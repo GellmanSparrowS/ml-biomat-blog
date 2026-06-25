@@ -1,4 +1,4 @@
-﻿---
+---
 title: "纤维网络力学基础：生物材料研究的关键概念"
 date: "2025-06-26"
 category: "biomaterials"

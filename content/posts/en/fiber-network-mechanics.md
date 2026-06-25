@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Fiber Network Mechanics: Key Concepts for Biomaterials Research"
 date: "2025-06-26"
 category: "biomaterials"

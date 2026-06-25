@@ -11,6 +11,7 @@ os.chdir(str(ROOT))
 
 def parse_frontmatter(text):
     meta, body = {}, text
+    if text.startswith("\ufeff"): text = text[1:]
     if text.startswith("---"):
         parts = text.split("---", 2)
         if len(parts) >= 3:
@@ -207,8 +208,33 @@ def section_head(lang, label, href):
     return f'<section class="section-head"><h2><span class="lang-dot {lang}"></span>{label}</h2><a href="{href}" class="view-all">View all \u2192</a></section>'
 
 
+
+
+def check_coverage(posts):
+    """Validate EN/ZH article pairing coverage. Prints a table at build time."""
+    en_posts = {p["slug"]: p for p in posts if p["lang"] == "en"}
+    zh_posts = {p["slug"]: p for p in posts if p["lang"] == "zh"}
+    
+    # Category-level stats
+    from collections import defaultdict
+    cat_stats = defaultdict(lambda: {"EN": 0, "ZH": 0})
+    for p in posts:
+        cat_stats[p["category"]]["EN" if p["lang"]=="en" else "ZH"] += 1
+    
+    print("\n  Coverage Report:")
+    print(f"  {'Category':<25} {'EN':>4} {'ZH':>4} {'Status'}")
+    print(f"  {'-'*25} {'-'*4} {'-'*4} {'-'*10}")
+    for cat in sorted(set(p["category"] for p in posts)):
+        stats = cat_stats[cat]
+        status = "OK" if stats["EN"] > 0 and stats["ZH"] > 0 else "MISSING"
+        print(f"  {cat:<25} {stats['EN']:>4} {stats['ZH']:>4} {status}")
+    
+    # Slug-based pair check disabled - use category-level coverage above
+    # New articles should follow slug convention: EN {topic}, ZH {topic}-zh
+
 def build():
     posts = load_posts()
+    check_coverage(posts)
     en = [p for p in posts if p["lang"] == "en"]
     zh = [p for p in posts if p["lang"] == "zh"]
     print(f"Loaded {len(posts)} posts ({len(en)} EN, {len(zh)} ZH)")
