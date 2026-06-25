@@ -1,0 +1,95 @@
+:root {
+    --bg: #fff;
+    --fg: #1a1a1a;
+    --muted: #6b7280;
+    --accent: #1e40af;
+    --accent-light: #dbeafe;
+    --border: #e5e7eb;
+    --code-bg: #f3f4f6;
+    --max-w: 720px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    --font-mono: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", "Consolas", monospace;
+    --radius: 6px;
+    --shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:17px;line-height:1.72;color:var(--fg);background:var(--bg);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%;height:auto}
+
+/* Layout */
+.container{max-width:var(--max-w);margin:0 auto;padding:0 1.25rem}
+header{border-bottom:1px solid var(--border);padding:1.25rem 0;margin-bottom:2.5rem}
+header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem}
+.site-title{font-size:1.25rem;font-weight:700;color:var(--fg);letter-spacing:-0.01em}
+.site-title:hover{color:var(--accent);text-decoration:none}
+nav a{margin-left:1.5rem;font-size:0.9rem;color:var(--muted)}
+nav a:hover{color:var(--accent);text-decoration:none}
+
+/* Posts list */
+.post-list{list-style:none}
+.post-item{padding:1.5rem 0;border-bottom:1px solid var(--border)}
+.post-item:first-child{padding-top:0}
+.post-title{font-size:1.35rem;font-weight:700;line-height:1.35;margin-bottom:0.3rem}
+.post-meta{font-size:0.85rem;color:var(--muted);margin-bottom:0.5rem}
+.post-desc{font-size:0.95rem;color:var(--muted);line-height:1.6}
+.post-category{display:inline-block;background:var(--accent-light);color:var(--accent);padding:0.15rem 0.6rem;border-radius:var(--radius);font-size:0.78rem;margin-right:0.4rem}
+
+/* Single post */
+article.post-header{margin-bottom:2rem}
+article h1{font-size:2rem;font-weight:800;line-height:1.25;margin-bottom:0.5rem;letter-spacing:-0.02em}
+article .post-date{color:var(--muted);font-size:0.9rem}
+article .post-tags{margin-top:0.75rem}
+.tag{display:inline-block;font-size:0.8rem;color:var(--muted);margin-right:0.5rem}
+.tag::before{content:"#"}
+article .content{margin-top:2rem}
+article .content h2{font-size:1.5rem;font-weight:700;margin:2.5rem 0 0.75rem;padding-bottom:0.4rem;border-bottom:2px solid var(--border)}
+article .content h3{font-size:1.2rem;font-weight:700;margin:2rem 0 0.5rem}
+article .content p{margin:1rem 0}
+article .content ul,article .content ol{margin:0.75rem 0;padding-left:1.5rem}
+article .content li{margin:0.35rem 0}
+article .content blockquote{margin:1.25rem 0;padding:0.5rem 1rem;border-left:3px solid var(--accent);background:var(--accent-light);font-style:italic;color:var(--muted)}
+
+/* Code blocks */
+code{font-family:var(--font-mono);font-size:0.88em;background:var(--code-bg);padding:0.15em 0.4em;border-radius:3px}
+pre{background:var(--code-bg);padding:1rem 1.25rem;overflow-x:auto;border-radius:var(--radius);margin:1.25rem 0;font-size:0.85rem;line-height:1.55;border:1px solid var(--border)}
+pre code{background:none;padding:0;font-size:inherit}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.9rem}
+th,td{border:1px solid var(--border);padding:0.6rem 0.8rem;text-align:left}
+th{background:var(--code-bg);font-weight:600}
+
+/* Pagination */
+.pagination{display:flex;justify-content:space-between;margin:2.5rem 0;font-size:0.9rem}
+
+/* Category / tag pages */
+.section-title{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem}
+.section-title span{color:var(--accent)}
+
+/* Footer */
+footer{border-top:1px solid var(--border);margin-top:4rem;padding:1.5rem 0;text-align:center;font-size:0.85rem;color:var(--muted)}
+footer a{color:var(--muted)}
+
+/* About page */
+.about-content h2{font-size:1.4rem;font-weight:700;margin:2rem 0 0.5rem}
+.about-content p{margin:0.75rem 0}
+
+/* Responsive */
+@media(max-width:640px){
+    html{font-size:15px}
+    article h1{font-size:1.6rem}
+    header .container{flex-direction:column;align-items:flex-start}
+    nav a:first-child{margin-left:0}
+    .container{padding:0 1rem}
+}
+@media(prefers-color-scheme:dark){
+    :root{
+        --bg:#111827;--fg:#f3f4f6;--muted:#9ca3af;
+        --accent:#60a5fa;--accent-light:#1e3a5f;
+        --border:#374151;--code-bg:#1f2937;
+        --shadow:0 1px 3px rgba(0,0,0,.3)
+    }
+}
