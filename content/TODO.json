@@ -1,0 +1,33 @@
+{
+  "description": "Articles to write. Remove entries when written.",
+  "queue": [
+    {
+      "category": "machine-learning",
+      "lang": "zh",
+      "topic": "feature-engineering",
+      "title_en": "Feature Engineering for Materials",
+      "title_zh": "材料科学中的特征工程"
+    },
+    {
+      "category": "python-tutorials",
+      "lang": "en",
+      "topic": "data-visualization",
+      "title_en": "Scientific Visualization with Matplotlib",
+      "title_zh": ""
+    },
+    {
+      "category": "biomaterials",
+      "lang": "en",
+      "topic": "silk-biomaterials",
+      "title_en": "Silk Fibroin: From Molecular Structure to Mechanical Function",
+      "title_zh": ""
+    }
+  ],
+  "rules": [
+    "Each article must have EN+ZH pair (slug convention: topic / topic-zh)",
+    "Research online before writing for accuracy",
+    "Cite real papers and tools",
+    "Rebuild with python build.py after writing",
+    "Push via: git add -A && git commit && git push origin main"
+  ]
+}
