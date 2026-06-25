@@ -20,9 +20,9 @@
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a href="/">Home</a>
-<a href="/categories/">Categories</a>
-<a href="/about/">About</a>
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
 </nav>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
@@ -31,83 +31,81 @@
 <span class="lang-badge en">EN</span>
 <h1>Fiber Network Mechanics</h1>
 <div class="article-meta">
-<span>2025-01-01</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/uncategorized/">uncategorized</a>
+<span>2025-01-01</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/uncategorized/">uncategorized</a>
 </div>
 </header>
 <div class="content">
 <p>﻿---</p>
-<p>title: "Fiber Network Mechanics: Key Concepts for Biomaterials Research"</p>
+<p>title: "纤维网络力学基础：生物材料研究的关键概念"</p>
 <p>date: "2025-06-26"</p>
 <p>category: "biomaterials"</p>
-<p>tags: ["biomaterials", "fiber-networks", "mechanics", "silk", "collagen"]</p>
-<p>lang: "en"</p>
-<p>slug: "fiber-network-mechanics-intro"</p>
-<p>description: "An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships."</p>
+<p>tags: ["生物材料", "纤维网络", "力学", "丝素蛋白", "胶原蛋白"]</p>
+<p>lang: "zh"</p>
+<p>slug: "fiber-network-mechanics-zh"</p>
+<p>description: "纤维生物材料的力学行为入门：网络架构、应变强化、结构-性能关系，以及实验表征和计算模拟方法。"</p>
 <hr>
 
-<h2>Why Fiber Networks Matter</h2>
+<h2>为什么纤维网络很重要</h2>
 
-<p>Nature builds structural materials from fibers: collagen in tendons, silk in cocoons, cellulose in plant cell walls. These <strong>disordered fiber networks</strong> achieve remarkable mechanical properties — high strength-to-weight ratios, strain-stiffening, and toughness — through architecture rather than chemistry alone.</p>
+<p>自然界用纤维构建结构材料：肌腱中的胶原蛋白、蚕茧中的丝素蛋白、植物细胞壁中的纤维素。这些<strong>无序纤维网络</strong>通过架构而非化学组成实现卓越的力学性能——高比强度、应变强化和韧性。</p>
 
-<p>Understanding fiber network mechanics is essential for designing better biomaterials.</p>
+<p>理解纤维网络力学对设计更好的生物材料至关重要。</p>
 
-<h2>Key Mechanical Behaviors</h2>
+<h2>关键力学行为</h2>
 
-<h3>1. Strain-Stiffening</h3>
+<h3>1. 应变强化</h3>
 
-<p>Unlike metals (which soften after yield), fiber networks <strong>stiffen as you stretch them</strong>. At low strains, fibers reorient and align. At high strains, aligned fibers bear load axially:</p>
+<p>与金属（屈服后软化）不同，纤维网络<strong>越拉越硬</strong>。低应变时，纤维重新取向排列。高应变时，已排列的纤维轴向承载：</p>
 
 <pre><code class="language-python">
 import numpy as np
-# Conceptual: stress-strain of a fiber network
+# 简化模型：纤维网络的应力-应变
 strain = np.linspace(0, 0.5, 100)
-# Low strain: bending-dominated (soft)
-# High strain: stretching-dominated (stiff)
-stress = 0.1 * strain + 5.0 * strain**3  # simplified
+stress = 0.1 * strain + 5.0 * strain**3  # 低应变弯曲主导，高应变拉伸主导
 </code></pre>
 
-<h3>2. Architecture-Property Relationships</h3>
+<h3>2. 架构-性能关系</h3>
 
-<table><tr><th>Parameter</th><th>Effect on Mechanics</th></tr><tr><td>-----------</td><td>-------------------</td></tr><tr><td>Fiber diameter</td><td>Thinner fibers = more flexible network</td></tr><tr><td>Network density (mg/cm3)</td><td>Higher density = higher modulus</td></tr><tr><td>Crosslink density</td><td>More crosslinks = stiffer, less ductile</td></tr><tr><td>Fiber orientation</td><td>Aligned fibers = anisotropic properties</td></tr><tr><td>Fiber aspect ratio</td><td>Longer fibers = better load transfer</td></tr></table>
+<table><tr><th>参数</th><th>对力学性能的影响</th></tr><tr><td>------</td><td>----------------</td></tr><tr><td>纤维直径</td><td>更细 = 网络更柔</td></tr><tr><td>网络密度 (mg/cm3)</td><td>更高 = 模量更高</td></tr><tr><td>交联密度</td><td>更多交联 = 更刚，韧性下降</td></tr><tr><td>纤维取向</td><td>取向排列 = 各向异性</td></tr><tr><td>纤维长径比</td><td>更长 = 更好的载荷传递</td></tr></table>
 
-<h3>3. Percolation Threshold</h3>
+<h3>3. 逾渗阈值</h3>
 
-<p>A fiber network needs a minimum density to transmit load — the <strong>percolation threshold</strong>. Below this density, the network is a disconnected "soup" of fibers. Above it, a continuous load-bearing path forms.</p>
+<p>纤维网络需要最低密度才能传递载荷——<strong>逾渗阈值</strong>。低于此密度，网络是互不连接的纤维"汤"。高于阈值，形成连续的载荷传递路径。</p>
 
-<h2>Experimental Characterization</h2>
+<h2>实验表征</h2>
 
-<p>Common techniques to probe fiber network mechanics:</p>
+<p>常用的纤维网络力学探测方法：</p>
 
 <ul>
-<li><strong>AFM nanoindentation</strong>: local stiffness at nanometer scale</li>
-<li><strong>Tensile testing</strong>: bulk stress-strain curves</li>
-<li><strong>Rheology</strong>: viscoelastic properties (G', G")</li>
-<li><strong>SEM/TEM imaging</strong>: network architecture visualization</li>
-<li><strong>SAXS/WAXS</strong>: molecular-level structural changes during deformation</li>
+<li><strong>AFM纳米压痕</strong>：纳米级局部刚度</li>
+<li><strong>拉伸测试</strong>：宏观应力-应变曲线</li>
+<li><strong>流变学</strong>：粘弹性（储能模量G'、损耗模量G"）</li>
+<li><strong>SEM/TEM成像</strong>：网络架构可视化</li>
+<li><strong>SAXS/WAXS</strong>：变形过程中的分子级结构变化</li>
 </ul>
 
-<h2>Computational Modeling</h2>
+<h2>计算模拟</h2>
 
-<p>Three main approaches:</p>
+<p>三种主要方法：</p>
 
 <ol>
-<li><strong>Molecular Dynamics (MD)</strong>: atomistic detail, nanosecond timescale</li>
-<li><strong>Coarse-Grained (CG) models</strong>: mesoscale, microsecond timescale</li>
-<li><strong>Finite Element (FE) models</strong>: continuum scale, treat fibers as beams</li>
+<li><strong>分子动力学（MD）</strong>：原子分辨率，纳秒尺度</li>
+<li><strong>粗粒化模型（CG）</strong>：介观尺度，微秒尺度</li>
+<li><strong>有限元模型（FE）</strong>：连续介质尺度，将纤维视为梁单元</li>
 </ol>
 
-<p>Multiscale approaches combine these to predict macroscale properties from molecular parameters.</p>
+<p>多尺度方法结合三者，从分子参数预测宏观性能。</p>
 
-<h2>Common Biomaterial Fiber Systems</h2>
+<h2>常见生物材料纤维体系</h2>
 
 <ul>
-<li><strong>Silk fibroin</strong>: exceptional toughness, programmable degradation</li>
-<li><strong>Collagen</strong>: hierarchical structure, cell-instructive</li>
-<li><strong>Cellulose nanofibers</strong>: abundant, high stiffness</li>
-<li><strong>Electrospun polymers</strong>: tunable architecture, scalable production</li>
+<li><strong>丝素蛋白</strong>：优异的韧性，可编程降解</li>
+<li><strong>胶原蛋白</strong>：层级结构，细胞指导性</li>
+<li><strong>纤维素纳米纤维</strong>：来源丰富，高刚度</li>
+<li><strong>静电纺丝聚合物</strong>：架构可调，可规模化生产</li>
 </ul>
 
-<h2>Key References</h2>
+<h2>参考文献</h2>
 
 <ul>
 <li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS</em>, 103(33), 12285-12290.</li>
@@ -124,7 +122,7 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">About</a><a href="/categories/">Categories</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
 </div>
 </div></footer>
 </body>

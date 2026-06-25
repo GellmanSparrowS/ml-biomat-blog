@@ -154,15 +154,15 @@ HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8"
 HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a href="/"{home_active}>Home</a>
-<a href="/categories/">Categories</a>
-<a href="/about/">About</a>
+<a href="/"{home_active}>Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
 </nav>
 <span class="lang-switch"><a href="/en/"{en_active}>EN</a><a href="/zh/"{zh_active}>中文</a></span>
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About</a><a href="/categories/">Categories</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>\n</div>\n</div></footer>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>\n</div>\n</div></footer>\n</body>\n</html>'
 
 POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{lang_label}</span>\n<h3><a href="/posts/{slug}/">{title}</a></h3>\n<div class="card-meta"><span>{date}</span><span>\u00b7</span><span>{read_min} min read</span></div>\n<p class="card-desc">{desc}</p>\n<div class="card-tags">{tags_html}</div>\n</article>'
 
@@ -240,10 +240,10 @@ def build():
     body += cat_cards_html
     if en:
         body += section_head("en", "English Articles", "/en/")
-        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in en[:6]) + '</div>'
+        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in en[:4]) + '</div>'
     if zh:
         body += section_head("zh", "\u4e2d\u6587\u6587\u7ae0", "/zh/")
-        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in zh[:6]) + '</div>'
+        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in zh[:4]) + '</div>'
     body += ENGAGE_BANNER
     html = make_head(title="ML-Biomat", desc=SITE["description_en"], url=SITE["base_url"],
                      ld=site_ld(), wide="wide", home_active=' class="active"') + body + FOOT.format(year=datetime.now().year)
@@ -316,7 +316,7 @@ def build():
   <channel>
     <title>ML-Biomat</title>
     <link>{SITE['base_url']}</link>
-    <description>{SITE['description_en']}</description>
+    <description>{SITE['description_en']} | {SITE['description_zh']}</description>
     <language>en</language>
     <atom:link href="{SITE['base_url']}/rss.xml" rel="self" type="application/rss+xml"/>
 {chr(10).join(rss_items)}

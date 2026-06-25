@@ -161,3 +161,9 @@ pre code{font-family:var(--font-mono);font-size:inherit;background:none;padding:
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:.5rem}
 .cat-col h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
 @media(max-width:640px){.cat-grid{grid-template-columns:1fr;gap:1rem}}
+
+
+/* Equal column heights in category pages */
+.cat-grid{align-items:stretch}
+.cat-col{display:flex;flex-direction:column}
+.cat-col ul{flex:1}
