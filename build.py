@@ -1,479 +1,377 @@
 # -*- coding: utf-8 -*-
-"""
-Static blog generator for ml-biomat.com
-Reads Markdown posts from content/, generates SEO-optimized HTML in output/.
-"""
-import os, re, json, shutil, html as html_mod
+"""Static blog generator — outputs to docs/ for GitHub Pages. Bilingual EN+ZH."""
+import os, re, json, shutil, html as hm
 from datetime import datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
 
-SCRIPTS_DIR = Path(os.getcwd()) if os.getcwd().endswith("ml-biomat-blog") else Path(__file__).parent
-os.chdir(str(SCRIPTS_DIR))
+ROOT = Path(os.getcwd()) if os.getcwd().endswith("ml-biomat-blog") else Path(__file__).parent.resolve()
+os.chdir(str(ROOT))
 
 
 def parse_frontmatter(text):
-    """Extract YAML-ish frontmatter from Markdown. Returns (meta dict, body)."""
-    meta = {}
-    body = text
+    meta, body = {}, text
     if text.startswith("---"):
         parts = text.split("---", 2)
         if len(parts) >= 3:
             for line in parts[1].strip().split("\n"):
                 line = line.strip()
                 if ":" in line:
-                    key, val = line.split(":", 1)
-                    key, val = key.strip(), val.strip()
-                    val = val.strip('"').strip("'")
-                    if val.startswith("[") and val.endswith("]"):
-                        val = [v.strip().strip('"').strip("'") for v in val[1:-1].split(",") if v.strip()]
-                    meta[key] = val
+                    k, v = line.split(":", 1)
+                    k, v = k.strip(), v.strip().strip('"').strip("'")
+                    if v.startswith("[") and v.endswith("]"):
+                        v = [x.strip().strip('"').strip("'") for x in v[1:-1].split(",") if x.strip()]
+                    meta[k] = v
             body = parts[2].strip()
     return meta, body
 
 
+def inline_md(t):
+    t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
+    t = re.sub(r'\*(.+?)\*', r'<em>\1</em>', t)
+    t = re.sub(r'`([^`]+)`', r'<code>\1</code>', t)
+    t = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', t)
+    return t
+
+
 def md_to_html(text):
-    """Simple Markdown-to-HTML converter. Handles headings, code, lists, links, bold, italic."""
-    lines = text.split("\n")
-    out = []
-    in_code = False
-    in_list = False
-    list_tag = ""
-    i = 0
+    lines = text.split("\n"); out = []; in_code = False; in_list = False; list_tag = ""; i = 0
     while i < len(lines):
         line = lines[i]
-        # Fenced code blocks
         if line.strip().startswith("```"):
             if not in_code:
                 lang = line.strip()[3:].strip()
                 out.append(f'<pre><code class="language-{lang}">' if lang else "<pre><code>")
                 in_code = True
             else:
-                out.append("</code></pre>")
-                in_code = False
-            i += 1
-            continue
-        if in_code:
-            out.append(html_mod.escape(line))
-            i += 1
-            continue
-        # Close list if needed
+                out.append("</code></pre>"); in_code = False
+            i += 1; continue
+        if in_code: out.append(hm.escape(line)); i += 1; continue
         if in_list and not re.match(r'^(\d+\.\s|[-*]\s)', line.strip()):
-            out.append(f"</{list_tag}>")
-            in_list = False
-        # Headings
+            out.append(f"</{list_tag}>"); in_list = False
         m = re.match(r'^(#{1,6})\s+(.+)$', line)
-        if m:
-            level = len(m.group(1))
-            txt = inline_md(m.group(2))
-            out.append(f"<h{level}>{txt}</h{level}>")
-            i += 1
-            continue
-        # Unordered list
+        if m: lvl = len(m.group(1)); out.append(f"<h{lvl}>{inline_md(m.group(2))}</h{lvl}>"); i += 1; continue
         m = re.match(r'^[-*]\s+(.+)$', line)
         if m:
-            if not in_list:
-                out.append("<ul>")
-                in_list = True
-                list_tag = "ul"
-            out.append(f"<li>{inline_md(m.group(1))}</li>")
-            i += 1
-            continue
-        # Ordered list
+            if not in_list: out.append("<ul>"); in_list = True; list_tag = "ul"
+            out.append(f"<li>{inline_md(m.group(1))}</li>"); i += 1; continue
         m = re.match(r'^\d+\.\s+(.+)$', line)
         if m:
-            if not in_list:
-                out.append("<ol>")
-                in_list = True
-                list_tag = "ol"
-            out.append(f"<li>{inline_md(m.group(1))}</li>")
-            i += 1
-            continue
-        # Horizontal rule
-        if re.match(r'^[-*_]{3,}$', line.strip()):
-            out.append("<hr>")
-            i += 1
-            continue
-        # Blockquote
+            if not in_list: out.append("<ol>"); in_list = True; list_tag = "ol"
+            out.append(f"<li>{inline_md(m.group(1))}</li>"); i += 1; continue
+        if re.match(r'^[-*_]{3,}$', line.strip()): out.append("<hr>"); i += 1; continue
         if line.startswith(">"):
-            qt_lines = []
+            qt = []
             while i < len(lines) and lines[i].startswith(">"):
-                qt_lines.append(lines[i][1:].strip() if lines[i][1:2] == " " else lines[i][1:].strip())
-                i += 1
-            out.append(f"<blockquote>{'<br>'.join(inline_md(l) for l in qt_lines)}</blockquote>")
-            continue
-        # Table (simple: | col | col |)
+                qt.append(lines[i][1:].strip() if lines[i][1:2] == " " else lines[i][1:].strip()); i += 1
+            out.append(f"<blockquote>{'<br>'.join(inline_md(l) for l in qt)}</blockquote>"); continue
         if "|" in line and line.strip().startswith("|"):
-            table_lines = []
-            while i < len(lines) and "|" in lines[i]:
-                table_lines.append(lines[i])
-                i += 1
-            out.append(_table_to_html(table_lines))
-            continue
-        # Image
+            tl = []
+            while i < len(lines) and "|" in lines[i]: tl.append(lines[i]); i += 1
+            rows = []
+            for ri, rl in enumerate(tl):
+                cells = [inline_md(c.strip()) for c in rl.strip().strip("|").split("|")]
+                tag = "th" if ri == 0 else "td"
+                rows.append("<tr>" + "".join(f"<{tag}>{c}</{tag}>" for c in cells) + "</tr>")
+            out.append(f"<table>{''.join(rows)}</table>"); continue
         m = re.match(r'^!\[([^\]]*)\]\(([^)]+)\)$', line.strip())
-        if m:
-            out.append(f'<img src="{m.group(2)}" alt="{m.group(1)}" loading="lazy">')
-            i += 1
-            continue
-        # Empty line
-        if not line.strip():
-            out.append("")
-            i += 1
-            continue
-        # Paragraph
-        out.append(f"<p>{inline_md(line)}</p>")
-        i += 1
-    if in_list:
-        out.append(f"</{list_tag}>")
-    if in_code:
-        out.append("</code></pre>")
+        if m: out.append(f'<img src="{m.group(2)}" alt="{m.group(1)}" loading="lazy">'); i += 1; continue
+        if not line.strip(): out.append(""); i += 1; continue
+        out.append(f"<p>{inline_md(line)}</p>"); i += 1
+    if in_list: out.append(f"</{list_tag}>")
+    if in_code: out.append("</code></pre>")
     return "\n".join(out)
 
 
-def _table_to_html(lines):
-    rows = []
-    for i, line in enumerate(lines):
-        cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        cells = [inline_md(c) for c in cells]
-        tag = "th" if i == 0 else "td"
-        rows.append("<tr>" + "".join(f"<{tag}>{c}</{tag}>" for c in cells) + "</tr>")
-        if i == 0 and len(lines) > 1 and re.match(r'^[\s|:\-]+$', lines[1].strip()):
-            continue  # skip separator row; handled by the loop
-    # Remove separator row if present
-    if len(rows) > 1:
-        # Check second line of original for separator pattern
-        pass
-    return f"<table>{''.join(rows)}</table>"
-
-
-def inline_md(text):
-    """Convert inline Markdown: bold, italic, code, links, images."""
-    t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
-    t = re.sub(r'__(.+?)__', r'<strong>\1</strong>', t)
-    t = re.sub(r'\*(.+?)\*', r'<em>\1</em>', t)
-    t = re.sub(r'_(.+?)_', r'<em>\1</em>', t)
-    t = re.sub(r'`([^`]+)`', r'<code>\1</code>', t)
-    t = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', t)
-    return t
-
-
 def load_posts():
-    """Load all posts from content/posts/"""
-    posts = []
-    posts_dir = Path(CONTENT_DIR) / "posts"
+    posts = []; posts_dir = Path(CONTENT_DIR) / "posts"
     for root, dirs, files in os.walk(posts_dir):
         for f in sorted(files, reverse=True):
             if f.endswith(".md"):
                 path = Path(root) / f
-                rel = path.relative_to(posts_dir)
                 text = path.read_text(encoding="utf-8")
                 meta, body = parse_frontmatter(text)
                 slug = meta.get("slug", path.stem)
-                date_str = meta.get("date", "2025-01-01")
-                try:
-                    posted = datetime.strptime(date_str, "%Y-%m-%d")
-                except ValueError:
-                    posted = datetime(2025, 1, 1)
+                try: posted = datetime.strptime(meta.get("date", "2025-01-01"), "%Y-%m-%d")
+                except ValueError: posted = datetime(2025, 1, 1)
+                html_content = md_to_html(body)
+                wc = len(body.split()); read_min = max(1, wc // 200)
                 posts.append({
                     "title": meta.get("title", slug.replace("-", " ").title()),
-                    "slug": slug,
-                    "date": posted.strftime("%Y-%m-%d"),
-                    "datetime": posted,
-                    "category": meta.get("category", "uncategorized"),
-                    "tags": meta.get("tags", []),
-                    "lang": meta.get("lang", "en"),
+                    "slug": slug, "date": posted.strftime("%Y-%m-%d"),
+                    "datetime": posted, "category": meta.get("category", "uncategorized"),
+                    "tags": meta.get("tags", []), "lang": meta.get("lang", "en"),
                     "description": meta.get("description", ""),
-                    "body": body,
-                    "html": md_to_html(body),
+                    "html": html_content, "read_min": read_min,
                 })
     posts.sort(key=lambda p: p["datetime"], reverse=True)
     return posts
 
 
-# ---- HTML Templates ----
-
-HEAD = """<!DOCTYPE html>
-<html lang="{lang}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{title} — {site_title}</title>
-<meta name="description" content="{desc}">
-<meta name="author" content="{author}">
-<meta property="og:title" content="{title}">
-<meta property="og:description" content="{desc}">
+def og_tags(title, desc, url, og_type="website"):
+    return f'''<meta property="og:title" content="{hm.escape(title)}">
+<meta property="og:description" content="{hm.escape(desc)}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:url" content="{url}">
-<meta property="og:site_name" content="{site_title}">
-<link rel="canonical" href="{url}">
-<link rel="alternate" type="application/rss+xml" title="{site_title} RSS" href="/rss.xml">
-<link rel="stylesheet" href="/static/css/style.css">
-<script type="application/ld+json">{structured_data}</script>
-{extra_head}
-</head>
-<body>
-<header><div class="container">
-<a href="/" class="site-title">{site_title}</a>
-<nav>
-<a href="/">Home</a>
-<a href="/categories/">Categories</a>
-<a href="/about/">About</a>
-</nav>
-</div></header>
-<main class="container">"""
-
-FOOT = """</main>
-<footer><div class="container">
-&copy; {year} {site_title}. Built with care.
-· <a href="/rss.xml">RSS</a>
-· <a href="/sitemap.xml">Sitemap</a>
-</div></footer>
-</body>
-</html>"""
-
-POST_TEMPLATE = """<article>
-<header class="post-header">
-<h1>{title}</h1>
-<div class="post-date">{date}</div>
-<div class="post-tags">
-<a href="/categories/{cat_slug}/" class="post-category">{cat_name}</a>
-{tags_html}
-</div>
-</header>
-<div class="content">
-{html}
-</div>
-</article>"""
-
-INDEX_POST = """<li class="post-item">
-<h2 class="post-title"><a href="/posts/{slug}/">{title}</a></h2>
-<div class="post-meta">{date} · <a href="/categories/{cat_slug}/" class="post-category">{cat_name}</a></div>
-<p class="post-desc">{desc}</p>
-</li>"""
-
-CAT_TAG_PAGE = """<section class="post-list-section">
-<h1 class="section-title">Posts in <span>{name}</span></h1>
-<ul class="post-list">
-{items}
-</ul>
-</section>"""
-
-PAGINATION = """<nav class="pagination">
-{prev_link}{next_link}
-</nav>"""
+<meta property="og:site_name" content="ML-Biomat">'''
 
 
-def render_page(title, desc, body, lang="en", url="", og_type="website", structured_data="{}", extra_head=""):
-    h = HEAD.format(
-        title=html_mod.escape(title),
-        site_title=SITE["title"],
-        desc=html_mod.escape(desc or SITE["description"]),
-        author=SITE["author"],
-        og_type=og_type,
-        url=url or SITE["base_url"],
-        lang=lang,
-        structured_data=structured_data,
-        extra_head=extra_head,
-    )
-    f = FOOT.format(year=datetime.now().year, site_title=SITE["title"])
-    return h + body + f
+def ld_json(data):
+    return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>'
 
 
-def structured_article(post):
-    return json.dumps({
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": post["title"],
-        "description": post["description"],
+def article_ld(post):
+    return ld_json({
+        "@context": "https://schema.org", "@type": "BlogPosting",
+        "headline": post["title"], "description": post["description"],
         "datePublished": post["date"],
         "author": {"@type": "Person", "name": SITE["author"]},
         "url": f'{SITE["base_url"]}/posts/{post["slug"]}/',
-    }, ensure_ascii=False)
+    })
 
 
-def structured_website():
-    return json.dumps({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": SITE["title"],
-        "url": SITE["base_url"],
-        "description": SITE["description"],
-    }, ensure_ascii=False)
+def site_ld():
+    return ld_json({
+        "@context": "https://schema.org", "@type": "WebSite",
+        "name": "ML-Biomat", "url": SITE["base_url"],
+        "description": SITE["description_en"],
+    })
 
 
 def write_file(path, content):
-    p = Path(path)
+    p = Path(BUILD_DIR) / path
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(content, encoding="utf-8")
 
 
+def cat_name(cat_slug, lang="en"):
+    c = CATEGORIES.get(cat_slug, {})
+    return c.get(f"name_{lang}", c.get("name_en", cat_slug))
+
+
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title} \u2014 ML-Biomat</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n</head>\n<body>\n'
+
+HEADER = '''<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/"{home_active}>Home</a>
+<a href="/categories/">Categories</a>
+<a href="/about/">About</a>
+</nav>
+<span class="lang-switch"><a href="/en/"{en_active}>EN</a><a href="/zh/"{zh_active}>中文</a></span>
+</div></header>
+<main class="container{wide_class}">'''
+
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About</a><a href="/categories/">Categories</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>\n</div>\n</div></footer>\n</body>\n</html>'
+
+POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{lang_label}</span>\n<h3><a href="/posts/{slug}/">{title}</a></h3>\n<div class="card-meta"><span>{date}</span><span>\u00b7</span><span>{read_min} min read</span></div>\n<p class="card-desc">{desc}</p>\n<div class="card-tags">{tags_html}</div>\n</article>'
+
+POST_ROW = '<li class="post-row"><span class="row-date">{date}</span><a href="/posts/{slug}/">{title}</a></li>'
+
+ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="/categories/{cat_slug}/">{cat_name}</a>\n</div>\n</header>\n<div class="content">\n{html}\n</div>\n</article>'
+
+ENGAGE_BANNER = '<section class="cta-banner">\n<h3>\U0001f4ac Questions or Feedback?</h3>\n<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>\n<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>\n</section>'
+
+HERO = '''<section class="hero">
+<h1>ML-Biomat</h1>
+<p class="subtitle">{desc_en}</p>
+<p class="subtitle" style="margin-top:.3rem;font-size:.95rem">{desc_zh}</p>
+<div class="badge-row">
+<span class="badge">\U0001f9ae ML for Science</span>
+<span class="badge">\U0001f52c Multiscale Methods</span>
+<span class="badge">\U0001f9aa Fiber Biomaterials</span>
+</div>
+</section>'''
+
+
+def make_head(title, desc, url, lang="en", og_type="website", ld="",
+              home_active="", en_active="", zh_active="", wide=""):
+    head = HEAD_TOP.format(
+        title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
+        url=url, lang=lang, og=og_tags(title, desc, url, og_type), ld=ld)
+    header = HEADER.format(
+        home_active=home_active, en_active=en_active, zh_active=zh_active,
+        wide_class=" container-wide" if wide else "")
+    return head + header
+
+
+def post_card(p):
+    return POST_CARD.format(
+        lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587",
+        title=hm.escape(p["title"]), slug=p["slug"], date=p["date"],
+        read_min=p["read_min"], desc=hm.escape(p["description"] or ""),
+        tags_html="".join(f'<span class="tag-pill">{t}</span>' for t in p["tags"][:3]))
+
+
+def section_head(lang, label, href):
+    return f'<section class="section-head"><h2><span class="lang-dot {lang}"></span>{label}</h2><a href="{href}" class="view-all">View all \u2192</a></section>'
+
+
 def build():
     posts = load_posts()
-    print(f"Loaded {len(posts)} posts")
+    en = [p for p in posts if p["lang"] == "en"]
+    zh = [p for p in posts if p["lang"] == "zh"]
+    print(f"Loaded {len(posts)} posts ({len(en)} EN, {len(zh)} ZH)")
 
-    # ---- Individual post pages ----
+    # Individual post pages
     for p in posts:
-        cat_name = CATEGORIES.get(p["category"], {}).get("name", p["category"])
-        tags_html = "".join(f'<span class="tag">{t}</span>' for t in p["tags"])
-        body = POST_TEMPLATE.format(
-            title=html_mod.escape(p["title"]),
-            date=p["date"],
-            cat_slug=p["category"],
-            cat_name=cat_name,
-            tags_html=tags_html,
-            html=p["html"],
-        )
-        html = render_page(
-            title=p["title"],
-            desc=p["description"] or p["title"],
-            body=body,
-            lang=p["lang"],
-            url=f'{SITE["base_url"]}/posts/{p["slug"]}/',
-            og_type="article",
-            structured_data=structured_article(p),
-        )
-        write_file(f"{BUILD_DIR}/posts/{p['slug']}/index.html", html)
+        cn = cat_name(p["category"], p["lang"])
+        body = ARTICLE_HTML.format(
+            title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
+            cat_slug=p["category"], cat_name=cn, html=p["html"],
+            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + ENGAGE_BANNER
+        html = make_head(title=p["title"], desc=p["description"] or p["title"],
+                         url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=p["lang"],
+                         og_type="article", ld=article_ld(p)) + body + FOOT.format(year=datetime.now().year)
+        write_file(f"posts/{p['slug']}/index.html", html)
+    print("  Posts done")
 
-    # ---- Homepage with pagination ----
-    posts_per_page = 10
-    total_pages = max(1, (len(posts) + posts_per_page - 1) // posts_per_page)
-    for page_num in range(1, total_pages + 1):
-        start = (page_num - 1) * posts_per_page
-        chunk = posts[start:start + posts_per_page]
-        items = []
-        for p in chunk:
-            cat_name = CATEGORIES.get(p["category"], {}).get("name", p["category"])
-            items.append(INDEX_POST.format(
-                title=html_mod.escape(p["title"]),
-                slug=p["slug"],
-                date=p["date"],
-                cat_slug=p["category"],
-                cat_name=cat_name,
-                desc=html_mod.escape(p["description"] or ""),
-            ))
-        prev_link = ""
-        next_link = ""
-        if page_num > 1:
-            href = "/" if page_num == 2 else f"/page/{page_num - 1}/"
-            prev_link = f'<a href="{href}">&larr; Newer</a>'
-        if page_num < total_pages:
-            next_link = f'<a href="/page/{page_num + 1}/">Older &rarr;</a>'
-        body = f'<ul class="post-list">{"".join(items)}</ul>'
-        body += PAGINATION.format(prev_link=prev_link, next_link=next_link)
-        title = SITE["title"] if page_num == 1 else f"{SITE['title']} — Page {page_num}"
-        desc = SITE["description"] if page_num == 1 else f"{SITE['description']} Page {page_num}"
-        url = SITE["base_url"] if page_num == 1 else f'{SITE["base_url"]}/page/{page_num}/'
-        html = render_page(title=title, desc=desc, body=body, url=url, structured_data=structured_website())
-        dest = f"{BUILD_DIR}/index.html" if page_num == 1 else f"{BUILD_DIR}/page/{page_num}/index.html"
-        write_file(dest, html)
-    print(f"  Homepage: {total_pages} page(s)")
+    # Homepage (bilingual)
+    hero = HERO.format(desc_en=SITE["description_en"], desc_zh=SITE["description_zh"])
+    # Category cards for homepage
+    cat_cards_html = '<section class="section-head"><h2>\U0001f4c2 Categories / \u5206\u7c7b</h2><a href="/categories/" class="view-all">All \u2192</a></section>'
+    cat_cards_html += '<div class="post-grid">'
+    for s, info in CATEGORIES.items():
+        cnt = sum(1 for p in posts if p["category"] == s)
+        if cnt:
+            cat_cards_html += f'<a href="/categories/{s}/" class="post-card" style="text-decoration:none"><span class="card-lang en">{info["name_en"]}</span><h3 style="font-size:1rem;margin-top:.3rem">{info["name_zh"]}</h3><div class="card-meta">{cnt} post(s)</div></a>'
+    cat_cards_html += '</div>'
+    body = hero
+    body += cat_cards_html
+    if en:
+        body += section_head("en", "English Articles", "/en/")
+        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in en[:6]) + '</div>'
+    if zh:
+        body += section_head("zh", "\u4e2d\u6587\u6587\u7ae0", "/zh/")
+        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in zh[:6]) + '</div>'
+    body += ENGAGE_BANNER
+    html = make_head(title="ML-Biomat", desc=SITE["description_en"], url=SITE["base_url"],
+                     ld=site_ld(), wide="wide", home_active=' class="active"') + body + FOOT.format(year=datetime.now().year)
+    write_file("index.html", html)
+    print("  Homepage done")
 
-    # ---- Categories index ----
-    cat_items = ""
-    for slug, info in CATEGORIES.items():
-        cat_posts = [p for p in posts if p["category"] == slug]
-        if not cat_posts:
-            continue
-        cat_items += f'<li class="post-item"><h2 class="post-title"><a href="/categories/{slug}/">{info["name"]}</a></h2><p class="post-desc">{len(cat_posts)} post(s)</p></li>'
-    body = f'<h1 class="section-title">Categories</h1><ul class="post-list">{cat_items}</ul>'
-    write_file(f"{BUILD_DIR}/categories/index.html", render_page(
-        title="Categories", desc="All categories", body=body,
-        url=f'{SITE["base_url"]}/categories/', structured_data=structured_website()))
+    # Language-specific pages
+    for lang, lp, label in [("en", en, "English"), ("zh", zh, "\u4e2d\u6587")]:
+        desc = SITE[f"description_{lang}"]
+        hero_lang = HERO.format(desc_en=SITE["description_en"] if lang == "en" else desc,
+                                 desc_zh=SITE["description_zh"] if lang == "zh" else desc)
+        body = hero_lang
+        body += f'<section class="section-head"><h2><span class="lang-dot {lang}"></span>{label} Articles</h2></section>'
+        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in lp[:12]) + '</div>'
+        body += ENGAGE_BANNER
+        ha = ' class="active"' if lang == "en" else ""
+        za = ' class="active"' if lang == "zh" else ""
+        html = make_head(title=f"{label} Articles", desc=desc,
+                         url=f'{SITE["base_url"]}/{lang}/', lang=lang, ld=site_ld(),
+                         wide="wide", en_active=ha, zh_active=za) + body + FOOT.format(year=datetime.now().year)
+        write_file(f"{lang}/index.html", html)
+    print("  Language pages done")
 
-    # ---- Individual category pages ----
-    for slug, info in CATEGORIES.items():
-        cat_posts = [p for p in posts if p["category"] == slug]
-        if not cat_posts:
-            continue
-        items = []
-        for p in cat_posts:
-            items.append(INDEX_POST.format(
-                title=html_mod.escape(p["title"]), slug=p["slug"], date=p["date"],
-                cat_slug=p["category"], cat_name=info["name"], desc=html_mod.escape(p["description"] or "")))
-        body = CAT_TAG_PAGE.format(name=info["name"], items="".join(items))
-        write_file(f"{BUILD_DIR}/categories/{slug}/index.html", render_page(
-            title=info["name"], desc=f"Posts about {info['name']}", body=body,
-            url=f'{SITE["base_url"]}/categories/{slug}/'))
-    print(f"  Categories: {len(CATEGORIES)}")
+    # Categories index
+    ci = '<h1 class="section-title">Categories</h1><ul class="post-list-simple">'
+    for s, info in CATEGORIES.items():
+        cnt = sum(1 for p in posts if p["category"] == s)
+        if cnt:
+            ci += f'<li class="post-row"><a href="/categories/{s}/"><strong>{info["name_en"]}</strong> ({info["name_zh"]})</a><span style="margin-left:auto;color:var(--c-muted);font-size:.85rem">{cnt} posts</span></li>'
+    ci += "</ul>"
+    html = make_head(title="Categories", desc="All categories", url=f'{SITE["base_url"]}/categories/') + ci + FOOT.format(year=datetime.now().year)
+    write_file("categories/index.html", html)
 
-    # ---- RSS feed ----
-    items = []
+    # Individual category pages
+    for s, info in CATEGORIES.items():
+        cp = [p for p in posts if p["category"] == s]
+        if not cp: continue
+        en_cp = [p for p in cp if p["lang"] == "en"]
+        zh_cp = [p for p in cp if p["lang"] == "zh"]
+        body = f'<h1 class="section-title"><span class="highlight">{info["name_en"]}</span> / {info["name_zh"]}</h1>'
+        body += '<div class="cat-grid">'
+        if en_cp:
+            body += '<div class="cat-col"><h3><span class="lang-dot en"></span>English</h3><ul class="post-list-simple">'
+            body += "".join(POST_ROW.format(date=p["date"], title=hm.escape(p["title"]), slug=p["slug"]) for p in en_cp) + '</ul></div>'
+        if zh_cp:
+            body += '<div class="cat-col"><h3><span class="lang-dot zh"></span>中文</h3><ul class="post-list-simple">'
+            body += "".join(POST_ROW.format(date=p["date"], title=hm.escape(p["title"]), slug=p["slug"]) for p in zh_cp) + '</ul>'
+        html = make_head(title=f'{info["name_en"]} Posts', desc=f'{info["name_en"]} articles',
+                         url=f'{SITE["base_url"]}/categories/{s}/') + body + FOOT.format(year=datetime.now().year)
+        write_file(f"categories/{s}/index.html", html)
+    print("  Categories done")
+
+    # About page
+    about_body = Path("content/about-body.html").read_text(encoding="utf-8")
+    html = make_head(title="About", desc="About ML-Biomat", url=f'{SITE["base_url"]}/about/') + about_body + FOOT.format(year=datetime.now().year)
+    write_file("about/index.html", html)
+
+    # RSS
+    rss_items = []
     for p in posts[:20]:
-        items.append(f"""    <item>
-      <title>{html_mod.escape(p['title'])}</title>
+        rss_items.append(f"""    <item>
+      <title>{hm.escape(p['title'])}</title>
       <link>{SITE['base_url']}/posts/{p['slug']}/</link>
       <guid>{SITE['base_url']}/posts/{p['slug']}/</guid>
-      <description>{html_mod.escape(p['description'] or '')}</description>
+      <description>{hm.escape(p['description'] or '')}</description>
       <pubDate>{p['date']}T00:00:00+08:00</pubDate>
     </item>""")
     rss = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{SITE['title']}</title>
+    <title>ML-Biomat</title>
     <link>{SITE['base_url']}</link>
-    <description>{SITE['description']}</description>
+    <description>{SITE['description_en']}</description>
     <language>en</language>
     <atom:link href="{SITE['base_url']}/rss.xml" rel="self" type="application/rss+xml"/>
-{chr(10).join(items)}
+{chr(10).join(rss_items)}
   </channel>
 </rss>"""
-    write_file(f"{BUILD_DIR}/rss.xml", rss)
+    write_file("rss.xml", rss)
 
-    # ---- Sitemap ----
-    urls = [f"""  <url><loc>{SITE['base_url']}/</loc><priority>1.0</priority></url>"""]
-    urls.append(f"""  <url><loc>{SITE['base_url']}/about/</loc><priority>0.6</priority></url>""")
-    urls.append(f"""  <url><loc>{SITE['base_url']}/categories/</loc><priority>0.7</priority></url>""")
-    for slug in CATEGORIES:
-        urls.append(f"""  <url><loc>{SITE['base_url']}/categories/{slug}/</loc><priority>0.6</priority></url>""")
+    # Sitemap
+    urls = [
+        f'  <url><loc>{SITE["base_url"]}/</loc><priority>1.0</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/en/</loc><priority>0.9</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/zh/</loc><priority>0.9</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/about/</loc><priority>0.6</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/categories/</loc><priority>0.7</priority></url>',
+    ]
+    for s in CATEGORIES:
+        urls.append(f'  <url><loc>{SITE["base_url"]}/categories/{s}/</loc><priority>0.6</priority></url>')
     for p in posts:
-        urls.append(f"""  <url><loc>{SITE['base_url']}/posts/{p['slug']}/</loc><priority>0.8</priority><lastmod>{p['date']}</lastmod></url>""")
-    sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{chr(10).join(urls)}
-</urlset>"""
-    write_file(f"{BUILD_DIR}/sitemap.xml", sitemap)
+        urls.append(f'  <url><loc>{SITE["base_url"]}/posts/{p["slug"]}/</loc><priority>0.8</priority><lastmod>{p["date"]}</lastmod></url>')
+    write_file("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{chr(10).join(urls)}\n</urlset>')
 
-    # ---- Robots.txt ----
-    robots = f"""User-agent: *
-Allow: /
-Sitemap: {SITE['base_url']}/sitemap.xml
-"""
-    write_file(f"{BUILD_DIR}/robots.txt", robots)
+    # Robots.txt
+    write_file("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE['base_url']}/sitemap.xml\n")
 
-    # ---- About page ----
-    about_body = """<article class="about-content">
-<h1 class="section-title">About</h1>
-<p>This blog explores the intersection of <strong>machine learning</strong>, <strong>multiscale modeling</strong>, and <strong>fiber-based biomaterials</strong>.</p>
-<p>Written by a PhD researcher who believes in making computational methods accessible to scientists across disciplines.</p>
-<h2>Topics</h2>
-<ul>
-<li>Python tutorials for scientific computing</li>
-<li>Multiscale simulation techniques (MD, FE, coarse-graining)</li>
-<li>Machine learning applications in materials science</li>
-<li>Data analysis for biomaterials research</li>
-<li>Research workflows and reproducibility</li>
-</ul>
-<h2>Contact</h2>
-<p>For questions, collaborations, or feedback, reach out via <a href="https://github.com/GellmanSparrowS">GitHub</a>.</p>
-</article>"""
-    write_file(f"{BUILD_DIR}/about/index.html", render_page(
-        title="About", desc="About ML-Biomat — Machine Learning & Multiscale Modeling for Biomaterials",
-        body=about_body, url=f'{SITE["base_url"]}/about/'))
+    # 404
+    not_found = make_head(title="404 Not Found", desc="Page not found", url=f'{SITE["base_url"]}/404.html')
+    not_found += '<h1 style="font-size:3rem;margin-top:3rem">404</h1><p>Page not found. <a href="/">Go home</a>.</p>' + FOOT.format(year=datetime.now().year)
+    write_file("404.html", not_found)
 
-    # ---- 404 ----
-    write_file(f"{BUILD_DIR}/404.html", render_page(
-        title="404 — Not Found", desc="Page not found",
-        body="<h1>404</h1><p>Page not found. <a href='/'>Back to home</a>.</p>",
-        url=f'{SITE["base_url"]}/404.html'))
-
-    # ---- Copy static files ----
+    # Copy static files
     static_out = Path(BUILD_DIR) / "static"
-    if static_out.exists():
-        shutil.rmtree(static_out)
+    if static_out.exists(): shutil.rmtree(static_out)
     shutil.copytree("static", static_out)
+    # Google verification
+    gv = Path(BUILD_DIR) / "google4f70fafcd20d5909.html"
+    gv.write_text("google-site-verification: google4f70fafcd20d5909.html", encoding="utf-8")
+    # CV photo
+    cv_photo = Path("static/images/photo.jpg")
+    cv_photo_sq = Path("static/images/photo-sq.jpg")
+    if not cv_photo.exists():
+        src = Path("../\U00007667\U00007247.jpg")
+        if src.exists():
+            cv_photo.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, cv_photo)
 
-    print("Build complete. Site is in output/")
+    
+    # --- CV Page ---
+    cv_body = Path("content/cv-body.html").read_text(encoding="utf-8")
+    cv_page = make_head(title="CV \u2014 Yunhao Yang", desc="Academic CV of Yunhao Yang, PhD student at Fudan University", url=SITE["base_url"] + "/cv/") + cv_body + FOOT.format(year=datetime.now().year)
+    write_file("cv/index.html", cv_page)
+
+
+    print(f"\nBuild complete: {BUILD_DIR}/")
+    print(f"  {len(posts)} posts, {len(en)} EN + {len(zh)} ZH")
+    print(f"  Pages generated: posts/{len(posts)}, en, zh, about, categories, rss, sitemap")
 
 
 if __name__ == "__main__":

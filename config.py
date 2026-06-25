@@ -3,21 +3,23 @@
 
 SITE = {
     "title": "ML-Biomat",
+    "tagline_en": "Machine Learning and Multiscale Modeling for Biomaterials",
+    "tagline_zh": "机器学习与多尺度模拟 — 面向生物材料研究",
     "base_url": "https://ml-biomat.com",
-    "description": "Machine Learning &amp; Multiscale Modeling for Biomaterials — tutorials, research notes, practical guides for scientists.",
-    "author": "GellmanSparrow",
+    "description_en": "Tutorials, research notes, and practical guides on ML and multiscale modeling for fiber-based biomaterials.",
+    "description_zh": "纤维生物材料的机器学习与多尺度模拟教程、研究笔记和实战指南。",
+    "author": "Yunhao Yang",
+    "author_affiliation": "Fudan University",
     "lang": "en",
-    "google_analytics": "",  # Fill after GA setup
-    "adsense_pub_id": "",   # Fill after AdSense approval: ca-pub-XXXXXXXXXXXXXXXX
 }
+BUILD_DIR = "docs"
+CONTENT_DIR = "content"
 
 CATEGORIES = {
-    "machine-learning": {"name": "Machine Learning", "slug": "machine-learning"},
-    "multiscale-modeling": {"name": "Multiscale Modeling", "slug": "multiscale-modeling"},
-    "biomaterials": {"name": "Biomaterials", "slug": "biomaterials"},
-    "python-tutorials": {"name": "Python Tutorials", "slug": "python-tutorials"},
-    "research-notes": {"name": "Research Notes", "slug": "research-notes"},
+    "machine-learning": {"name_en": "Machine Learning", "name_zh": "机器学习", "slug": "machine-learning"},
+    "multiscale-modeling": {"name_en": "Multiscale Modeling", "name_zh": "多尺度模拟", "slug": "multiscale-modeling"},
+    "biomaterials": {"name_en": "Biomaterials", "name_zh": "生物材料", "slug": "biomaterials"},
+    "python-tutorials": {"name_en": "Python Tutorials", "name_zh": "Python教程", "slug": "python-tutorials"},
+    "research-notes": {"name_en": "Research Notes", "name_zh": "研究笔记", "slug": "research-notes"},
+    "wet-lab-data": {"name_en": "Wet-lab Data Processing", "name_zh": "湿实验数据处理", "slug": "wet-lab-data"},
 }
-
-BUILD_DIR = "output"
-CONTENT_DIR = "content"
