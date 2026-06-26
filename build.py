@@ -372,6 +372,11 @@ def build():
     not_found += '<h1 style="font-size:3rem;margin-top:3rem">404</h1><p>Page not found. <a href="/">Go home</a>.</p>' + FOOT.format(year=datetime.now().year)
     write_file("404.html", not_found)
 
+    # --- Search page ---
+    search_body = f'''<div class="search-page"><h1 class="section-title">Search</h1><input type="text" id="search-input-big" class="search-box" placeholder="Type to search {len(posts)} articles..." autocomplete="off"><div id="search-results" class="search-hint">Start typing to search all articles</div></div>'''
+    sp = make_head(title="Search", desc="Search all articles on ML-Biomat", url=SITE["base_url"]+"/search/") + search_body + FOOT.format(year=datetime.now().year)
+    write_file("search/index.html", sp)
+
     # Copy static files
     static_out = Path(BUILD_DIR) / "static"
     if static_out.exists(): shutil.rmtree(static_out)
