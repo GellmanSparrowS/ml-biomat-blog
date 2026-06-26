@@ -402,6 +402,13 @@ def build():
     write_file("cv/index.html", cv_page)
 
 
+    # --- CNAME for custom domain ---
+    (Path(BUILD_DIR) / "CNAME").write_text("ml-biomat.com", encoding="utf-8")
+    # --- Bing Webmaster verification ---
+    (Path(BUILD_DIR) / "BingSiteAuth.xml").write_text(
+        '<?xml version="1.0"?>\n<users>\n\t<user>CBF04BCC82F5CD300324A057BE99494C</user>\n</users>',
+        encoding="utf-8"
+    )
     print(f"\nBuild complete: {BUILD_DIR}/")
     print(f"  {len(posts)} posts, {len(en)} EN + {len(zh)} ZH")
     print(f"  Pages generated: posts/{len(posts)}, en, zh, about, categories, rss, sitemap")
