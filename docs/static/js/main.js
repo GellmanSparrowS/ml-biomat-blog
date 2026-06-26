@@ -129,6 +129,17 @@ function hideResults(){
 }
 
 // === Progress bar + Back to top ===
+
+// Back to top click handler
+document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('back-to-top');
+    if(btn){
+        btn.addEventListener('click', function(){
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+    }
+});
+
 window.addEventListener('scroll', function(){
     var winH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     var scrolled = (window.scrollY / winH) * 100;
