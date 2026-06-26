@@ -127,4 +127,14 @@ function hideResults(){
     var dd = document.getElementById('search-dropdown');
     if(dd) dd.style.display = 'none';
 }
+
+// === Progress bar + Back to top ===
+window.addEventListener('scroll', function(){
+    var winH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (window.scrollY / winH) * 100;
+    var bar = document.getElementById('progress-bar');
+    if(bar) bar.style.width = scrolled + '%';
+    var btn = document.getElementById('back-to-top');
+    if(btn) btn.style.display = window.scrollY > 400 ? 'block' : 'none';
+});
 })();
