@@ -1,58 +1,84 @@
 ---
-title: "\u5e94\u529b-\u5e94\u53d8\u66f2\u7ebf\u89e3\u8bfb\uff1a\u6750\u6599\u529b\u5b66\u5165\u95e8"
+title: "应力-应变曲线解读：材料力学入门"
 date: "2026-06-27"
 category: "biomaterials"
-tags: ["\u5e94\u529b-\u5e94\u53d8", "\u529b\u5b66", "\u751f\u7269\u6750\u6599", "\u5f39\u6027\u6a21\u91cf", "\u6559\u7a0b"]
+tags: ["应力-应变", "力学", "生物材料", "弹性模量", "教程"]
 lang: "zh"
 slug: "stress-strain-curves-zh"
-description: "\u9762\u5411\u751f\u7269/\u6750\u6599\u7814\u7a76\u751f\u7684\u5e94\u529b-\u5e94\u53d8\u66f2\u7ebf\u5165\u95e8\u6307\u5357\uff1a\u5f39\u6027\u6a21\u91cf\u3001\u5c48\u670d\u5f3a\u5ea6\u3001\u6781\u9650\u5f3a\u5ea6\u3001\u97e7\u6027\uff0c\u4ee5\u53ca\u751f\u7269\u6750\u6599\u7684\u7279\u6b8a\u6027\u3002"
+description: "面向生物/材料研究生的应力-应变曲线入门指南：弹性模量、屈服强度、极限强度、韧性，以及生物材料的特殊性。"
 ---
 
-## \u4e3a\u4ec0\u4e48\u6bcf\u4e2a\u6750\u6599\u4eba\u90fd\u8981\u61c2\u8fd9\u4e2a
+## 为什么每个材料人都要懂这个
 
-\u5e94\u529b-\u5e94\u53d8\u66f2\u7ebf\u662f\u6750\u6599\u79d1\u5b66\u6700\u91cd\u8981\u7684\u56fe\u3002\u5b83\u544a\u8bc9\u4f60\u6750\u6599\u6709\u591a\u786c\u3001\u80fd\u62c9\u591a\u957f\u3001\u5438\u6536\u591a\u5c11\u80fd\u91cf\u3002\u65e0\u8bba\u4f60\u7814\u7a76\u4e1d\u7d20\u3001\u6c34\u51dd\u80f6\u8fd8\u662f\u9aa8\u5934\uff0c\u8fd9\u662f\u57fa\u7840\u3002
+应力-应变曲线是材料科学最重要的图。它告诉你材料有多硬、能拉多长、吸收多少能量。无论你研究丝素蛋白、水凝胶还是骨头，这都是基础。
 
-**\u5e94\u529b** = \u529b / \u622a\u9762\u79ef\u3002**\u5e94\u53d8** = \u957f\u5ea6\u53d8\u5316\u91cf / \u539f\u59cb\u957f\u5ea6\u3002
+**应力** = 力 / 截面积。**应变** = 长度变化量 / 原始长度。
 
-## \u66f2\u7ebf\u5404\u533a\u57df
+```
+应力(σ) = F / A0     应变(ε) = (L-L0)/L0
+```
 
-| \u533a\u57df | \u53d1\u751f\u4ec0\u4e48 | \u5173\u952e\u53c2\u6570 |
+## 曲线的五个关键区域
+
+| 区域 | 发生什么 | 关键参数 |
 |------|------|------|
-| \u5f39\u6027\u533a | \u53d8\u5f62\u53ef\u9006\uff0c\u53bb\u9664\u529b\u540e\u6062\u590d\u539f\u72b6 | \u6768\u6c0f\u6a21\u91cf E |
-| \u5c48\u670d | \u6c38\u4e45\u53d8\u5f62\u5f00\u59cb | \u5c48\u670d\u5f3a\u5ea6 |
-| \u5851\u6027\u533a | \u6c38\u4e45\u53d8\u5f62\u7d2f\u79ef | \u52a0\u5de5\u786c\u5316 |
-| \u6781\u9650 | \u6700\u5927\u627f\u8f7d\u80fd\u529b | \u62c9\u4f38\u5f3a\u5ea6(UTS) |
-| \u65ad\u88c2 | \u6750\u6599\u7834\u574f | \u65ad\u88c2\u4f38\u957f\u7387 |
+| 弹性区 | 变形可逆，去力后恢复原状 | 杨氏模量 E |
+| 屈服点 | 永久变形开始 | 屈服强度 |
+| 塑性区 | 永久变形累积 | 加工硬化 |
+| 极限点 | 材料能承受的最大应力 | 抗拉强度(UTS) |
+| 断裂点 | 材料破坏 | 断裂伸长率 |
 
-## Python\u8ba1\u7b97\u529b\u5b66\u53c2\u6570
+## Python计算力学参数
 
 ```python
 import numpy as np
 
 def compute_mechanical_properties(strain, stress):
+    # 杨氏模量：弹性区(前2%应变)斜率
     elastic_mask = strain < 0.02
     E, _ = np.polyfit(strain[elastic_mask], stress[elastic_mask], 1)
+    
+    # 抗拉强度
     UTS = np.max(stress)
+    
+    # 韧性：曲线下方面积(单位体积吸收能量)
     toughness = np.trapz(stress, strain)
-    return {"E_MPa": E, "UTS_MPa": UTS, "Elongation_pct": strain[-1] * 100}
+    
+    return {
+        "杨氏模量_MPa": E,
+        "抗拉强度_MPa": UTS,
+        "断裂伸长率_pct": strain[-1] * 100,
+        "韧性_MJ_m3": toughness,
+    }
 ```
 
-## \u751f\u7269\u6750\u6599\u7279\u6b8a\u6027
+## 生物材料的特殊性
 
-1. **\u6ca1\u6709\u660e\u663e\u5c48\u670d\u70b9** \u2014\u2014 \u75280.2%\u504f\u79fb\u6cd5\u6216\u5272\u7ebf\u6a21\u91cf
-2. **\u5e94\u53d8\u7387\u4f9d\u8d56** \u2014\u2014 \u5728\u751f\u7406\u76f8\u5173\u901f\u7387\u4e0b\u6d4b\u8bd5\uff0c\u62a5\u544a\u5e94\u53d8\u7387
-3. **\u542b\u6c34\u91cf\u5f71\u54cd** \u2014\u2014 \u59cb\u7ec8\u5728\u6c34\u5408\u72b6\u6001\u4e0b\u6d4b\u8bd5
-4. **\u975e\u7ebf\u6027\u5f39\u6027** \u2014\u2014 J\u5f62\u66f2\u7ebf\u5f88\u5e38\u89c1\uff08\u8db6\u8dbe\u533a+\u7ebf\u6027\u533a\uff09
-5. **\u6ede\u540e** \u2014\u2014 \u52a0\u8f7d/\u5378\u8f7d\u66f2\u7ebf\u4e0d\u540c\uff0c\u8fd9\u662f\u80fd\u91cf\u8017\u6563
+软生物材料（水凝胶、组织、丝素膜）与金属行为不同：
 
-## \u5e38\u89c1\u9519\u8bef
+1. **没有明显屈服点**——用0.2%偏移法或割线模量
+2. **应变率依赖**——在生理相关速率下测试，报告应变率
+3. **含水量影响巨大**——除非专门研究干态，始终在水合态下测试
+4. **非线性弹性**——J形曲线很常见（趾区+线性区）
+5. **滞回**——加载/卸载曲线不同，这是能量耗散而非塑性变形
 
-- \u6df7\u6dc6\u5de5\u7a0b\u5e94\u529b\u548c\u771f\u5b9e\u5e94\u529b\uff08\u5927\u5e94\u53d8>10%\u65f6\u5dee\u5f02\u663e\u8457\uff09
-- \u4e0d\u62a5\u544a\u6837\u54c1\u5c3a\u5bf8
-- \u5939\u5177\u6ed1\u79fb\u88ab\u8bef\u8ba4\u4e3a\u989d\u5916\u5e94\u53d8
+```python
+# 对非线性材料：计算特定应变下的切线模量
+def tangent_modulus(strain, stress, at_strain=0.05):
+    idx = np.argmin(np.abs(strain - at_strain))
+    w = max(5, idx // 10)
+    return np.polyfit(strain[idx-w:idx+w], stress[idx-w:idx+w], 1)[0]
+```
 
-## \u53c2\u8003\u8d44\u6599
+## 常见错误
+
+- 混淆工程应力和真实应力（大应变>10%时差异显著）
+- 不报告样品尺寸
+- 夹具滑移被误认为额外应变
+- 对噪声过度解读
+
+## 参考资料
 
 - Callister, W.D. (2018). *Materials Science and Engineering*. Wiley.
 - Meyers, M.A. (2009). *Mechanical Behavior of Materials*. Cambridge.
-- GitHub: [MechAnalyzer](https://github.com/nickabattista/mech_analyzer)
+- GitHub: [MechAnalyzer](https://github.com/nickabattista/mech_analyzer) — 开源应力-应变分析工具

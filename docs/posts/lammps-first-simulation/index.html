@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Molecular Dynamics Basics: Your First LAMMPS Simulation — ML-Biomat</title>
+<meta name="description" content="A hands-on guide to running your first molecular dynamics simulation with LAMMPS: installation, input script structure, force fields, water box simulation, and trajectory analysis.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/lammps-first-simulation/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Molecular Dynamics Basics: Your First LAMMPS Simulation">
+<meta property="og:description" content="A hands-on guide to running your first molecular dynamics simulation with LAMMPS: installation, input script structure, force fields, water box simulation, and trajectory analysis.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/lammps-first-simulation/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Molecular Dynamics Basics: Your First LAMMPS Simulation", "description": "A hands-on guide to running your first molecular dynamics simulation with LAMMPS: installation, input script structure, force fields, water box simulation, and trajectory analysis.", "datePublished": "2026-06-27", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/lammps-first-simulation/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>Molecular Dynamics Basics: Your First LAMMPS Simulation</h1>
+<div class="article-meta">
+<span>2026-06-27</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/multiscale-modeling/">Multiscale Modeling</a>
+</div>
+</header>
+<div class="content">
+<h2>What is Molecular Dynamics?</h2>
+
+<p>MD simulates the motion of atoms by solving Newton's equations (F=ma) at each timestep. Given initial positions, velocities, and a force field (potential energy function), MD predicts how a system evolves over time.</p>
+
+<p>For biomaterials research, MD answers questions like:</p>
+<ul>
+<li>What is the Young's modulus of a collagen microfibril?</li>
+<li>How do water molecules interact with silk fibroin surfaces?</li>
+<li>What happens to a protein under tensile load?</li>
+</ul>
+
+<h2>Installing LAMMPS</h2>
+
+<p>LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) from Sandia National Labs is the most widely used open-source MD code.</p>
+
+<p><strong>Option 1: Pre-built binary (recommended for beginners)</strong></p>
+<pre><code class="language-bash">
+# Linux (Ubuntu/Debian)
+sudo apt install lammps
+
+# macOS
+brew install lammps
+
+# Windows: download from https://packages.lammps.org/windows.html
+</code></pre>
+
+<p><strong>Option 2: Conda (cross-platform)</strong></p>
+<pre><code class="language-bash">
+conda create -n lammps -c conda-forge lammps -y
+conda activate lammps
+</code></pre>
+
+<p>Verify installation:</p>
+<pre><code class="language-bash">
+lmp_serial -h
+</code></pre>
+
+<h2>Anatomy of a LAMMPS Input Script</h2>
+
+<p>A LAMMPS input file has four essential sections:</p>
+
+<pre><code class="language-bash">
+# ===== 1. Initialization =====
+units           real        # Energy: kcal/mol, Distance: Angstrom
+atom_style      full        # Atoms have charge, molecule ID
+boundary        p p p       # Periodic in all directions
+
+# ===== 2. System Setup =====
+region          box block 0 30 0 30 0 30
+create_box      2 box       # 2 atom types
+create_atoms    1 random 500 12345 box
+
+# ===== 3. Force Field =====
+pair_style      lj/cut 10.0
+pair_coeff      1 1 0.155 3.166  # O-O Lennard-Jones parameters
+
+# ===== 4. Run =====
+velocity        all create 300.0 12345
+fix             nvt all nvt temp 300.0 300.0 100.0
+thermo          100
+thermo_style    custom step temp press etotal
+dump            traj all custom 100 dump.lammpstrj id type x y z
+run             10000
+</code></pre>
+
+<h2>Your First Simulation: Water Box</h2>
+
+<p>Let's simulate 500 water molecules at room temperature using the TIP3P model:</p>
+
+<pre><code class="language-bash">
+# water.lammps
+units           real
+atom_style      full
+bond_style      harmonic
+angle_style     harmonic
+dihedral_style  opls
+
+# Read TIP3P water box
+read_data       water_box.data
+
+# Assign force field
+pair_style      lj/cut/coul/long 10.0 10.0
+kspace_style    pppm 1e-5
+include         par_oplsaa.in
+
+# Energy minimization
+minimize        1e-4 1e-6 1000 10000
+
+# Equilibration (NVT)
+velocity        all create 300.0 12345
+fix             nvt all nvt temp 300.0 300.0 100.0
+run             50000
+
+# Production (NPT)
+unfix           nvt
+fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
+run             100000
+</code></pre>
+
+<h2>Key Parameters Explained</h2>
+
+<table><tr><th>Parameter</th><th>Meaning</th><th>Typical Value</th></tr><tr><td>-----------</td><td>---------</td><td>---------------</td></tr><tr><td>timestep</td><td>Integration step size</td><td>1.0-2.0 fs</td></tr><tr><td>cutoff</td><td>Non-bonded interaction cutoff</td><td>10-12 Angstrom</td></tr><tr><td>temperature</td><td>System temperature</td><td>300 K (room temp)</td></tr><tr><td>NVT</td><td>Constant particle number, volume, temperature</td><td>Equilibration</td></tr><tr><td>NPT</td><td>Constant particle number, pressure, temperature</td><td>Production</td></tr></table>
+
+<h2>Common Force Fields</h2>
+
+<table><tr><th>Force Field</th><th>Best For</th><th>Reference</th></tr><tr><td>------------</td><td>---------</td><td>-----------</td></tr><tr><td>OPLS-AA</td><td>Proteins, organic molecules</td><td>Jorgensen et al. (1996)</td></tr><tr><td>CHARMM36</td><td>Proteins, nucleic acids</td><td>Best et al. (2012)</td></tr><tr><td>AMBER ff19SB</td><td>Proteins</td><td>Tian et al. (2020)</td></tr><tr><td>ReaxFF</td><td>Reactive systems, bond breaking</td><td>van Duin et al. (2001)</td></tr><tr><td>Martini</td><td>Coarse-grained biomolecular</td><td>Marrink et al. (2007)</td></tr></table>
+
+<h2>Trajectory Analysis with Python</h2>
+
+<p>After the simulation finishes, analyze the trajectory:</p>
+
+<pre><code class="language-python">
+import numpy as np
+import MDAnalysis as mda
+from MDAnalysis.analysis import rmsd, rdf
+
+# Load trajectory
+u = mda.Universe(&quot;water_box.data&quot;, &quot;dump.lammpstrj&quot;)
+
+# Temperature over time
+temps = []
+for ts in u.trajectory:
+    velocities = u.atoms.velocities
+    ke = 0.5 * np.sum(u.atoms.masses[:, None] * velocities**2)
+    temps.append(ke * 2 / (3 * len(u.atoms) * 0.001987))
+
+# Radial distribution function
+oxygen = u.select_atoms(&quot;type O&quot;)
+rdf_oo = rdf.InterRDF(oxygen, oxygen, nbins=200, range=(0, 10.0))
+rdf_oo.run()
+</code></pre>
+
+<h2>Troubleshooting</h2>
+
+<table><tr><th>Problem</th><th>Solution</th></tr><tr><td>---------</td><td>----------</td></tr><tr><td>"Lost atoms" error</td><td>Decrease timestep or increase neighbor list skin</td></tr><tr><td>Energy not converging</td><td>Run longer minimization or use softer initial conditions</td></tr><tr><td>Simulation too slow</td><td>Use GPU (Kokkos package) or coarser force field</td></tr><tr><td>Segfault</td><td>Check atom type consistency in input script</td></tr></table>
+
+<h2>References</h2>
+
+<ul>
+<li>LAMMPS documentation: <a href="https://docs.lammps.org">docs.lammps.org</a></li>
+<li>MDAnalysis: <a href="https://www.mdanalysis.org">mdanalysis.org</a></li>
+<li>Allen, M.P. & Tildesley, D.J. (2017). <em>Computer Simulation of Liquids</em>. Oxford.</li>
+<li>GitHub: <a href="https://github.com/lammps/lammps">lammps/lammps</a></li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+</body>
+</html>
