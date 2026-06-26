@@ -215,3 +215,27 @@ pre:hover .copy-btn{opacity:1}
     .cat-grid{grid-template-columns:1fr;gap:1rem}
     .lang-switch a{padding:.2rem .4rem;font-size:.7rem}
 }
+
+/* === Upgraded Code Copy === */
+.copy-btn{position:absolute;top:.3rem;right:.3rem;padding:.3rem;background:var(--c-bg);color:var(--c-muted);border:1px solid var(--c-border);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.55;transition:all .15s;z-index:10}
+.copy-btn:hover{opacity:1;color:var(--c-primary);border-color:var(--c-primary);background:var(--c-primary-soft)}
+.copy-btn.copied{color:#16a34a;border-color:#16a34a;background:#f0fdf4;opacity:1}
+
+/* === Dedicated Search Page === */
+.search-page{padding:2rem 0}
+.search-page .search-box{width:100%;padding:.8rem 1.2rem;font-size:1.15rem;border:2px solid var(--c-border);border-radius:var(--r);background:var(--c-surface);color:var(--c-fg);outline:none;font-family:var(--font-sans);transition:border-color .15s}
+.search-page .search-box:focus{border-color:var(--c-primary)}
+.search-page .search-hint{text-align:center;color:var(--c-muted);padding:2rem 0;font-size:.95rem}
+
+/* === Donation Section === */
+.donate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-top:1rem}
+.donate-card{text-align:center;padding:1rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r)}
+.donate-card img{width:160px;height:160px;object-fit:contain;border-radius:var(--r-sm)}
+.donate-card p{margin-top:.5rem;font-size:.82rem;color:var(--c-muted)}
+.donate-card a{display:inline-block;margin-top:.5rem;padding:.4rem 1rem;background:var(--c-primary);color:#fff;border-radius:999px;font-size:.82rem;font-weight:600;text-decoration:none}
+.donate-card a:hover{opacity:.9;text-decoration:none}
+
+/* === CV Fixes === */
+.cv-page table td{font-size:.9rem}
+.cv-page h3{font-size:1.05rem;margin:1.5rem 0 .5rem}
+.cv-page ul,.cv-page ol{font-size:.9rem;line-height:1.75}
