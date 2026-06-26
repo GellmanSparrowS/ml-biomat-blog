@@ -157,8 +157,10 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 <nav class="nav-links">
 <a href="/"{home_active}>Home / 首页</a>
 <a href="/categories/">Categories / 分类</a>
+<a href="/search/">Search / 搜索</a>
 <a href="/about/">About / 关于</a>
 </nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <span class="lang-switch"><a href="/en/"{en_active}>EN</a><a href="/zh/"{zh_active}>中文</a></span>
 </div></header>
 <main class="container{wide_class}">'''
