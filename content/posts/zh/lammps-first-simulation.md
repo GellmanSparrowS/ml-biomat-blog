@@ -1,6 +1,6 @@
 ---
 title: "分子动力学入门：你的第一个LAMMPS模拟"
-date: "2026-06-27"
+date: "2026-06-26"
 category: "multiscale-modeling"
 tags: ["分子动力学", "LAMMPS", "模拟", "教程", "力场"]
 lang: "zh"

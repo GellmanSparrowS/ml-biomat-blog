@@ -1,6 +1,6 @@
 ---
 title: "Understanding Stress-Strain Curves: A Materials Science Primer"
-date: "2026-06-27"
+date: "2026-06-26"
 category: "biomaterials"
 tags: ["stress-strain", "mechanics", "biomaterials", "elasticity", "tutorial"]
 lang: "en"

@@ -1,6 +1,6 @@
 ---
 title: "Python科学计算环境搭建指南：从零开始到顺利跑代码"
-date: "2026-06-27"
+date: "2026-06-26"
 category: "python-tutorials"
 tags: ["python", "conda", "jupyter", "环境配置", "科学计算"]
 lang: "zh"

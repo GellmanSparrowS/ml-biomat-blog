@@ -1,6 +1,6 @@
 ---
 title: "Molecular Dynamics Basics: Your First LAMMPS Simulation"
-date: "2026-06-27"
+date: "2026-06-26"
 category: "multiscale-modeling"
 tags: ["molecular-dynamics", "LAMMPS", "simulation", "tutorial", "force-fields"]
 lang: "en"

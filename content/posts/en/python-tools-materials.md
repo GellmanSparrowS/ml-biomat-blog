@@ -1,6 +1,6 @@
 ---
 title: "Python Tools for Scientific Computing in Materials Research"
-date: "2025-06-23"
+date: "2026-06-25"
 category: "python-tutorials"
 tags: ["python", "numpy", "scipy", "materials-science", "data-analysis", "visualization"]
 lang: "en"

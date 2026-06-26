@@ -1,6 +1,6 @@
 ---
 title: "Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide"
-date: "2026-06-27"
+date: "2026-06-26"
 category: "python-tutorials"
 tags: ["python", "conda", "jupyter", "venv", "scientific-computing", "setup"]
 lang: "en"

@@ -1,6 +1,6 @@
 ---
 title: "多尺度模拟在纤维生物材料中的应用入门"
-date: "2025-06-24"
+date: "2026-06-26"
 category: "multiscale-modeling"
 tags: ["多尺度模拟", "分子动力学", "有限元", "纤维材料", "生物材料"]
 lang: "zh"

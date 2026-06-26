@@ -1,6 +1,6 @@
 ---
 title: "机器学习预测纤维材料力学性能：从数据准备到模型部署"
-date: "2025-06-22"
+date: "2026-06-25"
 category: "machine-learning"
 tags: ["机器学习", "随机森林", "XGBoost", "纤维材料", "力学性能", "特征工程"]
 lang: "zh"

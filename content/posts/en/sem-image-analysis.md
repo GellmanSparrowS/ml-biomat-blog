@@ -1,6 +1,6 @@
 ---
 title: "Practical SEM Image Analysis for Biomaterials Research"
-date: "2026-06-27"
+date: "2026-06-26"
 category: "wet-lab-data"
 tags: ["SEM", "image-analysis", "fiber-morphology", "python", "skimage"]
 lang: "en"
