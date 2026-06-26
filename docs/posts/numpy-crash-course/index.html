@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NumPy Crash Course for Experimentalists — ML-Biomat</title>
+<meta name="description" content="Practical NumPy for materials researchers: arrays, broadcasting, loading experimental data, and everyday operations.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/numpy-crash-course/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="NumPy Crash Course for Experimentalists">
+<meta property="og:description" content="Practical NumPy for materials researchers: arrays, broadcasting, loading experimental data, and everyday operations.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/numpy-crash-course/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy Crash Course for Experimentalists", "description": "Practical NumPy for materials researchers: arrays, broadcasting, loading experimental data, and everyday operations.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/numpy-crash-course/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>NumPy Crash Course for Experimentalists</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+</div>
+</header>
+<div class="content">
+<h2>Why NumPy</h2>
+
+<p>If you process numerical data in Python, NumPy is the foundation. Tensile tests, AFM curves, XRD patterns, MD trajectories all become NumPy arrays.</p>
+
+<pre><code class="language-python">
+import numpy as np
+</code></pre>
+
+<h2>Creating Arrays</h2>
+
+<pre><code class="language-python">
+strains = np.array([0.0, 0.01, 0.02, 0.05, 0.10])
+stresses = np.array([0, 15, 28, 52, 74])
+data = np.loadtxt(&quot;tensile_test.csv&quot;, delimiter=&quot;,&quot;, skiprows=1)
+z, force = data[:, 0], data[:, 1]
+</code></pre>
+
+<h2>Array Operations</h2>
+
+<pre><code class="language-python">
+mean = np.mean(stresses)
+coeffs = np.polyfit(strains, stresses, 1)
+E_modulus = coeffs[0]  # Young&#x27;s modulus
+elastic = stresses[strains &lt; 0.02]  # Boolean indexing
+</code></pre>
+
+<h2>Common Patterns</h2>
+
+<pre><code class="language-python">
+raw = np.loadtxt(&quot;force_curve_001.txt&quot;, skiprows=320)
+z_piezo, deflection = raw[:, 0], raw[:, 1]
+force = 0.06 * 45.0 * (deflection - np.median(deflection[:100]))
+</code></pre>
+
+<ul>
+<li>numpy.org/doc</li>
+<li>VanderPlas, J. (2016). Python Data Science Handbook. OReilly.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
