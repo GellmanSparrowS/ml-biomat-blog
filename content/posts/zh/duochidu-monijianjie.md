@@ -4,7 +4,7 @@ date: "2025-06-24"
 category: "multiscale-modeling"
 tags: ["多尺度模拟", "分子动力学", "有限元", "纤维材料", "生物材料"]
 lang: "zh"
-slug: "multiscale-modeling-fiber-biomaterials-zh"
+slug: "multiscale-modeling-biomaterials-intro-zh"
 description: "从分子动力学到连续介质力学，系统介绍多尺度模拟在纤维生物材料研究中的方法、工具和实战思路，包含Python代码示例。"
 ---
 

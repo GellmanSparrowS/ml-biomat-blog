@@ -4,7 +4,7 @@ date: "2026-06-26"
 category: "machine-learning"
 tags: ["特征工程", "机器学习", "材料科学", "数据预处理"]
 lang: "zh"
-slug: "feature-engineering-materials-zh"
+slug: "feature-engineering-materials-ml-zh"
 description: "如何将零散的实验数据转化为结构化的特征矩阵，含编码、交互特征、缺失值处理和小样本特征选择。"
 ---
 
