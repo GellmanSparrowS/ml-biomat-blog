@@ -1,6 +1,6 @@
 ---
 title: "Feature Engineering for Materials Science: From Experimental Logs to ML-Ready Data"
-date: "2025-06-26"
+date: "2026-06-26"
 category: "machine-learning"
 tags: ["feature-engineering", "machine-learning", "materials-science", "data-preprocessing"]
 lang: "en"

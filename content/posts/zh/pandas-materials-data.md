@@ -1,6 +1,6 @@
 ---
 title: "Python数据处理实战：用Pandas清洗和可视化材料实验数据"
-date: "2025-06-26"
+date: "2026-06-26"
 category: "python-tutorials"
 tags: ["pandas", "python", "数据处理", "实验数据", "可视化"]
 lang: "zh"

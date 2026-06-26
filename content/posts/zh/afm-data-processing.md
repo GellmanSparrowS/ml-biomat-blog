@@ -1,6 +1,6 @@
 ---
 title: "Python实战AFM力曲线分析：从原始数据到力学性能"
-date: "2025-06-25"
+date: "2026-06-25"
 category: "wet-lab-data"
 tags: ["AFM", "力曲线", "python", "数据处理", "生物材料", "力学性能"]
 lang: "zh"

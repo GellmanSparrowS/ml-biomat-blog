@@ -1,6 +1,6 @@
 ---
 title: "A Practical Introduction to Multiscale Modeling for Biomaterials"
-date: "2025-06-25"
+date: "2026-06-25"
 category: "multiscale-modeling"
 tags: ["multiscale", "biomaterials", "molecular-dynamics", "finite-element", "coarse-graining"]
 lang: "en"

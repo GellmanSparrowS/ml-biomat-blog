@@ -1,6 +1,6 @@
 ---
 title: "Fiber Network Mechanics: Key Concepts for Biomaterials Research"
-date: "2025-06-26"
+date: "2026-06-26"
 category: "biomaterials"
 tags: ["biomaterials", "fiber-networks", "mechanics", "silk", "collagen"]
 lang: "en"
