@@ -141,3 +141,7 @@ with pd.ExcelWriter("results.xlsx") as writer:
 ## 小结
 
 Pandas解决的是实验室80%的数据处理需求。花一小时学会这五个操作——读取、清洗、分组、画图、导出——你的数据处理效率会提高一个数量级。
+
+## 参考文献
+- McKinney, W. (2010). Data Structures for Statistical Computing in Python. *Proc. SciPy*, 56-61.
+- pandas.pydata.org

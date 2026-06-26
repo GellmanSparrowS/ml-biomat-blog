@@ -206,3 +206,7 @@ In future posts, I'll cover:
 - Automated AFM data processing pipelines
 - Integrating MD simulation output with ML feature extraction
 - Building interactive dashboards with Streamlit for lab data
+
+## References
+- Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. *CSE*, 9(3), 90-95.
+- Larsen, A.H. et al. (2017). ASE: Atomic Simulation Environment. *J. Physics: Condensed Matter*, 29, 273002.

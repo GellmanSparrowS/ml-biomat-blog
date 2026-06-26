@@ -61,3 +61,7 @@ plt.savefig("figure.png", dpi=600)  # 位图，高分辨率
 ## 参考文献
 - Rougier, N.P. et al. (2014). Ten simple rules for better figures. *PLoS Computational Biology*, 10(9), e1003833.
 - Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. *Computing in Science & Engineering*, 9(3), 90-95.
+
+## 参考文献
+- Rougier, N.P. et al. (2014). Ten simple rules for better figures. *PLoS CB*, 10(9), e1003833.
+- Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. *CSE*, 9(3), 90-95.

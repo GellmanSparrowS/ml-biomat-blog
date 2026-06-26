@@ -76,3 +76,7 @@ conda create -n matsci python=3.10 numpy scipy pandas matplotlib scikit-learn ju
 ## 参考文献
 - Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. *CSE*, 9(3), 90-95.
 - van der Walt, S. et al. (2014). scikit-image: image processing in Python. *PeerJ*, 2, e453.
+
+## 参考文献
+- Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. *CSE*, 9(3), 90-95.
+- van der Walt, S. et al. (2014). scikit-image. *PeerJ*, 2, e453.

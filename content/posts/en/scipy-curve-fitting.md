@@ -195,3 +195,8 @@ print(f"Constrained result: {result.x}")
 - Virtanen, P. et al. (2020). SciPy 1.0. *Nature Methods*, 17, 261-272.
 - Lin, D.C. et al. (2007). Robust strategies for automated AFM force curve analysis. *J. Biomech. Eng.*, 129(6), 904-912.
 - Oliver, W.C. & Pharr, G.M. (1992). An improved technique for determining hardness and elastic modulus. *J. Mater. Res.*, 7(6), 1564-1583.
+
+## References
+- Virtanen, P. et al. (2020). SciPy 1.0. *Nature Methods*, 17, 261-272.
+- Johnson, M.L. & Faunt, L.M. (1992). Parameter estimation. *Methods in Enzymology*, 210, 1-37.
+- Lin, D.C. et al. (2007). Robust AFM force curve analysis. *J. Biomech. Eng.*, 129(6), 904-912.

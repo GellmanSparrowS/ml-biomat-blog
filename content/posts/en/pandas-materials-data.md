@@ -80,3 +80,7 @@ with pd.ExcelWriter("results.xlsx") as writer:
 | Encoding error | `pd.read_csv("file.csv", encoding="utf-8")` or `"gbk"` |
 | Large file slow | Specify `dtype` or use `chunksize` |
 | Date format wrong | `pd.to_datetime(df["date"], format="%Y-%m-%d")` |
+
+## References
+- McKinney, W. (2010). Data Structures for Statistical Computing in Python. *Proc. SciPy*, 56-61.
+- pandas.pydata.org - Pandas documentation.

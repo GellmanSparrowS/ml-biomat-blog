@@ -78,3 +78,7 @@ def predict_with_uncertainty(model, X, n_iter=100):
 4. Open-source your code and data for reproducibility
 
 - Yang Y., Bai R., Gao W. et al. (2024). *Advanced Science*, 2413293.
+
+## References
+- Yang Y., Bai R., Gao W. et al. (2024). Optimizing biomimetic 3D fibrous networks via DRL. *Advanced Science*, 2413293.
+- Ramprasad, R. et al. (2017). Machine learning in materials informatics. *npj Computational Materials*, 3, 54.

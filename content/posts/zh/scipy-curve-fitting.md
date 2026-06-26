@@ -75,3 +75,7 @@ print(f"AIC: 越小越好")
 
 ## 参考文献
 - Virtanen, P. et al. (2020). SciPy 1.0. *Nature Methods*, 17, 261-272.
+
+## 参考文献
+- Virtanen, P. et al. (2020). SciPy 1.0. *Nature Methods*, 17, 261-272.
+- Johnson, M.L. & Faunt, L.M. (1992). Parameter estimation. *Methods in Enzymology*, 210, 1-37.

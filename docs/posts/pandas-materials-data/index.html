@@ -105,6 +105,12 @@ with pd.ExcelWriter(&quot;results.xlsx&quot;) as writer:
 <h2>Quick Troubleshooting</h2>
 
 <table><tr><th>Problem</th><th>Fix</th></tr><tr><td>---------</td><td>-----</td></tr><tr><td>Encoding error</td><td><code>pd.read_csv("file.csv", encoding="utf-8")</code> or <code>"gbk"</code></td></tr><tr><td>Large file slow</td><td>Specify <code>dtype</code> or use <code>chunksize</code></td></tr><tr><td>Date format wrong</td><td><code>pd.to_datetime(df["date"], format="%Y-%m-%d")</code></td></tr></table>
+
+<h2>References</h2>
+<ul>
+<li>McKinney, W. (2010). Data Structures for Statistical Computing in Python. <em>Proc. SciPy</em>, 56-61.</li>
+<li>pandas.pydata.org - Pandas documentation.</li>
+</ul>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>
