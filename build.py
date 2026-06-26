@@ -172,6 +172,8 @@ POST_ROW = '<li class="post-row"><span class="row-date">{date}</span><a href="/p
 
 ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="/categories/{cat_slug}/">{cat_name}</a>\n</div>\n</header>\n<div class="content">\n{html}\n</div>\n</article>'
 
+
+GISCUS_SCRIPT = '<section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)"><h2>Comments</h2><script src="https://giscus.app/client.js" data-repo="GellmanSparrowS/ml-biomat-blog" data-repo-id="R_kgDOTEwhsA" data-category="General" data-category-id="DIC_kwDOTEwhsM4CpPbT" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script></section>'
 ENGAGE_BANNER = '<section class="cta-banner">\n<h3>\U0001f4ac Questions or Feedback?</h3>\n<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>\n<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>\n</section>'
 
 HERO = '''<section class="hero">
