@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python科研绘图实战：发表级图表制作 — ML-Biomat</title>
+<meta name="description" content="Matplotlib发表级图表制作指南：多幅布局、色彩方案、高分辨率导出。">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/scientific-visualization-python-zh/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Python科研绘图实战：发表级图表制作">
+<meta property="og:description" content="Matplotlib发表级图表制作指南：多幅布局、色彩方案、高分辨率导出。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/scientific-visualization-python-zh/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python科研绘图实战：发表级图表制作", "description": "Matplotlib发表级图表制作指南：多幅布局、色彩方案、高分辨率导出。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/scientific-visualization-python-zh/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge zh">中文</span>
+<h1>Python科研绘图实战：发表级图表制作</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
+</div>
+</header>
+<div class="content">
+<h2>多幅图模板</h2>
+
+<pre><code class="language-python">
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+axes[0,0].plot(strain, stress, &quot;k-&quot;)
+axes[0,0].text(-0.1, 1.05, &quot;A&quot;, transform=axes[0,0].transAxes, fontweight=&quot;bold&quot;)
+df.boxplot(column=&quot;modulus&quot;, by=&quot;treatment&quot;, ax=axes[0,1])
+axes[1,0].scatter(x, y, s=20, alpha=0.6)
+axes[1,1].imshow(sem_image, cmap=&quot;gray&quot;)
+plt.tight_layout()
+</code></pre>
+
+<h2>色彩方案</h2>
+
+<pre><code class="language-python">
+import seaborn as sns
+sns.set_palette(&quot;colorblind&quot;)
+colors = [&quot;#1b9e77&quot;, &quot;#d95f02&quot;, &quot;#7570b3&quot;, &quot;#e7298a&quot;]
+</code></pre>
+
+<h2>导出格式</h2>
+
+<pre><code class="language-python">
+plt.savefig(&quot;figure.pdf&quot;, dpi=300, bbox_inches=&quot;tight&quot;)  # 矢量
+plt.savefig(&quot;figure.png&quot;, dpi=600)  # 高分辨率
+</code></pre>
+
+<h2>审稿建议</h2>
+<ul>
+<li>不要单独用红绿配色</li>
+<li>用粗体字母标注幅面</li>
+<li>在caption中报告n值</li>
+</ul>
+
+<ul>
+<li>Rougier, N.P. et al. (2014). <em>PLoS CB</em>, 10(9), e1003833.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:chr(39)+chr(115)+chr(109)+chr(111)+chr(111)+chr(116)+chr(104)+chr(39)})" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>

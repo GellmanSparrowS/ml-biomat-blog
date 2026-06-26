@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python Tools for Scientific Computing in Materials Research — ML-Biomat</title>
+<meta name="description" content="A curated guide to Python libraries for materials science: from data loading with ASE/pymatgen to ML with scikit-learn, plus practical AFM/SEM data analysis scripts.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/python-tools-materials-research/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Python Tools for Scientific Computing in Materials Research">
+<meta property="og:description" content="A curated guide to Python libraries for materials science: from data loading with ASE/pymatgen to ML with scikit-learn, plus practical AFM/SEM data analysis scripts.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/python-tools-materials-research/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python Tools for Scientific Computing in Materials Research", "description": "A curated guide to Python libraries for materials science: from data loading with ASE/pymatgen to ML with scikit-learn, plus practical AFM/SEM data analysis scripts.", "datePublished": "2025-06-23", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/python-tools-materials-research/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>Python Tools for Scientific Computing in Materials Research</h1>
+<div class="article-meta">
+<span>2025-06-23</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+</div>
+</header>
+<div class="content">
+<h2>Why Python for Materials Science</h2>
+
+<p>Materials research generates data everywhere: AFM force curves, SEM images, MD trajectories, XRD patterns, mechanical testing logs. Python has become the lingua franca for processing this data—and for good reason: it's free, readable, and has an ecosystem purpose-built for scientific computing.</p>
+
+<p>This post covers the essential Python stack for a materials researcher, with concrete code examples you can copy into your Jupyter notebook.</p>
+
+<h2>The Core Stack</h2>
+
+<h3>NumPy &amp; SciPy</h3>
+
+<p>The foundation. If you're processing experimental data, these two cover 80% of your needs:</p>
+
+<pre><code class="language-python">
+import numpy as np
+from scipy import signal, optimize, interpolate
+
+# Load AFM force curve (typical .txt with column format)
+data = np.loadtxt(&quot;force_curve.txt&quot;, skiprows=2)
+z_piezo, deflection = data[:, 0], data[:, 1]
+
+# Convert to force using spring constant and sensitivity
+k = 2.8  # N/m, cantilever spring constant
+sensitivity = 42.5  # nm/V
+force = k * sensitivity * (deflection - np.median(deflection[:100]))
+
+# Find adhesion peak using scipy
+peaks, properties = signal.find_peaks(-force, prominence=0.5)
+adhesion_force = -force[peaks[0]] if len(peaks) &gt; 0 else 0
+print(f&quot;Adhesion force: {adhesion_force:.2f} nN&quot;)
+</code></pre>
+
+<h3>Pandas</h3>
+
+<p>When your data is tabular (mechanical tests with multiple samples, conditions, repeats):</p>
+
+<pre><code class="language-python">
+import pandas as pd
+import seaborn as sns
+
+df = pd.read_csv(&quot;tensile_tests.csv&quot;)
+# Group by treatment, compute statistics
+summary = df.groupby(&quot;treatment&quot;).agg({
+    &quot;youngs_modulus&quot;: [&quot;mean&quot;, &quot;std&quot;],
+    &quot;ultimate_strength&quot;: [&quot;mean&quot;, &quot;std&quot;],
+    &quot;strain_at_break&quot;: [&quot;mean&quot;, &quot;std&quot;]
+}).round(2)
+print(summary)
+</code></pre>
+
+<h3>Matplotlib &amp; Seaborn</h3>
+
+<p>Publication-quality figures with minimal code:</p>
+
+<pre><code class="language-python">
+import matplotlib.pyplot as plt
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+
+# Stress-strain with elastic fit
+ax1.plot(strain, stress, &#x27;b-&#x27;, linewidth=1.5, label=&#x27;Experiment&#x27;)
+ax1.plot(strain[:elastic_idx], elastic_fit, &#x27;r--&#x27;, label=&#x27;Elastic fit&#x27;)
+ax1.set_xlabel(&quot;Strain&quot;); ax1.set_ylabel(&quot;Stress (MPa)&quot;)
+ax1.legend(frameon=False)
+
+# Boxplot comparing groups
+df.boxplot(column=&quot;youngs_modulus&quot;, by=&quot;treatment&quot;, ax=ax2)
+ax2.set_ylabel(&quot;Young&#x27;s Modulus (GPa)&quot;)
+
+plt.tight_layout()
+plt.savefig(&quot;mechanical_properties.pdf&quot;, dpi=300)
+</code></pre>
+
+<h2>Materials-Specific Libraries</h2>
+
+<h3>ASE (Atomic Simulation Environment)</h3>
+
+<p>For atomistic data—reading structure files, building supercells, computing properties:</p>
+
+<pre><code class="language-python">
+from ase.io import read, write
+from ase.build import make_supercell
+
+# Read LAMMPS data file
+atoms = read(&quot;collagen_fibril.data&quot;, format=&quot;lammps-data&quot;)
+
+# Create supercell for larger simulation
+supercell = make_supercell(atoms, [[2, 0, 0], [0, 2, 0], [0, 0, 3]])
+
+# Compute radial distribution function
+from ase.geometry.analysis import Analysis
+ana = Analysis(supercell)
+rdf = ana.get_rdf(rmax=15.0, nbins=200)
+</code></pre>
+
+<h3>pymatgen (Python Materials Genomics)</h3>
+
+<p>For crystal structures, phase diagrams, and materials informatics:</p>
+
+<pre><code class="language-python">
+from pymatgen.core import Structure
+from pymatgen.analysis.elasticity import ElasticTensor
+
+# Build a collagen-like structure (simplified)
+structure = Structure.from_spacegroup(&quot;P1&quot;, lattice, [&quot;C&quot;, &quot;N&quot;, &quot;O&quot;], coords)
+
+# Compute elastic tensor from DFT-calculated stress-strain
+elastic_tensor = ElasticTensor.from_stress_strain_dict(stress_strain_data)
+print(f&quot;Bulk modulus: {elastic_tensor.k_voigt:.2f} GPa&quot;)
+</code></pre>
+
+<h2>Machine Learning for Materials</h2>
+
+<h3>scikit-learn — Your First ML Model</h3>
+
+<p>Predicting mechanical properties from composition/processing features:</p>
+
+<pre><code class="language-python">
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# Features: composition, processing params
+# Target: Young&#x27;s modulus
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+
+model = RandomForestRegressor(n_estimators=100, max_depth=10)
+scores = cross_val_score(model, X_train_scaled, y_train, cv=5)
+print(f&quot;CV R²: {scores.mean():.3f} ± {scores.std():.3f}&quot;)
+
+model.fit(X_train_scaled, y_train)
+train_score = model.score(X_train_scaled, y_train)
+test_score = model.score(scaler.transform(X_test), y_test)
+</code></pre>
+
+<h3>Feature Importance — What Drives Performance?</h3>
+
+<pre><code class="language-python">
+importances = model.feature_importances_
+indices = np.argsort(importances)[::-1]
+
+for i in range(min(10, len(feature_names))):
+    print(f&quot;{feature_names[indices[i]]}: {importances[indices[i]]:.4f}&quot;)
+</code></pre>
+
+<h2>Image Analysis for Microscopy</h2>
+
+<p>Processing SEM/TEM images to quantify fiber morphology:</p>
+
+<pre><code class="language-python">
+from skimage import io, filters, measure, morphology
+
+# Load SEM image, threshold, measure fibers
+img = io.imread(&quot;sem_fiber_network.tif&quot;, as_gray=True)
+thresh = filters.threshold_otsu(img)
+binary = img &gt; thresh
+cleaned = morphology.remove_small_objects(binary, min_size=50)
+
+# Label fibers and measure properties
+labels = measure.label(cleaned)
+props = measure.regionprops_table(labels, properties=[
+    &quot;area&quot;, &quot;perimeter&quot;, &quot;eccentricity&quot;, &quot;orientation&quot;,
+    &quot;major_axis_length&quot;, &quot;minor_axis_length&quot;
+])
+df_fibers = pd.DataFrame(props)
+print(f&quot;Mean fiber diameter: {df_fibers[&#x27;minor_axis_length&#x27;].mean():.1f} px&quot;)
+print(f&quot;Fiber orientation std: {np.std(df_fibers[&#x27;orientation&#x27;]):.2f} rad&quot;)
+</code></pre>
+
+<h2>Putting It Together: A Research Workflow</h2>
+
+<p>Here's how a typical multiscale project flows with Python:</p>
+
+<ol>
+<li><strong>Load raw data</strong> (NumPy, Pandas) — from instruments, simulations</li>
+<li><strong>Clean &amp; preprocess</strong> (SciPy signal processing, outlier removal)</li>
+<li><strong>Extract features</strong> (skimage for images, custom functions for MD data)</li>
+<li><strong>Build models</strong> (scikit-learn, XGBoost, or PyTorch if deep learning)</li>
+<li><strong>Visualize &amp; export</strong> (Matplotlib for figures, pandas to_csv for tables)</li>
+<li><strong>Version control everything</strong> (Git + DVC for data)</li>
+</ol>
+
+<h2>Quick Setup</h2>
+
+<pre><code class="language-bash">
+# Create a conda environment with everything you need
+conda create -n matsci python=3.10 numpy scipy pandas matplotlib \
+    scikit-learn seaborn jupyter ase pymatgen scikit-image -c conda-forge
+conda activate matsci
+</code></pre>
+
+<h2>What's Next</h2>
+
+<p>In future posts, I'll cover:</p>
+<ul>
+<li>Deep learning for materials property prediction with PyTorch</li>
+<li>Automated AFM data processing pipelines</li>
+<li>Integrating MD simulation output with ML feature extraction</li>
+<li>Building interactive dashboards with Streamlit for lab data</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:chr(39)+chr(115)+chr(109)+chr(111)+chr(111)+chr(116)+chr(104)+chr(39)})" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
