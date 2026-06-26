@@ -376,6 +376,13 @@ def build():
     # Copy static files
     static_out = Path(BUILD_DIR) / "static"
     if static_out.exists(): shutil.rmtree(static_out)
+
+    # --- Search index for header search ---
+    import json as json_mod
+    search_data = []
+    for p in posts:
+        search_data.append({"title": p["title"], "slug": p["slug"], "date": p["date"], "category": p["category"], "tags": p["tags"], "lang": p["lang"], "description": p["description"] or ""})
+    write_file("search.json", json_mod.dumps(search_data, ensure_ascii=False))
     shutil.copytree("static", static_out)
     # Google verification
     gv = Path(BUILD_DIR) / "google4f70fafcd20d5909.html"
@@ -397,6 +404,7 @@ def build():
 
 
     # --- CNAME for custom domain ---
+    (Path(BUILD_DIR) / ".nojekyll").touch()
     (Path(BUILD_DIR) / "CNAME").write_text("ml-biomat.com", encoding="utf-8")
     # --- Bing Webmaster verification ---
     (Path(BUILD_DIR) / "BingSiteAuth.xml").write_text(
