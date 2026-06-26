@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feature Engineering for Materials Science: From Experimental Logs to ML-Ready Data — ML-Biomat</title>
+<meta name="description" content="How to transform scattered experimental data into structured feature matrices for ML, with Python examples.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/feature-engineering-materials-ml/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Feature Engineering for Materials Science: From Experimental Logs to ML-Ready Data">
+<meta property="og:description" content="How to transform scattered experimental data into structured feature matrices for ML, with Python examples.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/feature-engineering-materials-ml/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Feature Engineering for Materials Science: From Experimental Logs to ML-Ready Data", "description": "How to transform scattered experimental data into structured feature matrices for ML, with Python examples.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-ml/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>Feature Engineering for Materials Science: From Experimental Logs to ML-Ready Data</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/machine-learning/">Machine Learning</a>
+</div>
+</header>
+<div class="content">
+<h2>The Real Bottleneck</h2>
+
+<p>Most materials ML tutorials start with a clean CSV and jump straight to model fitting. In reality, your data lives in lab notebooks, instrument exports, and Excel sheets. <strong>Feature engineering</strong> is where 80% of the work happens.</p>
+
+<pre><code class="language-python">
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+</code></pre>
+
+<h2>From Raw Data to Feature Matrix</h2>
+
+<p>Typical raw data from a biomaterials experiment:</p>
+
+<table><tr><th>Sample</th><th>Fiber_dia(nm)</th><th>Orientation(deg)</th><th>Crosslink(%)</th><th>Treatment</th><th>Youngs_mod(GPa)</th></tr><tr><td>--------</td><td>--------------</td><td>-----------------</td><td>-------------</td><td>-----------</td><td>-----------------</td></tr><tr><td>A1</td><td>45</td><td>12</td><td>2.5</td><td>methanol</td><td>2.8</td></tr><tr><td>A2</td><td>52</td><td>22</td><td>1.8</td><td>ethanol</td><td>1.9</td></tr></table>
+
+<pre><code class="language-python">
+df = pd.DataFrame({
+    &quot;fiber_diameter_nm&quot;: [45, 52, 48, 55, 50, 47],
+    &quot;orientation_std_deg&quot;: [12, 22, 8, 18, 15, 20],
+    &quot;crosslink_density_pct&quot;: [2.5, 1.8, 3.2, 2.0, 4.1, 1.5],
+    &quot;treatment&quot;: [&quot;methanol&quot;, &quot;ethanol&quot;, &quot;methanol&quot;, &quot;water&quot;, &quot;methanol&quot;, &quot;ethanol&quot;],
+    &quot;youngs_modulus_GPa&quot;: [2.8, 1.9, 3.5, 2.3, 4.0, 1.7],
+})
+</code></pre>
+
+<h2>Encoding Categorical Variables</h2>
+
+<pre><code class="language-python">
+encoder = OneHotEncoder(sparse_output=False, drop=&quot;first&quot;)
+treatment_encoded = encoder.fit_transform(df[[&quot;treatment&quot;]])
+treatment_cols = encoder.get_feature_names_out([&quot;treatment&quot;])
+
+df_encoded = pd.concat([
+    df.drop(&quot;treatment&quot;, axis=1),
+    pd.DataFrame(treatment_encoded, columns=treatment_cols)
+], axis=1)
+</code></pre>
+
+<h2>Domain-Driven Interaction Features</h2>
+
+<p>This is where materials knowledge adds value:</p>
+
+<pre><code class="language-python">
+def engineer_materials_features(df):
+    df = df.copy()
+    # Crosslink x fiber diameter synergy
+    df[&quot;crosslink_x_diameter&quot;] = (
+        df[&quot;crosslink_density_pct&quot;] * df[&quot;fiber_diameter_nm&quot;]
+    )
+    # Orientation disorder vs diameter ratio
+    df[&quot;orient_diameter_ratio&quot;] = (
+        df[&quot;orientation_std_deg&quot;] / (df[&quot;fiber_diameter_nm&quot;] + 1e-6)
+    )
+    # Log-transform skewed features
+    for col in [&quot;crosslink_density_pct&quot;, &quot;fiber_diameter_nm&quot;]:
+        if col in df.columns:
+            df[f&quot;log_{col}&quot;] = np.log1p(df[col])
+    return df
+</code></pre>
+
+<h2>Handling Missing Values</h2>
+
+<p>For small datasets, avoid blind mean imputation:</p>
+
+<pre><code class="language-python">
+def smart_impute(df, group_col=&quot;treatment&quot;):
+    df = df.copy()
+    numeric_cols = df.select_dtypes(include=np.number).columns
+    for col in numeric_cols:
+        if df[col].isna().sum() == 0: continue
+        if group_col in df.columns:
+            df[col] = df.groupby(group_col)[col].transform(
+                lambda x: x.fillna(x.median())
+            )
+        df[col] = df[col].fillna(df[col].median())
+    return df
+</code></pre>
+
+<h2>Feature Selection for Small Datasets</h2>
+
+<p>With <100 samples, avoid automated selection:</p>
+
+<ol>
+<li><strong>Correlation analysis</strong>: drop |r| > 0.95</li>
+<li><strong>Variance threshold</strong>: drop near-constant features</li>
+<li><strong>Domain curation</strong>: only physically justified features</li>
+</ol>
+
+<pre><code class="language-python">
+corr_matrix = df_feat[feature_cols].corr().abs()
+upper_tri = corr_matrix.where(
+    np.triu(np.ones(corr_matrix.shape), k=1).astype(bool)
+)
+to_drop = [col for col in upper_tri.columns 
+           if any(upper_tri[col] &gt; 0.95)]
+</code></pre>
+
+<h2>Checklist</h2>
+
+<ul>
+<li>All features numeric</li>
+<li>No target leakage</li>
+<li>Missing values handled</li>
+<li>Categoricals encoded</li>
+<li>Interaction features have physical justification</li>
+</ul>
+
+<h2>References</h2>
+
+<ul>
+<li>Kuhn, M. & Johnson, K. (2019). <em>Feature Engineering and Selection</em>. CRC Press.</li>
+<li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>

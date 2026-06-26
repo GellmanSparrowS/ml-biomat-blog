@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Silk Fibroin: From Molecular Structure to Mechanical Function — ML-Biomat</title>
+<meta name="description" content="How silk fibroin&#x27;s hierarchical structure—from amino acid sequence to beta-sheet crystallites—dictates its remarkable mechanical properties and guides biomaterials design.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Silk Fibroin: From Molecular Structure to Mechanical Function">
+<meta property="og:description" content="How silk fibroin&#x27;s hierarchical structure—from amino acid sequence to beta-sheet crystallites—dictates its remarkable mechanical properties and guides biomaterials design.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Silk Fibroin: From Molecular Structure to Mechanical Function", "description": "How silk fibroin's hierarchical structure—from amino acid sequence to beta-sheet crystallites—dictates its remarkable mechanical properties and guides biomaterials design.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>Silk Fibroin: From Molecular Structure to Mechanical Function</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/biomaterials/">Biomaterials</a>
+</div>
+</header>
+<div class="content">
+<h2>Why Silk?</h2>
+
+<p>Silk fibroin is one of nature’s most remarkable structural proteins. A single silkworm cocoon fiber combines <strong>high strength (~500 MPa)</strong>, <strong>extensibility (~20% strain)</strong>, and <strong>toughness exceeding Kevlar</strong>. Understanding how this performance emerges from molecular architecture is central to designing better protein-based materials.</p>
+
+<h2>Hierarchical Structure</h2>
+
+<p>Silk fibroin’s structure spans six orders of magnitude:</p>
+
+<table><tr><th>Scale</th><th>Feature</th><th>Mechanical Role</th></tr><tr><td>-------</td><td>---------</td><td>----------------</td></tr><tr><td>1-10 nm</td><td>Beta-sheet crystallites</td><td>Stiffness, crosslinking nodes</td></tr><tr><td>10-100 nm</td><td>Crystalline/amorphous domains</td><td>Toughness via sacrificial bonds</td></tr><tr><td>100 nm - 1 um</td><td>Nanofibrils</td><td>Load distribution</td></tr><tr><td>1-10 um</td><td>Microfibrils</td><td>Fiber unit</td></tr><tr><td>10-100 um</td><td>Single fiber</td><td>Bulk mechanical response</td></tr></table>
+
+<h2>Molecular Composition</h2>
+
+<p>Bombyx mori silk fibroin consists of three chains:</p>
+<ul>
+<li><strong>Heavy chain (H-chain, ~390 kDa)</strong>: Gly-Ala-Gly-Ala-Gly-Ser repeats forming beta-sheets</li>
+<li><strong>Light chain (L-chain, ~26 kDa)</strong>: Disulfide-linked to H-chain</li>
+<li><strong>P25 glycoprotein</strong>: Maintains chain stoichiometry</li>
+</ul>
+
+<pre><code class="language-python">
+# Simplified silk sequence analysis
+def beta_sheet_content(sequence):
+    &quot;&quot;&quot;Estimate beta-sheet propensity from GAGAGS repeat density.&quot;&quot;&quot;
+    motif = &quot;GAGAGS&quot;
+    count = sequence.count(motif)
+    return count * len(motif) / len(sequence)
+
+# Bombyx mori H-chain N-terminal domain (simplified)
+bmori_hchain = &quot;GAGAGSGAGAGSGAGAGSGAGAGSGAGAGS&quot; * 100
+print(f&quot;Beta-sheet content: {beta_sheet_content(bmori_hchain):.1%}&quot;)
+</code></pre>
+
+<h2>Beta-Sheet Crystallites</h2>
+
+<p>The (Gly-Ala-Gly-Ala-Gly-Ser)n repeats assemble into antiparallel beta-sheets. These crystallites act as <strong>physical crosslinks</strong> in an otherwise amorphous protein matrix. Key parameters:</p>
+
+<ul>
+<li>Crystallite size: 2-6 nm (XRD)</li>
+<li>Crystallinity index: 10-50% (varies with processing)</li>
+<li>Inter-sheet distance: 0.35 nm (hydrogen bonding)</li>
+<li>Inter-strand distance: 0.95 nm (van der Waals)</li>
+</ul>
+
+<h2>Mechanical Model: Two-Phase Composite</h2>
+
+<p>A simplified model treats silk as a composite of stiff crystallites in a soft matrix:</p>
+
+<pre><code class="language-python">
+def silk_modulus(Vc, Ec=20, Ea=0.5):
+    &quot;&quot;&quot;Voigt (upper bound) estimate of silk modulus.
+    Vc: crystalline volume fraction
+    Ec: crystal modulus (GPa)
+    Ea: amorphous modulus (GPa)
+    &quot;&quot;&quot;
+    return Vc * Ec + (1 - Vc) * Ea
+
+for Vc in [0.1, 0.2, 0.3, 0.4, 0.5]:
+    print(f&quot;Vc={Vc:.1f}: E={silk_modulus(Vc):.1f} GPa&quot;)
+</code></pre>
+
+<h2>Processing-Structure-Property Relationships</h2>
+
+<table><tr><th>Processing Step</th><th>Structural Change</th><th>Property Change</th></tr><tr><td>----------------</td><td>-------------------</td><td>----------------</td></tr><tr><td>Degumming (boiling)</td><td>Removes sericin coating</td><td>Fibers separate, slight stiffness loss</td></tr><tr><td>Dissolution (LiBr)</td><td>Denatures protein, breaks H-bonds</td><td>Loss of crystallinity</td></tr><tr><td>Methanol/ethanol treatment</td><td>Induces beta-sheet formation</td><td>Increases stiffness, reduces solubility</td></tr><tr><td>Water annealing</td><td>Slow beta-sheet growth</td><td>Controlled crystallinity</td></tr><tr><td>Drawing/stretching</td><td>Aligns molecular chains</td><td>Increases strength and anisotropy</td></tr></table>
+
+<h2>Practical Tips for Experimentalists</h2>
+
+<ol>
+<li><strong>Degumming time matters</strong>: Over-boiling degrades the H-chain, reducing mechanical properties</li>
+<li><strong>Ethanol vs methanol</strong>: Both induce beta-sheets; ethanol is slower but gentler</li>
+<li><strong>Water content</strong>: Silk’s mechanical properties are strongly humidity-dependent—always report RH%</li>
+<li><strong>AFM characterization</strong>: Use PeakForce QNM mode for nanoscale modulus mapping on silk films</li>
+<li><strong>Regenerated vs native</strong>: Regenerated silk rarely matches native fiber mechanics—focus on processing optimization</li>
+</ol>
+
+<h2>References</h2>
+
+<ul>
+<li>Keten, S. et al. (2010). Nanoconfinement controls stiffness, strength and toughness of beta-sheet crystals in silk. <em>Nature Materials</em>, 9, 359-367.</li>
+<li>Nova, A. et al. (2010). Molecular and nanoscale contributors to the mechanical response of spider silk. <em>Nano Letters</em>, 10(7), 2626-2634.</li>
+<li>Omenetto, F.G. & Kaplan, D.L. (2010). New opportunities for an ancient material. <em>Science</em>, 329(5991), 528-531.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
