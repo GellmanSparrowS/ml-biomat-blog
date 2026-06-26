@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>分子动力学入门：你的第一个LAMMPS模拟 — ML-Biomat</title>
+<meta name="description" content="手把手教你跑第一个分子动力学模拟：LAMMPS安装、输入脚本结构、力场选择、水盒子模拟和轨迹分析。">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/lammps-first-simulation-zh/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="分子动力学入门：你的第一个LAMMPS模拟">
+<meta property="og:description" content="手把手教你跑第一个分子动力学模拟：LAMMPS安装、输入脚本结构、力场选择、水盒子模拟和轨迹分析。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/lammps-first-simulation-zh/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "分子动力学入门：你的第一个LAMMPS模拟", "description": "手把手教你跑第一个分子动力学模拟：LAMMPS安装、输入脚本结构、力场选择、水盒子模拟和轨迹分析。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/lammps-first-simulation-zh/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge zh">中文</span>
+<h1>分子动力学入门：你的第一个LAMMPS模拟</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/multiscale-modeling/">多尺度模拟</a>
+</div>
+</header>
+<div class="content">
+<h2>什么是分子动力学</h2>
+
+<p>MD通过在每个时间步求解牛顿运动方程(F=ma)来模拟原子运动。给定了初始位置、速度和力场(势能函数)，MD预测系统如何随时间演化。</p>
+
+<p>对于生物材料研究，MD可以回答：</p>
+<ul>
+<li>胶原微纤维的杨氏模量是多少？</li>
+<li>水分子如何与丝素蛋白表面相互作用？</li>
+<li>蛋白质在拉伸载荷下会发生什么？</li>
+</ul>
+
+<h2>安装LAMMPS</h2>
+
+<p>LAMMPS来自Sandia国家实验室，是最广泛应用的开源MD代码。</p>
+
+<p><strong>方法一：预编译二进制（推荐新手）</strong></p>
+<pre><code class="language-bash">
+sudo apt install lammps        # Linux (Ubuntu/Debian)
+brew install lammps             # macOS
+# Windows: https://packages.lammps.org/windows.html
+</code></pre>
+
+<p><strong>方法二：Conda（跨平台）</strong></p>
+<pre><code class="language-bash">
+conda create -n lammps -c conda-forge lammps -y
+conda activate lammps
+</code></pre>
+
+<p>验证安装：</p>
+<pre><code class="language-bash">
+lmp_serial -h
+</code></pre>
+
+<h2>LAMMPS输入脚本结构</h2>
+
+<p>一个LAMMPS输入文件有四个基本部分：</p>
+
+<pre><code class="language-bash">
+# 1. 初始化
+units           real        # 能量: kcal/mol, 距离: 埃
+atom_style      full        # 原子带电荷、分子ID
+boundary        p p p       # 所有方向周期性边界
+
+# 2. 系统设置
+region          box block 0 30 0 30 0 30
+create_box      2 box       # 2种原子类型
+create_atoms    1 random 500 12345 box
+
+# 3. 力场
+pair_style      lj/cut 10.0
+pair_coeff      1 1 0.155 3.166  # O-O LJ参数
+
+# 4. 运行
+velocity        all create 300.0 12345
+fix             nvt all nvt temp 300.0 300.0 100.0
+thermo          100
+dump            traj all custom 100 dump.lammpstrj id type x y z
+run             10000
+</code></pre>
+
+<h2>第一个模拟：水盒子</h2>
+
+<p>用TIP3P模型模拟500个水分子在室温下：</p>
+
+<pre><code class="language-bash">
+# water.lammps
+units           real; atom_style      full
+bond_style      harmonic; angle_style     harmonic
+
+read_data       water_box.data
+pair_style      lj/cut/coul/long 10.0 10.0
+kspace_style    pppm 1e-5
+
+minimize        1e-4 1e-6 1000 10000     # 能量最小化
+velocity        all create 300.0 12345
+fix             nvt all nvt temp 300.0 300.0 100.0
+run             50000                     # NVT平衡
+fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
+run             100000                    # NPT生产
+</code></pre>
+
+<h2>关键参数</h2>
+
+<table><tr><th>参数</th><th>含义</th><th>典型值</th></tr><tr><td>------</td><td>------</td><td>--------</td></tr><tr><td>timestep</td><td>积分步长</td><td>1.0-2.0 fs</td></tr><tr><td>cutoff</td><td>非键作用截断距离</td><td>10-12 埃</td></tr><tr><td>temperature</td><td>系统温度</td><td>300 K(室温)</td></tr><tr><td>NVT</td><td>恒粒子数/体积/温度</td><td>平衡阶段</td></tr><tr><td>NPT</td><td>恒粒子数/压力/温度</td><td>生产阶段</td></tr></table>
+
+<h2>常用力场</h2>
+
+<table><tr><th>力场</th><th>适用</th><th>参考文献</th></tr><tr><td>------</td><td>------</td><td>---------</td></tr><tr><td>OPLS-AA</td><td>蛋白质、有机分子</td><td>Jorgensen (1996)</td></tr><tr><td>CHARMM36</td><td>蛋白质、核酸</td><td>Best (2012)</td></tr><tr><td>AMBER ff19SB</td><td>蛋白质</td><td>Tian (2020)</td></tr><tr><td>ReaxFF</td><td>反应体系、断键</td><td>van Duin (2001)</td></tr><tr><td>Martini</td><td>粗粒化生物分子</td><td>Marrink (2007)</td></tr></table>
+
+<h2>轨迹分析</h2>
+
+<pre><code class="language-python">
+import MDAnalysis as mda
+from MDAnalysis.analysis import rdf
+
+u = mda.Universe(&quot;water_box.data&quot;, &quot;dump.lammpstrj&quot;)
+oxygen = u.select_atoms(&quot;type O&quot;)
+rdf_oo = rdf.InterRDF(oxygen, oxygen, nbins=200, range=(0, 10.0))
+rdf_oo.run()
+</code></pre>
+
+<h2>常见问题</h2>
+
+<table><tr><th>问题</th><th>解决</th></tr><tr><td>------</td><td>------</td></tr><tr><td>"Lost atoms"错误</td><td>减小timestep或增大neighbor list skin</td></tr><tr><td>能量不收敛</td><td>更长最小化或用更软的初始条件</td></tr><tr><td>模拟太慢</td><td>用GPU(Kokkos)或更粗的力场</td></tr></table>
+
+<h2>参考资料</h2>
+
+<ul>
+<li>LAMMPS文档: <a href="https://docs.lammps.org">docs.lammps.org</a></li>
+<li>MDAnalysis: <a href="https://www.mdanalysis.org">mdanalysis.org</a></li>
+<li>Allen & Tildesley (2017). <em>Computer Simulation of Liquids</em>. Oxford.</li>
+<li>GitHub: <a href="https://github.com/lammps/lammps">lammps/lammps</a></li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>

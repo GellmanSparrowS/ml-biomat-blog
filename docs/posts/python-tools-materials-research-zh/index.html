@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python科研工具箱：材料科学常用Python库实战 — ML-Biomat</title>
+<meta name="description" content="材料科研必备Python库指南：NumPy/SciPy数据处理、Pandas分组统计、Matplotlib科研绘图、ASE/pymatgen原子结构分析。">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/python-tools-materials-research-zh/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Python科研工具箱：材料科学常用Python库实战">
+<meta property="og:description" content="材料科研必备Python库指南：NumPy/SciPy数据处理、Pandas分组统计、Matplotlib科研绘图、ASE/pymatgen原子结构分析。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/python-tools-materials-research-zh/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python科研工具箱：材料科学常用Python库实战", "description": "材料科研必备Python库指南：NumPy/SciPy数据处理、Pandas分组统计、Matplotlib科研绘图、ASE/pymatgen原子结构分析。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/python-tools-materials-research-zh/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge zh">中文</span>
+<h1>Python科研工具箱：材料科学常用Python库实战</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
+</div>
+</header>
+<div class="content">
+<h2>为什么用Python</h2>
+
+<p>材料研究产生各种数据：AFM力曲线、SEM图像、MD轨迹、XRD图谱、力学测试日志。Python已成为处理这些数据的万能语言。</p>
+
+<pre><code class="language-python">
+import numpy as np
+from scipy import signal, optimize
+import matplotlib.pyplot as plt
+</code></pre>
+
+<h2>核心工具栈</h2>
+
+<h3>NumPy & SciPy</h3>
+
+<pre><code class="language-python">
+data = np.loadtxt(&quot;force_curve.txt&quot;, skiprows=2)
+z_piezo, deflection = data[:, 0], data[:, 1]
+k = 2.8  # N/m
+sensitivity = 42.5  # nm/V
+force = k * sensitivity * (deflection - np.median(deflection[:100]))
+peaks, _ = signal.find_peaks(-force, prominence=0.5)
+adhesion = -force[peaks[0]] if len(peaks) &gt; 0 else 0
+</code></pre>
+
+<h3>Pandas</h3>
+
+<pre><code class="language-python">
+import pandas as pd
+df = pd.read_csv(&quot;tensile_tests.csv&quot;)
+summary = df.groupby(&quot;treatment&quot;).agg({&quot;youngs_modulus&quot;: [&quot;mean&quot;, &quot;std&quot;], &quot;ultimate_strength&quot;: [&quot;mean&quot;, &quot;std&quot;]}).round(2)
+</code></pre>
+
+<h3>Matplotlib</h3>
+
+<pre><code class="language-python">
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+ax1.plot(strain, stress, &quot;b-&quot;, linewidth=1.5)
+plt.savefig(&quot;mechanical_properties.pdf&quot;, dpi=300)
+</code></pre>
+
+<h2>材料科学专用库</h2>
+
+<h3>ASE（原子模拟环境）</h3>
+
+<pre><code class="language-python">
+from ase.io import read
+atoms = read(&quot;collagen_fibril.data&quot;, format=&quot;lammps-data&quot;)
+supercell = atoms * (2, 2, 3)
+</code></pre>
+
+<ul>
+<li>Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. <em>CSE</em>, 9(3), 90-95.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>

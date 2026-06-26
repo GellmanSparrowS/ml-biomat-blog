@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide — ML-Biomat</title>
+<meta name="description" content="Complete guide to setting up a Python environment for materials and biology research: Miniconda, Jupyter, VS Code, package management, and troubleshooting common issues.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/python-env-setup/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide">
+<meta property="og:description" content="Complete guide to setting up a Python environment for materials and biology research: Miniconda, Jupyter, VS Code, package management, and troubleshooting common issues.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/python-env-setup/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide", "description": "Complete guide to setting up a Python environment for materials and biology research: Miniconda, Jupyter, VS Code, package management, and troubleshooting common issues.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/python-env-setup/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+</div>
+</header>
+<div class="content">
+<h2>Who Is This For?</h2>
+
+<p>You are a graduate student in biology, chemistry, or materials science. You have heard that Python can help with your data, but you have never set up a programming environment. This guide walks you through every step—no prior experience assumed.</p>
+
+<p>By the end, you will have a working Python setup with Jupyter notebooks, essential scientific packages, and VS Code as your editor.</p>
+
+<h2>Step 1: Install Miniconda</h2>
+
+<p><strong>Why Miniconda instead of Anaconda?</strong> Miniconda is lightweight (~50 MB vs ~500 MB), installs faster, and gives you full control over which packages you need.</p>
+
+<ol>
+<li>Go to <a href="https://docs.conda.io/en/latest/miniconda.html">docs.conda.io/en/latest/miniconda.html</a></li>
+<li>Download the installer for your OS (Windows: <code>.exe</code>, macOS: <code>.pkg</code>, Linux: <code>.sh</code>)</li>
+<li>Run the installer. <strong>Important: check "Add Miniconda to PATH"</strong> on Windows</li>
+<li>Verify installation:</li>
+</ol>
+
+<pre><code class="language-bash">
+conda --version
+# Expected: conda 24.x.x
+</code></pre>
+
+<h2>Step 2: Create Your First Environment</h2>
+
+<p>Environments isolate project dependencies. Think of them as separate toolboxes—one for AFM analysis, one for MD simulations, one for ML projects.</p>
+
+<pre><code class="language-bash">
+# Create an environment with Python 3.10 (most packages support this)
+conda create -n matsci python=3.10 -y
+
+# Activate it
+conda activate matsci
+
+# Your prompt should now show (matsci)
+</code></pre>
+
+<h2>Step 3: Install Essential Packages</h2>
+
+<p>For materials/biomaterials research, here are the packages you need right away:</p>
+
+<pre><code class="language-bash">
+# Core scientific stack
+conda install numpy scipy pandas matplotlib jupyter -y
+
+# Additional useful libraries
+conda install -c conda-forge seaborn scikit-learn scikit-image -y
+
+# For atomic/molecular simulations (install as needed)
+# conda install -c conda-forge ase pymatgen mdanalysis -y
+</code></pre>
+
+<p>Verify everything works:</p>
+
+<pre><code class="language-python">
+# test_env.py
+import numpy as np
+import scipy
+import pandas as pd
+import matplotlib.pyplot as plt
+import sklearn
+
+print(f&quot;NumPy: {np.__version__}&quot;)
+print(f&quot;SciPy: {scipy.__version__}&quot;)
+print(f&quot;Pandas: {pd.__version__}&quot;)
+print(f&quot;scikit-learn: {sklearn.__version__}&quot;)
+print(&quot;All packages OK!&quot;)
+</code></pre>
+
+<h2>Step 4: Set Up Jupyter Notebook</h2>
+
+<p>Jupyter is the interactive coding environment most scientists use for exploration:</p>
+
+<pre><code class="language-bash">
+# Start Jupyter in your project folder
+cd path/to/your/project
+jupyter notebook
+
+# Or use JupyterLab (more modern interface)
+jupyter lab
+</code></pre>
+
+<p><strong>Pro tip:</strong> Create a shortcut command for quick launch. On Windows, create <code>jupyter_lab.bat</code>:</p>
+
+<pre><code class="language-batch">
+@echo off
+call conda activate matsci
+jupyter lab
+</code></pre>
+
+<h2>Step 5: VS Code for Serious Development</h2>
+
+<p>When notebooks get too messy (and they will), switch to VS Code:</p>
+
+<ol>
+<li>Download from <a href="https://code.visualstudio.com">code.visualstudio.com</a></li>
+<li>Install the <strong>Python extension</strong> (Microsoft)</li>
+<li>Open your project folder: <code>File > Open Folder</code></li>
+<li>Select your conda environment: <code>Ctrl+Shift+P</code> > "Python: Select Interpreter" > choose <code>matsci</code></li>
+</ol>
+
+<p>Essential VS Code extensions for scientists:</p>
+<ul>
+<li><strong>Python</strong> (Microsoft): IntelliSense, debugging</li>
+<li><strong>Jupyter</strong> (Microsoft): Notebook support inside VS Code</li>
+<li><strong>Rainbow CSV</strong>: Color-coded CSV files</li>
+<li><strong>GitLens</strong>: Git integration</li>
+</ul>
+
+<h2>Step 6: Package Management Reference</h2>
+
+<pre><code class="language-bash">
+# List installed packages
+conda list
+
+# Install a specific version
+conda install numpy=1.24.3
+
+# Install from conda-forge (community-maintained channel)
+conda install -c conda-forge package_name
+
+# Use pip when conda does not have the package
+pip install package_name
+
+# Export your environment (for sharing/reproducibility)
+conda env export &gt; environment.yml
+
+# Recreate from file
+conda env create -f environment.yml
+</code></pre>
+
+<h2>Step 7: Common Problems and Solutions</h2>
+
+<table><tr><th>Problem</th><th>Solution</th></tr><tr><td>---------</td><td>----------</td></tr><tr><td><code>conda not recognized</code></td><td>Restart terminal or reinstall with "Add to PATH" checked</td></tr><tr><td>Package install hangs</td><td>Use <code>conda install -c conda-forge</code> instead of defaults</td></tr><tr><td><code>DLL load failed</code> on Windows</td><td>Install <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Visual C++ Redistributable</a></td></tr><tr><td>Jupyter kernel not found</td><td><code>python -m ipykernel install --user --name matsci</code></td></tr><tr><td>Conda slow on Windows</td><td>Use <code>mamba</code> instead: <code>conda install mamba -c conda-forge</code> then <code>mamba install ...</code></td></tr></table>
+
+<h2>Step 8: Quick Start Template</h2>
+
+<p>Save this as <code>start_project.bat</code> (Windows) or <code>start_project.sh</code> (macOS/Linux):</p>
+
+<pre><code class="language-bash">
+# Windows: start_project.bat
+conda activate matsci
+jupyter lab
+</code></pre>
+
+<p>Double-click to start working. That is it—you are ready to code.</p>
+
+<h2>References</h2>
+
+<ul>
+<li>Conda documentation: <a href="https://docs.conda.io">docs.conda.io</a></li>
+<li>Jupyter documentation: <a href="https://docs.jupyter.org">docs.jupyter.org</a></li>
+<li>VS Code Python setup: <a href="https://code.visualstudio.com/docs/python/python-tutorial">code.visualstudio.com/docs/python/python-tutorial</a></li>
+<li>Scientific Python ecosystem: <a href="https://scientific-python.org">scientific-python.org</a></li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>

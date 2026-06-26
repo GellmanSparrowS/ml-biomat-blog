@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fiber Network Mechanics: Key Concepts for Biomaterials Research — ML-Biomat</title>
+<meta name="description" content="An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/fiber-network-mechanics-intro/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Fiber Network Mechanics: Key Concepts for Biomaterials Research">
+<meta property="og:description" content="An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/fiber-network-mechanics-intro/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Fiber Network Mechanics: Key Concepts for Biomaterials Research", "description": "An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/fiber-network-mechanics-intro/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>Fiber Network Mechanics: Key Concepts for Biomaterials Research</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/biomaterials/">Biomaterials</a>
+</div>
+</header>
+<div class="content">
+<h2>Why Fiber Networks Matter</h2>
+
+<p>Nature builds structural materials from fibers: collagen in tendons, silk in cocoons, cellulose in plant cell walls. These <strong>disordered fiber networks</strong> achieve remarkable mechanical properties — high strength-to-weight ratios, strain-stiffening, and toughness — through architecture rather than chemistry alone.</p>
+
+<p>Understanding fiber network mechanics is essential for designing better biomaterials.</p>
+
+<h2>Key Mechanical Behaviors</h2>
+
+<h3>1. Strain-Stiffening</h3>
+
+<p>Unlike metals (which soften after yield), fiber networks <strong>stiffen as you stretch them</strong>. At low strains, fibers reorient and align. At high strains, aligned fibers bear load axially:</p>
+
+<pre><code class="language-python">
+import numpy as np
+# Conceptual: stress-strain of a fiber network
+strain = np.linspace(0, 0.5, 100)
+# Low strain: bending-dominated (soft)
+# High strain: stretching-dominated (stiff)
+stress = 0.1 * strain + 5.0 * strain**3  # simplified
+</code></pre>
+
+<h3>2. Architecture-Property Relationships</h3>
+
+<table><tr><th>Parameter</th><th>Effect on Mechanics</th></tr><tr><td>-----------</td><td>-------------------</td></tr><tr><td>Fiber diameter</td><td>Thinner fibers = more flexible network</td></tr><tr><td>Network density (mg/cm3)</td><td>Higher density = higher modulus</td></tr><tr><td>Crosslink density</td><td>More crosslinks = stiffer, less ductile</td></tr><tr><td>Fiber orientation</td><td>Aligned fibers = anisotropic properties</td></tr><tr><td>Fiber aspect ratio</td><td>Longer fibers = better load transfer</td></tr></table>
+
+<h3>3. Percolation Threshold</h3>
+
+<p>A fiber network needs a minimum density to transmit load — the <strong>percolation threshold</strong>. Below this density, the network is a disconnected "soup" of fibers. Above it, a continuous load-bearing path forms.</p>
+
+<h2>Experimental Characterization</h2>
+
+<p>Common techniques to probe fiber network mechanics:</p>
+
+<ul>
+<li><strong>AFM nanoindentation</strong>: local stiffness at nanometer scale</li>
+<li><strong>Tensile testing</strong>: bulk stress-strain curves</li>
+<li><strong>Rheology</strong>: viscoelastic properties (G', G")</li>
+<li><strong>SEM/TEM imaging</strong>: network architecture visualization</li>
+<li><strong>SAXS/WAXS</strong>: molecular-level structural changes during deformation</li>
+</ul>
+
+<h2>Computational Modeling</h2>
+
+<p>Three main approaches:</p>
+
+<ol>
+<li><strong>Molecular Dynamics (MD)</strong>: atomistic detail, nanosecond timescale</li>
+<li><strong>Coarse-Grained (CG) models</strong>: mesoscale, microsecond timescale</li>
+<li><strong>Finite Element (FE) models</strong>: continuum scale, treat fibers as beams</li>
+</ol>
+
+<p>Multiscale approaches combine these to predict macroscale properties from molecular parameters.</p>
+
+<h2>Common Biomaterial Fiber Systems</h2>
+
+<ul>
+<li><strong>Silk fibroin</strong>: exceptional toughness, programmable degradation</li>
+<li><strong>Collagen</strong>: hierarchical structure, cell-instructive</li>
+<li><strong>Cellulose nanofibers</strong>: abundant, high stiffness</li>
+<li><strong>Electrospun polymers</strong>: tunable architecture, scalable production</li>
+</ul>
+
+<h2>Key References</h2>
+
+<ul>
+<li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS</em>, 103(33), 12285-12290.</li>
+<li>Picu, R.C. (2011). Mechanics of random fiber networks — a review. <em>Soft Matter</em>, 7, 6768-6785.</li>
+<li>Onck, P.R. et al. (2005). Alternative explanation of stiffening in cross-linked semiflexible networks. <em>PRL</em>, 95, 178102.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>

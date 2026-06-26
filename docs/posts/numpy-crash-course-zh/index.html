@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NumPy完全指南：从零到生产力 — ML-Biomat</title>
+<meta name="description" content="从零学习NumPy，用真实的材料科学数据示例：加载实验数据、数组运算、统计分析、曲线拟合、批量处理。">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/numpy-crash-course-zh/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="NumPy完全指南：从零到生产力">
+<meta property="og:description" content="从零学习NumPy，用真实的材料科学数据示例：加载实验数据、数组运算、统计分析、曲线拟合、批量处理。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/numpy-crash-course-zh/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy完全指南：从零到生产力", "description": "从零学习NumPy，用真实的材料科学数据示例：加载实验数据、数组运算、统计分析、曲线拟合、批量处理。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/numpy-crash-course-zh/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge zh">中文</span>
+<h1>NumPy完全指南：从零到生产力</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
+</div>
+</header>
+<div class="content">
+<h2>为什么每个材料人都需要NumPy</h2>
+
+<p>处理实验数据的基础工具。把拉伸机、AFM、XRD导出的txt文件变成可以分析、绘图、导出的Python数组。</p>
+
+<pre><code class="language-python">
+import numpy as np
+</code></pre>
+
+<h2>1. NumPy数组：你的数据容器</h2>
+
+<pre><code class="language-python">
+strains = np.array([0.0, 0.005, 0.010, 0.020, 0.050, 0.100])
+stresses = np.array([0, 8, 15, 28, 52, 74])
+
+# 便捷函数
+x = np.linspace(0, 0.5, 200)       # 0到0.5均匀分布200个点
+zeros = np.zeros((10, 3))          # 10行3列全零矩阵
+
+# 数组属性
+print(arr.shape)  # (2, 3) — 2行3列
+print(arr.ndim)   # 2 — 二维
+print(arr.dtype)  # int64 — 数据类型
+</code></pre>
+
+<h2>2. 加载实验数据</h2>
+
+<pre><code class="language-python">
+# 通用：空格或制表符分隔
+data = np.loadtxt(&quot;tensile_test.txt&quot;, skiprows=0)
+
+# CSV文件
+data = np.loadtxt(&quot;mechanical_data.csv&quot;, delimiter=&quot;,&quot;, skiprows=1)
+
+# AFM力曲线（Bruker：320行头部）
+raw = np.loadtxt(&quot;force_curve.001&quot;, skiprows=320)
+z_piezo = raw[:, 0]        # 第一列
+deflection = raw[:, 1]     # 第二列
+
+# 处理缺失值
+data = np.genfromtxt(&quot;messy_data.csv&quot;, delimiter=&quot;,&quot;, skip_header=1, filling_values=0)
+</code></pre>
+
+<h2>3. 逐元素运算（无需循环）</h2>
+
+<p>NumPy的真正威力：操作同时应用于每个元素：</p>
+
+<pre><code class="language-python">
+# 算术
+stress_pa = stresses * 1e6          # MPa转Pa
+strain_pct = strains * 100          # 转为百分比
+
+# 数学函数
+log_stress = np.log(stresses)
+exp_decay = np.exp(-time / tau)
+
+# 比较
+yielded = stresses &gt; 30             # 布尔数组
+
+# AFM偏转转力
+k, sensitivity = 0.06, 45.0
+force = k * sensitivity * deflection * 1e-9 * 1e9  # nN
+</code></pre>
+
+<h2>4. 统计和聚合</h2>
+
+<pre><code class="language-python">
+mean = np.mean(stresses)         # 平均值
+std = np.std(stresses)           # 标准差
+median = np.median(stresses)     # 中位数（抗异常值）
+max_val = np.max(stresses)
+total = np.sum(force)            # 求和
+
+# 沿轴操作（二维数据）
+col_means = data.mean(axis=0)    # 每列均值
+row_stds = data.std(axis=1)      # 每行标准差
+</code></pre>
+
+<h2>5. 布尔索引（数据过滤）</h2>
+
+<p>你可能最常用的NumPy特性：</p>
+
+<pre><code class="language-python">
+# 弹性区数据
+elastic = stresses[strains &lt; 0.02]
+
+# 组合条件
+valid = (strains &gt; 0) &amp; (strains &lt; 0.1) &amp; (stresses &gt; 0)
+
+# 计数
+n_yielded = np.sum(stresses &gt; 30)
+
+# 替换值
+stresses[stresses &lt; 0] = 0
+
+# 找索引
+idx_max = np.argmax(stresses)
+idx_where = np.where(stresses &gt; 30)[0]
+</code></pre>
+
+<h2>6. 重塑和合并数组</h2>
+
+<pre><code class="language-python">
+flat = data.flatten()                   # 展平
+matrix = np.arange(12).reshape(3, 4)    # 1D -&gt; 3x4
+combined = np.column_stack([strains, stresses])  # 并排
+stacked = np.vstack([data1, data2])              # 按行追加
+centered = data - data.mean(axis=0)              # 每列减均值
+</code></pre>
+
+<h2>7. 保存结果</h2>
+
+<pre><code class="language-python">
+np.savetxt(&quot;results.csv&quot;, combined, delimiter=&quot;,&quot;, header=&quot;strain,stress&quot;)
+np.save(&quot;processed.npy&quot;, data)           # 二进制格式
+loaded = np.load(&quot;processed.npy&quot;)
+</code></pre>
+
+<h2>8. 完整示例：AFM力曲线处理</h2>
+
+<pre><code class="language-python">
+import numpy as np
+raw = np.loadtxt(&quot;force_curve_001.txt&quot;, skiprows=320)
+z_piezo, deflection_V = raw[:, 0], raw[:, 1]
+
+# 转力
+k, sens = 0.06, 45.0
+force = k * sens * deflection_V * 1e-9 * 1e9
+
+# 基线校正
+baseline = np.median(force[:100])
+force_corr = force - baseline
+
+# 找接触点
+derivative = np.gradient(force_corr)
+noise = np.std(derivative[:50])
+contact_idx = np.argmax(derivative &gt; 5 * noise)
+
+# 拟合
+indent = z_piezo[contact_idx] - z_piezo
+mask = (indent &gt; 0) &amp; (indent &lt; 50)
+E, _ = np.polyfit(indent[mask], (force_corr-force_corr[contact_idx])[mask], 1)
+print(f&quot;杨氏模量: {E:.1f}&quot;)
+</code></pre>
+
+<h2>9. 常见问题</h2>
+
+<table><tr><th>问题</th><th>解决</th></tr><tr><td>------</td><td>------</td></tr><tr><td>加载失败</td><td><code>skiprows=N</code> 跳过头部行</td></tr><tr><td>缺失值</td><td><code>np.genfromtxt</code> + <code>filling_values</code></td></tr><tr><td>形状错误</td><td>用<code>.shape</code>检查，<code>data[:,0]</code>是1D</td></tr><tr><td>NaN</td><td><code>np.divide(a, b, where=b!=0)</code></td></tr></table>
+
+<ul>
+<li>Harris, C.R. et al. (2020). Array programming with NumPy. <em>Nature</em>, 585, 357-362.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
