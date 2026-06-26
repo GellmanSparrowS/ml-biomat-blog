@@ -395,6 +395,16 @@ def build():
     write_file("cv/index.html", cv_page)
 
 
+    # --- Search page ---
+    search_body = f'''<div class="search-page">
+<h1 class="section-title">Search / \u641c\u7d22</h1>
+<input type="text" id="search-input-big" class="search-box" placeholder="Type to search all {len(posts)} articles..." autocomplete="off">
+<div id="search-results" class="search-hint">Start typing to search all articles on ML-Biomat. Results appear as you type.</div>
+</div>'''
+    sp = make_head(title="Search / \u641c\u7d22", desc="Search all articles on ML-Biomat", url=SITE["base_url"]+"/search/") + search_body + FOOT.format(year=datetime.now().year)
+    write_file("search/index.html", sp)
+
+    print("  Search page: generated")
     print(f"\nBuild complete: {BUILD_DIR}/")
     print(f"  {len(posts)} posts, {len(en)} EN + {len(zh)} ZH")
     print(f"  Pages generated: posts/{len(posts)}, en, zh, about, categories, rss, sitemap")
