@@ -1,7 +1,7 @@
 ﻿# ml-biomat-blog Maintenance Skill
 ## Project
 E:\Auto_TEST\ml-biomat-blog\
-GitHub: GellmanSparrowS/ml-biomat-blog (token: ask user)
+GitHub: GellmanSparrowS/ml-biomat-blog (token: E:\Auto_TEST\.ml-biomat-token)
 Domain: ml-biomat.com (GitHub Pages, main /docs)
 
 ## Build & Push
