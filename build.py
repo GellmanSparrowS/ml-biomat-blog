@@ -236,6 +236,9 @@ def check_coverage(posts):
     # New articles should follow slug convention: EN {topic}, ZH {topic}-zh
 
 def build():
+    # Load Giscus HTML for article pages
+    giscus_html = Path("static/giscus.html").read_text(encoding="utf-8") if Path("static/giscus.html").exists() else ""
+
     posts = load_posts()
     check_coverage(posts)
     en = [p for p in posts if p["lang"] == "en"]
@@ -248,7 +251,7 @@ def build():
         body = ARTICLE_HTML.format(
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
             cat_slug=p["category"], cat_name=cn, html=p["html"],
-            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + ENGAGE_BANNER
+            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + ENGAGE_BANNER + giscus_html
         html = make_head(title=p["title"], desc=p["description"] or p["title"],
                          url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=p["lang"],
                          og_type="article", ld=article_ld(p)) + body + FOOT.format(year=datetime.now().year)
