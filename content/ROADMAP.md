@@ -1,5 +1,5 @@
 # Content Roadmap — ml-biomat.com
-Last updated: 2026-06-27
+Last updated: 2026-06-27 (v10: 26 posts)
 
 ## Guiding Principles
 - Every article: EN + ZH pair (slug: topic / topic-zh)
