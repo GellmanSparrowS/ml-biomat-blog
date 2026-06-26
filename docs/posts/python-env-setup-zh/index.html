@@ -37,24 +37,13 @@
 </div>
 </header>
 <div class="content">
-<h2>谁需要这篇指南</h2>
+<h2>你需要这篇指南</h2>
 
 <p>你是生物、化学或材料科学的研究生。你听说Python可以帮你处理数据，但从来没有搭建过编程环境。这篇指南带你从零开始——不假设任何先验知识。</p>
 
 <h2>第一步：安装Miniconda</h2>
 
-<p><strong>为什么选Miniconda而不是Anaconda？</strong> Miniconda体积小（~50 MB vs ~500 MB），安装快，只装你需要的包。</p>
-
-<ol>
-<li>打开 <a href="https://docs.conda.io/en/latest/miniconda.html">docs.conda.io</a></li>
-<li>下载对应操作系统的安装包</li>
-<li>运行安装程序。<strong>重要：勾选"Add Miniconda to PATH"</strong></li>
-<li>验证安装：</li>
-</ol>
-
-<pre><code class="language-bash">
-conda --version
-</code></pre>
+<p>为什么选Miniconda而不是Anaconda？Miniconda体积小（约50MB vs 500MB），安装快，只装你需要的包。打开docs.conda.io下载对应操作系统的安装包，运行安装程序。重要：勾选"Add Miniconda to PATH"。验证：<code>conda --version</code></p>
 
 <h2>第二步：创建环境</h2>
 
@@ -68,62 +57,30 @@ conda activate matsci
 <pre><code class="language-bash">
 conda install numpy scipy pandas matplotlib jupyter -y
 conda install -c conda-forge seaborn scikit-learn scikit-image -y
-</code></pre>
-
-<p>如果下载慢，可以用清华镜像（国内用户）：</p>
-
-<pre><code class="language-bash">
-# 设置清华镜像
+# 国内用户设置清华镜像加速
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --set show_channel_urls yes
 </code></pre>
 
-<p>验证安装：</p>
-
-<pre><code class="language-python">
-import numpy as np; import scipy; import pandas as pd
-import matplotlib.pyplot as plt; import sklearn
-print(f&quot;NumPy: {np.__version__}, Pandas: {pd.__version__}&quot;)
-print(&quot;所有包安装成功！&quot;)
-</code></pre>
+<p>验证安装：<code>python -c "import numpy as np; import scipy; print('成功！')"</code></p>
 
 <h2>第四步：Jupyter Notebook</h2>
 
 <pre><code class="language-bash">
-cd 你的项目文件夹
-jupyter notebook   # 或 jupyter lab（推荐）
+cd 你的项目文件夹; jupyter lab  # 推荐lab
 </code></pre>
 
 <h2>第五步：VS Code</h2>
 
-<ol>
-<li>下载 <a href="https://code.visualstudio.com">code.visualstudio.com</a></li>
-<li>安装Python扩展（Microsoft）</li>
-<li><code>Ctrl+Shift+P</code> > "Python: Select Interpreter" > 选择<code>matsci</code></li>
-</ol>
-
-<p>推荐扩展：Python, Jupyter, Rainbow CSV, GitLens</p>
-
-<h2>第六步：包管理速查</h2>
-
-<pre><code class="language-bash">
-conda list              # 查看已安装包
-conda install numpy=1.24.3  # 安装特定版本
-conda env export &gt; environment.yml  # 导出环境
-conda env create -f environment.yml  # 从文件重建
-</code></pre>
+<p>下载code.visualstudio.com，安装Python扩展（Microsoft）。Ctrl+Shift+P > "Python: Select Interpreter" > 选择matsci。推荐扩展：Python, Jupyter, Rainbow CSV, GitLens。</p>
 
 <h2>常见问题</h2>
 
-<table><tr><th>问题</th><th>解决方案</th></tr><tr><td>---------</td><td>---------</td></tr><tr><td>conda不被识别</td><td>重启终端或重装并勾选"Add to PATH"</td></tr><tr><td>下载慢</td><td>用清华镜像(国内)或安装mamba</td></tr><tr><td>Jupyter找不到内核</td><td><code>python -m ipykernel install --user --name matsci</code></td></tr><tr><td>DLL加载失败(Windows)</td><td>安装<a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">VC++ Redist</a></td></tr></table>
+<table><tr><th>问题</th><th>解决</th></tr><tr><td>------</td><td>------</td></tr><tr><td>conda不被识别</td><td>重启终端或重装勾选"Add to PATH"</td></tr><tr><td>下载慢</td><td>清华镜像或安装mamba</td></tr><tr><td>Jupyter找不到内核</td><td><code>python -m ipykernel install --user --name matsci</code></td></tr><tr><td>DLL加载失败(Windows)</td><td>安装VC++ Redist</td></tr></table>
 
-<h2>参考资料</h2>
-
+<h2>参考文献</h2>
 <ul>
-<li>Conda文档: <a href="https://docs.conda.io">docs.conda.io</a></li>
-<li>Jupyter文档: <a href="https://docs.jupyter.org">docs.jupyter.org</a></li>
-<li>清华镜像: <a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">mirrors.tuna.tsinghua.edu.cn</a></li>
+<li>Conda文档: docs.conda.io</li>
+<li>Jupyter文档: docs.jupyter.org</li>
 </ul>
 </div>
 </article><section class="cta-banner">

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>纤维网络力学基础：生物材料研究的关键概念 — ML-Biomat</title>
+<meta name="description" content="纤维生物材料的力学行为入门：网络架构、应变强化、结构-性能关系，以及实验表征和计算模拟方法。">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/fiber-network-mechanics-zh/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="纤维网络力学基础：生物材料研究的关键概念">
+<meta property="og:description" content="纤维生物材料的力学行为入门：网络架构、应变强化、结构-性能关系，以及实验表征和计算模拟方法。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/fiber-network-mechanics-zh/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "纤维网络力学基础：生物材料研究的关键概念", "description": "纤维生物材料的力学行为入门：网络架构、应变强化、结构-性能关系，以及实验表征和计算模拟方法。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/fiber-network-mechanics-zh/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge zh">中文</span>
+<h1>纤维网络力学基础：生物材料研究的关键概念</h1>
+<div class="article-meta">
+<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/biomaterials/">生物材料</a>
+</div>
+</header>
+<div class="content">
+<h2>为什么纤维网络很重要</h2>
+
+<p>自然界用纤维构建结构材料：肌腱中的胶原蛋白、蚕茧中的丝素蛋白、植物细胞壁中的纤维素。这些无序纤维网络通过架构而非化学组成实现卓越的力学性能——高比强度、应变强化和韧性。理解纤维网络力学对设计更好的生物材料至关重要。</p>
+
+<h2>关键力学行为</h2>
+
+<h3>应变强化</h3>
+
+<p>与金属不同，纤维网络越拉越硬。低应变时，纤维重新取向排列。高应变时，已排列的纤维轴向承载：</p>
+
+<pre><code class="language-python">
+import numpy as np
+strain = np.linspace(0, 0.5, 100)
+stress = 0.1 * strain + 5.0 * strain**3
+</code></pre>
+
+<h3>架构-性能关系</h3>
+
+<table><tr><th>参数</th><th>对力学的影响</th></tr><tr><td>------</td><td>------------</td></tr><tr><td>纤维直径</td><td>更细 = 网络更柔</td></tr><tr><td>网络密度</td><td>更高 = 模量更高</td></tr><tr><td>交联密度</td><td>更多交联 = 更刚，韧性下降</td></tr><tr><td>纤维取向</td><td>取向排列 = 各向异性</td></tr><tr><td>纤维长径比</td><td>更长 = 更好的载荷传递</td></tr></table>
+
+<h3>逾渗阈值</h3>
+
+<p>纤维网络需要最低密度才能传递载荷。低于此密度，网络是互不连接的纤维"汤"。高于阈值，形成连续的载荷传递路径。</p>
+
+<h2>实验表征</h2>
+
+<p>常用的纤维网络力学探测：AFM纳米压痕（局部刚度）、拉伸测试（宏观应力-应变）、流变学（粘弹性G'、G""）、SEM/TEM成像（网络架构可视化）、SAXS/WAXS（变形过程中分子级结构变化）。</p>
+
+<h2>计算模拟</h2>
+
+<p>三种主要方法：分子动力学MD（原子分辨率）、粗粒化CG模型（介观尺度）、有限元FE模型（连续介质）。多尺度方法结合三者，从分子参数预测宏观性能。</p>
+
+<h2>常见生物材料纤维体系</h2>
+
+<p>丝素蛋白（优异韧性）、胶原蛋白（层级结构、细胞指导性）、纤维素纳米纤维（高刚度）、静电纺丝聚合物（架构可调）。</p>
+
+<h2>参考文献</h2>
+<ul>
+<li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS</em>, 103(33), 12285-12290.</li>
+<li>Picu, R.C. (2011). Mechanics of random fiber networks. <em>Soft Matter</em>, 7, 6768-6785.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
