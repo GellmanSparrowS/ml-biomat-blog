@@ -33,7 +33,7 @@
 <span class="lang-badge en">EN</span>
 <h1>Machine Learning for Fiber Mechanics: From Data Preparation to Model Deployment</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/machine-learning/">Machine Learning</a>
+<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/machine-learning/">Machine Learning</a>
 </div>
 </header>
 <div class="content">
@@ -44,7 +44,6 @@
 <p>The special challenge in materials ML: <strong>data is scarce</strong>. You might have only 30-50 experimental samples.</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
@@ -54,7 +53,6 @@ from sklearn.model_selection import cross_val_score
 
 <h2>Data Preparation</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 data = pd.DataFrame({
     &quot;fiber_diameter_nm&quot;: [45, 52, 48, 55, 50],
@@ -69,7 +67,6 @@ data = pd.DataFrame({
 <table><tr><th>Model</th><th>Small-data advantage</th><th>Watch out for</th></tr><tr><td>------</td><td>---------------------</td><td>--------------</td></tr><tr><td>Random Forest</td><td>Insensitive to hyperparams, feature importance</td><td>Keep max_depth small</td></tr><tr><td>Gradient Boosting</td><td>High accuracy, handles nonlinearity</td><td>Easy to overfit, low lr needed</td></tr><tr><td>Gaussian Process</td><td>Built-in uncertainty, perfect for n<100</td><td>O(n^3), avoid n>1000</td></tr></table>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 models = {
     &quot;RF&quot;: RandomForestRegressor(n_estimators=200, max_depth=5, random_state=42),
     &quot;GB&quot;: GradientBoostingRegressor(n_estimators=100, max_depth=3, learning_rate=0.05, random_state=42),
@@ -81,7 +78,6 @@ for name, model in models.items():
 
 <h2>Uncertainty Quantification</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 def predict_with_uncertainty(model, X, n_iter=100):
     predictions = np.zeros((n_iter, len(X)))
@@ -118,6 +114,20 @@ def predict_with_uncertainty(model, X, n_iter=100):
 <ul>
 <li>Yang Y., Bai R., Gao W. et al. (2024). Optimizing biomimetic 3D fibrous networks via DRL. <em>Advanced Science</em>, 2413293.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
+</ul>
+
+
+<h2>Practical Considerations for ML in Materials</h2>
+
+<p>The curse of dimensionality hits materials ML particularly hard. Each experimental condition adds a dimension, and with limited data, models quickly overfit. Dimensionality reduction via principal component analysis or feature selection based on physical insight is essential before training.</p>
+
+<p>Uncertainty quantification distinguishes good ML practice from wishful thinking. Bootstrapping provides a simple, non-parametric way to estimate prediction intervals. Train 100 models on bootstrapped samples of your data, and the distribution of predictions at each point gives a confidence interval. This approach requires no distributional assumptions and works with any model type.</p>
+
+<p>Domain adaptation addresses the simulation-to-experiment gap. Models trained on abundant simulation data often fail on experimental measurements due to systematic differences. Domain adaptation techniques from transfer learning can align the feature distributions, allowing models trained on simulations to generalize to experimental data with minimal fine-tuning.</p>
+
+<h2>References</h2>
+<ul>
+<li>Butler, K.T. et al. (2018). Machine learning for molecular and materials science. <em>Nature</em>, 559, 547-555.</li>
 </ul>
 </div>
 </article><section class="cta-banner">
