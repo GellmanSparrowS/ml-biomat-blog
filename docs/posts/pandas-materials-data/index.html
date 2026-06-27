@@ -42,7 +42,6 @@
 <p>Most researchers manually merge, filter, and plot experimental data in Excel -- error-prone and time-consuming. Pandas handles all of this with a few lines of code.</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -50,7 +49,6 @@ import matplotlib.pyplot as plt
 
 <h2>Reading Experimental Data</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 df = pd.read_excel(&quot;mechanical_tests.xlsx&quot;, sheet_name=&quot;Sheet1&quot;)
 df = pd.read_csv(&quot;force_curves.csv&quot;)
@@ -65,7 +63,6 @@ df_all = pd.concat(dfs, ignore_index=True)
 <h2>Data Cleaning</h2>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 df = df.dropna(how=&quot;all&quot;)  # Remove fully empty rows
 df = df.rename(columns={&quot;fiber_diameter_nm&quot;: &quot;diameter&quot;, &quot;youngs_modulus_GPa&quot;: &quot;modulus&quot;})
 
@@ -78,7 +75,6 @@ for col in [&quot;modulus&quot;, &quot;diameter&quot;]:
 <h2>Group Statistics</h2>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 summary = df.groupby(&quot;treatment&quot;).agg({
     &quot;modulus&quot;: [&quot;mean&quot;, &quot;std&quot;, &quot;count&quot;],
     &quot;diameter&quot;: [&quot;mean&quot;, &quot;std&quot;],
@@ -87,7 +83,6 @@ summary = df.groupby(&quot;treatment&quot;).agg({
 
 <h2>Visualization</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 df.boxplot(column=&quot;modulus&quot;, by=&quot;treatment&quot;, ax=axes[0,0])
@@ -99,7 +94,6 @@ plt.tight_layout()
 
 <h2>Export Results</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 summary.to_csv(&quot;mechanical_summary.csv&quot;)
 df.to_csv(&quot;cleaned_data.csv&quot;, index=False)
@@ -124,7 +118,6 @@ with pd.ExcelWriter(&quot;results.xlsx&quot;) as writer:
 <p>Merging data from multiple sources is a common task in materials research. Suppose you have mechanical test results in one CSV file and fiber morphology measurements from SEM analysis in another. Pandas merge function allows you to combine these datasets on a common key such as sample ID:</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 mechanics = pd.read_csv(&quot;mechanical_data.csv&quot;)
 morphology = pd.read_csv(&quot;sem_fiber_morphology.csv&quot;)
 combined = pd.merge(mechanics, morphology, on=&quot;sample_id&quot;, how=&quot;inner&quot;)
@@ -133,13 +126,11 @@ combined = pd.merge(mechanics, morphology, on=&quot;sample_id&quot;, how=&quot;i
 <p>For time-dependent measurements common in biomaterials research (degradation studies, creep tests), the rolling window functions provide smoothed trends:</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 df[&quot;stress_smooth&quot;] = df[&quot;stress&quot;].rolling(window=5, center=True).mean()
 </code></pre>
 
 <p>When dealing with multiple experimental conditions, the groupby transform method allows you to normalize data within each group without losing the original structure. This is particularly useful for comparing relative changes across treatments with different baseline values:</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 df[&quot;normalized_modulus&quot;] = df.groupby(&quot;treatment&quot;)[&quot;modulus_GPa&quot;].transform(lambda x: x / x.mean())
 </code></pre>
