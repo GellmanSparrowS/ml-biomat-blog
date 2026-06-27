@@ -55,7 +55,6 @@
 </ol>
 
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 conda --version
 # Expected: conda 24.x.x
 </code></pre>
@@ -64,7 +63,6 @@ conda --version
 
 <p>Environments isolate project dependencies. Think of them as separate toolboxes—one for AFM analysis, one for MD simulations, one for ML projects.</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 # Create an environment with Python 3.10 (most packages support this)
 conda create -n matsci python=3.10 -y
@@ -79,7 +77,6 @@ conda activate matsci
 
 <p>For materials/biomaterials research, here are the packages you need right away:</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 # Core scientific stack
 conda install numpy scipy pandas matplotlib jupyter -y
@@ -113,7 +110,6 @@ print(&quot;All packages OK!&quot;)
 <p>Jupyter is the interactive coding environment most scientists use for exploration:</p>
 
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 # Start Jupyter in your project folder
 cd path/to/your/project
 jupyter notebook
@@ -124,7 +120,6 @@ jupyter lab
 
 <p><strong>Pro tip:</strong> Create a shortcut command for quick launch. On Windows, create <code>jupyter_lab.bat</code>:</p>
 
-<pre><code class="language-batch">
 <pre><code class="language-batch">
 @echo off
 call conda activate matsci
@@ -153,7 +148,6 @@ jupyter lab
 <h2>Step 6: Package Management Reference</h2>
 
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 # List installed packages
 conda list
 
@@ -181,7 +175,6 @@ conda env create -f environment.yml
 
 <p>Save this as <code>start_project.bat</code> (Windows) or <code>start_project.sh</code> (macOS/Linux):</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 # Windows: start_project.bat
 conda activate matsci
