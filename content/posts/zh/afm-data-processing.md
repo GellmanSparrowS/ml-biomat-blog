@@ -262,3 +262,15 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 ## 参考文献
 - Cappella, B. & Dietler, G. (1999). Force-distance curves by AFM. *Surface Science Reports*, 34(1-3), 1-104.
 - Hertz, H. (1882). On the contact of elastic solids. *J. Reine Angew. Math.*, 92, 156-171.
+
+
+## 讨论：AFM力谱学在生物材料定量分析中的进展
+
+AFM力谱学已经从接触模式下的简单力曲线记录发展为一个成熟的定量纳米力学分析平台。峰值力轻敲模式代表了技术上的重要进步——它在每个像素点记录完整的力曲线，同时保持了与传统轻敲模式相当的成像速度。这意味着你可以在一张图像中同时获得形貌信息和定量力学信息，大大提高了实验效率。
+
+粘附力映射在生物材料表征中具有特殊价值。丝素蛋白、胶原蛋白和细胞外基质等材料表现出复杂的表面化学特性，粘附力分布可以揭示表面功能化、蛋白质吸附和交联密度的空间变化。将粘附力映射与形貌像叠加，可以直观地将表面化学性质与结构特征联系起来。
+
+数据处理的标准化和自动化是当前的研究热点。不同的基线校正方法、接触点确定算法和拟合模型可能导致同一组数据得到显著不同的模量值。开源数据处理工具如AtomicJ和PyJibe正在推动AFM数据分析的标准化。建立社区共识的数据处理流程对于提高研究的可复现性和可比性至关重要。
+
+## 参考文献
+- Hermanowicz, P. et al. (2014). AtomicJ: An open source software for analysis of force curves. *Review of Scientific Instruments*, 85(6), 063703.

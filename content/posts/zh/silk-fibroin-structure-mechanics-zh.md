@@ -49,3 +49,16 @@ description: "丝素蛋白的层级结构如何决定其优异的力学性能：
 ## 参考文献
 - Keten, S. et al. (2010). Nanoconfinement controls stiffness, strength and toughness of beta-sheet crystals in silk. *Nature Materials*, 9, 359-367.
 - Omenetto, F.G. & Kaplan, D.L. (2010). New opportunities for an ancient material. *Science*, 329(5991), 528-531.
+
+
+## 丝素蛋白力学性能的微观起源
+
+理解丝素蛋白的优异力学性能需要从分子尺度开始。天然丝素纤维的强度源自高度有序的反平行beta-折叠纳米晶体。这些晶体的尺寸非常小——通常只有几纳米——而这种纳米尺度恰恰是丝素强度的关键。经典的材料科学告诉我们，材料强度随着缺陷尺寸的减小而增加——Griffith断裂理论预测理论强度只能在无缺陷或缺陷极小的材料中实现。丝素的beta-折叠纳米晶体正是这种接近理论强度的"无缺陷"结构单元。
+
+丝素的韧性则来源于更复杂的多尺度机制。在分子水平上，beta-折叠晶体之间的非晶域充当牺牲键——在受力时这些区域首先变形和断裂，耗散能量，保护晶体本身不被破坏。这种机制类似于汽车中的保险杠——牺牲一个廉价部件来保护整体结构。在纳米尺度上，beta-折叠晶体与丝素重链分子之间的界面提供了进一步的能量耗散途径。氢键网络可以在断裂后重新形成，赋予材料一定的自愈合能力。
+
+丝素的力学性能还表现出显著的各向异性——沿着纤维轴向的模量和强度远高于横向方向。这种各向异性是beta-折叠晶体和分子链沿纤维轴择优取向的直接结果。在再生丝素材料的制备中，通过控制加工条件诱导分子取向是获得优异力学性能的关键策略。
+
+## 参考文献
+- Shao, Z. & Vollrath, F. (2002). Surprising strength of silkworm silk. *Nature*, 418, 741.
+- Porter, D. & Vollrath, F. (2009). Silk as a biomimetic ideal for structural polymers. *Advanced Materials*, 21, 487-492.

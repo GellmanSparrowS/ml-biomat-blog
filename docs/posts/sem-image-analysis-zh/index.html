@@ -137,6 +137,20 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 <li>van der Walt, S. et al. (2014). scikit-image. <em>PeerJ</em>, 2, e453.</li>
 <li>GitHub: <a href="https://github.com/scikit-image/scikit-image">scikit-image/scikit-image</a></li>
 </ul>
+
+
+<h2>深入探讨：图像分割算法的选择</h2>
+
+<p>阈值分割是SEM图像分析最关键的一步，直接影响后续所有量化结果的准确性。Otsu方法假设图像直方图是双峰的——纤维（前景）和背景形成两个明显分离的灰度峰。对于高对比度、光照均匀的SEM图像，Otsu通常是最佳选择。但对于光照不均或背景复杂的图像，局部自适应阈值方法更为合适。</p>
+
+<p>分水岭算法是处理粘连纤维时的有效工具。当纤维在SEM图像中紧密接触时，简单的全局阈值无法将粘连的纤维分开。分水岭算法通过将图像视为地形图——像素值为高度——然后模拟"注水"过程来找到不同纤维之间的分界线。结合距离变换，分水岭算法可以准确分离紧密相邻的纤维。</p>
+
+<p>机器学习方法正在改变SEM图像分析的范式。传统的滤波与阈值方法需要手动调整参数，而训练好的深度学习模型可以在各种成像条件下自动识别纤维特征。U-Net是图像分割的常用架构，仅需少量标注图像就能取得很好的效果。对于有大量重复性SEM分析需求的研究组，考虑训练一个专门的纤维分割模型是值得的投资。</p>
+
+<h2>参考文献</h2>
+<ul>
+<li>Ronneberger, O. et al. (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation. <em>MICCAI</em>, 234-241.</li>
+</ul>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>

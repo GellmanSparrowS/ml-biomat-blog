@@ -53,3 +53,16 @@ stress = 0.1 * strain + 5.0 * strain**3
 ## 参考文献
 - Buehler, M.J. (2006). Nature designs tough collagen. *PNAS*, 103(33), 12285-12290.
 - Picu, R.C. (2011). Mechanics of random fiber networks. *Soft Matter*, 7, 6768-6785.
+
+
+## 深入研究：逾渗理论与纤维网络力学
+
+纤维网络的力学行为由两个关键因素决定：网络的连通性和单根纤维的力学属性。逾渗理论提供理解网络连通性的数学框架。当纤维密度低于临界值时，网络由孤立纤维或无应力承载能力的松散团簇组成。超过临界密度后，纤维之间形成足够多的连接点，网络突然获得了承载能力——这就是逾渗转变。对于典型的随机纤维网络，逾渗阈值与纤维长径比成反比：纤维越长越细，越容易在较低密度下形成连通网络。
+
+逾渗转变在生物材料中有重要的实际意义。例如胶原蛋白纤维在伤口愈合过程中逐渐沉积并交联。在早期阶段，纤维密度低于逾渗阈值，组织几乎没有力学强度。当纤维密度超过阈值后，组织突然获得承载能力。理解逾渗转变有助于设计组织工程支架，确保支架在植入后立即具有足够的力学支撑。
+
+从计算角度看，逾渗分析可以通过网络建模来实现。使用随机纤维网络生成算法创建不同密度的网络结构，然后计算网络的刚度矩阵来确定其是否能够承载载荷。Python结合NetworkX等图论库可以高效地进行这类分析。
+
+## 参考文献
+- Stauffer, D. & Aharony, A. (1994). *Introduction to Percolation Theory*. Taylor & Francis.
+- Head, D.A. et al. (2003). Distinct regimes of elastic response and deformation modes of cross-linked cytoskeletal and semiflexible polymer networks. *Physical Review E*, 68(6), 061907.

@@ -80,6 +80,22 @@ def engineer_features(df):
 <li>Kuhn, M. & Johnson, K. (2019). <em>Feature Engineering and Selection</em>. CRC Press.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
 </ul>
+
+
+<h2>深入探讨：特征缩放与标准化</h2>
+
+<p>特征缩放是机器学习预处理中容易被忽视但至关重要的步骤。不同物理量通常具有截然不同的量级——纤维直径可能只有几十纳米，而杨氏模量可能有几个吉帕。如果不进行缩放，依赖距离的模型会将量级大的特征视为更重要，即使它们物理上并不更关键。</p>
+
+<p>StandardScaler将每个特征转换为均值为零标准差为一的分布。这对于线性回归、支持向量机和神经网络等模型至关重要。对于树模型如随机森林，特征缩放不是必需的，因为决策树基于特征值的排序而非距离。了解这一点可以避免不必要的预处理步骤。</p>
+
+<p>特征归一化通过MinMaxScaler将所有特征缩放到给定范围如零到一之间。当你不确定特征分布是否近似正态时，归一化是更安全的选择。但归一化对异常值敏感——单个极端值可以压缩所有其他值到窄小区间。</p>
+
+<p>特征工程的质量远比模型选择重要。在材料科学的小样本场景中，一两个精心构造的物理特征对模型性能的提升往往超过尝试十种不同算法。花时间理解你的数据，与领域专家讨论，让物理直觉指导特征构造——这是任何自动化工具都无法替代的人类价值。</p>
+
+<h2>参考文献</h2>
+<ul>
+<li>Guyon, I. & Elisseeff, A. (2003). An introduction to variable and feature selection. <em>Journal of Machine Learning Research</em>, 3, 1157-1182.</li>
+</ul>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>

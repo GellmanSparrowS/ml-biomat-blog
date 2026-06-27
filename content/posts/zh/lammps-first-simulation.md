@@ -133,3 +133,15 @@ rdf_oo.run()
 - MDAnalysis: [mdanalysis.org](https://www.mdanalysis.org)
 - Allen & Tildesley (2017). *Computer Simulation of Liquids*. Oxford.
 - GitHub: [lammps/lammps](https://github.com/lammps/lammps)
+
+
+## 深入探讨：力场选择与验证
+
+力场是分子动力学模拟中最重要的输入之一。力场定义了原子间相互作用的函数形式和参数，直接影响模拟结果的准确性。为你的生物材料体系选择合适的力场是模拟成败的关键决策。
+
+对于蛋白质和生物分子体系，CHARMM和AMBER是最成熟的两个力场系列。CHARMM36m特别优化了蛋白质的构象平衡，适合模拟蛋白质折叠和构象变化。AMBER ff19SB改进了主链扭转角的描述，在蛋白质-配体相互作用方面表现优异。对于纤维类蛋白质如丝素和胶原，两个力场都适用，选择哪个主要取决于你实验室的传统和你参考的文献使用的力场。OPLS-AA在有机小分子方面表现更好。
+
+力场验证是经常被忽视但至关重要的步骤。在进行大规模生产模拟之前，用你知道正确结果的简单系统验证力场——例如计算水的密度和扩散系数，或者计算已知实验值的短肽构象分布。如果力场无法重现这些基本性质，那么对复杂系统的模拟结果就需要谨慎解释。这是一个非常重要的科学原则——永远在你可控的范围内验证你的方法。
+
+## 参考文献
+- Huang, J. et al. (2017). CHARMM36m: an improved force field for folded and intrinsically disordered proteins. *Nature Methods*, 14, 71-73.

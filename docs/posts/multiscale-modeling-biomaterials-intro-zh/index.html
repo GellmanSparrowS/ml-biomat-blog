@@ -164,6 +164,20 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS.</em></li>
 <li>GROMACS: www.gromacs.org</li>
 </ul>
+
+
+<h2>讨论：多尺度模拟的未来方向</h2>
+
+<p>多尺度模拟的未来在于三个方向的融合：机器学习加速、自动化工作流和不确定度量化的标准化。机器学习力场正在快速发展，DeepMD和NequIP等软件包可以从DFT级别的计算数据中训练出高精度的经典力场，使纳秒到微秒尺度的MD模拟保持量子力学精度。这对生物材料领域尤其重要——传统力场难以描述丝素蛋白中beta-折叠形成的氢键网络的精确能量分布，而机器学习力场提供了新的解决方案。</p>
+
+<p>自动化工作流是降低多尺度模拟门槛的关键。目前从全原子MD到粗粒化再到有限元的流程需要大量手工操作和专业知识。自动化工具如pyCHARMM和BioBB等正在封装最佳实践，让非专家也能运行多尺度模拟。这与深度学习的发展相辅相成——当数据生成变得自动化，数据驱动的发现就更加可行。</p>
+
+<p>不确定度量化应该成为多尺度模拟的标准组成部分。目前大多数多尺度模拟研究只报告单一的"确定性"结果，忽略了各尺度模型的累积误差。贝叶斯框架和蒙特卡洛方法可以量化从分子参数到宏观性能的误差传播。在向实验科学家提供计算指导时，报告预测区间比报告单一数值更有价值。</p>
+
+<h2>参考文献</h2>
+<ul>
+<li>Zhang, L. et al. (2018). Deep Potential Molecular Dynamics: A Scalable Model. <em>Physical Review Letters</em>, 120, 143001.</li>
+</ul>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>
