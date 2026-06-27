@@ -75,3 +75,16 @@ Multiscale approaches combine these to predict macroscale properties from molecu
 - Buehler, M.J. (2006). Nature designs tough collagen. *PNAS*, 103(33), 12285-12290.
 - Picu, R.C. (2011). Mechanics of random fiber networks — a review. *Soft Matter*, 7, 6768-6785.
 - Onck, P.R. et al. (2005). Alternative explanation of stiffening in cross-linked semiflexible networks. *PRL*, 95, 178102.
+
+
+## Computational Modeling of Fiber Networks
+
+Discrete fiber network models represent each fiber as a beam element with bending, stretching, and torsional stiffness. These models capture the transition from bending-dominated to stretching-dominated deformation that underlies strain-stiffening. Open-source tools like FiberSim and custom Python scripts using the finite element method enable researchers to generate representative volume elements of random fiber networks and simulate their mechanical response.
+
+The computational cost scales poorly with network size. A network with thousands of fibers may take minutes to solve on a desktop, but scaling to tissue-level dimensions requires homogenization approaches. Effective medium theories and mean-field models bridge this gap by deriving effective continuum properties from the statistics of the underlying network architecture.
+
+Machine learning surrogates offer a promising alternative. A neural network trained on thousands of discrete network simulations can predict mechanical properties orders of magnitude faster than direct simulation, enabling rapid screening of network architectures for desired properties. This approach combines the accuracy of physics-based simulation with the speed of data-driven prediction.
+
+## References
+- Stein, A.M. et al. (2011). An algorithm for extracting the network geometry of 3D collagen gels. *Journal of Microscopy*, 232(3), 463-475.
+- Zagar, G. et al. (2015). From mechanical micromodeling to continuum modeling of fibrous networks. *International Journal of Solids and Structures*, 57, 78-88.
