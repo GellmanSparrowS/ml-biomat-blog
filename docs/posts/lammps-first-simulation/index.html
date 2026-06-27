@@ -54,7 +54,6 @@
 
 <p><strong>Option 1: Pre-built binary (recommended for beginners)</strong></p>
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 # Linux (Ubuntu/Debian)
 sudo apt install lammps
 
@@ -66,13 +65,11 @@ brew install lammps
 
 <p><strong>Option 2: Conda (cross-platform)</strong></p>
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 conda create -n lammps -c conda-forge lammps -y
 conda activate lammps
 </code></pre>
 
 <p>Verify installation:</p>
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 lmp_serial -h
 </code></pre>
@@ -81,7 +78,6 @@ lmp_serial -h
 
 <p>A LAMMPS input file has four essential sections:</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 # ===== 1. Initialization =====
 units           real        # Energy: kcal/mol, Distance: Angstrom
@@ -110,7 +106,6 @@ run             10000
 
 <p>Let's simulate 500 water molecules at room temperature using the TIP3P model:</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 # water.lammps
 units           real
