@@ -50,7 +50,6 @@
 <table><tr><th>Segment</th><th>What happens</th><th>What you extract</th></tr><tr><td>---------</td><td>-------------</td><td>-----------------</td></tr><tr><td>Approach</td><td>Tip approaches surface</td><td>Contact point, sample stiffness</td></tr><tr><td>Contact</td><td>Tip presses into sample</td><td>Elastic modulus (via fitting)</td></tr><tr><td>Retract</td><td>Tip pulls away</td><td>Adhesion force, unbinding events</td></tr></table>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal, optimize
@@ -68,7 +67,6 @@ from scipy import signal, optimize
 </ul>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 def load_afm_curve(filepath, skip_rows=0):
     data = np.loadtxt(filepath, skiprows=skip_rows)
     return data[:, 0], data[:, 1]
@@ -79,7 +77,6 @@ z_piezo, deflection = load_afm_curve(&quot;force_curve_001.txt&quot;, skip_rows=
 
 <h3>Handling Bruker Headers</h3>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 def load_bruker_curve(filepath):
     with open(filepath, &quot;r&quot;) as f:
@@ -95,7 +92,6 @@ def load_bruker_curve(filepath):
 <h2>3. Converting Deflection to Force</h2>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 def deflection_to_force(deflection_V, spring_constant, sensitivity_nm_per_V):
     deflection_nm = deflection_V * sensitivity_nm_per_V
     force_N = spring_constant * deflection_nm * 1e-9
@@ -109,7 +105,6 @@ force = deflection_to_force(deflection, k, sensitivity)
 <h2>4. Baseline Correction</h2>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 def baseline_correct(z_piezo, force, contact_idx):
     baseline_region = slice(0, contact_idx)
     coeffs = np.polyfit(z_piezo[baseline_region], force[baseline_region], 1)
@@ -119,7 +114,6 @@ def baseline_correct(z_piezo, force, contact_idx):
 
 <h2>5. Finding the Contact Point</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
     force_smooth = signal.savgol_filter(force, window_length=21, polyorder=3)
@@ -139,7 +133,6 @@ def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
 <h2>6. Extracting Adhesion Force</h2>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 def extract_adhesion(z_piezo, force, contact_idx):
     retract_region = force[contact_idx:]
     adhesion_idx = np.argmin(retract_region)
@@ -155,7 +148,6 @@ def extract_adhesion(z_piezo, force, contact_idx):
 
 <p>where E* = E / (1 - nu^2).</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 def hertz_sphere(indentation, E_star, R):
     return (4/3) * E_star * np.sqrt(R) * np.power(np.maximum(indentation, 0), 1.5)
@@ -181,7 +173,6 @@ def fit_youngs_modulus(z_piezo, force, contact_idx, tip_radius_nm=20.0,
 
 <h2>8. Batch Processing</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 import glob
 from pathlib import Path
@@ -215,7 +206,6 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 <li><strong>Ting's model</strong>: for viscoelastic relaxation</li>
 </ul>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 def sneddon_cone(indentation, E_star, alpha_deg=18):
     alpha = np.radians(alpha_deg)
