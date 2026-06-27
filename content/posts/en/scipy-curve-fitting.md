@@ -200,3 +200,15 @@ print(f"Constrained result: {result.x}")
 - Virtanen, P. et al. (2020). SciPy 1.0. *Nature Methods*, 17, 261-272.
 - Johnson, M.L. & Faunt, L.M. (1992). Parameter estimation. *Methods in Enzymology*, 210, 1-37.
 - Lin, D.C. et al. (2007). Robust AFM force curve analysis. *J. Biomech. Eng.*, 129(6), 904-912.
+
+
+## Model Selection and Goodness of Fit
+
+Choosing between competing models requires more than just comparing R-squared values. The Akaike Information Criterion (AIC) penalizes models with more parameters, helping avoid overfitting. For nested models, the F-test provides a formal statistical comparison.
+
+Cross-validation is essential when the goal is prediction rather than description. Leave-one-out cross-validation is appropriate for very small datasets common in materials research. For each data point, fit the model without that point and calculate the prediction error. The average error across all points gives a realistic estimate of predictive performance.
+
+When reporting fitted parameters in publications, include not just the best-fit values and standard errors but also the correlation matrix between parameters. Highly correlated parameters indicate that the model may be overparameterized—different combinations of parameter values produce nearly identical fits. This is a red flag that should be discussed transparently.
+
+## References
+- Burnham, K.P. & Anderson, D.R. (2002). *Model Selection and Multimodel Inference*. Springer.

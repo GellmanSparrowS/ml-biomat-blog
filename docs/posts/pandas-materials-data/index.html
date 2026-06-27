@@ -117,6 +117,37 @@ with pd.ExcelWriter(&quot;results.xlsx&quot;) as writer:
 <li>McKinney, W. (2010). Data Structures for Statistical Computing in Python. <em>Proc. SciPy</em>, 56-61.</li>
 <li>pandas.pydata.org - Pandas documentation.</li>
 </ul>
+
+
+<h2>Advanced Data Operations</h2>
+
+<p>Merging data from multiple sources is a common task in materials research. Suppose you have mechanical test results in one CSV file and fiber morphology measurements from SEM analysis in another. Pandas merge function allows you to combine these datasets on a common key such as sample ID:</p>
+
+<pre><code class="language-python">
+<pre><code class="language-python">
+mechanics = pd.read_csv(&quot;mechanical_data.csv&quot;)
+morphology = pd.read_csv(&quot;sem_fiber_morphology.csv&quot;)
+combined = pd.merge(mechanics, morphology, on=&quot;sample_id&quot;, how=&quot;inner&quot;)
+</code></pre>
+
+<p>For time-dependent measurements common in biomaterials research (degradation studies, creep tests), the rolling window functions provide smoothed trends:</p>
+
+<pre><code class="language-python">
+<pre><code class="language-python">
+df[&quot;stress_smooth&quot;] = df[&quot;stress&quot;].rolling(window=5, center=True).mean()
+</code></pre>
+
+<p>When dealing with multiple experimental conditions, the groupby transform method allows you to normalize data within each group without losing the original structure. This is particularly useful for comparing relative changes across treatments with different baseline values:</p>
+
+<pre><code class="language-python">
+<pre><code class="language-python">
+df[&quot;normalized_modulus&quot;] = df.groupby(&quot;treatment&quot;)[&quot;modulus_GPa&quot;].transform(lambda x: x / x.mean())
+</code></pre>
+
+<h2>References</h2>
+<ul>
+<li>McKinney, W. (2012). <em>Python for Data Analysis</em>. O'Reilly Media.</li>
+</ul>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>

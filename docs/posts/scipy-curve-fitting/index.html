@@ -33,7 +33,7 @@
 <span class="lang-badge en">EN</span>
 <h1>Practical Curve Fitting with SciPy: From Basics to Advanced Models</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>5 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+<span>2026-06-26</span><span>·</span><span>6 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
 </div>
 </header>
 <div class="content">
@@ -237,6 +237,20 @@ print(f&quot;Constrained result: {result.x}&quot;)
 <li>Virtanen, P. et al. (2020). SciPy 1.0. <em>Nature Methods</em>, 17, 261-272.</li>
 <li>Johnson, M.L. & Faunt, L.M. (1992). Parameter estimation. <em>Methods in Enzymology</em>, 210, 1-37.</li>
 <li>Lin, D.C. et al. (2007). Robust AFM force curve analysis. <em>J. Biomech. Eng.</em>, 129(6), 904-912.</li>
+</ul>
+
+
+<h2>Model Selection and Goodness of Fit</h2>
+
+<p>Choosing between competing models requires more than just comparing R-squared values. The Akaike Information Criterion (AIC) penalizes models with more parameters, helping avoid overfitting. For nested models, the F-test provides a formal statistical comparison.</p>
+
+<p>Cross-validation is essential when the goal is prediction rather than description. Leave-one-out cross-validation is appropriate for very small datasets common in materials research. For each data point, fit the model without that point and calculate the prediction error. The average error across all points gives a realistic estimate of predictive performance.</p>
+
+<p>When reporting fitted parameters in publications, include not just the best-fit values and standard errors but also the correlation matrix between parameters. Highly correlated parameters indicate that the model may be overparameterized—different combinations of parameter values produce nearly identical fits. This is a red flag that should be discussed transparently.</p>
+
+<h2>References</h2>
+<ul>
+<li>Burnham, K.P. & Anderson, D.R. (2002). <em>Model Selection and Multimodel Inference</em>. Springer.</li>
 </ul>
 </div>
 </article><section class="cta-banner">

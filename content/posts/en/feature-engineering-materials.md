@@ -119,3 +119,17 @@ to_drop = [col for col in upper_tri.columns
 
 - Kuhn, M. & Johnson, K. (2019). *Feature Engineering and Selection*. CRC Press.
 - Ramprasad, R. et al. (2017). Machine learning in materials informatics. *npj Computational Materials*, 3, 54.
+
+
+## Advanced Feature Engineering Strategies
+
+Domain-specific feature engineering can dramatically improve model performance with limited data. For fiber biomaterials, consider these physics-informed features that capture known structure-property relationships.
+
+The persistence length of semiflexible fibers can be estimated from orientation correlation functions and used as a feature that captures the intrinsic flexibility of the fiber material independent of network architecture. Similarly, the excluded volume interaction parameter derived from the second virial coefficient provides a measure of fiber-fiber interactions that influences network mechanics.
+
+For data with strong hierarchical structure (fiber -> bundle -> network), hierarchical features that aggregate properties at each level can help models capture multi-scale effects. Calculate fiber-level features first, then aggregate to bundle-level means and variances, and finally to network-level descriptors.
+
+When experimental measurements are limited, simulation-informed features can bridge the gap. Run coarse-grained simulations across a parameter space, extract features from the simulation outputs, and use these as supplementary features alongside experimental data. The simulations capture the underlying physics while the experimental data anchors the predictions to reality.
+
+## References
+- Ramprasad, R. et al. (2017). Machine learning in materials informatics: Recent applications and prospects. *npj Computational Materials*, 3, 54.

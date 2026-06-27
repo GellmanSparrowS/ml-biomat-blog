@@ -33,7 +33,7 @@
 <span class="lang-badge en">EN</span>
 <h1>Scientific Data Visualization with Python: Publication-Ready Figures</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
 </div>
 </header>
 <div class="content">
@@ -158,6 +158,21 @@ plt.savefig(&quot;figure.svg&quot;)  # Fully editable in Illustrator/Inkscape
 <ul>
 <li>Rougier, N.P. et al. (2014). Ten simple rules for better figures. <em>PLoS Computational Biology</em>, 10(9), e1003833.</li>
 <li>Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. <em>CSE</em>, 9(3), 90-95.</li>
+</ul>
+
+
+<h2>Advanced Tips for Publication Figures</h2>
+
+<p>When preparing figures for journal submission, consider these guidelines that reviewers appreciate. Font sizes should be consistent across all panels—use the same font family and size for axis labels, tick marks, and annotations throughout the entire figure. A common mistake is having readable labels in one panel but tiny, unreadable labels in another.</p>
+
+<p>Color accessibility matters. Approximately 8% of males have some form of color vision deficiency. Avoid red-green combinations as the sole differentiator between data series. Instead, combine color with different line styles (solid, dashed, dotted) or marker shapes (circles, triangles, squares) as redundant cues. The ColorBrewer palettes via Seaborn provide colorblind-safe options tested for print and digital display.</p>
+
+<p>Figure legends should be positioned to minimize white space while avoiding data occlusion. The bbox_to_anchor parameter in Matplotlib allows precise placement outside the axes. For multi-panel figures, consider placing a single legend that applies to all panels rather than repeating legends in each subplot. This saves space and reduces visual clutter.</p>
+
+<h2>References</h2>
+<ul>
+<li>Stone, M. (2006). Choosing colors for data visualization. <em>Business Intelligence Network</em>.</li>
+<li>Tufte, E. (2001). <em>The Visual Display of Quantitative Information</em>. Graphics Press.</li>
 </ul>
 </div>
 </article><section class="cta-banner">

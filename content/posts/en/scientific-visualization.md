@@ -127,3 +127,16 @@ plt.savefig("figure.svg")  # Fully editable in Illustrator/Inkscape
 ## References
 - Rougier, N.P. et al. (2014). Ten simple rules for better figures. *PLoS Computational Biology*, 10(9), e1003833.
 - Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. *CSE*, 9(3), 90-95.
+
+
+## Advanced Tips for Publication Figures
+
+When preparing figures for journal submission, consider these guidelines that reviewers appreciate. Font sizes should be consistent across all panels—use the same font family and size for axis labels, tick marks, and annotations throughout the entire figure. A common mistake is having readable labels in one panel but tiny, unreadable labels in another.
+
+Color accessibility matters. Approximately 8% of males have some form of color vision deficiency. Avoid red-green combinations as the sole differentiator between data series. Instead, combine color with different line styles (solid, dashed, dotted) or marker shapes (circles, triangles, squares) as redundant cues. The ColorBrewer palettes via Seaborn provide colorblind-safe options tested for print and digital display.
+
+Figure legends should be positioned to minimize white space while avoiding data occlusion. The bbox_to_anchor parameter in Matplotlib allows precise placement outside the axes. For multi-panel figures, consider placing a single legend that applies to all panels rather than repeating legends in each subplot. This saves space and reduces visual clutter.
+
+## References
+- Stone, M. (2006). Choosing colors for data visualization. *Business Intelligence Network*.
+- Tufte, E. (2001). *The Visual Display of Quantitative Information*. Graphics Press.

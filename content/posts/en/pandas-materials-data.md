@@ -84,3 +84,29 @@ with pd.ExcelWriter("results.xlsx") as writer:
 ## References
 - McKinney, W. (2010). Data Structures for Statistical Computing in Python. *Proc. SciPy*, 56-61.
 - pandas.pydata.org - Pandas documentation.
+
+
+## Advanced Data Operations
+
+Merging data from multiple sources is a common task in materials research. Suppose you have mechanical test results in one CSV file and fiber morphology measurements from SEM analysis in another. Pandas merge function allows you to combine these datasets on a common key such as sample ID:
+
+```python
+mechanics = pd.read_csv("mechanical_data.csv")
+morphology = pd.read_csv("sem_fiber_morphology.csv")
+combined = pd.merge(mechanics, morphology, on="sample_id", how="inner")
+```
+
+For time-dependent measurements common in biomaterials research (degradation studies, creep tests), the rolling window functions provide smoothed trends:
+
+```python
+df["stress_smooth"] = df["stress"].rolling(window=5, center=True).mean()
+```
+
+When dealing with multiple experimental conditions, the groupby transform method allows you to normalize data within each group without losing the original structure. This is particularly useful for comparing relative changes across treatments with different baseline values:
+
+```python
+df["normalized_modulus"] = df.groupby("treatment")["modulus_GPa"].transform(lambda x: x / x.mean())
+```
+
+## References
+- McKinney, W. (2012). *Python for Data Analysis*. O'Reilly Media.
