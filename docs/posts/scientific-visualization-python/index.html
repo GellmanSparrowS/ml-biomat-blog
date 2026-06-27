@@ -42,7 +42,6 @@
 <p>A well-designed figure communicates your results faster than any paragraph. Yet most researchers learn Matplotlib through copy-paste and trial-and-error. This guide gives you <strong>reusable templates</strong> for the four most common figure types in materials science.</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -61,7 +60,6 @@ plt.rcParams.update({
 
 <p>The workhorse of any paper: 2x2 subplots comparing different conditions.</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 fig, axes = plt.subplots(2, 2, figsize=(10, 8))
 axes = axes.flatten()
@@ -95,7 +93,6 @@ plt.savefig(&quot;figure1.pdf&quot;, dpi=300)
 <p>Avoid default Matplotlib colors. Use perceptually uniform or journal-specific palettes:</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 # Option A: Seaborn colorblind-friendly
 sns.set_palette(&quot;colorblind&quot;)
 
@@ -109,7 +106,6 @@ cmap = sns.color_palette(&quot;rocket_r&quot;, as_cmap=True)
 <h2>3. Heatmaps for Matrix Data</h2>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 fig, ax = plt.subplots(figsize=(6, 5))
 im = ax.imshow(correlation_matrix, cmap=&quot;RdBu_r&quot;, vmin=-1, vmax=1)
 cbar = plt.colorbar(im, ax=ax, shrink=0.8)
@@ -122,7 +118,6 @@ ax.set_yticklabels(labels)
 
 <h2>4. Export for Journals</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 # Nature/Science: 89 mm (single column) or 183 mm (double)
 fig.set_size_inches(3.5, 3.0)  # Single column
