@@ -60,6 +60,7 @@
 <p>A typical workflow extracts nanoscale mechanical properties—Young's modulus, persistence length, hydrogen bond densities—that feed into higher-scale models.</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 # Example: computing persistence length from MD trajectory
 import numpy as np
 from scipy.spatial.distance import pdist
@@ -107,6 +108,7 @@ def compute_persistence_length(positions, kbt=4.114, n_segments=10):
 
 <p>The real power comes from linking these scales. Here's a minimal example of how to pass MD-derived stiffness to an FEA material model:</p>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 import numpy as np
 

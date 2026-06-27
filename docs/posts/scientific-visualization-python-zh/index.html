@@ -40,6 +40,7 @@
 <p>一张好图比一段文字更能说服审稿人。这篇指南给你可复用的Matplotlib模板，直接用于论文。</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 import matplotlib.pyplot as plt
 import numpy as np
 plt.rcParams.update({&quot;font.size&quot;: 10, &quot;figure.dpi&quot;: 150, &quot;savefig.dpi&quot;: 300})
@@ -47,6 +48,7 @@ plt.rcParams.update({&quot;font.size&quot;: 10, &quot;figure.dpi&quot;: 150, &qu
 
 <h2>多幅图模板</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 fig, axes = plt.subplots(2, 2, figsize=(10, 8))
 # A: 应力-应变曲线
@@ -68,6 +70,7 @@ plt.tight_layout()
 <p>不要用默认颜色。用色盲友好或期刊特定的调色板：</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 import seaborn as sns
 sns.set_palette(&quot;colorblind&quot;)  # 色盲友好
 colors = [&quot;#1b9e77&quot;, &quot;#d95f02&quot;, &quot;#7570b3&quot;, &quot;#e7298a&quot;]  # 自定义科学配色
@@ -75,6 +78,7 @@ colors = [&quot;#1b9e77&quot;, &quot;#d95f02&quot;, &quot;#7570b3&quot;, &quot;#
 
 <h2>导出格式</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 plt.savefig(&quot;figure.pdf&quot;, dpi=300, bbox_inches=&quot;tight&quot;)  # 矢量，可编辑
 plt.savefig(&quot;figure.png&quot;, dpi=600)  # 位图，高分辨率

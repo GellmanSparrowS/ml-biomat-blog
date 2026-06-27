@@ -44,6 +44,7 @@
 <p>The special challenge in materials ML: <strong>data is scarce</strong>. You might have only 30-50 experimental samples.</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
@@ -53,6 +54,7 @@ from sklearn.model_selection import cross_val_score
 
 <h2>Data Preparation</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 data = pd.DataFrame({
     &quot;fiber_diameter_nm&quot;: [45, 52, 48, 55, 50],
@@ -67,6 +69,7 @@ data = pd.DataFrame({
 <table><tr><th>Model</th><th>Small-data advantage</th><th>Watch out for</th></tr><tr><td>------</td><td>---------------------</td><td>--------------</td></tr><tr><td>Random Forest</td><td>Insensitive to hyperparams, feature importance</td><td>Keep max_depth small</td></tr><tr><td>Gradient Boosting</td><td>High accuracy, handles nonlinearity</td><td>Easy to overfit, low lr needed</td></tr><tr><td>Gaussian Process</td><td>Built-in uncertainty, perfect for n<100</td><td>O(n^3), avoid n>1000</td></tr></table>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 models = {
     &quot;RF&quot;: RandomForestRegressor(n_estimators=200, max_depth=5, random_state=42),
     &quot;GB&quot;: GradientBoostingRegressor(n_estimators=100, max_depth=3, learning_rate=0.05, random_state=42),
@@ -78,6 +81,7 @@ for name, model in models.items():
 
 <h2>Uncertainty Quantification</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 def predict_with_uncertainty(model, X, n_iter=100):
     predictions = np.zeros((n_iter, len(X)))

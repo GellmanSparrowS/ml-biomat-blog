@@ -48,12 +48,14 @@
 <h2>第二步：创建环境</h2>
 
 <pre><code class="language-bash">
+<pre><code class="language-bash">
 conda create -n matsci python=3.10 -y
 conda activate matsci
 </code></pre>
 
 <h2>第三步：安装科学计算包</h2>
 
+<pre><code class="language-bash">
 <pre><code class="language-bash">
 conda install numpy scipy pandas matplotlib jupyter -y
 conda install -c conda-forge seaborn scikit-learn scikit-image -y
@@ -65,6 +67,7 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/m
 
 <h2>第四步：Jupyter Notebook</h2>
 
+<pre><code class="language-bash">
 <pre><code class="language-bash">
 cd 你的项目文件夹; jupyter lab  # 推荐lab
 </code></pre>

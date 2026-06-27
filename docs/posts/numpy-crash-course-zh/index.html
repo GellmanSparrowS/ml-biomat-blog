@@ -42,11 +42,13 @@
 <p>处理实验数据的基础工具。把拉伸机、AFM、XRD导出的txt文件变成可以分析、绘图、导出的Python数组。</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 import numpy as np
 </code></pre>
 
 <h2>1. NumPy数组：你的数据容器</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 strains = np.array([0.0, 0.005, 0.010, 0.020, 0.050, 0.100])
 stresses = np.array([0, 8, 15, 28, 52, 74])
@@ -63,6 +65,7 @@ print(arr.dtype)  # int64 — 数据类型
 
 <h2>2. 加载实验数据</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # 通用：空格或制表符分隔
 data = np.loadtxt(&quot;tensile_test.txt&quot;, skiprows=0)
@@ -84,6 +87,7 @@ data = np.genfromtxt(&quot;messy_data.csv&quot;, delimiter=&quot;,&quot;, skip_h
 <p>NumPy的真正威力：操作同时应用于每个元素：</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 # 算术
 stress_pa = stresses * 1e6          # MPa转Pa
 strain_pct = strains * 100          # 转为百分比
@@ -103,6 +107,7 @@ force = k * sensitivity * deflection * 1e-9 * 1e9  # nN
 <h2>4. 统计和聚合</h2>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 mean = np.mean(stresses)         # 平均值
 std = np.std(stresses)           # 标准差
 median = np.median(stresses)     # 中位数（抗异常值）
@@ -118,6 +123,7 @@ row_stds = data.std(axis=1)      # 每行标准差
 
 <p>你可能最常用的NumPy特性：</p>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # 弹性区数据
 elastic = stresses[strains &lt; 0.02]
@@ -139,6 +145,7 @@ idx_where = np.where(stresses &gt; 30)[0]
 <h2>6. 重塑和合并数组</h2>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 flat = data.flatten()                   # 展平
 matrix = np.arange(12).reshape(3, 4)    # 1D -&gt; 3x4
 combined = np.column_stack([strains, stresses])  # 并排
@@ -149,6 +156,7 @@ centered = data - data.mean(axis=0)              # 每列减均值
 <h2>7. 保存结果</h2>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 np.savetxt(&quot;results.csv&quot;, combined, delimiter=&quot;,&quot;, header=&quot;strain,stress&quot;)
 np.save(&quot;processed.npy&quot;, data)           # 二进制格式
 loaded = np.load(&quot;processed.npy&quot;)
@@ -156,6 +164,7 @@ loaded = np.load(&quot;processed.npy&quot;)
 
 <h2>8. 完整示例：AFM力曲线处理</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 import numpy as np
 raw = np.loadtxt(&quot;force_curve_001.txt&quot;, skiprows=320)

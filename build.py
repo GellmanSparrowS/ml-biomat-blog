@@ -40,7 +40,14 @@ def md_to_html(text):
     while i < len(lines):
         line = lines[i]
         if line.strip().startswith("```"):
+            lang = line.strip()[3:].strip() if not in_code else ""
             if not in_code:
+                if lang == "mermaid":
+                    out.append('<div class="mermaid">')
+                    in_mermaid = True
+                else:
+                    out.append(f'<pre><code class="language-{lang}">' if lang else "<pre><code>")
+                    in_code = True
                 lang = line.strip()[3:].strip()
                 out.append(f'<pre><code class="language-{lang}">' if lang else "<pre><code>")
                 in_code = True

@@ -44,6 +44,7 @@
 <p><strong>Pandas是Python的数据处理瑞士军刀</strong>。学一次，终身受益。</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -53,6 +54,7 @@ import matplotlib.pyplot as plt
 
 <p>最常见的三种格式：</p>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # Excel（最常见）
 df = pd.read_excel(&quot;mechanical_tests.xlsx&quot;, sheet_name=&quot;Sheet1&quot;)
@@ -71,6 +73,7 @@ df_all = pd.concat(dfs, ignore_index=True)
 
 <p>实验数据永远不干净。以下是常见问题和处理：</p>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # 删除完全空的行/列
 df = df.dropna(how=&quot;all&quot;)
@@ -94,6 +97,7 @@ for col in [&quot;youngs_modulus_GPa&quot;, &quot;fiber_diameter_nm&quot;]:
 <p>实验室最常用的分析——按处理条件分组看统计量：</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 summary = df.groupby(&quot;treatment&quot;).agg({
     &quot;youngs_modulus_GPa&quot;: [&quot;mean&quot;, &quot;std&quot;, &quot;count&quot;],
     &quot;fiber_diameter_nm&quot;: [&quot;mean&quot;, &quot;std&quot;],
@@ -104,6 +108,7 @@ print(summary)
 
 <p>输出类似：</p>
 
+<pre><code>
 <pre><code>
            youngs_modulus_GPa          fiber_diameter_nm
                         mean   std count            mean   std
@@ -116,6 +121,7 @@ methanol                3.48  0.28     3           48.00  3.61
 
 <p>四种最常用的科研图表：</p>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 
@@ -145,6 +151,7 @@ plt.savefig(&quot;mechanical_analysis.pdf&quot;, dpi=150, bbox_inches=&quot;tigh
 
 <h2>5. 导出结果</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # 导出统计摘要
 summary.to_csv(&quot;mechanical_summary.csv&quot;)

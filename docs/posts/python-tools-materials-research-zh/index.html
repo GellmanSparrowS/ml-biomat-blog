@@ -40,6 +40,7 @@
 <p>材料研究产生各种数据：AFM力曲线、SEM图像、MD轨迹、XRD图谱、力学测试日志。Python已成为处理这些数据的万能语言。</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 import numpy as np
 from scipy import signal, optimize
 import matplotlib.pyplot as plt
@@ -47,6 +48,7 @@ import matplotlib.pyplot as plt
 
 <h2>NumPy & SciPy</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # 加载AFM力曲线
 data = np.loadtxt(&quot;force_curve.txt&quot;, skiprows=2)
@@ -63,6 +65,7 @@ adhesion = -force[peaks[0]] if len(peaks) &gt; 0 else 0
 <h2>Pandas分组统计</h2>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 import pandas as pd
 df = pd.read_csv(&quot;tensile_tests.csv&quot;)
 summary = df.groupby(&quot;treatment&quot;).agg({&quot;youngs_modulus&quot;: [&quot;mean&quot;, &quot;std&quot;], &quot;ultimate_strength&quot;: [&quot;mean&quot;, &quot;std&quot;]}).round(2)
@@ -70,6 +73,7 @@ summary = df.groupby(&quot;treatment&quot;).agg({&quot;youngs_modulus&quot;: [&q
 
 <h2>Matplotlib科研绘图</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
 ax1.plot(strain, stress, &quot;b-&quot;, linewidth=1.5)
@@ -81,6 +85,7 @@ plt.savefig(&quot;mechanical_properties.pdf&quot;, dpi=300)
 <h2>ASE原子模拟环境</h2>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 from ase.io import read
 atoms = read(&quot;collagen_fibril.data&quot;, format=&quot;lammps-data&quot;)
 supercell = atoms * (2, 2, 3)
@@ -88,6 +93,7 @@ supercell = atoms * (2, 2, 3)
 
 <h2>图像分析</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 from skimage import io, filters, measure
 img = io.imread(&quot;sem_fiber.tif&quot;, as_gray=True)
@@ -98,6 +104,7 @@ props = measure.regionprops_table(measure.label(binary), properties=[&quot;area&
 
 <h2>快速安装</h2>
 
+<pre><code class="language-bash">
 <pre><code class="language-bash">
 conda create -n matsci python=3.10 numpy scipy pandas matplotlib scikit-learn jupyter ase pymatgen scikit-image -c conda-forge
 </code></pre>

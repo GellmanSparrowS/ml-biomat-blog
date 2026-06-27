@@ -42,6 +42,7 @@
 <p>If you process experimental data, NumPy is non-negotiable. It turns raw <code>.txt</code> files from your tensile tester, AFM, or XRD into Python arrays you can analyze, plot, and export. This guide assumes you have Python installed and takes you from zero to productive with real lab data.</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 import numpy as np
 </code></pre>
 
@@ -49,6 +50,7 @@ import numpy as np
 
 <p>A NumPy array is a grid of numbers — like a column in Excel, but faster and more powerful:</p>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # From a Python list
 strains = np.array([0.0, 0.005, 0.010, 0.020, 0.050, 0.100])
@@ -64,6 +66,7 @@ empty = np.empty(100)              # Uninitialized (fast, but fill before use)
 <h3>Array Properties</h3>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 arr = np.array([[1, 2, 3], [4, 5, 6]])
 print(arr.shape)    # (2, 3) — 2 rows, 3 columns
 print(arr.ndim)     # 2 — 2-dimensional
@@ -75,6 +78,7 @@ print(arr.size)     # 6 — total elements
 
 <p>Most lab instruments export tabular data. NumPy handles all common formats:</p>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # Generic: columns separated by spaces or tabs
 data = np.loadtxt(&quot;tensile_test.txt&quot;, skiprows=0)
@@ -101,6 +105,7 @@ data_with_nans = np.genfromtxt(&quot;messy_data.csv&quot;, delimiter=&quot;,&quo
 <p>NumPy's real power: operations apply to every element simultaneously. No <code>for</code> loops needed:</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 # Arithmetic
 stress_pascals = stresses * 1e6          # MPa to Pa
 strain_percent = strains * 100           # fraction to percent
@@ -123,6 +128,7 @@ force = k * deflection_nm * 1e-9 * 1e9     # Convert to nN
 
 <h2>4. Statistics and Aggregation</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 # Basic statistics
 mean_stress = np.mean(stresses)         # 29.5 MPa
@@ -148,6 +154,7 @@ row_stds = data.std(axis=1)             # Std of each row
 <p>This is probably the NumPy feature you will use most:</p>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 # Find all points in the elastic region (strain &lt; 2%)
 elastic_mask = strains &lt; 0.02
 elastic_stresses = stresses[elastic_mask]
@@ -171,6 +178,7 @@ idx_where = np.where(stresses &gt; 30)[0]  # Indices where condition is True
 <h2>6. Reshaping and Combining Arrays</h2>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 # Reshape
 flat = data.flatten()                   # Any shape -&gt; 1D
 matrix = np.arange(12).reshape(3, 4)    # 1D -&gt; 3x4 matrix
@@ -190,6 +198,7 @@ normalized = data / data.max(axis=0)    # Normalize each column
 <h2>7. Saving Results</h2>
 
 <pre><code class="language-python">
+<pre><code class="language-python">
 # Simple text export
 np.savetxt(&quot;results.csv&quot;, combined, delimiter=&quot;,&quot;, header=&quot;strain,stress&quot;, comments=&quot;&quot;)
 
@@ -207,6 +216,7 @@ print(archive[&quot;strain&quot;])
 
 <p>Here is a complete pipeline from raw data to mechanical properties:</p>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 import numpy as np
 

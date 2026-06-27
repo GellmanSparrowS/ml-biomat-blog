@@ -44,6 +44,7 @@
 <p><strong>Stress</strong> (y-axis, Pa/MPa) = force / cross-sectional area. <strong>Strain</strong> (x-axis, dimensionless) = change in length / original length.</p>
 
 <pre><code>
+<pre><code>
 Stress = F / A0
 Strain = (L - L0) / L0
 </code></pre>
@@ -54,6 +55,7 @@ Strain = (L - L0) / L0
 
 <h2>Computing Mechanical Properties</h2>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 import numpy as np
 
@@ -77,6 +79,7 @@ def compute_mechanical_properties(strain, stress):
 <li><strong>Hysteresis</strong> — loading/unloading differ; this is energy dissipation</li>
 </ol>
 
+<pre><code class="language-python">
 <pre><code class="language-python">
 def tangent_modulus(strain, stress, at_strain=0.05):
     idx = np.argmin(np.abs(strain - at_strain))
