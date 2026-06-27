@@ -33,7 +33,7 @@
 <span class="lang-badge en">EN</span>
 <h1>Understanding Stress-Strain Curves: A Materials Science Primer</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/biomaterials/">Biomaterials</a>
+<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/biomaterials/">Biomaterials</a>
 </div>
 </header>
 <div class="content">
@@ -55,7 +55,6 @@ Strain = (L - L0) / L0
 
 <h2>Computing Mechanical Properties</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 import numpy as np
 
@@ -80,7 +79,6 @@ def compute_mechanical_properties(strain, stress):
 </ol>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 def tangent_modulus(strain, stress, at_strain=0.05):
     idx = np.argmin(np.abs(strain - at_strain))
     w = max(5, idx // 10)
@@ -102,6 +100,20 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 <li>Callister, W.D. (2018). <em>Materials Science and Engineering: An Introduction</em>. Wiley.</li>
 <li>Meyers, M.A. & Chawla, K.K. (2009). <em>Mechanical Behavior of Materials</em>. Cambridge.</li>
 <li>GitHub: <a href="https://github.com/nickabattista/mech_analyzer">MechAnalyzer</a> — open-source stress-strain analysis tool.</li>
+</ul>
+
+
+<h2>Advanced Topics in Stress-Strain Analysis</h2>
+
+<p>True stress and true strain differ from engineering values at large deformations. Engineering stress uses the original cross-sectional area, while true stress accounts for the instantaneous area reduction during deformation. For strains beyond 10%, the difference becomes significant. Most published data for soft biomaterials report engineering stress unless otherwise specified, so always check the methodology section when comparing literature values.</p>
+
+<p>The strain rate sensitivity of biomaterials reflects their viscoelastic nature. At higher strain rates, the material appears stiffer because polymer chains have less time to relax and reorganize under load. For physiologically meaningful results, test soft tissues and hydrogels at strain rates matching their in vivo loading conditions: approximately 0.01 to 0.1 per second for most connective tissues.</p>
+
+<p>Cyclic loading reveals the Mullins effect in many biomaterials: the stress required to reach a given strain decreases with repeated cycling. This stress softening stabilizes after several cycles and is attributed to the progressive rupture of weaker sacrificial bonds within the network. The stabilized cycle is typically reported as the preconditioned response.</p>
+
+<h2>References</h2>
+<ul>
+<li>Dorfmann, A. & Ogden, R.W. (2004). A constitutive model for the Mullins effect. <em>International Journal of Solids and Structures</em>, 41, 1855-1878.</li>
 </ul>
 </div>
 </article><section class="cta-banner">
