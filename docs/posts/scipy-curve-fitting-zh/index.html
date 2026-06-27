@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SciPy曲线拟合完全指南：线性、非线性与进阶 — ML-Biomat</title>
-<meta name="description" content="掌握SciPy曲线拟合：线性和非线性回归、置信区间、参数约束、多模型选择和真实材料数据案例。">
+<title>SciPy\u66f2\u7ebf\u62df\u5408\u5b8c\u5168\u6307\u5357\uff1a\u4ece\u7ebf\u6027\u56de\u5f52\u5230\u975e\u7ebf\u6027\u5efa\u6a21 — ML-Biomat</title>
+<meta name="description" content="\u9762\u5411\u6750\u6599\u79d1\u5b66\u548c\u751f\u7269\u5b66\u7814\u7a76\u751f\u7684SciPy\u66f2\u7ebf\u62df\u5408\u5b8c\u6574\u6559\u7a0b\uff1a\u7ebf\u6027\u56de\u5f52\u3001\u6307\u6570\u8870\u51cf\u3001Hertz\u538b\u75d5\u6a21\u578b\u3001\u7f6e\u4fe1\u533a\u95f4\u4f30\u8ba1\u548c\u6a21\u578b\u9009\u62e9\u3002">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/scipy-curve-fitting-zh/">
 <link rel="alternate" type="application/rss+xml" href="/rss.xml">
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
 <link rel="stylesheet" href="/static/css/style.css">
-<meta property="og:title" content="SciPy曲线拟合完全指南：线性、非线性与进阶">
-<meta property="og:description" content="掌握SciPy曲线拟合：线性和非线性回归、置信区间、参数约束、多模型选择和真实材料数据案例。">
+<meta property="og:title" content="SciPy\u66f2\u7ebf\u62df\u5408\u5b8c\u5168\u6307\u5357\uff1a\u4ece\u7ebf\u6027\u56de\u5f52\u5230\u975e\u7ebf\u6027\u5efa\u6a21">
+<meta property="og:description" content="\u9762\u5411\u6750\u6599\u79d1\u5b66\u548c\u751f\u7269\u5b66\u7814\u7a76\u751f\u7684SciPy\u66f2\u7ebf\u62df\u5408\u5b8c\u6574\u6559\u7a0b\uff1a\u7ebf\u6027\u56de\u5f52\u3001\u6307\u6570\u8870\u51cf\u3001Hertz\u538b\u75d5\u6a21\u578b\u3001\u7f6e\u4fe1\u533a\u95f4\u4f30\u8ba1\u548c\u6a21\u578b\u9009\u62e9\u3002">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/scipy-curve-fitting-zh/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SciPy曲线拟合完全指南：线性、非线性与进阶", "description": "掌握SciPy曲线拟合：线性和非线性回归、置信区间、参数约束、多模型选择和真实材料数据案例。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting-zh/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SciPy\\u66f2\\u7ebf\\u62df\\u5408\\u5b8c\\u5168\\u6307\\u5357\\uff1a\\u4ece\\u7ebf\\u6027\\u56de\\u5f52\\u5230\\u975e\\u7ebf\\u6027\\u5efa\\u6a21", "description": "\\u9762\\u5411\\u6750\\u6599\\u79d1\\u5b66\\u548c\\u751f\\u7269\\u5b66\\u7814\\u7a76\\u751f\\u7684SciPy\\u66f2\\u7ebf\\u62df\\u5408\\u5b8c\\u6574\\u6559\\u7a0b\\uff1a\\u7ebf\\u6027\\u56de\\u5f52\\u3001\\u6307\\u6570\\u8870\\u51cf\\u3001Hertz\\u538b\\u75d5\\u6a21\\u578b\\u3001\\u7f6e\\u4fe1\\u533a\\u95f4\\u4f30\\u8ba1\\u548c\\u6a21\\u578b\\u9009\\u62e9\\u3002", "datePublished": "2026-06-27", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting-zh/"}</script>
 </head>
 <body>
 <header class="site-header"><div class="header-inner">
@@ -31,13 +31,13 @@
 <main class="container"><article>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
-<h1>SciPy曲线拟合完全指南：线性、非线性与进阶</h1>
+<h1>SciPy\u66f2\u7ebf\u62df\u5408\u5b8c\u5168\u6307\u5357\uff1a\u4ece\u7ebf\u6027\u56de\u5f52\u5230\u975e\u7ebf\u6027\u5efa\u6a21</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
+<span>2026-06-27</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
 </div>
 </header>
 <div class="content">
-<p>拿到实验数据后，提取参数需要曲线拟合。SciPy的curve_fit从简单线性回归到复杂非线性模型都能处理，内置参数不确定性估计。</p>
+<p>\u5728\u6750\u6599\u79d1\u5b66\u548c\u751f\u7269\u5b66\u5b9e\u9a8c\u4e2d\uff0c\u6211\u4eec\u7ecf\u5e38\u9700\u8981\u4ece\u79bb\u6563\u7684\u6570\u636e\u70b9\u4e2d\u63d0\u53d6\u8fde\u7eed\u7684\u7269\u7406\u53c2\u6570\u3002\u6bd4\u5982\u4ece\u5e94\u529b-\u5e94\u53d8\u66f2\u7ebf\u4e2d\u63d0\u53d6\u6768\u6c0f\u6a21\u91cf\u3001\u4ece\u677e\u5f1b\u5b9e\u9a8c\u4e2d\u63d0\u53d6\u677e\u5f1b\u65f6\u95f4\u3001\u4eceAFM\u538b\u75d5\u66f2\u7ebf\u4e2d\u63d0\u53d6\u6837\u54c1\u521a\u5ea6\u3002\u66f2\u7ebf\u62df\u5408\u662f\u8fde\u63a5\u5b9e\u9a8c\u6570\u636e\u548c\u7269\u7406\u6a21\u578b\u7684\u6865\u6881\uff0c\u800cSciPy\u7684curve_fit\u662f\u5b8c\u6210\u8fd9\u4e00\u4efb\u52a1\u7684\u5229\u5668\u3002</p>
 
 <pre><code class="language-python">
 <pre><code class="language-python">
@@ -45,74 +45,97 @@ import numpy as np
 from scipy.optimize import curve_fit
 </code></pre>
 
-<h2>1. 线性回归</h2>
+<h2>\u4e00\u3001\u66f2\u7ebf\u62df\u5408\u7684\u57fa\u672c\u539f\u7406</h2>
+
+<p>\u66f2\u7ebf\u62df\u5408\u7684\u672c\u8d28\u662f\u627e\u5230\u4e00\u4e2a\u6570\u5b66\u6a21\u578b\u7684\u53c2\u6570\uff0c\u4f7f\u6a21\u578b\u7684\u9884\u6d4b\u503c\u4e0e\u5b9e\u9a8c\u6d4b\u91cf\u503c\u4e4b\u95f4\u7684\u5dee\u5f02\u6700\u5c0f\u3002\u8fd9\u4e2a\u5dee\u5f02\u901a\u5e38\u7528\u6b8b\u5dee\u5e73\u65b9\u548c\u6765\u8861\u91cf\uff0c\u56e0\u6b64\u66f2\u7ebf\u62df\u5408\u4e5f\u5e38\u88ab\u79f0\u4e3a\u6700\u5c0f\u4e8c\u4e58\u6cd5\u3002</p>
+
+<p>SciPy\u7684curve_fit\u4e0d\u4ec5\u7ed9\u51fa\u6700\u4f18\u53c2\u6570\uff0c\u8fd8\u63d0\u4f9b\u534f\u65b9\u5dee\u77e9\u9635\uff0c\u7528\u6765\u4f30\u8ba1\u6bcf\u4e2a\u53c2\u6570\u7684\u4e0d\u786e\u5b9a\u5ea6\u3002\u8fd9\u5bf9\u4e8e\u79d1\u7814\u8bba\u6587\u4e2d\u7684\u8bef\u5dee\u62a5\u544a\u975e\u5e38\u91cd\u8981\u3002</p>
+
+<h2>\u4e8c\u3001\u7ebf\u6027\u56de\u5f52\uff1a\u529b\u5b66\u6d4b\u8bd5\u4e2d\u6700\u5e38\u7528\u7684\u65b9\u6cd5</h2>
 
 <pre><code class="language-python">
 <pre><code class="language-python">
+strain = np.array([0.000, 0.005, 0.010, 0.015, 0.020])
+stress = np.array([0.0, 8.2, 15.8, 23.5, 31.2])
+
 def linear(x, a, b): return a * x + b
+
 popt, pcov = curve_fit(linear, strain, stress)
 E, intercept = popt
 E_std = np.sqrt(pcov[0, 0])
+
+# R-squared
 residuals = stress - linear(strain, *popt)
 r2 = 1 - np.sum(residuals**2) / np.sum((stress - np.mean(stress))**2)
-print(f&quot;E = {E:.1f} +/- {E_std:.1f}, R2 = {r2:.3f}&quot;)
+print(f&quot;\u6768\u6c0f\u6a21\u91cf: {E:.1f} +/- {E_std:.1f} MPa, R2={r2:.4f}&quot;)
 </code></pre>
 
-<h2>2. 指数衰减：应力松弛</h2>
+<h2>\u4e09\u3001\u6307\u6570\u8870\u51cf\u6a21\u578b\uff1a\u5e94\u529b\u677e\u5f1b\u5b9e\u9a8c</h2>
 
 <pre><code class="language-python">
 <pre><code class="language-python">
+time_min = np.array([0, 1, 2, 5, 10, 20, 40, 80])
+stress_kPa = np.array([12.5, 10.8, 9.3, 7.2, 5.5, 4.1, 3.2, 2.8])
+
 def exp_decay(t, A, tau, y0): return A * np.exp(-t / tau) + y0
-A_guess = force[0] - force[-1]
-tau_guess = time[-1] / 3
-popt, pcov = curve_fit(exp_decay, time, force, p0=[A_guess, tau_guess, force[-1]])
-print(f&quot;松弛时间: {popt[1]:.1f} s&quot;)
+
+# \u4ece\u6570\u636e\u4f30\u8ba1\u5408\u7406\u7684\u521d\u59cb\u731c\u6d4b\u503c
+A_guess = stress_kPa[0] - stress_kPa[-1]
+tau_guess = time_min[-1] / 3
+
+popt, pcov = curve_fit(exp_decay, time_min, stress_kPa, p0=[A_guess, tau_guess, stress_kPa[-1]])
+A, tau, y0 = popt
+print(f&quot;\u677e\u5f1b\u65f6\u95f4: {tau:.1f} min&quot;)
 </code></pre>
 
-<h2>3. Hertz模型：AFM压痕</h2>
+<h2>\u56db\u3001Hertz\u6a21\u578b\uff1aAFM\u7eb3\u7c73\u538b\u75d5\u5206\u6790</h2>
 
 <pre><code class="language-python">
 <pre><code class="language-python">
-def hertz(delta, E_star, R=20.0):
+indentation_nm = np.array([0, 10, 20, 30, 40, 50, 60])
+force_nN = np.array([0, 1.5, 4.8, 9.2, 14.5, 20.3, 26.8])
+
+def hertz_model(delta, E_star, R=20.0):
     return (4/3) * E_star * np.sqrt(R) * np.power(np.maximum(delta, 0), 1.5)
-popt, pcov = curve_fit(hertz, indentation, force, p0=[1000], bounds=(1, 1e9))
-E = popt[0] * (1 - 0.5**2)
-print(f&quot;杨氏模量: {E/1000:.1f} kPa&quot;)
+
+popt, pcov = curve_fit(hertz_model, indentation_nm, force_nN,
+    p0=[1000], bounds=(1, 1e9))
+E_modulus = popt[0] * (1 - 0.5**2)  # \u8f6c\u6362\u4e3a\u6768\u6c0f\u6a21\u91cf
+print(f&quot;\u6768\u6c0f\u6a21\u91cf: {E_modulus/1000:.1f} kPa&quot;)
 </code></pre>
 
-<h2>4. 置信区间</h2>
+<p>Hertz\u6a21\u578b\u5047\u8bbe\u6750\u6599\u662f\u5404\u5411\u540c\u6027\u7ebf\u5f39\u6027\u7684\u3001\u538b\u75d5\u6df1\u5ea6\u8fdc\u5c0f\u4e8e\u6837\u54c1\u539a\u5ea6\u3001\u9488\u5c16\u4e0e\u6837\u54c1\u4e4b\u95f4\u65e0\u7c98\u9644\u4f5c\u7528\u3002\u5bf9\u4e8e\u751f\u7269\u6750\u6599\uff0c\u8fd9\u4e9b\u5047\u8bbe\u4e0d\u603b\u662f\u6210\u7acb\uff0c\u56e0\u6b64\u5f97\u5230\u7684\u6a21\u91cf\u5e94\u89c6\u4e3a\u8868\u89c2\u6a21\u91cf\u800c\u975e\u7edd\u5bf9\u7684\u672c\u5f81\u6750\u6599\u53c2\u6570\u3002</p>
+
+<h2>\u4e94\u3001\u7f6e\u4fe1\u533a\u95f4\uff1a\u4e0d\u8981\u53ea\u62a5\u4e00\u4e2a\u6570\u5b57</h2>
 
 <pre><code class="language-python">
 <pre><code class="language-python">
 from scipy import stats
-alpha = 0.05; t_val = stats.t.ppf(1 - alpha/2, max(0, len(x) - len(popt)))
-for i, (p, s) in enumerate(zip(popt, np.sqrt(np.diag(pcov)))):
-    print(f&quot;参数{i}: {p:.3f} +/- {t_val*s:.3f} (95%置信区间)&quot;)
+alpha = 0.05; n = len(indentation_nm); p = len(popt)
+t_val = stats.t.ppf(1 - alpha/2, max(0, n - p))
+for i, (param, name) in enumerate(zip(popt, [&#x27;E_star&#x27;])):
+    std = np.sqrt(pcov[i, i])
+    print(f&quot;{name}: {param:.1f} +/- {t_val*std:.1f} (95% CI)&quot;)
 </code></pre>
 
-<h2>5. 模型比较：AIC</h2>
+<h2>\u516d\u3001\u5e38\u89c1\u95ee\u9898\u548c\u8c03\u8bd5\u6280\u5de7</h2>
+
+<p>\u62df\u5408\u4e0d\u6536\u655b\u901a\u5e38\u610f\u5473\u7740\u521d\u59cb\u731c\u6d4b\u503c\u79bb\u771f\u5b9e\u503c\u592a\u8fdc\u3002\u89e3\u51b3\u65b9\u6cd5\u662f\u5148\u5c06\u6570\u636e\u548c\u6a21\u578b\u51fd\u6570\u753b\u51fa\u6765\uff0c\u76ee\u6d4b\u4f30\u8ba1\u5408\u7406\u7684\u53c2\u6570\u503c\u4f5c\u4e3a\u521d\u59cb\u731c\u6d4b\u3002\u53c2\u6570\u503c\u4e0d\u7269\u7406\u2014\u2014\u6bd4\u5982\u6768\u6c0f\u6a21\u91cf\u4e3a\u8d1f\u6570\u2014\u2014\u53ef\u4ee5\u901a\u8fc7\u8bbe\u7f6e\u5408\u7406\u7684\u8fb9\u754c\u7ea6\u675f\u6765\u907f\u514d\u3002\u4e0d\u786e\u5b9a\u5ea6\u5f02\u5e38\u5927\u65f6\uff0c\u901a\u5e38\u610f\u5473\u7740\u6a21\u578b\u8fc7\u4e8e\u590d\u6742\u800c\u6570\u636e\u91cf\u592a\u5c11\uff0c\u6b64\u65f6\u53ef\u4ee5\u8003\u8651\u7b80\u5316\u6a21\u578b\u6216\u6536\u96c6\u66f4\u591a\u6570\u636e\u3002</p>
+
+<h2>\u4e03\u3001\u5ef6\u4f38\u5de5\u5177</h2>
 
 <pre><code class="language-python">
 <pre><code class="language-python">
-def aic(n_params, residuals):
-    n = len(residuals)
-    return n * np.log(np.sum(residuals**2) / n) + 2 * n_params
-print(f&quot;AIC: 越小越好&quot;)
+from scipy.optimize import minimize
+result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, y), bounds=[(0, None)]*2)
 </code></pre>
 
-<h2>6. 常见失败</h2>
-
-<table><tr><th>问题</th><th>原因</th><th>解决</th></tr><tr><td>------</td><td>------</td><td>------</td></tr><tr><td>拟合不收敛</td><td>初始值不好</td><td>可视化后调整p0</td></tr><tr><td>参数不合理</td><td>无约束</td><td>加bounds</td></tr><tr><td>不确定度过大</td><td>过参数化</td><td>减少参数或固定已知值</td></tr></table>
-
-<h2>参考文献</h2>
-<ul>
-<li>Virtanen, P. et al. (2020). SciPy 1.0. <em>Nature Methods</em>, 17, 261-272.</li>
-</ul>
-
-<h2>参考文献</h2>
+<h2>\u53c2\u8003\u6587\u732e</h2>
 <ul>
 <li>Virtanen, P. et al. (2020). SciPy 1.0. <em>Nature Methods</em>, 17, 261-272.</li>
 <li>Johnson, M.L. & Faunt, L.M. (1992). Parameter estimation. <em>Methods in Enzymology</em>, 210, 1-37.</li>
+<li>Lin, D.C. et al. (2007). Robust AFM force curve analysis. <em>J. Biomech. Eng.</em>, 129(3), 430-440.</li>
+<li>Hertz, H. (1882). Ueber die Beruehrung fester elastischer Koerper. <em>J. Reine Angew. Math.</em>, 92, 156-171.</li>
 </ul>
 </div>
 </article><section class="cta-banner">
