@@ -42,14 +42,12 @@
 <p>大多数材料ML教程从干净的CSV直接跳到模型拟合。现实中，你的数据分散在实验本、仪器导出文件和Excel表格里。特征工程是将原始观测转化为结构化特征矩阵的过程，占实际工作量的80%。</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import pandas as pd; import numpy as np
 df = pd.DataFrame({&quot;纤维直径_nm&quot;: [45,52,48], &quot;交联密度_pct&quot;: [2.5,1.8,3.2], &quot;处理&quot;: [&quot;甲醇&quot;,&quot;乙醇&quot;,&quot;水&quot;], &quot;杨氏模量_GPa&quot;: [2.8,1.9,2.3]})
 </code></pre>
 
 <h2>分类变量编码</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 from sklearn.preprocessing import OneHotEncoder
 encoder = OneHotEncoder(sparse_output=False, drop=&quot;first&quot;)
@@ -58,7 +56,6 @@ encoded = encoder.fit_transform(df[[&quot;处理&quot;]])
 
 <h2>域知识驱动的交互特征</h2>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 def engineer_features(df):
     df = df.copy()
