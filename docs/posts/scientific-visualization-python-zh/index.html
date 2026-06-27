@@ -40,7 +40,6 @@
 <p>一张好的图表比大段文字更能传达研究发现。在材料科学和生物学中，应力-应变曲线、电镜图像分析、AFM力谱统计、XRD图谱——这些都需要清晰专业的数据可视化。Matplotlib是Python生态中最成熟灵活的绘图库，结合Seaborn可以让统计图表更加美观。本文从最基础的折线图开始，逐步深入多面板子图、统计图表、热力图，最终达到发表级别导出的完整技能。</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -60,7 +59,6 @@ plt.rcParams.update({
 <p>折线图适用于展示连续测量数据，如应力-应变曲线、力-位移曲线、时间序列数据。对于材料力学测试，这是最常用的图表类型：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 # 模拟丝素蛋白纤维的拉伸数据
 strain = np.linspace(0, 0.15, 100)
 stress = 1800 * strain + 4000 * strain**2 + np.random.normal(0, 5, 100)
@@ -77,7 +75,6 @@ plt.tight_layout()
 <p>要在一张图上叠加多条曲线对比不同样品或条件，只需多次调用plot并在最后调用legend：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 colors = [&quot;#1f77b4&quot;, &quot;#ff7f0e&quot;, &quot;#2ca02c&quot;]
 for i, color in enumerate(colors):
     stress_i = stress + np.random.normal(0, 3, 100)
@@ -89,7 +86,6 @@ ax.legend(frameon=False)
 
 <p>当你需要展示纤维直径与杨氏模量的关系、AFM测得的多个位点的模量分布时，散点图是最佳选择。使用alpha参数处理数据点重叠的问题：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 # 模拟50根纤维的直径-模量数据
 np.random.seed(42)
@@ -108,7 +104,6 @@ ax.set_ylabel(&quot;Young\&#x27;s Modulus (MPa)&quot;)
 
 <p>大多数期刊论文使用多面板图表同时展示多个实验结果。subplots函数创建规整的网格布局，让你可以在一个figure中排列多张子图：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 fig, axes = plt.subplots(2, 2, figsize=(11, 8))
 
@@ -150,7 +145,6 @@ plt.tight_layout(pad=2)
 <p>箱线图展示分组数据的中位数、四分位数范围和异常值，远比单纯报告均值和标准差信息量大。小提琴图在箱线图基础上额外展示了数据分布的概率密度估计，适合样本量较大的情况：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import pandas as pd
 df = pd.DataFrame({
     &quot;modulus&quot;: np.concatenate([np.random.normal(2.5, 0.3, 25), np.random.normal(3.2, 0.4, 25), np.random.normal(2.8, 0.2, 25)]),
@@ -166,7 +160,6 @@ plt.title(&quot;&quot;); plt.suptitle(&quot;&quot;)
 <p>科研论文的色彩选择关乎可读性和包容性。必须避免单独使用红绿配色——约百分之八的男性读者有色觉障碍。优先使用色盲友好的调色板。Nature和Science系列期刊偏好柔和专业的配色：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 sns.set_palette(&quot;colorblind&quot;)
 custom_colors = [&quot;#1b9e77&quot;, &quot;#d95f02&quot;, &quot;#7570b3&quot;, &quot;#e7298a&quot;]
 # 热力图推荐使用感知均匀的colormap
@@ -178,7 +171,6 @@ cmap_heatmap = sns.color_palette(&quot;rocket_r&quot;, as_cmap=True)
 <p>根据期刊要求选择合适的输出格式。矢量格式可以无限放大不失真，适合曲线图和数据图。位图格式适合照片类图像：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 plt.savefig(&quot;figure1.pdf&quot;, dpi=300, bbox_inches=&quot;tight&quot;)  # 矢量，投稿首选
 plt.savefig(&quot;figure1.png&quot;, dpi=600)  # 高分辨率位图
 plt.savefig(&quot;figure1.svg&quot;)  # Inkscape/Illustrator可编辑
@@ -188,7 +180,6 @@ plt.savefig(&quot;figure1.svg&quot;)  # Inkscape/Illustrator可编辑
 
 <p>审稿人经常对图表提出以下意见。提前了解可以避免不必要的修改轮次。坐标轴标签字体太小是最常见的批评——确保标签字体不小于正文。图例位置遮挡数据是另一个常见问题——使用bbox_to_anchor将图例外移。颜色区分度不足时使用不同线型作为辅助区分手段。误差棒缺失时，统计图表必须展示标准差或置信区间：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 # 图例外移到图外
 ax.legend(bbox_to_anchor=(1.05, 1), loc=&quot;upper left&quot;, frameon=False)
