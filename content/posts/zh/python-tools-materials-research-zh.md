@@ -237,7 +237,7 @@ conda install -c conda-forge seaborn scikit-learn scikit-image ase pymatgen -y
 - McKinney, W. (2010). Data Structures for Statistical Computing in Python. *Proceedings of the 9th Python in Science Conference*, 56-61. https://doi.org/10.25080/Majora-92bf1922-00a
 
 
-## 八、常见数据处理流程模板
+### 八、常见数据处理流程模板
 
 以下是一个完整的材料力学测试数据处理管道，可直接复制到Jupyter中修改使用：
 
@@ -299,7 +299,7 @@ def process_tensile_test(data_dir, output_dir):
 # df = process_tensile_test("./raw_data/", "./results/")
 ```
 
-## 九、常见错误与调试技巧
+### 九、常见错误与调试技巧
 
 新手在使用Python处理科学数据时，经常遇到以下几类问题。了解这些可以节省大量调试时间。
 
@@ -338,7 +338,7 @@ for chunk in chunks:
     process_chunk(chunk)
 ```
 
-## 十、推荐学习路径
+### 十、推荐学习路径
 
 对于材料科学背景、编程基础薄弱的研究生，建议按照以下顺序逐步深入：
 
@@ -357,7 +357,7 @@ for chunk in chunks:
 - Ong, S.P. et al. (2013). Python Materials Genomics (pymatgen): A robust, open-source Python library for materials analysis. *Computational Materials Science*, 68, 314-319. https://doi.org/10.1016/j.commatsci.2012.10.028
 
 
-## 十一、版本管理与可复现性
+### 十一、版本管理与可复现性
 
 科学计算中最大的隐患之一是环境不一致导致的不可复现问题。你的代码在别人电脑上跑不出同样的结果，通常是因为Python版本或依赖包的版本不同。解决这个问题的最佳实践是使用环境文件锁定所有依赖的精确版本。
 
@@ -376,7 +376,7 @@ conda env create -f environment.yml
 对材料科学研究者来说，可复现性不仅是一个技术问题，更是科学诚信的基石。当你发表论文时，审稿人和读者应该能够基于你提供的数据和代码复现你的分析结果。养成在实验开始时就规划好数据管理和代码版本控制的习惯，会让你的科研工作事半功倍。
 
 
-## 十二、从实验室到发表：一个完整的材料力学分析案例
+### 十二、从实验室到发表：一个完整的材料力学分析案例
 
 为了让以上内容更加具体，下面通过一个完整的例子展示如何用Python完成从原始数据到发表级图表的全过程。假设你测试了三种不同交联处理的丝素蛋白纤维，每种条件下有5个平行样品，原始数据以CSV格式保存在文件夹中。
 
@@ -436,7 +436,7 @@ plt.savefig("modulus_comparison.pdf", dpi=300, bbox_inches="tight")
 
 随着你越来越熟悉Python生态系统，你会发现它不仅是一个工具，更是一种思维方式：用代码描述你的分析逻辑，让计算机去执行重复性工作，而你则可以把精力集中在理解结果的科学意义上。这正是Python在科学研究中最核心的价值所在。
 
-## 十三、总结与展望
+### 十三、总结与展望
 
 本文系统介绍了材料科学和生物研究中常用的Python工具栈。从NumPy的基础数组操作到SciPy的高级曲线拟合，从Pandas的实验数据管理到Matplotlib的发表级图表制作，再到ASE、pymatgen和scikit-image等专业库的应用，这些工具共同构成了一个完整的科学计算生态系统。
 
