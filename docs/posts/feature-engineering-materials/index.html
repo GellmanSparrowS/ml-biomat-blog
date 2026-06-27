@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feature Engineering Materials — ML-Biomat</title>
+<meta name="description" content="Feature Engineering Materials">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/feature-engineering-materials/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Feature Engineering Materials">
+<meta property="og:description" content="Feature Engineering Materials">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/feature-engineering-materials/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Feature Engineering Materials", "description": "", "datePublished": "2025-01-01", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>Feature Engineering Materials</h1>
+<div class="article-meta">
+<span>2025-01-01</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/uncategorized/">uncategorized</a>
+</div>
+</header>
+<div class="content">
+<hr>
+<p>title: "材料科学中的特征工程：从实验记录到机器学习就绪数据"</p>
+<p>date: "2026-06-27"</p>
+<p>category: "machine-learning"</p>
+<p>tags: ["特征工程", "机器学习", "材料科学", "数据预处理"]</p>
+<p>lang: "zh"</p>
+<p>slug: "feature-engineering-materials-zh"</p>
+<p>description: "将实验室实验数据转化为机器学习特征：分类编码、交互特征、缺失值处理和小样本特征选择。"</p>
+
+<p>大多数材料科学的机器学习教程从一个完美的CSV文件开始，直接跳到模型训练。但在真实的实验室环境中，数据分散在实验记录本、仪器导出文件和格式不统一的Excel表格中。特征工程——将原始实验观测转化为结构化数值特征矩阵的过程——占实际机器学习工作量的百分之八十以上，也是决定模型性能的最关键步骤。</p>
+
+<h2>一、从实验台到数据表</h2>
+
+<p>典型的纤维生物材料实验记录包含纤维直径、取向分布、交联密度、处理溶剂类型和测试温度作为特征，杨氏模量作为预测目标。直接将这些信息输入机器学习模型存在明显问题：处理溶剂是文本而非数字、不同特征的数量级差异巨大、缺失值普遍存在、某些特征之间存在物理意义的交互关系。特征工程就是系统性地解决这些问题。</p>
+
+<h2>二、分类变量的数值编码</h2>
+
+<pre><code class="language-python">
+<pre><code class="language-python">
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+df = pd.DataFrame({&quot;diameter_nm&quot;: [45, 52, 48], &quot;solvent&quot;: [&quot;methanol&quot;, &quot;ethanol&quot;, &quot;water&quot;], &quot;modulus_GPa&quot;: [2.8, 1.9, 2.3]})
+encoder = OneHotEncoder(sparse_output=False, drop=&quot;first&quot;)
+encoded = encoder.fit_transform(df[[&quot;solvent&quot;]])
+</code></pre>
+
+<p>OneHot编码为每个类别创建二进制列，drop="first"参数避免完全共线性。对于有序分类变量如处理强度等级，使用OrdinalEncoder保留顺序信息。</p>
+
+<h2>三、物理知识驱动的交互特征</h2>
+
+<p>这是材料科学家区别于纯数据科学家的关键优势：利用物理知识构造有意义的特征。交联密度与纤维直径的乘积反映了交联点对纤维网络刚度的协同贡献。构造交互特征时应基于明确的物理依据，而非盲目进行多项式扩展。</p>
+
+<h2>四、缺失值处理策略</h2>
+
+<p>小样本情况下，简单的均值填充可能引入显著偏差。分组中位数填充利用相似样品的信息更合理。缺失比率超过百分之三十的特征建议直接丢弃。</p>
+
+<h2>五、小样本特征选择</h2>
+
+<p>样品数量少于一百时，自动化特征选择容易过拟合。推荐使用领域知识辅助的手动筛选：首先去除方差接近零的特征，然后计算特征间相关系数去除冗余，最后基于物理合理性手工选择保留的特征集。</p>
+
+<h2>六、完整处理管道</h2>
+
+<p>将编码、交互特征构造、缺失值处理和标准化整合为可复用的管道函数。当新实验数据到达时，只需修改文件路径并重新运行脚本，所有分析自动完成。</p>
+
+<h2>参考文献</h2>
+<ul>
+<li>Kuhn, M. & Johnson, K. (2019). <em>Feature Engineering and Selection</em>. CRC Press.</li>
+<li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
+</ul>
+
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>Comments</h2>
+<script src="https://giscus.app/client.js"
+    data-repo="GellmanSparrowS/ml-biomat-blog"
+    data-repo-id="R_kgDOTEwhsA"
+    data-category="General"
+    data-category-id="DIC_kwDOTEwhsM4CpPbT"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
