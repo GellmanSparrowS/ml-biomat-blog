@@ -50,7 +50,6 @@
 <h3>典型的数据长什么样</h3>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import pandas as pd
 import numpy as np
 
@@ -67,7 +66,6 @@ data = pd.DataFrame({
 
 <h3>关键预处理步骤</h3>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, QuantileTransformer
@@ -97,7 +95,6 @@ X_test_scaled = scaler.transform(X_test)
 <p>纤维材料的力学性能通常有物理意义明确的交互关系：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 def add_domain_features(df):
     &quot;&quot;&quot;加入材料科学领域知识的交互特征&quot;&quot;&quot;
     df = df.copy()
@@ -118,7 +115,6 @@ data_aug = add_domain_features(data)
 
 <p><strong>核心原则：数据少 → 选偏差高的模型，配合强正则化。</strong></p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.gaussian_process import GaussianProcessRegressor
@@ -158,7 +154,6 @@ for name, model in models.items():
 <p>材料科学中，只说"预测模量 2.8 GPa"不够，你需要给出置信区间：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 from sklearn.ensemble import RandomForestRegressor
 
 def predict_with_uncertainty(model, X, n_iterations=100):
@@ -182,7 +177,6 @@ for i in range(len(mean_pred)):
 
 <p>ML 模型不仅要做预测，还要帮助理解物理机制：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 import matplotlib.pyplot as plt
 
