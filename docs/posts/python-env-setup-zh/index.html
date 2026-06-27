@@ -108,7 +108,7 @@ jupyter lab
 
 <p>推荐安装的扩展包括Python和Jupyter用于核心Python支持，Rainbow CSV用于更方便地查看CSV数据文件，GitLens用于Git版本控制。</p>
 
-<h2>七、包管理速查</h2>
+<h3>七、包管理速查</h3>
 
 <p>日常使用中最重要的conda命令：</p>
 
@@ -121,11 +121,11 @@ conda env export &gt; environment.yml  # 导出环境配置
 conda env create -f environment.yml # 从配置重建环境
 </code></pre>
 
-<h2>八、常见问题</h2>
+<h3>八、常见问题</h3>
 
 <p>conda命令不被识别通常是因为安装时没有勾选Add to PATH。重启终端或重新安装可解决。包安装下载慢时使用清华镜像或安装mamba作为更快的替代品。Jupyter找不到内核时使用python -m ipykernel install --user --name matsci注册内核。Windows上DLL加载失败通常是因为缺少Visual C++ Redistributable运行库。</p>
 
-<h2>参考文献</h2>
+<h3>参考文献</h3>
 <ul>
 <li>Conda documentation: https://docs.conda.io</li>
 <li>Jupyter documentation: https://docs.jupyter.org</li>
@@ -133,7 +133,7 @@ conda env create -f environment.yml # 从配置重建环境
 </ul>
 
 
-<h2>九、多环境管理与项目隔离</h2>
+<h3>九、多环境管理与项目隔离</h3>
 
 <p>在实际科研工作中，你可能会同时进行多个项目，它们需要的Python版本或包版本可能不同。Conda的虚拟环境机制让你可以为每个项目创建完全独立的环境。例如你的AFM数据分析项目需要特定版本的科学计算库，而你的机器学习项目需要最新版的scikit-learn和PyTorch。这两个环境之间完全隔离，不会相互干扰。</p>
 
@@ -146,7 +146,7 @@ conda create -n ml_project python=3.11 scikit-learn pytorch -y
 conda activate ml_project  # 切换到机器学习项目环境
 </code></pre>
 
-<h2>十、conda与pip的关系</h2>
+<h3>十、conda与pip的关系</h3>
 
 <p>Conda和pip都是Python包管理工具，但它们的定位不同。Conda管理的是完整的软件包（包括Python本身、C库和Python包），而pip只管理Python包。一般来说，优先使用conda安装包，因为它可以更好地处理非Python依赖。当conda找不到你需要的包时，使用pip作为补充。</p>
 
@@ -154,7 +154,7 @@ conda activate ml_project  # 切换到机器学习项目环境
 
 <p>如果你不确定某个包应该用conda还是pip安装，可以先去conda-forge频道搜索。如果conda-forge有提供，就用conda安装。如果没有或者版本太老，再用pip。这个原则可以帮你避免大部分包管理相关的环境问题。</p>
 
-<h2>十一、学习建议与后续方向</h2>
+<h3>十一、学习建议与后续方向</h3>
 
 <p>环境搭建完成后，建议从最简单的任务开始：打开JupyterLab，创建一个新的Notebook，尝试导入NumPy并创建一个简单的数组。成功运行这段代码意味着你的环境配置正确。然后可以逐步尝试加载你的实验数据文件，从CSV或TXT格式开始。</p>
 
