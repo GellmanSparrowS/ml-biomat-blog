@@ -42,7 +42,6 @@
 <p>本文面向完全没有编程经验或者只有基础Python知识的研究生，提供一份完整的工具箱指南。读完你可以立即在自己的实验数据上应用这些技能。</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import numpy as np
 from scipy import signal, optimize, stats
 import pandas as pd
@@ -55,7 +54,6 @@ import matplotlib.pyplot as plt
 
 <p>创建数组的常用方式：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 # 从Python列表直接创建
 strains = np.array([0.00, 0.01, 0.02, 0.03, 0.05, 0.10])
@@ -75,7 +73,6 @@ displacement = data[:, 2]            # 第三列：位移
 <p>加载AFM力曲线数据是材料实验室最常见的场景之一：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 # Bruker AFM导出文件，前320行为仪器元数据
 raw = np.loadtxt(&quot;force_curve.001&quot;, skiprows=320)
 z_piezo = raw[:, 0]       # 压电陶瓷位移（nm）
@@ -90,7 +87,6 @@ force_nN = k * deflection_nm * 1e-9 * 1e9  # 转换为纳牛（nN）
 
 <p>NumPy的向量化运算让你无需写for循环就能对整个数组进行操作：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 # 逐元素运算
 stress_pa = stresses * 1e6            # MPa转Pa，每个元素自动乘以1e6
@@ -111,7 +107,6 @@ elastic_stresses = stresses[elastic_mask]  # 仅保留弹性区应力值
 <p>线性拟合是提取杨氏模量的标准方法。NumPy的polyfit一行代码解决：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 # 对弹性区数据做线性回归
 coeffs = np.polyfit(strains[elastic_mask], stresses[elastic_mask], 1)
 Youngs_modulus = coeffs[0]  # 斜率即为杨氏模量（GPa或MPa取决于单位）
@@ -126,7 +121,6 @@ print(f&quot;杨氏模量: {Youngs_modulus:.1f} MPa&quot;)
 
 <p>曲线拟合是材料力学分析的核心。SciPy的curve_fit支持任意自定义模型：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 from scipy.optimize import curve_fit
 
@@ -150,7 +144,6 @@ print(f&quot;松弛时间: {tau_fit:.1f} ± {np.sqrt(pcov[1,1]):.1f} s&quot;)
 <p>材料实验中经常需要检测峰值——例如AFM力曲线的粘附峰、XRD图谱的衍射峰：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 from scipy.signal import find_peaks
 
 # 在AFM回退曲线中寻找粘附峰（负力方向）
@@ -165,7 +158,6 @@ if len(peaks) &gt; 0:
 
 <p>当你有多组实验条件、多个重复样本时，Pandas的DataFrame让你的数据管理变得井井有条：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 import pandas as pd
 
@@ -192,7 +184,6 @@ print(summary)
 
 <p>一张好的图抵得上千言万语。Matplotlib让你完全控制每一个细节：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 import matplotlib.pyplot as plt
 
@@ -225,7 +216,6 @@ plt.savefig(&quot;figure1.pdf&quot;, dpi=300, bbox_inches=&quot;tight&quot;)
 <p>当你的研究涉及分子动力学或第一性原理计算时，这两个库不可或缺：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 from ase.io import read
 # 读取LAMMPS数据文件
 atoms = read(&quot;collagen_fibril.data&quot;, format=&quot;lammps-data&quot;)
@@ -239,7 +229,6 @@ supercell.write(&quot;supercell.pdb&quot;)
 
 <p>处理SEM/TEM图像以量化纤维形态：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 from skimage import io, filters, measure, morphology
 
@@ -284,7 +273,6 @@ conda install -c conda-forge seaborn scikit-learn scikit-image ase pymatgen -y
 
 <p>以下是一个完整的材料力学测试数据处理管道，可直接复制到Jupyter中修改使用：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 import numpy as np
 import pandas as pd
@@ -350,14 +338,12 @@ def process_tensile_test(data_dir, output_dir):
 <p>首先是数据加载时的编码和格式问题。不同仪器导出的文件编码各不相同，有些用UTF-8，有些用GBK（中文Windows系统默认）。如果加载时报编码错误，尝试指定<code>encoding</code>参数：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 # 如果UTF-8报错，试试GBK
 data = np.loadtxt(&quot;data.csv&quot;, delimiter=&quot;,&quot;, encoding=&quot;gbk&quot;)
 </code></pre>
 
 <p>其次是数组形状不匹配的问题。NumPy的运算要求参与运算的数组具有兼容的形状。最常见的问题是加载多列数据后，错误地使用了不匹配的数组进行运算：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 # 错误：形状不匹配 (100,) 和 (200,) 无法逐元素相加
 # 正确：在运算前检查数组形状
@@ -366,7 +352,6 @@ print(f&quot;strains shape: {strains.shape}, stresses shape: {stresses.shape}&qu
 
 <p>第三是浮点数精度问题。在比较两个浮点数是否相等时，永远不要使用<code>==</code>，而应该使用<code>np.isclose()</code>或者检查差值是否小于一个很小的阈值：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 # 错误写法：
 if strain_value == 0.02: ...
@@ -377,7 +362,6 @@ if np.abs(strain_value - 0.02) &lt; 1e-6: ...
 
 <p>第四是关于内存管理的提醒。处理大型MD轨迹文件时，一次性加载全部数据可能导致内存溢出。此时应该使用分块读取或者内存映射的方式：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 # 分块读取大文件
 chunks = pd.read_csv(&quot;large_md_data.csv&quot;, chunksize=10000)
@@ -434,7 +418,6 @@ conda env create -f environment.yml
 <p>第一步是数据整合。使用Pandas读取和合并所有数据，添加处理条件标签：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 import pandas as pd
 from pathlib import Path
 
@@ -453,7 +436,6 @@ df_all = pd.concat(all_data, ignore_index=True)
 <p>第二步是批量计算每个样品的力学参数。使用groupby按条件和样品分组，对每组应用计算函数：</p>
 
 <pre><code class="language-python">
-<pre><code class="language-python">
 def extract_properties(group):
     stress = group[&quot;stress_MPa&quot;].values
     strain = group[&quot;strain&quot;].values
@@ -470,7 +452,6 @@ summary = df_all.groupby([&quot;condition&quot;, &quot;sample_id&quot;]).apply(e
 
 <p>第三步是统计分析和可视化。对每种处理条件计算均值和标准差，绘制带误差棒的柱状图：</p>
 
-<pre><code class="language-python">
 <pre><code class="language-python">
 import matplotlib.pyplot as plt
 
