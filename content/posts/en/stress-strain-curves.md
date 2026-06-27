@@ -71,3 +71,15 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 - Callister, W.D. (2018). *Materials Science and Engineering: An Introduction*. Wiley.
 - Meyers, M.A. & Chawla, K.K. (2009). *Mechanical Behavior of Materials*. Cambridge.
 - GitHub: [MechAnalyzer](https://github.com/nickabattista/mech_analyzer) — open-source stress-strain analysis tool.
+
+
+## Advanced Topics in Stress-Strain Analysis
+
+True stress and true strain differ from engineering values at large deformations. Engineering stress uses the original cross-sectional area, while true stress accounts for the instantaneous area reduction during deformation. For strains beyond 10%, the difference becomes significant. Most published data for soft biomaterials report engineering stress unless otherwise specified, so always check the methodology section when comparing literature values.
+
+The strain rate sensitivity of biomaterials reflects their viscoelastic nature. At higher strain rates, the material appears stiffer because polymer chains have less time to relax and reorganize under load. For physiologically meaningful results, test soft tissues and hydrogels at strain rates matching their in vivo loading conditions: approximately 0.01 to 0.1 per second for most connective tissues.
+
+Cyclic loading reveals the Mullins effect in many biomaterials: the stress required to reach a given strain decreases with repeated cycling. This stress softening stabilizes after several cycles and is attributed to the progressive rupture of weaker sacrificial bonds within the network. The stabilized cycle is typically reported as the preconditioned response.
+
+## References
+- Dorfmann, A. & Ogden, R.W. (2004). A constitutive model for the Mullins effect. *International Journal of Solids and Structures*, 41, 1855-1878.
