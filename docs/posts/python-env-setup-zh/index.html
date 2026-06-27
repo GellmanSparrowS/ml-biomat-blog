@@ -52,7 +52,6 @@
 <p>打开Miniconda官方网站下载对应操作系统的安装包。Windows用户下载exe文件，macOS用户下载pkg文件，Linux用户下载sh脚本。运行安装程序时，务必勾选Add Miniconda to PATH选项——这会让系统在任何位置都能识别conda命令。安装完成后打开终端或命令提示符验证：</p>
 
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 conda --version
 </code></pre>
 
@@ -61,14 +60,12 @@ conda --version
 <p>环境是Python包管理的核心概念。每个环境是一个独立的Python生态系统，有自己的Python版本和包集合。这意味着你可以为不同的项目创建隔离的环境，避免包版本冲突：</p>
 
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 conda create -n matsci python=3.10 -y
 conda activate matsci
 </code></pre>
 
 <p>验证环境已激活——终端提示符前面应该显示(matsci)：</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 python --version
 </code></pre>
@@ -78,14 +75,12 @@ python --version
 <p>激活环境后安装最常用的科学计算工具包。conda和conda-forge是两个主要的包来源，conda-forge由社区维护，通常更新更快：</p>
 
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 conda install numpy scipy pandas matplotlib jupyter -y
 conda install -c conda-forge seaborn scikit-learn scikit-image -y
 </code></pre>
 
 <p>对于国内用户，下载速度可能较慢。可以用清华镜像加速：</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config --set show_channel_urls yes
@@ -95,7 +90,6 @@ conda config --set show_channel_urls yes
 
 <p>Jupyter Notebook是科学计算中最流行的交互式编程环境。它允许你在浏览器中编写和运行Python代码，同时可以记录文字说明、显示图表和数学公式。启动方式很简单，在项目文件夹中打开终端，运行：</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 jupyter lab
 </code></pre>
@@ -112,7 +106,6 @@ jupyter lab
 
 <p>日常使用中最重要的conda命令：</p>
 
-<pre><code class="language-bash">
 <pre><code class="language-bash">
 conda list              # 列出当前环境安装的包
 conda install 包名       # 安装新包
@@ -140,7 +133,6 @@ conda env create -f environment.yml # 从配置重建环境
 <p>创建多环境的推荐做法是给每个项目一个描述性的环境名。环境配置文件environment.yml记录了环境的完整信息，可以用于在其他电脑上复现你的分析环境。这对于与导师或合作者分享代码时特别重要——他们可以基于你的环境文件重建完全相同的计算环境，确保代码可以在他们的电脑上运行出相同的结果：</p>
 
 <pre><code class="language-bash">
-<pre><code class="language-bash">
 conda create -n afm_analysis python=3.10 numpy scipy matplotlib -y
 conda create -n ml_project python=3.11 scikit-learn pytorch -y
 conda activate ml_project  # 切换到机器学习项目环境
@@ -161,14 +153,6 @@ conda activate ml_project  # 切换到机器学习项目环境
 <p>如果在任何步骤遇到问题，Stack Overflow和GitHub Issues是极好的求助资源。几乎你在环境配置中遇到的任何问题，都已经有人遇到过并提供了解决方案。用英文搜索错误信息通常能得到更准确的结果。</p>
 
 <p>掌握了本文介绍的环境管理技能后，你已经具备了独立搭建和维护Python科学计算环境的能力。下一步可以深入学习NumPy和Pandas进行数据处理，或者直接开始处理你的实验数据。记住，编程技能是逐步积累的——每次解决一个小问题，你的能力就会提升一点。</p>
-
-<h2>高级环境管理与协作实践</h2>
-
-<p>随着研究项目的深入，你可能会积累多个conda环境。使用conda env list查看所有环境，定期清理不再需要的旧环境以释放磁盘空间。导出环境文件时使用--from-history标志可以只记录你显式安装的包，排除依赖项的具体版本，使环境文件更简洁且更容易在不同平台上复现。</p>
-
-<p>与导师和合作者分享代码时，良好的环境管理是代码能否在对方电脑上运行的关键。除了导出environment.yml之外，还应该在README文件中记录环境创建的完整步骤，包括任何特殊处理——比如某些包需要从特定频道安装、需要设置环境变量、或者需要在特定操作系统上运行。这些看似琐碎的细节往往是合作者遇到问题的根源。</p>
-
-<p>对于需要严格可复现性的重要项目，Docker容器提供了比conda环境更强的隔离和可移植性。虽然学习Docker有一定的初始成本，但一旦掌握，你可以在一个完全封闭的环境中运行计算，确保任何人在任何机器上都能得到相同的结果——这在准备投稿或者响应审稿人要求复现分析时特别有价值。</p>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>
