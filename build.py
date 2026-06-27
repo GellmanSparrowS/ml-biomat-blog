@@ -36,21 +36,20 @@ def inline_md(t):
 
 
 def md_to_html(text):
-    lines = text.split("\n"); out = []; in_code = False; in_list = False; list_tag = ""; i = 0
+    lines = text.split("\n"); out = []; in_code = False; in_mermaid = False; in_list = False; list_tag = ""; i = 0
     while i < len(lines):
         line = lines[i]
         if line.strip().startswith("```"):
             lang = line.strip()[3:].strip() if not in_code else ""
-            if not in_code:
+            if in_mermaid:
+                out.append('</div>'); in_mermaid = False
+            elif not in_code:
                 if lang == "mermaid":
                     out.append('<div class="mermaid">')
                     in_mermaid = True
                 else:
                     out.append(f'<pre><code class="language-{lang}">' if lang else "<pre><code>")
                     in_code = True
-                lang = line.strip()[3:].strip()
-                out.append(f'<pre><code class="language-{lang}">' if lang else "<pre><code>")
-                in_code = True
             else:
                 out.append("</code></pre>"); in_code = False
             i += 1; continue
@@ -103,7 +102,6 @@ def load_posts():
                 try: posted = datetime.strptime(meta.get("date", "2025-01-01"), "%Y-%m-%d")
                 except ValueError: posted = datetime(2025, 1, 1)
                 html_content = md_to_html(body)
-                html_content = html_content.replace(chr(60)+chr(112)+chr(114)+chr(101)+chr(62)+chr(60)+chr(99)+chr(111)+chr(100)+chr(101)+chr(32)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(61)+chr(34)+chr(108)+chr(97)+chr(110)+chr(103)+chr(117)+chr(97)+chr(103)+chr(101)+chr(45)+chr(112)+chr(121)+chr(116)+chr(104)+chr(111)+chr(110)+chr(34)+chr(62)+chr(10)+chr(60)+chr(112)+chr(114)+chr(101)+chr(62)+chr(60)+chr(99)+chr(111)+chr(100)+chr(101)+chr(32)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(61)+chr(34)+chr(108)+chr(97)+chr(110)+chr(103)+chr(117)+chr(97)+chr(103)+chr(101)+chr(45)+chr(112)+chr(121)+chr(116)+chr(104)+chr(111)+chr(110)+chr(34)+chr(62), chr(60)+chr(112)+chr(114)+chr(101)+chr(62)+chr(60)+chr(99)+chr(111)+chr(100)+chr(101)+chr(32)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(61)+chr(34)+chr(108)+chr(97)+chr(110)+chr(103)+chr(117)+chr(97)+chr(103)+chr(101)+chr(45)+chr(112)+chr(121)+chr(116)+chr(104)+chr(111)+chr(110)+chr(34)+chr(62))
                 wc = len(body.split()); read_min = max(1, wc // 200)
                 posts.append({
                     "title": meta.get("title", slug.replace("-", " ").title()),
@@ -424,7 +422,11 @@ def build():
         '<?xml version="1.0"?>\n<users>\n\t<user>CBF04BCC82F5CD300324A057BE99494C</user>\n</users>',
         encoding="utf-8"
     )
-    print(f"\nBuild complete: {BUILD_DIR}/")
+    # --- Baidu verification ---
+    (Path(BUILD_DIR) / 'baidu_verify_codeva-PBR3uMEnYw.html').write_text(
+        'baidu-site-verification: codeva-PBR3uMEnYw',
+        encoding='utf-8'
+    )
     print(f"  {len(posts)} posts, {len(en)} EN + {len(zh)} ZH")
     print(f"  Pages generated: posts/{len(posts)}, en, zh, about, categories, rss, sitemap")
 
