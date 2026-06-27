@@ -103,6 +103,7 @@ def load_posts():
                 try: posted = datetime.strptime(meta.get("date", "2025-01-01"), "%Y-%m-%d")
                 except ValueError: posted = datetime(2025, 1, 1)
                 html_content = md_to_html(body)
+                html_content = html_content.replace(chr(60)+chr(112)+chr(114)+chr(101)+chr(62)+chr(60)+chr(99)+chr(111)+chr(100)+chr(101)+chr(32)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(61)+chr(34)+chr(108)+chr(97)+chr(110)+chr(103)+chr(117)+chr(97)+chr(103)+chr(101)+chr(45)+chr(112)+chr(121)+chr(116)+chr(104)+chr(111)+chr(110)+chr(34)+chr(62)+chr(10)+chr(60)+chr(112)+chr(114)+chr(101)+chr(62)+chr(60)+chr(99)+chr(111)+chr(100)+chr(101)+chr(32)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(61)+chr(34)+chr(108)+chr(97)+chr(110)+chr(103)+chr(117)+chr(97)+chr(103)+chr(101)+chr(45)+chr(112)+chr(121)+chr(116)+chr(104)+chr(111)+chr(110)+chr(34)+chr(62), chr(60)+chr(112)+chr(114)+chr(101)+chr(62)+chr(60)+chr(99)+chr(111)+chr(100)+chr(101)+chr(32)+chr(99)+chr(108)+chr(97)+chr(115)+chr(115)+chr(61)+chr(34)+chr(108)+chr(97)+chr(110)+chr(103)+chr(117)+chr(97)+chr(103)+chr(101)+chr(45)+chr(112)+chr(121)+chr(116)+chr(104)+chr(111)+chr(110)+chr(34)+chr(62))
                 wc = len(body.split()); read_min = max(1, wc // 200)
                 posts.append({
                     "title": meta.get("title", slug.replace("-", " ").title()),
