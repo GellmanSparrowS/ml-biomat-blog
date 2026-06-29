@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GROMACS Molecular Dynamics Tutorial: From Structure Preparation to Trajectory Analysis — ML-Biomat</title>
+<meta name="description" content="A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/gromacs-md-tutorial/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="GROMACS Molecular Dynamics Tutorial: From Structure Preparation to Trajectory Analysis">
+<meta property="og:description" content="A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/gromacs-md-tutorial/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS Molecular Dynamics Tutorial: From Structure Preparation to Trajectory Analysis", "description": "A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.", "datePublished": "2026-06-29", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>GROMACS Molecular Dynamics Tutorial: From Structure Preparation to Trajectory Analysis</h1>
+<div class="article-meta">
+<span>2026-06-29</span><span>·</span><span>8 min read</span><span>·</span><a href="/categories/multiscale-modeling/">Multiscale Modeling</a>
+</div>
+</header>
+<div class="content">
+<p>Biomaterials research increasingly relies on molecular dynamics (MD) simulation to understand the atomic-scale behavior of proteins, fibers, and polysaccharides. Among the many MD packages available, GROMACS (GROningen MAchine for Chemical Simulations) stands out for its open-source nature, exceptional computational efficiency, and active community. This tutorial walks through a complete GROMACS MD workflow using hen egg-white lysozyme (PDB: 1AKI) as a concrete example.</p>
+
+<h2>Why GROMACS</h2>
+
+<p>GROMACS offers several key advantages over other MD engines:</p>
+
+<ul>
+<li><strong>Extreme computational efficiency</strong>: Highly optimized CPU and GPU kernels deliver 2-5x speedup over comparable packages on a single GPU</li>
+<li><strong>Open source and free</strong>: GPL-licensed, freely usable in both academic and industrial settings</li>
+<li><strong>Complete workflow toolkit</strong>: Built-in commands for topology construction, solvation, ion addition, energy minimization, equilibration, and production MD</li>
+<li><strong>Rich analysis suite</strong>: Built-in modules for RMSD, RMSF, radius of gyration, hydrogen bonds, SASA, and dozens more</li>
+<li><strong>Active community</strong>: Excellent documentation and Justin Lemkul's classic tutorials (http://www.mdtutorials.com/gmx/) provide outstanding learning resources</li>
+</ul>
+
+<p>For biomaterials researchers, GROMACS enables simulation of silk fibroin beta-sheet transitions, collagen mechanical stretching, cellulose solvent effects, and protein-ligand interactions.</p>
+
+<h2>Installation</h2>
+
+<p>GROMACS supports Linux, macOS, and Windows (via WSL). The recommended installation uses conda:</p>
+
+<pre><code class="language-bash">
+conda create -n gromacs -c conda-forge -c bioconda gromacs
+conda activate gromacs
+gmx --version
+</code></pre>
+
+<p>For GPU-accelerated installations (NVIDIA):</p>
+
+<pre><code class="language-bash">
+conda install -c conda-forge -c bioconda gromacs=&quot;2024.*=*cuda*&quot;
+</code></pre>
+
+<p>Verify your installation with <code>gmx --version</code>, which reports the version number and GPU support status.</p>
+
+<h2>MD Simulation Workflow</h2>
+
+<p>A complete MD simulation proceeds through the following stages:</p>
+
+<table><tr><th>Step</th><th>Command</th><th>Purpose</th><th>Typical Time</th></tr><tr><td>------</td><td>---------</td><td>---------</td><td>-------------</td></tr><tr><td>1. Structure</td><td>wget PDB</td><td>Acquire initial coordinates</td><td>manual</td></tr><tr><td>2. Topology</td><td>gmx pdb2gmx</td><td>Generate topology and force field</td><td>< 1 s</td></tr><tr><td>3. Box</td><td>gmx editconf</td><td>Define simulation box</td><td>< 1 s</td></tr><tr><td>4. Solvate</td><td>gmx solvate</td><td>Fill with water molecules</td><td>seconds</td></tr><tr><td>5. Ions</td><td>gmx genion</td><td>Neutralize system charge</td><td>seconds</td></tr><tr><td>6. EM</td><td>gmx grompp + mdrun</td><td>Eliminate atomic clashes</td><td>minutes</td></tr><tr><td>7. NVT</td><td>gmx grompp + mdrun</td><td>Stabilize temperature</td><td>hours</td></tr><tr><td>8. NPT</td><td>gmx grompp + mdrun</td><td>Stabilize pressure/density</td><td>hours</td></tr><tr><td>9. Production</td><td>gmx grompp + mdrun</td><td>Collect trajectory data</td><td>hours-days</td></tr><tr><td>10. Analysis</td><td>gmx rms/rmsf/...</td><td>Extract observables</td><td>minutes</td></tr></table>
+
+<h2>Worked Example: Lysozyme in Water</h2>
+
+<h3>Step 1: Acquire the Structure</h3>
+
+<p>Download the lysozyme structure from the Protein Data Bank (https://www.rcsb.org/):</p>
+
+<pre><code class="language-bash">
+wget https://files.rcsb.org/download/1AKI.pdb
+grep -v HOH 1AKI.pdb &gt; protein.pdb
+</code></pre>
+
+<h3>Step 2: Generate Topology</h3>
+
+<p><code>pdb2gmx</code> converts the PDB file into a topology with force field parameters. We use the well-validated AMBER99SB-ILDN force field:</p>
+
+<pre><code class="language-bash">
+gmx pdb2gmx -f protein.pdb -o processed.gro -water spc -ff amber99sb-ildn -ignh
+</code></pre>
+
+<p>This produces three files: <code>processed.gro</code> (coordinates), <code>topol.top</code> (topology), and <code>posre.itp</code> (position restraints).</p>
+
+<h3>Step 3: Define the Simulation Box</h3>
+
+<pre><code class="language-bash">
+gmx editconf -f processed.gro -o box.gro -c -d 1.0 -bt cubic
+</code></pre>
+
+<p>The <code>-d 1.0</code> flag places the protein at least 1.0 nm from the box edges, preventing self-interaction under periodic boundary conditions.</p>
+
+<h3>Step 4: Solvate the System</h3>
+
+<p>Fill the box with SPC water molecules:</p>
+
+<pre><code class="language-bash">
+gmx solvate -cp box.gro -cs spc216.gro -o solv.gro -p topol.top
+</code></pre>
+
+<h3>Step 5: Add Counter-Ions</h3>
+
+<p>Neutralize the system charge. Create a minimal <code>ions.mdp</code> file:</p>
+
+<pre><code>
+; ions.mdp
+integrator = steep
+nsteps = 0
+</code></pre>
+
+<pre><code class="language-bash">
+gmx grompp -f ions.mdp -c solv.gro -p topol.top -o ions.tpr
+gmx genion -s ions.tpr -o neutral.gro -p topol.top -pname NA -nname CL -neutral
+</code></pre>
+
+<p>Use <code>-conc 0.15</code> to simulate physiological (150 mM) NaCl conditions.</p>
+
+<h3>Step 6: Energy Minimization (EM)</h3>
+
+<p>Create the EM parameter file <code>em.mdp</code>:</p>
+
+<pre><code>
+; em.mdp
+integrator      = steep
+emtol           = 1000.0
+emstep          = 0.01
+nsteps          = 50000
+cutoff-scheme   = Verlet
+coulombtype     = PME
+rcoulomb        = 1.0
+rvdw            = 1.0
+pbc             = xyz
+</code></pre>
+
+<p>Run EM:</p>
+
+<pre><code class="language-bash">
+gmx grompp -f em.mdp -c neutral.gro -p topol.top -o em.tpr
+gmx mdrun -v -deffnm em
+</code></pre>
+
+<p>Check convergence: <code>gmx energy -f em.edr -o potential.xvg</code></p>
+
+<h3>Step 7: NVT Equilibration</h3>
+
+<p>Create <code>nvt.mdp</code> with the V-rescale thermostat at 300 K:</p>
+
+<pre><code>
+; nvt.mdp
+integrator      = md
+dt              = 0.002
+nsteps          = 50000
+nstxout-compressed = 1000
+tcoupl          = V-rescale
+tc-grps         = Protein Non-Protein
+tau_t           = 0.1 0.1
+ref_t           = 300 300
+pcoupl          = no
+cutoff-scheme   = Verlet
+coulombtype     = PME
+rcoulomb        = 1.0
+rvdw            = 1.0
+constraints     = h-bonds
+</code></pre>
+
+<pre><code class="language-bash">
+gmx grompp -f nvt.mdp -c em.gro -r em.gro -p topol.top -o nvt.tpr
+gmx mdrun -v -deffnm nvt
+</code></pre>
+
+<h3>Step 8: NPT Equilibration</h3>
+
+<p>Add pressure coupling with the Parrinello-Rahman barostat. Create <code>npt.mdp</code>:</p>
+
+<pre><code>
+; npt.mdp
+integrator      = md
+dt              = 0.002
+nsteps          = 50000
+tcoupl          = V-rescale
+tc-grps         = Protein Non-Protein
+tau_t           = 0.1 0.1
+ref_t           = 300 300
+pcoupl          = Parrinello-Rahman
+pcoupltype      = isotropic
+tau_p           = 2.0
+ref_p           = 1.0
+compressibility = 4.5e-5
+continuation    = yes
+</code></pre>
+
+<pre><code class="language-bash">
+gmx grompp -f npt.mdp -c nvt.gro -t nvt.cpt -r nvt.gro -p topol.top -o npt.tpr
+gmx mdrun -v -deffnm npt
+</code></pre>
+
+<p>Verify density converges to ~1000 kg/m^3: <code>gmx energy -f npt.edr -o density.xvg</code></p>
+
+<h3>Step 9: Production MD</h3>
+
+<p>Create <code>md.mdp</code> with position restraints removed:</p>
+
+<pre><code>
+integrator      = md
+dt              = 0.002
+nsteps          = 5000000
+nstxout-compressed = 5000
+tcoupl          = V-rescale
+tc-grps         = Protein Non-Protein
+tau_t           = 0.1 0.1
+ref_t           = 300 300
+pcoupl          = Parrinello-Rahman
+pcoupltype      = isotropic
+tau_p           = 2.0
+ref_p           = 1.0
+compressibility = 4.5e-5
+continuation    = yes
+</code></pre>
+
+<pre><code class="language-bash">
+gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md.tpr
+gmx mdrun -v -deffnm md -nb gpu
+</code></pre>
+
+<p>The <code>-nb gpu</code> flag offloads non-bonded calculations to the GPU, delivering 5-10x speedup on modern hardware.</p>
+
+<h2>Trajectory Analysis</h2>
+
+<h3>RMSD</h3>
+
+<p>RMSD measures overall conformational deviation from a reference structure. For globular proteins, RMSD typically stabilizes around 0.1-0.3 nm.</p>
+
+<pre><code class="language-bash">
+gmx rms -s md.tpr -f md.xtc -o rmsd.xvg -tu ns
+# Select backbone (group 4) for fitting and calculation
+</code></pre>
+
+<h3>RMSF</h3>
+
+<p>RMSF reveals per-residue flexibility. High RMSF regions correspond to flexible loops; low RMSF regions indicate stable secondary structure elements.</p>
+
+<pre><code class="language-bash">
+gmx rmsf -s md.tpr -f md.xtc -o rmsf.xvg -res
+# Select backbone (group 4)
+</code></pre>
+
+<h3>Radius of Gyration (Rg)</h3>
+
+<p>Rg describes overall protein compactness and serves as a reliable folding-state indicator.</p>
+
+<pre><code class="language-bash">
+gmx gyrate -s md.tpr -f md.xtc -o gyrate.xvg
+</code></pre>
+
+<h3>Hydrogen Bond Analysis</h3>
+
+<p>Hydrogen bonds maintain protein secondary structure. GROMACS can quantify both intra-protein and protein-solvent H-bonds.</p>
+
+<pre><code class="language-bash">
+# Intra-protein H-bonds
+gmx hbond -s md.tpr -f md.xtc -num hbond_num.xvg
+
+# All H-bonds (including protein-water)
+gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
+</code></pre>
+
+<h3>Python Analysis Code</h3>
+
+<p>Below is a self-contained Python script for visualizing key trajectory observables:</p>
+
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+# RMSD analysis
+data = np.loadtxt(&#x27;rmsd.xvg&#x27;, comments=(&#x27;#&#x27;, &#x27;@&#x27;))
+time_ns = data[:, 0] / 1000
+rmsd_nm = data[:, 1]
+print(f&quot;Equilibrated RMSD: {np.mean(rmsd_nm[1000:]):.4f} +/- {np.std(rmsd_nm[1000:]):.4f} nm&quot;)
+
+# Radius of gyration
+data_rg = np.loadtxt(&#x27;gyrate.xvg&#x27;, comments=(&#x27;#&#x27;, &#x27;@&#x27;))
+rg = data_rg[:, 1]
+print(f&quot;Mean Rg: {np.mean(rg[1000:]):.4f} nm, Stability: {np.std(rg[1000:]):.4f} nm&quot;)
+
+# Hydrogen bonds
+data_hb = np.loadtxt(&#x27;hbond_num.xvg&#x27;, comments=(&#x27;#&#x27;, &#x27;@&#x27;))
+hbonds = data_hb[:, 1]
+print(f&quot;Average intra-protein H-bonds: {np.mean(hbonds[1000:]):.1f}&quot;)
+
+# Multi-panel plot
+fig, axes = plt.subplots(1, 3, figsize=(14, 4))
+axes[0].plot(time_ns, rmsd_nm)
+axes[0].set_xlabel(&#x27;Time (ns)&#x27;); axes[0].set_ylabel(&#x27;RMSD (nm)&#x27;)
+axes[1].plot(time_ns[:len(rg)], rg)
+axes[1].set_xlabel(&#x27;Time (ns)&#x27;); axes[1].set_ylabel(&#x27;Rg (nm)&#x27;)
+axes[2].plot(time_ns[:len(hbonds)], hbonds)
+axes[2].set_xlabel(&#x27;Time (ns)&#x27;); axes[2].set_ylabel(&#x27;H-bonds&#x27;)
+plt.tight_layout()
+plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
+</code></pre>
+
+<h2>Performance Optimization</h2>
+
+<ol>
+<li><strong>GPU acceleration</strong>: Use <code>-nb gpu -pme gpu</code> to offload both non-bonded and PME calculations to GPU</li>
+<li><strong>Periodic boundary conditions</strong>: For non-globular systems (fibers, membranes), use a rhombic dodecahedron box (<code>-bt dodecahedron</code>) which saves ~30% of water molecules compared to cubic</li>
+<li><strong>Time step</strong>: With H-bond constraints (LINCS), safely increase the time step from 1 fs to 2 fs, or 4-5 fs with virtual sites</li>
+<li><strong>Force field selection</strong>: AMBER99SB-ILDN or CHARMM36m for proteins, OL15 for nucleic acids</li>
+<li><strong>PME grid spacing</strong>: Recommended 0.12-0.16 nm; box dimensions should be powers of 2 for efficient FFT</li>
+</ol>
+
+<h2>Common Issues and Troubleshooting</h2>
+
+<p><strong>Simulation crashes immediately?</strong></p>
+<ol>
+<li>Verify EM convergence: Fmax should be below 1000 kJ/(mol*nm)</li>
+<li>Reduce time step to 1 fs if crashes persist</li>
+<li>Check PBC settings: ensure <code>-d</code> is large enough</li>
+<li>Confirm force field compatibility with your system</li>
+</ol>
+
+<p><strong>NPT density unstable?</strong></p>
+<ul>
+<li>Ensure <code>tau_p</code> is in the 1-5 ps range</li>
+<li>Verify <code>compressibility</code> matches your solvent (water: 4.5e-5 bar^-1)</li>
+<li>Consider pre-equilibrating with the Berendsen barostat before switching to Parrinello-Rahman</li>
+</ul>
+
+<h2>GROMACS in Multiscale Biomaterials Research</h2>
+
+<p>GROMACS occupies a pivotal position in multiscale modeling:</p>
+
+<ul>
+<li><strong>Upward</strong>: Mechanical parameters extracted from MD trajectories (elastic moduli, bond strengths, contact maps) feed coarse-grained models (Martini) and finite element analysis (Abaqus, FEniCS)</li>
+<li><strong>Downward</strong>: QM calculations (Gaussian, ORCA) provide electrostatic potentials for force field parameterization</li>
+<li><strong>ML integration</strong>: MD trajectories serve as training data for machine-learned force fields (ANI, NequIP, MACE)</li>
+</ul>
+
+<p>For fiber biomaterials, GROMACS can simulate silk fibroin conformational transitions, collagen mechanics under tension, and cellulose-solvent interactions. The basic workflow demonstrated here is the first step toward these more specialized applications.</p>
+
+<h2>Summary</h2>
+
+<p>This tutorial demonstrated a complete GROMACS molecular dynamics workflow using lysozyme as an example: structure acquisition, topology generation, solvation, ion addition, energy minimization, NVT/NPT equilibration, production MD, and trajectory analysis (RMSD, RMSF, Rg, H-bonds). This pipeline applies to most soluble proteins and many biopolymer systems. For fiber biomaterials such as silk, collagen, and cellulose, special attention to periodic boundary conditions and force field selection is required, topics to be covered in subsequent articles.</p>
+
+<h2>References</h2>
+
+<ol>
+<li>Abraham, M.J., Murtola, T., Schulz, R., Pall, S., Smith, J.C., Hess, B., & Lindahl, E. (2015). GROMACS: High performance molecular simulations through multi-level parallelism from laptops to supercomputers. <em>SoftwareX</em>, 1-2, 19-25.</li>
+<li>Van Der Spoel, D., Lindahl, E., Hess, B., Groenhof, G., Mark, A.E., & Berendsen, H.J.C. (2005). GROMACS: Fast, flexible, and free. <em>Journal of Computational Chemistry</em>, 26(16), 1701-1718.</li>
+<li>Lemkul, J.A. (2018). GROMACS Tutorial: Lysozyme in Water. http://www.mdtutorials.com/gmx/lysozyme/index.html</li>
+<li>GROMACS Development Team. (2024). GROMACS Reference Manual. https://manual.gromacs.org/</li>
+<li>Lindorff-Larsen, K., Piana, S., Palmo, K., Maragakis, P., Klepeis, J.L., Dror, R.O., & Shaw, D.E. (2010). Improved side-chain torsion potentials for the Amber ff99SB protein force field. <em>Proteins</em>, 78(8), 1950-1958.</li>
+<li>Berman, H.M., Westbrook, J., Feng, Z., Gilliland, G., Bhat, T.N., Weissig, H., Shindyalov, I.N., & Bourne, P.E. (2000). The Protein Data Bank. <em>Nucleic Acids Research</em>, 28(1), 235-242.</li>
+</ol>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>Comments</h2>
+<script src="https://giscus.app/client.js"
+    data-repo="GellmanSparrowS/ml-biomat-blog"
+    data-repo-id="R_kgDOTEwhsA"
+    data-category="General"
+    data-category-id="DIC_kwDOTEwhsM4CpPbT"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
