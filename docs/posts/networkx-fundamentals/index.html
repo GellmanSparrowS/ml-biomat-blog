@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python — ML-Biomat</title>
+<meta name="description" content="A complete hands-on introduction to NetworkX: from graph theory fundamentals to network construction, analysis metrics, and visualization.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/networkx-fundamentals/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python">
+<meta property="og:description" content="A complete hands-on introduction to NetworkX: from graph theory fundamentals to network construction, analysis metrics, and visualization.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/networkx-fundamentals/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python", "description": "A complete hands-on introduction to NetworkX: from graph theory fundamentals to network construction, analysis metrics, and visualization.", "datePublished": "2026-06-30", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals/"}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python</h1>
+<div class="article-meta">
+<span>2026-06-30</span><span>·</span><span>19 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+</div>
+</header>
+<div class="content">
+<h2>1. Why NetworkX — From Intuition to Tool</h2>
+
+<p>Before understanding NetworkX, take a step back and consider "relationships" themselves. In your proteome, one protein activates another; a bone trabecula transmits stress to another through a contact point; a neuron fires downstream; a city's roads connect it to neighboring cities. All of these phenomena share the same formal structure: a set of <strong>entities</strong> and <strong>connections</strong> between them. Mathematics abstracts this as a graph, \(G = (V, E)\), consisting of a vertex set \(V\) and an edge set \(E\).</p>
+
+<p>Graph theory is not young. Euler solved the Königsberg bridge problem in 1736 using equivalent ideas. What truly made graphs a daily research tool was the simultaneous arrival of cheap computing power and abundant data. When analyzing thousands of proteins in a protein–protein interaction (PPI) network, hundreds of thousands of synapses in a connectome, or tens of thousands of beam elements in a metamaterial lattice, pencil and paper become useless. We need a library that can read data, compute centrality automatically, find shortest paths, detect community structure, and visualize results on demand.</p>
+
+<p>NetworkX was built for exactly this purpose. It is a pure-Python open-source library first developed in 2002 by Aric Hagberg, Daniel Schult, and Pieter Swart, publicly debuted at SciPy 2004, and originally motivated in part by modeling disease propagation strategies across social, biological, and infrastructure networks. Today, NetworkX (current stable version: 3.6.1) has become the de facto standard for network analysis in the Python ecosystem. It covers graph creation and manipulation, dozens of classical algorithms, several graph model generators, and visualization interfaces to Matplotlib and GraphViz.</p>
+
+<p>Understanding NetworkX's core value is not just about which functions it provides, but about its design philosophy: <strong>treating graphs as first-class computational objects</strong>. Nodes can be any hashable Python object—strings, integers, tuples, or even another graph. Edges can carry arbitrary attribute dictionaries. This means you never need to encode biological entities as integers before analysis; you can use protein names directly as nodes and experimental confidence scores as edge weights, so that the code reads almost one-to-one with your scientific intent.</p>
+
+<p>Installation is trivial:</p>
+
+<pre><code class="language-bash">
+pip install networkx
+pip install matplotlib   # for visualization support
+</code></pre>
+
+<p>The conventional import alias is:</p>
+
+<pre><code class="language-python">
+import networkx as nx
+import matplotlib.pyplot as plt
+</code></pre>
+
+<hr>
+
+<h2>2. Four Graph Types — Which Structure Fits Your Problem?</h2>
+
+<p>The first step when facing a real problem is deciding which type of graph best models it. NetworkX provides four core classes, and the choice directly affects the behavior of every subsequent algorithm.</p>
+
+<p><code>Graph</code> is the most basic <strong>undirected graph</strong>: edges have no direction, \((u, v)\) and \((v, u)\) represent the same edge, and at most one edge exists between any pair of nodes. Use cases include protein interaction networks (interactions are symmetric), undirected skeletal networks, and friendship graphs. <code>DiGraph</code> is a <strong>directed graph</strong>: edges have direction, \((u, v)\) differs from \((v, u)\). Use cases include gene regulatory networks (A activating B does not imply B activating A), hyperlink graphs, and directed stress propagation paths. <code>MultiGraph</code> allows <strong>multiple undirected edges</strong> between the same pair of nodes—useful when different types of relationships coexist for the same node pair. <code>MultiDiGraph</code> combines directed edges with multiple-edge support.</p>
+
+<table><tr><th>Class</th><th>Directed</th><th>Parallel Edges</th><th>Typical Use</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td><code>Graph</code></td><td>No</td><td>No</td><td>PPI networks, undirected lattices</td></tr><tr><td><code>DiGraph</code></td><td>Yes</td><td>No</td><td>Gene regulatory, citation networks</td></tr><tr><td><code>MultiGraph</code></td><td>No</td><td>Yes</td><td>Multi-modal transportation</td></tr><tr><td><code>MultiDiGraph</code></td><td>Yes</td><td>Yes</td><td>Directed multi-relational networks</td></tr></table>
+
+<p>All four classes share nearly identical APIs, so switching between them carries minimal cost. When uncertain, start with <code>Graph</code> or <code>DiGraph</code> and migrate to multi-edge versions if needed.</p>
+
+<hr>
+
+<h2>3. Building Graphs — Nodes, Edges, and Attributes</h2>
+
+<p>Once you have chosen a graph type, the next step is loading data into the graph object. NetworkX's add/remove API is highly Pythonic, allowing you to build graphs from many sources: one-by-one additions, batch imports, or conversion from dictionaries and matrices.</p>
+
+<p>The most direct method is building from an empty graph. <code>G.add_node(n)</code> adds a single node; <code>G.add_nodes_from(iterable)</code> adds many at once. Nodes can carry attribute dictionaries at declaration time, stored in <code>G.nodes[n]</code> and accessible at any time.</p>
+
+<pre><code class="language-python">
+import networkx as nx
+
+G = nx.Graph()
+
+# Add single nodes with attributes
+G.add_node(&quot;ProteinA&quot;, type=&quot;kinase&quot;, molecular_weight=52.3)
+G.add_node(&quot;ProteinB&quot;, type=&quot;receptor&quot;)
+
+# Batch add nodes
+proteins = [(&quot;ProteinC&quot;, {&quot;type&quot;: &quot;enzyme&quot;}), (&quot;ProteinD&quot;, {&quot;type&quot;: &quot;transcription_factor&quot;})]
+G.add_nodes_from(proteins)
+</code></pre>
+
+<p>Adding edges is equally direct. <code>G.add_edge(u, v)</code> adds an edge (auto-creating u and v if they don't exist); <code>G.add_edges_from(ebunch)</code> accepts any iterable of edge tuples. Edges can carry attributes, with <code>weight</code> being the most common:</p>
+
+<pre><code class="language-python">
+# Add edges with attributes
+G.add_edge(&quot;ProteinA&quot;, &quot;ProteinB&quot;, weight=0.95, interaction_type=&quot;phosphorylation&quot;)
+G.add_edge(&quot;ProteinB&quot;, &quot;ProteinC&quot;, weight=0.72, interaction_type=&quot;binding&quot;)
+
+# Batch add weighted edges
+G.add_weighted_edges_from([
+    (&quot;ProteinC&quot;, &quot;ProteinD&quot;, 0.88),
+    (&quot;ProteinA&quot;, &quot;ProteinD&quot;, 0.61),
+])
+</code></pre>
+
+<p>At the data structure level, NetworkX implements its adjacency list as a "dict-of-dicts": the outer dictionary maps nodes to their neighbor dictionaries; inner dictionaries map neighboring nodes to edge attribute dictionaries. This structure makes node and neighbor lookup, addition, and deletion all close to O(1)—highly efficient for sparse graphs, which real networks almost always are.</p>
+
+<p>Accessing basic properties:</p>
+
+<pre><code class="language-python">
+print(G.number_of_nodes())
+print(G.number_of_edges())
+print(G.adj[&quot;ProteinA&quot;])           # adjacency dict
+print(G[&quot;ProteinA&quot;][&quot;ProteinB&quot;][&quot;weight&quot;])  # 0.95
+
+# G.nodes and G.edges return live Views, not copies
+for neighbor in G.neighbors(&quot;ProteinA&quot;):
+    print(neighbor)
+</code></pre>
+
+<p>Note that <code>G.nodes</code> and <code>G.edges</code> return <strong>Views</strong> that synchronize with the underlying data structure in real time. If you need to modify the graph while iterating, convert to a list first (<code>list(G.edges())</code>), to avoid runtime errors.</p>
+
+<p>NetworkX also supports conversion from adjacency matrices, edge-list DataFrames, and adjacency dictionaries:</p>
+
+<pre><code class="language-python">
+import numpy as np
+
+A = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+H = nx.from_numpy_array(A)
+
+adj_dict = {&quot;a&quot;: [&quot;b&quot;, &quot;c&quot;], &quot;b&quot;: [&quot;a&quot;], &quot;c&quot;: [&quot;a&quot;]}
+K = nx.from_dict_of_lists(adj_dict)
+</code></pre>
+
+<hr>
+
+<h2>4. Degree, Path Length, and Clustering — Three Keys to Reading a Network</h2>
+
+<p>Once a graph is built, the first questions researchers typically ask are: which nodes are "important"? How far does information need to travel from A to B? Does this system tend to form tight cliques or remain open? These three questions correspond to three foundational network metrics: <strong>degree</strong>, <strong>shortest path</strong>, and <strong>clustering coefficient</strong>. Mastering these three is equivalent to learning the basic grammar for reading any network.</p>
+
+<p><strong>Degree</strong> is the most intuitive node property: how many edges does a node have? For undirected graphs, <code>G.degree(node)</code> returns the neighbor count directly. For directed graphs, in-degree and out-degree carry distinct meanings—in a gene regulatory network, a high-in-degree node is a hub regulated by many genes, while a high-out-degree node is a master regulator controlling many others.</p>
+
+<pre><code class="language-python">
+G_directed = nx.DiGraph()
+G_directed.add_edges_from([(1, 2), (1, 3), (2, 3), (3, 4)])
+print(dict(G_directed.in_degree()))   # {1: 0, 2: 1, 3: 2, 4: 1}
+print(dict(G_directed.out_degree()))  # {1: 2, 2: 1, 3: 1, 4: 0}
+</code></pre>
+
+<p>The <strong>degree distribution</strong>—the fraction of nodes with degree k—provides a statistical fingerprint of the network. Random networks follow a Poisson distribution; real PPI, social, and web networks follow a power law, indicating scale-free structure with a few massive hubs.</p>
+
+<p><strong>Shortest path</strong> describes the "distance" between nodes. Of all possible routes, the shortest path minimizes hop count (unweighted) or total weight (weighted):</p>
+
+<pre><code class="language-python">
+G = nx.Graph()
+G.add_weighted_edges_from([(&quot;A&quot;,&quot;B&quot;,4), (&quot;B&quot;,&quot;D&quot;,2), (&quot;A&quot;,&quot;C&quot;,3), (&quot;C&quot;,&quot;D&quot;,4)])
+
+print(nx.shortest_path(G, &quot;A&quot;, &quot;D&quot;))                       # [&#x27;A&#x27;, &#x27;B&#x27;, &#x27;D&#x27;]
+print(nx.shortest_path(G, &quot;A&quot;, &quot;D&quot;, weight=&quot;weight&quot;))      # [&#x27;A&#x27;, &#x27;B&#x27;, &#x27;D&#x27;] (total weight=6)
+print(nx.average_shortest_path_length(G))
+</code></pre>
+
+<p><strong>Clustering coefficient</strong> answers: how tightly connected are a node's neighbors to each other? If all your friends know each other, your clustering coefficient is 1; if none of them do, it is 0. Mathematically, the local clustering coefficient of node \(i\) is:</p>
+
+<p>$$C(i) = \frac{2e_i}{k_i(k_i-1)}$$</p>
+
+<p>where \(k_i\) is node i's degree and \(e_i\) is the number of edges that actually exist among its neighbors.</p>
+
+<pre><code class="language-python">
+G = nx.karate_club_graph()  # Zachary&#x27;s karate club — classic benchmark
+
+local_cc  = nx.clustering(G)
+avg_cc    = nx.average_clustering(G)
+trans     = nx.transitivity(G)
+
+print(f&quot;Average clustering: {avg_cc:.4f}&quot;)
+print(f&quot;Transitivity (global clustering): {trans:.4f}&quot;)
+</code></pre>
+
+<p>Together, these three metrics give a coarse portrait of any network. High average degree + low average path length + high clustering typically indicates an efficient, robust small-world network. Extremely heterogeneous degree with very short average paths suggests scale-free structure. These signatures are directly meaningful in biology (functional modularity), materials (load redistribution capacity), and infrastructure (vulnerability to targeted failure).</p>
+
+<hr>
+
+<h2>5. Centrality — Who Matters Most in a Network?</h2>
+
+<p>Centrality is the richest—and most easily misused—family of concepts in network analysis. The central question is: what does "important" mean? Different answers give rise to different metrics, each capturing a distinct facet of importance. Researchers must choose based on domain knowledge rather than defaulting to node degree.</p>
+
+<p><strong>Degree centrality</strong> is the most direct: \(C_D(i) = k_i / (n-1)\). It quantifies how many direct connections a node has—analogous to follower count in a social network or interaction count in a PPI network. Its weakness is being entirely local: it knows nothing about where those neighbors sit in the global network.</p>
+
+<p><strong>Betweenness centrality</strong> captures how often a node serves as a bridge in global communication:</p>
+
+<p>$$C_B(i) = \sum_{s \neq i \neq t} \frac{\sigma_{st}(i)}{\sigma_{st}}$$</p>
+
+<p>where \(\sigma_{st}\) is the total number of shortest paths from s to t, and \(\sigma_{st}(i)\) is the fraction passing through i. High-betweenness nodes are "traffic hubs"—removing them forces many information flows to reroute or break down. In structural mechanics, such nodes are analogous to critical members carrying the most force paths; in epidemiology, they are superspreaders bridging communities.</p>
+
+<p><strong>Closeness centrality</strong> measures how quickly a node can reach all others:</p>
+
+<p>$$C_C(i) = \frac{n-1}{\sum_{j \neq i} d(i,j)}$$</p>
+
+<p>A node with high closeness centrality can "reach" the entire network rapidly—making it ideal for placing sensors, broadcast nodes, or emergency response facilities.</p>
+
+<p><strong>Eigenvector centrality</strong> introduces a recursive idea: a node's importance depends not just on how many neighbors it has, but on how important those neighbors are. This is the conceptual core of Google's PageRank. Mathematically, it is the principal eigenvector of the adjacency matrix.</p>
+
+<pre><code class="language-python">
+G = nx.karate_club_graph()
+
+degree_c    = nx.degree_centrality(G)
+betweenness = nx.betweenness_centrality(G)
+closeness   = nx.closeness_centrality(G)
+eigenvector = nx.eigenvector_centrality(G)
+
+def top_node(d):
+    return max(d, key=d.get)
+
+print(&quot;Top by Degree:      &quot;, top_node(degree_c))
+print(&quot;Top by Betweenness: &quot;, top_node(betweenness))
+print(&quot;Top by Closeness:   &quot;, top_node(closeness))
+print(&quot;Top by Eigenvector: &quot;, top_node(eigenvector))
+</code></pre>
+
+<p>A practical recommendation: in network analysis papers, always report multiple centrality measures and discuss their correlation (using Pearson or Spearman rank correlation). High agreement across measures signals a strong core-periphery structure; independence across measures indicates that network "importance" is multi-dimensional and cannot be reduced to a single axis.</p>
+
+<hr>
+
+<h2>6. Shortest-Path Algorithms — From Dijkstra to Floyd</h2>
+
+<p>Shortest-path computation is one of the most deeply studied problems in graph theory and one of the most frequently needed operations in practice. NetworkX includes several algorithms; understanding their applicability conditions is essential for choosing the right one.</p>
+
+<p><strong>Dijkstra's algorithm</strong> is the default choice. It uses a greedy strategy: starting from the source node, at each step it selects the unvisited node with the smallest known distance and relaxes its neighbors. Time complexity is \(O((V + E) \log V)\) with heap optimization—the industry standard for positive-weight sparse graphs. NetworkX's <code>nx.shortest_path(G, source, target, weight='weight')</code> defaults to Dijkstra.</p>
+
+<p><strong>Bellman-Ford</strong> allows negative edge weights but runs in \(O(VE)\)—use it only when negative weights are genuinely present.</p>
+
+<p><strong>Floyd-Warshall</strong> computes all-pairs shortest paths in \(O(V^3)\), appropriate for small to medium networks (up to a few hundred nodes) when the complete distance matrix is needed.</p>
+
+<pre><code class="language-python">
+import networkx as nx
+
+G = nx.Graph()
+G.add_weighted_edges_from([
+    (1, 2, 1.5), (2, 3, 2.0), (1, 3, 5.0),
+    (3, 4, 1.0), (2, 4, 4.0)
+])
+
+paths  = nx.single_source_dijkstra_path(G, source=1)
+lengths = nx.single_source_dijkstra_path_length(G, source=1)
+print(&quot;Shortest path 1-&gt;4:&quot;,  paths[4])    # [1, 2, 3, 4]
+print(&quot;Shortest distance 1-&gt;4:&quot;, lengths[4]) # 4.5
+
+# Extract the largest connected component before computing average path length
+if nx.is_connected(G):
+    avg_l = nx.average_shortest_path_length(G, weight=&quot;weight&quot;)
+    print(f&quot;Average shortest path length: {avg_l:.3f}&quot;)
+else:
+    lcc = G.subgraph(max(nx.connected_components(G), key=len)).copy()
+    avg_l = nx.average_shortest_path_length(lcc, weight=&quot;weight&quot;)
+</code></pre>
+
+<p>A common pitfall: <code>nx.average_shortest_path_length()</code> raises an exception on disconnected graphs, because distances between disconnected node pairs are infinite. Always check connectivity with <code>nx.is_connected(G)</code> first or analyze the largest connected component (LCC).</p>
+
+<p>For structural and materials researchers, shortest paths can be interpreted as <strong>load transmission paths</strong>: in a beam network, force travels from a loading point to a support along the shortest (or lowest-impedance) path. Nodes or edges with high betweenness centrality are precisely those through which the most force paths pass—the critical members whose failure maximally disrupts the overall structural response.</p>
+
+<hr>
+
+<h2>7. Classic Network Models — Random, Small-World, and Scale-Free</h2>
+
+<p>Understanding real networks requires a reference baseline: what does "random" look like, and what deviations from it are meaningful? NetworkX provides built-in generators for three theoretically fundamental models.</p>
+
+<p>The <strong>Erdős–Rényi random graph</strong> (ER model) is the simplest baseline. Given n nodes, each pair connects independently with probability p, producing \(G(n, p)\). Degree distribution follows a Poisson, clustering coefficient equals p, and average path length scales as \(\ln n / \ln \langle k \rangle\). The crucial point: real networks almost universally deviate from ER on all of these metrics—and those deviations carry information about internal structure.</p>
+
+<pre><code class="language-python">
+G_er = nx.erdos_renyi_graph(n=100, p=0.05, seed=42)
+print(f&quot;ER avg clustering: {nx.average_clustering(G_er):.4f}&quot;)
+</code></pre>
+
+<p>The <strong>Watts-Strogatz small-world model</strong> (WS model) was proposed in 1998 in <em>Nature</em> after Watts and Strogatz observed that neural networks (<em>C. elegans</em>), actor collaboration networks, and the US western power grid all shared high clustering coefficients (like regular lattices) yet short average path lengths (like random graphs). Their model generates a ring lattice where each node connects to its k nearest neighbors, then rewires each edge with probability \(\beta\). At intermediate \(\beta\), the model captures the "small-world" co-occurrence of high clustering and short paths.</p>
+
+<pre><code class="language-python">
+G_ws = nx.watts_strogatz_graph(n=100, k=4, p=0.1, seed=42)
+print(f&quot;WS avg clustering: {nx.average_clustering(G_ws):.4f}&quot;)
+print(f&quot;WS avg path length: {nx.average_shortest_path_length(G_ws):.4f}&quot;)
+</code></pre>
+
+<p>The <strong>Barabási-Albert scale-free model</strong> (BA model), proposed in 1999 in <em>Science</em>, revealed that many real networks—the Web, citation networks, PPI networks—follow a power-law degree distribution \(P(k) \sim k^{-\gamma}\), meaning a handful of massively connected hubs dominate the network. This "scale-free" structure emerges from <strong>preferential attachment</strong>: as the network grows, new nodes attach preferentially to already high-degree nodes, embodying a "rich-get-richer" dynamics.</p>
+
+<pre><code class="language-python">
+G_ba = nx.barabasi_albert_graph(n=100, m=2, seed=42)
+print(f&quot;BA max degree: {max(dict(G_ba.degree()).values())}&quot;)
+print(f&quot;BA avg clustering: {nx.average_clustering(G_ba):.4f}&quot;)
+</code></pre>
+
+<p>Comparing the three models yields crucial intuitions:</p>
+
+<table><tr><th>Property</th><th>ER Random</th><th>WS Small-World</th><th>BA Scale-Free</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>Degree dist.</td><td>Poisson</td><td>Near-Poisson</td><td>Power law</td></tr><tr><td>Clustering</td><td>Low</td><td>High</td><td>Medium (decreases with size)</td></tr><tr><td>Avg path length</td><td>Short</td><td>Short</td><td>Short</td></tr><tr><td>Robustness</td><td>Uniform failure</td><td>Uniform failure</td><td>Robust to random, fragile to targeted attack</td></tr></table>
+
+<p>For structural mechanics researchers: scale-free networks are highly robust against random node removal (most nodes have low degree, so random removal rarely matters) but catastrophically vulnerable to targeted attacks on hub nodes. This maps directly onto certain metamaterial and biological skeleton failure modes—seemingly strong, yet harboring a critical Achilles' heel.</p>
+
+<hr>
+
+<h2>8. Visualization — Making Graphs Speak</h2>
+
+<p>NetworkX is not a professional visualization tool, but its Matplotlib interface is sufficient for rapid exploration. For publication-quality figures, dedicated software such as Gephi, Cytoscape (biological networks), or Graphviz is recommended. For research presentations and draft figures, NetworkX + Matplotlib does the job.</p>
+
+<p>The core function is <code>nx.draw_networkx()</code>. Layout algorithms determine where nodes are placed, and choice of layout strongly affects readability:</p>
+
+<pre><code class="language-python">
+import networkx as nx
+import matplotlib.pyplot as plt
+
+G = nx.karate_club_graph()
+
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+layouts = {
+    &quot;Spring Layout\n(force-directed)&quot;: nx.spring_layout(G, seed=42),
+    &quot;Circular Layout&quot;:                 nx.circular_layout(G),
+    &quot;Kamada-Kawai Layout&quot;:             nx.kamada_kawai_layout(G),
+}
+
+betweenness = nx.betweenness_centrality(G)
+node_colors = [betweenness[n] for n in G.nodes()]
+
+for ax, (title, pos) in zip(axes, layouts.items()):
+    nx.draw_networkx(
+        G, pos=pos, ax=ax,
+        node_color=node_colors, cmap=plt.cm.viridis,
+        node_size=200, with_labels=True, font_size=7,
+        edge_color=&quot;gray&quot;, alpha=0.85
+    )
+    ax.set_title(title)
+    ax.axis(&quot;off&quot;)
+
+plt.suptitle(&quot;Karate Club — Node color = Betweenness Centrality&quot;, y=1.02)
+plt.tight_layout()
+plt.show()
+</code></pre>
+
+<p>Practical tips: encode centrality in node color, degree in node size, and edge weight in transparency or width—this conveys rich information in a single figure without clutter. For large graphs (> 500 nodes), direct drawing typically produces an uninterpretable hairball. In that case, aggregate to community level, display only the topological skeleton, or export to Gephi via <code>nx.write_gexf(G, "graph.gexf")</code>.</p>
+
+<hr>
+
+<h2>9. Community Detection and Graph Generators — Advanced Tools</h2>
+
+<p>When a network grows too large to comprehend visually, <strong>community detection</strong> becomes the primary tool for revealing structure. A community is a set of nodes with dense internal connections and sparse external ones—analogous to protein complexes (functional modules), crystal grains in materials (clusters of aligned atoms), or interest groups in social networks.</p>
+
+<p>NetworkX includes the Louvain algorithm (available as <code>nx.community.louvain_communities()</code> from version 3.x onward), the most widely used community detection method, based on greedy modularity optimization:</p>
+
+<pre><code class="language-python">
+G = nx.karate_club_graph()
+
+communities = nx.community.louvain_communities(G, seed=42)
+print(f&quot;Number of communities: {len(communities)}&quot;)
+
+node_community = {}
+for idx, community in enumerate(communities):
+    for node in community:
+        node_community[node] = idx
+
+colors = [node_community[n] for n in G.nodes()]
+pos = nx.spring_layout(G, seed=42)
+nx.draw_networkx(G, pos=pos, node_color=colors, cmap=plt.cm.tab10,
+                 node_size=300, with_labels=True)
+plt.title(&quot;Louvain Communities — Karate Club&quot;)
+plt.axis(&quot;off&quot;)
+plt.show()
+
+modularity = nx.community.modularity(G, communities)
+print(f&quot;Modularity: {modularity:.4f}&quot;)
+</code></pre>
+
+<p>Modularity quantifies the quality of the community partition, ranging from \(-1\) to \(1\); values closer to 1 indicate cleaner, more distinct communities.</p>
+
+<p>NetworkX also provides an extensive suite of <strong>graph generators</strong> for rapid benchmarking:</p>
+
+<pre><code class="language-python">
+G_lattice  = nx.grid_2d_graph(5, 5)           # 2D square lattice
+G_hex      = nx.hexagonal_lattice_graph(3, 3)  # Hexagonal lattice (2D materials)
+G_tree     = nx.balanced_tree(r=3, h=3)        # Balanced ternary tree
+G_complete = nx.complete_graph(10)             # Fully connected
+G_star     = nx.star_graph(10)                 # Hub-and-spoke
+</code></pre>
+
+<p>For materials and structural mechanics researchers, hexagonal (<code>hexagonal_lattice_graph</code>) and triangular (<code>triangular_lattice_graph</code>) lattices are excellent starting points for parameterizing metamaterial topologies as NetworkX graphs, then computing connectivity, centrality distributions, and robustness curves (largest connected component size as a function of random removal vs. targeted attack fraction).</p>
+
+<hr>
+
+<h2>10. Performance Considerations and Further Resources</h2>
+
+<p>NetworkX prioritizes flexibility and readability over raw speed. Its pure-Python dict-of-dicts architecture is a bottleneck for graphs exceeding one million nodes or requiring real-time computation. Common alternatives include <strong>igraph</strong> (C core, Python interface, significantly faster for most metrics), <strong>graph-tool</strong> (C++/OpenMP, for very large graphs), and <strong>cuGraph</strong> (NVIDIA RAPIDS, GPU-accelerated, for billion-scale graphs). A 2025 benchmarking study published in <em>Social Network Analysis and Mining</em> confirmed that igraph and graph-tool outperform NetworkX substantially on computationally intensive tasks such as community detection and betweenness centrality, though NetworkX's seamless integration with NumPy, SciPy, and Pandas remains its core competitive advantage for research workflows.</p>
+
+<p>Recommended resources for graduate students seeking to go deeper—most have no comprehensive Chinese-language equivalents, which is why direct engagement with the English materials is strongly recommended:</p>
+
+<ul>
+<li><strong>Official Documentation & Tutorial</strong>: https://networkx.org/documentation/stable/tutorial.html — authoritative and up-to-date</li>
+<li><strong>GitHub Repository</strong>: https://github.com/networkx/networkx — source code, issues, and example notebooks; reading the source is itself an excellent way to learn graph algorithms</li>
+<li><strong>Memgraph's NetworkX Guide</strong>: https://memgraph.github.io/networkx-guide/ — well-structured with extensive practical code examples</li>
+<li><strong>PHYS 7332 Network Science Course Materials</strong>: https://asmithh.github.io/network-science-data-book/ — graduate-level, combining theory and NetworkX practice</li>
+<li><strong>DataCamp NetworkX Tutorial</strong>: https://www.datacamp.com/tutorial/networkx-python-graph-tutorial — problem-driven (Chinese Postman Problem), fully runnable code</li>
+</ul>
+
+<p>NetworkX is a tool, but the thinking it enables—modeling systems as nodes and relationships, describing function and fragility in topological language—is the skill worth cultivating. Whether your research concerns protein folding, impact-resistant metamaterials, brain connectomes, or urban road networks, the ability to fluently translate between graph language and domain language is one of the most valuable cross-disciplinary competencies a modern computational researcher can develop.</p>
+
+<hr>
+
+<h2>References</h2>
+
+<ol>
+<li>Hagberg, A. A., Schult, D. A., & Swart, P. J. (2008). Exploring network structure, dynamics, and function using NetworkX. <em>Proceedings of the 7th Python in Science Conference (SciPy 2008)</em>, 11–16.</li>
+</ol>
+
+<ol>
+<li>Watts, D. J., & Strogatz, S. H. (1998). Collective dynamics of 'small-world' networks. <em>Nature</em>, 393(6684), 440–442. https://doi.org/10.1038/30918</li>
+</ol>
+
+<ol>
+<li>Barabási, A. L., & Albert, R. (1999). Emergence of scaling in random networks. <em>Science</em>, 286(5439), 509–512. https://doi.org/10.1126/science.286.5439.509</li>
+</ol>
+
+<ol>
+<li>Albert, R., & Barabási, A. L. (2002). Statistical mechanics of complex networks. <em>Reviews of Modern Physics</em>, 74(1), 47–97. https://doi.org/10.1103/RevModPhys.74.47</li>
+</ol>
+
+<ol>
+<li>Nair, A., Rajput, P., & Rahman, M. (2025). A comparative evaluation of social network analysis tools: performance and community engagement perspectives. <em>Social Network Analysis and Mining</em>, 15, Article 40. https://doi.org/10.1007/s13278-025-01409-y</li>
+</ol>
+
+<ol>
+<li>Verma, T., & others (2021). Searching for small-world and scale-free behaviour in long-term historical data of a real-world power grid. <em>Scientific Reports</em>, 11, 6879. https://doi.org/10.1038/s41598-021-86103-7</li>
+</ol>
+
+<ol>
+<li>Humphries, M. D., & Gurney, K. (2011). Methods for generating complex networks with selected structural properties for simulations: A review and tutorial for neuroscientists. <em>Frontiers in Computational Neuroscience</em>, 5, 10. https://doi.org/10.3389/fncom.2011.00010</li>
+</ol>
+
+<ol>
+<li>NetworkX Developers. (2024). NetworkX 3.x Documentation. https://networkx.org/documentation/stable/</li>
+<pre><code>
+
+---
+Learn more:
+1. [Tutorial — NetworkX 3.6.1 documentation](https://networkx.org/documentation/stable/tutorial.html)
+2. [Complex Network Series: Part 4 — Network Analysis with NetworkX | by Ebrahim Mousavi | Medium](https://medium.com/@ebimsv/complex-network-series-part-4-network-analysis-with-networkx-8b009bdae040)
+3. [Small World and Scale-Free Networks](https://dshizuka.github.io/networkanalysis/example1_smallworld.html)
+4. [NetworkX for Python — A Practical Guide to Graphs, Visualization, and Traversals | by Sneha Jain | Medium](https://medium.com/@jainsnehasj6/networkx-for-python-a-practical-guide-to-graphs-visualization-and-traversals-35106cfee2ea)
+5. [An introduction to Graph Analysis and NetworkX | by Luigi Sciarretta | Data Reply IT | DataTech | Medium](https://medium.com/data-reply-it-datatech/an-introduction-to-graph-analysis-and-networkx-b76e4a387c6c)
+6. [NetworkX - Wikipedia](https://en.wikipedia.org/wiki/NetworkX)
+7. [Scale-Free Networks - Think Complexity, 2nd Edition \[Book\]](https://www.oreilly.com/library/view/think-complexity-2nd/9781492040194/ch04.html)
+8. [Introduction — NetworkX 3.6.1 documentation](https://networkx.org/documentation/stable/reference/introduction.html)
+9. [Exploring Network Structure, Dynamics, and Function ...](https://aric.hagberg.org/papers/hagberg-2008-exploring.pdf)
+10. [Clustering — NetworkX 3.6.1 documentation](https://networkx.org/documentation/stable/reference/algorithms/clustering.html)
+11. [The modeling of scale-free networks - ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0378437103011257)
+12. [networkx · PyPI](https://pypi.org/project/networkx/)
+13. [Graph Data Science With Python/NetworkX | Toptal®](https://www.toptal.com/developers/data-science/graph-data-science-python-networkx)
+14. [Clustering, Connectivity and other Graph properties using Python Networkx](https://www.tutorialspoint.com/article/clustering-connectivity-and-other-graph-properties-using-python-networkx)
+15. [Searching for small-world and scale-free behaviour in long-term historical data of a real-world power grid | Scientific Reports](https://www.nature.com/articles/s41598-021-86103-7)
+16. [Reference — NetworkX 3.6.1 documentation](https://networkx.org/documentation/stable/reference/index.html)
+17. [NetworkX: A Comprehensive Guide to Mastering Network Analysis with Python | by Tushar Aggarwal | Medium](https://medium.com/@tushar_aggarwal/networkx-a-comprehensive-guide-to-mastering-network-analysis-with-python-fd7e5195f6a0)
+18. [Network Analysis with NetworkX](https://python-fiddle.com/tutorials/networkx)
+19. [Network Model with Scale‐Free, High Clustering Coefficients, and Small‐World Properties - Yan - 2023 - Journal of Applied Mathematics - Wiley Online Library](https://onlinelibrary.wiley.com/doi/10.1155/2023/5533260)
+20. [Python NetworkX for Graph Optimization Tutorial | DataCamp](https://www.datacamp.com/tutorial/networkx-python-graph-tutorial)
+21. [Working with spatial networks using NetworkX | D-Lab](https://dlab.berkeley.edu/news/working-spatial-networks-using-networkx)
+22. [Class 3: Introduction to Networkx 2 — Graph Properties &amp; Algorithms — PHYS 7332 (Network Science Data)](https://asmithh.github.io/network-science-data-book/class_03_networkx2.html)
+23. [Watts–Strogatz model - Wikipedia](https://en.wikipedia.org/wiki/Watts%E2%80%93Strogatz_model)
+24. [GitHub - networkx/networkx: Network Analysis in Python · GitHub](https://github.com/networkx/networkx)
+25. [NetworkX Resources – Deep Learning Garden](https://deeplearning.lipingyang.org/networkx-resources/)
+26. [NetworkX: Network Analysis with Python](https://www.cl.cam.ac.uk/teaching/1314/L109/tutorial.pdf)
+27. [Networks: Structure and Dynamics Erzs´ebet Ravasz Regan](https://regan.med.harvard.edu/Teaching/CVBR/Ravasz_Networks.pdf)
+28. [NetworkX Package - Python Graph Library - AskPython](https://www.askpython.com/python-modules/networkx-package)
+29. [Graph Theory and NetworkX - Part 1: Loading and Visualization - Tales of One Thousand and One Data](https://walkenho.github.io/graph-theory-and-networkX-part1/)
+30. [Graph Algorithms - - Maël Fabien](https://maelfabien.github.io/machinelearning/graph_3/)
+31. [(PDF) Scale-Free Networks: A Decade and Beyond](https://www.researchgate.net/publication/26692135_Scale-Free_Networks_A_Decade_and_Beyond)
+32. [NetworkX basics | Memgraph&#x27;s Guide for NetworkX library](https://memgraph.github.io/networkx-guide/basics/)
+33. [(PDF) Exploring Network Structure, Dynamics, and Function Using NetworkX](https://www.researchgate.net/publication/236407765_Exploring_Network_Structure_Dynamics_and_Function_Using_NetworkX)
+34. [Python | Clustering, Connectivity and other Graph properties using Networkx - GeeksforGeeks](https://www.geeksforgeeks.org/python-clustering-connectivity-and-other-graph-properties-using-networkx/)
+35. [(a) WS small world (Watts and Strogatz, 1998) and (b) BA scale free... | Download Scientific Diagram](https://www.researchgate.net/figure/a-WS-small-world-Watts-and-Strogatz-1998-and-b-BA-scale-free-Barabasi-and-Albert_fig2_282395671)
+36. [Graph types — NetworkX 3.6.1 documentation](https://networkx.org/documentation/stable/reference/classes/index.html)
+37. [NetworkX Graph Visualization | Tom Sawyer Software](https://blog.tomsawyer.com/networkx-graph-visualization)
+38. [A comparative evaluation of social network analysis tools: performance and community engagement perspectives | Social Network Analysis and Mining | Springer Nature Link](https://link.springer.com/article/10.1007/s13278-025-01409-y)
+39. [Methods for Generating Complex Networks with Selected Structural Properties for Simulations: A Review and Tutorial for Neuroscientists - PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC3059456/)
+</ol>
+</code></pre>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>Comments</h2>
+<script src="https://giscus.app/client.js"
+    data-repo="GellmanSparrowS/ml-biomat-blog"
+    data-repo-id="R_kgDOTEwhsA"
+    data-category="General"
+    data-category-id="DIC_kwDOTEwhsM4CpPbT"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
