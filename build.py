@@ -54,7 +54,7 @@ def md_to_html(text):
                 out.append("</code></pre>"); in_code = False
             i += 1; continue
         if in_code: out.append(hm.escape(line)); i += 1; continue
-        if in_list and not re.match(r'^(\d+\.\s|[-*]\s)', line.strip()):
+        if in_list and not re.match(r'^(\d+\.\s|[-*]\s)', line.strip()) and line.strip():
             out.append(f"</{list_tag}>"); in_list = False
         m = re.match(r'^(#{1,6})\s+(.+)$', line)
         if m: lvl = len(m.group(1)); out.append(f"<h{lvl}>{inline_md(m.group(2))}</h{lvl}>"); i += 1; continue
@@ -156,7 +156,7 @@ def cat_name(cat_slug, lang="en"):
     return c.get(f"name_{lang}", c.get("name_en", cat_slug))
 
 
-HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title} \u2014 ML-Biomat</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n</head>\n<body>\n'
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title} \u2014 ML-Biomat</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>\n<body>\n'
 
 HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
