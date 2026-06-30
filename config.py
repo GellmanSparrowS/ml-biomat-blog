@@ -18,7 +18,7 @@ CONTENT_DIR = "content"
 CATEGORIES = {
     "machine-learning": {"name_en": "Machine Learning", "name_zh": "机器学习", "slug": "machine-learning"},
     "multiscale-modeling": {"name_en": "Multiscale Modeling", "name_zh": "多尺度模拟", "slug": "multiscale-modeling"},
-    "biomaterials": {"name_en": "Biomaterials", "name_zh": "生物材料", "slug": "biomaterials"},
+    "biomaterials": {"name_en": "Bio-Materials-Structures", "name_zh": "生物材料", "slug": "biomaterials"},
     "python-tutorials": {"name_en": "Python Tutorials", "name_zh": "Python教程", "slug": "python-tutorials"},
     "research-notes": {"name_en": "Research Notes", "name_zh": "研究笔记", "slug": "research-notes"},
     "wet-lab-data": {"name_en": "Wet-lab Data Processing", "name_zh": "湿实验数据处理", "slug": "wet-lab-data"},
