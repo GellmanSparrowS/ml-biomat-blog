@@ -27,3 +27,13 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - **BOM**: PowerShell Set-Content adds BOM. Use Python write for .md files.
 - **.nojekyll**: Always auto-generate .nojekyll in docs/ to bypass Jekyll.
 - **Git push fails**: Use GitHub Contents API (PUT /contents/{path}) as fallback.
+
+## Critical: Encoding (updated 2026-06-29)
+- NEVER use backslash-x hex escapes in Python strings for write_text(encoding=utf-8). They get DOUBLE-ENCODED. Use backslash-u escapes instead.
+- For Chinese content through PowerShell python -c: use here-string + base64 OR backslash-uXXXX unicode escapes.
+- PowerShell backtick is escape char. Use backslash-u0060 for literal backticks.
+- PowerShell does NOT support && for chaining; use ; instead.
+
+## CI Compatibility (Python 3.12+)
+- f-strings cannot contain backslashes. Extract re.sub() calls into a variable first.
+- Applies to build.py, generate.py, and ALL Python files across repos.
