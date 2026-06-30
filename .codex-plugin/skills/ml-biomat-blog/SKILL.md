@@ -57,3 +57,10 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - If a task (article + build + push) is not complete at end of session, continue in next turn.
 - Do not stop at partial work. Complete the full cycle: write -> build -> verify -> push.
 - Respect GitHub API rate limits: batch pushes, retry SSL failures, do not hammer.
+
+## Long-Form Chinese Writing (2026-06-30)
+- exec_command here-string has a content size limit (~800 hanzi per call). Not suitable for articles.
+- apply_patch CAN create Python generator scripts using unicode escapes (pure ASCII, no PS issues).
+- Best for 8000+ hanzi: use apply_patch to build a _gen_article.py script, then run it once.
+- Never mix write-mode and append-mode on the same file across parallel exec_command calls.
+- The Python generator script pattern is the only reliable method for long Chinese articles.
