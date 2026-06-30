@@ -47,6 +47,8 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - Do not leave un-pushed local changes at end of session.
 
 ## Article Depth Rule (2026-06-30)
-- Section depth over section count: aim for 8-12 deep sections, not 20+ shallow ones.
-- Each section: geometric principle -> deformation mechanism -> key parameters -> design rules.
-- Review articles should explain mechanisms in plain language first, then add math.
+- Keep section count low (8-12 is good). Focus on depth, not breadth.
+- Each section should be substantial (500-1000 hanzi), explaining ONE concept thoroughly.
+- Write for graduate students: plain language first, math/sparse after intuition is built.
+- The test: can a non-specialist grad student understand the core idea from this section alone?
+- Avoid bullet-point lists of shallow facts; prefer connected paragraphs that build understanding.
