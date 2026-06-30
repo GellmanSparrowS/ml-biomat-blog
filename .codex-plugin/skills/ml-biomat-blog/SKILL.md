@@ -37,3 +37,11 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 ## CI Compatibility (Python 3.12+)
 - f-strings cannot contain backslashes. Extract re.sub() calls into a variable first.
 - Applies to build.py, generate.py, and ALL Python files across repos.
+
+
+## Auto-Push Rule (updated 2026-06-30)
+- After completing articles + python build.py, ALWAYS push the full changeset without waiting for user prompt.
+- Push scope: ALL changed files (config.py, content/posts/*.md, docs/*, SKILL.md).
+- If git push fails (network), use GitHub Contents API batch upload automatically.
+- Priority: push build output (docs/) and source (content/) first; then verify GitHub Pages deployment.
+- Do not leave un-pushed local changes at end of session.
