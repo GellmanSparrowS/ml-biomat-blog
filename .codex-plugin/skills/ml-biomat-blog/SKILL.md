@@ -47,8 +47,13 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - Do not leave un-pushed local changes at end of session.
 
 ## Article Depth Rule (2026-06-30)
-- Keep section count low (8-12 is good). Focus on depth, not breadth.
-- Each section should be substantial (500-1000 hanzi), explaining ONE concept thoroughly.
-- Write for graduate students: plain language first, math/sparse after intuition is built.
-- The test: can a non-specialist grad student understand the core idea from this section alone?
-- Avoid bullet-point lists of shallow facts; prefer connected paragraphs that build understanding.
+- Section count: 4-12 is ideal. Depth over breadth.
+- Each section: 900-2000 hanzi, thorough explanation of ONE concept.
+- Write for graduate students: plain language intuition first, math second.
+- Test: can a non-specialist grad student grasp the core from this section alone?
+- Avoid shallow bullet lists; prefer connected paragraphs that build understanding.
+
+## Auto-Completion Rule (2026-06-30)
+- If a task (article + build + push) is not complete at end of session, continue in next turn.
+- Do not stop at partial work. Complete the full cycle: write -> build -> verify -> push.
+- Respect GitHub API rate limits: batch pushes, retry SSL failures, do not hammer.
