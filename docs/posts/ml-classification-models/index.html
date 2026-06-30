@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Common Classification Models in Machine Learning: From Logistic Regression to Gradient Boosting — ML-Biomat</title>
+<meta name="description" content="A systematic overview of common ML classification models, from logistic regression to gradient boosting, with principles, code, and comparison.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/ml-classification-models/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="Common Classification Models in Machine Learning: From Logistic Regression to Gradient Boosting">
+<meta property="og:description" content="A systematic overview of common ML classification models, from logistic regression to gradient boosting, with principles, code, and comparison.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/ml-classification-models/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Common Classification Models in Machine Learning: From Logistic Regression to Gradient Boosting", "description": "A systematic overview of common ML classification models, from logistic regression to gradient boosting, with principles, code, and comparison.", "datePublished": "2026-06-30", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/ml-classification-models/"}</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/categories/">Categories / 分类</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge en">EN</span>
+<h1>Common Classification Models in Machine Learning: From Logistic Regression to Gradient Boosting</h1>
+<div class="article-meta">
+<span>2026-06-30</span><span>·</span><span>23 min read</span><span>·</span><a href="/categories/machine-learning/">Machine Learning</a>
+</div>
+</header>
+<div class="content">
+<h2>1. What Is Classification — From Labels to Decision Boundaries</h2>
+
+<p>Classification is the most fundamental and widely applied task in supervised machine learning. Its goal is straightforward: given an input sample, determine which predefined category it belongs to. This description may sound deceptively simple, but nearly every scientific or engineering problem that requires a "judgment call" can be framed within this structure. Distinguishing healthy cells from cancerous ones in microscopy images, identifying cracks versus intact regions in X-ray scans, differentiating fatigue fracture from ductile failure in materials testing — all of these are classification problems. Whether a classification model can be built that is accurate, interpretable, and computationally efficient often determines the scientific ceiling of a computational research project.</p>
+
+<p>Formally, a classification problem is defined as follows. We are given a training dataset \(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N\), where \(\mathbf{x}_i \in \mathbb{R}^d\) is the feature vector of the i-th sample (d-dimensional) and \(y_i \in \{1, 2, \ldots, K\}\) is its class label. The objective is to learn a mapping \(f: \mathbb{R}^d \rightarrow \{1, 2, \ldots, K\}\) that generalizes correctly to new, unseen samples. When \(K=2\), this is <strong>binary classification</strong>; when \(K>2\), it is <strong>multi-class classification</strong>.</p>
+
+<p>The core intuition behind classification is the <strong>decision boundary</strong>. Imagine plotting two categories of points — red and blue — in a two-dimensional feature space. A classifier's fundamental job is to draw a surface that separates them. Different algorithms differ in how they draw this surface: logistic regression draws a straight line, SVMs find the widest possible "separation band," decision trees cut the space with axis-aligned boundaries, and neural networks can produce arbitrarily complex curves. This intuition immediately suggests why no single algorithm dominates all problems — the optimal boundary shape depends on the data's intrinsic distribution and the constraints imposed by the scientific context.</p>
+
+<p>In the Python ecosystem, virtually all mainstream classification algorithms are encapsulated under a unified interface in scikit-learn. Every classifier inherits from the same base class and exposes <code>.fit()</code>, <code>.predict()</code>, and <code>.predict_proba()</code> methods, making it easy to swap models with a single line change. Below is the data preparation template used throughout this article:</p>
+
+<pre><code class="language-python">
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score
+
+# Load a classic multi-class dataset (150 samples, 4 features, 3 classes)
+X, y = load_iris(return_X_y=True)
+
+# Stratified split preserves class proportions in both subsets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Standardize features: zero mean, unit variance
+# Critical for distance-based and gradient-based models
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test  = scaler.transform(X_test)   # Apply training statistics only
+</code></pre>
+
+<p>The <code>stratify=y</code> argument ensures that class proportions are preserved in both the training and test sets, preventing evaluation bias due to class imbalance. Feature standardization is critical for logistic regression, SVMs, and k-NN, but leaves decision trees and random forests completely unaffected. These details recur throughout subsequent sections.</p>
+
+<hr>
+
+<h2>2. Logistic Regression — Linear Classification Through a Probabilistic Lens</h2>
+
+<p>Despite its name, logistic regression is a classification model through and through. It is the first classifier most practitioners learn and one of the most frequently used baselines in both academic research and industry, precisely because it not only outputs a predicted class but also a calibrated probability estimate. Understanding logistic regression amounts to understanding the probabilistic foundations shared by nearly all parametric classifiers.</p>
+
+<p>Start with the intuition. Suppose you want to classify a material as metal or non-metal based on its hardness score (a one-dimensional feature). Intuitively, higher hardness implies a higher probability of being metal. But "higher probability" needs to be quantified. A linear function \(z = w_0 + w_1 x\) is unsuitable because its range is the entire real line, whereas probabilities must lie in (0, 1). Logistic regression solves this with the <strong>sigmoid function</strong>:</p>
+
+<p>$$\sigma(z) = \frac{1}{1 + e^{-z}}$$</p>
+
+<p>This function maps any real number into (0, 1), producing an S-shaped curve that approaches 1 for large z, approaches 0 for small z, and equals 0.5 at z = 0. Logistic regression feeds the output of a linear function \(z = \mathbf{w}^T\mathbf{x} + b\) through the sigmoid to estimate the probability of the positive class:</p>
+
+<p>$$P(y=1|\mathbf{x}) = \sigma(\mathbf{w}^T\mathbf{x} + b) = \frac{1}{1+e^{-(\mathbf{w}^T\mathbf{x}+b)}}$$</p>
+
+<p>The decision boundary is the hyperplane \(\mathbf{w}^T\mathbf{x} + b = 0\) — a straight line in two-dimensional feature space. Samples with predicted probability above 0.5 are assigned to the positive class; otherwise the negative class.</p>
+
+<p>Parameters \(\mathbf{w}\) and \(b\) are learned by <strong>maximum likelihood estimation (MLE)</strong>: find the parameter values that maximize the probability of observing the training labels. The log-likelihood for N samples is:</p>
+
+<p>$$\mathcal{L}(\mathbf{w}, b) = \sum_{i=1}^N \left[ y_i \log \hat{p}_i + (1-y_i) \log(1-\hat{p}_i) \right]$$</p>
+
+<p>where \(\hat{p}_i = \sigma(\mathbf{w}^T\mathbf{x}_i + b)\). Maximizing this (equivalently, minimizing the <strong>cross-entropy loss</strong>) has no closed-form solution and is typically solved by gradient descent or L-BFGS. Regularization terms prevent overfitting: L2 (Ridge) shrinks weights toward zero without eliminating them, while L1 (Lasso) promotes sparsity — many weights become exactly zero — which serves as an implicit feature selection mechanism.</p>
+
+<p>A key advantage particularly relevant for biology and materials science researchers: the learned coefficients \(\mathbf{w}\) are directly interpretable. For feature \(x_j\), the exponentiated coefficient \(e^{w_j}\) is the multiplicative change in the <strong>odds ratio</strong> for a one-unit increase in that feature. This makes logistic regression not just a prediction tool but an analytical instrument for identifying which features most strongly discriminate between classes.</p>
+
+<pre><code class="language-python">
+from sklearn.linear_model import LogisticRegression
+
+# C is the inverse of regularization strength: smaller C = stronger regularization
+model = LogisticRegression(C=1.0, penalty=&#x27;l2&#x27;, solver=&#x27;lbfgs&#x27;,
+                           max_iter=500, random_state=42)
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+y_prob = model.predict_proba(X_test)  # Shape: (n_samples, n_classes)
+
+print(f&quot;Test Accuracy: {accuracy_score(y_test, y_pred):.4f}&quot;)
+
+# Identify the most important feature per class (by absolute coefficient magnitude)
+import numpy as np
+feature_names = [&#x27;sepal_len&#x27;, &#x27;sepal_wid&#x27;, &#x27;petal_len&#x27;, &#x27;petal_wid&#x27;]
+for i, cls in enumerate([&#x27;setosa&#x27;, &#x27;versicolor&#x27;, &#x27;virginica&#x27;]):
+    top = feature_names[np.argmax(np.abs(model.coef_[i]))]
+    print(f&quot;Class &#x27;{cls}&#x27; most discriminative feature: {top}&quot;)
+</code></pre>
+
+<p>Logistic regression's key limitation is that it can only learn <strong>linear</strong> decision boundaries. If two classes are not linearly separable in feature space — for instance, if one class surrounds the other — logistic regression will fail regardless of how well it is tuned. Solutions include polynomial feature engineering (using <code>PolynomialFeatures</code>) or switching to a nonlinear model. Even so, in settings with limited data or strong interpretability requirements, logistic regression should always be the starting point.</p>
+
+<hr>
+
+<h2>3. Support Vector Machines — The Widest Possible Margin</h2>
+
+<p>Support vector machines (SVMs) were developed by Cortes, Vapnik, and colleagues in the 1990s. After the introduction of the kernel trick, SVMs briefly held the status of state-of-the-art classifier across many domains. For small datasets and high-dimensional data — such as gene expression profiling — they remain highly competitive. Their design philosophy stems from a provocative question: among the infinitely many hyperplanes that correctly separate two classes, which one is the best?</p>
+
+<p>SVM's answer is: <strong>the one with the widest margin</strong>. More precisely, SVM seeks the hyperplane that maximizes the minimum distance from any training sample to the decision boundary — the "margin." The training points that lie exactly on the margin boundaries are the <strong>support vectors</strong>, so named because they "support" the margin: moving any non-support-vector sample leaves the decision boundary unchanged, while shifting a single support vector changes the boundary. This means the entire model is determined by the hardest, most ambiguous examples.</p>
+
+<p>Formally, for binary classification with labels \(y_i \in \{-1, +1\}\), the hard-margin SVM solves:</p>
+
+<p>$$\min_{\mathbf{w}, b} \frac{1}{2} \|\mathbf{w}\|^2 \quad \text{s.t.} \quad y_i(\mathbf{w}^T\mathbf{x}_i + b) \geq 1, \quad \forall i$$</p>
+
+<p>The margin width equals \(2/\|\mathbf{w}\|\), so minimizing \(\|\mathbf{w}\|^2\) is equivalent to maximizing the margin. This formulation requires data to be linearly separable. Real data rarely is, so the <strong>soft-margin</strong> variant introduces slack variables, allowing some samples to violate the margin while penalizing the degree of violation. The hyperparameter C controls the tradeoff: large C penalizes misclassification harshly (tight margin, more prone to overfitting); small C tolerates more violations (wider, more robust margin).</p>
+
+<p>The true power of SVMs lies in the <strong>kernel trick</strong>. For nonlinearly separable data, a mapping \(\phi(\mathbf{x})\) projects inputs into a higher-dimensional (potentially infinite-dimensional) feature space, where a linear boundary is sought. The kernel function \(k(\mathbf{x}_i, \mathbf{x}_j) = \phi(\mathbf{x}_i)^T\phi(\mathbf{x}_j)\) lets us compute inner products in the high-dimensional space without ever constructing \(\phi\) explicitly — avoiding prohibitive computational cost. Common kernels include the linear kernel \(k = \mathbf{x}_i^T\mathbf{x}_j\) (equivalent to no mapping; ideal for high-dimensional sparse data), the polynomial kernel \(k = (\gamma \mathbf{x}_i^T\mathbf{x}_j + r)^d\), the widely used RBF kernel \(k = \exp(-\gamma\|\mathbf{x}_i - \mathbf{x}_j\|^2)\) (which implicitly performs infinite-order polynomial expansion), and the sigmoid kernel.</p>
+
+<pre><code class="language-python">
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+
+param_grid = {
+    &#x27;C&#x27;:     [0.1, 1, 10, 100],
+    &#x27;gamma&#x27;: [&#x27;scale&#x27;, &#x27;auto&#x27;, 0.01, 0.1]
+}
+svm = SVC(kernel=&#x27;rbf&#x27;, probability=True, random_state=42)
+
+# 5-fold cross-validated grid search
+grid_search = GridSearchCV(svm, param_grid, cv=5,
+                           scoring=&#x27;accuracy&#x27;, n_jobs=-1)
+grid_search.fit(X_train, y_train)
+
+best_svm = grid_search.best_estimator_
+print(f&quot;Best params: {grid_search.best_params_}&quot;)
+print(f&quot;Test accuracy: {accuracy_score(y_test, best_svm.predict(X_test)):.4f}&quot;)
+</code></pre>
+
+<p>SVMs have notable limitations: training complexity approaches \(O(N^2)\) to \(O(N^3)\), making them impractical for datasets larger than ~50,000 samples; hyperparameter selection (C and \(\gamma\)) strongly influences performance and requires cross-validated search; and the output is not a natural probability (the <code>probability=True</code> flag applies Platt scaling post-hoc, at additional computational cost). For high-dimensional sparse inputs such as text or genomics data, <code>LinearSVC</code> with a linear kernel is a far more scalable alternative.</p>
+
+<hr>
+
+<h2>4. Decision Trees — Transparent, Rule-Based Classification</h2>
+
+<p>Decision trees are among the most interpretable classifiers in machine learning. Their decision logic can be understood directly by human experts — a crucial property in high-stakes domains such as medical diagnosis and structural failure analysis. When asked "why was this sample classified as fatigue fracture?", a decision tree can answer with a clear if-then-else chain; a black-box neural network cannot.</p>
+
+<p>The intuition behind decision trees is entirely natural. Imagine playing a guessing game where you can only ask yes/no questions. A skilled player prioritizes questions that divide the remaining possibilities into roughly equal halves — "Is it an animal?" is more informative than "Is it a mammal?" because the former more evenly splits the candidate space. Decision tree training does exactly this systematically: at each node, find the feature and threshold that most effectively splits the current data subset, then repeat recursively until each subset is "pure" (contains only one class) or a stopping criterion is met. This greedy recursive splitting strategy is known as <strong>recursive partitioning</strong>.</p>
+
+<p>"Purity" is quantified by an <strong>impurity measure</strong>. Two standard choices are Shannon entropy and Gini impurity. The <strong>Shannon entropy</strong> at node t is:</p>
+
+<p>$$H(t) = -\sum_{k=1}^K p_k \log_2 p_k$$</p>
+
+<p>where \(p_k\) is the fraction of samples at node t belonging to class k. A pure node has entropy 0; a maximally mixed node has entropy \(\log_2 K\). The <strong>information gain</strong> from splitting node t on feature A is:</p>
+
+<p>$$\text{IG}(t, A) = H(t) - \left(\frac{|t_L|}{|t|} H(t_L) + \frac{|t_R|}{|t|} H(t_R)\right)$$</p>
+
+<p>Larger information gain means a more useful split. The <strong>Gini impurity</strong> is:</p>
+
+<p>$$G(t) = 1 - \sum_{k=1}^K p_k^2$$</p>
+
+<p>Gini is computationally slightly cheaper (no logarithm) and is the default criterion in scikit-learn's <code>DecisionTreeClassifier</code>. The two measures typically yield very similar results in practice.</p>
+
+<p>A critical issue with decision trees is <strong>overfitting</strong>. Without constraints, a tree will grow until every leaf node contains a single sample — achieving 100% training accuracy but failing to generalize. Standard remedies include <strong>pre-pruning</strong> (setting <code>max_depth</code>, <code>min_samples_leaf</code> before growth) and <strong>post-pruning</strong> (growing a full tree and then removing branches that do not improve performance on a held-out set).</p>
+
+<pre><code class="language-python">
+from sklearn.tree import DecisionTreeClassifier, export_text, plot_tree
+import matplotlib.pyplot as plt
+
+tree = DecisionTreeClassifier(max_depth=4, min_samples_leaf=5,
+                               criterion=&#x27;gini&#x27;, random_state=42)
+tree.fit(X_train, y_train)
+
+print(f&quot;Depth: {tree.get_depth()}, Leaves: {tree.get_n_leaves()}&quot;)
+print(f&quot;Test accuracy: {accuracy_score(y_test, tree.predict(X_test)):.4f}&quot;)
+
+# Print human-readable rule set
+feature_names = [&#x27;sepal_len&#x27;, &#x27;sepal_wid&#x27;, &#x27;petal_len&#x27;, &#x27;petal_wid&#x27;]
+print(export_text(tree, feature_names=feature_names))
+
+# Visualize the tree structure
+fig, ax = plt.subplots(figsize=(16, 8))
+plot_tree(tree, feature_names=feature_names,
+          class_names=[&#x27;setosa&#x27;, &#x27;versicolor&#x27;, &#x27;virginica&#x27;],
+          filled=True, rounded=True, impurity=True, ax=ax)
+plt.tight_layout()
+plt.show()
+
+# Feature importances: aggregated Gini impurity reduction per feature
+print(&quot;Feature importances:&quot;, dict(zip(feature_names, tree.feature_importances_)))
+</code></pre>
+
+<p>Decision trees naturally produce <strong>feature importance scores</strong> by tallying the total impurity reduction each feature contributes across all splits. In materials science, this immediately answers questions such as: which mechanical parameters best discriminate between failure modes? In genomics: which gene-expression features best predict cell fate? These scores are a useful starting point for feature understanding, though they exhibit a known bias toward high-cardinality features.</p>
+
+<hr>
+
+<h2>5. Random Forests and Ensemble Learning — The Wisdom of Crowds</h2>
+
+<p>A single decision tree is intuitive but prone to overfitting. Random forests address this by combining many trees, embodying a simple yet profound principle: <strong>an ensemble of weak learners consistently outperforms a single strong learner</strong>. Understanding random forests requires first grasping one of machine learning's central conceptual tensions: the bias-variance tradeoff.</p>
+
+<p>The <strong>bias-variance tradeoff</strong> states that a learner's expected generalization error can be decomposed into bias (systematic deviation of the model's assumptions from the true pattern), variance (sensitivity of the model to random fluctuations in training data), and irreducible noise. Decision trees suffer from high variance: on the same problem, different training samples yield structurally different trees. Ensemble methods exploit a key statistical fact: averaging predictions from multiple high-variance, uncorrelated models dramatically reduces variance while leaving bias approximately unchanged. This is the core insight behind <strong>Bagging (Bootstrap Aggregating)</strong>.</p>
+
+<p>Random forests add two layers of randomization to maximize the independence (and thus decorrelation) of individual trees:</p>
+
+<p>The first layer is <strong>bootstrap sampling</strong>: each of the T trees is trained on a random sample drawn with replacement from the training set. Approximately 63.2% of samples appear in each bootstrap sample; the remaining ~36.8% — the <strong>out-of-bag (OOB) samples</strong> — can be used to estimate generalization error without requiring a separate validation set.</p>
+
+<p>The second layer is <strong>feature randomization</strong>: at each split node, rather than searching all d features for the optimal split, the algorithm randomly selects \(m \approx \sqrt{d}\) features and considers only those. This further decorrelates individual trees, amplifying the variance-reduction benefit of averaging.</p>
+
+<pre><code class="language-python">
+from sklearn.ensemble import RandomForestClassifier
+
+rf = RandomForestClassifier(
+    n_estimators=200,      # Number of trees
+    min_samples_leaf=2,    # Minimum samples at a leaf node
+    max_features=&#x27;sqrt&#x27;,   # Feature subset size per split: sqrt(d)
+    oob_score=True,        # Estimate generalization with OOB samples
+    n_jobs=-1,             # Parallelize across all CPU cores
+    random_state=42
+)
+rf.fit(X_train, y_train)
+
+print(f&quot;OOB generalization estimate: {rf.oob_score_:.4f}&quot;)
+print(f&quot;Test accuracy:               {accuracy_score(y_test, rf.predict(X_test)):.4f}&quot;)
+
+feature_names = [&#x27;sepal_len&#x27;, &#x27;sepal_wid&#x27;, &#x27;petal_len&#x27;, &#x27;petal_wid&#x27;]
+print(&quot;Feature importances:&quot;, dict(zip(feature_names, rf.feature_importances_)))
+</code></pre>
+
+<p><strong>Gradient boosting</strong> represents an alternative ensemble philosophy. Rather than training trees in parallel and averaging, it trains trees <strong>sequentially</strong>: each new tree is fit specifically to the residuals of all previous trees, gradually correcting accumulated errors. This corresponds to performing gradient descent in function space. Gradient boosting typically achieves lower bias than random forests, and modern implementations — XGBoost, LightGBM, CatBoost — exploit histogram-based splits and sparsity awareness to scale to very large datasets.</p>
+
+<pre><code class="language-python">
+from sklearn.ensemble import GradientBoostingClassifier
+
+gb = GradientBoostingClassifier(
+    n_estimators=200,
+    learning_rate=0.05,  # Shrinkage: smaller rate + more trees is often better
+    max_depth=3,         # Shallow &quot;stumps&quot; are conventional for boosting
+    subsample=0.8,       # Stochastic gradient boosting
+    random_state=42
+)
+gb.fit(X_train, y_train)
+print(f&quot;Gradient Boosting Test accuracy: {accuracy_score(y_test, gb.predict(X_test)):.4f}&quot;)
+</code></pre>
+
+<p>Practical recommendation: random forests are the most reliably "out-of-the-box" classifier available. They are insensitive to feature scaling, handle mixed feature types, tolerate modest missing data, and estimate generalization performance via OOB error — eliminating the need for a separate validation set. When uncertain which model to use, start with random forests. If further accuracy is needed, move to LightGBM or XGBoost.</p>
+
+<hr>
+
+<h2>6. k-Nearest Neighbors — The Laziest Learner</h2>
+
+<p>k-Nearest Neighbors (k-NN) is the most intuitively transparent algorithm in machine learning and the canonical example of <strong>lazy learning</strong>. Its premise reflects an everyday heuristic: <strong>you can infer someone's characteristics by looking at who they are close to</strong>. In feature space, k-NN locates the k training samples nearest to a test point and assigns the majority class label among those neighbors. There is no training phase at all — the algorithm simply memorizes the entire training set and defers all computation to prediction time.</p>
+
+<p>This "laziness" is both an advantage and a liability. On the positive side, new data can be added without any retraining. On the negative side, every prediction requires computing the distance to all N training points: O(Nd) complexity, which becomes prohibitive for large datasets. Tree-based data structures (KD-Tree, Ball-Tree) can accelerate this to approximately \(O(\log N)\), though their benefit degrades in high dimensions.</p>
+
+<p>The choice of distance metric profoundly affects k-NN's behavior. The most common options are the <strong>Euclidean (L2) distance</strong>:</p>
+
+<p>$$d(\mathbf{x}, \mathbf{x}') = \sqrt{\sum_{j=1}^d (x_j - x_j')^2}$$</p>
+
+<p>and the <strong>Manhattan (L1) distance</strong>:</p>
+
+<p>$$d(\mathbf{x}, \mathbf{x}') = \sum_{j=1}^d |x_j - x_j'|$$</p>
+
+<p>Euclidean distance is more sensitive to large-scale features; Manhattan distance is often more stable in high dimensions due to its reduced sensitivity to outliers. <strong>Feature standardization is mandatory for k-NN</strong>: if one feature ranges over millimeters (1–100) and another over pascals (\(10^6 - 10^9\)), Euclidean distance is entirely dominated by the latter.</p>
+
+<p>The choice of k governs model complexity: k=1 is maximally local and highly prone to overfitting; k=N always predicts the majority class and underfits. Optimal k is typically found via cross-validation.</p>
+
+<p>A deeper theoretical concern is the <strong>curse of dimensionality</strong>. As dimensionality d grows, all pairwise distances tend to equalize — the contrast between "near" and "far" erodes. Intuitively, in 100-dimensional space, the ratio of the nearest-neighbor distance to the farthest-neighbor distance approaches 1, rendering the neighborhood concept meaningless. This implies that k-NN performs poorly in raw high-dimensional feature spaces (raw pixels, gene expression vectors) and generally requires prior dimensionality reduction (PCA, UMAP) before use.</p>
+
+<pre><code class="language-python">
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import cross_val_score
+import numpy as np
+
+# Find optimal k by cross-validation
+k_range = range(1, 31)
+cv_scores = [
+    cross_val_score(
+        KNeighborsClassifier(n_neighbors=k, metric=&#x27;euclidean&#x27;),
+        X_train, y_train, cv=5, scoring=&#x27;accuracy&#x27;
+    ).mean()
+    for k in k_range
+]
+
+optimal_k = list(k_range)[np.argmax(cv_scores)]
+print(f&quot;Optimal k: {optimal_k}, CV accuracy: {max(cv_scores):.4f}&quot;)
+
+# Distance-weighted voting: closer neighbors contribute more
+knn = KNeighborsClassifier(n_neighbors=optimal_k, weights=&#x27;distance&#x27;,
+                           algorithm=&#x27;auto&#x27;, metric=&#x27;euclidean&#x27;)
+knn.fit(X_train, y_train)
+print(f&quot;Test accuracy: {accuracy_score(y_test, knn.predict(X_test)):.4f}&quot;)
+</code></pre>
+
+<p>Setting <code>weights='distance'</code> makes each neighbor's vote inversely proportional to its distance from the test point, typically improving performance near class boundaries compared to uniform weighting.</p>
+
+<hr>
+
+<h2>7. Naive Bayes — The Minimalist Philosophy of Probabilistic Inference</h2>
+
+<p>Naive Bayes is a family of probabilistic classifiers grounded in Bayes' theorem. Celebrated for its extreme simplicity and training speed, it has a long history in text classification (spam detection) and biological sequence analysis. Understanding it requires first grasping the conceptual core of Bayes' theorem: how to <strong>systematically update beliefs in light of observed evidence</strong>.</p>
+
+<p><strong>Bayes' theorem</strong> states:</p>
+
+<p>$$P(y|\mathbf{x}) = \frac{P(\mathbf{x}|y) \cdot P(y)}{P(\mathbf{x})}$$</p>
+
+<p>Here \(P(y)\) is the <strong>prior</strong> (the probability of each class before observing the sample), \(P(\mathbf{x}|y)\) is the <strong>likelihood</strong> (the probability of observing feature vector \(\mathbf{x}\) given class y), \(P(y|\mathbf{x})\) is the <strong>posterior</strong> — what we actually want: the probability of class y given the observed features — and \(P(\mathbf{x})\) is a normalizing constant that is identical across all classes and can be safely ignored during classification.</p>
+
+<p>The classification decision follows the MAP (maximum a posteriori) rule:</p>
+
+<p>$$\hat{y} = \arg\max_y P(\mathbf{x}|y) \cdot P(y)$$</p>
+
+<p>The central challenge is that \(P(\mathbf{x}|y) = P(x_1, x_2, \ldots, x_d | y)\) is a d-dimensional joint distribution, which is essentially impossible to estimate from finite data when d is large. The <strong>naive assumption</strong> resolves this: given the class label y, all features are assumed to be <strong>conditionally independent</strong>:</p>
+
+<p>$$P(\mathbf{x}|y) = \prod_{j=1}^d P(x_j|y)$$</p>
+
+<p>This assumption almost never holds in reality — features are correlated. Yet in practice the model often performs surprisingly well. The reason: even if the assumption is wrong, it is wrong in a consistent direction across all classes. The relative ordering of posterior probabilities — and thus the final classification — can remain correct even when the absolute probability values are distorted.</p>
+
+<p>Under this assumption, only univariate distributions \(P(x_j|y)\) need to be estimated — one per feature per class. For continuous features, Gaussian Naive Bayes assumes:</p>
+
+<p>$$P(x_j|y=k) = \frac{1}{\sqrt{2\pi\sigma_{kj}^2}} \exp\left(-\frac{(x_j - \mu_{kj})^2}{2\sigma_{kj}^2}\right)$$</p>
+
+<p>Training requires only estimating the per-class per-feature mean \(\mu_{kj}\) and variance \(\sigma_{kj}^2\) from the data — a closed-form operation requiring zero iterative optimization.</p>
+
+<pre><code class="language-python">
+from sklearn.naive_bayes import GaussianNB
+
+gnb = GaussianNB()
+gnb.fit(X_train, y_train)
+
+print(f&quot;Test accuracy: {accuracy_score(y_test, gnb.predict(X_test)):.4f}&quot;)
+
+# Inspect learned parameters
+print(&quot;Class priors P(y):&quot;, gnb.class_prior_)
+# theta_: per-class per-feature means, shape (n_classes, n_features)
+print(&quot;Feature means per class:\n&quot;, gnb.theta_)
+</code></pre>
+
+<p>Naive Bayes' strengths are training speed (\(O(Nd)\)), well-calibrated probabilistic outputs, graceful handling of missing features (simply skip the missing term in the product), and stability on small datasets. Specialized variants exist for different data types: <code>MultinomialNB</code> for word-count features (the standard in text classification), <code>BernoulliNB</code> for binary presence/absence features (e.g., whether a gene is expressed or not). Its main weakness is that strong feature correlations degrade performance — when the naive independence assumption is severely violated, SVMs and random forests will typically outperform it.</p>
+
+<hr>
+
+<h2>8. Evaluation Metrics — Accuracy Is Just the Beginning</h2>
+
+<p>Once a classifier is trained, how should its performance be measured? Many beginners default to <strong>accuracy</strong> — the fraction of correctly classified samples. But accuracy is a dangerous oversimplification, especially under class imbalance. If 99% of a medical dataset consists of healthy subjects, a classifier that always predicts "healthy" achieves 99% accuracy while being completely useless for disease detection. Choosing the right evaluation metric is, fundamentally, an act of encoding what it means to be wrong in the specific context of your problem.</p>
+
+<p>The foundation of all evaluation metrics is the <strong>confusion matrix</strong>. For binary classification:</p>
+
+<table><tr><th></th><th>Predicted Positive</th><th>Predicted Negative</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td><strong>Actually Positive</strong></td><td>TP (True Positive)</td><td>FN (False Negative — missed)</td></tr><tr><td><strong>Actually Negative</strong></td><td>FP (False Positive — false alarm)</td><td>TN (True Negative)</td></tr></table>
+
+<p>From these four counts, a coherent family of metrics emerges:</p>
+
+<p><strong>Precision</strong> measures the fraction of predicted positives that are genuinely positive:</p>
+
+<p>$$\text{Precision} = \frac{TP}{TP+FP}$$</p>
+
+<p>It answers: "Of all my reported positives, how many are real?" Precision matters most when false positives are costly — a cancer misdiagnosis leading to unnecessary surgery, or a material classified as defective triggering an expensive replacement.</p>
+
+<p><strong>Recall</strong> (also called Sensitivity or True Positive Rate) measures the fraction of actual positives that were detected:</p>
+
+<p>$$\text{Recall} = \frac{TP}{TP+FN}$$</p>
+
+<p>It answers: "Did I find all the real positives?" Recall matters most when false negatives are costly — a missed structural crack that leads to catastrophic failure, or a disease missed by a diagnostic screen.</p>
+
+<p><strong>F1 score</strong> is the harmonic mean of precision and recall, providing a single balanced metric:</p>
+
+<p>$$F_1 = 2 \cdot \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$</p>
+
+<p><strong>ROC curve and AUC</strong> are obtained by varying the classification threshold (default 0.5) and plotting True Positive Rate (Recall) against False Positive Rate (\(FP/(FP+TN)\)). The AUC (Area Under the Curve) ranges from 0.5 (random guessing) to 1.0 (perfect classification) and is invariant to class imbalance — making it one of the most reliable summary statistics for binary classification.</p>
+
+<pre><code class="language-python">
+from sklearn.datasets import load_breast_cancer
+from sklearn.metrics import (
+    confusion_matrix, ConfusionMatrixDisplay,
+    classification_report, roc_auc_score,
+    RocCurveDisplay
+)
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+
+X_bc, y_bc = load_breast_cancer(return_X_y=True)
+X_tr, X_te, y_tr, y_te = train_test_split(
+    X_bc, y_bc, test_size=0.2, random_state=42, stratify=y_bc
+)
+sc = StandardScaler()
+X_tr = sc.fit_transform(X_tr)
+X_te = sc.transform(X_te)
+
+clf = LogisticRegression(max_iter=1000, C=1.0)
+clf.fit(X_tr, y_tr)
+y_pred_bc = clf.predict(X_te)
+y_prob_bc  = clf.predict_proba(X_te)[:, 1]
+
+# Confusion matrix
+ConfusionMatrixDisplay(
+    confusion_matrix(y_te, y_pred_bc),
+    display_labels=[&#x27;Malignant&#x27;, &#x27;Benign&#x27;]
+).plot(cmap=&#x27;Blues&#x27;)
+plt.title(&quot;Confusion Matrix&quot;)
+plt.show()
+
+# Full multi-metric report
+print(classification_report(y_te, y_pred_bc,
+                            target_names=[&#x27;Malignant&#x27;, &#x27;Benign&#x27;]))
+
+# AUC-ROC
+auc = roc_auc_score(y_te, y_prob_bc)
+print(f&quot;AUC-ROC: {auc:.4f}&quot;)
+RocCurveDisplay.from_predictions(y_te, y_prob_bc,
+                                  name=&quot;Logistic Regression&quot;).plot()
+plt.title(f&quot;ROC Curve (AUC = {auc:.3f})&quot;)
+plt.show()
+</code></pre>
+
+<p>For multi-class problems, precision, recall, and F1 must be aggregated: <strong>macro-averaging</strong> treats all classes equally (more sensitive to minority classes), while <strong>weighted averaging</strong> weights each class by its sample count (biased toward majority classes). Always choose the aggregation scheme that reflects your actual scientific priorities.</p>
+
+<p>Finally, <strong>K-fold cross-validation</strong> is the gold standard for estimating generalization performance. The dataset is partitioned into K folds; in each iteration one fold serves as the validation set while the rest form the training set, cycling K times and averaging the result. This is far more reliable than a single train-test split, particularly when data are limited — a condition that is endemic in experimental biology and materials science.</p>
+
+<hr>
+
+<h2>9. A Practical Model-Selection Guide — No Free Lunch</h2>
+
+<p>No classifier is optimal for every problem. This is formalized by the <strong>No Free Lunch Theorem</strong>: when averaged over all possible datasets, every algorithm has identical expected performance. In practice, model selection requires reasoning across several dimensions simultaneously — not defaulting to whichever algorithm won last year's Kaggle competition.</p>
+
+<p><strong>Dataset size</strong> is the first constraint. When N < 500, logistic regression, Naive Bayes, and SVMs with strong inductive biases are more reliable than data-hungry models. When N > 100,000, gradient boosting (XGBoost, LightGBM) and deep learning can realize their full potential, while SVMs become computationally impractical due to their \(O(N^2)\) to \(O(N^3)\) training complexity.</p>
+
+<p><strong>Interpretability requirements</strong> are the second constraint and are often non-negotiable in clinical, regulatory, and safety-critical engineering contexts. When you must explain a decision to a physician, structural engineer, or regulatory body, decision trees and logistic regression are the natural choices: the former produces explicit if-then rule chains; the latter provides signed, magnitude-ordered feature coefficients. Random forests and gradient boosting offer partial interpretability through feature importance scores; neural networks are essentially opaque without additional explainability tools (SHAP, LIME).</p>
+
+<p><strong>Feature dimensionality</strong> is the third constraint. For low-dimensional features (d < 20), k-NN, Naive Bayes, and decision trees work well. For moderate dimensionality (20 < d < 1000), SVM with RBF kernel and random forests are the workhorses. For high-dimensional sparse inputs (text, genomics, d > 1000), linear SVM (<code>LinearSVC</code>), L1-regularized logistic regression, and Multinomial Naive Bayes are preferred for their computational efficiency and implicit sparsity handling.</p>
+
+<p><strong>Class imbalance</strong> is pervasive in real-world scientific data and must be addressed independently of model choice. Nearly all scikit-learn classifiers support <code>class_weight='balanced'</code>, which automatically adjusts loss contributions inversely proportional to class frequency. Alternatively, SMOTE oversampling of the minority class at the data level can be effective.</p>
+
+<table><tr><th>Model</th><th>Train Speed</th><th>Predict Speed</th><th>Interpretability</th><th>Needs Scaling</th><th>Small Data</th><th>High-Dim Sparse</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>Logistic Regression</td><td>Fast</td><td>Fast</td><td>High</td><td>Yes</td><td>✓</td><td>✓ (L1)</td></tr><tr><td>SVM (RBF)</td><td>Medium–Slow</td><td>Medium</td><td>Low</td><td>Yes</td><td>✓</td><td>✗</td></tr><tr><td>Decision Tree</td><td>Fast</td><td>Fast</td><td>Highest</td><td>No</td><td>Medium</td><td>✗</td></tr><tr><td>Random Forest</td><td>Medium</td><td>Medium</td><td>Medium</td><td>No</td><td>Medium</td><td>Medium</td></tr><tr><td>Gradient Boosting</td><td>Slow</td><td>Medium</td><td>Medium</td><td>No</td><td>✗</td><td>Medium</td></tr><tr><td>k-NN</td><td>None (lazy)</td><td>Slow</td><td>Medium</td><td>Yes</td><td>✓</td><td>✗</td></tr><tr><td>Naive Bayes</td><td>Very Fast</td><td>Very Fast</td><td>Medium</td><td>No</td><td>✓</td><td>✓</td></tr></table>
+
+<p><strong>Practical recommendation</strong>: always begin with a simple baseline — logistic regression or random forest — to understand the intrinsic difficulty of the data and identify the most informative features. A carefully tuned random forest will satisfy the accuracy requirements of most structured scientific datasets while remaining far more interpretable than a neural network. Reserve deep learning for situations where data are abundant (N > 10,000), computational infrastructure is available, and classical methods have been rigorously shown to be insufficient.</p>
+
+<hr>
+
+<h2>References</h2>
+
+<ol>
+<li>Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011). Scikit-learn: Machine learning in Python. <em>Journal of Machine Learning Research</em>, 12, 2825–2830.</li>
+
+<li>Breiman, L. (2001). Random forests. <em>Machine Learning</em>, 45(1), 5–32. https://doi.org/10.1023/A:1010933404324</li>
+
+<li>Cortes, C., & Vapnik, V. (1995). Support-vector networks. <em>Machine Learning</em>, 20(3), 273–297. https://doi.org/10.1007/BF00994018</li>
+
+<li>Friedman, J. H. (2001). Greedy function approximation: A gradient boosting machine. <em>Annals of Statistics</em>, 29(5), 1189–1232. https://doi.org/10.1214/aos/1013203451</li>
+
+<li>Cover, T. M., & Hart, P. E. (1967). Nearest neighbor pattern classification. <em>IEEE Transactions on Information Theory</em>, 13(1), 21–27. https://doi.org/10.1109/TIT.1967.1053964</li>
+
+<li>Zhang, H. (2004). The optimality of naive Bayes. <em>Proceedings of the 17th International FLAIRS Conference</em>. American Association for Artificial Intelligence.</li>
+
+<li>Fawcett, T. (2006). An introduction to ROC analysis. <em>Pattern Recognition Letters</em>, 27(8), 861–874. https://doi.org/10.1016/j.patrec.2005.10.010</li>
+
+<li>Wolpert, D. H. (1996). The lack of a priori distinctions between learning algorithms. <em>Neural Computation</em>, 8(7), 1341–1390. https://doi.org/10.1162/neco.1996.8.7.1341</li>
+</ol>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>Comments</h2>
+<script src="https://giscus.app/client.js"
+    data-repo="GellmanSparrowS/ml-biomat-blog"
+    data-repo-id="R_kgDOTEwhsA"
+    data-category="General"
+    data-category-id="DIC_kwDOTEwhsM4CpPbT"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
