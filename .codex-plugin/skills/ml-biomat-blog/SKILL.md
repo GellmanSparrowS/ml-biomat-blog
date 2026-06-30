@@ -45,3 +45,8 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - If git push fails (network), use GitHub Contents API batch upload automatically.
 - Priority: push build output (docs/) and source (content/) first; then verify GitHub Pages deployment.
 - Do not leave un-pushed local changes at end of session.
+
+## Article Depth Rule (2026-06-30)
+- Section depth over section count: aim for 8-12 deep sections, not 20+ shallow ones.
+- Each section: geometric principle -> deformation mechanism -> key parameters -> design rules.
+- Review articles should explain mechanisms in plain language first, then add math.
