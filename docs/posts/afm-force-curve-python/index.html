@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/afm-force-curve-python/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical AFM Force Curve Analysis with Python: From Raw Data to Mechanical Properties", "description": "A step-by-step guide to processing AFM force curves in Python: baseline correction, contact point detection, adhesion force, and Young's modulus fitting with Hertz/Sneddon models.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -64,7 +64,6 @@ from scipy import signal, optimize
 <li><strong>JPK/Nanowizard</strong>: <code>.txt</code> or <code>.jpk-force</code> with metadata header</li>
 <li><strong>Asylum/AR</strong>: <code>.txt</code> or <code>.ibw</code> (use <code>igorpro</code> package)</li>
 <li><strong>Generic</strong>: <code>.csv</code> with columns: Z_piezo, Deflection</li>
-</ul>
 
 <pre><code class="language-python">
 def load_afm_curve(filepath, skip_rows=0):
@@ -75,6 +74,7 @@ def load_afm_curve(filepath, skip_rows=0):
 z_piezo, deflection = load_afm_curve(&quot;force_curve_001.txt&quot;, skip_rows=320)
 </code></pre>
 
+</ul>
 <h3>Handling Bruker Headers</h3>
 
 <pre><code class="language-python">
@@ -204,7 +204,6 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 <li><strong>Sneddon model</strong>: for conical indenters: F = (2/pi) E* tan(alpha) delta^2</li>
 <li><strong>JKR model</strong>: includes adhesion in contact mechanics</li>
 <li><strong>Ting's model</strong>: for viscoelastic relaxation</li>
-</ul>
 
 <pre><code class="language-python">
 def sneddon_cone(indentation, E_star, alpha_deg=18):
@@ -212,14 +211,15 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
     return (2 / np.pi) * E_star * np.tan(alpha) * np.power(indentation, 2)
 </code></pre>
 
+</ul>
 <h2>References</h2>
 
 <ul>
 <li>Cappella, B. & Dietler, G. (1999). Force-distance curves by AFM. <em>Surface Science Reports</em>, 34(1-3), 1-104.</li>
 <li>Hertz, H. (1882). On the contact of elastic solids. <em>J. Reine Angew. Math.</em>, 92, 156-171.</li>
 <li>Sneddon, I.N. (1965). The relation between load and penetration. <em>Int. J. Eng. Sci.</em>, 3(1), 47-57.</li>
-</ul>
 
+</ul>
 <h2>References</h2>
 <ul>
 <li>Cappella, B. & Dietler, G. (1999). Force-distance curves by AFM. <em>Surface Science Reports</em>, 34(1-3), 1-104.</li>

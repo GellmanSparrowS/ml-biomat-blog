@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/gromacs-md-tutorial-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS分子动力学模拟实战：从结构准备到轨迹分析", "description": "GROMACS分子动力学模拟的完整实战教程：以溶菌酶为例演示从结构准备到轨迹分析的全流程", "datePublished": "2026-06-29", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial-zh/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -49,8 +49,8 @@
 <li><strong>完整的工作流工具</strong>：内置拓扑构建、溶剂化、离子添加、能量最小化、平衡和生产的全流程命令</li>
 <li><strong>丰富的分析工具</strong>：内置RMSD、RMSF、回转半径、氢键、SASA等数十种分析模块</li>
 <li><strong>活跃的社区</strong>：官方文档和Justin Lemkul经典教程(http://www.mdtutorials.com/gmx/)提供了极好的学习资源</li>
-</ul>
 
+</ul>
 <p>对于生物材料研究者，GROMACS可模拟丝素蛋白beta-折叠、胶原蛋白力学拉伸、纤维素溶剂效应、蛋白-配体相互作用等关键问题。</p>
 
 <h2>安装与配置</h2>
@@ -288,8 +288,8 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 <li><strong>时间步长</strong>：氢键约束(h-bonds)后可将步长从1 fs提升到2-4 fs</li>
 <li><strong>力场选择</strong>：蛋白质推荐AMBER99SB-ILDN或CHARMM36m，核酸推荐OL15</li>
 <li><strong>多尺度衔接</strong>：GROMACS处于分子尺度关键位置——向上可供粗粒化(Martini)和有限元(Abaqus)模型，向下可参考QM(Gaussian)计算结果，轨迹数据还是训练ML力场(ANI, NequIP, MACE)的天然素材</li>
-</ol>
 
+</ol>
 <h2>总结</h2>
 
 <p>本文以溶菌酶为例，完整演示了GROMACS MD模拟的标准流程：结构获取→拓扑生成→溶剂化→离子添加→EM→NVT/NPT平衡→生产MD→轨迹分析(RMSD/RMSF/Rg/氢键)。该工作流适用于大多数可溶性蛋白质。对于纤维生物材料(丝素、胶原、纤维素)，需特别注意周期性边界条件和力场选择，将在后续文章中讨论。</p>
@@ -303,9 +303,9 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 <li>GROMACS Reference Manual. https://manual.gromacs.org/</li>
 <li>Lindorff-Larsen, K., et al. (2010). Improved side-chain torsion potentials for the Amber ff99SB protein force field. <em>Proteins</em>, 78(8), 1950-1958.</li>
 <li>Berman, H.M., et al. (2000). The Protein Data Bank. <em>Nucleic Acids Res.</em>, 28(1), 235-242.</li>
+
+
 </ol>
-
-
 <h2>附录：Python轨迹分析代码 Python轨迹分析代码(附录)</h2>
 
 <p>以下Python代码演示如何对GROMACS生成的xvg文件进行可视化和统计分析：</p>
@@ -349,16 +349,16 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li><strong>缩短时间步长</strong>：如果用了1 fs步长仍然崩溃，可能是力场问题或体系准备有误</li>
 <li><strong>检查周期性边界条件</strong>：确保-d参数足够大，避免蛋白与自身镜像交互</li>
 <li><strong>确认力场与体系匹配</strong>：比如含有金属离子时需要特殊参数</li>
-</ol>
 
+</ol>
 <h3>NPT密度不稳定？</h3>
 
 <ul>
 <li>确保压力耦合时间常数tau_p设置合理(1-5 ps)</li>
 <li>检查compressibility参数是否与溶剂匹配(水为4.5e-5 bar^-1)</li>
 <li>如果压力震荡太大，可先用Berendsen耦合预平衡，再切换到Parrinello-Rahman</li>
-</ul>
 
+</ul>
 <h3>GPU性能优化</h3>
 
 <ul>
@@ -366,8 +366,8 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li>对于多GPU设置，使用<code>-gpu_id 01 -npme 1</code>将1个GPU专门处理PME</li>
 <li>PME grid间距推荐0.12-0.16 nm，立方体盒子尺寸尽量使用2的幂次以便FFT</li>
 <li>使用<code>update gpu</code>参数让GPU负责坐标更新</li>
-</ul>
 
+</ul>
 <h2>GROMACS在生物材料研究中的应用前景</h2>
 
 <p>对于生物材料研究者，GROMACS是连接分子尺度与宏观力学性能的核心工具。典型应用场景包括：</p>
@@ -378,8 +378,8 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li><strong>纤维素溶剂效应</strong>：研究纤维素纤维在水、离子液体和有机溶剂中的溶胀行为，为纤维素材料设计提供指导</li>
 <li><strong>蛋白质-配体结合</strong>：模拟生物活性分子与蛋白质的结合自由能，为药物设计和生物传感器开发提供定量信息</li>
 <li><strong>纳米纤维自组装</strong>：研究多肽纤维的自发聚集过程，利用粗粒化MD在更大时空尺度上观察纤维形成动力学</li>
-</ul>
 
+</ul>
 <p>本文介绍的基础工作流是进行这些研究的第一步。掌握了溶菌酶的基本模拟后，您可以将其应用到恰当的体系中，并在后续文章中学习SMD、粗粒化、自由能扰动(FEP)等进阶技术。</p>
 </div>
 </article><section class="cta-banner">

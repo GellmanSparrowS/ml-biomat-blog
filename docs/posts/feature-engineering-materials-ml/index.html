@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/feature-engineering-materials-ml/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Feature Engineering for Materials Science: From Experimental Logs to ML-Ready Data", "description": "How to transform scattered experimental data into structured feature matrices for ML, with Python examples.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-ml/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -124,7 +124,6 @@ def smart_impute(df, group_col=&quot;treatment&quot;):
 <li><strong>Correlation analysis</strong>: drop |r| > 0.95</li>
 <li><strong>Variance threshold</strong>: drop near-constant features</li>
 <li><strong>Domain curation</strong>: only physically justified features</li>
-</ol>
 
 <pre><code class="language-python">
 corr_matrix = df_feat[feature_cols].corr().abs()
@@ -135,6 +134,7 @@ to_drop = [col for col in upper_tri.columns
            if any(upper_tri[col] &gt; 0.95)]
 </code></pre>
 
+</ol>
 <h2>Checklist</h2>
 
 <ul>
@@ -143,16 +143,16 @@ to_drop = [col for col in upper_tri.columns
 <li>Missing values handled</li>
 <li>Categoricals encoded</li>
 <li>Interaction features have physical justification</li>
-</ul>
 
+</ul>
 <h2>References</h2>
 
 <ul>
 <li>Kuhn, M. & Johnson, K. (2019). <em>Feature Engineering and Selection</em>. CRC Press.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
+
+
 </ul>
-
-
 <h2>Advanced Feature Engineering Strategies</h2>
 
 <p>Domain-specific feature engineering can dramatically improve model performance with limited data. For fiber biomaterials, consider these physics-informed features that capture known structure-property relationships.</p>

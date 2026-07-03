@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "多尺度模拟在纤维生物材料中的应用入门", "description": "从分子动力学到连续介质力学，系统介绍多尺度模拟在纤维生物材料研究中的方法、工具和实战思路，包含Python代码示例。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -55,8 +55,8 @@
 <li><strong>GROMACS</strong> 或 <strong>LAMMPS</strong> 跑生产级模拟</li>
 <li>蛋白质体系用 <strong>CHARMM</strong> 或 <strong>AMBER</strong> 力场</li>
 <li>涉及化学反应（键断裂/形成）用 <strong>ReaxFF</strong></li>
-</ul>
 
+</ul>
 <p>典型工作流从 MD 中提取纳米尺度的力学参数——杨氏模量、持续长度、氢键密度——然后传递给更高尺度的模型。</p>
 
 <pre><code class="language-python">
@@ -83,8 +83,8 @@ for rate in strain_rates:
 <ul>
 <li><strong>Martini</strong> — 生物分子通用粗粒化力场</li>
 <li><strong>MSCG（多尺度粗粒化）</strong> — 从全原子 MD 系统推导有效势</li>
-</ul>
 
+</ul>
 <p>核心思路：在全原子 MD 的结果上做"平均"，把原子间的复杂相互作用等效为珠子间较少的有效参数。</p>
 
 <h3>连续介质尺度（微米～毫米）</h3>
@@ -96,8 +96,8 @@ for rate in strain_rates:
 <ul>
 <li><strong>Abaqus</strong>（商业）或 <strong>FEniCS</strong>（开源）</li>
 <li>本构模型：超弹性（Ogden, Arruda-Boyce）、粘弹性、纤维增强</li>
-</ul>
 
+</ul>
 <p>关键问题：从分子模拟中得到的刚度如何映射到 FEA 的材料卡片？</p>
 
 <h2>用 Python 串联多尺度</h2>
@@ -132,8 +132,8 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <li><strong>跨尺度一致性</strong> — 确保温度、压强等热力学条件在不同尺度间一致</li>
 <li><strong>计算资源规划</strong> — MD 上 GPU（GROMACS CUDA 版可达 100+ ns/天），FEA 用并行求解器</li>
 <li><strong>不确定度量化</strong> — 从系综平均给出误差范围，不要只报告单一数值</li>
-</ol>
 
+</ol>
 <h2>常见问题</h2>
 
 <p><strong>Q: 我不会 MD，能用 ML 替代吗？</strong></p>
@@ -154,16 +154,16 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <li>Noid, W.G. (2013). Coarse-grained models for biomolecular systems. <em>J. Chem. Phys.</em></li>
 <li>中国力学学会生物力学专业委员会 — 年度学术会议论文集</li>
 <li>GROMACS 中文教程（可在 GitHub 搜索相关仓库）</li>
-</ul>
 
+</ul>
 <h2>参考文献</h2>
 <ul>
 <li>Noid, W.G. (2013). Coarse-grained models for biomolecular systems. <em>J. Chem. Phys.</em></li>
 <li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS.</em></li>
 <li>GROMACS: www.gromacs.org</li>
+
+
 </ul>
-
-
 <h2>讨论：多尺度模拟的未来方向</h2>
 
 <p>多尺度模拟的未来在于三个方向的融合：机器学习加速、自动化工作流和不确定度量化的标准化。机器学习力场正在快速发展，DeepMD和NequIP等软件包可以从DFT级别的计算数据中训练出高精度的经典力场，使纳秒到微秒尺度的MD模拟保持量子力学精度。这对生物材料领域尤其重要——传统力场难以描述丝素蛋白中beta-折叠形成的氢键网络的精确能量分布，而机器学习力场提供了新的解决方案。</p>

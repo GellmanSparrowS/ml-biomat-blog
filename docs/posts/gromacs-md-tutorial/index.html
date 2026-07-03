@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/gromacs-md-tutorial/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS Molecular Dynamics Tutorial: From Structure Preparation to Trajectory Analysis", "description": "A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.", "datePublished": "2026-06-29", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -49,8 +49,8 @@
 <li><strong>Complete workflow toolkit</strong>: Built-in commands for topology construction, solvation, ion addition, energy minimization, equilibration, and production MD</li>
 <li><strong>Rich analysis suite</strong>: Built-in modules for RMSD, RMSF, radius of gyration, hydrogen bonds, SASA, and dozens more</li>
 <li><strong>Active community</strong>: Excellent documentation and Justin Lemkul's classic tutorials (http://www.mdtutorials.com/gmx/) provide outstanding learning resources</li>
-</ul>
 
+</ul>
 <p>For biomaterials researchers, GROMACS enables simulation of silk fibroin beta-sheet transitions, collagen mechanical stretching, cellulose solvent effects, and protein-ligand interactions.</p>
 
 <h2>Installation</h2>
@@ -324,8 +324,8 @@ plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li><strong>Time step</strong>: With H-bond constraints (LINCS), safely increase the time step from 1 fs to 2 fs, or 4-5 fs with virtual sites</li>
 <li><strong>Force field selection</strong>: AMBER99SB-ILDN or CHARMM36m for proteins, OL15 for nucleic acids</li>
 <li><strong>PME grid spacing</strong>: Recommended 0.12-0.16 nm; box dimensions should be powers of 2 for efficient FFT</li>
-</ol>
 
+</ol>
 <h2>Common Issues and Troubleshooting</h2>
 
 <p><strong>Simulation crashes immediately?</strong></p>
@@ -334,15 +334,15 @@ plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li>Reduce time step to 1 fs if crashes persist</li>
 <li>Check PBC settings: ensure <code>-d</code> is large enough</li>
 <li>Confirm force field compatibility with your system</li>
-</ol>
 
+</ol>
 <p><strong>NPT density unstable?</strong></p>
 <ul>
 <li>Ensure <code>tau_p</code> is in the 1-5 ps range</li>
 <li>Verify <code>compressibility</code> matches your solvent (water: 4.5e-5 bar^-1)</li>
 <li>Consider pre-equilibrating with the Berendsen barostat before switching to Parrinello-Rahman</li>
-</ul>
 
+</ul>
 <h2>GROMACS in Multiscale Biomaterials Research</h2>
 
 <p>GROMACS occupies a pivotal position in multiscale modeling:</p>
@@ -351,8 +351,8 @@ plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li><strong>Upward</strong>: Mechanical parameters extracted from MD trajectories (elastic moduli, bond strengths, contact maps) feed coarse-grained models (Martini) and finite element analysis (Abaqus, FEniCS)</li>
 <li><strong>Downward</strong>: QM calculations (Gaussian, ORCA) provide electrostatic potentials for force field parameterization</li>
 <li><strong>ML integration</strong>: MD trajectories serve as training data for machine-learned force fields (ANI, NequIP, MACE)</li>
-</ul>
 
+</ul>
 <p>For fiber biomaterials, GROMACS can simulate silk fibroin conformational transitions, collagen mechanics under tension, and cellulose-solvent interactions. The basic workflow demonstrated here is the first step toward these more specialized applications.</p>
 
 <h2>Summary</h2>

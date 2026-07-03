@@ -64,3 +64,12 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - Best for 8000+ hanzi: use apply_patch to build a _gen_article.py script, then run it once.
 - Never mix write-mode and append-mode on the same file across parallel exec_command calls.
 - The Python generator script pattern is the only reliable method for long Chinese articles.
+
+## MathJax / LaTeX Rendering (2026-07-03)
+MathJax 3 auto-injected in build.py for post pages. After LaTeX-heavy articles, clear browser cache (Ctrl+Shift+R). If formulas fail, check backslash escaping.
+
+## Cache and Deployment (2026-07-03)
+GitHub Pages deploys 1-2 min after push. Hard refresh to verify. Stale content: check Actions tab for deployment status.
+
+## Post-Frontmatter Checklist
+title, date, category, tags[], lang, slug, description. Bilingual: same category, EN slug xxx-ml, ZH xxx-zh.

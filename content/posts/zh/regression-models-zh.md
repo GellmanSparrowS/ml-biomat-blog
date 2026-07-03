@@ -1,0 +1,556 @@
+---
+title: "常用的机器学习回归模型：从线性基准到梯度提升"
+date: "2026-07-03"
+category: "machine-learning"
+tags: ["回归","机器学习","scikit-learn","梯度提升","模型评估"]
+lang: "zh"
+slug: "regression-models-zh"
+description: "系统讲解线性回归、岭回归、Lasso、多项式回归、SVR、决策树、随机森林和梯度提升。"
+---
+## 一、回归问题的本质——从数值预测到函数逼近
+
+回归（Regression）与分类的最根本区别在于输出的性质：分类预测离散的类别标签，回归预测连续的数值。这个区别看似微小，却深刻影响了模型的设计方式、损失函数的选取和评估指标的含义。在生物、材料与结构力学领域，回归问题几乎无处不在：根据材料成分和加工参数预测弹性模量，根据蛋白质序列特征预测结合自由能，根据有限元仿真结果的子集预测全场应力分布，根据传感器时序数据预测剩余疲劳寿命。能否建立一个准确、可泛化的回归模型，在很大程度上决定了"用数据代替实验"这一科学计算思路的实际可信度。
+
+从数学框架来说，回归问题的结构如下：给定训练数据集 \(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N\)，其中 \(\mathbf{x}_i \in \mathbb{R}^d\) 是第 i 个样本的特征向量（d 维），\(y_i \in \mathbb{R}\) 是对应的连续目标值，目标是学习一个函数 \(f: \mathbb{R}^d \rightarrow \mathbb{R}\)，使得对训练集之外的新样本 \(\mathbf{x}\)，\(f(\mathbf{x})\) 能给出精确的数值预测。函数 \(f\) 的具体形式由选择的模型决定——可以是简单的线性函数、多项式、分段常数函数（决策树），也可以是高度非线性的集成模型。
+
+理解回归的核心直觉是**函数逼近（Function Approximation）**。真实世界的数据生成过程背后存在某种未知的真实函数 \(f^*(\mathbf{x})\)，但我们只能观察到它被噪声污染后的样本：\(y_i = f^*(\mathbf{x}_i) + \epsilon_i\)，其中 \(\epsilon_i\) 是均值为零的随机噪声。回归模型的任务是从有限的带噪声观测中估计 \(f^*\)。不同回归算法本质上是不同的估计策略：它们对 \(f^*\) 做出不同的先验假设（线性、分段线性、平滑……），对噪声做出不同的假设（高斯、拉普拉斯……），并用不同的优化方法求解。
+
+回归任务有一个独特挑战在于**过拟合与欠拟合的平衡**，这比在分类中更直观可见。欠拟合意味着模型过于简单，无法捕捉数据中的规律（用直线拟合明显非线性的散点图）；过拟合意味着模型过于复杂，完美拟合了训练数据中的噪声，在新数据上误差反而很大。通过绘制训练误差和验证误差随模型复杂度的变化曲线（学习曲线），可以系统地诊断这两种情况，这是数据科学实践的基本功。
+
+以下是贯穿本文的数据准备与评估模板：
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+
+np.random.seed(42)
+
+# Synthetic regression dataset: cubic trend + noise
+N = 300
+X_raw = np.linspace(-3, 3, N).reshape(-1, 1)
+y_raw = (0.5 * X_raw.ravel()**3
+         - X_raw.ravel()**2
+         + 2 * X_raw.ravel()
+         + np.random.randn(N) * 1.5)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X_raw, y_raw, test_size=0.2, random_state=42
+)
+
+# Standardize: critical for regularized and kernel-based models
+scaler = StandardScaler()
+X_train_sc = scaler.fit_transform(X_train)
+X_test_sc  = scaler.transform(X_test)   # Apply training statistics only
+
+def evaluate(name, y_true, y_pred):
+    """Compact multi-metric regression report."""
+    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
+    mae  = mean_absolute_error(y_true, y_pred)
+    r2   = r2_score(y_true, y_pred)
+    print(f"{name:35s} | RMSE={rmse:.3f}  MAE={mae:.3f}  R²={r2:.4f}")
+```
+
+---
+
+## 二、线性回归——最简洁的基准
+
+线性回归（Linear Regression）是所有回归模型的起点，也是科学研究中使用最广泛的统计工具之一。它的假设极为简单：目标值是输入特征的线性组合加上随机误差。这个假设在材料科学中的杨氏模量-成分关系、生物学中的剂量-效应关系、结构力学中的应力-应变线弹性阶段都有良好的近似。理解线性回归不仅是学习更复杂模型的基础，它本身的推导过程还揭示了监督学习中最核心的几个概念：损失函数、最小二乘估计和几何解释。
+
+先建立直觉。假设你有一批弹簧的刚度测量数据（截面积 x，刚度 y），你想找一条直线 \(\hat{y} = w_1 x + w_0\) 最好地"穿过"这些散点。"最好"的标准需要量化——最自然的想法是让所有点到直线的竖直距离之和最小。但直接求距离之和有正负抵消的问题，于是取距离的平方和，这就是**最小二乘准则（Ordinary Least Squares, OLS）**。推广到多维特征（d 个特征），用矩阵形式表示：设 \(\mathbf{X} \in \mathbb{R}^{N \times (d+1)}\) 是设计矩阵（每行是一个样本的特征，第一列补全为 1 以包含截距），\(\mathbf{y} \in \mathbb{R}^N\) 是目标值向量，\(\mathbf{w} \in \mathbb{R}^{d+1}\) 是待估参数向量，则损失函数为：
+
+$$\mathcal{L}(\mathbf{w}) = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 = (\mathbf{y} - \mathbf{X}\mathbf{w})^T(\mathbf{y} - \mathbf{X}\mathbf{w})$$
+
+对 \(\mathbf{w}\) 求导并令其为零，得到**正规方程（Normal Equation）**：
+
+$$\mathbf{X}^T\mathbf{X}\mathbf{w} = \mathbf{X}^T\mathbf{y}$$
+
+当 \(\mathbf{X}^T\mathbf{X}\) 可逆时，解析解为：
+
+$$\hat{\mathbf{w}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
+
+这是闭合形式解，无需迭代，计算复杂度为 \(O(Nd^2 + d^3)\)。当特征数 \(d\) 很大时（如 \(d > 10^4\)），矩阵求逆变得很慢，此时转用随机梯度下降（SGD）更为高效。
+
+线性回归有几个重要的统计假设，当这些假设成立时，OLS 估计是"最佳线性无偏估计量"（BLUE，Gauss-Markov 定理）：误差项均值为零 \(\mathbb{E}[\epsilon_i]=0\)；误差项同方差（Homoscedasticity），即 \(\text{Var}(\epsilon_i) = \sigma^2\) 为常数；误差项之间不相关；误差项与特征无关。在残差分析中（对训练完成后的预测残差 \(e_i = y_i - \hat{y}_i\) 绘制诊断图），可以系统检验这些假设是否满足：残差对预测值的散点图应呈随机分布（若有明显曲线趋势，说明漏掉了非线性结构）；Q-Q 图检验正态性；尺度-位置图检验同方差性。
+
+线性回归系数 \(\hat{w}_j\) 的含义极为直观：其他特征保持不变时，特征 j 增加一个单位，目标值平均增加 \(\hat{w}_j\)。这种"边际效应"解释在生物统计和材料基因组学中被广泛使用。但需注意多重共线性问题：若两个特征高度相关，各自的系数估计会不稳定（方差极大），此时需要正则化（下一节讨论）或主成分分析降维。
+
+```python
+from sklearn.linear_model import LinearRegression
+
+lr = LinearRegression()
+lr.fit(X_train_sc, y_train)
+
+y_pred_lr = lr.predict(X_test_sc)
+evaluate("Linear Regression", y_test, y_pred_lr)
+print(f"Coefficients : {lr.coef_}")
+print(f"Intercept    : {lr.intercept_:.4f}")
+
+# Residual diagnostics: residuals vs. predicted values
+residuals = y_test - y_pred_lr
+plt.figure(figsize=(8, 4))
+plt.scatter(y_pred_lr, residuals, alpha=0.6, edgecolors='k', linewidths=0.4)
+plt.axhline(0, color='red', linewidth=1.2, linestyle='--')
+plt.xlabel("Predicted values")
+plt.ylabel("Residuals  (Actual − Predicted)")
+plt.title("Residual Plot — Linear Regression")
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+## 三、岭回归与 Lasso——正则化的艺术
+
+普通线性回归在特征数接近或超过样本数时（\(d \approx N\) 或 \(d > N\)），以及特征之间高度相关时，会遭遇严重的数值问题：\(\mathbf{X}^T\mathbf{X}\) 接近奇异，系数估计方差极大，预测极不稳定。这是过拟合的经典场景。正则化（Regularization）通过在损失函数中加入对系数大小的惩罚项，强迫模型"不要太贪婪"，从而在偏差略微增加的代价下大幅降低方差。从贝叶斯视角看，正则化等价于对参数施加先验分布：L2 正则化对应高斯先验，L1 正则化对应拉普拉斯先验。理解这两种正则化方式，实际上是理解偏差-方差权衡在线性模型中的具体体现。
+
+**岭回归（Ridge Regression，L2 正则化）**在损失函数中加入系数 L2 范数的平方：
+
+$$\mathcal{L}_{\text{Ridge}}(\mathbf{w}) = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 + \lambda \|\mathbf{w}\|^2$$
+
+超参数 \(\lambda \geq 0\) 控制正则化强度：\(\lambda = 0\) 退化为普通线性回归；\(\lambda \rightarrow \infty\) 迫使所有系数趋近于零。与普通线性回归类似，岭回归也有闭合解：
+
+$$\hat{\mathbf{w}}_{\text{Ridge}} = (\mathbf{X}^T\mathbf{X} + \lambda\mathbf{I})^{-1}\mathbf{X}^T\mathbf{y}$$
+
+加入 \(\lambda\mathbf{I}\) 使矩阵变得严格正定，从根本上解决了奇异性问题——这正是"岭（Ridge）"这个名字的由来（在统计文献中，\(\lambda\mathbf{I}\) 被形象地称为"岭"）。从几何视角看，岭回归把系数限制在一个 L2 球（圆形区域）内，所有系数都被压缩向零但不为零，因此所有特征都被保留。
+
+**Lasso 回归（Least Absolute Shrinkage and Selection Operator，L1 正则化）**把惩罚项换为 L1 范数：
+
+$$\mathcal{L}_{\text{Lasso}}(\mathbf{w}) = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 + \lambda \|\mathbf{w}\|_1 = \sum_{i=1}^N (y_i - \mathbf{w}^T\mathbf{x}_i)^2 + \lambda \sum_{j=1}^d |w_j|$$
+
+L1 惩罚的等值线形状是一个菱形（在高维是交叉多胞体），其顶角恰好在坐标轴上——这意味着损失函数的最优解往往落在菱形的顶角处，此时某些系数恰好为零。这是 Lasso **稀疏性（Sparsity）**的几何根源：Lasso 不仅压缩系数，还进行隐式的**特征选择（Feature Selection）**，将不重要的特征系数精确推为零。在高维数据（如基因组学、代谢组学，特征数可达数万）中，这个性质极为有价值——让数据告诉你哪些特征真正重要。Lasso 没有闭合解（因为 L1 范数在原点不可微），通常用坐标下降（Coordinate Descent）求解。
+
+**弹性网（Elastic Net）**混合 L1 和 L2 惩罚：
+
+$$\mathcal{L}_{\text{EN}}(\mathbf{w}) = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 + \lambda_1 \|\mathbf{w}\|_1 + \lambda_2 \|\mathbf{w}\|^2$$
+
+弹性网兼有 Lasso 的稀疏性和岭回归的数值稳定性。当特征组之间存在强相关时，Lasso 倾向于从相关组中只保留一个特征（随机选择），而弹性网倾向于同组进退，对成组的物理相关特征（如材料基因组学中多个描述符共同刻画同一物理机制）更为稳健。
+
+```python
+from sklearn.linear_model import Ridge, Lasso, ElasticNet, RidgeCV
+import numpy as np
+
+# Ridge: L2 — numerically stable, retains all features
+ridge = Ridge(alpha=1.0)
+ridge.fit(X_train_sc, y_train)
+evaluate("Ridge (alpha=1.0)", y_test, ridge.predict(X_test_sc))
+
+# Lasso: L1 — sparse feature selection
+lasso = Lasso(alpha=0.1, max_iter=10000)
+lasso.fit(X_train_sc, y_train)
+evaluate("Lasso (alpha=0.1)", y_test, lasso.predict(X_test_sc))
+n_nonzero = np.sum(lasso.coef_ != 0)
+print(f"  Lasso non-zero coefficients: {n_nonzero} / {len(lasso.coef_)}")
+
+# Elastic Net: L1 + L2 hybrid
+en = ElasticNet(alpha=0.1, l1_ratio=0.5, max_iter=10000)
+en.fit(X_train_sc, y_train)
+evaluate("Elastic Net", y_test, en.predict(X_test_sc))
+
+# Cross-validated alpha selection — mandatory in practice
+alphas = np.logspace(-4, 3, 100)
+ridge_cv = RidgeCV(alphas=alphas, cv=5, scoring='neg_mean_squared_error')
+ridge_cv.fit(X_train_sc, y_train)
+print(f"\nRidgeCV best alpha: {ridge_cv.alpha_:.5f}")
+evaluate("Ridge (CV-tuned alpha)", y_test, ridge_cv.predict(X_test_sc))
+
+# Regularization path: how coefficients shrink as alpha increases
+# (For multi-feature data this is the standard diagnostic)
+from sklearn.linear_model import lasso_path
+_, coef_path, _ = lasso_path(X_train_sc, y_train, alphas=alphas)
+# coef_path shape: (n_features, n_alphas)
+```
+
+在实际使用中，选择 \(\lambda\)（scikit-learn 中对应 `alpha`）是关键步骤，必须通过交叉验证完成，而不是靠直觉猜测。正则化路径图（Regularization Path）展示随 \(\lambda\) 从大到小变化时，各特征系数的演化轨迹，是理解特征重要性层次和相关结构的有力可视化工具，在特征数较多的科研场景中应作为标准诊断图输出。
+
+---
+
+## 四、多项式回归与特征工程——突破线性枷锁
+
+线性回归假设目标值是特征的线性函数，这在很多实际问题中过于简单。应力-应变关系在塑性阶段是非线性的，酶催化反应遵循 Michaelis-Menten 动力学，材料疲劳寿命与应力幅呈幂律关系——这些都是明显的非线性现象。多项式回归（Polynomial Regression）是引入非线性的最简单方式：把原始特征的多项式组合作为新特征，喂给一个普通的线性回归。这个看似简单的思路实际上揭示了机器学习中一个深刻的一般性原理：**特征工程（Feature Engineering）**——通过变换和组合原始特征来提升模型表达能力，往往比直接换用更复杂的模型更有效，且在样本量有限时尤为重要。
+
+以单变量为例，对特征 \(x\)，生成多项式特征 \((1, x, x^2, x^3, \ldots, x^p)\)，然后对这个扩展特征向量做线性回归：
+
+$$\hat{y} = w_0 + w_1 x + w_2 x^2 + \ldots + w_p x^p$$
+
+这个模型对参数 \(\mathbf{w}\) 仍然是线性的（Linear in Parameters），因此所有线性回归的工具（正规方程、正则化、交叉验证）都完全适用。但对原始输入 \(x\) 而言，模型是非线性的，能够拟合曲线。推广到多维特征时，`PolynomialFeatures` 会生成所有不超过指定次数的特征项，包括交叉项 \(x_i x_j\)、\(x_i^2 x_j\) 等。对 \(d\) 个特征，2 次多项式生成 \(\binom{d+2}{2}\) 个新特征，3 次生成 \(\binom{d+3}{3}\) 个——特征数的爆炸式增长使正则化变得尤为必要，实践中多项式回归几乎总与岭回归或 Lasso 配合使用。
+
+多项式次数 \(p\) 是关键超参数。\(p\) 太小导致欠拟合；\(p\) 太大导致过拟合——高次多项式会在数据点之间剧烈震荡，在区间边界处尤为严重（龙格现象）。通过比较不同 \(p\) 下的训练集误差和交叉验证误差，找到偏差-方差折中最佳的次数，这也是所有"超参数调优"问题的通用方法论。
+
+特征工程的思想远不局限于多项式。在材料科学中，若已知弹性模量与密度之间可能遵循某种幂律，可以手动构造 \(\log(\rho)\)、\(1/d^2\)（粒径倒数）等物理启发的特征；在生物力学中，膝关节力矩与关节角度可能呈正弦关系，用 \(\sin(\theta)\)、\(\cos(\theta)\) 作特征往往比多项式更有效且更稳定。将领域知识注入特征设计，是数据量有限时提升模型性能最高效的路径，也是计算研究者区别于纯机器学习从业者的核心竞争力。
+
+```python
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import Ridge
+
+# Systematically compare polynomial degrees
+print(f"{'Degree':>7} | {'Test R²':>8} | {'CV RMSE':>10}")
+print("-" * 35)
+for degree in [1, 2, 3, 4, 5, 7]:
+    pipe = Pipeline([
+        ('poly',   PolynomialFeatures(degree=degree, include_bias=False)),
+        ('scaler', StandardScaler()),
+        ('ridge',  Ridge(alpha=1.0))
+    ])
+    pipe.fit(X_train, y_train)
+
+    test_r2 = r2_score(y_test, pipe.predict(X_test))
+    cv_mse  = cross_val_score(pipe, X_train, y_train,
+                              cv=5, scoring='neg_mean_squared_error')
+    cv_rmse = np.sqrt(-cv_mse.mean())
+    print(f"{degree:>7d} | {test_r2:>8.4f} | {cv_rmse:>8.3f} ± {cv_mse.std():.3f}")
+
+# Best pipeline: polynomial expansion + Ridge regularization
+best_pipe = Pipeline([
+    ('poly',   PolynomialFeatures(degree=3, include_bias=False)),
+    ('scaler', StandardScaler()),
+    ('ridge',  Ridge(alpha=0.5))
+])
+best_pipe.fit(X_train, y_train)
+evaluate("Poly(3) + Ridge", y_test, best_pipe.predict(X_test))
+```
+
+使用 `Pipeline` 封装整个预处理-建模流程有两个关键好处：一是防止**数据泄露**（标准化参数和多项式特征只在训练集上估计，通过 pipeline 的 `fit_transform` 机制自动保证，测试集只调用 `transform`）；二是方便交叉验证（`cross_val_score` 对整个 pipeline 调用时，保证每一折的预处理都独立进行，不会将验证折的信息泄露给训练折）。这是生产级 scikit-learn 代码的基本范式，在真实研究中至关重要，任何特征预处理步骤都应包含在 pipeline 内。
+
+---
+
+## 五、支持向量回归——容忍误差的ε管道
+
+支持向量回归（Support Vector Regression, SVR）是将 SVM 的间隔最大化思想迁移到回归任务的产物，其核心理念与分类 SVM 截然不同：分类 SVM 寻找使类别间隔最大的超平面，而 SVR 寻找能把大多数训练数据"包住"的最宽管道（tube），同时只对落在管道之外的点施加惩罚。这个设计引入了一个在普通回归中没有的概念：**ε-不敏感损失（ε-Insensitive Loss）**。
+
+直觉如下：假设你在拟合一条曲线穿过散点，但你相信数据中有一定的测量误差，对于偏差在 ε 范围内的预测，你认为是"足够好"的，不施加任何惩罚；只有当预测值与真实值的偏差超过 ε 时，才开始线性累积损失。这就像给回归曲线设置了一条宽度为 \(2\varepsilon\) 的"容忍带"，落在容忍带内的样本对模型参数的更新没有任何贡献，只有落在外部的"困难样本"（对应分类 SVM 中的支持向量）才起作用。
+
+数学形式化为：
+
+$$\min_{\mathbf{w}, b, \xi, \xi^*} \frac{1}{2}\|\mathbf{w}\|^2 + C \sum_{i=1}^N (\xi_i + \xi_i^*)$$
+
+$$\text{s.t.} \quad y_i - (\mathbf{w}^T\mathbf{x}_i + b) \leq \varepsilon + \xi_i, \quad (\mathbf{w}^T\mathbf{x}_i + b) - y_i \leq \varepsilon + \xi_i^*, \quad \xi_i, \xi_i^* \geq 0$$
+
+其中 \(\xi_i\)、\(\xi_i^*\) 是上下两侧的松弛变量，量化超出容忍带的程度，\(C\) 控制对违规的惩罚强度。与分类 SVM 完全相同，SVR 同样支持**核技巧**：通过 RBF 核等将输入映射到高维空间后做线性回归，等价于在原始空间中拟合非线性函数，且不显式计算高维映射。
+
+SVR 有三个关键超参数：C（正则化强度）、ε（容忍带宽度，越大则函数越平滑，更多点被"包住"）以及核参数 γ（RBF 核的带宽，控制函数的局部性）。三个超参数构成一个三维搜索空间，调优代价相对较大，但在样本量适中（N < 10,000）且数据含有少量离群点时，SVR 往往比普通最小二乘回归稳定得多——ε-不敏感损失的线性增长对极端值的惩罚远低于最小二乘的平方惩罚，天然具有鲁棒性。
+
+```python
+from sklearn.svm import SVR, LinearSVR
+from sklearn.model_selection import GridSearchCV
+
+# 3D grid search: C, epsilon, gamma
+param_grid = {
+    'C':       [0.1, 1, 10, 100],
+    'epsilon': [0.01, 0.1, 0.5, 1.0],
+    'gamma':   ['scale', 'auto', 0.01, 0.1]
+}
+gs_svr = GridSearchCV(
+    SVR(kernel='rbf'), param_grid,
+    cv=5, scoring='neg_mean_squared_error', n_jobs=-1
+)
+gs_svr.fit(X_train_sc, y_train)
+
+print(f"Best SVR params: {gs_svr.best_params_}")
+evaluate("SVR (RBF, grid-tuned)", y_test, gs_svr.predict(X_test_sc))
+
+# LinearSVR: scales to large N — equivalent to SVR with linear kernel
+lin_svr = LinearSVR(C=1.0, epsilon=0.1, max_iter=10000)
+lin_svr.fit(X_train_sc, y_train)
+evaluate("Linear SVR", y_test, lin_svr.predict(X_test_sc))
+
+# Epsilon sensitivity: visualize the tube
+best_svr = gs_svr.best_estimator_
+X_plot = np.linspace(X_test_sc.min(), X_test_sc.max(), 200).reshape(-1, 1)
+y_plot = best_svr.predict(X_plot)
+eps    = gs_svr.best_params_['epsilon']
+
+plt.figure(figsize=(9, 4))
+plt.scatter(X_test_sc, y_test, alpha=0.5, label='Test data', s=20)
+plt.plot(X_plot, y_plot, 'r-', label='SVR prediction')
+plt.fill_between(X_plot.ravel(), y_plot - eps, y_plot + eps,
+                 alpha=0.2, color='red', label=f'ε-tube (ε={eps})')
+plt.legend(); plt.title("SVR — ε-Insensitive Tube"); plt.tight_layout(); plt.show()
+```
+
+SVR 的主要局限与分类 SVM 相同：训练复杂度高（接近 \(O(N^2)\) 到 \(O(N^3)\)），大数据集（N > 50,000）不实用；超参数调优代价较大。当数据量较大时，梯度提升系列（下一节）是更实际的选择。
+
+---
+
+## 六、决策树回归与随机森林——分段逼近与集成平均
+
+决策树不仅能做分类，也能做回归。决策树回归（Decision Tree Regressor）的基本逻辑与分类树完全类似：递归地把特征空间分割为若干矩形区域，在每个叶节点预测一个常数值——通常是该区域内所有训练样本目标值的均值。因此，决策树回归本质上是一个**分段常数函数（Piecewise Constant Function）**逼近器：特征空间被切割得越细（树越深），预测函数越接近阶梯状，对训练数据拟合越好，但对新数据的泛化越差。这与所有模型共同的过拟合问题在决策树中表现得特别直观：一棵无约束的深树，在训练集上 R² = 1，在测试集上可能 R² < 0。
+
+分裂标准由最小化**均方误差（MSE）**的信息增益决定：对节点 t，最优分裂使得分裂后两个子节点的加权 MSE 之和最小：
+
+$$\min_{j,\,\tau} \left[\frac{|t_L|}{|t|} \text{MSE}(t_L) + \frac{|t_R|}{|t|} \text{MSE}(t_R)\right]$$
+
+其中 \(\text{MSE}(t) = \frac{1}{|t|}\sum_{i \in t} (y_i - \bar{y}_t)^2\)，\(\bar{y}_t\) 是节点 t 内目标值的均值，搜索在所有特征 j 和所有阈值 \(\tau\) 上穷举（或用近似算法加速）。
+
+**随机森林回归（Random Forest Regressor）**用 Bagging + 特征随机化策略解决单棵树的高方差问题：分类时用多数投票聚合，回归时用 T 棵树的**均值聚合（Mean Aggregation）**——当各树的预测误差相互独立时，平均后的方差降低约 T 倍，而偏差基本不变。随机森林回归还有一个在科研中极为实用的特性：**预测不确定性量化**。通过记录 T 棵树各自的预测值，可以计算预测的均值和标准差，为每个预测附上不确定度信息。在材料性能预测中，"弹性模量预测为 210 GPa ± 5 GPa"比单一点预测值更有价值，能指导实验优先级和工程决策。
+
+随机森林回归的一个根本局限需要特别说明：**外推能力差**。随机森林的预测始终是训练集目标值的加权均值，因此对超出训练集输入范围的样本（外推情境），预测值会"平台化"并固定在训练集边界附近，而非延续真实趋势。在需要预测超出历史观测范围的材料性能（如极高温或极端成分配比）时，这是一个根本性的局限，此时应回归线性或多项式模型，或求助于物理约束的神经网络。
+
+```python
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+
+# Decision tree: depth controls the bias-variance tradeoff
+print(f"{'max_depth':>12} | {'Train R²':>9} | {'Test R²':>8}")
+for depth in [2, 4, 6, 10, None]:
+    dt = DecisionTreeRegressor(max_depth=depth, min_samples_leaf=5, random_state=42)
+    dt.fit(X_train, y_train)
+    tr2 = r2_score(y_train, dt.predict(X_train))
+    te2 = r2_score(y_test,  dt.predict(X_test))
+    print(f"{str(depth):>12s} | {tr2:>9.4f} | {te2:>8.4f}")
+
+# Random forest regression
+rf_reg = RandomForestRegressor(
+    n_estimators=300,
+    min_samples_leaf=3,
+    max_features=1.0,       # For 1D toy data; use 'sqrt' for high-d
+    oob_score=True,
+    n_jobs=-1,
+    random_state=42
+)
+rf_reg.fit(X_train, y_train)
+evaluate("Random Forest Regressor", y_test, rf_reg.predict(X_test))
+print(f"OOB R²: {rf_reg.oob_score_:.4f}")
+
+# Prediction uncertainty: distribution across individual trees
+tree_preds = np.array([t.predict(X_test) for t in rf_reg.estimators_])
+pred_mean  = tree_preds.mean(axis=0)   # Shape: (n_test,)
+pred_std   = tree_preds.std(axis=0)    # Predictive standard deviation
+print(f"Mean predictive uncertainty (std): {pred_std.mean():.4f}")
+
+# Visualize uncertainty bands on sorted test set
+order = np.argsort(X_test.ravel())
+plt.figure(figsize=(9, 4))
+plt.fill_between(X_test.ravel()[order],
+                 (pred_mean - 2*pred_std)[order],
+                 (pred_mean + 2*pred_std)[order],
+                 alpha=0.3, label='±2σ uncertainty')
+plt.plot(X_test.ravel()[order], pred_mean[order], 'b-', label='RF mean prediction')
+plt.scatter(X_test.ravel(), y_test, s=15, alpha=0.5, color='gray', label='Test data')
+plt.legend(); plt.title("RF Regressor — Predictive Uncertainty"); plt.tight_layout(); plt.show()
+```
+
+---
+
+## 七、梯度提升回归——XGBoost 与 LightGBM
+
+梯度提升回归（Gradient Boosting Regression）是目前在结构化数据回归任务上最强的算法之一，也是数据竞赛中最常见的获胜方案。其思想是：通过串行累加一系列弱学习器（浅决策树），逐步逼近目标函数。与随机森林的"多个独立树取平均"不同，梯度提升中的每棵树专门拟合前面所有树的残差，是一种在函数空间中进行梯度下降的思想——这也是"梯度提升"这个名字的来源。
+
+理解梯度提升从最简单的情形出发。对均方误差损失，第一棵树 \(T_1\) 拟合原始目标 \(\mathbf{y}\)，得到预测 \(\hat{F}_1(\mathbf{x}) = T_1(\mathbf{x})\)；计算残差 \(r_1 = \mathbf{y} - \hat{F}_1\)，第二棵树 \(T_2\) 拟合这些残差；新的集成预测为 \(\hat{F}_2 = \hat{F}_1 + \eta T_2\)，其中 \(\eta\) 是学习率（缩减步长）；依此类推，第 m 棵树拟合前 m-1 棵树的残差：
+
+$$\hat{F}_m(\mathbf{x}) = \hat{F}_{m-1}(\mathbf{x}) + \eta \cdot T_m(\mathbf{x})$$
+
+对于任意可微损失函数 \(\mathcal{L}(y, \hat{y})\)，"残差"推广为损失函数关于当前预测的**负梯度（伪残差，Pseudo-Residuals）**：
+
+$$r_{im} = -\left[\frac{\partial \mathcal{L}(y_i, F(\mathbf{x}_i))}{\partial F(\mathbf{x}_i)}\right]_{F=\hat{F}_{m-1}}$$
+
+这个推广使梯度提升能适配不同的损失函数：均方误差对应普通残差；平均绝对误差对应残差的符号（使模型对离群点更鲁棒）；分位数损失对应分位数回归（直接输出置信区间而非点预测，在工程可靠性分析中极为有价值）。
+
+**XGBoost**（eXtreme Gradient Boosting）引入了二阶梯度信息（泰勒展开到二阶项，利用目标函数的曲率信息加速收敛）、树结构正则化（惩罚叶节点数量和叶权重大小以防止过拟合）、列采样（类似随机森林的特征随机化）以及并行化的节点分裂算法。**LightGBM** 进一步引入直方图分桶（将连续特征离散化为直方图，大幅减少分裂点搜索复杂度，内存占用降低数倍）和基于梯度的单边采样（GOSS，优先保留梯度大的样本），在大数据集上速度比 XGBoost 快数倍，是当前工业界最常用的梯度提升实现。
+
+```python
+from sklearn.ensemble import GradientBoostingRegressor
+
+# sklearn built-in gradient boosting (good baseline, slower than XGB/LGB)
+gb_reg = GradientBoostingRegressor(
+    n_estimators=500,
+    learning_rate=0.05,     # Small lr + more trees = generally better generalization
+    max_depth=3,            # Shallow "stumps" are standard for boosting
+    subsample=0.8,          # Stochastic GBM: use 80% of data per tree
+    min_samples_leaf=5,
+    validation_fraction=0.1,
+    n_iter_no_change=30,    # Early stopping: halt if no improvement for 30 rounds
+    random_state=42
+)
+gb_reg.fit(X_train, y_train)
+evaluate("Gradient Boosting (sklearn)", y_test, gb_reg.predict(X_test))
+print(f"Trees used (early stopping): {gb_reg.n_estimators_}")
+
+# XGBoost
+try:
+    import xgboost as xgb
+    xgb_reg = xgb.XGBRegressor(
+        n_estimators=500,
+        learning_rate=0.05,
+        max_depth=4,
+        subsample=0.8,
+        colsample_bytree=0.8,   # Feature subsampling per tree
+        reg_alpha=0.1,          # L1 regularization on leaf weights
+        reg_lambda=1.0,         # L2 regularization on leaf weights
+        early_stopping_rounds=30,
+        eval_metric='rmse',
+        random_state=42,
+        verbosity=0
+    )
+    xgb_reg.fit(X_train, y_train,
+                eval_set=[(X_test, y_test)], verbose=False)
+    evaluate("XGBoost", y_test, xgb_reg.predict(X_test))
+    print(f"Best XGBoost round: {xgb_reg.best_iteration}")
+except ImportError:
+    print("XGBoost not installed — run: pip install xgboost")
+
+# LightGBM
+try:
+    import lightgbm as lgb
+    lgb_reg = lgb.LGBMRegressor(
+        n_estimators=500,
+        learning_rate=0.05,
+        num_leaves=31,          # Controls tree complexity (default 31)
+        subsample=0.8,
+        colsample_bytree=0.8,
+        reg_alpha=0.1,
+        reg_lambda=1.0,
+        random_state=42,
+        verbose=-1
+    )
+    lgb_reg.fit(
+        X_train, y_train,
+        eval_set=[(X_test, y_test)],
+        callbacks=[lgb.early_stopping(30, verbose=False),
+                   lgb.log_evaluation(period=-1)]
+    )
+    evaluate("LightGBM", y_test, lgb_reg.predict(X_test))
+except ImportError:
+    print("LightGBM not installed — run: pip install lightgbm")
+
+# Quantile regression: predict 10th and 90th percentile for uncertainty bounds
+try:
+    import xgboost as xgb
+    q10 = xgb.XGBRegressor(objective='reg:quantileerror', quantile_alpha=0.10,
+                            n_estimators=300, learning_rate=0.05, verbosity=0)
+    q90 = xgb.XGBRegressor(objective='reg:quantileerror', quantile_alpha=0.90,
+                            n_estimators=300, learning_rate=0.05, verbosity=0)
+    q10.fit(X_train, y_train); q90.fit(X_train, y_train)
+    coverage = np.mean((y_test >= q10.predict(X_test)) &
+                       (y_test <= q90.predict(X_test)))
+    print(f"80% prediction interval coverage: {coverage:.3f} (ideal ≈ 0.80)")
+except Exception:
+    pass
+```
+
+梯度提升的核心调参经验：学习率（`learning_rate`）越小，需要越多的树（`n_estimators`），但泛化通常越好，0.01~0.1 是常用范围；树的深度（`max_depth`）控制单棵树的复杂度，回归任务通常 3~6；`subsample` 和 `colsample_bytree` 引入随机性，防止过拟合，效果类似 Dropout；`early_stopping_rounds` 是防止过拟合和节省计算时间的最有效手段，在生产环境中几乎必须启用。
+
+---
+
+## 八、回归评估指标——MSE、MAE、R² 的选择与局限
+
+选好模型后，如何准确评估其性能？回归问题的评估比分类更微妙，因为不同的误差度量方式对"什么是好的预测"有不同的隐含假设，误选指标可能导致对模型性能的严重误判。在科研报告中同时汇报多个指标，并辅以诊断图，是负责任的实践规范。
+
+**均方误差（Mean Squared Error, MSE）**是最经典的回归损失：
+
+$$\text{MSE} = \frac{1}{N}\sum_{i=1}^N (y_i - \hat{y}_i)^2$$
+
+均方根误差（RMSE）是 MSE 的平方根，与目标值同量纲，更直观。MSE 对大误差施以平方惩罚，因此对离群点非常敏感——误差为 10 的样本贡献的 MSE 是误差为 1 的样本的 100 倍。在材料性能预测中，若大多数样本预测误差在 1 MPa 以内，但有一两个极端值达到 20 MPa（可能是相变点附近的特殊样本），MSE 会被极端值主导，不能客观反映模型在大多数样本上的真实性能。
+
+**平均绝对误差（Mean Absolute Error, MAE）**：
+
+$$\text{MAE} = \frac{1}{N}\sum_{i=1}^N |y_i - \hat{y}_i|$$
+
+MAE 对所有大小的误差线性对待，因此对离群点的敏感性远低于 MSE。当数据中有少量不可避免的异常值（如传感器故障导致的偶发异常测量点）时，用 MAE 评估更能反映模型在"正常样本"上的表现。MAE 同时也是以中位数为条件期望的损失（最小化 MAE 等价于预测条件中位数，而非条件均值），在分布有偏斜时更鲁棒。
+
+**决定系数（Coefficient of Determination, \(R^2\)）**：
+
+$$R^2 = 1 - \frac{\sum_{i=1}^N (y_i - \hat{y}_i)^2}{\sum_{i=1}^N (y_i - \bar{y})^2} = 1 - \frac{\text{SS}_\text{res}}{\text{SS}_\text{tot}}$$
+
+\(R^2\) 衡量模型解释了目标变量总方差的比例。\(R^2 = 1\) 表示完美预测；\(R^2 = 0\) 表示模型等价于始终预测目标均值（零技能基线）；\(R^2 < 0\) 意味着模型性能甚至不如均值基线，这是一个强烈的报警信号。\(R^2\) 的最大优点是**无量纲**，可以跨数据集、跨量纲任务比较模型性能，而 MSE 和 MAE 是量纲相关的，不能直接比较预测 GPa 量级弹性模量和预测 nm 量级纳米颗粒粒径的两个模型的误差。需注意：训练集上的 \(R^2\) 随模型复杂度单调增加，因此只有测试集或交叉验证的 \(R^2\) 有意义。
+
+**平均绝对百分比误差（MAPE）**提供相对误差视角：
+
+$$\text{MAPE} = \frac{100\%}{N}\sum_{i=1}^N \left|\frac{y_i - \hat{y}_i}{y_i}\right|$$
+
+便于跨量级解读，但当目标值接近零时会发散，不适用于有零值或接近零值的目标。
+
+```python
+def comprehensive_eval(name, y_true, y_pred):
+    """Compute and display all standard regression metrics."""
+    mse  = mean_squared_error(y_true, y_pred)
+    rmse = np.sqrt(mse)
+    mae  = mean_absolute_error(y_true, y_pred)
+    r2   = r2_score(y_true, y_pred)
+    mask = y_true != 0
+    mape = np.mean(np.abs((y_true[mask]-y_pred[mask]) / y_true[mask])) * 100
+
+    print(f"\n{'='*52}")
+    print(f" {name}")
+    print(f"{'='*52}")
+    print(f"  MSE   = {mse:>10.4f}")
+    print(f"  RMSE  = {rmse:>10.4f}")
+    print(f"  MAE   = {mae:>10.4f}")
+    print(f"  R²    = {r2:>10.4f}")
+    print(f"  MAPE  = {mape:>9.2f}%")
+
+def regression_diagnostics(y_true, y_pred, title=""):
+    """Two-panel diagnostic: predicted vs. actual + residual distribution."""
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+    # Predicted vs. actual (ideal: all points on y = x line)
+    axes[0].scatter(y_true, y_pred, alpha=0.6, edgecolors='k', linewidths=0.3, s=25)
+    lims = [min(y_true.min(), y_pred.min()), max(y_true.max(), y_pred.max())]
+    axes[0].plot(lims, lims, 'r--', lw=1.5, label='Perfect prediction')
+    axes[0].set_xlabel("Actual values")
+    axes[0].set_ylabel("Predicted values")
+    axes[0].set_title(f"Predicted vs Actual — {title}")
+    axes[0].legend()
+
+    # Residual histogram (should be centered at 0, roughly symmetric)
+    residuals = y_true - y_pred
+    axes[1].hist(residuals, bins=30, edgecolor='black', alpha=0.7, color='steelblue')
+    axes[1].axvline(0, color='red', lw=1.5, linestyle='--')
+    axes[1].set_xlabel("Residual  (Actual − Predicted)")
+    axes[1].set_ylabel("Count")
+    axes[1].set_title(f"Residual Distribution — {title}")
+
+    plt.tight_layout()
+    plt.show()
+```
+
+在科研报告中，除了汇报数值指标，还应包含两类诊断图：**预测值 vs. 真实值散点图**（理想情况下所有点落在 y = x 对角线上，系统性偏离揭示模型偏差结构）和**残差分布图**（残差应呈以零为中心的对称分布；若有明显偏斜，说明模型存在系统性偏差；若残差方差随预测值增大而增大，说明存在异方差结构，需要目标值变换或加权回归）。这两类图所传递的诊断信息，远比单一的 RMSE 或 R² 数值丰富。
+
+---
+
+## 九、模型选择实用指南——从问题结构到算法
+
+与分类问题一样，回归中也不存在普遍最优的算法——这是"没有免费的午餐定理"在回归问题上的映射。不同算法对数据量、特征结构、噪声分布、外推需求和可解释性的适应性各异，合理的选择策略比单纯追求最高精度更重要。
+
+**数据量的约束**：样本量极少（N < 200）时，普通线性回归、岭回归或 Lasso 是最稳健的选择，因为它们的有效参数量少，不容易在少量数据上过拟合，且可解释的系数分析能提供有价值的科学洞察。样本量适中（200 < N < 10,000）时，SVR（RBF）、随机森林和 sklearn 的梯度提升是首选。大数据集（N > 10,000）时，LightGBM 和 XGBoost 具备显著的速度优势，且通常能获得最优精度；SVR 因为 \(O(N^2)\) 的训练代价变得不切实际。
+
+**可解释性的约束**在材料科学和生物力学领域往往是研究本身的要求之一，而不仅仅是工程需求。线性回归（含岭和 Lasso）的系数直接对应各特征的边际效应，在特征经过标准化后具有物理含义；多项式回归的系数也有明确含义，但高次交叉项难以单独解读；随机森林和梯度提升可通过特征重要性分数和 SHAP 值获得部分全局和局部解释，但不如线性模型直接。SHAP（SHapley Additive exPlanations）是目前最系统的模型解释工具，能为任意模型的每个预测计算每个特征的贡献量，将"黑盒预测"与"特征归因分析"连接起来，在高影响力研究中越来越被视为必要的报告内容。
+
+**外推能力的约束**是在材料和力学领域使用机器学习回归时必须明确认识的根本局限。线性回归对外推行为最可预测（按线性趋势延伸，若真实关系线性，则外推可靠）；多项式回归在训练集内非线性拟合能力强，但训练集之外的外推极不稳定；树模型（随机森林、梯度提升）在训练集范围内非线性拟合能力强，但对外推区域给出常数预测（等于训练集边界处的预测值），在预测超出历史观测范围的材料性能时是根本性局限。当外推是研究需求的核心时，应回归物理约束的参数化模型，或使用高斯过程回归（Gaussian Process Regression）——后者通过核函数显式建模不确定性，并在训练集外自动给出增大的预测置信区间。
+
+**噪声与离群点的约束**：数据较干净时，MSE 损失（普通最小二乘和梯度提升的默认损失）表现最好；数据含有较多离群点时，MAE 损失（对应中位数回归）、SVR（ε-不敏感损失）和 Huber 损失下的回归（`HuberRegressor`，在小误差区域用 MSE，大误差区域自动切换为 MAE）更稳健，不会被少数极端异常值主导。
+
+| 模型 | 数据量 | 非线性 | 外推 | 可解释性 | 离群点鲁棒性 | 需要缩放 |
+|---|---|---|---|---|---|---|
+| 线性回归 | 小～大 | 差 | 好（线性延伸） | 最高 | 差 | 是 |
+| 岭 / Lasso | 小～大 | 差 | 好 | 高 | 差 | 是 |
+| 多项式 + 岭 | 小～中 | 中 | 差（震荡） | 中 | 差 | 是 |
+| SVR（RBF） | 小～中 | 好 | 中 | 低 | 好 | 是 |
+| 决策树 | 中～大 | 好 | 差（常数） | 高 | 中 | 否 |
+| 随机森林 | 中～大 | 好 | 差（常数） | 中 | 中 | 否 |
+| 梯度提升 | 中～大 | 最好 | 差（常数） | 中 | 中（可调） | 否 |
+
+**实践工作流建议**：在一个新回归问题上，建议按如下顺序推进。首先用线性回归（或岭回归）建立基线，获得特征重要性的初步判断和可解释的边际效应；然后检验残差图，判断是否存在明显的非线性结构；如果有，先尝试引入多项式特征或物理启发的变换，因为这最节约数据；如果样本量允许且非线性程度高，转向随机森林；最后在有充足样本时，用交叉验证比较随机森林和梯度提升，选择泛化性能更好的。在整个过程中，SHAP 值分析是连接"模型预测性能"和"科学机理解释"的桥梁，不应被视为可选步骤而是标准流程的一部分。
+
+---
+
+## 参考文献
+
+1. Friedman, J. H. (2001). Greedy function approximation: A gradient boosting machine. *Annals of Statistics*, 29(5), 1189–1232. https://doi.org/10.1214/aos/1013203451
+
+2. Tibshirani, R. (1996). Regression shrinkage and selection via the Lasso. *Journal of the Royal Statistical Society: Series B*, 58(1), 267–288. https://doi.org/10.1111/j.2517-6161.1996.tb02080.x
+
+3. Hoerl, A. E., & Kennard, R. W. (1970). Ridge regression: Biased estimation for nonorthogonal problems. *Technometrics*, 12(1), 55–67. https://doi.org/10.1080/00401706.1970.10488634
+
+4. Drucker, H., Burges, C. J. C., Kaufman, L., Smola, A., & Vapnik, V. (1997). Support vector regression machines. *Advances in Neural Information Processing Systems*, 9, 155–161.
+
+5. Breiman, L. (2001). Random forests. *Machine Learning*, 45(1), 5–32. https://doi.org/10.1023/A:1010933404324
+
+6. Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011). Scikit-learn: Machine learning in Python. *Journal of Machine Learning Research*, 12, 2825–2830.
+
+7. Chen, T., & Guestrin, C. (2016). XGBoost: A scalable tree boosting system. *Proceedings of the 22nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining*, 785–794. https://doi.org/10.1145/2939672.2939785
+
+8. Ke, G., Meng, Q., Finley, T., et al. (2017). LightGBM: A highly efficient gradient boosting decision tree. *Advances in Neural Information Processing Systems*, 30, 3146–3154.

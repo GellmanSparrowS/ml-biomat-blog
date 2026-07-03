@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/python-env-setup-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python科学计算环境完全搭建指南：从零到生产力", "description": "面向生物和材料研究生的Python环境搭建完全指南：Miniconda安装、环境管理、Jupyter配置、VS Code集成和常见问题解决。", "datePublished": "2026-06-27", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/python-env-setup-zh/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -123,9 +123,9 @@ conda env create -f environment.yml # 从配置重建环境
 <li>Conda documentation: https://docs.conda.io</li>
 <li>Jupyter documentation: https://docs.jupyter.org</li>
 <li>VS Code Python setup: https://code.visualstudio.com/docs/python/python-tutorial</li>
+
+
 </ul>
-
-
 <h3>九、多环境管理与项目隔离</h3>
 
 <p>在实际科研工作中，你可能会同时进行多个项目，它们需要的Python版本或包版本可能不同。Conda的虚拟环境机制让你可以为每个项目创建完全独立的环境。例如你的AFM数据分析项目需要特定版本的科学计算库，而你的机器学习项目需要最新版的scikit-learn和PyTorch。这两个环境之间完全隔离，不会相互干扰。</p>

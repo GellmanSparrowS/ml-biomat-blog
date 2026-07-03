@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/stress-strain-curves/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Understanding Stress-Strain Curves: A Materials Science Primer", "description": "A beginner-friendly guide to interpreting stress-strain curves: elastic modulus, yield strength, ultimate strength, toughness, and how these concepts apply to soft biomaterials.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/stress-strain-curves/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -33,7 +33,7 @@
 <span class="lang-badge en">EN</span>
 <h1>Understanding Stress-Strain Curves: A Materials Science Primer</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/biomaterials/">Biomaterials</a>
+<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/biomaterials/">Bio-Materials-Structures</a>
 </div>
 </header>
 <div class="content">
@@ -75,7 +75,6 @@ def compute_mechanical_properties(strain, stress):
 <li><strong>Hydration matters</strong> — test hydrated unless studying dried samples</li>
 <li><strong>Nonlinear elasticity</strong> — J-shaped curves common (toe region + linear region)</li>
 <li><strong>Hysteresis</strong> — loading/unloading differ; this is energy dissipation</li>
-</ol>
 
 <pre><code class="language-python">
 def tangent_modulus(strain, stress, at_strain=0.05):
@@ -84,6 +83,7 @@ def tangent_modulus(strain, stress, at_strain=0.05):
     return np.polyfit(strain[idx-w:idx+w], stress[idx-w:idx+w], 1)[0]
 </code></pre>
 
+</ol>
 <h2>Common Mistakes</h2>
 
 <ul>
@@ -91,17 +91,17 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 <li>Not reporting sample dimensions</li>
 <li>Grip slippage appearing as extra strain</li>
 <li>Over-interpreting noise without smoothing</li>
-</ul>
 
+</ul>
 <h2>References</h2>
 
 <ul>
 <li>Callister, W.D. (2018). <em>Materials Science and Engineering: An Introduction</em>. Wiley.</li>
 <li>Meyers, M.A. & Chawla, K.K. (2009). <em>Mechanical Behavior of Materials</em>. Cambridge.</li>
 <li>GitHub: <a href="https://github.com/nickabattista/mech_analyzer">MechAnalyzer</a> — open-source stress-strain analysis tool.</li>
+
+
 </ul>
-
-
 <h2>Advanced Topics in Stress-Strain Analysis</h2>
 
 <p>True stress and true strain differ from engineering values at large deformations. Engineering stress uses the original cross-sectional area, while true stress accounts for the instantaneous area reduction during deformation. For strains beyond 10%, the difference becomes significant. Most published data for soft biomaterials report engineering stress unless otherwise specified, so always check the methodology section when comparing literature values.</p>

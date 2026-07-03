@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/python-tools-materials-research-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python科研工具箱完全指南：材料科学与生物研究必备", "description": "面向材料/生物研究生的完整Python科研工具指南：从NumPy数据处理到Matplotlib发表级作图，含ASE原子模拟和skimage图像分析。", "datePublished": "2026-06-27", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/python-tools-materials-research-zh/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -265,9 +265,9 @@ conda install -c conda-forge seaborn scikit-learn scikit-image ase pymatgen -y
 <li>Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. <em>Computing in Science & Engineering</em>, 9(3), 90-95. https://doi.org/10.1109/MCSE.2007.55</li>
 <li>van der Walt, S. et al. (2014). scikit-image: image processing in Python. <em>PeerJ</em>, 2, e453. https://doi.org/10.7717/peerj.453</li>
 <li>McKinney, W. (2010). Data Structures for Statistical Computing in Python. <em>Proceedings of the 9th Python in Science Conference</em>, 56-61. https://doi.org/10.25080/Majora-92bf1922-00a</li>
+
+
 </ul>
-
-
 <h3>八、常见数据处理流程模板</h3>
 
 <p>以下是一个完整的材料力学测试数据处理管道，可直接复制到Jupyter中修改使用：</p>
@@ -387,9 +387,9 @@ for chunk in chunks:
 <li>Pedregosa, F. et al. (2011). Scikit-learn: Machine Learning in Python. <em>Journal of Machine Learning Research</em>, 12, 2825-2830.</li>
 <li>Larsen, A.H. et al. (2017). The Atomic Simulation Environment—A Python library for working with atoms. <em>Journal of Physics: Condensed Matter</em>, 29, 273002. https://doi.org/10.1088/1361-648X/aa680e</li>
 <li>Ong, S.P. et al. (2013). Python Materials Genomics (pymatgen): A robust, open-source Python library for materials analysis. <em>Computational Materials Science</em>, 68, 314-319. https://doi.org/10.1016/j.commatsci.2012.10.028</li>
+
+
 </ul>
-
-
 <h3>十一、版本管理与可复现性</h3>
 
 <p>科学计算中最大的隐患之一是环境不一致导致的不可复现问题。你的代码在别人电脑上跑不出同样的结果，通常是因为Python版本或依赖包的版本不同。解决这个问题的最佳实践是使用环境文件锁定所有依赖的精确版本。</p>

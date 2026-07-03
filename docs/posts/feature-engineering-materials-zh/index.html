@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/feature-engineering-materials-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "description": "如何将零散的实验数据转化为结构化的特征矩阵，含分类编码、交互特征、缺失值处理和小样本特征选择。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-zh/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -76,9 +76,9 @@ def engineer_features(df):
 <ul>
 <li>Kuhn, M. & Johnson, K. (2019). <em>Feature Engineering and Selection</em>. CRC Press.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
+
+
 </ul>
-
-
 <h2>深入探讨：特征缩放与标准化</h2>
 
 <p>特征缩放是机器学习预处理中容易被忽视但至关重要的步骤。不同物理量通常具有截然不同的量级——纤维直径可能只有几十纳米，而杨氏模量可能有几个吉帕。如果不进行缩放，依赖距离的模型会将量级大的特征视为更重要，即使它们物理上并不更关键。</p>

@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/sem-image-analysis-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SEM图像分析实战：纤维形态的自动化测量", "description": "用Python自动分析SEM纤维网络图像：阈值分割、纤维直径和取向测量、批量处理，基于scikit-image。", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/sem-image-analysis-zh/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -129,9 +129,9 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 <ul>
 <li>van der Walt, S. et al. (2014). scikit-image. <em>PeerJ</em>, 2, e453.</li>
 <li>GitHub: <a href="https://github.com/scikit-image/scikit-image">scikit-image/scikit-image</a></li>
+
+
 </ul>
-
-
 <h2>深入探讨：图像分割算法的选择</h2>
 
 <p>阈值分割是SEM图像分析最关键的一步，直接影响后续所有量化结果的准确性。Otsu方法假设图像直方图是双峰的——纤维（前景）和背景形成两个明显分离的灰度峰。对于高对比度、光照均匀的SEM图像，Otsu通常是最佳选择。但对于光照不均或背景复杂的图像，局部自适应阈值方法更为合适。</p>

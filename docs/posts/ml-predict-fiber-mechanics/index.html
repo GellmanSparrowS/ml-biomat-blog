@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/ml-predict-fiber-mechanics/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Machine Learning for Fiber Mechanics: From Data Preparation to Model Deployment", "description": "Step-by-step guide to predicting fiber biomaterial mechanical properties with ML: data cleaning, feature engineering, model selection, and uncertainty quantification.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -95,8 +95,8 @@ def predict_with_uncertainty(model, X, n_iter=100):
 <li><strong>Transfer learning</strong>: pretrain on simulations, fine-tune on experiments</li>
 <li><strong>Active learning</strong>: let the model suggest the next experiment</li>
 <li><strong>PINNs</strong>: inject constitutive equations as NN constraints</li>
-</ul>
 
+</ul>
 <h2>Key Takeaways</h2>
 
 <ol>
@@ -104,19 +104,17 @@ def predict_with_uncertainty(model, X, n_iter=100):
 <li>Feature engineering matters more than model choice</li>
 <li>Always report uncertainty -- reviewers will ask</li>
 <li>Open-source your code and data for reproducibility</li>
-</ol>
 
-<ul>
 <li>Yang Y., Bai R., Gao W. et al. (2024). <em>Advanced Science</em>, 2413293.</li>
-</ul>
 
+</ol>
 <h2>References</h2>
 <ul>
 <li>Yang Y., Bai R., Gao W. et al. (2024). Optimizing biomimetic 3D fibrous networks via DRL. <em>Advanced Science</em>, 2413293.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
+
+
 </ul>
-
-
 <h2>Practical Considerations for ML in Materials</h2>
 
 <p>The curse of dimensionality hits materials ML particularly hard. Each experimental condition adds a dimension, and with limited data, models quickly overfit. Dimensionality reduction via principal component analysis or feature selection based on physical insight is essential before training.</p>

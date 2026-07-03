@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "A Practical Introduction to Multiscale Modeling for Biomaterials", "description": "A practical overview of multiscale modeling approaches for fiber-based biomaterials: from molecular dynamics to continuum mechanics, with Python code examples.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -55,8 +55,8 @@
 <li><strong>GROMACS</strong> or <strong>LAMMPS</strong> for production runs</li>
 <li><strong>CHARMM</strong> or <strong>AMBER</strong> force fields for proteins</li>
 <li><strong>ReaxFF</strong> for reactive systems (bond breaking/forming)</li>
-</ul>
 
+</ul>
 <p>A typical workflow extracts nanoscale mechanical properties—Young's modulus, persistence length, hydrogen bond densities—that feed into higher-scale models.</p>
 
 <pre><code class="language-python">
@@ -86,8 +86,8 @@ def compute_persistence_length(positions, kbt=4.114, n_segments=10):
 <ul>
 <li><strong>Martini</strong> — general-purpose CG for biomolecules</li>
 <li><strong>MSCG (Multiscale Coarse-Graining)</strong> — systematically derived from all-atom MD</li>
-</ul>
 
+</ul>
 <p>The key idea: run all-atom MD on a representative subsystem, extract effective potentials between CG beads, then simulate the full system at CG resolution.</p>
 
 <h3>3. Continuum Scale (micrometers to millimeters)</h3>
@@ -99,8 +99,8 @@ def compute_persistence_length(positions, kbt=4.114, n_segments=10):
 <ul>
 <li><strong>Abaqus</strong> (commercial) or <strong>FEniCS</strong> (open-source)</li>
 <li>Constitutive models: hyperelastic (Ogden, Arruda-Boyce), viscoelastic, or fiber-reinforced</li>
-</ul>
 
+</ul>
 <p>The challenge: how do you get the constitutive parameters from molecular simulations?</p>
 
 <h2>Bridging Scales with Python</h2>
@@ -130,8 +130,8 @@ def youngs_modulus_from_md(stress, strain):
 <li><strong>Scale bridging consistency</strong> — ensure thermodynamic consistency across scales (temperature, pressure)</li>
 <li><strong>Computational cost</strong> — use GPU-accelerated MD (GROMACS with CUDA) and parallel FEA</li>
 <li><strong>Uncertainty quantification</strong> — always report error bars from ensemble averaging</li>
-</ol>
 
+</ol>
 <h2>What's Next</h2>
 
 <p>In the next post, I'll walk through a complete workflow: all-atom MD of a collagen microfibril → coarse-graining via MSCG → FEA of a fiber network, entirely driven by Python scripts.</p>

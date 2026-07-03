@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/python-env-setup/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide", "description": "Complete guide to setting up a Python environment for materials and biology research: Miniconda, Jupyter, VS Code, package management, and troubleshooting common issues.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/python-env-setup/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -52,13 +52,13 @@
 <li>Download the installer for your OS (Windows: <code>.exe</code>, macOS: <code>.pkg</code>, Linux: <code>.sh</code>)</li>
 <li>Run the installer. <strong>Important: check "Add Miniconda to PATH"</strong> on Windows</li>
 <li>Verify installation:</li>
-</ol>
 
 <pre><code class="language-bash">
 conda --version
 # Expected: conda 24.x.x
 </code></pre>
 
+</ol>
 <h2>Step 2: Create Your First Environment</h2>
 
 <p>Environments isolate project dependencies. Think of them as separate toolboxes—one for AFM analysis, one for MD simulations, one for ML projects.</p>
@@ -135,16 +135,16 @@ jupyter lab
 <li>Install the <strong>Python extension</strong> (Microsoft)</li>
 <li>Open your project folder: <code>File > Open Folder</code></li>
 <li>Select your conda environment: <code>Ctrl+Shift+P</code> > "Python: Select Interpreter" > choose <code>matsci</code></li>
-</ol>
 
+</ol>
 <p>Essential VS Code extensions for scientists:</p>
 <ul>
 <li><strong>Python</strong> (Microsoft): IntelliSense, debugging</li>
 <li><strong>Jupyter</strong> (Microsoft): Notebook support inside VS Code</li>
 <li><strong>Rainbow CSV</strong>: Color-coded CSV files</li>
 <li><strong>GitLens</strong>: Git integration</li>
-</ul>
 
+</ul>
 <h2>Step 6: Package Management Reference</h2>
 
 <pre><code class="language-bash">

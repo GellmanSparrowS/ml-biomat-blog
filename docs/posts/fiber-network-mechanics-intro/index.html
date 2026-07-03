@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/fiber-network-mechanics-intro/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Fiber Network Mechanics: Key Concepts for Biomaterials Research", "description": "An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/fiber-network-mechanics-intro/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -33,7 +33,7 @@
 <span class="lang-badge en">EN</span>
 <h1>Fiber Network Mechanics: Key Concepts for Biomaterials Research</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/biomaterials/">Biomaterials</a>
+<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/biomaterials/">Bio-Materials-Structures</a>
 </div>
 </header>
 <div class="content">
@@ -76,8 +76,8 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <li><strong>Rheology</strong>: viscoelastic properties (G', G")</li>
 <li><strong>SEM/TEM imaging</strong>: network architecture visualization</li>
 <li><strong>SAXS/WAXS</strong>: molecular-level structural changes during deformation</li>
-</ul>
 
+</ul>
 <h2>Computational Modeling</h2>
 
 <p>Three main approaches:</p>
@@ -86,8 +86,8 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <li><strong>Molecular Dynamics (MD)</strong>: atomistic detail, nanosecond timescale</li>
 <li><strong>Coarse-Grained (CG) models</strong>: mesoscale, microsecond timescale</li>
 <li><strong>Finite Element (FE) models</strong>: continuum scale, treat fibers as beams</li>
-</ol>
 
+</ol>
 <p>Multiscale approaches combine these to predict macroscale properties from molecular parameters.</p>
 
 <h2>Common Biomaterial Fiber Systems</h2>
@@ -97,17 +97,17 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <li><strong>Collagen</strong>: hierarchical structure, cell-instructive</li>
 <li><strong>Cellulose nanofibers</strong>: abundant, high stiffness</li>
 <li><strong>Electrospun polymers</strong>: tunable architecture, scalable production</li>
-</ul>
 
+</ul>
 <h2>Key References</h2>
 
 <ul>
 <li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS</em>, 103(33), 12285-12290.</li>
 <li>Picu, R.C. (2011). Mechanics of random fiber networks — a review. <em>Soft Matter</em>, 7, 6768-6785.</li>
 <li>Onck, P.R. et al. (2005). Alternative explanation of stiffening in cross-linked semiflexible networks. <em>PRL</em>, 95, 178102.</li>
+
+
 </ul>
-
-
 <h2>Computational Modeling of Fiber Networks</h2>
 
 <p>Discrete fiber network models represent each fiber as a beam element with bending, stretching, and torsional stiffness. These models capture the transition from bending-dominated to stretching-dominated deformation that underlies strain-stiffening. Open-source tools like FiberSim and custom Python scripts using the finite element method enable researchers to generate representative volume elements of random fiber networks and simulate their mechanical response.</p>

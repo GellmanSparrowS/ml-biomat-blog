@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/scipy-curve-fitting/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "description": "A comprehensive guide to curve fitting with SciPy for materials and biology researchers. Linear regression, exponential decay, Hertz indentation, viscoelastic models, with complete code and real examples.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -54,8 +54,8 @@ import matplotlib.pyplot as plt
 <li>Define a model function <code>f(x, param1, param2, ...)</code></li>
 <li>Call <code>curve_fit(f, x_data, y_data)</code> which returns optimal parameters and their covariance</li>
 <li>Extract parameters and uncertainties from the results</li>
-</ol>
 
+</ol>
 <h2>2. Linear Regression: The Foundation</h2>
 
 <p>Most materials characterization starts with linear fitting. Young's modulus from a stress-strain curve, calibration curves, and many standard analyses use linear regression.</p>
@@ -155,8 +155,8 @@ print(f&quot;Young&#x27;s modulus: {E/1000:.1f} kPa&quot;)
 <li>Indentation depth < 10% of sample thickness (avoid substrate effects)</li>
 <li>Multiple locations show consistent results</li>
 <li>Loading rate independence (or report the rate)</li>
-</ul>
 
+</ul>
 <h2>5. Viscoelastic Models</h2>
 
 <p>Many biomaterials show both elastic and viscous behavior. The Standard Linear Solid (SLS) model captures this:</p>
@@ -223,16 +223,16 @@ print(f&quot;Constrained result: {result.x}&quot;)
 <li>Virtanen, P. et al. (2020). SciPy 1.0. <em>Nature Methods</em>, 17, 261-272.</li>
 <li>Lin, D.C. et al. (2007). Robust strategies for automated AFM force curve analysis. <em>J. Biomech. Eng.</em>, 129(6), 904-912.</li>
 <li>Oliver, W.C. & Pharr, G.M. (1992). An improved technique for determining hardness and elastic modulus. <em>J. Mater. Res.</em>, 7(6), 1564-1583.</li>
-</ul>
 
+</ul>
 <h2>References</h2>
 <ul>
 <li>Virtanen, P. et al. (2020). SciPy 1.0. <em>Nature Methods</em>, 17, 261-272.</li>
 <li>Johnson, M.L. & Faunt, L.M. (1992). Parameter estimation. <em>Methods in Enzymology</em>, 210, 1-37.</li>
 <li>Lin, D.C. et al. (2007). Robust AFM force curve analysis. <em>J. Biomech. Eng.</em>, 129(6), 904-912.</li>
+
+
 </ul>
-
-
 <h2>Model Selection and Goodness of Fit</h2>
 
 <p>Choosing between competing models requires more than just comparing R-squared values. The Akaike Information Criterion (AIC) penalizes models with more parameters, helping avoid overfitting. For nested models, the F-test provides a formal statistical comparison.</p>

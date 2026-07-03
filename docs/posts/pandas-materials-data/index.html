@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/pandas-materials-data/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Data Processing with Pandas: From Lab Measurements to Analysis-Ready Data", "description": "A practical guide to using Pandas for materials research data: loading multi-source files, cleaning, group statistics, and visualization.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/pandas-materials-data/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -110,9 +110,9 @@ with pd.ExcelWriter(&quot;results.xlsx&quot;) as writer:
 <ul>
 <li>McKinney, W. (2010). Data Structures for Statistical Computing in Python. <em>Proc. SciPy</em>, 56-61.</li>
 <li>pandas.pydata.org - Pandas documentation.</li>
+
+
 </ul>
-
-
 <h2>Advanced Data Operations</h2>
 
 <p>Merging data from multiple sources is a common task in materials research. Suppose you have mechanical test results in one CSV file and fiber morphology measurements from SEM analysis in another. Pandas merge function allows you to combine these datasets on a common key such as sample ID:</p>

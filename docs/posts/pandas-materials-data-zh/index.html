@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/pandas-materials-data-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Pandas实验数据处理实战：从原始数据到统计分析", "description": "面向材料科学和生物学研究生的Pandas数据处理教程：数据读取、清洗、分组统计、合并和导出。", "datePublished": "2026-06-27", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/pandas-materials-data-zh/"}</script>
-</head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -103,9 +103,9 @@ df.boxplot(column=&quot;modulus_GPa&quot;, by=&quot;treatment&quot;)
 <ul>
 <li>McKinney, W. (2010). Data Structures for Statistical Computing in Python. <em>Proceedings of SciPy</em>, 56-61.</li>
 <li>pandas.pydata.org — Pandas官方文档</li>
+
+
 </ul>
-
-
 <h3>七、数据透视与多维度分析</h3>
 
 <p>在材料科学研究中，常常需要从多个维度同时查看数据。例如你可能想比较不同处理条件下各重复样品的模量分布，或者分析纤维直径和模量在不同交联密度下的关系。Pandas的pivot_table函数提供了Excel数据透视表的所有功能，而且可以编程自动化：</p>
