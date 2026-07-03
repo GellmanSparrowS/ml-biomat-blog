@@ -5,7 +5,7 @@ category: "machine-learning"
 tags: ["deep-learning","neural-networks","backpropagation","PyTorch"]
 lang: "en"
 slug: "deep-learning-intro-ml"
-description: "Neurons, activation functions, backpropagation, regularization, transfer learning."
+description: "A systematic introduction to deep learning: neurons, activation functions, backpropagation, regularization, and transfer learning, with practical guidance on when deep learning is the right tool in materials science."
 ---
 ## 1. The Nature of Deep Learning — From Feature Engineering to Representation Learning
 

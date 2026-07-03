@@ -5,7 +5,7 @@ category: "machine-learning"
 tags: ["机器学习", "分类模型", "逻辑回归", "SVM", "随机森林", "XGBoost", "scikit-learn"]
 lang: "zh"
 slug: "ml-classification-models-zh"
-description: "系统梳理常用的机器学习分类模型，从逻辑回归到梯度提升，涵盖原理、代码实现和应用场景对比。"
+description: "系统梳理常用机器学习分类模型：从逻辑回归、KNN、SVM到决策树、随机森林和梯度提升，含原理对比、scikit-learn代码实现和应用场景分析。"
 ---
 
 ## 一、分类问题的本质——从标签到决策边界

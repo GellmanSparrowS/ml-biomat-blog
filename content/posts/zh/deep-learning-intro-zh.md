@@ -5,7 +5,7 @@ category: "machine-learning"
 tags: ["深度学习","神经网络","反向传播","PyTorch","表示学习"]
 lang: "zh"
 slug: "deep-learning-intro-zh"
-description: "从神经元、激活函数、反向传播、正则化到迁移学习。"
+description: "从神经元和激活函数讲起，深入反向传播、正则化与迁移学习，帮助材料科学研究生判断何时该用深度学习、何时用传统方法更合适。"
 ---
 ## 一、深度学习的本质——从特征工程到表示学习
 

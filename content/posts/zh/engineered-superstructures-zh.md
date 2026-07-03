@@ -5,7 +5,7 @@ category: "biomaterials"
 tags: ["超结构", "力学超材料", "折纸", "蜂巢", "拉胀", "扭转", "点阵"]
 lang: "zh"
 slug: "engineered-superstructures-zh"
-description: "工程超结构力学的深度综述，十个深度章节覆盖全部主要类型。"
+description: "全面综述工程超结构的力学设计：折纸、蜂巢、拉涨、扭转、点阵等类型，涵盖二维和三维构型，解析几何-机制-参数-设计规则四层逻辑。"
 ---
 
 

@@ -5,7 +5,7 @@ category: "machine-learning"
 tags: ["regression","machine-learning","scikit-learn","gradient-boosting"]
 lang: "en"
 slug: "regression-models-ml"
-description: "A systematic guide to linear regression, Ridge, Lasso, SVR, trees and boosting."
+description: "A systematic guide to linear regression, Ridge, Lasso, polynomial regression, SVR, decision trees, random forests, and gradient boosting for scientific and engineering applications, with complete code examples."
 ---
 
 

@@ -5,7 +5,7 @@ category: "biomaterials"
 tags: ["生物材料", "纤维网络", "力学", "丝素蛋白", "胶原蛋白"]
 lang: "zh"
 slug: "fiber-network-mechanics-zh"
-description: "纤维生物材料的力学行为入门：网络架构、应变强化、结构-性能关系，以及实验表征和计算模拟方法。"
+description: "纤维网络体系的力学行为入门：涵盖网络架构、应变强化、结构-功能关系，以及实验表征和计算模拟方法。"
 ---
 
 ## 为什么纤维网络很重要

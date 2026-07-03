@@ -5,7 +5,7 @@ category: "biomaterials"
 tags: ["superstructures", "mechanical metamaterials", "origami", "honeycomb", "auxetic", "twisted structures", "lattice"]
 lang: "en"
 slug: "engineered-superstructures"
-description: "A comprehensive review of engineered superstructures across ten deep sections."
+description: "A comprehensive review of engineered superstructures: origami, honeycomb, auxetic, helical, and lattice designs in 2D and 3D, covering geometry, mechanisms, parameters, and design rules."
 ---
 
 ## Section 1: Origami and Kirigami — Programming Three-Dimensional Deformation from Two-Dimensional Sheets

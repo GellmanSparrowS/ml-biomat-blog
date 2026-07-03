@@ -5,7 +5,7 @@ category: "machine-learning"
 tags: ["特征工程", "机器学习", "材料科学", "数据预处理"]
 lang: "zh"
 slug: "feature-engineering-materials-zh"
-description: "如何将零散的实验数据转化为结构化的特征矩阵，含分类编码、交互特征、缺失值处理和小样本特征选择。"
+description: "如何将零散的实验数据转化为结构化的特征矩阵：含分类编码、交互特征、缺失值处理和小样本特征选择，是材料ML项目的第一步。"
 ---
 
 ## 真正的瓶颈

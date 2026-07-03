@@ -73,3 +73,14 @@ GitHub Pages deploys 1-2 min after push. Hard refresh to verify. Stale content: 
 
 ## Post-Frontmatter Checklist
 title, date, category, tags[], lang, slug, description. Bilingual: same category, EN slug xxx-ml, ZH xxx-zh.
+
+## IndexNow (2026-07-03)
+- Key: cbd023642a994753b6b98784c0489ce7 stored at docs/{key}.txt and E:\\Auto_TEST\\cbd023642a994753b6b98784c0489ce7.txt
+- Auto-submitted in build.py after each build (all post URLs + homepage).
+- API: POST https://api.indexnow.org/indexnow with JSON {host, key, keyLocation, urlList}.
+- If submission fails, site still works via normal crawling; IndexNow just accelerates indexing.
+
+## Meta Descriptions (2026-07-03)
+- Bing flags descriptions < 150 chars; Chinese is judged by raw char count.
+- Target: 60-100 Chinese chars, 150-250 English chars.
+- Use description field in YAML frontmatter; build.py reads it directly.

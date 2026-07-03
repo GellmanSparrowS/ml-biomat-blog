@@ -429,6 +429,31 @@ def build():
     )
     print(f"  {len(posts)} posts, {len(en)} EN + {len(zh)} ZH")
     print(f"  Pages generated: posts/{len(posts)}, en, zh, about, categories, rss, sitemap")
+    # --- IndexNow key file ---
+    indexnow_key = "cbd023642a994753b6b98784c0489ce7"
+    (Path(BUILD_DIR) / f"{indexnow_key}.txt").write_text(indexnow_key, encoding="utf-8")
+
+    # --- IndexNow submission ---
+    import urllib.request
+    url_list = [f"{SITE['base_url']}/posts/{p['slug']}/" for p in posts]
+    url_list.append(f"{SITE['base_url']}/")
+    data = json.dumps({
+        "host": "ml-biomat.com",
+        "key": indexnow_key,
+        "keyLocation": f"{SITE['base_url']}/{indexnow_key}.txt",
+        "urlList": url_list
+    }).encode('utf-8')
+    req = urllib.request.Request(
+        "https://api.indexnow.org/indexnow",
+        data=data,
+        headers={"Content-Type": "application/json"}
+    )
+    try:
+        urllib.request.urlopen(req, timeout=10)
+        print(f"  IndexNow: submitted {len(url_list)} URLs")
+    except Exception as e:
+        print(f"  IndexNow: submission error ({e})")
+
 
 
 if __name__ == "__main__":

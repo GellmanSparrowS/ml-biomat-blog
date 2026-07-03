@@ -5,7 +5,7 @@ category: "python-tutorials"
 tags: ["pandas", "数据处理", "统计分析", "实验数据", "python"]
 lang: "zh"
 slug: "pandas-materials-data-zh"
-description: "面向材料科学和生物学研究生的Pandas数据处理教程：数据读取、清洗、分组统计、合并和导出。"
+description: "面向材料科学和生物学研究的Pandas数据处理教程：数据读取、清洗、分组统计、合并与导出，用真实实验数据演示完整工作流。"
 ---
 
 Pandas是Python中最强大的表格数据处理库。对于材料科学和生物学研究生来说，它是连接原始实验数据和统计分析的桥梁。无论你需要处理拉伸测试的多组数据、对比不同处理条件下的纤维形态参数、还是整合多个仪器导出的测量结果，Pandas都能让这些任务从数小时的Excel手动操作变成几行代码的自动化流程。
