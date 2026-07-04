@@ -415,7 +415,7 @@ def build():
 
 
     # --- CNAME for custom domain ---
-    (Path(BUILD_DIR) / ".nojekyll").touch()
+    (Path(BUILD_DIR) / ".nojekyll").write_text("", encoding="utf-8")
     (Path(BUILD_DIR) / "CNAME").write_text("ml-biomat.com", encoding="utf-8")
     # --- Bing Webmaster verification ---
     (Path(BUILD_DIR) / "BingSiteAuth.xml").write_text(
