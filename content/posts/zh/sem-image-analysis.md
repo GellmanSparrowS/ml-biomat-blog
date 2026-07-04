@@ -5,7 +5,7 @@ category: "wet-lab-data"
 tags: ["SEM", "图像分析", "纤维形态", "python", "skimage"]
 lang: "zh"
 slug: "sem-image-analysis-zh"
-description: "用Python自动分析SEM纤维网络图像：阈值分割、纤维直径和取向测量、批量处理，基于scikit-image。"
+description: "用Python自动化分析SEM纤维网络图像：系统讲解阈值分割、纤维直径提取、取向分布分析和批量处理策略，基于scikit-image的完整实战工作流与代码。"
 ---
 
 ## 为什么自动化SEM分析

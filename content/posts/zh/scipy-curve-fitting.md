@@ -5,7 +5,7 @@ category: "python-tutorials"
 tags: ["scipy", "曲线拟合", "优化", "回归", "Hertz模型"]
 lang: "zh"
 slug: "scipy-curve-fitting-zh"
-description: "面向材料科学和生物学研究生的SciPy曲线拟合完整教程：线性回归、指数衰减、Hertz压痕模型、置信区间估计和模型选择。"
+description: "面向材料科学和生物学研究的SciPy曲线拟合全指南：从线性回归、指数衰减到Hertz压痕模型与粘弹性拟合，含完整代码实现、置信区间估计和模型选择策略。"
 ---
 
 

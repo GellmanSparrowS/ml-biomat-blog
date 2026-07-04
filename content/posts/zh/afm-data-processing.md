@@ -5,7 +5,7 @@ category: "wet-lab-data"
 tags: ["AFM", "力曲线", "python", "数据处理", "生物材料", "力学性能"]
 lang: "zh"
 slug: "afm-force-curve-python-zh"
-description: "手把手教你用Python处理AFM力曲线数据：基线校正、接触点检测、粘附力提取、Hertz模型拟合杨氏模量，含批量处理和常见坑点。"
+description: "手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。"
 ---
 
 ## 为什么写这个教程

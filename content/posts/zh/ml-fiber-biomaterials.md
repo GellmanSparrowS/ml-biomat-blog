@@ -5,7 +5,7 @@ category: "machine-learning"
 tags: ["机器学习", "随机森林", "XGBoost", "纤维材料", "力学性能", "特征工程"]
 lang: "zh"
 slug: "ml-predict-fiber-mechanics-zh"
-description: "手把手教你用机器学习预测纤维生物材料的力学性能：数据清洗、特征工程、模型选择、超参数调优、交叉验证和结果解释。"
+description: "手把手教你用机器学习预测纤维生物材料的力学性能：从数据清洗、特征工程、模型选择到超参数优化、交叉验证和结果解释，贯穿完整科研工作流的实战教程。"
 ---
 
 ## 问题的本质

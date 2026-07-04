@@ -1,5 +1,5 @@
 ---
-title: "Engineered Superstructures: Origami, Honeycomb, Auxetic, Helical, and Lattice Design in 2D and 3D"
+title: "Engineered Superstructures: Origami, Honeycomb, Auxetic and Lattice Design"
 date: "2026-06-30"
 category: "biomaterials"
 tags: ["superstructures", "mechanical metamaterials", "origami", "honeycomb", "auxetic", "twisted structures", "lattice"]

@@ -5,7 +5,7 @@ category: "python-tutorials"
 tags: ["python", "numpy", "scipy", "pandas", "matplotlib", "教程"]
 lang: "zh"
 slug: "python-tools-materials-research-zh"
-description: "面向材料/生物研究生的完整Python科研工具指南：从NumPy数据处理到Matplotlib发表级作图，含ASE原子模拟和skimage图像分析。"
+description: "面向生物与材料研究者的Python科学工具全指南：从NumPy数据处理、Matplotlib出版级绘图到ASE原子模拟和skimage图像分析，覆盖科研全流程的实用工具链。"
 ---
 
 材料科学研究每天产生海量数据：拉伸机的力-位移曲线、AFM的力谱图、SEM的电镜照片、XRD的衍射图谱、MD模拟的轨迹文件。手动在Excel里处理这些数据不仅效率低下，而且极易出错、不可复现。Python凭借其免费、开源、生态丰富的优势，已成为材料科学数据处理的事实标准。

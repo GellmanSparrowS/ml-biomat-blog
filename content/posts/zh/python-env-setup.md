@@ -5,7 +5,7 @@ category: "python-tutorials"
 tags: ["python", "conda", "jupyter", "环境配置", "科学计算"]
 lang: "zh"
 slug: "python-env-setup-zh"
-description: "面向生物和材料研究生的Python环境搭建完全指南：Miniconda安装、环境管理、Jupyter配置、VS Code集成和常见问题解决。"
+description: "面向生物和材料研究的Python科学计算环境搭建全指南：从Miniconda安装、环境管理、Jupyter配置到VS Code集成和常见问题排查，从零搭建可运行的科研计算环境。"
 ---
 
 作为生物或材料科学的研究生，你可能听说过Python可以帮助处理实验数据、绘制论文图表、甚至进行机器学习分析。但很多人卡在了第一步——不知道如何在自己的电脑上搭建一个可用的Python编程环境。这篇指南将带你从零开始，不假设任何编程经验，完成一个完整的科学计算环境搭建。

@@ -5,7 +5,7 @@ category: "multiscale-modeling"
 tags: ["GROMACS", "分子动力学", "MD模拟", "蛋白质模拟", "轨迹分析", "溶菌酶"]
 lang: "zh"
 slug: "gromacs-md-tutorial-zh"
-description: "GROMACS分子动力学模拟完整实战教程，以溶菌酶为例演示从结构准备、能量最小化、平衡态到生产运行的全程，含RMSD/RMSF/Rg/氢键轨迹分析。"
+description: "GROMACS分子动力学模拟完整实战教程：以溶菌酶为实例，手把手演示从结构准备、能量最小化、平衡态到生产运行的全流程，含RMSD、RMSF、Rg和氢键轨迹分析。"
 ---
 
 生物材料研究越来越依赖分子动力学( Molecular Dynamics, MD)模拟来理解蛋白质、纤维和多糖在原子尺度的行为。在众多MD软件中，GROMACS(GROningen MAchine for Chemical Simulations)因其开源、高效和活跃的社区而成为最广泛使用的工具之一。本文以溶菌酶(lysozyme)为例，完整演示GROMACS MD模拟的全流程，涵盖从结构获取到轨迹分析的所有步骤。
