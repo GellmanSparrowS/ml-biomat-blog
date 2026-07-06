@@ -22,7 +22,7 @@
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
 <a href="/">Home / 首页</a>
-<a href="/fibernet/">FiberNet</a>
+<a href="/fibernet/">Library / 库</a>
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -59,7 +59,7 @@
 
 <p><strong>Miniconda</strong> is the stripped-down version, with an installer of only 60–100 MB. After installation, you have only <code>conda</code>, Python, and a few basic tools; no scientific libraries are pre-installed. Everything must be installed manually on demand. The initial configuration requires a few extra installation commands, which imposes a modest learning curve, but the environment is under your complete control from the start — you know exactly what is installed, with no unused packages silently consuming disk space.</p>
 
-<p>How to choose? A simple criterion: <strong>if disk space is not a concern (10 GB or more available) and you are unfamiliar with the command line, choose Anaconda; if disk space is limited, you already have some Python experience, or you are working on a remote server without a graphical interface, choose Miniconda.</strong> Both can be swapped later by uninstalling and reinstalling, so there is no risk of an irrevocable wrong choice.</p>
+<p>How to choose? <strong>Miniconda is generally recommended</strong> — building from scratch gives you full visibility into what is installed, occupies only a few hundred MB, and deploys effortlessly on remote servers. If you have never used a command line and have ample disk space, Anaconda's out-of-the-box experience is also solid. Both can be swapped later, so there is no wrong choice.</p>
 
 <p>One additional option worth introducing: <strong>Mamba</strong>. Mamba is not a standalone installer but a high-performance drop-in replacement for Conda that can be installed on top of any existing Conda setup. It rewrites Conda's dependency solver in C++, making it several times faster at resolving complex dependency trees. If you have ever installed PyTorch with CUDA support and watched <code>conda install</code> freeze on "Solving environment..." for several minutes, that is precisely the scenario where Mamba shines. Install it with <code>conda install -n base -c conda-forge mamba -y</code>; afterward, any <code>conda install</code> or <code>conda create</code> command can be replaced with <code>mamba install</code> or <code>mamba create</code>, with all other syntax remaining identical.</p>
 
@@ -250,7 +250,7 @@ python -m ipykernel install --user --name matsci --display-name &quot;Python (ma
 <li><strong>Jupyter</strong> (Microsoft): open and edit <code>.ipynb</code> files directly in VS Code, and run <code>.py</code> scripts with <code># %%</code> comment delimiters as interactive cells — the interactive execution experience of a Notebook without requiring the <code>.ipynb</code> format</li>
 
 </ul>
-<p>After installing the Python extension, press <code>Ctrl+Shift+P</code> (<code>Cmd+Shift+P</code> on macOS) to open the Command Palette, type <code>Python: Select Interpreter</code>, and choose the Python path corresponding to your conda environment (the path typically contains <code>envs/matsci</code>, e.g., <code>/home/username/miniconda3/envs/matsci/bin/python</code>). Once selected, all autocompletion, Linting, and debugging will use the packages installed in that environment.</p>
+<p>To decide whether to use conda or pip for a given package: <strong>prefer pip for pure Python packages</strong> (NumPy, Pandas, Matplotlib, scikit-learn) — faster and always up-to-date; use conda only for packages with complex compiled dependencies (PyTorch, FEniCSx, CUDA toolkits). In practice, after installing <code>Ctrl+Shift+P</code> (<code>Cmd+Shift+P</code> on macOS) to open the Command Palette, type <code>Python: Select Interpreter</code>, and choose the Python path corresponding to your conda environment (the path typically contains <code>envs/matsci</code>, e.g., <code>/home/username/miniconda3/envs/matsci/bin/python</code>). Once selected, all autocompletion, Linting, and debugging will use the packages installed in that environment.</p>
 
 <p>The most valuable VS Code feature for researchers working with remote computation is <strong>Remote Development</strong>. The <strong>Remote - SSH</strong> extension lets you edit and run code stored on a remote server — HPC cluster, institutional computing node, or cloud VM — using VS Code's full IDE interface on your local Mac or Windows machine. You get the benefit of your high-resolution screen and familiar keyboard layout while computation executes on the server's GPU or large-memory resources. This workflow is substantially more efficient than editing code in <code>vim</code> or <code>nano</code> over SSH. Setup: after installing the extension, press <code>F1</code>, select <code>Remote-SSH: Connect to Host</code>, enter <code>username@server-ip</code>, and VS Code handles the rest automatically.</p>
 
@@ -389,7 +389,7 @@ trusted-host = mirrors.tuna.tsinghua.edu.cn
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">About / 关于</a><a href="/fibernet/">FiberNet</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>

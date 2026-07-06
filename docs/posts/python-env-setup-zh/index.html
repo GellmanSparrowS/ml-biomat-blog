@@ -22,7 +22,7 @@
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
 <a href="/">Home / 首页</a>
-<a href="/fibernet/">FiberNet</a>
+<a href="/fibernet/">Library / 库</a>
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -59,7 +59,7 @@
 
 <p><strong>Miniconda</strong> 是精简版本，安装包仅约 60 到 100 MB，安装完成后只有 <code>conda</code>、Python 和几个基础工具，没有任何预装的科学计算库。一切都需要手动按需安装，初次配置时需要多运行几条安装命令，但换来的好处是环境从一开始就完全在你的掌控之下——你清楚地知道安装了什么，不存在大量"永远不会用到的包"默默占用磁盘空间。对于已经有一定 Python 使用经验、希望精确控制环境内容的用户，或者在磁盘空间有限的笔记本上工作、或者在远程服务器上无法使用图形界面的用户，Miniconda 更为合适。</p>
 
-<p>如何选择？给出一个简单的判断标准：<strong>如果磁盘空间充裕（余量 ≥ 10 GB）且你对命令行不熟悉，选 Anaconda；如果磁盘紧张、已有一定使用经验、或在服务器上工作，选 Miniconda</strong>。两者日后都可以自由切换（删除旧安装后重新安装另一个），所以不存在"选错了"的风险，不必过度纠结。</p>
+<p>如何选择？<strong>一般推荐 Miniconda</strong>——从零按需搭建让你清楚知道装了什么，磁盘占用仅数百 MB，在远程服务器上也能轻松部署。如果对命令行完全陌生且磁盘充裕，Anaconda 的开箱即用体验也不错。两者日后可自由切换，不存在选错的风险</p>
 
 <p>还有一个值得单独介绍的选项：<strong>Mamba</strong>。Mamba 不是独立的安装包，而是在已安装 Conda 之后可以选择安装的高性能替代工具。它用 C++ 重写了 Conda 的依赖求解器（即计算"安装包 A 需要哪些版本的依赖包"这个问题的算法），在解决复杂依赖关系时速度比 Conda 快数倍。如果你安装过 PyTorch 并同时需要 CUDA 支持，就会体验过 <code>conda install</code> 长时间卡在"Solving environment..."的痛苦——这正是 Mamba 的适用场景。安装方式：在已有 Conda 安装的基础上运行 <code>conda install -n base -c conda-forge mamba -y</code>，之后将所有 <code>conda install</code> 和 <code>conda create</code> 命令替换为 <code>mamba install</code> 和 <code>mamba create</code> 即可，其余用法完全相同。</p>
 
@@ -276,7 +276,7 @@ python -m ipykernel install --user --name matsci --display-name &quot;Python (ma
 
 <p>在同一个 conda 环境中混用 conda 和 pip 是完全合理的，但必须遵守一个操作顺序原则：<strong>先用 conda 安装所有能用 conda 安装的包，最后才用 pip 安装 conda 没有的包</strong>。原因在于：conda 的依赖求解器遇到已经由 pip 安装的包时，无法准确识别其版本信息，可能做出错误的依赖判断——如果先大量用 pip 安装包，再用 conda 安装其他包，conda 可能会将 pip 安装的包覆盖或强制降级，破坏原有配置。</p>
 
-<p>判断某个包应该用 conda 还是 pip 安装，建议按以下顺序检查：第一步，在 conda-forge 频道搜索（<code>conda search -c conda-forge 包名</code>）；如果 conda-forge 有且版本足够新，用 conda 安装；如果没有或版本过旧，再用 pip 安装。conda-forge 是由开源社区维护的 conda 包仓库，覆盖极为广泛，包括 BioPython、pymatgen、FEniCSx、NGsolve 等专业科学计算包，大多数情况下 conda-forge 的版本更新速度并不慢于 PyPI。</p>
+<p>判断某个包应该用 conda 还是 pip 安装，建议按以下原则：纯 Python 包（如 NumPy、Pandas、Matplotlib）优先用 pip 安装，速度快且版本新；需要编译 C/Fortran 扩展或有复杂二进制依赖的包（如 PyTorch、FEniCSx）才用 conda 安装。具体操作时，在 conda-forge 频道搜索（<code>conda search -c conda-forge 包名</code>）；如果 conda-forge 有且版本足够新，用 conda 安装；如果没有或版本过旧，再用 pip 安装。conda-forge 是由开源社区维护的 conda 包仓库，覆盖极为广泛，包括 BioPython、pymatgen、FEniCSx、NGsolve 等专业科学计算包，大多数情况下 conda-forge 的版本更新速度并不慢于 PyPI。</p>
 
 <pre><code class="language-bash">
 # 推荐操作顺序示例
@@ -401,7 +401,7 @@ trusted-host = mirrors.tuna.tsinghua.edu.cn
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">About / 关于</a><a href="/fibernet/">FiberNet</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
