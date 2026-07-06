@@ -439,7 +439,7 @@ def build():
     indexnow_key = "cbd023642a994753b6b98784c0489ce7"
     (Path(BUILD_DIR) / f"{indexnow_key}.txt").write_text(indexnow_key, encoding="utf-8")
 
-    # --- IndexNow submission ---
+    # --- IndexNow auto-submission ---
     import urllib.request
     url_list = [f"{SITE['base_url']}/posts/{p['slug']}/" for p in posts]
     url_list.append(f"{SITE['base_url']}/")
