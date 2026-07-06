@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FiberNet — ML-Biomat</title>
+<meta name="description" content="FiberNet fiber network toolkit">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/fibernet/">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="FiberNet">
+<meta property="og:description" content="FiberNet fiber network toolkit">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ml-biomat.com/fibernet/">
+<meta property="og:site_name" content="ML-Biomat">
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/fibernet/">FiberNet</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><h1 class="section-title">FiberNet</h1>
+<p class="section-sub" style="font-size:1.05rem;color:var(--c-fg-soft);margin-bottom:2rem">A comprehensive Python toolkit for fiber network generation, simulation, and analysis / 纤维网络结构生成、模拟与分析 Python 工具包</p>
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem">
+<a href="https://github.com/GellmanSparrowS/fibernet" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;background:var(--c-fg);color:#fff;border-radius:var(--r-sm);font-weight:600;font-size:.9rem;text-decoration:none">GitHub</a>
+<a href="https://fibernet.readthedocs.io/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;border:1.5px solid var(--c-border);color:var(--c-fg-soft);border-radius:var(--r-sm);font-weight:500;font-size:.9rem;text-decoration:none">Documentation</a>
+</div>
+
+<div class="about-card" style="grid-column:1/-1">
+<h2>What is FiberNet?</h2>
+<p style="font-size:.95rem;line-height:1.85;color:var(--c-fg-soft)">
+FiberNet is a research-grade Python toolkit for computational study of <strong>fiber network structures</strong>. It provides a unified framework for generating, simulating, analyzing, and visualizing diverse fiber architectures — from simple random networks to complex hierarchical, chiral, woven, and metamaterial structures. Built for materials scientists, biomechanics researchers, and computational mechanicians.
+</p>
+</div>
+
+<div class="about-card" style="grid-column:1/-1">
+<h2>FiberNet 是什么？</h2>
+<p style="font-size:.95rem;line-height:1.85;color:var(--c-fg-soft)">
+FiberNet 是一个面向纤维网络结构计算研究的 Python 工具包。它提供从结构生成、力学模拟到统计分析与可视化的统一框架，覆盖随机网络、层级手性结构、编织复合材料和力学超材料等多种纤维构型。专为材料科学、生物力学和计算力学研究者设计。
+</p>
+</div>
+
+<div class="about-card">
+<h2>Core Capabilities</h2>
+<ul style="line-height:2;font-size:.92rem">
+<li><strong>79+ Generators:</strong> Random, ordered, chiral, woven, hierarchical, bundles, curved, fractal, gradient, laminates, metamaterials (auxetic, octet, diamond, gyroid)</li>
+<li><strong>22+ Simulation Modules:</strong> FEM mechanics, nonlinear, dynamics, fracture, damage, fatigue, creep, thermal, electromagnetic, acoustic, fluid, rheology, DMA, viscoelastic, multiscale</li>
+<li><strong>Analysis Suite:</strong> Morphology, topology, statistics, percolation, homogenization, stress-strain, spatial, Poisson's ratio</li>
+<li><strong>ML Integration:</strong> Feature extraction, dataset creation, GNN, property prediction</li>
+<li><strong>I/O:</strong> JSON, YAML, LAMMPS, VTK, GMSH, PDB, XYZ, HDF5, pandas</li>
+<li><strong>Visualization:</strong> PyVista 3D, matplotlib 2D, Plotly interactive, animations</li>
+</ul>
+</div>
+
+<div class="about-card">
+<h2>Installation</h2>
+<div style="background:var(--c-code-bg);border-radius:var(--r-sm);padding:1rem;font-family:var(--font-mono);font-size:.82rem;line-height:1.7;overflow-x:auto">
+pip install git+https://github.com/GellmanSparrowS/fibernet.git<br>
+<br>
+<span style="color:var(--c-muted)"># Full install with visualization and ML deps</span><br>
+pip install "git+https://github.com/GellmanSparrowS/fibernet.git#egg=fibernet[full]"<br>
+<br>
+<span style="color:var(--c-muted)"># Requirements: Python 3.9+, NumPy, SciPy</span>
+</div>
+</div>
+
+<div class="about-card">
+<h2>Quick Example</h2>
+<div style="background:var(--c-code-bg);border-radius:var(--r-sm);padding:1rem;font-family:var(--font-mono);font-size:.78rem;line-height:1.6;overflow-x:auto">
+<span style="color:var(--c-muted)">from</span> fibernet <span style="color:var(--c-muted)">import</span> gen<br>
+<span style="color:var(--c-muted)">from</span> fibernet.sim.mechanical <span style="color:var(--c-muted)">import</span> FiberFEM, compute_effective_properties<br>
+<br>
+<span style="color:var(--c-muted)"># Generate a re-entrant auxetic honeycomb</span><br>
+net = gen.reentrant_honeycomb_2d(<br>
+&nbsp;&nbsp;&nbsp;&nbsp;reentrant_angle=150,&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--c-muted)"># &gt;120&deg; = auxetic</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;grid_size=(8, 8),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cell_height=10, cell_width=10,<br>
+)<br>
+<br>
+<span style="color:var(--c-muted)"># Compute effective properties</span><br>
+props = compute_effective_properties(net, strain=0.001)<br>
+print(props.summary())
+</div>
+</div>
+
+<div class="about-card">
+<h2>Platforms</h2>
+<table style="width:100%;font-size:.9rem;border-collapse:collapse">
+<tr><td style="padding:.3rem 0">Ubuntu</td><td style="padding:.3rem 0">Python 3.9–3.12</td><td style="color:var(--c-accent);padding:.3rem 0">All tests pass</td></tr>
+<tr><td style="padding:.3rem 0">macOS (ARM64)</td><td style="padding:.3rem 0">Python 3.9–3.12</td><td style="color:var(--c-accent);padding:.3rem 0">All tests pass</td></tr>
+<tr><td style="padding:.3rem 0">Windows</td><td style="padding:.3rem 0">Python 3.9–3.12</td><td style="color:var(--c-accent);padding:.3rem 0">All tests pass</td></tr>
+</table>
+</div>
+
+<div class="about-card" style="grid-column:1/-1">
+<h2>Status</h2>
+<p style="font-size:.9rem;color:var(--c-fg-soft)">
+FiberNet is under active development at <strong>BMG-FDU</strong> (Fudan University). The API is stabilizing, and full documentation is available on Read the Docs. Tutorials and detailed usage guides are coming soon — this page will be updated as the library matures.
+</p>
+<p style="font-size:.85rem;color:var(--c-muted);margin-top:.5rem">
+FiberNet 正在复旦大学 BMG 课题组积极开发中。API 趋于稳定，完整文档见 Read the Docs。教程与详细使用指南即将发布，本页面将随库的成熟持续更新。
+</p>
+</div>
+</main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/fibernet/">FiberNet</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
