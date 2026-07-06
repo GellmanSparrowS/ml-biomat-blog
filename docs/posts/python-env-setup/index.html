@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide — ML-Biomat</title>
-<meta name="description" content="Complete guide to setting up a Python environment for materials and biology research: Miniconda, Jupyter, VS Code, package management, and troubleshooting common issues.">
+<title>A Complete Guide to Setting Up a Python Scientific Computing Environment: From Zero to Productivity — ML-Biomat</title>
+<meta name="description" content="A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/python-env-setup/">
 <link rel="alternate" type="application/rss+xml" href="/rss.xml">
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw">
 <link rel="stylesheet" href="/static/css/style.css">
-<meta property="og:title" content="Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide">
-<meta property="og:description" content="Complete guide to setting up a Python environment for materials and biology research: Miniconda, Jupyter, VS Code, package management, and troubleshooting common issues.">
+<meta property="og:title" content="A Complete Guide to Setting Up a Python Scientific Computing Environment: From Zero to Productivity">
+<meta property="og:description" content="A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/python-env-setup/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide", "description": "Complete guide to setting up a Python environment for materials and biology research: Miniconda, Jupyter, VS Code, package management, and troubleshooting common issues.", "datePublished": "2026-06-26", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/python-env-setup/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "A Complete Guide to Setting Up a Python Scientific Computing Environment: From Zero to Productivity", "description": "A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students.", "datePublished": "2026-07-06", "author": {"@type": "Person", "name": "Yunhao Yang"}, "url": "https://ml-biomat.com/posts/python-env-setup/"}</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
 <a href="/">Home / 首页</a>
-<a href="/categories/">Categories / 分类</a>
+<a href="https://github.com/GellmanSparrowS/fibernet" target="_blank" rel="noopener" class="nav-fibernet">FiberNet</a>
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -31,166 +31,339 @@
 <main class="container"><article>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
-<h1>Setting Up Your Python Environment for Scientific Computing: A Step-by-Step Guide</h1>
+<h1>A Complete Guide to Setting Up a Python Scientific Computing Environment: From Zero to Productivity</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+<span>2026-07-06</span><span>·</span><span>22 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
 </div>
 </header>
 <div class="content">
-<h2>Who Is This For?</h2>
+<h2>1. Why Environment Management Matters — The Version Conflict Problem</h2>
 
-<p>You are a graduate student in biology, chemistry, or materials science. You have heard that Python can help with your data, but you have never set up a programming environment. This guide walks you through every step—no prior experience assumed.</p>
+<p>Many graduate students have a frustrating first encounter with Python. You find a script online for processing AFM data or XRD diffraction patterns, install the required libraries following a tutorial, and it works. A few weeks later, your supervisor sends a machine learning analysis script. After installing its dependencies, the original script suddenly crashes with a version incompatibility error — and you haven't changed a thing. This experience is almost universal among graduate students, and the root cause is straightforward: when every package is installed into the same global Python environment, conflicting version requirements between projects inevitably cause breakage.</p>
 
-<p>By the end, you will have a working Python setup with Jupyter notebooks, essential scientific packages, and VS Code as your editor.</p>
+<p>The problem is best illustrated with a laboratory analogy. Imagine sharing a single incubator between two bacterial strains with optimal growth temperatures of 30°C and 37°C — you cannot satisfy both simultaneously without compromising one. Python package conflicts follow the same logic. An older BioPython script may depend on NumPy 1.x interfaces, while a new version of TensorFlow requires NumPy 2.x features; OVITO's Python bindings may require one version of a VTK library, while your finite-element post-processing script needs another. If both tools share a single environment, installing either one tends to break the other. For a graduate student simultaneously working on materials characterization analysis, molecular dynamics simulations, and machine learning predictions, such conflicts are not merely possible but nearly inevitable.</p>
 
-<h2>Step 1: Install Miniconda</h2>
+<p>The solution is a <strong>virtual environment</strong> — an isolated Python runtime space with its own independent Python interpreter version and complete package collection, entirely separate from other environments and from the system's default Python. Think of it as a dedicated cleanroom in a laboratory: each cleanroom maintains its own temperature, humidity, and contamination controls; different experiments proceed in their respective spaces without cross-contamination. Creating a virtual environment is equivalent to opening a new cleanroom; deleting an environment dismantles it without affecting anything else.</p>
 
-<p><strong>Why Miniconda instead of Anaconda?</strong> Miniconda is lightweight (~50 MB vs ~500 MB), installs faster, and gives you full control over which packages you need.</p>
+<p><strong>Conda</strong> is the de facto standard tool for managing virtual environments in the Python scientific computing community. Compared to Python's built-in <code>venv</code> or <code>virtualenv</code>, Conda's core advantage is that it manages not only Python packages but also the Python interpreter itself and non-Python binary dependencies — including C/C++ shared libraries, BLAS/LAPACK linear algebra libraries (the actual performance bottleneck of NumPy and SciPy operations), and CUDA toolchains for GPU computing. For research scenarios involving finite-element solvers such as FEniCSx, molecular dynamics interfaces such as LAMMPS's Python bindings, or biological sequence analysis tools, Conda's precise control at this binary dependency layer is something the pip+venv combination simply cannot replicate.</p>
 
-<ol>
-<li>Go to <a href="https://docs.conda.io/en/latest/miniconda.html">docs.conda.io/en/latest/miniconda.html</a></li>
-<li>Download the installer for your OS (Windows: <code>.exe</code>, macOS: <code>.pkg</code>, Linux: <code>.sh</code>)</li>
-<li>Run the installer. <strong>Important: check "Add Miniconda to PATH"</strong> on Windows</li>
-<li>Verify installation:</li>
+<p>Mastering Conda virtual environment management is the key step between "being able to run Python scripts" and "being able to reproducibly generate scientific computing results" — and it represents the basic professional standard expected when sharing code with supervisors or collaborators.</p>
+
+<hr>
+
+<h2>2. Anaconda or Miniconda — Choose What Fits, Don't Overthink It</h2>
+
+<p>Before installing Conda, it is important to clarify a common source of confusion: Anaconda and Miniconda are two different installer packages, but they install the same core <code>conda</code> tool and are functionally identical in terms of environment management. The difference is only in how many packages come pre-installed. Every command in the rest of this guide works identically regardless of which one you choose.</p>
+
+<p><strong>Anaconda</strong> is the all-in-one distribution. After installation, you have <code>conda</code> itself, Python, over two hundred and fifty pre-installed scientific computing packages (NumPy, SciPy, Pandas, Matplotlib, Jupyter, scikit-learn, and many more), and a graphical management interface called Anaconda Navigator. The installer is roughly 800 MB to 1 GB, expanding to 3–5 GB on disk. The advantage is true out-of-the-box readiness: after installation, the packages required for most scientific computing tasks are already present; launching JupyterLab and starting data analysis requires no further installation commands. For graduate students whose first priority is "start processing experimental data as soon as possible" rather than "deeply understand environment management," Anaconda is the more appropriate entry point.</p>
+
+<p><strong>Miniconda</strong> is the stripped-down version, with an installer of only 60–100 MB. After installation, you have only <code>conda</code>, Python, and a few basic tools; no scientific libraries are pre-installed. Everything must be installed manually on demand. The initial configuration requires a few extra installation commands, which imposes a modest learning curve, but the environment is under your complete control from the start — you know exactly what is installed, with no unused packages silently consuming disk space.</p>
+
+<p>How to choose? A simple criterion: <strong>if disk space is not a concern (10 GB or more available) and you are unfamiliar with the command line, choose Anaconda; if disk space is limited, you already have some Python experience, or you are working on a remote server without a graphical interface, choose Miniconda.</strong> Both can be swapped later by uninstalling and reinstalling, so there is no risk of an irrevocable wrong choice.</p>
+
+<p>One additional option worth introducing: <strong>Mamba</strong>. Mamba is not a standalone installer but a high-performance drop-in replacement for Conda that can be installed on top of any existing Conda setup. It rewrites Conda's dependency solver in C++, making it several times faster at resolving complex dependency trees. If you have ever installed PyTorch with CUDA support and watched <code>conda install</code> freeze on "Solving environment..." for several minutes, that is precisely the scenario where Mamba shines. Install it with <code>conda install -n base -c conda-forge mamba -y</code>; afterward, any <code>conda install</code> or <code>conda create</code> command can be replaced with <code>mamba install</code> or <code>mamba create</code>, with all other syntax remaining identical.</p>
+
+<hr>
+
+<h2>3. Platform-Specific Installation: Windows, macOS, and Linux</h2>
+
+<p>Installation procedures differ meaningfully across operating systems. The most critical distinction is the Apple Silicon versus Intel distinction on macOS. The following covers each platform in full; follow the section that corresponds to your system.</p>
+
+<p><strong>Windows</strong></p>
+
+<p>Download the installer (.exe) from the Anaconda website (<code>https://www.anaconda.com/download</code>) or, for Miniconda, from <code>https://docs.conda.io/en/latest/miniconda.html</code>. Double-click the installer. At the "Installation Type" step, select "Just Me" (no administrator privileges required). At the "Advanced Installation Options" page, <strong>check the box labeled "Add Anaconda3/Miniconda3 to my PATH environment variable"</strong> — without this, the system will not locate the <code>conda</code> command and none of the subsequent steps will work.</p>
+
+<p>After installation, do not use the ordinary Command Prompt (CMD) or PowerShell. Instead, open <strong>Anaconda Prompt</strong> from the Start menu and use it as your command-line interface for all <code>conda</code> operations. Ordinary CMD and PowerShell may fail to recognize conda's environment activation commands due to default security policies. Verify the installation in Anaconda Prompt:</p>
 
 <pre><code class="language-bash">
 conda --version
-# Expected: conda 24.x.x
+python --version
 </code></pre>
 
-</ol>
-<h2>Step 2: Create Your First Environment</h2>
+<p>Both commands returning version numbers (e.g., <code>conda 24.7.1</code>, <code>Python 3.12.4</code>) confirms a successful installation.</p>
 
-<p>Environments isolate project dependencies. Think of them as separate toolboxes—one for AFM analysis, one for MD simulations, one for ML projects.</p>
+<p><strong>macOS (Critical: M-Series vs. Intel)</strong></p>
+
+<p>Macs released after late 2020 mostly use Apple Silicon chips (M1/M2/M3/M4 series), which differ fundamentally in instruction-set architecture from Intel chips (ARM versus x86-64). You <strong>must select the correct architecture version</strong> when downloading — installing the wrong one means all Apple Silicon native performance optimizations (NumPy's Apple Accelerate framework integration, PyTorch's MPS backend, and so on) will be unavailable, with potential performance losses of several times.</p>
+
+<p>To check your chip: click the Apple logo in the top-left corner → About This Mac. If the "Chip" field shows "Apple M1/M2/M3/M4," download the <strong>arm64</strong> version; if it shows "Intel Core," download <strong>x86_64</strong>. Install from the Terminal using the shell script, shown here for Apple Silicon Miniconda:</p>
 
 <pre><code class="language-bash">
-# Create an environment with Python 3.10 (most packages support this)
-conda create -n matsci python=3.10 -y
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+bash Miniconda3-latest-MacOSX-arm64.sh
+</code></pre>
 
-# Activate it
+<p>When asked "Do you wish the installer to initialize Miniconda3 by running conda init?" type <code>yes</code>. This modifies <code>~/.zshrc</code> (macOS defaults to zsh). After installation, reload the shell:</p>
+
+<pre><code class="language-bash">
+source ~/.zshrc
+conda --version
+</code></pre>
+
+<p><strong>Linux (Local and HPC Clusters)</strong></p>
+
+<p>The procedure mirrors macOS command-line installation:</p>
+
+<pre><code class="language-bash">
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh    # type &quot;yes&quot; when prompted for conda init
+source ~/.bashrc
+conda --version
+</code></pre>
+
+<p>If you work on a university or institute HPC cluster, first check whether Conda is already available via the module system: run <code>module avail anaconda</code> or <code>module avail miniconda</code>. If a module exists, load it with <code>module load anaconda3</code> rather than installing a separate copy. If no module is available, install Miniconda into your home directory (set the installation path to <code>$HOME/miniconda3</code>) — no root privileges are needed, and other users are unaffected.</p>
+
+<hr>
+
+<h2>4. Creating and Managing Virtual Environments — Core Isolation Operations</h2>
+
+<p>With the motivation for virtual environments established, the actual creation and management commands are quite intuitive. This section covers the full lifecycle of an environment, including the critically important reproducibility workflow.</p>
+
+<p>Creating a new environment always requires an explicit Python version:</p>
+
+<pre><code class="language-bash">
+conda create -n matsci python=3.11 -y
+</code></pre>
+
+<p>The <code>-n matsci</code> argument specifies the environment name; use descriptive names tied to the project (<code>afm_analysis</code>, <code>ml_fatigue</code>, <code>protein_dock</code>) rather than generic names like <code>myenv</code>. Different environments can use different Python versions with no conflict between them. The <code>-y</code> flag auto-confirms all prompts.</p>
+
+<p>Activating the environment is a mandatory step before starting work:</p>
+
+<pre><code class="language-bash">
 conda activate matsci
-
-# Your prompt should now show (matsci)
 </code></pre>
 
-<h2>Step 3: Install Essential Packages</h2>
+<p>Once activated, the terminal prompt will show <code>(matsci)</code> at the front — the visual confirmation that the environment is active. All packages installed and all Python scripts run in that terminal window will use the isolated <code>matsci</code> space. To exit, run <code>conda deactivate</code>.</p>
 
-<p>For materials/biomaterials research, here are the packages you need right away:</p>
+<p>Listing all existing environments (the currently active one is marked with <code>*</code>):</p>
 
 <pre><code class="language-bash">
-# Core scientific stack
-conda install numpy scipy pandas matplotlib jupyter -y
-
-# Additional useful libraries
-conda install -c conda-forge seaborn scikit-learn scikit-image -y
-
-# For atomic/molecular simulations (install as needed)
-# conda install -c conda-forge ase pymatgen mdanalysis -y
+conda env list
 </code></pre>
 
-<p>Verify everything works:</p>
-
-<pre><code class="language-python">
-# test_env.py
-import numpy as np
-import scipy
-import pandas as pd
-import matplotlib.pyplot as plt
-import sklearn
-
-print(f&quot;NumPy: {np.__version__}&quot;)
-print(f&quot;SciPy: {scipy.__version__}&quot;)
-print(f&quot;Pandas: {pd.__version__}&quot;)
-print(f&quot;scikit-learn: {sklearn.__version__}&quot;)
-print(&quot;All packages OK!&quot;)
-</code></pre>
-
-<h2>Step 4: Set Up Jupyter Notebook</h2>
-
-<p>Jupyter is the interactive coding environment most scientists use for exploration:</p>
+<p>Listing all packages installed in the current environment:</p>
 
 <pre><code class="language-bash">
-# Start Jupyter in your project folder
-cd path/to/your/project
-jupyter notebook
-
-# Or use JupyterLab (more modern interface)
-jupyter lab
-</code></pre>
-
-<p><strong>Pro tip:</strong> Create a shortcut command for quick launch. On Windows, create <code>jupyter_lab.bat</code>:</p>
-
-<pre><code class="language-batch">
-@echo off
-call conda activate matsci
-jupyter lab
-</code></pre>
-
-<h2>Step 5: VS Code for Serious Development</h2>
-
-<p>When notebooks get too messy (and they will), switch to VS Code:</p>
-
-<ol>
-<li>Download from <a href="https://code.visualstudio.com">code.visualstudio.com</a></li>
-<li>Install the <strong>Python extension</strong> (Microsoft)</li>
-<li>Open your project folder: <code>File > Open Folder</code></li>
-<li>Select your conda environment: <code>Ctrl+Shift+P</code> > "Python: Select Interpreter" > choose <code>matsci</code></li>
-
-</ol>
-<p>Essential VS Code extensions for scientists:</p>
-<ul>
-<li><strong>Python</strong> (Microsoft): IntelliSense, debugging</li>
-<li><strong>Jupyter</strong> (Microsoft): Notebook support inside VS Code</li>
-<li><strong>Rainbow CSV</strong>: Color-coded CSV files</li>
-<li><strong>GitLens</strong>: Git integration</li>
-
-</ul>
-<h2>Step 6: Package Management Reference</h2>
-
-<pre><code class="language-bash">
-# List installed packages
 conda list
+</code></pre>
 
-# Install a specific version
-conda install numpy=1.24.3
+<p><strong>Environment reproducibility</strong> is one of the most important practices in computational research. When your materials characterization analysis or fatigue-life prediction code reaches a stage worth recording in a paper's supplementary section, export the complete environment state:</p>
 
-# Install from conda-forge (community-maintained channel)
-conda install -c conda-forge package_name
-
-# Use pip when conda does not have the package
-pip install package_name
-
-# Export your environment (for sharing/reproducibility)
+<pre><code class="language-bash">
 conda env export &gt; environment.yml
+</code></pre>
 
-# Recreate from file
+<p>The generated <code>environment.yml</code> file records every installed package and its exact version number. A collaborator or a reviewer requesting code validation can reconstruct the identical environment with a single command:</p>
+
+<pre><code class="language-bash">
 conda env create -f environment.yml
 </code></pre>
 
-<h2>Step 7: Common Problems and Solutions</h2>
+<p>This workflow ensures that your code produces the same output on your supervisor's machine, during peer review, and when you return to the project years later. It is the technical foundation of reproducibility in modern computational science.</p>
 
-<table><tr><th>Problem</th><th>Solution</th></tr><tr><td>---------</td><td>----------</td></tr><tr><td><code>conda not recognized</code></td><td>Restart terminal or reinstall with "Add to PATH" checked</td></tr><tr><td>Package install hangs</td><td>Use <code>conda install -c conda-forge</code> instead of defaults</td></tr><tr><td><code>DLL load failed</code> on Windows</td><td>Install <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Visual C++ Redistributable</a></td></tr><tr><td>Jupyter kernel not found</td><td><code>python -m ipykernel install --user --name matsci</code></td></tr><tr><td>Conda slow on Windows</td><td>Use <code>mamba</code> instead: <code>conda install mamba -c conda-forge</code> then <code>mamba install ...</code></td></tr></table>
+<table><tr><th>Operation</th><th>Command</th></tr><tr><td>---</td><td>---</td></tr><tr><td>Create new environment</td><td><code>conda create -n name python=3.11 -y</code></td></tr><tr><td>Activate environment</td><td><code>conda activate name</code></td></tr><tr><td>Deactivate environment</td><td><code>conda deactivate</code></td></tr><tr><td>List all environments</td><td><code>conda env list</code></td></tr><tr><td>Delete an environment</td><td><code>conda env remove -n name</code></td></tr><tr><td>Export environment config</td><td><code>conda env export > environment.yml</code></td></tr><tr><td>Rebuild from config file</td><td><code>conda env create -f environment.yml</code></td></tr><tr><td>List installed packages</td><td><code>conda list</code></td></tr><tr><td>Update a package</td><td><code>conda update package-name</code></td></tr></table>
 
-<h2>Step 8: Quick Start Template</h2>
+<hr>
 
-<p>Save this as <code>start_project.bat</code> (Windows) or <code>start_project.sh</code> (macOS/Linux):</p>
+<h2>5. Installing Core Scientific Computing Packages — Understanding What Each Tool Does</h2>
+
+<p>With the target environment activated, you can install the packages needed for scientific computing. The following describes each major package from a functional perspective — understanding what each tool is for helps you reach for the right one when a new analysis task arises, rather than blindly installing everything in sight.</p>
+
+<p>Install the base scientific computing suite:</p>
 
 <pre><code class="language-bash">
-# Windows: start_project.bat
+conda install numpy scipy pandas matplotlib -y
+conda install -c conda-forge jupyterlab seaborn scikit-learn scikit-image ipykernel -y
+</code></pre>
+
+<p><strong>NumPy</strong> is the numerical computing foundation of the entire Python scientific ecosystem. It provides multidimensional array (ndarray) data structures and vectorized mathematical functions, powered by highly optimized BLAS/LAPACK linear algebra libraries at the C level. Whether you are performing matrix operations on stress-strain data, processing voxel arrays from CT scans, or transforming protein structure coordinates, NumPy is almost always the first tool you will use. A matrix multiplication that would require nested Python loops is expressed as <code>A @ B</code> in NumPy and runs orders of magnitude faster.</p>
+
+<p><strong>SciPy</strong> builds on NumPy to provide higher-level scientific computing algorithms. <code>scipy.signal</code> handles signal processing (filtering fatigue test load spectra, computing frequency spectra of electrophysiological signals); <code>scipy.stats</code> covers statistical tests (assessing whether the mean values of two groups of material test data differ significantly); <code>scipy.ndimage</code> provides image processing operations (morphological operations on CT images for trabecular bone segmentation); <code>scipy.optimize</code> supports curve fitting (fitting the Paris crack growth law <code>da/dN = C(ΔK)^m</code> to extract parameters C and m); and <code>scipy.sparse</code> provides sparse matrix support (efficient storage and solution of finite-element stiffness matrices).</p>
+
+<p><strong>Pandas</strong> is the standard tool for tabular data. For organizing materials composition-property databases, managing batch biological sample data across multiple experimental conditions, or merging and cleaning multi-channel sensor time series, Pandas is nearly indispensable. Its core data structure, the DataFrame, can be thought of as a "labeled NumPy matrix" that supports SQL-style group-and-aggregate operations, time series resampling, and flexible data alignment.</p>
+
+<p><strong>Matplotlib</strong> and <strong>Seaborn</strong> are the primary visualization tools. Matplotlib provides fine-grained control over every visual element (axis ranges, font sizes, line styles, legend positions) to meet the stringent figure formatting requirements of journal submissions. Seaborn builds on Matplotlib to provide more polished statistical charts (box plots, heatmaps, pair plot matrices) for rapid exploratory visualization. XRD diffraction patterns, S-N fatigue life curves, and statistical box plots of cell viability can all be produced at publication quality with these two libraries.</p>
+
+<p><strong>scikit-learn</strong> is the standard library for classical machine learning, covering random forests, support vector machines, principal component analysis (PCA), Lasso/Ridge regression, k-nearest neighbors, and other algorithms commonly used in scientific data analysis. The deep learning chapter of this series emphasizes that not every problem requires deep learning — scikit-learn is the preferred tool when sample sizes are limited and features have well-defined physical meaning.</p>
+
+<p>For research requiring deep learning (image classification, sequence prediction, physics-informed neural networks), install <strong>PyTorch</strong>:</p>
+
+<pre><code class="language-bash">
+# CPU-only version (no dedicated GPU, or Apple Silicon — PyTorch uses MPS automatically)
+conda install pytorch torchvision torchaudio -c pytorch -y
+
+# NVIDIA GPU version (confirm CUDA version first: nvidia-smi; example for CUDA 12.1)
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia -y
+</code></pre>
+
+<p>Domain-specific libraries worth knowing: for bioinformatics, <code>conda install -c conda-forge biopython -y</code> (sequence analysis, PDB protein structure file parsing); for materials science, <code>conda install -c conda-forge pymatgen -y</code> (Materials Project API, crystal structure analysis and symmetry operations); for computational mechanics, <code>conda install -c conda-forge fenics-dolfinx -y</code> (FEniCSx finite-element framework for custom PDE solving); for simulation data I/O, <code>conda install -c conda-forge h5py netcdf4 -y</code> (reading and writing HDF5 and NetCDF files common in large-scale finite-element and molecular dynamics outputs).</p>
+
+<hr>
+
+<h2>6. JupyterLab — The Core Interactive Scientific Computing Environment</h2>
+
+<p>JupyterLab is the most widely used interactive computing environment in modern scientific research. Running in a browser, it integrates in a single interface: code editing and execution, inline figure display, Markdown text with LaTeX mathematical formula rendering, file system browsing, and an embedded terminal. For scientific work that must simultaneously present experimental data, computational logic, visualization results, and scientific interpretation, the Notebook format — a "computational document" — has irreplaceable value. A Notebook is not merely a programming tool; it is a medium for recording the scientific exploration process, making "code as experimental record" a practical reality.</p>
+
+<p>After activating your conda environment, launch JupyterLab:</p>
+
+<pre><code class="language-bash">
 conda activate matsci
 jupyter lab
 </code></pre>
 
-<p>Double-click to start working. That is it—you are ready to code.</p>
+<p>JupyterLab automatically opens in your default browser at <code>http://localhost:8888</code>. When working on a remote server (HPC cluster or cloud instance), direct browser access is not possible; use SSH port forwarding instead:</p>
+
+<pre><code class="language-bash">
+# Run on your local machine — maps the server&#x27;s port 8888 to your local port 8888
+ssh -L 8888:localhost:8888 username@server-ip
+
+# Then on the remote server, start JupyterLab without automatically opening a browser
+jupyter lab --no-browser --port=8888
+
+# Copy the token URL from the server terminal output into your local browser
+</code></pre>
+
+<p>Understanding the <strong>Kernel</strong> concept is critical for using JupyterLab correctly. The Kernel is the Python process that actually executes the code in the background, completely separate from the JupyterLab interface process. Each Notebook has an associated Kernel, and the Kernel's Python environment determines which packages can be imported. When you encounter <code>ModuleNotFoundError: No module named 'torch'</code>, the most common cause is not that PyTorch was never installed, but that the Notebook's current Kernel corresponds to a conda environment different from the one where PyTorch was installed.</p>
+
+<p>Registering a conda environment as an available JupyterLab Kernel:</p>
+
+<pre><code class="language-bash">
+conda activate matsci
+conda install -c conda-forge ipykernel -y
+python -m ipykernel install --user --name matsci --display-name &quot;Python (matsci)&quot;
+</code></pre>
+
+<p>After registration, "Python (matsci)" appears in JupyterLab's Launcher (when creating a new Notebook) and in the Kernel selector at the top-right of any open Notebook. Each conda environment can be registered independently, allowing multiple Notebooks associated with different environments to run simultaneously within one JupyterLab instance.</p>
+
+<p>Practical JupyterLab techniques worth internalizing: <strong>Magic Commands</strong> are Jupyter-specific convenience functions — <code>%timeit func()</code> automatically runs a function multiple times and reports execution statistics, useful for benchmarking algorithm efficiency; <code>%matplotlib inline</code> embeds figures directly into cell outputs; <code>%%bash</code> runs an entire cell as shell commands. <strong>Tab autocompletion</strong> and <strong>inline documentation</strong> (type <code>function_name?</code> and press Shift+Enter to display the full docstring) significantly reduce time spent looking up reference documentation. Notebook files are fundamentally JSON and can be tracked with git; installing <strong>nbstripout</strong> (<code>conda install -c conda-forge nbstripout</code>) and configuring it as a pre-commit hook strips all output cells before commits, keeping git diffs focused on code changes rather than output data.</p>
+
+<hr>
+
+<h2>7. VS Code Integration — From Exploratory Analysis to Engineering-Grade Development</h2>
+
+<p>JupyterLab is ideal for exploratory analysis: you are uncertain about the data structure, trying things step by step, with each step's output immediately visible. When the analysis logic stabilizes and you need to produce reproducible scripts, build data processing pipelines, or write analysis modules that others can import and reuse, <strong>VS Code (Visual Studio Code)</strong> becomes the more appropriate environment. The two are complementary rather than competing: a common workflow is to explore in JupyterLab, confirm the logic, then refactor into clean <code>.py</code> scripts in VS Code.</p>
+
+<p>Download and install VS Code from <code>https://code.visualstudio.com</code> (installers available for Windows, macOS, and Linux). In the Extensions panel (shortcut <code>Ctrl+Shift+X</code>, or <code>Cmd+Shift+X</code> on macOS), search and install the following:</p>
+
+<ul>
+<li><strong>Python</strong> (the official Microsoft extension): syntax highlighting, IntelliSense autocompletion, Linting, inline variable inspection during debugging, and integrated test runner</li>
+<li><strong>Jupyter</strong> (Microsoft): open and edit <code>.ipynb</code> files directly in VS Code, and run <code>.py</code> scripts with <code># %%</code> comment delimiters as interactive cells — the interactive execution experience of a Notebook without requiring the <code>.ipynb</code> format</li>
+
+</ul>
+<p>After installing the Python extension, press <code>Ctrl+Shift+P</code> (<code>Cmd+Shift+P</code> on macOS) to open the Command Palette, type <code>Python: Select Interpreter</code>, and choose the Python path corresponding to your conda environment (the path typically contains <code>envs/matsci</code>, e.g., <code>/home/username/miniconda3/envs/matsci/bin/python</code>). Once selected, all autocompletion, Linting, and debugging will use the packages installed in that environment.</p>
+
+<p>The most valuable VS Code feature for researchers working with remote computation is <strong>Remote Development</strong>. The <strong>Remote - SSH</strong> extension lets you edit and run code stored on a remote server — HPC cluster, institutional computing node, or cloud VM — using VS Code's full IDE interface on your local Mac or Windows machine. You get the benefit of your high-resolution screen and familiar keyboard layout while computation executes on the server's GPU or large-memory resources. This workflow is substantially more efficient than editing code in <code>vim</code> or <code>nano</code> over SSH. Setup: after installing the extension, press <code>F1</code>, select <code>Remote-SSH: Connect to Host</code>, enter <code>username@server-ip</code>, and VS Code handles the rest automatically.</p>
+
+<hr>
+
+<h2>8. The conda–pip Relationship and Best Practices</h2>
+
+<p>When managing environments with conda, you will eventually encounter packages unavailable in conda channels that can only be installed with pip. Understanding the division of responsibility between conda and pip is key to avoiding dependency conflicts and environment corruption.</p>
+
+<p><strong>conda</strong> is a <strong>general-purpose package manager</strong> whose scope includes Python packages, the Python interpreter itself, and all non-Python binary dependencies — C/C++ shared libraries, compilers, CUDA runtimes, and so on. When conda installs a package, it performs full dependency resolution across the entire tree of requirements and installs a mutually compatible set of all needed components simultaneously. This holistic resolution is particularly important for scientific computing packages, which often carry complex compiled C extensions with version-sensitive binary dependencies.</p>
+
+<p><strong>pip</strong> is a <strong>Python-specific package manager</strong> that handles only Python packages and does not manage binary-level dependencies. Pip's dependency resolution is comparatively weaker: it may only discover conflicts after installation, rather than before. However, pip covers far more packages than conda — many newly published research codebases (especially experimental libraries on GitHub) are published only on PyPI, without a corresponding conda package.</p>
+
+<p>Mixing conda and pip within the same environment is entirely reasonable, but a strict ordering principle must be respected: <strong>use conda to install every package that conda can provide first; only use pip for packages that conda cannot supply.</strong> The reason is that conda's dependency solver cannot accurately identify the version information of packages already installed by pip; if large numbers of packages are first installed with pip and conda is then used for additional packages, conda may overwrite or force-downgrade pip-installed packages, corrupting the environment state.</p>
+
+<p>To determine whether a given package should be installed with conda or pip, follow this sequence: first, search conda-forge (<code>conda search -c conda-forge package-name</code>); if conda-forge provides the package at an adequate version, install it with conda; only if conda-forge does not carry it or only has an outdated version should you fall back to pip. The conda-forge community repository covers an extremely wide range of packages — BioPython, pymatgen, FEniCSx, NGsolve, and most other scientific computing tools are available there, often with update speeds comparable to PyPI.</p>
+
+<pre><code class="language-bash">
+# Recommended operational sequence
+conda activate matsci
+
+# Step 1: install everything available via conda
+conda install -c conda-forge numpy scipy pandas matplotlib scikit-learn -y
+conda install -c conda-forge biopython pymatgen -y
+
+# Final step: only resort to pip for packages not on conda
+pip install some-niche-library-only-on-pypi
+</code></pre>
+
+<hr>
+
+<h2>9. Network Acceleration for Users in China</h2>
+
+<p>Users in China frequently encounter very slow download speeds or connection timeouts when installing conda packages, because conda's default download servers are located outside the country. Switching to domestic mirror servers maintained by Chinese universities can increase installation speeds by orders of magnitude. The following configuration uses <strong>Tsinghua University's TUNA mirror</strong>, which is noted for high update frequency and reliability:</p>
+
+<pre><code class="language-bash">
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --set show_channel_urls yes
+</code></pre>
+
+<p>After configuration, the download addresses shown during <code>conda install</code> operations will switch to <code>tuna.tsinghua.edu.cn</code>. Downloads that previously took several minutes typically complete within seconds. If TUNA is intermittently unavailable, the Beijing Foreign Studies University mirror (<code>mirrors.bfsu.edu.cn</code>) is a comparable alternative with identical configuration syntax.</p>
+
+<p>pip can be mirrored as well. For one-time use without modifying the configuration file:</p>
+
+<pre><code class="language-bash">
+pip install package-name -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/
+</code></pre>
+
+<p>For permanent configuration, create or edit the pip config file (Windows: <code>%APPDATA%\pip\pip.ini</code>; macOS/Linux: <code>~/.pip/pip.conf</code> or <code>~/.config/pip/pip.conf</code>):</p>
+
+<pre><code class="language-ini">
+[global]
+index-url = https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/
+trusted-host = mirrors.tuna.tsinghua.edu.cn
+</code></pre>
+
+<p>If <code>conda install</code> continues to stall on "Solving environment..." even after configuring mirrors — this is a dependency solver performance issue entirely unrelated to network speed — install Mamba (<code>conda install -n base -c conda-forge mamba -y</code>) and replace <code>conda install</code> with <code>mamba install</code>. The C++ solver in Mamba typically reduces resolution time from minutes to seconds.</p>
+
+<hr>
+
+<h2>10. Troubleshooting Reference</h2>
+
+<p>Even with careful adherence to the steps above, environment configuration issues can still arise. The following covers the most frequently encountered failure patterns, organized by symptom, root cause, and solution.</p>
+
+<p><strong><code>conda</code> command not recognized (Windows CMD or PowerShell)</strong></p>
+
+<p>Symptom: typing <code>conda</code> in CMD or PowerShell returns "'conda' is not recognized as an internal or external command." Root cause: the "Add to PATH" checkbox was not ticked during installation, or ordinary CMD is being used instead of Anaconda Prompt. Resolution: open <strong>Anaconda Prompt</strong> from the Start menu and use it as the standard command-line interface. If you prefer PowerShell, run it as administrator, execute <code>Set-ExecutionPolicy RemoteSigned</code>, then <code>conda init powershell</code>, and restart PowerShell.</p>
+
+<p><strong><code>conda activate</code> fails on macOS or Linux</strong></p>
+
+<p>Symptom: running <code>conda activate matsci</code> returns <code>CommandNotFoundError</code> or "conda activate is not supported in non-interactive shells." Root cause: conda's shell initialization script was not loaded, typically because the <code>conda init</code> step was skipped during installation. Resolution: run <code>conda init zsh</code> (macOS default) or <code>conda init bash</code> (Linux default), then close and reopen the terminal to load the initialization code written into <code>~/.zshrc</code> or <code>~/.bashrc</code>.</p>
+
+<p><strong><code>ModuleNotFoundError</code> when importing a package in Jupyter</strong></p>
+
+<p>Symptom: a package is visibly installed via conda, but <code>import</code> in a Notebook throws ModuleNotFoundError. Root cause: the Notebook's active Kernel corresponds to a different conda environment than the one where the package was installed. Diagnosis: run <code>import sys; print(sys.executable)</code> in the first Notebook cell to see the actual Python interpreter path the Kernel is using, and verify it contains the expected conda environment name. Resolution: re-register ipykernel as described in Section 6, then switch the Notebook's Kernel to the correct environment using the selector in the top-right corner.</p>
+
+<p><strong><code>DLL load failed</code> when importing a package on Windows</strong></p>
+
+<p>Symptom: after installing a package, <code>import</code> throws <code>ImportError: DLL load failed while importing xxx</code>. Root cause: the Microsoft Visual C++ Redistributable runtime is missing. Resolution: download and install the latest Visual C++ Redistributable from the Microsoft website (install both x64 and x86 versions), restart the computer, and retry.</p>
+
+<p><strong>Package installation fails on Apple Silicon Mac due to architecture mismatch</strong></p>
+
+<p>Symptom: <code>conda install</code> on an M-series Mac reports that no arm64 version is available, or the installed package fails to import. Root cause: the package has not yet been compiled for the Apple Silicon architecture. Temporary workaround: create an x86_64 Rosetta 2 environment for the incompatible package (<code>CONDA_SUBDIR=osx-64 conda create -n compat python=3.10 -y</code>), noting that performance will be reduced. Better approach: check conda-forge for the arm64 version — community maintainers typically provide Apple Silicon builds quickly, often faster than the default Anaconda channel.</p>
+
+<p><strong><code>conda install</code> freezes indefinitely on "Solving environment..."</strong></p>
+
+<p>Root cause: conda's default SAT-based dependency solver becomes computationally expensive with complex dependency graphs — this is a solver performance issue, not a network issue. Resolution: install Mamba (<code>conda install -n base -c conda-forge mamba -y</code>) and replace <code>conda install</code> with <code>mamba install</code>. Under the same dependency conditions, Mamba's C++ solver typically completes in seconds rather than minutes.</p>
+
+<p>For issues not covered here, search Stack Overflow using the complete English-language error message (English search results are typically more numerous and more current). The conda-forge GitHub Issues tracker (<code>github.com/conda-forge/conda-forge.github.io/issues</code>) is a comprehensive resource for environment-specific problems that goes beyond what general forums can address.</p>
+
+<hr>
 
 <h2>References</h2>
 
-<ul>
-<li>Conda documentation: <a href="https://docs.conda.io">docs.conda.io</a></li>
-<li>Jupyter documentation: <a href="https://docs.jupyter.org">docs.jupyter.org</a></li>
-<li>VS Code Python setup: <a href="https://code.visualstudio.com/docs/python/python-tutorial">code.visualstudio.com/docs/python/python-tutorial</a></li>
-<li>Scientific Python ecosystem: <a href="https://scientific-python.org">scientific-python.org</a></li>
-</ul>
+<ol>
+<li>Anaconda, Inc. (2024). Anaconda Distribution Documentation. Anaconda, Inc. https://docs.anaconda.com</li>
+
+<li>conda Contributors (2024). Conda User Guide (Version 24.x). conda.io. https://docs.conda.io/en/latest/</li>
+
+<li>Project Jupyter (2024). JupyterLab Documentation. ReadTheDocs / GitHub. https://jupyterlab.readthedocs.io</li>
+
+<li>Microsoft (2024). Python in Visual Studio Code — Getting Started Tutorial. Microsoft Docs. https://code.visualstudio.com/docs/python/python-tutorial</li>
+
+<li>Pérez, F., & Granger, B. E. (2007). IPython: A System for Interactive Scientific Computing. <em>Computing in Science & Engineering</em>, 9(3), 21–29. https://doi.org/10.1109/MCSE.2007.53</li>
+
+<li>Harris, C. R., Millman, K. J., van der Walt, S. J., et al. (2020). Array programming with NumPy. <em>Nature</em>, 585, 357–362. https://doi.org/10.1038/s41586-020-2649-2</li>
+
+<li>Virtanen, P., Gommers, R., Oliphant, T. E., et al. (2020). SciPy 1.0: Fundamental algorithms for scientific computing in Python. <em>Nature Methods</em>, 17, 261–272. https://doi.org/10.1038/s41592-019-0686-2</li>
+
+<li>McKinney, W. (2010). Data structures for statistical computing in Python. <em>Proceedings of the 9th Python in Science Conference (SciPy 2010)</em>, 56–61. https://doi.org/10.25080/Majora-92bf1922-00a</li>
+</ol>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>
@@ -216,7 +389,7 @@ jupyter lab
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">About / 关于</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
+<a href="/about/">About / 关于</a><a href="https://github.com/GellmanSparrowS/fibernet" target="_blank" rel="noopener" class="nav-fibernet">FiberNet</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
