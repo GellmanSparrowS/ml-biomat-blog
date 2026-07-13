@@ -28,151 +28,162 @@
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
-<main class="container"><div class="fibernet-hero" style="text-align:center;padding:3.5rem 1.5rem 3rem;margin-bottom:2.5rem;background:linear-gradient(160deg,#334155 0%,#1e3a5f 50%,#312e81 100%);border-radius:12px;border:1px solid #475569;box-shadow:0 4px 24px rgba(0,0,0,.12)">
-<div style="display:inline-flex;align-items:center;gap:.4rem;background:var(--c-primary);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.03em;margin-bottom:1.2rem">v1.24.0</div>
+<main class="container"><div style="text-align:center;padding:3rem 1.5rem 2.5rem;margin-bottom:2.5rem;background:linear-gradient(160deg,#1e293b 0%,#1e3a5f 50%,#0f172a 100%);border-radius:12px;border:1px solid #334155;box-shadow:0 4px 24px rgba(0,0,0,.15)">
+<div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem">
+<span style="background:var(--c-primary);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.03em">v4.0.0</span>
+<span style="background:rgba(59,130,246,.2);color:#93c5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">12 Unit Types</span>
+<span style="background:rgba(20,184,166,.2);color:#5eead4;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">Taichi GPU</span>
+</div>
 <h1 style="font-size:2.5rem;font-weight:800;letter-spacing:-.025em;margin:.2rem 0;color:#f1f5f9;line-height:1.2">FiberNet</h1>
-<p style="font-size:1.05rem;color:#cbd5e1;max-width:620px;margin:.6rem auto 0;line-height:1.75">
-A research-grade Python toolkit for fiber network generation, simulation, and analysis
+<p style="font-size:1.05rem;color:#cbd5e1;max-width:640px;margin:.5rem auto 0;line-height:1.7">
+Python Toolkit for Fiber Network Design, Simulation &amp; Intelligent Optimization
 </p>
-<p style="font-size:.88rem;color:#94a3b8;max-width:620px;margin:.3rem auto 0;line-height:1.6">
-纤维网络结构生成、模拟与分析 Python 工具包
+<p style="font-size:.88rem;color:#94a3b8;max-width:640px;margin:.3rem auto 0">
+纤维网络结构生成、力学模拟与智能优化 Python 工具包
 </p>
 <div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin:1.2rem 0">
-<span style="background:rgba(59,130,246,.2);color:#93c5fd;padding:.2rem .7rem;border-radius:4px;font-size:.75rem;font-family:var(--font-mono);font-weight:600">Python 3.9+</span>
-<span style="background:rgba(20,184,166,.2);color:#5eead4;padding:.2rem .7rem;border-radius:4px;font-size:.75rem;font-family:var(--font-mono);font-weight:600">MIT</span>
-<span style="background:rgba(251,191,36,.2);color:#fde68a;padding:.2rem .7rem;border-radius:4px;font-size:.75rem;font-family:var(--font-mono);font-weight:600">Cross-platform</span>
+<span style="background:rgba(59,130,246,.2);color:#93c5fd;padding:.2rem .7rem;border-radius:4px;font-size:.72rem;font-family:var(--font-mono);font-weight:600">Python 3.9+</span>
+<span style="background:rgba(20,184,166,.2);color:#5eead4;padding:.2rem .7rem;border-radius:4px;font-size:.72rem;font-family:var(--font-mono);font-weight:600">MIT</span>
+<span style="background:rgba(251,191,36,.2);color:#fde68a;padding:.2rem .7rem;border-radius:4px;font-size:.72rem;font-family:var(--font-mono);font-weight:600">Cross-platform</span>
+<span style="background:rgba(168,85,247,.2);color:#c4b5fd;padding:.2rem .7rem;border-radius:4px;font-size:.72rem;font-family:var(--font-mono);font-weight:600">Taichi</span>
 </div>
-<pre style="background:#0f172a;color:#e2e8f0;border-radius:10px;padding:1rem 1.5rem;font-family:var(--font-mono);font-size:.92rem;line-height:1.6;text-align:left;margin:0;overflow-x:auto;white-space:pre-wrap;word-break:break-all">pip install fibernet</pre>
-<div style="margin-top:1rem;display:flex;gap:.8rem;justify-content:center">
+<pre style="background:#0f172a;color:#e2e8f0;border-radius:10px;padding:.9rem 1.5rem;font-family:var(--font-mono);font-size:.9rem;line-height:1.6;text-align:left;margin:1rem auto;max-width:420px;overflow-x:auto">pip install fibernet</pre>
+<div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
+<code style="background:rgba(255,255,255,.08);color:#94a3b8;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-family:var(--font-mono)">fibernet[full]</code>
+<code style="background:rgba(255,255,255,.08);color:#94a3b8;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-family:var(--font-mono)">fibernet[ml]</code>
+<code style="background:rgba(255,255,255,.08);color:#94a3b8;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-family:var(--font-mono)">fibernet[rl]</code>
+<code style="background:rgba(255,255,255,.08);color:#94a3b8;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-family:var(--font-mono)">fibernet[accel]</code>
+<code style="background:rgba(255,255,255,.08);color:#94a3b8;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-family:var(--font-mono)">fibernet[viz]</code>
+</div>
+<div style="margin-top:1.2rem;display:flex;gap:.8rem;justify-content:center">
 <a href="https://github.com/GellmanSparrowS/fibernet" target="_blank" rel="noopener" style="padding:.55rem 1.3rem;background:var(--c-primary);color:#fff;border-radius:6px;font-weight:600;font-size:.85rem;text-decoration:none">GitHub</a>
 <a href="https://pypi.org/project/fibernet/" target="_blank" rel="noopener" style="padding:.55rem 1.3rem;background:var(--c-accent);color:#fff;border-radius:6px;font-weight:600;font-size:.85rem;text-decoration:none">PyPI</a>
 </div>
 </div>
 
 <section style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem">
-<div style="text-align:center;padding:1.2rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px">
-<div style="font-size:1.7rem;font-weight:800;color:var(--c-primary)">79+</div>
-<div style="font-size:.75rem;color:var(--c-muted);margin-top:.25rem">Generators / 生成器</div>
-</div>
-<div style="text-align:center;padding:1.2rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px">
-<div style="font-size:1.7rem;font-weight:800;color:var(--c-primary)">22+</div>
-<div style="font-size:.75rem;color:var(--c-muted);margin-top:.25rem">Simulators / 模拟器</div>
-</div>
-<div style="text-align:center;padding:1.2rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px">
-<div style="font-size:1.7rem;font-weight:800;color:var(--c-accent)">925+</div>
-<div style="font-size:.75rem;color:var(--c-muted);margin-top:.25rem">Tests / 测试</div>
-</div>
-<div style="text-align:center;padding:1.2rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px">
-<div style="font-size:1.7rem;font-weight:800;color:var(--c-accent)">3</div>
-<div style="font-size:.75rem;color:var(--c-muted);margin-top:.25rem">Platforms / 平台</div>
-</div>
+<div style="text-align:center;padding:1.2rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.7rem;font-weight:800;color:var(--c-primary)">12</div><div style="font-size:.75rem;color:var(--c-muted);margin-top:.25rem">Units / 基元</div></div>
+<div style="text-align:center;padding:1.2rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.7rem;font-weight:800;color:var(--c-primary)">94</div><div style="font-size:.75rem;color:var(--c-muted);margin-top:.25rem">Features / 特征</div></div>
+<div style="text-align:center;padding:1.2rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.7rem;font-weight:800;color:var(--c-accent)">368D</div><div style="font-size:.75rem;color:var(--c-muted);margin-top:.25rem">Action Space / 动作空间</div></div>
+<div style="text-align:center;padding:1.2rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.7rem;font-weight:800;color:var(--c-accent)">3</div><div style="font-size:.75rem;color:var(--c-muted);margin-top:.25rem">Platforms / 平台</div></div>
 </section>
 
-<section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem">
+<section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
 <div class="about-card">
 <h2>What is FiberNet? / 是什么</h2>
 <p style="font-size:.9rem;line-height:1.85;color:var(--c-fg-soft)">
-A unified Python framework for computational study of <strong>fiber network structures</strong>. From random networks to hierarchical chiral architectures, woven composites, and mechanical metamaterials — one toolkit for generation, simulation, analysis, and visualization.
+A research-grade Python toolkit providing a <strong>complete closed-loop workflow</strong> for computational design of fiber network structures:
 </p>
-<p style="font-size:.9rem;line-height:1.85;color:var(--c-fg-soft);margin-top:.5rem">
-面向纤维网络结构计算研究的统一 Python 框架。覆盖随机网络、层级手性结构、编织复合材料和力学超材料的<strong>生成、模拟、分析与可视化</strong>全流程。
-</p>
-<p style="font-size:.78rem;color:var(--c-muted);margin-top:.8rem">
+<div style="background:var(--c-code-bg);border-radius:6px;padding:.8rem 1rem;font-family:var(--font-mono);font-size:.72rem;color:var(--c-muted);margin:.8rem 0;text-align:center">
+Generation &rarr; Simulation &rarr; Feature Extraction &rarr; Machine Learning &rarr; Reinforcement Learning
+</div>
+<p style="font-size:.82rem;color:var(--c-muted);margin-top:.5rem">
 BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
 </p>
 </div>
 <div class="about-card">
 <h2>Why FiberNet? / 为什么选择</h2>
 <ul style="line-height:2.1;font-size:.88rem;list-style:none;padding:0">
-<li><strong>Unified API</strong> — one consistent interface across 79+ generators and 22+ simulators<br><span style="font-size:.78rem;color:var(--c-muted)">统一接口，跨越 79+ 生成器与 22+ 模拟器</span></li>
-<li><strong>Research-grade</strong> — 925+ tests, peer-reviewed algorithms, reproducible outputs<br><span style="font-size:.78rem;color:var(--c-muted)">研究级质量，925+ 测试，可复现输出</span></li>
-<li><strong>Batteries included</strong> — visualization, ML integration, multi-format I/O built in<br><span style="font-size:.78rem;color:var(--c-muted)">内置可视化、机器学习集成、多格式读写</span></li>
-<li><strong>Cross-platform</strong> — Ubuntu, macOS ARM64, Windows, Python 3.9+<br><span style="font-size:.78rem;color:var(--c-muted)">全平台支持</span></li>
+<li><strong>One-line APIs</strong> &mdash; generate, simulate, predict, optimize in a single call<br><span style="font-size:.78rem;color:var(--c-muted)">一行代码完成生成、模拟、预测、优化</span></li>
+<li><strong>Taichi GPU acceleration</strong> &mdash; mass-spring dynamics with auto-relaxation<br><span style="font-size:.78rem;color:var(--c-muted)">Taichi 质点弹簧动力学，GPU 加速</span></li>
+<li><strong>Parametric control</strong> &mdash; 368D continuous action space for RL<br><span style="font-size:.78rem;color:var(--c-muted)">368维连续动作空间，原生RL支持</span></li>
+<li><strong>94-dim features</strong> &mdash; structural, pore, and contact descriptors<br><span style="font-size:.78rem;color:var(--c-muted)">94维结构-孔隙-接触特征</span></li>
 </ul>
 </div>
 </section>
 
-<section style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
-<div class="about-card">
-<h3 style="font-size:.92rem;margin-bottom:.7rem">Generators / 生成器</h3>
-<p style="font-size:.82rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem">
-Random, ordered, hierarchical, chiral, woven, bundled, curved, fractal, gradient, laminates, and metamaterial architectures including auxetic, octet, diamond, and gyroid lattices.
-</p>
-<p style="font-size:.78rem;color:var(--c-muted)">
-随机、有序、层级、手性、编织、束状、弯曲、分形、梯度、层压，以及拉涨、八面体、金刚石、螺旋面等超材料构型。
-</p>
+<section style="margin-bottom:2.5rem">
+<h2 style="text-align:center;font-size:1.1rem;margin-bottom:1rem">Structure Catalog / 结构目录</h2>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;margin-bottom:1.5rem">
+<div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Square<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">正方形</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Triangle<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">三角形</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Hexagon<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">六边形</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Honeycomb<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">蜂窝</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Kagome<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">Kagome</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Voronoi<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">Voronoi</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Chiral<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">手性</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Reentrant<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">凹角</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Star<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">星形</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Cross<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">十字</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Diamond<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">钻石</span></div><div style="text-align:center;padding:.7rem .3rem;background:var(--c-code-bg);border-radius:8px;font-size:.75rem;font-weight:600;color:var(--c-fg-soft)">Missing Rib<br><span style="font-size:.65rem;color:var(--c-muted);font-weight:400">缺肋</span></div>
 </div>
-<div class="about-card">
-<h3 style="font-size:.92rem;margin-bottom:.7rem">Simulation / 模拟</h3>
-<p style="font-size:.82rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem">
-FEM mechanics, nonlinear deformation, fracture and damage evolution, fatigue life prediction, creep, thermal analysis, electromagnetic response, acoustic propagation, fluid-structure interaction, rheology, DMA, viscoelasticity, and multiscale homogenization.
-</p>
-<p style="font-size:.78rem;color:var(--c-muted)">
-有限元力学、非线性变形、断裂损伤、疲劳寿命、蠕变、热分析、电磁、声学、流固耦合、流变、DMA、粘弹性、多尺度均匀化。
-</p>
-</div>
-<div class="about-card">
-<h3 style="font-size:.92rem;margin-bottom:.7rem">Analysis / 分析</h3>
-<p style="font-size:.82rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem">
-Morphological characterization, topological graph analysis, spatial statistics, percolation threshold detection, stress-strain curve extraction, effective property computation, Poisson's ratio evaluation, and machine learning feature pipelines.
-</p>
-<p style="font-size:.78rem;color:var(--c-muted)">
-形态表征、拓扑图分析、空间统计、逾渗阈值、应力应变曲线、等效性质、泊松比、机器学习特征管道。
-</p>
-</div>
-<div class="about-card">
-<h3 style="font-size:.92rem;margin-bottom:.7rem">I/O &amp; Visualization / 读写与可视化</h3>
-<p style="font-size:.82rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem">
-Native support for JSON, YAML, LAMMPS data, VTK, GMSH, PDB, XYZ, HDF5, and pandas DataFrames. 3D rendering via PyVista, 2D via matplotlib, interactive via Plotly, with animation export.
-</p>
-<p style="font-size:.78rem;color:var(--c-muted)">
-原生支持 JSON、YAML、LAMMPS、VTK、GMSH、PDB、XYZ、HDF5、pandas。PyVista 三维渲染、matplotlib 二维、Plotly 交互、动画导出。
-</p>
-</div>
+<img src="https://raw.githubusercontent.com/GellmanSparrowS/fibernet/main/docs/images/01_2d_gallery.png" alt="Structure Gallery" style="width:100%;max-width:700px;display:block;margin:0 auto;border-radius:10px;border:1px solid var(--c-border)" loading="lazy">
+<p style="text-align:center;font-size:.75rem;color:var(--c-muted);margin-top:.5rem">12 unit types across 6 architecture families / 12种基元，6大结构家族</p>
 </section>
 
-<section style="margin-bottom:2rem">
+<section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
 <div class="about-card">
-<h3 style="font-size:.92rem;margin-bottom:.7rem">Reinforcement Learning / 强化学习</h3>
-<p style="font-size:.82rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem">
-Train RL agents to design and optimize fiber network architectures. Use reinforcement learning for inverse design of metamaterials with target mechanical properties, automated topology optimization, and active learning-driven structure-property exploration. Built on stable-baselines3 and Gymnasium with custom fiber network environments.
-</p>
-<p style="font-size:.78rem;color:var(--c-muted)">
-训练强化学习智能体进行纤维网络结构设计与优化。面向目标力学性能的超材料逆向设计、自动化拓扑优化、主动学习驱动的结构-性能探索。基于 stable-baselines3 与 Gymnasium，提供自定义纤维网络环境。
-</p>
-</div>
-</section>
-
-<section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem">
-<div class="about-card">
-<h2>Quick Start / 快速开始</h2>
-<div style="background:var(--c-code-bg);border-radius:8px;padding:1rem;font-family:var(--font-mono);font-size:.76rem;line-height:1.7;overflow-x:auto">
-<span style="color:var(--c-muted)">from</span> fibernet <span style="color:var(--c-muted)">import</span> gen
-<br><span style="color:var(--c-muted)">from</span> fibernet.sim.mechanical <span style="color:var(--c-muted)">import</span> compute_effective_properties
+<h2>One-Line API / 一行代码</h2>
+<div style="background:var(--c-code-bg);border-radius:8px;padding:.9rem 1rem;font-family:var(--font-mono);font-size:.72rem;line-height:1.65;overflow-x:auto">
+<span style="color:var(--c-muted)">import</span> fibernet <span style="color:var(--c-muted)">as</span> fn
 <br>
-<br><span style="color:var(--c-muted)"># Auxetic honeycomb / 拉涨蜂窝结构</span>
-<br>net = gen.reentrant_honeycomb_2d(
-<br>&nbsp;&nbsp;&nbsp;&nbsp;reentrant_angle=150,
-<br>&nbsp;&nbsp;&nbsp;&nbsp;grid_size=(8, 8),
-<br>)
+<br><span style="color:var(--c-muted)"># Generate / 生成</span>
+<br>g = fn.pattern_2d(unit=<span style="color:var(--c-accent)">"honeycomb"</span>, grid=(4,4))
 <br>
-<br><span style="color:var(--c-muted)"># Effective properties / 等效力学性能</span>
-<br>props = compute_effective_properties(net)
-<br>print(props.summary())
+<br><span style="color:var(--c-muted)"># Visualize / 可视化</span>
+<br>fn.show(g)
+<br>
+<br><span style="color:var(--c-muted)"># Simulate / 模拟</span>
+<br>r = fn.simulate(g, mode=<span style="color:var(--c-accent)">"stretch"</span>, strain=1.5)
+<br>
+<br><span style="color:var(--c-muted)"># ML train / 机器学习</span>
+<br>result = fn.predict_from_csv(<span style="color:var(--c-accent)">"data.csv"</span>, target=<span style="color:var(--c-accent)">"max_force"</span>)
+<br>
+<br><span style="color:var(--c-muted)"># RL optimize / 强化学习</span>
+<br>best = fn.run_bayesian_optimization(obj_fn, space, n_iter=50)
 </div>
 </div>
 <div class="about-card">
-<h2>Platforms / 平台支持</h2>
-<table style="width:100%;font-size:.86rem;border-collapse:collapse">
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.5rem 0">Ubuntu</td><td style="padding:.5rem 0;text-align:right;color:var(--c-muted)">3.9–3.12</td><td style="padding:.5rem 0;text-align:right;color:var(--c-accent);font-weight:600">Pass</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.5rem 0">macOS ARM64</td><td style="padding:.5rem 0;text-align:right;color:var(--c-muted)">3.9–3.12</td><td style="padding:.5rem 0;text-align:right;color:var(--c-accent);font-weight:600">Pass</td></tr>
-<tr><td style="padding:.5rem 0">Windows</td><td style="padding:.5rem 0;text-align:right;color:var(--c-muted)">3.9–3.12</td><td style="padding:.5rem 0;text-align:right;color:var(--c-accent);font-weight:600">Pass</td></tr>
+<h2>Installation / 安装</h2>
+<table style="width:100%;font-size:.84rem;border-collapse:collapse">
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.45rem 0"><code>pip install fibernet</code></td><td style="padding:.45rem 0;text-align:right;color:var(--c-muted);font-size:.78rem">Core</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.45rem 0"><code>pip install fibernet[full]</code></td><td style="padding:.45rem 0;text-align:right;color:var(--c-muted);font-size:.78rem">ML + RL + Viz + Sim</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.45rem 0"><code>pip install fibernet[ml]</code></td><td style="padding:.45rem 0;text-align:right;color:var(--c-muted);font-size:.78rem">scikit-learn, pandas</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.45rem 0"><code>pip install fibernet[rl]</code></td><td style="padding:.45rem 0;text-align:right;color:var(--c-muted);font-size:.78rem">gymnasium, scikit-optimize</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.45rem 0"><code>pip install fibernet[accel]</code></td><td style="padding:.45rem 0;text-align:right;color:var(--c-muted);font-size:.78rem">taichi (GPU)</td></tr>
+<tr><td style="padding:.45rem 0"><code>pip install fibernet[viz]</code></td><td style="padding:.45rem 0;text-align:right;color:var(--c-muted);font-size:.78rem">pyvista (3D)</td></tr>
 </table>
-<p style="font-size:.82rem;color:var(--c-fg-soft);margin-top:1rem;line-height:1.7">
-Under active development. API is stabilizing. Tutorials and detailed guides are coming soon.
+</div>
+</section>
+
+<section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
+<div class="about-card">
+<h2>Machine Learning / 机器学习</h2>
+<p style="font-size:.85rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.7rem">
+Train predictors on 94-dimensional structural features from <code>predict_from_csv()</code>. Built-in nested cross-validation (no data leakage), model comparison, and visualization. Random Forest, Gradient Boosting, and Ridge regression out of the box.
 </p>
 <p style="font-size:.78rem;color:var(--c-muted)">
-积极开发中，API 趋于稳定。教程与详细指南即将发布。
+94维结构特征自动提取，内置嵌套交叉验证、模型对比与可视化。
+</p>
+</div>
+<div class="about-card">
+<h2>Reinforcement Learning / 强化学习</h2>
+<p style="font-size:.85rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.7rem">
+Bayesian optimization over a <strong>368-dimensional continuous action space</strong> of internal node displacements. <code>run_bayesian_optimization()</code> handles the full loop: generate &rarr; simulate &rarr; evaluate &rarr; update.
+</p>
+<p style="font-size:.78rem;color:var(--c-muted)">
+贝叶斯优化遍历368维连续节点位移空间，自动完成生成→模拟→评估→更新闭环。
+</p>
+</div>
+</section>
+
+<section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
+<div class="about-card">
+<h2>Simulation / 模拟</h2>
+<p style="font-size:.85rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.7rem">
+Taichi-powered mass-spring dynamics with auto-relaxation, trajectory recording, and multi-frame stress visualization. Nodes as point masses, edges as linear springs with configurable stiffness. Supports stretch, compression, and custom loading modes.
+</p>
+<p style="font-size:.78rem;color:var(--c-muted)">
+Taichi 加速质点弹簧动力学，自动弛豫、轨迹记录、多帧应力可视化。
+</p>
+<img src="https://raw.githubusercontent.com/GellmanSparrowS/fibernet/main/output_viz/sim/voronoi_1.5x_auto.png" alt="Voronoi Stretch" style="width:100%;border-radius:8px;margin-top:.8rem;border:1px solid var(--c-border)" loading="lazy">
+<p style="text-align:center;font-size:.7rem;color:var(--c-muted);margin-top:.3rem">Voronoi under 1.5x stretch / Voronoi 1.5倍拉伸</p>
+</div>
+<div class="about-card">
+<h2>Performance / 性能</h2>
+<table style="width:100%;font-size:.84rem;border-collapse:collapse">
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.5rem 0">Generation</td><td style="padding:.5rem 0;text-align:right;font-family:var(--font-mono);color:var(--c-fg-soft)">~0.1s</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.5rem 0">Stretch sim (1000 steps)</td><td style="padding:.5rem 0;text-align:right;font-family:var(--font-mono);color:var(--c-fg-soft)">~2.5s</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.5rem 0">Feature extraction</td><td style="padding:.5rem 0;text-align:right;font-family:var(--font-mono);color:var(--c-fg-soft)">~0.5s</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.5rem 0">ML training (RF, 100 samples)</td><td style="padding:.5rem 0;text-align:right;font-family:var(--font-mono);color:var(--c-fg-soft)">~1s</td></tr>
+<tr><td style="padding:.5rem 0">Bayesian opt (30 iter)</td><td style="padding:.5rem 0;text-align:right;font-family:var(--font-mono);color:var(--c-fg-soft)">~90s</td></tr>
+</table>
+<h3 style="font-size:.9rem;margin:1rem 0 .5rem">Platforms / 平台</h3>
+<table style="width:100%;font-size:.84rem;border-collapse:collapse">
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0">Ubuntu / macOS / Windows</td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted)">3.9&ndash;3.12</td><td style="padding:.4rem 0;text-align:right;color:var(--c-accent);font-weight:600">Pass</td></tr>
+</table>
+<p style="font-size:.78rem;color:var(--c-muted);margin-top:.8rem">
+Under active development. Tutorial at <code>tutorials/v4_tutorial/</code>.
 </p>
 </div>
 </section>
