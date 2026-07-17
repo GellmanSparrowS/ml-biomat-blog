@@ -39,37 +39,42 @@
 .pip-copy .copy-btn { position:absolute; right:6px; top:50%; transform:translateY(-50%); background:none; border:1px solid #475569; color:#94a3b8; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:.68rem; font-family:var(--font-sans); transition:all .15s; }
 .pip-copy .copy-btn:hover { color:#f1f5f9; border-color:#64748b; }
 .catalog-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:.5rem; margin-bottom:1.5rem; }
-.catalog-item { text-align:center; padding:.6rem .2rem; background:var(--c-code-bg); border-radius:8px; font-size:.72rem; font-weight:600; color:var(--c-fg-soft); }
-.img-full { width:100%; max-width:100%; display:block; margin:0 auto; border-radius:10px; border:1px solid var(--c-border); }
-@media (max-width:640px) { .catalog-grid { grid-template-columns:repeat(3,1fr); } }
+.catalog-item { text-align:center; padding:.6rem .2rem; background:var(--c-code-bg); border-radius:8px; font-size:.72rem; font-weight:600; color:var(--c-fg-soft); transition:transform .15s; }
+.catalog-item:hover { transform:translateY(-1px); }
+.img-full { width:100%; max-width:100%; display:block; border-radius:10px; border:1px solid var(--c-border); }
+.img-container { max-width:700px; margin:0 auto 2rem; }
+.img-container-wide { max-width:820px; margin:0 auto 2rem; }
+.img-caption { text-align:center; font-size:.72rem; color:var(--c-muted); margin-top:.4rem; line-height:1.5; }
+.showcase-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:2rem; }
+.showcase-card { border-radius:10px; border:1px solid var(--c-border); overflow:hidden; background:var(--c-surface); }
+.showcase-card img { width:100%; display:block; }
+.showcase-card p { font-size:.7rem; color:var(--c-muted); padding:.5rem .7rem; margin:0; line-height:1.4; }
+@media (max-width:640px) { .catalog-grid { grid-template-columns:repeat(3,1fr); } .showcase-grid { grid-template-columns:1fr; } }
 </style>
 
 <div class="fibernet-page">
 
 <div class="version-selector">
 <select onchange="if(this.value)location.href=this.value">
-<option value="#" selected>v4.0.0 (Latest / 最新)</option><option value="#">v1.24.0 (Stable)</option>
+<option value="#" selected>v4.0.5 (Latest)</option>
+<option value="#">v1.24.0 (Stable)</option>
 </select>
 </div>
 
 <div class="fibernet-hero">
 <div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem">
-<span style="background:var(--c-primary);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.03em">v4.0.0</span>
-<span style="background:rgba(168,85,247,.2);color:#c4b5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">12 Unit Types</span>
+<span style="background:var(--c-primary);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.03em">v4.0.5</span>
+<span style="background:rgba(168,85,247,.2);color:#c4b5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">12 Units</span>
 <span style="background:rgba(20,184,166,.2);color:#5eead4;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">Taichi GPU</span>
+<span style="background:rgba(59,130,246,.2);color:#93c5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">CEM RL</span>
 </div>
 <h1 style="font-size:2.4rem;font-weight:800;letter-spacing:-.025em;color:#f1f5f9;line-height:1.2;margin:.2rem 0">FiberNet</h1>
 <p style="font-size:1rem;color:#cbd5e1;max-width:600px;margin:.4rem auto 0;line-height:1.6">
 Python Toolkit for Fiber Network Design, Simulation &amp; Intelligent Optimization
 </p>
 <p style="font-size:.82rem;color:#94a3b8;max-width:600px;margin:.2rem auto 0">
-纤维网络结构生成、力学模拟与智能优化 Python 工具包
+Python 3.9+ · MIT · Cross-platform · 纤维网络结构生成与智能优化
 </p>
-<div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:1rem 0">
-<span style="background:rgba(59,130,246,.2);color:#93c5fd;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-family:var(--font-mono);font-weight:600">Python 3.9+</span>
-<span style="background:rgba(20,184,166,.2);color:#5eead4;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-family:var(--font-mono);font-weight:600">MIT</span>
-<span style="background:rgba(251,191,36,.2);color:#fde68a;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-family:var(--font-mono);font-weight:600">Cross-platform</span>
-</div>
 
 <div class="pip-copy">
 <pre>pip install fibernet</pre>
@@ -97,10 +102,10 @@ Python Toolkit for Fiber Network Design, Simulation &amp; Intelligent Optimizati
 <div class="about-card">
 <h2>What is FiberNet? / 是什么</h2>
 <p style="font-size:.9rem;line-height:1.85;color:var(--c-fg-soft)">
-A research-grade Python toolkit providing a <strong>complete closed-loop workflow</strong> for computational design of fiber network structures. From parametric generation through Taichi-powered simulation to one-line ML prediction and Bayesian RL optimization — all in a unified API.
+A research-grade Python toolkit for <strong>computational design of fiber network metamaterials</strong>. Complete closed-loop: parametric generation → Taichi GPU simulation → 94-dim feature extraction → one-line ML prediction → Bayesian/CEM reinforcement learning optimization.
 </p>
-<p style="font-size:.9rem;line-height:1.85;color:var(--c-fg-soft);margin-top:.6rem">
-面向纤维网络结构计算设计的 Python 工具包。从参数化生成、Taichi 加速力学模拟，到一行 ML 预测和贝叶斯 RL 优化，统一 API 覆盖完整闭环工作流。
+<p style="font-size:.88rem;line-height:1.85;color:var(--c-fg-soft);margin-top:.5rem">
+面向纤维网络超材料计算设计的 Python 工具包。参数化生成 &rarr; Taichi GPU 模拟 &rarr; 94维特征提取 &rarr; 一行 ML 预测 &rarr; 贝叶斯/CEM 强化学习优化，完整闭环。
 </p>
 <p style="font-size:.78rem;color:var(--c-muted);margin-top:.8rem">
 BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
@@ -109,10 +114,10 @@ BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
 <div class="about-card">
 <h2>Why FiberNet? / 为什么选择</h2>
 <ul style="line-height:2.1;font-size:.88rem;list-style:none;padding:0">
-<li><strong>One-line APIs</strong> — generate, simulate, predict, optimize<br><span style="font-size:.76rem;color:var(--c-muted)">一行代码：生成 / 模拟 / 预测 / 优化</span></li>
-<li><strong>Taichi GPU</strong> — mass-spring dynamics with auto-relaxation<br><span style="font-size:.76rem;color:var(--c-muted)">Taichi 加速质点弹簧动力学</span></li>
-<li><strong>Parametric RL</strong> — 368D continuous action space for node displacements<br><span style="font-size:.76rem;color:var(--c-muted)">368维连续动作空间，原生 RL 支持</span></li>
-<li><strong>94-dim features</strong> — structural, pore, and contact descriptors<br><span style="font-size:.76rem;color:var(--c-muted)">94维结构-孔隙-接触特征</span></li>
+<li><strong>One-line APIs</strong> — generate, simulate, predict, optimize in one call<br><span style="font-size:.76rem;color:var(--c-muted)">一行代码：生成 / 模拟 / 预测 / 优化</span></li>
+<li><strong>Taichi GPU</strong> — mass-spring dynamics with auto-relaxation<br><span style="font-size:.76rem;color:var(--c-muted)">Taichi 加速质点弹簧动力学，GPU 原生支持</span></li>
+<li><strong>CEM + Bayesian RL</strong> — Cross-Entropy Method and Bayesian optimization<br><span style="font-size:.76rem;color:var(--c-muted)">CEM 交叉熵方法 + 贝叶斯优化双引擎</span></li>
+<li><strong>94-dim features</strong> — structural, pore, and contact descriptors<br><span style="font-size:.76rem;color:var(--c-muted)">94维结构特征，覆盖结构/孔隙/接触三大类</span></li>
 </ul>
 </div>
 </section>
@@ -122,9 +127,27 @@ BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
 <div class="catalog-grid">
 <div class="catalog-item">Square<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">正方</span></div><div class="catalog-item">Triangle<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">三角</span></div><div class="catalog-item">Hexagon<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">六边</span></div><div class="catalog-item">Honeycomb<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">蜂窝</span></div><div class="catalog-item">Kagome<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">Kagome</span></div><div class="catalog-item">Voronoi<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">Voronoi</span></div><div class="catalog-item">Chiral<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">手性</span></div><div class="catalog-item">Reentrant<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">凹角</span></div><div class="catalog-item">Star<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">星形</span></div><div class="catalog-item">Cross<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">十字</span></div><div class="catalog-item">Diamond<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">钻石</span></div><div class="catalog-item">Missing Rib<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">缺肋</span></div>
 </div>
-<div style="max-width:700px;margin:0 auto">
+<div class="img-container">
 <img src="https://raw.githubusercontent.com/GellmanSparrowS/fibernet/main/docs/images/01_2d_gallery.png" alt="Structure Gallery" class="img-full" loading="lazy">
-<p style="text-align:center;font-size:.72rem;color:var(--c-muted);margin-top:.5rem">12 unit types across 6 architecture families / 12种基元，6大结构家族</p>
+<p class="img-caption">12 unit types across 6 architecture families / 12种基元，6大结构家族</p>
+</div>
+</section>
+
+<section style="margin-bottom:2.5rem">
+<h2 style="text-align:center;font-size:1.05rem;margin-bottom:1rem">Showcase / 展示</h2>
+<div class="showcase-grid">
+<div class="showcase-card">
+<img src="https://raw.githubusercontent.com/GellmanSparrowS/fibernet/main/docs/images/05_trajectory_dark.png" alt="Deformation Trajectory" loading="lazy">
+<p>8-frame honeycomb stretch trajectory, colored by edge stretch ratio / 蜂窝拉伸8帧轨迹</p>
+</div>
+<div class="showcase-card">
+<img src="https://raw.githubusercontent.com/GellmanSparrowS/fibernet/main/docs/images/voronoi_1.5x_auto.png" alt="Voronoi Stretch" loading="lazy">
+<p>Voronoi under 1.5x uniaxial stretch &mdash; stress distribution / Voronoi 1.5倍拉伸</p>
+</div>
+<div class="showcase-card">
+<img src="https://raw.githubusercontent.com/GellmanSparrowS/fibernet/main/docs/images/09_ml_analysis_dark.png" alt="ML Analysis" loading="lazy">
+<p>ML: confusion matrix, ROC curves, learning curves / 机器学习分析面板</p>
+</div>
 </div>
 </section>
 
@@ -138,22 +161,22 @@ g = fn.pattern_2d(unit=<span style="color:var(--c-accent)">"honeycomb"</span>, g
 <br>fn.show(g)
 <br>r = fn.simulate(g, mode=<span style="color:var(--c-accent)">"stretch"</span>, strain=1.5)
 <br>result = fn.predict_from_csv(<span style="color:var(--c-accent)">"data.csv"</span>, target=<span style="color:var(--c-accent)">"max_force"</span>)
-<br>best = fn.run_bayesian_optimization(obj_fn, space, n_iter=50)
+<br>best = fn.run_bayesian_optimization(obj, space, n_iter=50)
 </div>
 </div>
 <div class="about-card">
-<h2>Installation Options / 安装选项</h2>
+<h2>Installation / 安装</h2>
 <table style="width:100%;font-size:.82rem;border-collapse:collapse">
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>fibernet</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">Core / 核心</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>fibernet[full]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">ML + RL + Viz + Accel</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>fibernet[ml]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">scikit-learn, pandas</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>fibernet[rl]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">gymnasium, scikit-optimize</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>fibernet[accel]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">taichi (GPU)</td></tr>
-<tr><td style="padding:.4rem 0"><code>fibernet[viz]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">pyvista (3D)</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">Core / 核心</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet[full]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">ML + RL + Viz + Accel</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet[ml]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">scikit-learn, pandas</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet[rl]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">gymnasium, scikit-optimize</td></tr>
+<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet[accel]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">taichi (GPU)</td></tr>
+<tr><td style="padding:.4rem 0"><code>pip install fibernet[viz]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">pyvista (3D)</td></tr>
 </table>
 <h3 style="font-size:.88rem;margin:1rem 0 .4rem">Platforms / 平台</h3>
 <table style="width:100%;font-size:.82rem;border-collapse:collapse">
-<tr><td style="padding:.3rem 0">Ubuntu / macOS / Windows</td><td style="padding:.3rem 0;text-align:right;color:var(--c-accent);font-weight:600">Python 3.9–3.12</td></tr>
+<tr><td style="padding:.3rem 0">Ubuntu / macOS / Windows</td><td style="padding:.3rem 0;text-align:right;color:var(--c-accent);font-weight:600">Python 3.9&ndash;3.12</td></tr>
 </table>
 </div>
 </section>
@@ -162,7 +185,7 @@ g = fn.pattern_2d(unit=<span style="color:var(--c-accent)">"honeycomb"</span>, g
 <div class="about-card">
 <h2>Machine Learning / 机器学习</h2>
 <p style="font-size:.85rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem">
-94-dimensional structural features extracted automatically. <code>predict_from_csv()</code> handles train/test split, nested cross-validation (no data leakage), model comparison, and visualization in one call.
+94-dim structural features extracted automatically. <code>predict_from_csv()</code> handles train/test split, nested cross-validation (no data leakage), model comparison, and visualization in one call.
 </p>
 <p style="font-size:.78rem;color:var(--c-muted)">
 94维特征自动提取，一行完成训练/交叉验证/模型对比/可视化。
@@ -171,25 +194,52 @@ g = fn.pattern_2d(unit=<span style="color:var(--c-accent)">"honeycomb"</span>, g
 <div class="about-card">
 <h2>Reinforcement Learning / 强化学习</h2>
 <p style="font-size:.85rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem">
-Bayesian optimization over a <strong>368-dimensional continuous action space</strong> of internal node displacements. <code>run_bayesian_optimization()</code> closes the loop: generate &rarr; simulate &rarr; evaluate &rarr; update.
+Bayesian optimization and CEM (Cross-Entropy Method) over a <strong>368-dim continuous action space</strong> of internal node displacements. <code>run_bayesian_optimization()</code> closes the loop: generate &rarr; simulate &rarr; evaluate &rarr; update.
 </p>
 <p style="font-size:.78rem;color:var(--c-muted)">
-贝叶斯优化在368维节点位移空间中自动搜索最优结构。
+贝叶斯优化 + CEM 交叉熵方法，在368维节点位移空间中自动搜索最优结构。
 </p>
 </div>
 </section>
 
 <section style="margin-bottom:2.5rem">
-<h2 style="text-align:center;font-size:1.05rem;margin-bottom:1rem">Simulation &amp; Performance / 模拟与性能</h2>
-<div style="max-width:700px;margin:0 auto">
-<img src="https://raw.githubusercontent.com/GellmanSparrowS/fibernet/main/output_viz/sim/voronoi_1.5x_auto.png" alt="Voronoi Stretch" class="img-full" loading="lazy">
-<p style="text-align:center;font-size:.72rem;color:var(--c-muted);margin:.3rem 0 1.5rem">Voronoi under 1.5x stretch — Taichi mass-spring dynamics / Voronoi 1.5倍拉伸</p>
+<h2 style="text-align:center;font-size:1.05rem;margin-bottom:1rem">Complete Pipeline / 完整流水线</h2>
+<div style="background:var(--c-code-bg);border-radius:8px;padding:1rem 1.2rem;font-family:var(--font-mono);font-size:.7rem;line-height:1.65;overflow-x:auto;margin-bottom:1.5rem">
+<span style="color:var(--c-muted)">import</span> fibernet <span style="color:var(--c-muted)">as</span> fn
+<br><span style="color:var(--c-muted)">import</span> numpy <span style="color:var(--c-muted)">as</span> np
+<br>
+<br><span style="color:var(--c-muted)"># 1. Parametric generation with 20 displacement params</span>
+<br>displacements = [(np.random.uniform(-0.3,0.3), np.random.uniform(-0.3,0.3))
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--c-muted)">for</span> _ <span style="color:var(--c-muted)">in</span> range(20)]
+<br>g = fn.pattern_2d(unit=<span style="color:var(--c-accent)">"square"</span>, grid=(3,3), n_pts_per_side=5,
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;point_displacements=displacements)
+<br>
+<br><span style="color:var(--c-muted)"># 2. Taichi GPU simulation with trajectory</span>
+<br>engine = fn.TaichiEngine()
+<br>r = engine.stretch_test(g, target_stretch=1.5, stiffness=1e5, num_steps=1000)
+<br>
+<br><span style="color:var(--c-muted)"># 3. Multi-frame stress visualization</span>
+<br>fig = fn.render_trajectory(g, r.positions_trajectory, r.edge_stretches, n_frames=6)
+<br>
+<br><span style="color:var(--c-muted)"># 4. 94-dim feature vector</span>
+<br>features = fn.GraphFeatureExtractor().extract(g)
+<br>
+<br><span style="color:var(--c-muted)"># 5. Node manipulation for RL</span>
+<br>g.displace_node(g.get_internal_nodes()[0], [0.1, 0.2])
 </div>
+
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">
-<div style="text-align:center;padding:.8rem .3rem;background:var(--c-code-bg);border-radius:8px"><div style="font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--c-primary)">~0.1s</div><div style="font-size:.7rem;color:var(--c-muted);margin-top:.2rem">Generation / 生成</div></div>
-<div style="text-align:center;padding:.8rem .3rem;background:var(--c-code-bg);border-radius:8px"><div style="font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--c-primary)">~2.5s</div><div style="font-size:.7rem;color:var(--c-muted);margin-top:.2rem">Sim / 模拟</div></div>
+<div style="text-align:center;padding:.8rem .3rem;background:var(--c-code-bg);border-radius:8px"><div style="font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--c-primary)">~0.1s</div><div style="font-size:.7rem;color:var(--c-muted);margin-top:.2rem">Generate / 生成</div></div>
+<div style="text-align:center;padding:.8rem .3rem;background:var(--c-code-bg);border-radius:8px"><div style="font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--c-primary)">~2.5s</div><div style="font-size:.7rem;color:var(--c-muted);margin-top:.2rem">Simulate / 模拟</div></div>
 <div style="text-align:center;padding:.8rem .3rem;background:var(--c-code-bg);border-radius:8px"><div style="font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--c-accent)">~1s</div><div style="font-size:.7rem;color:var(--c-muted);margin-top:.2rem">ML Train / 训练</div></div>
-<div style="text-align:center;padding:.8rem .3rem;background:var(--c-code-bg);border-radius:8px"><div style="font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--c-accent)">~90s</div><div style="font-size:.7rem;color:var(--c-muted);margin-top:.2rem">BO (30 iter) / 优化</div></div>
+<div style="text-align:center;padding:.8rem .3rem;background:var(--c-code-bg);border-radius:8px"><div style="font-family:var(--font-mono);font-size:.85rem;font-weight:700;color:var(--c-accent)">~90s</div><div style="font-size:.7rem;color:var(--c-muted);margin-top:.2rem">BO 30 iter / 优化</div></div>
+</div>
+</section>
+
+<section style="margin-bottom:2.5rem">
+<div class="img-container-wide">
+<img src="https://raw.githubusercontent.com/GellmanSparrowS/fibernet/main/docs/images/11_rl_reward_dark.png" alt="RL Reward" class="img-full" loading="lazy">
+<p class="img-caption">CEM reinforcement learning: reward per episode and monotonically increasing best reward / CEM 强化学习：每轮奖励与单调递增的最优奖励</p>
 </div>
 </section>
 
