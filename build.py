@@ -428,6 +428,11 @@ def build():
             shutil.rmtree(wk_dst)
         shutil.copytree(wk_src, wk_dst)
 
+    # Copy auth.md
+    auth_src = Path("content") / "auth.md"
+    if auth_src.exists():
+        shutil.copy2(auth_src, Path(BUILD_DIR) / "auth.md")
+
     for llms_file in ['llms.txt', 'llms-full.txt']:
         src = Path('content') / llms_file
         if src.exists():
