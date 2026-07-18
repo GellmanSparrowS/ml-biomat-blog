@@ -420,6 +420,12 @@ def build():
     write_file("cv/index.html", cv_page)
 
 
+    # --- llms.txt for AI crawlers ---
+    for llms_file in ['llms.txt', 'llms-full.txt']:
+        src = Path('content') / llms_file
+        if src.exists():
+            shutil.copy2(src, Path(BUILD_DIR) / llms_file)
+
     # --- CNAME for custom domain ---
     (Path(BUILD_DIR) / ".nojekyll").write_text("", encoding="utf-8")
     (Path(BUILD_DIR) / "CNAME").write_text("ml-biomat.com", encoding="utf-8")
