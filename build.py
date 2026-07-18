@@ -312,7 +312,7 @@ def build():
         if cnt:
             ci += f'<li class="post-row"><a href="/categories/{s}/"><strong>{info["name_en"]}</strong> ({info["name_zh"]})</a><span style="margin-left:auto;color:var(--c-muted);font-size:.85rem">{cnt} posts</span></li>'
     ci += "</ul>"
-    html = make_head(title="Categories", desc="All categories", url=f'{SITE["base_url"]}/categories/') + ci + FOOT.format(year=datetime.now().year)
+    html = make_head(title="Categories", desc="Browse all 44 articles across 6 categories: Machine Learning, Multiscale Modeling, Biomaterials, Python Tutorials, Wet-lab Data, Research Notes", url=f'{SITE["base_url"]}/categories/') + ci + FOOT.format(year=datetime.now().year)
     write_file("categories/index.html", html)
 
     # Individual category pages
@@ -336,12 +336,12 @@ def build():
 
     # FiberNet page
     fibernet_body = Path("content/fibernet-body.html").read_text(encoding="utf-8")
-    html = make_head(title="FiberNet", desc="FiberNet fiber network toolkit", url=SITE["base_url"] + "/fibernet/") + fibernet_body + FOOT.format(year=datetime.now().year)
+    html = make_head(title="FiberNet", desc="FiberNet: A Python toolkit for fiber network generation, simulation, and intelligent optimization. 12 unit types, GPU acceleration, ML and RL integration.", url=SITE["base_url"] + "/fibernet/") + fibernet_body + FOOT.format(year=datetime.now().year)
     write_file("fibernet/index.html", html)
 
     # About page
     about_body = Path("content/about-body.html").read_text(encoding="utf-8")
-    html = make_head(title="About", desc="About ML-Biomat", url=f'{SITE["base_url"]}/about/') + about_body + FOOT.format(year=datetime.now().year)
+    html = make_head(title="About", desc="About ML-Biomat: A bilingual technical blog exploring machine learning and multiscale modeling for fiber-based biomaterials. By Yunhao Yang at Fudan University.", url=f'{SITE["base_url"]}/about/') + about_body + FOOT.format(year=datetime.now().year)
     write_file("about/index.html", html)
 
     # RSS
@@ -416,7 +416,7 @@ def build():
     
     # --- CV Page ---
     cv_body = Path("content/cv-body.html").read_text(encoding="utf-8")
-    cv_page = make_head(title="CV \u2014 Yunhao Yang", desc="Academic CV of Yunhao Yang, PhD student at Fudan University", url=SITE["base_url"] + "/cv/") + cv_body + FOOT.format(year=datetime.now().year)
+    cv_page = make_head(title="CV \u2014 Yunhao Yang", desc="Academic CV of Yunhao Yang, PhD student at Fudan University, Dept. of Macromolecular Science. Research in AI-driven multiscale modeling for biomaterials design.", url=SITE["base_url"] + "/cv/") + cv_body + FOOT.format(year=datetime.now().year)
     write_file("cv/index.html", cv_page)
 
 
