@@ -5,7 +5,7 @@ category: "multiscale-modeling"
 tags: ["分子动力学", "LAMMPS", "模拟", "教程", "力场"]
 lang: "zh"
 slug: "lammps-first-simulation-zh"
-description: "手把手带你跑通第一个分子动力学模拟：从LAMMPS安装配置、输入脚本结构解析、力场选择到水盒子建模和轨迹分析，零基础可上手的完整入门指南。"
+description: "分子动力学入门：你的第一个LAMMPS模拟。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
 ---
 
 ## 什么是分子动力学

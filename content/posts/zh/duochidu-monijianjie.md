@@ -5,7 +5,7 @@ category: "multiscale-modeling"
 tags: ["多尺度模拟", "分子动力学", "有限元", "纤维材料", "生物材料"]
 lang: "zh"
 slug: "multiscale-modeling-biomaterials-intro-zh"
-description: "从分子动力学到粗粒化再到连续介质力学，系统介绍多尺度模拟在纤维生物材料研究中的核心方法、主流工具和实战思路，含Python代码示例与完整计算工作流搭建指南。"
+description: "多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
 ---
 
 ## 为什么要做多尺度模拟

@@ -1,5 +1,5 @@
 ---
-title: "Machine Learning for Fiber Mechanics: From Data Preparation to Model Deployment"
+title: "ML for Fiber Mechanics: Data Prep to Model Deployment"
 date: "2026-06-26"
 category: "machine-learning"
 tags: ["machine-learning", "random-forest", "XGBoost", "fiber-materials", "mechanics"]

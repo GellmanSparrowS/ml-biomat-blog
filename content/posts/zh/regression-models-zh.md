@@ -5,7 +5,7 @@ category: "machine-learning"
 tags: ["回归","机器学习","scikit-learn","梯度提升","模型评估"]
 lang: "zh"
 slug: "regression-models-zh"
-description: "系统讲解线性回归、岭回归、Lasso、多项式回归、SVR、决策树、随机森林和梯度提升在科学与工程中的应用，含完整Python代码示例和模型选择决策框架。"
+description: "常用的机器学习回归模型：从线性基准到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
 ---
 ## 一、回归问题的本质——从数值预测到函数逼近
 

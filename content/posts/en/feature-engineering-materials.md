@@ -5,7 +5,7 @@ category: "machine-learning"
 tags: ["feature-engineering", "machine-learning", "materials-science", "data-preprocessing"]
 lang: "en"
 slug: "feature-engineering-materials-ml"
-description: "How to transform scattered experimental data into structured feature matrices for ML, with Python examples."
+description: "Feature Engineering for Materials Science: From Experimental Logs to ML-Ready Data. A practical guide for biology and materials science graduate students, with complete runnable code examples and detailed explanations."
 ---
 
 ## The Real Bottleneck

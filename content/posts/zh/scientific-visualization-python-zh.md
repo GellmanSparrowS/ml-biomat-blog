@@ -5,7 +5,7 @@ category: "python-tutorials"
 tags: ["matplotlib", "seaborn", "可视化", "科研绘图", "发表"]
 lang: "zh"
 slug: "scientific-visualization-python-zh"
-description: "面向生物与材料研究者的Matplotlib科学绘图教程：从折线图、散点图到多面板布局和出版级配色方案，手把手教你将实验数据转化为发表就绪的高质量图表。"
+description: "Python科研绘图完全指南：从数据到发表级图表。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
 ---
 
 一张好的图表比大段文字更能传达研究发现。在材料科学和生物学中，应力-应变曲线、电镜图像分析、AFM力谱统计、XRD图谱——这些都需要清晰专业的数据可视化。Matplotlib是Python生态中最成熟灵活的绘图库，结合Seaborn可以让统计图表更加美观。本文从最基础的折线图开始，逐步深入多面板子图、统计图表、热力图，最终达到发表级别导出的完整技能。

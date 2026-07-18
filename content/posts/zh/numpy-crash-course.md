@@ -5,7 +5,7 @@ category: "python-tutorials"
 tags: ["numpy", "python", "数组", "科学计算", "数据处理"]
 lang: "zh"
 slug: "numpy-crash-course-zh"
-description: "面向材料科学和生物学研究的NumPy速成教程：数组创建与运算、实验数据加载、统计分析与曲线拟合，用真实科研数据快速上手Python科学计算。"
+description: "NumPy完全入门：实验室数据处理必备。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
 ---
 
 NumPy是Python科学计算生态的基石。无论是处理拉伸试验的应力-应变数据、分析AFM力曲线的特征参数、统计SEM图像中数百根纤维的直径分布，还是从分子动力学轨迹中提取结构信息，NumPy数组都是最基础的数据结构。

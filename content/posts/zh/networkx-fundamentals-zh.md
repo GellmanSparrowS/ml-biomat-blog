@@ -5,7 +5,7 @@ category: "python-tutorials"
 tags: ["NetworkX", "Python", "网络分析", "图论", "网络科学", "数据可视化"]
 lang: "zh"
 slug: "networkx-fundamentals-zh"
-description: "NetworkX完整入门教程：从图论基础概念到网络构建、中心性分析、社区检测和可视化，手把手教你用Python理解和分析复杂网络，面向生物与材料科学研究者。"
+description: "NetworkX 基础：用 Python 理解、构建与分析网络。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
 ---
 
 ## 一、为什么需要 NetworkX——从直觉到工具

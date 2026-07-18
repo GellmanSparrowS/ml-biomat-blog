@@ -1,5 +1,5 @@
 ---
-title: "GROMACS Molecular Dynamics Tutorial: From Structure Preparation to Trajectory Analysis"
+title: "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis"
 date: "2026-06-29"
 category: "multiscale-modeling"
 tags: ["GROMACS", "molecular dynamics", "MD simulation", "protein simulation", "trajectory analysis", "lysozyme"]
