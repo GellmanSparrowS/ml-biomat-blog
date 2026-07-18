@@ -150,6 +150,34 @@ window.addEventListener('scroll', function(){
 });
 })();
 
+
+// === HEADING ANCHORS ===
+document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('.content h2, .content h3, article h2, article h3').forEach(function(h){
+        if(!h.id) h.id = h.textContent.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g,'-').replace(/^-|-$/g,'');
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.className = 'anchor-link';
+        a.innerHTML = '#';
+        a.title = 'Link to this section';
+        a.onclick = function(e){
+            e.preventDefault();
+            history.pushState(null,null,'#'+h.id);
+            h.scrollIntoView({behavior:'smooth'});
+            navigator.clipboard.writeText(location.href).catch(function(){});
+        };
+        h.appendChild(a);
+    });
+});
+
+// === IMAGE LOADED CLASS ===
+document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('img[loading="lazy"]').forEach(function(img){
+        if(img.complete) img.classList.add('loaded');
+        else img.addEventListener('load',function(){img.classList.add('loaded');});
+    });
+});
+
 // === IMAGE ZOOM (medium-zoom) ===
 (function(){
     var script = document.createElement('script');

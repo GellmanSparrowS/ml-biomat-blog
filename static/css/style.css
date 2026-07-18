@@ -271,6 +271,45 @@ pre:hover .copy-btn{opacity:1}
 .prev-next-nav a:hover{text-decoration:underline}
 
 
+
+/* === Selection color === */
+::selection{background:var(--c-primary-soft);color:var(--c-primary)}
+::-moz-selection{background:var(--c-primary-soft);color:var(--c-primary)}
+
+/* === Image progressive loading === */
+img[loading="lazy"]{opacity:0;transition:opacity .4s ease}
+img[loading="lazy"].loaded,img[loading="lazy"][complete]{opacity:1}
+img{transition:opacity .3s ease}
+
+/* === Table horizontal scroll === */
+.content table,.about-card table,.fibernet-page table{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.content table{display:table;width:100%}
+@media (max-width:640px){.content table{display:block}.about-card table{display:block}}
+
+/* === Details/summary collapsible blocks === */
+details{margin:1rem 0;border:1px solid var(--c-border);border-radius:var(--r-sm);overflow:hidden}
+details summary{padding:.7rem 1rem;background:var(--c-code-bg);cursor:pointer;font-weight:600;font-size:.9rem;user-select:none;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+";display:inline-block;width:1.2rem;color:var(--c-primary);font-weight:700;font-family:var(--font-mono)}
+details[open] summary::before{content:"-"}
+details .details-content{padding:1rem;font-size:.88rem;line-height:1.75}
+
+/* === Heading anchor links === */
+.anchor-link{display:inline-block;margin-left:.3rem;opacity:0;color:var(--c-muted);font-size:.85em;text-decoration:none;transition:opacity .15s;vertical-align:middle}
+h2:hover .anchor-link,h3:hover .anchor-link,h2:focus-within .anchor-link,h3:focus-within .anchor-link{opacity:1}
+.anchor-link:hover{color:var(--c-primary)}
+
+/* === Print stylesheet === */
+@media print{
+    header,nav,footer,.site-footer,.progress-bar,#back-to-top,.copy-btn,.prev-next-nav,.cta-banner,.lang-switch,#search-input{display:none!important}
+    body{font-size:12pt;line-height:1.6;color:#000;background:#fff}
+    a{color:#000;text-decoration:underline}
+    pre,code{background:#f5f5f5;border:1px solid #ddd}
+    img{max-width:100%!important;page-break-inside:avoid}
+    h2,h3{page-break-after:avoid}
+    .container{max-width:100%!important;padding:0!important}
+}
+
 /* === Mermaid diagrams === */
 .mermaid{text-align:center;margin:1.5rem 0;overflow-x:auto}
 .mermaid svg{max-width:100%;height:auto}
