@@ -149,3 +149,17 @@ window.addEventListener('scroll', function(){
     if(btn) btn.style.display = window.scrollY > 400 ? 'block' : 'none';
 });
 })();
+
+// === IMAGE ZOOM (medium-zoom) ===
+(function(){
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js';
+    script.onload = function(){
+        mediumZoom('article img, .img-full, .about-card img', {
+            margin: 24,
+            background: 'rgba(0,0,0,.9)',
+            scrollOffset: 0,
+        });
+    };
+    document.head.appendChild(script);
+})();

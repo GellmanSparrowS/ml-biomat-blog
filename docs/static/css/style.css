@@ -25,7 +25,7 @@
     --font-mono: "SF Mono","Fira Code","Consolas","Microsoft YaHei",monospace
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;line-height:1.75;color:var(--c-fg);background:var(--c-bg);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;font-size:16px;line-height:1.75;color:var(--c-fg);background:var(--c-bg);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
 body{min-height:100vh;display:flex;flex-direction:column}
 a{color:var(--c-primary);text-decoration:none;transition:color .15s}
 a:hover{color:var(--c-accent)}
@@ -199,6 +199,20 @@ pre code{font-family:var(--font-mono);font-size:inherit;background:none;padding:
 
 /* ===== Code Copy ===== */
 pre{position:relative}
+
+pre[class*="language-"]::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 0;
+    right: 3rem;
+    padding: .2rem .6rem;
+    font-size: .68rem;
+    font-family: var(--font-mono);
+    color: var(--c-muted);
+    background: var(--c-code-bg);
+    border-radius: 0 0 6px 6px;
+    z-index: 2;
+}
 .copy-btn{position:absolute;top:.4rem;right:.4rem;padding:.2rem .55rem;font-size:.7rem;font-family:var(--font-sans);background:var(--c-primary-soft);color:var(--c-primary);border:1px solid var(--c-border);border-radius:4px;cursor:pointer;opacity:0;transition:opacity .2s}
 pre:hover .copy-btn{opacity:1}
 .copy-btn:active{background:var(--c-primary);color:#fff}
