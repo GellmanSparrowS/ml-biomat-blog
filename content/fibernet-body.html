@@ -15,8 +15,7 @@
 .fn-code { background:var(--c-code-bg); border-radius:8px; padding:1rem 1.2rem; font-family:var(--font-mono); font-size:.78rem; line-height:1.7; overflow-x:auto; }
 .fn-code-sm { background:var(--c-code-bg); border-radius:8px; padding:.9rem 1.1rem; font-family:var(--font-mono); font-size:.76rem; line-height:1.65; overflow-x:auto; }
 .perf-card { text-align:center; padding:.8rem .3rem; background:var(--c-code-bg); border-radius:8px; }
-.perf-card .num { font-family:var(--font-mono); font-size:.85rem; font-weight:700; }
-.perf-card .label { font-size:.7rem; color:var(--c-muted); margin-top:.2rem; }
+.perf-card .label { font-size:.72rem; color:var(--c-muted); margin-top:.2rem; }
 @media (max-width:640px) { .catalog-grid { grid-template-columns:repeat(3,1fr); } }
 </style>
 
@@ -126,26 +125,26 @@ BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
 <section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
 <div class="about-card">
 <h2>One-Line API / 一行代码</h2>
-<div class="fn-code-sm">
-<span style="color:var(--c-muted)">import</span> fibernet <span style="color:var(--c-muted)">as</span> fn
-<br><br>
-g = fn.pattern_2d(unit=<span style="color:var(--c-accent)">"honeycomb"</span>, grid=(4,4))
-<br>fn.show(g)
-<br>r = fn.simulate(g, mode=<span style="color:var(--c-accent)">"stretch"</span>, strain=1.5)
-<br>result = fn.predict_from_csv(<span style="color:var(--c-accent)">"data.csv"</span>, target=<span style="color:var(--c-accent)">"max_force"</span>)
-<br>best = fn.run_bayesian_optimization(obj, space, n_iter=50)
-</div>
+<pre><code class="language-python">
+import fibernet as fn
+
+g = fn.pattern_2d(unit="honeycomb", grid=(4,4))
+fn.show(g)
+r = fn.simulate(g, mode="stretch", strain=1.5)
+result = fn.predict_from_csv("data.csv", target="max_force")
+best = fn.run_bayesian_optimization(obj, space, n_iter=50)
+</code></pre>
 </div>
 <div class="about-card">
 <h2>Installation / 安装</h2>
-<table style="width:100%;font-size:.82rem;border-collapse:collapse">
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">Core / 核心</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet[full]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">ML + RL + Viz + Accel</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet[ml]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">scikit-learn, pandas</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet[rl]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">gymnasium, scikit-optimize</td></tr>
-<tr style="border-bottom:1px solid var(--c-border)"><td style="padding:.4rem 0"><code>pip install fibernet[accel]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">taichi (GPU)</td></tr>
-<tr><td style="padding:.4rem 0"><code>pip install fibernet[viz]</code></td><td style="padding:.4rem 0;text-align:right;color:var(--c-muted);font-size:.75rem">pyvista (3D)</td></tr>
-</table>
+<pre><code class="language-bash">
+pip install fibernet            # Core / 核心
+pip install fibernet[full]      # ML + RL + Viz + Accel
+pip install fibernet[ml]        # scikit-learn, pandas
+pip install fibernet[rl]        # gymnasium, scikit-optimize
+pip install fibernet[accel]     # taichi (GPU)
+pip install fibernet[viz]       # pyvista (3D)
+</code></pre>
 <h3 style="font-size:.88rem;margin:1rem 0 .4rem">Platforms / 平台</h3>
 <table style="width:100%;font-size:.82rem;border-collapse:collapse">
 <tr><td style="padding:.3rem 0">Ubuntu / macOS / Windows</td><td style="padding:.3rem 0;text-align:right;color:var(--c-accent);font-weight:600">Python 3.9 &ndash; 3.12</td></tr>
@@ -176,35 +175,35 @@ Built-in optimization engines over a continuous parametric action space of inter
 
 <section style="margin-bottom:2.5rem">
 <h2 style="text-align:center;font-size:1.05rem;margin-bottom:1rem">Complete Pipeline / 完整流水线</h2>
-<div class="fn-code" style="margin-bottom:1.5rem">
-<span style="color:var(--c-muted)">import</span> fibernet <span style="color:var(--c-muted)">as</span> fn
-<br><span style="color:var(--c-muted)">import</span> numpy <span style="color:var(--c-muted)">as</span> np
-<br>
-<br><span style="color:var(--c-muted)"># 1. Parametric structure generation</span>
-<br>displacements = [(np.random.uniform(-0.3,0.3), np.random.uniform(-0.3,0.3))
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--c-muted)">for</span> _ <span style="color:var(--c-muted)">in</span> range(20)]
-<br>g = fn.pattern_2d(unit=<span style="color:var(--c-accent)">"square"</span>, grid=(3,3), n_pts_per_side=5,
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;point_displacements=displacements)
-<br>
-<br><span style="color:var(--c-muted)"># 2. GPU-accelerated simulation with trajectory recording</span>
-<br>engine = fn.TaichiEngine()
-<br>r = engine.stretch_test(g, target_stretch=1.5, stiffness=1e5, num_steps=5000)
-<br>
-<br><span style="color:var(--c-muted)"># 3. Multi-frame stress visualization</span>
-<br>fig = fn.render_trajectory(g, r.positions_trajectory, r.edge_stretches, n_frames=6)
-<br>
-<br><span style="color:var(--c-muted)"># 4. Feature extraction (94-dim vector)</span>
-<br>features = fn.GraphFeatureExtractor().extract(g)
-<br>
-<br><span style="color:var(--c-muted)"># 5. Node manipulation for optimization</span>
-<br>g.displace_node(g.get_internal_nodes()[0], [0.1, 0.2])
-</div>
+<pre><code class="language-python">
+import fibernet as fn
+import numpy as np
 
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">
-<div class="perf-card"><div class="num" style="color:var(--c-primary)">~0.1s</div><div class="label">Generation / 生成</div></div>
-<div class="perf-card"><div class="num" style="color:var(--c-primary)">~6s</div><div class="label">Simulation / 模拟<br><span style="font-size:.62rem">5000 steps</span></div></div>
-<div class="perf-card"><div class="num" style="color:var(--c-accent)">~1s</div><div class="label">ML Train / 训练</div></div>
-<div class="perf-card"><div class="num" style="color:var(--c-accent)">~6 min</div><div class="label">CEM Opt / 优化<br><span style="font-size:.62rem">200 episodes</span></div></div>
+# 1. Parametric structure generation
+displacements = [(np.random.uniform(-0.3,0.3), np.random.uniform(-0.3,0.3))
+                 for _ in range(20)]
+g = fn.pattern_2d(unit="square", grid=(3,3), n_pts_per_side=5,
+                  point_displacements=displacements)
+
+# 2. GPU-accelerated simulation with trajectory recording
+engine = fn.TaichiEngine()
+r = engine.stretch_test(g, target_stretch=1.5, stiffness=1e5, num_steps=5000)
+
+# 3. Multi-frame stress visualization
+fig = fn.render_trajectory(g, r.positions_trajectory, r.edge_stretches, n_frames=6)
+
+# 4. Feature extraction (94-dim vector)
+features = fn.GraphFeatureExtractor().extract(g)
+
+# 5. Node manipulation for optimization
+g.displace_node(g.get_internal_nodes()[0], [0.1, 0.2])
+</code></pre>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem">
+<div class="perf-card"><div class="label">Generation<br><span style="font-size:.62rem">生成</span></div></div>
+<div class="perf-card"><div class="label">Simulation<br><span style="font-size:.62rem">模拟</span></div></div>
+<div class="perf-card"><div class="label">Machine Learning<br><span style="font-size:.62rem">机器学习</span></div></div>
+<div class="perf-card"><div class="label">Optimization<br><span style="font-size:.62rem">优化</span></div></div>
 </div>
 </section>
 
