@@ -156,7 +156,7 @@ def cat_name(cat_slug, lang="en"):
     return c.get(f"name_{lang}", c.get("name_en", cat_slug))
 
 
-HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title} \u2014 ML-Biomat</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>\n<script>hljs.highlightAll();</script>\n<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>\n<body>\n'
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title} \u2014 ML-Biomat</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>\n<script>hljs.highlightAll();</script>\n<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>\n<body>\n'
 
 HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -170,7 +170,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{lang_label}</span>\n<h3><a href="/posts/{slug}/">{title}</a></h3>\n<div class="card-meta"><span>{date}</span><span>\u00b7</span><span>{read_min} min read</span></div>\n<p class="card-desc">{desc}</p>\n<div class="card-tags">{tags_html}</div>\n</article>'
 
@@ -180,6 +180,8 @@ ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-ba
 
 
 GISCUS_SCRIPT = '<section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)"><h2>Comments</h2><script src="https://giscus.app/client.js" data-repo="GellmanSparrowS/ml-biomat-blog" data-repo-id="R_kgDOTEwhsA" data-category="General" data-category-id="DIC_kwDOTEwhsM4CpPbT" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script></section>'
+ADSENSE_SCRIPT = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>'
+
 ENGAGE_BANNER = '<section class="cta-banner">\n<h3>\U0001f4ac Questions or Feedback?</h3>\n<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>\n<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>\n</section>'
 
 HERO = '''<section class="hero">
@@ -198,7 +200,7 @@ def make_head(title, desc, url, lang="en", og_type="website", ld="",
               home_active="", en_active="", zh_active="", wide=""):
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
-        url=url, lang=lang, og=og_tags(title, desc, url, og_type), ld=ld)
+        url=url, lang=lang, og=og_tags(title, desc, url, og_type), ld=ld, adsense=ADSENSE_SCRIPT)
     header = HEADER.format(
         home_active=home_active, en_active=en_active, zh_active=zh_active,
         wide_class=" container-wide" if wide else "")
@@ -344,6 +346,38 @@ def build():
     html = make_head(title="About", desc="About ML-Biomat: A bilingual technical blog exploring machine learning and multiscale modeling for fiber-based biomaterials. By Yunhao Yang at Fudan University.", url=f'{SITE["base_url"]}/about/') + about_body + FOOT.format(year=datetime.now().year)
     write_file("about/index.html", html)
 
+    # Privacy Policy page (required for AdSense)
+    privacy_body = """<article class="content">
+<h1>Privacy Policy</h1>
+<p><em>Last updated: 2026-07-23</em></p>
+
+<h2>1. Who We Are</h2>
+<p>ML-Biomat (ml-biomat.com) is a personal academic blog operated by Yunhao Yang, affiliated with Fudan University.</p>
+
+<h2>2. What Data We Collect</h2>
+<p>This site itself does not directly collect personal data. However, third-party services integrated into this site may collect information:</p>
+<ul>
+<li><strong>Google AdSense</strong>: Uses cookies to serve personalized ads based on your browsing history. Google may collect your IP address, browser type, and browsing behavior on this site.</li>
+<li><strong>Giscus (comments)</strong>: Uses GitHub OAuth for authentication. Your GitHub profile information is processed by GitHub.</li>
+<li><strong>Cloudflare CDN</strong>: May collect anonymized traffic data for performance and security purposes.</li>
+</ul>
+
+<h2>3. Cookies</h2>
+<p>Google AdSense uses cookies (such as the DoubleClick cookie) to serve ads based on your prior visits to this or other websites. You may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
+
+<h2>4. How We Use Data</h2>
+<p>We do not sell, trade, or share your personal data. Any data collected by third-party services is governed by their respective privacy policies.</p>
+
+<h2>5. Your Rights</h2>
+<p>You can disable cookies in your browser settings. You can also opt out of Google Analytics and personalized ads through Google's opt-out tools.</p>
+
+<h2>6. Contact</h2>
+<p>For privacy-related inquiries, contact: <a href="mailto:Gellmansparrow@outlook.com">Gellmansparrow@outlook.com</a></p>
+</article>"""
+    privacy_full = make_head(title="Privacy Policy", desc="Privacy policy for ML-Biomat: how we handle cookies, ads, and data.", url=SITE["base_url"] + "/privacy/") + privacy_body + FOOT.format(year=datetime.now().year)
+    write_file("privacy/index.html", privacy_full)
+
+
     # RSS
     rss_items = []
     for p in posts[:20]:
@@ -374,6 +408,7 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/zh/</loc><priority>0.9</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/fibernet/</loc><priority>0.7</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/about/</loc><priority>0.6</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/categories/</loc><priority>0.7</priority></url>',
     ]
     for s in CATEGORIES:
@@ -382,7 +417,11 @@ def build():
         urls.append(f'  <url><loc>{SITE["base_url"]}/posts/{p["slug"]}/</loc><priority>0.8</priority><lastmod>{p["date"]}</lastmod></url>')
     write_file("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{chr(10).join(urls)}\n</urlset>')
 
-    # Robots.txt
+    
+    # ads.txt for Google AdSense
+    write_file("ads.txt", "google.com, pub-7464969092761889, DIRECT, f08c47fec0942fa0")
+
+# Robots.txt
     write_file("robots.txt", f"User-agent: *\nContent-Signal: ai-train=yes, search=yes, ai-input=yes\nAllow: /\nSitemap: {SITE['base_url']}/sitemap.xml\n")
 
     # 404
