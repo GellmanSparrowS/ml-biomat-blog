@@ -33,6 +33,7 @@
 <span style="background:var(--c-primary);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.03em">v4.0.5</span>
 <span style="background:rgba(168,85,247,.2);color:#c4b5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">12 Unit Types</span>
 <span style="background:rgba(20,184,166,.2);color:#5eead4;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">GPU Accelerated</span>
+<span style="background:rgba(234,179,8,.2);color:#fde68a;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">FEM Simulation</span>
 <span style="background:rgba(59,130,246,.2);color:#93c5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">ML + RL Ready</span>
 </div>
 <h1 style="font-size:2.4rem;font-weight:800;letter-spacing:-.025em;color:#f1f5f9;line-height:1.2;margin:.2rem 0">FiberNet</h1>
@@ -107,6 +108,11 @@ BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
 </div>
 
 <div class="img-container">
+<img src="/static/images/fibernet/fem_showcase_dark.png" alt="FEM Deformation Showcase" class="img-full" loading="lazy" decoding="async">
+<p class="img-caption">Beam Frame FEM: uniaxial stretch (2x) and compression (0.5x) across topologies and fiber radii. Bright color = high von Mises stress. Welded frames with radius-dependent bending stiffness. / Euler-Bernoulli梁框架FEM：拉伸(2倍)与压缩(0.5倍)模拟，亮色=高von Mises应力</p>
+</div>
+
+<div class="img-container">
 <img src="/static/images/fibernet/voronoi_1.5x_auto.png" alt="Voronoi Stretch" class="img-full" loading="lazy" decoding="async">
 <p class="img-caption">Voronoi structure under 1.5x uniaxial stretch &mdash; deformation and stress distribution / Voronoi 结构 1.5 倍单轴拉伸</p>
 </div>
@@ -134,6 +140,20 @@ r = fn.simulate(g, mode="stretch", strain=1.5)
 result = fn.predict_from_csv("data.csv", target="max_force")
 best = fn.run_bayesian_optimization(obj, space, n_iter=50)
 </code></pre>
+</div>
+<div class="about-card">
+<h2>FEM in 3 Lines / 三行FEM</h2>
+<pre><code class="language-python">
+from fibernet.ml import BeamFrameFEM
+
+solver = BeamFrameFEM(E=1e9, nu=0.3)
+g = fn.pattern_2d(unit="honeycomb", box=(10, 10), grid=(4, 4), radius=0.05)
+result = solver.stretch_test(g, target_stretch=2.0)
+
+print(f"Max stress: {result['sigma_total'].max()/1e6:.1f} MPa")
+print(f"Max displacement: {result['max_displacement']:.4f} m")
+</code></pre>
+<p style="font-size:.78rem;color:var(--c-muted);margin-bottom:1.5rem">Euler-Bernoulli beam frame FEM with welded joints. Stretch and compression tests on any topology. / 欧拉-伯努利梁框架FEM，支持任意拓扑的拉伸与压缩测试。</p>
 </div>
 <div class="about-card">
 <h2>Installation / 安装</h2>
