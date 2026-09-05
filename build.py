@@ -156,7 +156,7 @@ def cat_name(cat_slug, lang="en"):
     return c.get(f"name_{lang}", c.get("name_en", cat_slug))
 
 
-HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title} \u2014 ML-Biomat</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>\n<script>hljs.highlightAll();</script>\n<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>\n<body>\n'
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>\n<script>hljs.highlightAll();</script>\n<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>\n<body>\n'
 
 HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -170,7 +170,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{lang_label}</span>\n<h3><a href="/posts/{slug}/">{title}</a></h3>\n<div class="card-meta"><span>{date}</span><span>\u00b7</span><span>{read_min} min read</span></div>\n<p class="card-desc">{desc}</p>\n<div class="card-tags">{tags_html}</div>\n</article>'
 
@@ -183,8 +183,6 @@ GISCUS_SCRIPT = '<section style="margin-top:2rem;padding-top:1.5rem;border-top:1
 ADSENSE_SCRIPT = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>'
 
 ENGAGE_BANNER = '<section class="cta-banner">\n<h3>\U0001f4ac Questions or Feedback?</h3>\n<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>\n<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>\n</section>'
-
-ADSENSE_SCRIPT = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>'
 
 HERO = '''<section class="hero">
 <h1>ML-Biomat</h1>
@@ -199,10 +197,10 @@ HERO = '''<section class="hero">
 
 
 def make_head(title, desc, url, lang="en", og_type="website", ld="",
-              home_active="", en_active="", zh_active="", wide=""):
+              home_active="", en_active="", zh_active="", wide="", title_suffix=" \u2014 ML-Biomat"):
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
-        url=url, lang=lang, og=og_tags(title, desc, url, og_type), ld=ld, adsense=ADSENSE_SCRIPT)
+        url=url, lang=lang, og=og_tags(title, desc, url, og_type), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix)
     header = HEADER.format(
         home_active=home_active, en_active=en_active, zh_active=zh_active,
         wide_class=" container-wide" if wide else "")
@@ -288,7 +286,7 @@ def build():
         body += '<div class="post-grid">' + "\n".join(post_card(p) for p in zh[:4]) + '</div>'
     body += ENGAGE_BANNER
     html = make_head(title="ML-Biomat", desc=SITE["description_en"], url=SITE["base_url"],
-                     ld=site_ld(), wide="wide", home_active=' class="active"') + body + FOOT.format(year=datetime.now().year)
+                     ld=site_ld(), wide="wide", home_active=' class="active"', title_suffix="") + body + FOOT.format(year=datetime.now().year)
     write_file("index.html", html)
     print("  Homepage done")
 
@@ -316,7 +314,9 @@ def build():
         if cnt:
             ci += f'<li class="post-row"><a href="/categories/{s}/"><strong>{info["name_en"]}</strong> ({info["name_zh"]})</a><span style="margin-left:auto;color:var(--c-muted);font-size:.85rem">{cnt} posts</span></li>'
     ci += "</ul>"
-    html = make_head(title="Categories", desc="Browse all 44 articles across 6 categories: Machine Learning, Multiscale Modeling, Biomaterials, Python Tutorials, Wet-lab Data, Research Notes", url=f'{SITE["base_url"]}/categories/') + ci + FOOT.format(year=datetime.now().year)
+    active_cats = [info["name_en"] for s, info in CATEGORIES.items() if any(p["category"] == s for p in posts)]
+    cat_desc = f"Browse all {len(posts)} articles across {len(active_cats)} categories: " + ", ".join(active_cats)
+    html = make_head(title="Categories", desc=cat_desc, url=f'{SITE["base_url"]}/categories/') + ci + FOOT.format(year=datetime.now().year)
     write_file("categories/index.html", html)
 
     # Individual category pages
@@ -414,7 +414,7 @@ def build():
 
     # RSS
     rss_items = []
-    for p in posts[:20]:
+    for p in posts:
         rss_items.append(f"""    <item>
       <title>{hm.escape(p['title'])}</title>
       <link>{SITE['base_url']}/posts/{p['slug']}/</link>
@@ -443,7 +443,6 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/fibernet/</loc><priority>0.7</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/about/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
-        f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/categories/</loc><priority>0.7</priority></url>',
     ]
     for s in CATEGORIES:
@@ -453,10 +452,6 @@ def build():
     write_file("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{chr(10).join(urls)}\n</urlset>')
 
     
-    # ads.txt for Google AdSense
-    write_file("ads.txt", "google.com, pub-7464969092761889, DIRECT, f08c47fec0942fa0")
-
-
     # ads.txt for Google AdSense
     write_file("ads.txt", "google.com, pub-7464969092761889, DIRECT, f08c47fec0942fa0")
 
