@@ -109,18 +109,21 @@ def load_posts():
                     "datetime": posted, "category": meta.get("category", "uncategorized"),
                     "tags": meta.get("tags", []), "lang": meta.get("lang", "en"),
                     "description": meta.get("description", ""),
-                    "html": html_content, "read_min": read_min,
+                    "html": html_content, "read_min": read_min, "word_count": wc,
                 })
     posts.sort(key=lambda p: p["datetime"], reverse=True)
     return posts
 
 
-def og_tags(title, desc, url, og_type="website"):
+def og_tags(title, desc, url, og_type="website", og_image=None):
+    img = ""
+    if og_image:
+        img = f'\n<meta property="og:image" content="{og_image}">\n<meta name="twitter:card" content="summary_large_image">'
     return f'''<meta property="og:title" content="{hm.escape(title)}">
 <meta property="og:description" content="{hm.escape(desc)}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:url" content="{url}">
-<meta property="og:site_name" content="ML-Biomat">'''
+<meta property="og:site_name" content="ML-Biomat">{img}'''
 
 
 def ld_json(data):
@@ -128,13 +131,30 @@ def ld_json(data):
 
 
 def article_ld(post):
-    return ld_json({
+    url = f'{SITE["base_url"]}/posts/{post["slug"]}/'
+    article = {
         "@context": "https://schema.org", "@type": "BlogPosting",
         "headline": post["title"], "description": post["description"],
-        "datePublished": post["date"],
-        "author": {"@type": "Person", "name": SITE["author"]},
-        "url": f'{SITE["base_url"]}/posts/{post["slug"]}/',
-    })
+        "datePublished": post["date"], "dateModified": post["date"],
+        "wordCount": post.get("word_count", 0),
+        "inLanguage": "en" if post["lang"] == "en" else "zh-CN",
+        "author": {"@type": "Person", "name": SITE["author"], "url": "https://github.com/GellmanSparrowS"},
+        "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": SITE["base_url"]},
+        "url": url,
+    }
+    og_path = Path("static/images/og") / f'{post["slug"]}.png'
+    if og_path.exists():
+        article["image"] = f'{SITE["base_url"]}/static/images/og/{post["slug"]}.png'
+    breadcrumb = {
+        "@context": "https://schema.org", "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE["base_url"]},
+            {"@type": "ListItem", "position": 2, "name": cat_name(post["category"], post["lang"]),
+             "item": f'{SITE["base_url"]}/categories/{post["category"]}/'},
+            {"@type": "ListItem", "position": 3, "name": post["title"], "item": url},
+        ],
+    }
+    return ld_json(article) + ld_json(breadcrumb)
 
 
 def site_ld():
@@ -155,8 +175,40 @@ def cat_name(cat_slug, lang="en"):
     c = CATEGORIES.get(cat_slug, {})
     return c.get(f"name_{lang}", c.get("name_en", cat_slug))
 
+PAIR_OVERRIDES = [("fiber-network-mechanics-intro", "fiber-network-mechanics-zh")]
 
-HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>\n<script>hljs.highlightAll();</script>\n<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>\n<body>\n'
+
+def hreflang_code(lang):
+    return "en" if lang == "en" else "zh-CN"
+
+
+def topic_key(slug, lang):
+    if lang == "zh" and slug.endswith("-zh"):
+        return slug[:-3]
+    if lang == "en" and slug.endswith("-ml"):
+        return slug[:-3]
+    return slug
+
+
+def find_pair(post, by_lang):
+    other = "zh" if post["lang"] == "en" else "en"
+    target = None
+    for e, z in PAIR_OVERRIDES:
+        if post["lang"] == "en" and post["slug"] == e:
+            target = z
+        elif post["lang"] == "zh" and post["slug"] == z:
+            target = e
+    if target:
+        return by_lang[other].get(target)
+    key = topic_key(post["slug"], post["lang"])
+    for cand in by_lang[other].values():
+        if topic_key(cand["slug"], other) == key:
+            return cand
+    return None
+
+
+
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>\n<script>hljs.highlightAll();</script>\n<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>\n<body>\n'
 
 HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -197,10 +249,11 @@ HERO = '''<section class="hero">
 
 
 def make_head(title, desc, url, lang="en", og_type="website", ld="",
-              home_active="", en_active="", zh_active="", wide="", title_suffix=" \u2014 ML-Biomat"):
+              home_active="", en_active="", zh_active="", wide="", title_suffix=" \u2014 ML-Biomat",
+              og_image=None, alternates=""):
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
-        url=url, lang=lang, og=og_tags(title, desc, url, og_type), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix)
+        url=url, lang=lang, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates)
     header = HEADER.format(
         home_active=home_active, en_active=en_active, zh_active=zh_active,
         wide_class=" container-wide" if wide else "")
@@ -254,7 +307,16 @@ def build():
     print(f"Loaded {len(posts)} posts ({len(en)} EN, {len(zh)} ZH)")
 
     # Individual post pages
+    by_lang = {"en": {p["slug"]: p for p in en}, "zh": {p["slug"]: p for p in zh}}
     for p in posts:
+        pair = find_pair(p, by_lang)
+        alts = ""
+        if pair:
+            self_code = hreflang_code(p["lang"]); other_code = hreflang_code(pair["lang"])
+            alts += f'<link rel="alternate" hreflang="{self_code}" href="{SITE["base_url"]}/posts/{p["slug"]}/">'
+            alts += f'<link rel="alternate" hreflang="{other_code}" href="{SITE["base_url"]}/posts/{pair["slug"]}/">'
+            alts += f'<link rel="alternate" hreflang="x-default" href="{SITE["base_url"]}/posts/{(p if p["lang"] == "en" else pair)["slug"]}/">'
+        og_img = f'{SITE["base_url"]}/static/images/og/{p["slug"]}.png' if (Path("static/images/og") / f'{p["slug"]}.png').exists() else None
         cn = cat_name(p["category"], p["lang"])
         body = ARTICLE_HTML.format(
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
@@ -262,7 +324,7 @@ def build():
             lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + ENGAGE_BANNER + giscus_html
         html = make_head(title=p["title"], desc=p["description"] or p["title"],
                          url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=p["lang"],
-                         og_type="article", ld=article_ld(p)) + body + FOOT.format(year=datetime.now().year)
+                         og_type="article", ld=article_ld(p), og_image=og_img, alternates=alts) + body + FOOT.format(year=datetime.now().year)
         write_file(f"posts/{p['slug']}/index.html", html)
     print("  Posts done")
 
