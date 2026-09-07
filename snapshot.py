@@ -34,7 +34,13 @@ def fix_html(path):
     text = path.read_text(encoding="utf-8", errors="replace")
 
     def repl(m):
-        target = "index.html" if m.group(2) == "/" else m.group(2)[1:]
+        path_part = m.group(2)
+        if path_part == "/":
+            target = "index.html"
+        elif path_part.endswith("/"):
+            target = path_part[1:] + "index.html"
+        else:
+            target = path_part[1:]
         return m.group(1) + '="' + prefix + target + '"'
 
     return re.sub(r'(href|src|action)="(/[^"]*)"', repl, text)
