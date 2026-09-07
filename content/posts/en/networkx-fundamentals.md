@@ -1,11 +1,11 @@
 ---
-title: "NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python"
+title: "NetworkX Fundamentals with Python"
 date: "2026-06-30"
 category: "python-tutorials"
 tags: ["NetworkX", "Python", "network analysis", "graph theory", "network science", "data visualization"]
 lang: "en"
 slug: "networkx-fundamentals"
-description: "A complete hands-on introduction to NetworkX: from graph theory fundamentals to network construction, analysis metrics, and visualization."
+description: "A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research."
 ---
 
 ## 1. Why NetworkX — From Intuition to Tool

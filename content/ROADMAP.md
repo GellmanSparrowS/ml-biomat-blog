@@ -1,5 +1,9 @@
 # Content Roadmap — ml-biomat.com
-Last updated: 2026-06-27 (v10: 26 posts)
+Last updated: 2026-09-07 (v11: 44 posts live)
+
+## Status (2026-09-07)
+44 articles are published across 5 categories (research-notes is still empty).
+See INVENTORY.md for the complete list. Remaining queue is tracked in TODO.json.
 
 ## Guiding Principles
 - Every article: EN + ZH pair (slug: topic / topic-zh)

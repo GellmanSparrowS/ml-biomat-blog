@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python — ML-Biomat</title>
-<meta name="description" content="A complete hands-on introduction to NetworkX: from graph theory fundamentals to network construction, analysis metrics, and visualization.">
+<title>NetworkX Fundamentals with Python — ML-Biomat</title>
+<meta name="description" content="A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/networkx-fundamentals/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/networkx-fundamentals/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/networkx-fundamentals-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/networkx-fundamentals/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css">
-<meta property="og:title" content="NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python">
-<meta property="og:description" content="A complete hands-on introduction to NetworkX: from graph theory fundamentals to network construction, analysis metrics, and visualization.">
+<meta property="og:title" content="NetworkX Fundamentals with Python">
+<meta property="og:description" content="A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/networkx-fundamentals/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/networkx-fundamentals.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python", "description": "A complete hands-on introduction to NetworkX: from graph theory fundamentals to network construction, analysis metrics, and visualization.", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 3827, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals/", "image": "https://ml-biomat.com/static/images/og/networkx-fundamentals.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python", "item": "https://ml-biomat.com/posts/networkx-fundamentals/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX Fundamentals with Python", "description": "A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research.", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 3827, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals/", "image": "https://ml-biomat.com/static/images/og/networkx-fundamentals.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NetworkX Fundamentals with Python", "item": "https://ml-biomat.com/posts/networkx-fundamentals/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
@@ -39,7 +39,7 @@
 <main class="container"><article>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
-<h1>NetworkX Fundamentals: Understanding, Building, and Analyzing Networks with Python</h1>
+<h1>NetworkX Fundamentals with Python</h1>
 <div class="article-meta">
 <span>2026-06-30</span><span>·</span><span>19 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
 </div>

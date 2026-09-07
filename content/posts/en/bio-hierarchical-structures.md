@@ -1,5 +1,5 @@
 ---
-title: "Hierarchical Superstructures in Biomaterials: Mechanical Design from Molecules to Macroscale"
+title: "Hierarchical Superstructures in Biomaterials"
 date: "2026-06-30"
 category: "biomaterials"
 tags: ["hierarchical structures", "superstructures", "biomaterials", "mechanical design", "silk", "collagen", "nacre"]

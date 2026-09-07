@@ -1,11 +1,11 @@
 ---
-title: "Common Classification Models in Machine Learning: From Logistic Regression to Gradient Boosting"
+title: "ML Classification Models: A Practical Overview"
 date: "2026-06-30"
 category: "machine-learning"
 tags: ["machine learning", "classification", "logistic regression", "SVM", "random forest", "XGBoost", "scikit-learn"]
 lang: "en"
 slug: "ml-classification-models"
-description: "A systematic overview of common ML classification models, from logistic regression to gradient boosting, with principles, code, and comparison."
+description: "A practical guide to major classification models in machine learning - logistic regression, decision trees, SVMs, and gradient boosting - covering intuition, tradeoffs, and reusable Python code."
 ---
 
 ## 1. What Is Classification — From Labels to Decision Boundaries

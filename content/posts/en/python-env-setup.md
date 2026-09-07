@@ -1,5 +1,5 @@
 ---
-title: "A Complete Guide to Setting Up a Python Scientific Computing Environment: From Zero to Productivity"
+title: "Setting Up a Python Scientific Computing Environment"
 date: "2026-07-06"
 category: "python-tutorials"
 tags: ["python", "conda", "jupyter", "mamba", "scientific-computing", "environment-setup"]

@@ -1,11 +1,11 @@
 ---
-title: "Data Processing with Pandas: From Lab Measurements to Analysis-Ready Data"
+title: "Pandas for Materials Data Processing"
 date: "2026-06-26"
 category: "python-tutorials"
 tags: ["pandas", "python", "data-processing", "experimental-data"]
 lang: "en"
 slug: "pandas-materials-data"
-description: "A practical guide to using Pandas for materials research data: loading multi-source files, cleaning, group statistics, and visualization."
+description: "A practical guide to Pandas for materials research data: load heterogeneous lab files, clean and merge measurements, run grouped statistics, and create publication-ready summaries and plots."
 ---
 
 ## Why Pandas

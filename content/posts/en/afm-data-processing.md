@@ -1,5 +1,5 @@
 ---
-title: "Practical AFM Force Curve Analysis with Python: From Raw Data to Mechanical Properties"
+title: "Practical AFM Force Curve Analysis with Python"
 date: "2026-06-26"
 category: "wet-lab-data"
 tags: ["AFM", "force-spectroscopy", "python", "numpy", "data-processing", "biomaterials"]

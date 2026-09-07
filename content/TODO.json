@@ -2,39 +2,15 @@
   "description": "Articles to write. Remove entries when written.",
   "queue": [
     {
-      "phase": "1.1",
-      "category": "python-tutorials",
-      "topic": "python-env-setup",
-      "lang_pair": true
-    },
-    {
       "phase": "1.2",
       "category": "python-tutorials",
       "topic": "command-line-basics",
       "lang_pair": true
     },
     {
-      "phase": "2.1",
-      "category": "biomaterials",
-      "topic": "stress-strain-curves",
-      "lang_pair": true
-    },
-    {
       "phase": "2.2",
       "category": "biomaterials",
       "topic": "viscoelasticity-basics",
-      "lang_pair": true
-    },
-    {
-      "phase": "3.1",
-      "category": "python-tutorials",
-      "topic": "numpy-crash-course",
-      "lang_pair": true
-    },
-    {
-      "phase": "4.1",
-      "category": "multiscale-modeling",
-      "topic": "lammps-basics",
       "lang_pair": true
     },
     {
@@ -45,10 +21,10 @@
     }
   ],
   "rules": [
-    "Each article must have EN+ZH pair (slug convention: topic / topic-zh)",
-    "Research online before writing for accuracy",
-    "Cite real papers and tools",
-    "Rebuild with python build.py after writing",
-    "Push via: git add -A && git commit && git push origin main"
+    "Each article must have an EN+ZH pair.",
+    "Write with article_writer.py (one section per part file, then assemble).",
+    "Generate figures with chart_gen.py; reference /static/images/posts/<slug>/...",
+    "Rebuild with python build.py after writing.",
+    "Local git commit only; never push unless the user explicitly authorizes it."
   ]
 }
