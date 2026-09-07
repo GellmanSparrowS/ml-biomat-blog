@@ -65,6 +65,8 @@ print(f"平均直径: {df_fibers['直径_px'].mean():.1f} +/- {df_fibers['直径
 
 ## 第五步：取向分析
 
+![纤维取向分布的极坐标直方图，优势取向约 90 度](/static/images/posts/sem-image-analysis/orientation-zh.webp)
+
 ```python
 from skimage.transform import radon
 theta = np.linspace(0., 180., max(img.shape), endpoint=False)

@@ -91,6 +91,8 @@ print(f"Mean aspect ratio: {df_fibers['aspect_ratio'].mean():.2f}")
 
 ## Step 5: Orientation Analysis
 
+![Polar histogram of fiber orientation with a dominant alignment near 90 degrees](/static/images/posts/sem-image-analysis/orientation-en.webp)
+
 ```python
 from skimage.transform import radon
 

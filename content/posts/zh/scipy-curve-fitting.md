@@ -42,6 +42,8 @@ print(f"杨氏模量: {E:.1f} +/- {E_std:.1f} MPa, R2={r2:.4f}")
 
 ## 三、指数衰减模型：应力松弛实验
 
+![测量应力松驰数据与指数表减拟合及平衡应力水平](/static/images/posts/scipy-curve-fitting/relaxation-zh.webp)
+
 ```python
 time_min = np.array([0, 1, 2, 5, 10, 20, 40, 80])
 stress_kPa = np.array([12.5, 10.8, 9.3, 7.2, 5.5, 4.1, 3.2, 2.8])

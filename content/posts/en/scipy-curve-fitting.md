@@ -66,6 +66,8 @@ plt.legend(); plt.tight_layout()
 
 ## 3. Exponential Decay: Stress Relaxation
 
+![Measured stress-relaxation data with an exponential decay fit and equilibrium stress level](/static/images/posts/scipy-curve-fitting/relaxation-en.webp)
+
 When you hold a biomaterial at constant strain, the stress decays over time. This stress relaxation follows an exponential model. Understanding the relaxation time is critical for applications like tissue scaffolds and drug delivery systems.
 
 ```python
