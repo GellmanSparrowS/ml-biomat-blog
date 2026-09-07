@@ -219,3 +219,30 @@ document.addEventListener('DOMContentLoaded',function(){
         });
     });
 })();
+
+// ===== TOC SCROLL SPY =====
+(function(){
+    if(!('IntersectionObserver' in window)) return;
+    document.addEventListener('DOMContentLoaded', function(){
+        var links = Array.prototype.slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+        if(!links.length) return;
+        var map = {};
+        links.forEach(function(a){
+            var h = document.querySelector(a.getAttribute('href'));
+            if(h) map[h.id] = a;
+        });
+        var obs = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){
+                if(e.isIntersecting){
+                    links.forEach(function(a){ a.classList.remove('active'); });
+                    var link = map[e.target.id];
+                    if(link) link.classList.add('active');
+                }
+            });
+        }, {rootMargin:'-20% 0px -70% 0px', threshold:0});
+        Object.keys(map).forEach(function(id){
+            var h = document.getElementById(id);
+            if(h) obs.observe(h);
+        });
+    });
+})();

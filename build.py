@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Static blog generator — outputs to docs/ for GitHub Pages. Bilingual EN+ZH."""
-import os, re, json, shutil, html as hm
+import os, re, json, shutil, html as hm, urllib.parse
 from datetime import datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
@@ -284,12 +284,20 @@ def make_head(title, desc, url, lang="en", og_type="website", ld="",
     return head + header
 
 
+def tag_href(tag):
+    return "/tags/" + urllib.parse.quote(tag, safe="") + "/"
+
+
+def tag_path(tag):
+    return "tags/" + urllib.parse.quote(tag, safe="") + "/index.html"
+
+
 def post_card(p):
     return POST_CARD.format(
         lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587",
         title=hm.escape(p["title"]), slug=p["slug"], date=p["date"],
         read_min=p["read_min"], desc=hm.escape(p["description"] or ""),
-        tags_html="".join(f'<span class="tag-pill">{t}</span>' for t in p["tags"][:3]))
+        tags_html="".join(f'<a class="tag-pill" href="{tag_href(t)}">{t}</a>' for t in p["tags"][:3]))
 
 
 def section_head(lang, label, href):
@@ -347,6 +355,15 @@ def build():
         related = [q for q in same_cat if q["lang"] == p["lang"]][:3]
         if len(related) < 3:
             related += [q for q in same_cat if q["lang"] != p["lang"]][:3 - len(related)]
+        lang_list = en if p["lang"] == "en" else zh
+        idx = next((j for j, q in enumerate(lang_list) if q["slug"] == p["slug"]), None)
+        prev_next = ""
+        if idx is not None:
+            prevp = lang_list[idx + 1] if idx + 1 < len(lang_list) else None
+            nextp = lang_list[idx - 1] if idx - 1 >= 0 else None
+            prev_link = f'<a href="/posts/{prevp["slug"]}/">\u2190 {hm.escape(prevp["title"])}</a>' if prevp else "<span></span>"
+            next_link = f'<a href="/posts/{nextp["slug"]}/">{hm.escape(nextp["title"])} \u2192</a>' if nextp else "<span></span>"
+            prev_next = f'<nav class="prev-next-nav"><span>{prev_link}</span><span>{next_link}</span></nav>'
         related_html = ""
         if related:
             related_html = '<section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple">' + "".join(
@@ -355,7 +372,7 @@ def build():
         body = ARTICLE_HTML.format(
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
             cat_slug=p["category"], cat_name=cn, html=p["html"], toc=p["toc"],
-            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + ENGAGE_BANNER + related_html + giscus_html
+            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + prev_next + ENGAGE_BANNER + related_html + giscus_html
         html = make_head(title=p["title"], desc=p["description"] or p["title"],
                          url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=p["lang"],
                          og_type="article", ld=article_ld(p), og_image=og_img, alternates=alts, needs_math=needs_math) + body + FOOT.format(year=datetime.now().year)
@@ -433,6 +450,25 @@ def build():
                          url=f'{SITE["base_url"]}/categories/{s}/') + body + FOOT.format(year=datetime.now().year)
         write_file(f"categories/{s}/index.html", html)
     print("  Categories done")
+
+    # Tag index + individual tag pages
+    from collections import defaultdict
+    tag_posts = defaultdict(list)
+    for p in posts:
+        for tg in p["tags"]:
+            tag_posts[tg].append(p)
+    tags_html_rows = []
+    for tg in sorted(tag_posts, key=lambda k: (-len(tag_posts[k]), k.lower())):
+        tags_html_rows.append(f'<a class="tag-pill" href="{tag_href(tg)}">{hm.escape(tg)} ({len(tag_posts[tg])})</a>')
+    tag_index = '<h1 class="section-title">Tags / 标签</h1><div class="tag-cloud">' + "".join(tags_html_rows) + "</div>"
+    html = make_head(title="Tags", desc=f"Browse {len(tag_posts)} tags across {len(posts)} articles.", url=f'{SITE["base_url"]}/tags/') + tag_index + FOOT.format(year=datetime.now().year)
+    write_file("tags/index.html", html)
+    for tg, tp in tag_posts.items():
+        body = f'<h1 class="section-title"><span class="highlight">{hm.escape(tg)}</span></h1>'
+        body += '<ul class="post-list-simple">' + "".join(POST_ROW.format(date=q["date"], title=hm.escape(q["title"]), slug=q["slug"]) for q in sorted(tp, key=lambda x: x["datetime"], reverse=True)) + "</ul>"
+        html = make_head(title=f"{tg} — Tag", desc=f"Articles tagged with {tg}", url=f'{SITE["base_url"]}{tag_href(tg)}') + body + FOOT.format(year=datetime.now().year)
+        write_file(tag_path(tg), html)
+    print("  Tags done")
 
     # FiberNet page
     fibernet_body = Path("content/fibernet-body.html").read_text(encoding="utf-8")
