@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>生物分子网络的粗粒化建模：从映射方案到验证方法 — ML-Biomat</title>
+<meta name="description" content="面向材料研究的生物分子网络粗粒化建模指南，系统讲解珠子映射原则、有效相互作用势、体系构建与平衡、以及如何用独立参考数据验证模型，帮助研究者避免常见的粗粒化陷阱。">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/">
+<link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"><link rel="api-catalog" href="/.well-known/api-catalog">
+<link rel="describedby" type="text/plain" href="/llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
+<meta name="google-adsense-account" content="ca-pub-7464969092761889">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/static/css/style.css">
+<meta property="og:title" content="生物分子网络的粗粒化建模：从映射方案到验证方法">
+<meta property="og:description" content="面向材料研究的生物分子网络粗粒化建模指南，系统讲解珠子映射原则、有效相互作用势、体系构建与平衡、以及如何用独立参考数据验证模型，帮助研究者避免常见的粗粒化陷阱。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物分子网络的粗粒化建模：从映射方案到验证方法", "description": "面向材料研究的生物分子网络粗粒化建模指南，系统讲解珠子映射原则、有效相互作用势、体系构建与平衡、以及如何用独立参考数据验证模型，帮助研究者避免常见的粗粒化陷阱。", "datePublished": "2026-09-07", "dateModified": "2026-09-07", "wordCount": 176, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "生物分子网络的粗粒化建模：从映射方案到验证方法", "item": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links">
+<a href="/">Home / 首页</a>
+<a href="/fibernet/">Library / 库</a>
+<a href="/about/">About / 关于</a>
+</nav>
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
+<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+</div></header>
+<main class="container"><article>
+<header class="article-header">
+<span class="lang-badge zh">中文</span>
+<h1>生物分子网络的粗粒化建模：从映射方案到验证方法</h1>
+<div class="article-meta">
+<span>2026-09-07</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/multiscale-modeling/">多尺度模拟</a>
+</div>
+</header>
+<div class="content">
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么生物材料需要粗粒化">为什么生物材料需要粗粒化</a></li><li class="toc-h2"><a href="#从原子到珠子-如何设计映射">从原子到珠子：如何设计映射</a></li><li class="toc-h2"><a href="#有效相互作用势及其局限">有效相互作用势及其局限</a></li><li class="toc-h2"><a href="#体系构建与平衡">体系构建与平衡</a></li><li class="toc-h2"><a href="#先验证-再预测">先验证，再预测</a></li><li class="toc-h2"><a href="#常见失效模式与报告标准">常见失效模式与报告标准</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="为什么生物材料需要粗粒化">为什么生物材料需要粗粒化</h2>
+
+<p>如果要对一根丝素蛋白纤维、一张胶原网络或一个含水纤维素束做全原子分子动力学，就需要模拟数百万个原子并推进微秒级的轨迹，即便如此，大多数真正影响力学行为的慢松弛过程仍然遥不可及。粗粒化模型的价值就在于主动丢弃一部分化学细节，从而把生物材料力学真正关心的尺度拿回来：链的持久长度、网络拓扑、交联密度、吸附水，以及决定韧性和粘弹性的缓慢结构重排。</p>
+
+<p>粗粒化的核心做法，是把一组原子替换为数量更少的相互作用位点，这些位点通常称为珠子。一个珠子可以代表一个水分子、一个氨基酸侧链、一个单体，也可以代表整段 Kuhn 链段，具体取决于要回答的问题。映射方案的选择绝不是技术细节，它同时决定了模型的保真度和可以模拟的时空尺度。一个丢失了蚕丝氢键方向性的模型，也会顺带丢掉让蚕丝变得如此特别的那个性质。</p>
+
+<h2 id="从原子到珠子-如何设计映射">从原子到珠子：如何设计映射</h2>
+
+<img src="/static/images/posts/coarse-grained-biomolecular-networks/mapping-zh.webp" alt="生物分子网络的全原子、粗粒化与网络映射层次" loading="lazy">
+
+<p>好的映射从一个清晰的目标量开始。如果目标是重现网络的弹性模量，那么映射可以放弃绝大多数分子内化学细节，只保留连接性、排除体积和交联密度。如果目标是区分结晶区与无定形区，那么映射就必须保留足够的珠子特异性，以便同时编码两种状态及其界面。</p>
+
+<p>生物材料文献中有几类常见选择。MARTINI 类模型把几个重原子映射到一个珠子，并按极性和氢键倾向区分珠子类型，当脂质、蛋白质和水区需要共享同一力场时尤其方便。基于结构或类 Go 的模型，则每个单体或残基放一个珠子，只编码天然接触，因此折叠和大规模重排效率极高，但不适合研究变性或溶剂驱动的溶胀。网络模型往往走得更远，把整段纤维用一个弹性单元表示，适合研究拓扑和失效统计，但不适合研究局部化学。</p>
+
+<p>下表总结了同一种材料在不同粗细层次上映射时会保留什么、又会失去什么。</p>
+
+<table><tr><th>映射层次</th><th>代表性单元</th><th>保留的信息</th><th>通常会丢失的信息</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>全原子</td><td>每个原子</td><td>电荷、化学键、精细构象</td><td>可达的时间与长度尺度</td></tr><tr><td>MARTINI 类</td><td>数个重原子对应一个珠子</td><td>极性与氢键倾向</td><td>扭转化学细节</td></tr><tr><td>残基 / 单体</td><td>每个残基或单体一个珠子</td><td>链连接性与天然接触</td><td>侧链堆积</td></tr><tr><td>网络</td><td>每个 Kuhn 链段一个位点</td><td>拓扑与交联密度</td><td>局部结构信息</td></tr></table>
+
+<h2 id="有效相互作用势及其局限">有效相互作用势及其局限</h2>
+
+<p>粗粒化势的具体函数形式远不如一个认知重要：任何粗粒化力场都是统计构造。软排斥、键弹簧、角势和成对吸引并不是对某条共价键或某个氢键的直接测量，而是一组有效相互作用，被用来让粗粒化分辨率下的系综平均重现某个选定的参考。这意味着参数永远不存在“放之四海而皆准”的可迁移性。为一套磷脂膜拟合的 MARTINI 参数，不会不经过重新标定就自动适用于蚕丝 beta-折叠结晶区。</p>
+
+<p>因此实际模拟必须谨慎地区分键合项与非键合项。键和角通常可以直接用玻尔兹曼反演从全原子分布拟合。非键合项要难得多；常见做法包括 Lennard-Jones 排斥加屏蔽静电来处理带电基团，但屏蔽长度和部分电荷的分配往往正是模型中最敏感的选择。只要条件允许，先对同一种化学体系跑一小段全原子模拟，把观测到的对分布投影到珠子中心上，再用这些分布作为粗粒化势的拟合目标。</p>
+
+<h2 id="体系构建与平衡">体系构建与平衡</h2>
+
+<p>粗粒化模拟虽然比全原子快，但体系仍然足够大，因此构建必须规范。周期性盒子的边长应当大于两倍的最长相关长度，否则网络会在各个方向上感知到自己的人为镜像。珠子的质量要保证在更大时间步下仍能稳定积分，但不能为了跑得更快而随意减小质量，因为质量分布会改变体系在刚性与柔性自由度之间分配动能的方式。</p>
+
+<p>平衡必须被当作物理问题而不是走过场。先用陡降法对准备好的坐标做能量最小化，再在较弱的位置约束下逐步升温跑短轨迹，最后只有当溶剂类珠子已经明显随机化之后，才撤除对网络结点的约束。一个粗粒化网络是否达到平衡，要看若干相互独立的观测量——总能量、盒子尺寸、链端距和径向分布函数——是否进入不再随时间漂移的稳定涨落，并且稳定时间至少要与后续产出段同样长。</p>
+
+<h2 id="先验证-再预测">先验证，再预测</h2>
+
+<p>验证是区分“粗粒化模型”和“参数化得不错的动画”的关键。最低标准是重现生成力场的全原子参考：对分布、局域密度、键角与键长的概率分布。但这仍然属于样本内检验，不应被宣传成预测能力。更具决定性的第二步，是计算一组拟合时没用到过的观测量——弹性模量、拉伸下的链取向、网络连接统计或随温度变化的结构转变——并与独立的模拟或实验结果对照。</p>
+
+<p>有实验可供对照时，尽量选择对实验和模拟不确定性都稳健的观测量来比较。模量和取向序参量通常比绝对自由能或稀有事件速率更稳妥。没有实验可供对照时，模型的任务就变成给出一个可证伪的预测：如果以后真的测到了某个结果，就能明确支持或否定这套粗粒化映射。</p>
+
+<h2 id="常见失效模式与报告标准">常见失效模式与报告标准</h2>
+
+<p>一个粗粒化模型未经验证的最廉价信号，就是它的优度图恰好算在拟合区间内。更隐蔽的失败包括：截断半径太短导致折叠链永远无法松弛、盒子太小装不下最慢的模态、氢键表示过软导致本应结晶的区域在普通平衡中就已经熔化。这些问题都能通过监控原始轨迹和能量守恒来识别，而不是只看最后的平均值。</p>
+
+<p>因此一份禁得起推敲的模拟报告，应当写明映射方案、构造势所用的参考、截断方式与静电处理、盒子尺寸、恒温器与积分器、平衡时长，以及具体的验证观测量。缺少这些细节，粗粒化结果就很难复现，也更难被信任。</p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<ul>
+<li>Marrink, S. J., Risselada, H. J., Yefimov, S., Tieleman, D. P., and de Vries, A. H. <em>The MARTINI force field: coarse grained model for biomolecular simulations.</em> J. Phys. Chem. B, 2007.</li>
+<li>Kmiecik, S., Gront, D., Kolinski, M., Wieteska, L., Dawid, A. E., and Kolinski, A. <em>Coarse-grained protein models and their applications.</em> Chem. Rev., 2016.</li>
+<li>Noid, W. G. <em>Perspective: Coarse-grained models for biomolecular systems.</em> J. Chem. Phys., 2013.</li>
+<li>Saunders, M. G., and Voth, G. A. <em>Coarse-graining methods for computational biology.</em> Annu. Rev. Biophys., 2013.</li>
+</ul>
+</div>
+</article><section class="cta-banner">
+<h3>💬 Questions or Feedback?</h3>
+<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
+<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation-zh/">分子动力学入门：你的第一个LAMMPS模拟</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>Comments</h2>
+<script src="https://giscus.app/client.js"
+    data-repo="GellmanSparrowS/ml-biomat-blog"
+    data-repo-id="R_kgDOTEwhsA"
+    data-category="General"
+    data-category-id="DIC_kwDOTEwhsM4CpPbT"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+</section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links">
+<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+</div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js" defer></script>
+</body>
+</html>
