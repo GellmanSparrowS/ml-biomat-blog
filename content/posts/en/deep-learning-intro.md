@@ -7,7 +7,8 @@ lang: "en"
 slug: "deep-learning-intro-ml"
 description: "A systematic introduction to deep learning: neurons, activation functions, backpropagation, regularization, and transfer learning, with practical guidance on when deep learning is the right tool in materials science."
 ---
-## 1. The Nature of Deep Learning — From Feature Engineering to Representation Learning
+## Neural Network Foundations
+### 1. The Nature of Deep Learning — From Feature Engineering to Representation Learning
 
 In the chapter on regression models, we emphasized feature engineering at every turn: transforming raw data — material composition, grain size, heat-treatment temperature — through logarithms, power laws, and interaction terms into forms that models can handle efficiently. This approach works extremely well when sample sizes are limited and domain knowledge is rich. When data dimensionality is extremely high and internal structure is extremely complex, however — a single cell micrograph contains millions of pixels, a protein sequence encodes folding information across multiple length scales, a finite-element mesh holds displacement fields at hundreds of thousands of nodes — hand-designed features face a fundamental bottleneck. It is not a question of effort; the complexity of the problem simply exceeds what human intuition can extract from raw data.
 
@@ -21,7 +22,7 @@ One critically important point must be stated clearly at the outset, however: **
 
 ---
 
-## 2. The Basic Components — Neurons, Layers, and Activation Functions
+### 2. The Basic Components — Neurons, Layers, and Activation Functions
 
 The term "neural network" originates from a rough analogy to biological neural systems: biological neurons receive chemical signals through dendrites, accumulate them in the cell body, and fire an electrical signal along the axon when the threshold is exceeded. Mathematically, an artificial neuron receives an output vector \(\mathbf{x} \in \mathbb{R}^d\) from the previous layer, computes a weighted sum plus a bias, and passes the result through a nonlinear function (the activation function):
 
@@ -70,7 +71,8 @@ plt.tight_layout(); plt.show()
 
 ---
 
-## 3. Forward Propagation and Loss Functions — From Input to Prediction
+## How Networks Learn
+### 3. Forward Propagation and Loss Functions — From Input to Prediction
 
 Once the layer-wise operation is understood, forward propagation is simply the process of passing input data sequentially through the layers until the output layer produces a prediction. For an L-layer fully connected network, forward propagation is expressed as the following recursion:
 
@@ -100,7 +102,7 @@ One subtlety worth stating explicitly: training minimizes the **empirical risk**
 
 ---
 
-## 4. Backpropagation and Gradient Descent — How Networks Learn from Errors
+### 4. Backpropagation and Gradient Descent — How Networks Learn from Errors
 
 Forward propagation produces predictions; the loss function quantifies the errors. The central remaining question is: how should the millions of model parameters be adjusted to minimize the loss? The answer is the **Backpropagation** algorithm — the core engine that makes the entire deep learning engineering stack possible, formalized in Rumelhart, Hinton, and Williams' landmark 1986 Nature paper.
 
@@ -176,7 +178,8 @@ In structural mechanics surrogate modeling, the training loop above remains exac
 
 ---
 
-## 5. Convolutional Neural Networks — Spatial Feature Extraction
+## Architectures
+### 5. Convolutional Neural Networks — Spatial Feature Extraction
 
 A fully connected MLP has a fundamental limitation: it is entirely oblivious to the spatial structure of its inputs. Flattening a 224 × 224 micrograph into a 150,528-dimensional vector and feeding it into an MLP forces the network to discover from scratch — through first-layer weights — that neighboring pixels are more relevant to each other than distant ones. This is not only computationally explosive (the first layer alone has hundreds of millions of parameters), it is data-catastrophically inefficient. **Convolutional Neural Networks (CNNs)** solve this problem structurally through three inductive biases: local connectivity, weight sharing, and translation invariance.
 
@@ -243,7 +246,7 @@ print("Params:", f"{sum(p.numel() for p in model.parameters()):,}")
 
 ---
 
-## 6. Sequence Models and Attention — LSTM and Transformer
+### 6. Sequence Models and Attention — LSTM and Transformer
 
 Biology, materials science, and mechanics all generate abundant sequential data: protein amino acid sequences (folding and ligand binding prediction), gene sequences, fatigue load time-series from sensors, step-by-step finite-element time histories of structural dynamic responses, and multi-step process sequences in material fabrication. The defining characteristic of such data is that the current output depends on its history, with the relevant historical horizon unknown a priori. Fully connected MLPs and CNNs have fundamental limitations in modeling temporal dependencies; **Recurrent Neural Networks (RNNs)** and their descendants are designed explicitly for this class of problems.
 
@@ -300,7 +303,8 @@ print("Attn:", attn(torch.randn(B, T, 64)).shape)       # → [4, 20, 64]
 
 ---
 
-## 7. Regularization and Training Techniques — From Overfitting to Generalization
+## Practical Training and Scope
+### 7. Regularization and Training Techniques — From Overfitting to Generalization
 
 A deep network's parameter count routinely exceeds the training sample count by several orders of magnitude, meaning it is theoretically capable of memorizing every training example — including noise — perfectly. Preventing this and enabling the model to learn genuinely generalizable patterns is the central practical challenge of deep learning.
 
@@ -373,7 +377,7 @@ print(f"Trainable / Total: {trainable:,} / {total:,}")
 
 ---
 
-## 8. When to Use Deep Learning — Its Scope and Relationship to Classical ML
+### 8. When to Use Deep Learning — Its Scope and Relationship to Classical ML
 
 After working through the technical details of deep learning, the most important question is one that should have been asked at the outset: **does this problem actually require deep learning?** In a research context, reaching for a deep network because it seems "advanced" or because the methodology needs to appear sufficiently complex is a waste of computational resources, researcher time, and scientific rigor. The following dimensions provide a principled decision framework.
 

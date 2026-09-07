@@ -18,7 +18,8 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 ```
 
-## From Raw Data to Feature Matrix
+## Core Feature Engineering Workflow
+### From Raw Data to Feature Matrix
 
 Typical raw data from a biomaterials experiment:
 
@@ -37,7 +38,7 @@ df = pd.DataFrame({
 })
 ```
 
-## Encoding Categorical Variables
+### Encoding Categorical Variables
 
 ```python
 encoder = OneHotEncoder(sparse_output=False, drop="first")
@@ -50,7 +51,7 @@ df_encoded = pd.concat([
 ], axis=1)
 ```
 
-## Domain-Driven Interaction Features
+### Domain-Driven Interaction Features
 
 This is where materials knowledge adds value:
 
@@ -72,7 +73,7 @@ def engineer_materials_features(df):
     return df
 ```
 
-## Handling Missing Values
+### Handling Missing Values
 
 For small datasets, avoid blind mean imputation:
 
@@ -90,7 +91,7 @@ def smart_impute(df, group_col="treatment"):
     return df
 ```
 
-## Feature Selection for Small Datasets
+### Feature Selection for Small Datasets
 
 With <100 samples, avoid automated selection:
 
@@ -129,4 +130,3 @@ The persistence length of semiflexible fibers can be estimated from orientation 
 For data with strong hierarchical structure (fiber -> bundle -> network), hierarchical features that aggregate properties at each level can help models capture multi-scale effects. Calculate fiber-level features first, then aggregate to bundle-level means and variances, and finally to network-level descriptors.
 
 When experimental measurements are limited, simulation-informed features can bridge the gap. Run coarse-grained simulations across a parameter space, extract features from the simulation outputs, and use these as supplementary features alongside experimental data. The simulations capture the underlying physics while the experimental data anchors the predictions to reality.
-

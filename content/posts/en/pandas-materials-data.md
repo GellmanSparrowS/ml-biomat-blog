@@ -18,7 +18,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-## Reading Experimental Data
+## The Pandas Workflow
+### Reading Experimental Data
 
 ```python
 df = pd.read_excel("mechanical_tests.xlsx", sheet_name="Sheet1")
@@ -31,7 +32,7 @@ dfs = [pd.read_csv(f) for f in files]
 df_all = pd.concat(dfs, ignore_index=True)
 ```
 
-## Data Cleaning
+### Data Cleaning
 
 ```python
 df = df.dropna(how="all")  # Remove fully empty rows
@@ -43,7 +44,7 @@ for col in ["modulus", "diameter"]:
     df = df[(df[col] > mean - 3*std) & (df[col] < mean + 3*std)]
 ```
 
-## Group Statistics
+### Group Statistics
 
 ```python
 summary = df.groupby("treatment").agg({
@@ -52,7 +53,7 @@ summary = df.groupby("treatment").agg({
 }).round(2)
 ```
 
-## Visualization
+### Visualization
 
 ```python
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
@@ -63,7 +64,7 @@ axes[1,0].imshow(corr, cmap="RdBu_r", vmin=-1, vmax=1)
 plt.tight_layout()
 ```
 
-## Export Results
+### Export Results
 
 ```python
 summary.to_csv("mechanical_summary.csv")
@@ -107,4 +108,3 @@ When dealing with multiple experimental conditions, the groupby transform method
 ```python
 df["normalized_modulus"] = df.groupby("treatment")["modulus_GPa"].transform(lambda x: x / x.mean())
 ```
-

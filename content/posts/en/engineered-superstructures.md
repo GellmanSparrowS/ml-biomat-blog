@@ -8,7 +8,8 @@ slug: "engineered-superstructures"
 description: "A comprehensive review of engineered superstructures: origami, honeycomb, auxetic, helical, and lattice designs in 2D and 3D, covering geometry, mechanisms, parameters, and design rules."
 ---
 
-## Section 1: Origami and Kirigami — Programming Three-Dimensional Deformation from Two-Dimensional Sheets
+## Bending and Folding Dominated Designs
+### Section 1: Origami and Kirigami — Programming Three-Dimensional Deformation from Two-Dimensional Sheets
 
 The central philosophy of engineering metamaterials is to replace composition with geometry. The traditional materials engineer asks "which material should I choose?", while the metamaterial engineer asks "how should I arrange matter?" Origami metamaterials take this philosophy to its logical extreme: three-dimensional deformation patterns are pre-encoded in two-dimensional sheets, and macroscopic shape change is achieved through local bending rather than global stretching. This is a fundamentally different mechanical strategy. Bending a thin sheet requires energy densities two to three orders of magnitude lower than stretching it in-plane, which means that simply changing fold geometry — without altering a single atom of the base material — can tune the effective modulus across an enormous range.
 
@@ -20,7 +21,7 @@ Understanding origami mechanics requires three levels of analysis. The first lev
 
 ---
 
-## Section 2: Honeycombs, Corrugations, and Perforated Sheets — Three Forms of Bending-Dominated Metamaterials
+### Section 2: Honeycombs, Corrugations, and Perforated Sheets — Three Forms of Bending-Dominated Metamaterials
 
 Bending-dominated metamaterials have the longest engineering history and widest deployment. Understanding them begins with the Gibson–Ashby scaling law: E*/Es = C(ρ*/ρs)^n, where starred quantities are effective properties of the cellular solid, unstarred quantities are those of the dense base material, C is a geometric constant, and the exponent n is the mechanistic key. For bending-dominated structures n ≈ 2; for stretch-dominated ones n → 1. If density falls by 10%, a bending-dominated structure loses roughly 19% of its modulus while a stretch-dominated structure loses only 10%. The pursuit of stretch dominance in lattice design is thus firmly grounded in this scaling argument.
 
@@ -32,7 +33,7 @@ Hierarchical honeycomb design adds sub-millimeter corrugations or ribs to the wa
 
 ---
 
-## Section 3: Auxetic Metamaterials — Mechanics and Fabrication of Negative Poisson's Ratio Structures
+### Section 3: Auxetic Metamaterials — Mechanics and Fabrication of Negative Poisson's Ratio Structures
 
 Auxetics — materials with negative Poisson's ratio — are the most counterintuitive members of the metamaterial family. Stretching them transversely makes them wider rather than narrower; compressing them causes lateral expansion. This behavior is not a physical anomaly but an inevitable mechanical consequence of specific unit-cell geometry, precisely engineerable by design.
 
@@ -46,7 +47,7 @@ Fabrication of three-dimensional auxetic structures relies primarily on additive
 
 ---
 
-## Section 4: Chiral Twisting and Compliant Metamaterials
+### Section 4: Chiral Twisting and Compliant Metamaterials
 
 Chiral metamaterials lack mirror symmetry — the structure cannot be superimposed on its mirror image by any rotation. This geometric asymmetry has a profound mechanical consequence: stretch–twist coupling. In a conventional isotropic elastic solid, axial tension produces only axial extension and lateral contraction; in a chiral structure, because the unit cell lacks mirror symmetry, axial load necessarily generates a net torque, causing the structure to twist as it extends. The coupling intensity is captured by a chirality modulus, whose magnitude — and sign — can be engineered through unit-cell geometry.
 
@@ -58,7 +59,8 @@ Compliant mechanisms achieve motion transmission through elastic deformation rat
 
 ---
 
-## Section 5: Tensegrity, Braided Structures, and Interlocking Assemblies
+## Lattices, Buckling, and Assembly
+### Section 5: Tensegrity, Braided Structures, and Interlocking Assemblies
 
 Tensegrity — a portmanteau coined by Buckminster Fuller from "tension" and "integrity" — describes structures in which a discontinuous set of compression members floats within a continuous tension network, with struts never touching each other and all equilibrium maintained by the interplay of prestressed tension and compression. Every strut carries only axial compression, every cable or band carries only axial tension: bending moments are absent throughout the structure, representing the highest possible efficiency of material utilization.
 
@@ -68,7 +70,7 @@ Braided metamaterials are governed by fiber–fiber contact and friction at cros
 
 ---
 
-## Section 6: Three-Dimensional Lattices and Triply Periodic Minimal Surfaces
+### Section 6: Three-Dimensional Lattices and Triply Periodic Minimal Surfaces
 
 Three-dimensional periodic lattice materials extend planar metamaterial design logic into full three-dimensional space and are perhaps the greatest beneficiary of additive manufacturing advances over the past decade. The decisive mechanical parameter remains the scaling exponent n. Stretch-dominated lattices (Octet truss, Kagome lattice) have nearly all struts carrying axial forces under any loading direction, giving n close to 1. Bending-dominated lattices (open-cell foams, simple cubic lattices) have struts primarily in bending, giving n approaching 2 or even 3. At 10% relative density, stretch-dominated lattices can be an order of magnitude stronger than bending-dominated ones of the same density. Zheng et al.'s 2014 Science report on ultralight Octet-truss microlattices — achieving near-stretch-dominated performance at densities below 1 mg/cm³ — filled a long-vacant region of the Ashby map and triggered intense research into architected materials for aerospace structural applications.
 
@@ -78,7 +80,7 @@ Triply Periodic Minimal Surfaces (TPMS) are the most isotropic class of lattice 
 
 ---
 
-## Section 7: Buckling-Induced Patterns and Multistable Structures
+### Section 7: Buckling-Induced Patterns and Multistable Structures
 
 Buckling is the traditional adversary of structural engineers — it signals sudden loss of load-carrying capacity. Metamaterial design has reframed buckling as a manufacturing tool and functional mechanism. In the most common implementation, a thin film is prestretched and bonded to a soft substrate; when the prestrain is released, the substrate contracts, the film experiences compression, and buckles into periodic sinusoidal waves with wavelength λ ≈ 2πt·(E_f / 3E_s)^(1/3), where t is film thickness and E_f, E_s are film and substrate moduli respectively. By controlling this ratio, one can prescribe wavelengths from nanometers to millimeters — an astonishingly simple route to periodic surface texturing that requires no masks or molds.
 
@@ -88,7 +90,8 @@ Coulais et al. demonstrated in Nature 2016 that by independently programming the
 
 ---
 
-## Section 8: Comparative Mechanics — Scaling Laws and Design Maps
+## Design Principles and Outlook
+### Section 8: Comparative Mechanics — Scaling Laws and Design Maps
 
 Systematic comparison across the metamaterial family is best organized through Ashby mapping: specific modulus (E/ρ) on one axis, specific strength (σ_y/ρ) on the other, each metamaterial type occupying a region whose position and extent are determined by its scaling exponent n, tunability range, and failure mode.
 
@@ -100,7 +103,7 @@ Core design rules crystallize from this framework. For maximum specific strength
 
 ---
 
-## Section 9: Machine-Learning-Assisted Design and Fabrication
+### Section 9: Machine-Learning-Assisted Design and Fabrication
 
 The traditional metamaterial design workflow — propose geometry, build analytical or finite-element model, conduct parametric study, optimize over limited parameter space — becomes a bottleneck as geometric complexity grows and performance objectives multiply. Machine learning removes this bottleneck by enabling data-driven exploration of design spaces that are far too large for exhaustive physics-based analysis.
 
@@ -114,7 +117,7 @@ On the fabrication side, stereolithography (SLA) and digital light processing (D
 
 ---
 
-## Section 10: Experimental Characterization, Sustainability, and Outlook
+### Section 10: Experimental Characterization, Sustainability, and Outlook
 
 Characterizing metamaterials demands specialized experimental methods, because their mechanical responses are highly non-uniform: large deformations concentrate at hinges and fold lines while panels remain nearly undeformed. Digital image correlation (DIC) tracks the displacement of a random surface speckle pattern to reconstruct full-field strain tensors, directly visualizing re-entrant unit-cell eversion, honeycomb wall bending, and origami rigid-body rotation. It is particularly powerful for verifying negative Poisson's ratio: the ratio of local transverse to longitudinal strain gives a spatially resolved Poisson's ratio map without any reliance on load-cell force readings. Nanoindentation quantifies indentation hardness enhancement in auxetic metamaterials at micrometer resolution. In-situ SEM loading stages image buckling initiation, crack nucleation, and crack propagation at the unit-cell scale under sustained load. Dynamic mechanical analysis (DMA) measures frequency-dependent storage modulus and loss factor, probing viscoelastic behavior and frictional dissipation mechanisms in braided and interlocking structures. X-ray micro/nano CT combined with digital volume correlation (DVC) reconstructs three-dimensional internal deformation fields — indispensable for Gyroid and other closed-channel TPMS structures whose internal deformation is inaccessible to surface measurement.
 

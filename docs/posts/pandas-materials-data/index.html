@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/pandas-materials-data.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Pandas for Materials Data Processing", "description": "A practical guide to Pandas for materials research data: load heterogeneous lab files, clean and merge measurements, run grouped statistics, and create publication-ready summaries and plots.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 384, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/pandas-materials-data/", "image": "https://ml-biomat.com/static/images/og/pandas-materials-data.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Pandas for Materials Data Processing", "item": "https://ml-biomat.com/posts/pandas-materials-data/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Pandas for Materials Data Processing", "description": "A practical guide to Pandas for materials research data: load heterogeneous lab files, clean and merge measurements, run grouped statistics, and create publication-ready summaries and plots.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 388, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/pandas-materials-data/", "image": "https://ml-biomat.com/static/images/og/pandas-materials-data.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Pandas for Materials Data Processing", "item": "https://ml-biomat.com/posts/pandas-materials-data/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -55,7 +55,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 </code></pre>
 
-<h2>Reading Experimental Data</h2>
+<h2>The Pandas Workflow</h2>
+<h3>Reading Experimental Data</h3>
 
 <pre><code class="language-python">
 df = pd.read_excel(&quot;mechanical_tests.xlsx&quot;, sheet_name=&quot;Sheet1&quot;)
@@ -68,7 +69,7 @@ dfs = [pd.read_csv(f) for f in files]
 df_all = pd.concat(dfs, ignore_index=True)
 </code></pre>
 
-<h2>Data Cleaning</h2>
+<h3>Data Cleaning</h3>
 
 <pre><code class="language-python">
 df = df.dropna(how=&quot;all&quot;)  # Remove fully empty rows
@@ -80,7 +81,7 @@ for col in [&quot;modulus&quot;, &quot;diameter&quot;]:
     df = df[(df[col] &gt; mean - 3*std) &amp; (df[col] &lt; mean + 3*std)]
 </code></pre>
 
-<h2>Group Statistics</h2>
+<h3>Group Statistics</h3>
 
 <pre><code class="language-python">
 summary = df.groupby(&quot;treatment&quot;).agg({
@@ -89,7 +90,7 @@ summary = df.groupby(&quot;treatment&quot;).agg({
 }).round(2)
 </code></pre>
 
-<h2>Visualization</h2>
+<h3>Visualization</h3>
 
 <pre><code class="language-python">
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
@@ -100,7 +101,7 @@ axes[1,0].imshow(corr, cmap=&quot;RdBu_r&quot;, vmin=-1, vmax=1)
 plt.tight_layout()
 </code></pre>
 
-<h2>Export Results</h2>
+<h3>Export Results</h3>
 
 <pre><code class="language-python">
 summary.to_csv(&quot;mechanical_summary.csv&quot;)

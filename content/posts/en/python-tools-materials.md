@@ -14,7 +14,8 @@ Materials research generates data everywhere: AFM force curves, SEM images, MD t
 
 This post covers the essential Python stack for a materials researcher, with concrete code examples you can copy into your Jupyter notebook.
 
-## The Core Stack
+## Core Scientific Stack
+### The Core Stack
 
 | Category | Libraries | Typical use |
 |---|---|---|
@@ -89,7 +90,7 @@ plt.tight_layout()
 plt.savefig("mechanical_properties.pdf", dpi=300)
 ```
 
-## Materials-Specific Libraries
+### Materials-Specific Libraries
 
 ### ASE (Atomic Simulation Environment)
 
@@ -127,7 +128,8 @@ elastic_tensor = ElasticTensor.from_stress_strain_dict(stress_strain_data)
 print(f"Bulk modulus: {elastic_tensor.k_voigt:.2f} GPa")
 ```
 
-## Machine Learning for Materials
+## Analysis and Machine Learning
+### Machine Learning for Materials
 
 ### scikit-learn — Your First ML Model
 
@@ -164,7 +166,7 @@ for i in range(min(10, len(feature_names))):
     print(f"{feature_names[indices[i]]}: {importances[indices[i]]:.4f}")
 ```
 
-## Image Analysis for Microscopy
+### Image Analysis for Microscopy
 
 Processing SEM/TEM images to quantify fiber morphology:
 
@@ -188,7 +190,8 @@ print(f"Mean fiber diameter: {df_fibers['minor_axis_length'].mean():.1f} px")
 print(f"Fiber orientation std: {np.std(df_fibers['orientation']):.2f} rad")
 ```
 
-## Putting It Together: A Research Workflow
+## Workflow and Setup
+### Putting It Together: A Research Workflow
 
 Here's how a typical multiscale project flows with Python:
 
@@ -199,7 +202,7 @@ Here's how a typical multiscale project flows with Python:
 5. **Visualize &amp; export** (Matplotlib for figures, pandas to_csv for tables)
 6. **Version control everything** (Git + DVC for data)
 
-## Quick Setup
+### Quick Setup
 
 ```bash
 # Create a conda environment with everything you need

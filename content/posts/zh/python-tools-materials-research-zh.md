@@ -28,7 +28,8 @@ import matplotlib.pyplot as plt
 | 机器学习 | scikit-learn | 回归、分类、特征重要性 |
 | 图像分析 | scikit-image | 显微图像分割与测量 |
 
-## 一、NumPy：科学计算的基石
+## 核心科学计算栈
+### 一、NumPy：科学计算的基石
 
 NumPy的核心是多维数组对象ndarray。与Python原生的列表相比，NumPy数组存储连续、运算向量化，处理十万级数据点时快几十倍。
 
@@ -95,7 +96,7 @@ intercept = coeffs[1]       # 截距，理想情况下应接近0
 print(f"杨氏模量: {Youngs_modulus:.1f} MPa")
 ```
 
-## 二、SciPy：高级科学计算
+### 二、SciPy：高级科学计算
 
 SciPy建立在NumPy之上，提供了优化、插值、信号处理、统计等高级功能。对于材料研究，最常用的是曲线拟合和信号处理。
 
@@ -134,7 +135,7 @@ if len(peaks) > 0:
     print(f"粘附力: {adhesion_force:.2f} nN, 位置: {adhesion_position:.1f} nm")
 ```
 
-## 三、Pandas：实验数据管理
+### 三、Pandas：实验数据管理
 
 当你有多组实验条件、多个重复样本时，Pandas的DataFrame让你的数据管理变得井井有条：
 
@@ -160,7 +161,7 @@ summary = df.groupby("treatment").agg({
 print(summary)
 ```
 
-## 四、Matplotlib：发表级科研绘图
+### 四、Matplotlib：发表级科研绘图
 
 一张好的图抵得上千言万语。Matplotlib让你完全控制每一个细节：
 
@@ -191,7 +192,8 @@ plt.tight_layout()
 plt.savefig("figure1.pdf", dpi=300, bbox_inches="tight")
 ```
 
-## 五、ASE和pymatgen：原子尺度模拟
+## 材料学扩展工具
+### 五、ASE和pymatgen：原子尺度模拟
 
 当你的研究涉及分子动力学或第一性原理计算时，这两个库不可或缺：
 
@@ -205,7 +207,7 @@ supercell = atoms * (2, 2, 3)
 supercell.write("supercell.pdb")
 ```
 
-## 六、scikit-image：电镜图像分析
+### 六、scikit-image：电镜图像分析
 
 处理SEM/TEM图像以量化纤维形态：
 
@@ -228,7 +230,8 @@ df_fibers = pd.DataFrame(props)
 print(f"平均纤维直径: {df_fibers['minor_axis_length'].mean():.1f} 像素")
 ```
 
-## 七、完整环境安装
+## 环境配置
+### 七、完整环境安装
 
 ```bash
 conda create -n matsci python=3.10 -y

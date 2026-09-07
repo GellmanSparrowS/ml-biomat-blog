@@ -27,7 +27,8 @@ plt.rcParams.update({
 })
 ```
 
-## 1. Multi-Panel Figure Template
+## Figure Building Blocks
+### 1. Multi-Panel Figure Template
 
 The workhorse of any paper: 2x2 subplots comparing different conditions.
 
@@ -59,7 +60,7 @@ plt.tight_layout(pad=2)
 plt.savefig("figure1.pdf", dpi=300)
 ```
 
-## 2. Color Schemes
+### 2. Color Schemes
 
 Avoid default Matplotlib colors. Use perceptually uniform or journal-specific palettes:
 
@@ -74,7 +75,7 @@ colors = ["#1b9e77", "#d95f02", "#7570b3", "#e7298a"]
 cmap = sns.color_palette("rocket_r", as_cmap=True)
 ```
 
-## 3. Heatmaps for Matrix Data
+### 3. Heatmaps for Matrix Data
 
 ```python
 fig, ax = plt.subplots(figsize=(6, 5))
@@ -87,7 +88,7 @@ ax.set_xticklabels(labels, rotation=45, ha="right")
 ax.set_yticklabels(labels)
 ```
 
-## 4. Export for Journals
+### 4. Export for Journals
 
 ```python
 # Nature/Science: 89 mm (single column) or 183 mm (double)
@@ -99,7 +100,8 @@ plt.savefig("figure.png", dpi=600)  # Raster, high-res
 plt.savefig("figure.svg")  # Fully editable in Illustrator/Inkscape
 ```
 
-## 5. Quick Reference
+## Submission and Review
+### 5. Quick Reference
 
 | Chart Type | Best For | Matplotlib Function |
 |-----------|----------|-------------------|
@@ -111,7 +113,7 @@ plt.savefig("figure.svg")  # Fully editable in Illustrator/Inkscape
 | Histogram | Distributions | `hist()` |
 | Violin plot | Distribution comparison | `violinplot()` |
 
-## 6. Tips for Reviewers
+### 6. Tips for Reviewers
 
 - **Never use red-green alone**: 8% of males are colorblind
 - **Label panels with bold letters**: A, B, C in top-left corner
@@ -133,4 +135,3 @@ When preparing figures for journal submission, consider these guidelines that re
 Color accessibility matters. Approximately 8% of males have some form of color vision deficiency. Avoid red-green combinations as the sole differentiator between data series. Instead, combine color with different line styles (solid, dashed, dotted) or marker shapes (circles, triangles, squares) as redundant cues. The ColorBrewer palettes via Seaborn provide colorblind-safe options tested for print and digital display.
 
 Figure legends should be positioned to minimize white space while avoiding data occlusion. The bbox_to_anchor parameter in Matplotlib allows precise placement outside the axes. For multi-panel figures, consider placing a single legend that applies to all panels rather than repeating legends in each subplot. This saves space and reduces visual clutter.
-

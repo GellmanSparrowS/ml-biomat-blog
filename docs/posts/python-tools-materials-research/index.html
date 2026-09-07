@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/python-tools-materials-research.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python Tools for Scientific Computing in Materials Research", "description": "A curated guide to Python libraries for materials science: from data loading with ASE/pymatgen to ML with scikit-learn, plus practical AFM/SEM data analysis scripts.", "datePublished": "2026-06-25", "dateModified": "2026-06-25", "wordCount": 848, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/python-tools-materials-research/", "image": "https://ml-biomat.com/static/images/og/python-tools-materials-research.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Python Tools for Scientific Computing in Materials Research", "item": "https://ml-biomat.com/posts/python-tools-materials-research/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python Tools for Scientific Computing in Materials Research", "description": "A curated guide to Python libraries for materials science: from data loading with ASE/pymatgen to ML with scikit-learn, plus practical AFM/SEM data analysis scripts.", "datePublished": "2026-06-25", "dateModified": "2026-06-25", "wordCount": 861, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/python-tools-materials-research/", "image": "https://ml-biomat.com/static/images/og/python-tools-materials-research.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Python Tools for Scientific Computing in Materials Research", "item": "https://ml-biomat.com/posts/python-tools-materials-research/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -51,7 +51,8 @@
 
 <p>This post covers the essential Python stack for a materials researcher, with concrete code examples you can copy into your Jupyter notebook.</p>
 
-<h2>The Core Stack</h2>
+<h2>Core Scientific Stack</h2>
+<h3>The Core Stack</h3>
 
 <table><tr><th>Category</th><th>Libraries</th><th>Typical use</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>Core scientific computing</td><td>NumPy, SciPy</td><td>array math, signal processing, curve fitting</td></tr><tr><td>Tabular data</td><td>Pandas</td><td>cleaning and grouping experimental datasets</td></tr><tr><td>Plotting</td><td>Matplotlib, Seaborn</td><td>publication figures and statistical plots</td></tr><tr><td>Atomistic simulation</td><td>ASE, pymatgen</td><td>structures, DFT/MD workflows, LAMMPS I/O</td></tr><tr><td>Machine learning</td><td>scikit-learn</td><td>regression, classification, feature importance</td></tr><tr><td>Image analysis</td><td>scikit-image</td><td>microscopy segmentation and measurement</td></tr></table>
 
@@ -119,7 +120,7 @@ plt.tight_layout()
 plt.savefig(&quot;mechanical_properties.pdf&quot;, dpi=300)
 </code></pre>
 
-<h2>Materials-Specific Libraries</h2>
+<h3>Materials-Specific Libraries</h3>
 
 <h3>ASE (Atomic Simulation Environment)</h3>
 
@@ -157,7 +158,8 @@ elastic_tensor = ElasticTensor.from_stress_strain_dict(stress_strain_data)
 print(f&quot;Bulk modulus: {elastic_tensor.k_voigt:.2f} GPa&quot;)
 </code></pre>
 
-<h2>Machine Learning for Materials</h2>
+<h2>Analysis and Machine Learning</h2>
+<h3>Machine Learning for Materials</h3>
 
 <h3>scikit-learn — Your First ML Model</h3>
 
@@ -194,7 +196,7 @@ for i in range(min(10, len(feature_names))):
     print(f&quot;{feature_names[indices[i]]}: {importances[indices[i]]:.4f}&quot;)
 </code></pre>
 
-<h2>Image Analysis for Microscopy</h2>
+<h3>Image Analysis for Microscopy</h3>
 
 <p>Processing SEM/TEM images to quantify fiber morphology:</p>
 
@@ -218,7 +220,8 @@ print(f&quot;Mean fiber diameter: {df_fibers[&#x27;minor_axis_length&#x27;].mean
 print(f&quot;Fiber orientation std: {np.std(df_fibers[&#x27;orientation&#x27;]):.2f} rad&quot;)
 </code></pre>
 
-<h2>Putting It Together: A Research Workflow</h2>
+<h2>Workflow and Setup</h2>
+<h3>Putting It Together: A Research Workflow</h3>
 
 <p>Here's how a typical multiscale project flows with Python:</p>
 
@@ -231,7 +234,7 @@ print(f&quot;Fiber orientation std: {np.std(df_fibers[&#x27;orientation&#x27;]):
 <li><strong>Version control everything</strong> (Git + DVC for data)</li>
 
 </ol>
-<h2>Quick Setup</h2>
+<h3>Quick Setup</h3>
 
 <pre><code class="language-bash">
 # Create a conda environment with everything you need
