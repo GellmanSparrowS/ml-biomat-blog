@@ -24,6 +24,8 @@ A typical AFM force curve records **cantilever deflection** (in volts or nanomet
 | Contact | Tip presses into sample | Elastic modulus (via fitting) |
 | Retract | Tip pulls away | Adhesion force, unbinding events |
 
+![Schematic AFM force-distance curve showing baseline, contact point, approach, retract, and adhesion pull-off](/static/images/posts/afm-force-curve-python/force-curve-en.webp)
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt

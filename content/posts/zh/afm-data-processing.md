@@ -22,6 +22,8 @@ description: "手把手教你用Python处理AFM力曲线数据：从基线校正
 | 接触 | 针尖压入样品 | 弹性模量 (通过拟合) |
 | 回退 | 针尖拉离样品 | 粘附力、解结合事件 |
 
+![AFM力-距离曲线示意图：显示基线、接触点、逼近、回退与粘附回拉](/static/images/posts/afm-force-curve-python/force-curve-zh.webp)
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt

@@ -29,6 +29,18 @@ Strain = (L - L0) / L0
 | Ultimate | Maximum stress capacity | Ultimate Tensile Strength (UTS) |
 | Fracture | Material breaks | Elongation at Break |
 
+![Schematic stress-strain curve showing the toe, elastic, yield, plastic/strain-hardening, ultimate tensile strength, and fracture regions](/static/images/posts/stress-strain-curves/curve-en.webp)
+
+| Material | Young's modulus (MPa) | UTS (MPa) | Elongation at break (%) |
+|---|---|---|---|
+| Mild steel | ~200,000 | ~400 | ~25 |
+| Cortical bone | ~17,000 | ~120 | ~2 |
+| Silk fibroin fiber | ~8,000 | ~500 | ~20 |
+| Tendon (collagen) | ~1,200 | ~100 | ~10 |
+| Rubber | ~1.5 | ~20 | ~500 |
+
+*Typical order-of-magnitude values; they vary with source, hydration, and strain rate.*
+
 ## Computing Mechanical Properties
 
 ```python

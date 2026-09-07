@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python实战AFM力曲线分析：从原始数据到力学性能", "description": "手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 763, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Python实战AFM力曲线分析：从原始数据到力学性能", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python实战AFM力曲线分析：从原始数据到力学性能", "description": "手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 764, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Python实战AFM力曲线分析：从原始数据到力学性能", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -54,6 +54,8 @@
 <p>一次典型的AFM力曲线记录的是<strong>微悬臂偏转</strong>随压电陶瓷移动趋近和远离样品：</p>
 
 <table><tr><th>阶段</th><th>物理含义</th><th>提取参数</th></tr><tr><td>------</td><td>---------</td><td>---------</td></tr><tr><td>逼近</td><td>针尖向样品靠近</td><td>接触点、样品刚度</td></tr><tr><td>接触</td><td>针尖压入样品</td><td>弹性模量 (通过拟合)</td></tr><tr><td>回退</td><td>针尖拉离样品</td><td>粘附力、解结合事件</td></tr></table>
+
+<img src="/static/images/posts/afm-force-curve-python/force-curve-zh.webp" alt="AFM力-距离曲线示意图：显示基线、接触点、逼近、回退与粘附回拉" loading="lazy">
 
 <pre><code class="language-python">
 import numpy as np
