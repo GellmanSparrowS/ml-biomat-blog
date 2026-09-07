@@ -339,3 +339,15 @@ h2:hover .anchor-link,h3:hover .anchor-link,h2:focus-within .anchor-link,h3:focu
 :root[data-theme="dark"] .card-lang.en,:root[data-theme="dark"] .lang-badge.en{background:#1e3a5f;color:#93c5fd}
 :root[data-theme="dark"] .card-lang.zh,:root[data-theme="dark"] .lang-badge.zh{background:#450a0a;color:#fca5a5}
 @media print{.theme-toggle,.toc,.related{display:none!important}}
+
+/* ===== Interactive tools ===== */
+.tool-page h1{font-size:1.6rem;margin-bottom:.6rem}
+.tool-intro{color:var(--c-fg-soft);margin-bottom:1.5rem}
+.tool-layout{display:grid;grid-template-columns:280px 1fr;gap:1.5rem;align-items:start}
+.tool-controls{display:flex;flex-direction:column;gap:1rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r);padding:1.25rem}
+.tool-controls label{display:flex;flex-direction:column;gap:.35rem;font-size:.85rem;color:var(--c-fg-soft)}
+.tool-controls input[type="range"]{accent-color:var(--c-primary)}
+.tool-output canvas{width:100%;height:auto;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r)}
+.tool-metrics{display:flex;gap:1.5rem;margin-top:.75rem;font-size:.9rem}
+.tool-metrics strong{color:var(--c-primary)}
+@media(max-width:720px){.tool-layout{grid-template-columns:1fr}}

@@ -246,7 +246,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{lang_label}</span>\n<h3><a href="/posts/{slug}/">{title}</a></h3>\n<div class="card-meta"><span>{date}</span><span>\u00b7</span><span>{read_min} min read</span></div>\n<p class="card-desc">{desc}</p>\n<div class="card-tags">{tags_html}</div>\n</article>'
 
@@ -506,6 +506,67 @@ def build():
 </article>"""
     privacy_full = make_head(title="Privacy Policy", desc="Privacy policy for ML-Biomat: how we handle cookies, ads, and data.", url=SITE["base_url"] + "/privacy/") + privacy_body + FOOT.format(year=datetime.now().year)
     write_file("privacy/index.html", privacy_full)
+    # Interactive tools
+    tools_body = '''<section class="tool-page">
+<h1>Interactive Stress-Strain Explorer / 应力应变交互探索器</h1>
+<p class="tool-intro">Drag the controls to see how the curve, modulus, and toughness change. 拖动参数观察曲线、模量与韧性如何变化。</p>
+<div class="tool-layout">
+  <div class="tool-controls">
+    <label>Toe extent (0-40%) <input id="p-toe" type="range" min="0" max="0.4" step="0.01" value="0.12"></label>
+    <label>Toe curvature <input id="p-xi" type="range" min="0.02" max="0.2" step="0.01" value="0.08"></label>
+    <label>Linear modulus (relative) <input id="p-k" type="range" min="0.2" max="3.0" step="0.05" value="1.0"></label>
+    <label>Failure strain (30-120%) <input id="p-fail" type="range" min="0.3" max="1.2" step="0.01" value="0.8"></label>
+  </div>
+  <div class="tool-output">
+    <canvas id="ss-canvas" width="640" height="420"></canvas>
+    <div class="tool-metrics">
+      <span>Modulus: <strong id="m-mod">1.00</strong></span>
+      <span>Toughness: <strong id="m-tough">0.00</strong></span>
+    </div>
+  </div>
+</div>
+</section>
+<script>
+(function(){
+  var cv=document.getElementById('ss-canvas'), ctx=cv.getContext('2d');
+  var ids=['p-toe','p-xi','p-k','p-fail'];
+  function val(id){return parseFloat(document.getElementById(id).value);}
+  function stress(s){var toe=val('p-toe'),xi=val('p-xi'),k=val('p-k'),fail=val('p-fail');
+    if(s<=0)return 0;
+    var toeEnd=0.2*Math.exp(toe/xi);
+    if(s<=toe){return toeEnd*(Math.exp(s/xi)-1)/(Math.exp(toe/xi)-1);}
+    var lin=toeEnd+k*(s-toe);
+    return s>fail? Math.max(0,lin-0.6*(s-fail)):lin;}
+  function draw(){
+    var W=cv.width,H=cv.height,pad=46;
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='#e2e8f0';ctx.lineWidth=1;
+    for(var i=0;i<=5;i++){var x=pad+(W-2*pad)*i/5;ctx.beginPath();ctx.moveTo(x,pad);ctx.lineTo(x,H-pad);ctx.stroke();}
+    var fail=val('p-fail');
+    var ss=[];for(var j=0;j<=400;j++){var s=fail*j/400;ss.push([s,stress(s)]);}
+    var maxS=1e-6;for(var q=0;q<ss.length;q++){if(ss[q][1]>maxS)maxS=ss[q][1];}
+    function X(s){return pad+(W-2*pad)*(s/(fail||1));}
+    function Y(y){return H-pad-(H-2*pad)*(y/(maxS*1.15));}
+    ctx.strokeStyle='#dbeafe';ctx.lineWidth=6;
+    ctx.beginPath();ctx.moveTo(X(0),Y(0));for(var q=0;q<ss.length;q++){ctx.lineTo(X(ss[q][0]),Y(ss[q][1]));}ctx.stroke();
+    ctx.strokeStyle='#2563eb';ctx.lineWidth=3;
+    ctx.beginPath();ctx.moveTo(X(0),Y(0));for(var r=0;r<ss.length;r++){ctx.lineTo(X(ss[r][0]),Y(ss[r][1]));}ctx.stroke();
+    ctx.fillStyle='#1e293b';ctx.font='12px sans-serif';
+    ctx.fillText('strain', W/2-20, H-12);
+  }
+  function metrics(){
+    var fail=val('p-fail'), n=2000, area=0, ds=fail/n, prev=0;
+    for(var i=1;i<=n;i++){var y=stress(i*ds);area+=(y+prev)/2*ds;prev=y;}
+    document.getElementById('m-mod').textContent=val('p-k').toFixed(2);
+    document.getElementById('m-tough').textContent=area.toFixed(3);
+  }
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',function(){draw();metrics();});});
+  draw();metrics();
+})();
+</script>'''
+    tools_full = make_head(title="Interactive Stress-Strain Explorer", desc="Interactive stress-strain curve explorer for biomaterials education.", url=SITE["base_url"] + "/tools/stress-strain/") + tools_body + FOOT.format(year=datetime.now().year)
+    write_file("tools/stress-strain/index.html", tools_full)
+
 
 
     # RSS
@@ -537,6 +598,7 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/en/</loc><priority>0.9</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/zh/</loc><priority>0.9</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/fibernet/</loc><priority>0.7</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/tools/stress-strain/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/about/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/categories/</loc><priority>0.7</priority></url>',
