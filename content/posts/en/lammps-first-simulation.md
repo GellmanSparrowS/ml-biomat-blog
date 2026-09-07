@@ -17,7 +17,8 @@ For biomaterials research, MD answers questions like:
 - How do water molecules interact with silk fibroin surfaces?
 - What happens to a protein under tensile load?
 
-## Installing LAMMPS
+## Getting Started
+### Installing LAMMPS
 
 LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) from Sandia National Labs is the most widely used open-source MD code.
 
@@ -43,7 +44,7 @@ Verify installation:
 lmp_serial -h
 ```
 
-## Anatomy of a LAMMPS Input Script
+### Anatomy of a LAMMPS Input Script
 
 A LAMMPS input file has four essential sections:
 
@@ -71,7 +72,7 @@ dump            traj all custom 100 dump.lammpstrj id type x y z
 run             10000
 ```
 
-## Your First Simulation: Water Box
+### Your First Simulation: Water Box
 
 Let's simulate 500 water molecules at room temperature using the TIP3P model:
 
@@ -105,7 +106,7 @@ fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
 run             100000
 ```
 
-## Key Parameters Explained
+### Key Parameters Explained
 
 | Parameter | Meaning | Typical Value |
 |-----------|---------|---------------|
@@ -115,7 +116,8 @@ run             100000
 | NVT | Constant particle number, volume, temperature | Equilibration |
 | NPT | Constant particle number, pressure, temperature | Production |
 
-## Common Force Fields
+## Force Fields and Analysis
+### Common Force Fields
 
 | Force Field | Best For | Reference |
 |------------|---------|-----------|
@@ -125,7 +127,7 @@ run             100000
 | ReaxFF | Reactive systems, bond breaking | van Duin et al. (2001) |
 | Martini | Coarse-grained biomolecular | Marrink et al. (2007) |
 
-## Trajectory Analysis with Python
+### Trajectory Analysis with Python
 
 After the simulation finishes, analyze the trajectory:
 
@@ -150,7 +152,7 @@ rdf_oo = rdf.InterRDF(oxygen, oxygen, nbins=200, range=(0, 10.0))
 rdf_oo.run()
 ```
 
-## Troubleshooting
+### Troubleshooting
 
 | Problem | Solution |
 |---------|----------|

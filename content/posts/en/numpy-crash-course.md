@@ -16,7 +16,8 @@ If you process experimental data, NumPy is non-negotiable. It turns raw `.txt` f
 import numpy as np
 ```
 
-## 1. The NumPy Array: Your Data Container
+## Core Array Operations
+### 1. The NumPy Array: Your Data Container
 
 A NumPy array is a grid of numbers — like a column in Excel, but faster and more powerful:
 
@@ -42,7 +43,7 @@ print(arr.dtype)    # int64 — data type
 print(arr.size)     # 6 — total elements
 ```
 
-## 2. Loading Experimental Data
+### 2. Loading Experimental Data
 
 Most lab instruments export tabular data. NumPy handles all common formats:
 
@@ -67,7 +68,7 @@ time, force, displacement = data[:, 0], data[:, 1], data[:, 2]
 data_with_nans = np.genfromtxt("messy_data.csv", delimiter=",", skip_header=1, filling_values=0)
 ```
 
-## 3. Element-Wise Operations (No Loops)
+### 3. Element-Wise Operations (No Loops)
 
 NumPy's real power: operations apply to every element simultaneously. No `for` loops needed:
 
@@ -92,7 +93,7 @@ deflection_nm = deflection * sensitivity
 force = k * deflection_nm * 1e-9 * 1e9     # Convert to nN
 ```
 
-## 4. Statistics and Aggregation
+### 4. Statistics and Aggregation
 
 ```python
 # Basic statistics
@@ -114,7 +115,8 @@ column_means = data.mean(axis=0)        # Mean of each column
 row_stds = data.std(axis=1)             # Std of each row
 ```
 
-## 5. Boolean Indexing (Filter Data)
+## Data Manipulation
+### 5. Boolean Indexing (Filter Data)
 
 This is probably the NumPy feature you will use most:
 
@@ -139,7 +141,7 @@ idx_max = np.argmax(stresses)           # Index of maximum
 idx_where = np.where(stresses > 30)[0]  # Indices where condition is True
 ```
 
-## 6. Reshaping and Combining Arrays
+### 6. Reshaping and Combining Arrays
 
 ```python
 # Reshape
@@ -158,7 +160,7 @@ centered = data - data.mean(axis=0)     # Subtract column means
 normalized = data / data.max(axis=0)    # Normalize each column
 ```
 
-## 7. Saving Results
+### 7. Saving Results
 
 ```python
 # Simple text export
@@ -174,7 +176,8 @@ archive = np.load("experiment.npz")
 print(archive["strain"])
 ```
 
-## 8. End-to-End Example: AFM Force Curve Processing
+## Putting It Together
+### 8. End-to-End Example: AFM Force Curve Processing
 
 Here is a complete pipeline from raw data to mechanical properties:
 
@@ -211,7 +214,7 @@ E, _ = np.polyfit(indentation[fit_mask], contact_force[fit_mask], 1)
 print(f"Young's modulus: {E:.1f} nN/nm (relative)")
 ```
 
-## 9. Common Pitfalls
+### 9. Common Pitfalls
 
 | Problem | Solution |
 |---------|----------|
@@ -221,7 +224,7 @@ print(f"Young's modulus: {E:.1f} nN/nm (relative)")
 | Operator `*` does element-wise | For matrix multiply, use `@` or `np.dot` |
 | NaN from division by zero | Use `np.divide(a, b, where=b!=0)` |
 
-## 10. When to Use What
+### 10. When to Use What
 
 | Task | NumPy Function |
 |------|---------------|

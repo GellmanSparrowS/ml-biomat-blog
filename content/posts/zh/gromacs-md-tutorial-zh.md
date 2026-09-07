@@ -22,7 +22,8 @@ GROMACS的核心优势：
 
 对于生物材料研究者，GROMACS可模拟丝素蛋白beta-折叠、胶原蛋白力学拉伸、纤维素溶剂效应、蛋白-配体相互作用等关键问题。
 
-## 安装与配置
+## 入门与基础流程
+### 安装与配置
 
 GROMACS支持Linux、macOS和Windows(WSL)。推荐conda安装：
 
@@ -40,7 +41,7 @@ conda install -c conda-forge -c bioconda gromacs="2024.*=*cuda*"
 
 安装完成后用`gmx --version`确认版本和GPU支持状态。
 
-## MD模拟基本流程
+### MD模拟基本流程
 
 | 步骤 | 命令 | 目的 | 耗时 |
 |------|------|------|------|
@@ -57,7 +58,7 @@ conda install -c conda-forge -c bioconda gromacs="2024.*=*cuda*"
 
 下面以PDB ID 1AKI(溶菌酶)为例逐步演示。
 
-## 实战案例：溶菌酶在水溶液中的模拟
+### 实战案例：溶菌酶在水溶液中的模拟
 
 ### 步骤1：获取结构文件
 
@@ -220,7 +221,8 @@ gmx mdrun -v -deffnm md -nb gpu
 
 `-nb gpu`将非键计算卸载到GPU，可提速5-10倍。
 
-## 轨迹分析
+## 分析与优化
+### 轨迹分析
 
 ### RMSD(均方根偏差)
 
@@ -260,7 +262,7 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_num.xvg
 gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 ```
 
-## 性能优化与多尺度衔接
+### 性能优化与多尺度衔接
 
 1. **GPU加速**：使用`-nb gpu -pme gpu`将非键和PME都卸载到GPU
 2. **周期性边界**：非球状体系用菱形十二面体(dodecahedron)比立方体节省30%水分子
@@ -316,7 +318,8 @@ plt.tight_layout(); plt.savefig('analysis_summary.png', dpi=150)
 
 这段代码可以作为每次模拟分析的关键脚本。RMSD反映蛋白质整体稳定性，Rg反映紧凑度变化，氢键数量反映二级结构保守性。三者结合可以快速评估模拟质量。
 
-## 常见问题与调试
+## 常见问题与拓展
+### 常见问题与调试
 
 ### 模拟崩溃怎么办？
 
@@ -338,7 +341,7 @@ plt.tight_layout(); plt.savefig('analysis_summary.png', dpi=150)
 - PME grid间距推荐0.12-0.16 nm，立方体盒子尺寸尽量使用2的幂次以便FFT
 - 使用`update gpu`参数让GPU负责坐标更新
 
-## GROMACS在生物材料研究中的应用前景
+### GROMACS在生物材料研究中的应用前景
 
 对于生物材料研究者，GROMACS是连接分子尺度与宏观力学性能的核心工具。典型应用场景包括：
 

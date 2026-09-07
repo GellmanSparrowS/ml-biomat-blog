@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "机器学习预测纤维材料力学性能：从数据准备到模型部署", "description": "机器学习预测纤维材料力学性能：从数据准备到模型部署。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-25", "dateModified": "2026-06-25", "wordCount": 472, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/", "image": "https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "机器学习预测纤维材料力学性能：从数据准备到模型部署", "item": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "机器学习预测纤维材料力学性能：从数据准备到模型部署", "description": "机器学习预测纤维材料力学性能：从数据准备到模型部署。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-25", "dateModified": "2026-06-25", "wordCount": 474, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/", "image": "https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "机器学习预测纤维材料力学性能：从数据准备到模型部署", "item": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -53,7 +53,8 @@
 
 <p>本文的策略是：在数据稀缺的约束下，用合理的特征工程和模型选择得到可靠的预测。</p>
 
-<h2>第一步：数据准备</h2>
+<h2>核心流程</h2>
+<h3>第一步：数据准备</h3>
 
 <h3>典型的数据长什么样</h3>
 
@@ -96,7 +97,7 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 </code></pre>
 
-<h2>第二步：特征工程</h2>
+<h3>第二步：特征工程</h3>
 
 <h3>利用领域知识构造交互特征</h3>
 
@@ -119,7 +120,7 @@ def add_domain_features(df):
 data_aug = add_domain_features(data)
 </code></pre>
 
-<h2>第三步：模型选择与评估</h2>
+<h3>第三步：模型选择与评估</h3>
 
 <p><strong>核心原则：数据少 → 选偏差高的模型，配合强正则化。</strong></p>
 
@@ -157,7 +158,7 @@ for name, model in models.items():
 
 <table><tr><th>模型</th><th>小数据优势</th><th>要注意</th></tr><tr><td>------</td><td>-----------</td><td>--------</td></tr><tr><td><strong>Random Forest</strong></td><td>对超参数不敏感，自带特征重要性</td><td>max_depth 要小</td></tr><tr><td><strong>Gradient Boosting</strong></td><td>精度高，可处理非线性</td><td>容易过拟合，lr 要低</td></tr><tr><td><strong>Gaussian Process</strong></td><td>自带不确定性估计，适合小样本</td><td>计算量 O(n³)，n>1000 慎用</td></tr></table>
 
-<h2>第四步：不确定性很重要</h2>
+<h3>第四步：不确定性很重要</h3>
 
 <p>材料科学中，只说"预测模量 2.8 GPa"不够，你需要给出置信区间：</p>
 
@@ -181,7 +182,7 @@ for i in range(len(mean_pred)):
           f&quot;(actual: {y_test[i]:.2f})&quot;)
 </code></pre>
 
-<h2>第五步：特征重要性——告诉老板为什么</h2>
+<h3>第五步：特征重要性——告诉老板为什么</h3>
 
 <p>ML 模型不仅要做预测，还要帮助理解物理机制：</p>
 

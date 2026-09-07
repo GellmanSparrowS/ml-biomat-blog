@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/gromacs-md-tutorial.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis", "description": "A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.", "datePublished": "2026-06-29", "dateModified": "2026-06-29", "wordCount": 1706, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial/", "image": "https://ml-biomat.com/static/images/og/gromacs-md-tutorial.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis", "item": "https://ml-biomat.com/posts/gromacs-md-tutorial/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis", "description": "A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.", "datePublished": "2026-06-29", "dateModified": "2026-06-29", "wordCount": 1715, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial/", "image": "https://ml-biomat.com/static/images/og/gromacs-md-tutorial.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis", "item": "https://ml-biomat.com/posts/gromacs-md-tutorial/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -61,7 +61,8 @@
 </ul>
 <p>For biomaterials researchers, GROMACS enables simulation of silk fibroin beta-sheet transitions, collagen mechanical stretching, cellulose solvent effects, and protein-ligand interactions.</p>
 
-<h2>Installation</h2>
+<h2>Setup and Core Workflow</h2>
+<h3>Installation</h3>
 
 <p>GROMACS supports Linux, macOS, and Windows (via WSL). The recommended installation uses conda:</p>
 
@@ -79,13 +80,13 @@ conda install -c conda-forge -c bioconda gromacs=&quot;2024.*=*cuda*&quot;
 
 <p>Verify your installation with <code>gmx --version</code>, which reports the version number and GPU support status.</p>
 
-<h2>MD Simulation Workflow</h2>
+<h3>MD Simulation Workflow</h3>
 
 <p>A complete MD simulation proceeds through the following stages:</p>
 
 <table><tr><th>Step</th><th>Command</th><th>Purpose</th><th>Typical Time</th></tr><tr><td>------</td><td>---------</td><td>---------</td><td>-------------</td></tr><tr><td>1. Structure</td><td>wget PDB</td><td>Acquire initial coordinates</td><td>manual</td></tr><tr><td>2. Topology</td><td>gmx pdb2gmx</td><td>Generate topology and force field</td><td>< 1 s</td></tr><tr><td>3. Box</td><td>gmx editconf</td><td>Define simulation box</td><td>< 1 s</td></tr><tr><td>4. Solvate</td><td>gmx solvate</td><td>Fill with water molecules</td><td>seconds</td></tr><tr><td>5. Ions</td><td>gmx genion</td><td>Neutralize system charge</td><td>seconds</td></tr><tr><td>6. EM</td><td>gmx grompp + mdrun</td><td>Eliminate atomic clashes</td><td>minutes</td></tr><tr><td>7. NVT</td><td>gmx grompp + mdrun</td><td>Stabilize temperature</td><td>hours</td></tr><tr><td>8. NPT</td><td>gmx grompp + mdrun</td><td>Stabilize pressure/density</td><td>hours</td></tr><tr><td>9. Production</td><td>gmx grompp + mdrun</td><td>Collect trajectory data</td><td>hours-days</td></tr><tr><td>10. Analysis</td><td>gmx rms/rmsf/...</td><td>Extract observables</td><td>minutes</td></tr></table>
 
-<h2>Worked Example: Lysozyme in Water</h2>
+<h3>Worked Example: Lysozyme in Water</h3>
 
 <h3>Step 1: Acquire the Structure</h3>
 
@@ -248,7 +249,8 @@ gmx mdrun -v -deffnm md -nb gpu
 
 <p>The <code>-nb gpu</code> flag offloads non-bonded calculations to the GPU, delivering 5-10x speedup on modern hardware.</p>
 
-<h2>Trajectory Analysis</h2>
+<h2>Analysis and Optimization</h2>
+<h3>Trajectory Analysis</h3>
 
 <h3>RMSD</h3>
 
@@ -324,7 +326,7 @@ plt.tight_layout()
 plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 </code></pre>
 
-<h2>Performance Optimization</h2>
+<h3>Performance Optimization</h3>
 
 <ol>
 <li><strong>GPU acceleration</strong>: Use <code>-nb gpu -pme gpu</code> to offload both non-bonded and PME calculations to GPU</li>
@@ -334,7 +336,7 @@ plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li><strong>PME grid spacing</strong>: Recommended 0.12-0.16 nm; box dimensions should be powers of 2 for efficient FFT</li>
 
 </ol>
-<h2>Common Issues and Troubleshooting</h2>
+<h3>Common Issues and Troubleshooting</h3>
 
 <p><strong>Simulation crashes immediately?</strong></p>
 <ol>
@@ -351,7 +353,7 @@ plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li>Consider pre-equilibrating with the Berendsen barostat before switching to Parrinello-Rahman</li>
 
 </ul>
-<h2>GROMACS in Multiscale Biomaterials Research</h2>
+<h3>GROMACS in Multiscale Biomaterials Research</h3>
 
 <p>GROMACS occupies a pivotal position in multiscale modeling:</p>
 

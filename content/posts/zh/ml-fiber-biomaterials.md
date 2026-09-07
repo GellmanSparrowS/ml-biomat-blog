@@ -16,7 +16,8 @@ description: "机器学习预测纤维材料力学性能：从数据准备到模
 
 本文的策略是：在数据稀缺的约束下，用合理的特征工程和模型选择得到可靠的预测。
 
-## 第一步：数据准备
+## 核心流程
+### 第一步：数据准备
 
 ### 典型的数据长什么样
 
@@ -59,7 +60,7 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 ```
 
-## 第二步：特征工程
+### 第二步：特征工程
 
 ### 利用领域知识构造交互特征
 
@@ -82,7 +83,7 @@ def add_domain_features(df):
 data_aug = add_domain_features(data)
 ```
 
-## 第三步：模型选择与评估
+### 第三步：模型选择与评估
 
 **核心原则：数据少 → 选偏差高的模型，配合强正则化。**
 
@@ -124,7 +125,7 @@ for name, model in models.items():
 | **Gradient Boosting** | 精度高，可处理非线性 | 容易过拟合，lr 要低 |
 | **Gaussian Process** | 自带不确定性估计，适合小样本 | 计算量 O(n³)，n>1000 慎用 |
 
-## 第四步：不确定性很重要
+### 第四步：不确定性很重要
 
 材料科学中，只说"预测模量 2.8 GPa"不够，你需要给出置信区间：
 
@@ -148,7 +149,7 @@ for i in range(len(mean_pred)):
           f"(actual: {y_test[i]:.2f})")
 ```
 
-## 第五步：特征重要性——告诉老板为什么
+### 第五步：特征重要性——告诉老板为什么
 
 ML 模型不仅要做预测，还要帮助理解物理机制：
 

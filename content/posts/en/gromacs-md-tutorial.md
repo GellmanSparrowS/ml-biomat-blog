@@ -22,7 +22,8 @@ GROMACS offers several key advantages over other MD engines:
 
 For biomaterials researchers, GROMACS enables simulation of silk fibroin beta-sheet transitions, collagen mechanical stretching, cellulose solvent effects, and protein-ligand interactions.
 
-## Installation
+## Setup and Core Workflow
+### Installation
 
 GROMACS supports Linux, macOS, and Windows (via WSL). The recommended installation uses conda:
 
@@ -40,7 +41,7 @@ conda install -c conda-forge -c bioconda gromacs="2024.*=*cuda*"
 
 Verify your installation with `gmx --version`, which reports the version number and GPU support status.
 
-## MD Simulation Workflow
+### MD Simulation Workflow
 
 A complete MD simulation proceeds through the following stages:
 
@@ -57,7 +58,7 @@ A complete MD simulation proceeds through the following stages:
 | 9. Production | gmx grompp + mdrun | Collect trajectory data | hours-days |
 | 10. Analysis | gmx rms/rmsf/... | Extract observables | minutes |
 
-## Worked Example: Lysozyme in Water
+### Worked Example: Lysozyme in Water
 
 ### Step 1: Acquire the Structure
 
@@ -220,7 +221,8 @@ gmx mdrun -v -deffnm md -nb gpu
 
 The `-nb gpu` flag offloads non-bonded calculations to the GPU, delivering 5-10x speedup on modern hardware.
 
-## Trajectory Analysis
+## Analysis and Optimization
+### Trajectory Analysis
 
 ### RMSD
 
@@ -296,7 +298,7 @@ plt.tight_layout()
 plt.savefig('analysis_summary.png', dpi=150)
 ```
 
-## Performance Optimization
+### Performance Optimization
 
 1. **GPU acceleration**: Use `-nb gpu -pme gpu` to offload both non-bonded and PME calculations to GPU
 2. **Periodic boundary conditions**: For non-globular systems (fibers, membranes), use a rhombic dodecahedron box (`-bt dodecahedron`) which saves ~30% of water molecules compared to cubic
@@ -304,7 +306,7 @@ plt.savefig('analysis_summary.png', dpi=150)
 4. **Force field selection**: AMBER99SB-ILDN or CHARMM36m for proteins, OL15 for nucleic acids
 5. **PME grid spacing**: Recommended 0.12-0.16 nm; box dimensions should be powers of 2 for efficient FFT
 
-## Common Issues and Troubleshooting
+### Common Issues and Troubleshooting
 
 **Simulation crashes immediately?**
 1. Verify EM convergence: Fmax should be below 1000 kJ/(mol*nm)
@@ -317,7 +319,7 @@ plt.savefig('analysis_summary.png', dpi=150)
 - Verify `compressibility` matches your solvent (water: 4.5e-5 bar^-1)
 - Consider pre-equilibrating with the Berendsen barostat before switching to Parrinello-Rahman
 
-## GROMACS in Multiscale Biomaterials Research
+### GROMACS in Multiscale Biomaterials Research
 
 GROMACS occupies a pivotal position in multiscale modeling:
 

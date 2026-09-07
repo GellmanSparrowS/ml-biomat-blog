@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ML for Fiber Mechanics: Data Prep to Model Deployment", "description": "Step-by-step guide to predicting fiber biomaterial mechanical properties with ML: data cleaning, feature engineering, model selection, and uncertainty quantification.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 524, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/", "image": "https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "ML for Fiber Mechanics: Data Prep to Model Deployment", "item": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ML for Fiber Mechanics: Data Prep to Model Deployment", "description": "Step-by-step guide to predicting fiber biomaterial mechanical properties with ML: data cleaning, feature engineering, model selection, and uncertainty quantification.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 529, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/", "image": "https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "ML for Fiber Mechanics: Data Prep to Model Deployment", "item": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -59,7 +59,8 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.model_selection import cross_val_score
 </code></pre>
 
-<h2>Data Preparation</h2>
+<h2>From Data to Model</h2>
+<h3>Data Preparation</h3>
 
 <pre><code class="language-python">
 data = pd.DataFrame({
@@ -70,7 +71,7 @@ data = pd.DataFrame({
 })
 </code></pre>
 
-<h2>Model Selection for Small Data</h2>
+<h3>Model Selection for Small Data</h3>
 
 <table><tr><th>Model</th><th>Small-data advantage</th><th>Watch out for</th></tr><tr><td>------</td><td>---------------------</td><td>--------------</td></tr><tr><td>Random Forest</td><td>Insensitive to hyperparams, feature importance</td><td>Keep max_depth small</td></tr><tr><td>Gradient Boosting</td><td>High accuracy, handles nonlinearity</td><td>Easy to overfit, low lr needed</td></tr><tr><td>Gaussian Process</td><td>Built-in uncertainty, perfect for n<100</td><td>O(n^3), avoid n>1000</td></tr></table>
 
@@ -84,7 +85,7 @@ for name, model in models.items():
     print(f&quot;{name}: MAE = {-scores.mean():.3f} +/- {scores.std():.3f}&quot;)
 </code></pre>
 
-<h2>Uncertainty Quantification</h2>
+<h3>Uncertainty Quantification</h3>
 
 <pre><code class="language-python">
 def predict_with_uncertainty(model, X, n_iter=100):

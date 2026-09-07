@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/lammps-first-simulation-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "分子动力学入门：你的第一个LAMMPS模拟", "description": "分子动力学入门：你的第一个LAMMPS模拟。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 409, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/lammps-first-simulation-zh/", "image": "https://ml-biomat.com/static/images/og/lammps-first-simulation-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "分子动力学入门：你的第一个LAMMPS模拟", "item": "https://ml-biomat.com/posts/lammps-first-simulation-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "分子动力学入门：你的第一个LAMMPS模拟", "description": "分子动力学入门：你的第一个LAMMPS模拟。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 413, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/lammps-first-simulation-zh/", "image": "https://ml-biomat.com/static/images/og/lammps-first-simulation-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "分子动力学入门：你的第一个LAMMPS模拟", "item": "https://ml-biomat.com/posts/lammps-first-simulation-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -56,7 +56,8 @@
 <li>蛋白质在拉伸载荷下会发生什么？</li>
 
 </ul>
-<h2>安装LAMMPS</h2>
+<h2>入门基础</h2>
+<h3>安装LAMMPS</h3>
 
 <p>LAMMPS来自Sandia国家实验室，是最广泛应用的开源MD代码。</p>
 
@@ -78,7 +79,7 @@ conda activate lammps
 lmp_serial -h
 </code></pre>
 
-<h2>LAMMPS输入脚本结构</h2>
+<h3>LAMMPS输入脚本结构</h3>
 
 <p>一个LAMMPS输入文件有四个基本部分：</p>
 
@@ -105,7 +106,7 @@ dump            traj all custom 100 dump.lammpstrj id type x y z
 run             10000
 </code></pre>
 
-<h2>第一个模拟：水盒子</h2>
+<h3>第一个模拟：水盒子</h3>
 
 <p>用TIP3P模型模拟500个水分子在室温下：</p>
 
@@ -126,15 +127,16 @@ fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
 run             100000                    # NPT生产
 </code></pre>
 
-<h2>关键参数</h2>
+<h3>关键参数</h3>
 
 <table><tr><th>参数</th><th>含义</th><th>典型值</th></tr><tr><td>------</td><td>------</td><td>--------</td></tr><tr><td>timestep</td><td>积分步长</td><td>1.0-2.0 fs</td></tr><tr><td>cutoff</td><td>非键作用截断距离</td><td>10-12 埃</td></tr><tr><td>temperature</td><td>系统温度</td><td>300 K(室温)</td></tr><tr><td>NVT</td><td>恒粒子数/体积/温度</td><td>平衡阶段</td></tr><tr><td>NPT</td><td>恒粒子数/压力/温度</td><td>生产阶段</td></tr></table>
 
-<h2>常用力场</h2>
+<h2>力场与分析</h2>
+<h3>常用力场</h3>
 
 <table><tr><th>力场</th><th>适用</th><th>参考文献</th></tr><tr><td>------</td><td>------</td><td>---------</td></tr><tr><td>OPLS-AA</td><td>蛋白质、有机分子</td><td>Jorgensen (1996)</td></tr><tr><td>CHARMM36</td><td>蛋白质、核酸</td><td>Best (2012)</td></tr><tr><td>AMBER ff19SB</td><td>蛋白质</td><td>Tian (2020)</td></tr><tr><td>ReaxFF</td><td>反应体系、断键</td><td>van Duin (2001)</td></tr><tr><td>Martini</td><td>粗粒化生物分子</td><td>Marrink (2007)</td></tr></table>
 
-<h2>轨迹分析</h2>
+<h3>轨迹分析</h3>
 
 <pre><code class="language-python">
 import MDAnalysis as mda
@@ -146,7 +148,7 @@ rdf_oo = rdf.InterRDF(oxygen, oxygen, nbins=200, range=(0, 10.0))
 rdf_oo.run()
 </code></pre>
 
-<h2>常见问题</h2>
+<h3>常见问题</h3>
 
 <table><tr><th>问题</th><th>解决</th></tr><tr><td>------</td><td>------</td></tr><tr><td>"Lost atoms"错误</td><td>减小timestep或增大neighbor list skin</td></tr><tr><td>能量不收敛</td><td>更长最小化或用更软的初始条件</td></tr><tr><td>模拟太慢</td><td>用GPU(Kokkos)或更粗的力场</td></tr></table>
 

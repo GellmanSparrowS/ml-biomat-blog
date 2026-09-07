@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/gromacs-md-tutorial-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS分子动力学模拟实战：从结构准备到轨迹分析", "description": "GROMACS分子动力学模拟完整实战教程：以溶菌酶为实例，手把手演示从结构准备、能量最小化、平衡态到生产运行的全流程，含RMSD、RMSF、Rg和氢键轨迹分析。", "datePublished": "2026-06-29", "dateModified": "2026-06-29", "wordCount": 908, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial-zh/", "image": "https://ml-biomat.com/static/images/og/gromacs-md-tutorial-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "GROMACS分子动力学模拟实战：从结构准备到轨迹分析", "item": "https://ml-biomat.com/posts/gromacs-md-tutorial-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS分子动力学模拟实战：从结构准备到轨迹分析", "description": "GROMACS分子动力学模拟完整实战教程：以溶菌酶为实例，手把手演示从结构准备、能量最小化、平衡态到生产运行的全流程，含RMSD、RMSF、Rg和氢键轨迹分析。", "datePublished": "2026-06-29", "dateModified": "2026-06-29", "wordCount": 914, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial-zh/", "image": "https://ml-biomat.com/static/images/og/gromacs-md-tutorial-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "GROMACS分子动力学模拟实战：从结构准备到轨迹分析", "item": "https://ml-biomat.com/posts/gromacs-md-tutorial-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -61,7 +61,8 @@
 </ul>
 <p>对于生物材料研究者，GROMACS可模拟丝素蛋白beta-折叠、胶原蛋白力学拉伸、纤维素溶剂效应、蛋白-配体相互作用等关键问题。</p>
 
-<h2>安装与配置</h2>
+<h2>入门与基础流程</h2>
+<h3>安装与配置</h3>
 
 <p>GROMACS支持Linux、macOS和Windows(WSL)。推荐conda安装：</p>
 
@@ -79,13 +80,13 @@ conda install -c conda-forge -c bioconda gromacs=&quot;2024.*=*cuda*&quot;
 
 <p>安装完成后用<code>gmx --version</code>确认版本和GPU支持状态。</p>
 
-<h2>MD模拟基本流程</h2>
+<h3>MD模拟基本流程</h3>
 
 <table><tr><th>步骤</th><th>命令</th><th>目的</th><th>耗时</th></tr><tr><td>------</td><td>------</td><td>------</td><td>------</td></tr><tr><td>1. 结构获取</td><td>-</td><td>PDB下载</td><td>手动</td></tr><tr><td>2. 拓扑生成</td><td>gmx pdb2gmx</td><td>生成拓扑和力场</td><td><1s</td></tr><tr><td>3. 定义盒子</td><td>gmx editconf</td><td>设定盒子大小</td><td><1s</td></tr><tr><td>4. 溶剂化</td><td>gmx solvate</td><td>填充水分子</td><td>数秒</td></tr><tr><td>5. 添加离子</td><td>gmx genion</td><td>中和电荷</td><td>数秒</td></tr><tr><td>6. 能量最小化</td><td>gmx grompp+mdrun</td><td>消除原子碰撞</td><td>数分钟</td></tr><tr><td>7. NVT平衡</td><td>gmx grompp+mdrun</td><td>稳定温度</td><td>数小时</td></tr><tr><td>8. NPT平衡</td><td>gmx grompp+mdrun</td><td>稳定压力</td><td>数小时</td></tr><tr><td>9. 生产模拟</td><td>gmx grompp+mdrun</td><td>采集轨迹</td><td>数小时-天</td></tr><tr><td>10. 轨迹分析</td><td>gmx rms/rmsf/...</td><td>提取物理量</td><td>数分钟</td></tr></table>
 
 <p>下面以PDB ID 1AKI(溶菌酶)为例逐步演示。</p>
 
-<h2>实战案例：溶菌酶在水溶液中的模拟</h2>
+<h3>实战案例：溶菌酶在水溶液中的模拟</h3>
 
 <h3>步骤1：获取结构文件</h3>
 
@@ -248,7 +249,8 @@ gmx mdrun -v -deffnm md -nb gpu
 
 <p><code>-nb gpu</code>将非键计算卸载到GPU，可提速5-10倍。</p>
 
-<h2>轨迹分析</h2>
+<h2>分析与优化</h2>
+<h3>轨迹分析</h3>
 
 <h3>RMSD(均方根偏差)</h3>
 
@@ -288,7 +290,7 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_num.xvg
 gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 </code></pre>
 
-<h2>性能优化与多尺度衔接</h2>
+<h3>性能优化与多尺度衔接</h3>
 
 <ol>
 <li><strong>GPU加速</strong>：使用<code>-nb gpu -pme gpu</code>将非键和PME都卸载到GPU</li>
@@ -348,7 +350,8 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 
 <p>这段代码可以作为每次模拟分析的关键脚本。RMSD反映蛋白质整体稳定性，Rg反映紧凑度变化，氢键数量反映二级结构保守性。三者结合可以快速评估模拟质量。</p>
 
-<h2>常见问题与调试</h2>
+<h2>常见问题与拓展</h2>
+<h3>常见问题与调试</h3>
 
 <h3>模拟崩溃怎么办？</h3>
 
@@ -376,7 +379,7 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li>使用<code>update gpu</code>参数让GPU负责坐标更新</li>
 
 </ul>
-<h2>GROMACS在生物材料研究中的应用前景</h2>
+<h3>GROMACS在生物材料研究中的应用前景</h3>
 
 <p>对于生物材料研究者，GROMACS是连接分子尺度与宏观力学性能的核心工具。典型应用场景包括：</p>
 

@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/silk-fibroin-structure-mechanics.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Silk Fibroin: From Molecular Structure to Mechanical Function", "description": "How silk fibroin's hierarchical structure—from amino acid sequence to beta-sheet crystallites—dictates its remarkable mechanical properties and guides biomaterials design.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 522, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/", "image": "https://ml-biomat.com/static/images/og/silk-fibroin-structure-mechanics.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "Silk Fibroin: From Molecular Structure to Mechanical Function", "item": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Silk Fibroin: From Molecular Structure to Mechanical Function", "description": "How silk fibroin's hierarchical structure—from amino acid sequence to beta-sheet crystallites—dictates its remarkable mechanical properties and guides biomaterials design.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 530, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/", "image": "https://ml-biomat.com/static/images/og/silk-fibroin-structure-mechanics.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "Silk Fibroin: From Molecular Structure to Mechanical Function", "item": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -49,13 +49,14 @@
 
 <p>Silk fibroin is one of nature’s most remarkable structural proteins. A single silkworm cocoon fiber combines <strong>high strength (~500 MPa)</strong>, <strong>extensibility (~20% strain)</strong>, and <strong>toughness exceeding Kevlar</strong>. Understanding how this performance emerges from molecular architecture is central to designing better protein-based materials.</p>
 
-<h2>Hierarchical Structure</h2>
+<h2>Structure and Composition</h2>
+<h3>Hierarchical Structure</h3>
 
 <p>Silk fibroin’s structure spans six orders of magnitude:</p>
 
 <table><tr><th>Scale</th><th>Feature</th><th>Mechanical Role</th></tr><tr><td>-------</td><td>---------</td><td>----------------</td></tr><tr><td>1-10 nm</td><td>Beta-sheet crystallites</td><td>Stiffness, crosslinking nodes</td></tr><tr><td>10-100 nm</td><td>Crystalline/amorphous domains</td><td>Toughness via sacrificial bonds</td></tr><tr><td>100 nm - 1 um</td><td>Nanofibrils</td><td>Load distribution</td></tr><tr><td>1-10 um</td><td>Microfibrils</td><td>Fiber unit</td></tr><tr><td>10-100 um</td><td>Single fiber</td><td>Bulk mechanical response</td></tr></table>
 
-<h2>Molecular Composition</h2>
+<h3>Molecular Composition</h3>
 
 <p>Bombyx mori silk fibroin consists of three chains:</p>
 <ul>
@@ -77,7 +78,7 @@ print(f&quot;Beta-sheet content: {beta_sheet_content(bmori_hchain):.1%}&quot;)
 </code></pre>
 
 </ul>
-<h2>Beta-Sheet Crystallites</h2>
+<h3>Beta-Sheet Crystallites</h3>
 
 <p>The (Gly-Ala-Gly-Ala-Gly-Ser)n repeats assemble into antiparallel beta-sheets. These crystallites act as <strong>physical crosslinks</strong> in an otherwise amorphous protein matrix. Key parameters:</p>
 
@@ -88,7 +89,8 @@ print(f&quot;Beta-sheet content: {beta_sheet_content(bmori_hchain):.1%}&quot;)
 <li>Inter-strand distance: 0.95 nm (van der Waals)</li>
 
 </ul>
-<h2>Mechanical Model: Two-Phase Composite</h2>
+<h2>Mechanics and Processing</h2>
+<h3>Mechanical Model: Two-Phase Composite</h3>
 
 <p>A simplified model treats silk as a composite of stiff crystallites in a soft matrix:</p>
 
@@ -105,11 +107,11 @@ for Vc in [0.1, 0.2, 0.3, 0.4, 0.5]:
     print(f&quot;Vc={Vc:.1f}: E={silk_modulus(Vc):.1f} GPa&quot;)
 </code></pre>
 
-<h2>Processing-Structure-Property Relationships</h2>
+<h3>Processing-Structure-Property Relationships</h3>
 
 <table><tr><th>Processing Step</th><th>Structural Change</th><th>Property Change</th></tr><tr><td>----------------</td><td>-------------------</td><td>----------------</td></tr><tr><td>Degumming (boiling)</td><td>Removes sericin coating</td><td>Fibers separate, slight stiffness loss</td></tr><tr><td>Dissolution (LiBr)</td><td>Denatures protein, breaks H-bonds</td><td>Loss of crystallinity</td></tr><tr><td>Methanol/ethanol treatment</td><td>Induces beta-sheet formation</td><td>Increases stiffness, reduces solubility</td></tr><tr><td>Water annealing</td><td>Slow beta-sheet growth</td><td>Controlled crystallinity</td></tr><tr><td>Drawing/stretching</td><td>Aligns molecular chains</td><td>Increases strength and anisotropy</td></tr></table>
 
-<h2>Practical Tips for Experimentalists</h2>
+<h3>Practical Tips for Experimentalists</h3>
 
 <ol>
 <li><strong>Degumming time matters</strong>: Over-boiling degrades the H-chain, reducing mechanical properties</li>

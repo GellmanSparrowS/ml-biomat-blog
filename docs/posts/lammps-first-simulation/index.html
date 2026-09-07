@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/lammps-first-simulation.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Molecular Dynamics Basics: Your First LAMMPS Simulation", "description": "A hands-on guide to running your first molecular dynamics simulation with LAMMPS: installation, input script structure, force fields, water box simulation, and trajectory analysis.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 677, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/lammps-first-simulation/", "image": "https://ml-biomat.com/static/images/og/lammps-first-simulation.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "Molecular Dynamics Basics: Your First LAMMPS Simulation", "item": "https://ml-biomat.com/posts/lammps-first-simulation/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Molecular Dynamics Basics: Your First LAMMPS Simulation", "description": "A hands-on guide to running your first molecular dynamics simulation with LAMMPS: installation, input script structure, force fields, water box simulation, and trajectory analysis.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 685, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/lammps-first-simulation/", "image": "https://ml-biomat.com/static/images/og/lammps-first-simulation.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "Molecular Dynamics Basics: Your First LAMMPS Simulation", "item": "https://ml-biomat.com/posts/lammps-first-simulation/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -56,7 +56,8 @@
 <li>What happens to a protein under tensile load?</li>
 
 </ul>
-<h2>Installing LAMMPS</h2>
+<h2>Getting Started</h2>
+<h3>Installing LAMMPS</h3>
 
 <p>LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) from Sandia National Labs is the most widely used open-source MD code.</p>
 
@@ -82,7 +83,7 @@ conda activate lammps
 lmp_serial -h
 </code></pre>
 
-<h2>Anatomy of a LAMMPS Input Script</h2>
+<h3>Anatomy of a LAMMPS Input Script</h3>
 
 <p>A LAMMPS input file has four essential sections:</p>
 
@@ -110,7 +111,7 @@ dump            traj all custom 100 dump.lammpstrj id type x y z
 run             10000
 </code></pre>
 
-<h2>Your First Simulation: Water Box</h2>
+<h3>Your First Simulation: Water Box</h3>
 
 <p>Let's simulate 500 water molecules at room temperature using the TIP3P model:</p>
 
@@ -144,15 +145,16 @@ fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
 run             100000
 </code></pre>
 
-<h2>Key Parameters Explained</h2>
+<h3>Key Parameters Explained</h3>
 
 <table><tr><th>Parameter</th><th>Meaning</th><th>Typical Value</th></tr><tr><td>-----------</td><td>---------</td><td>---------------</td></tr><tr><td>timestep</td><td>Integration step size</td><td>1.0-2.0 fs</td></tr><tr><td>cutoff</td><td>Non-bonded interaction cutoff</td><td>10-12 Angstrom</td></tr><tr><td>temperature</td><td>System temperature</td><td>300 K (room temp)</td></tr><tr><td>NVT</td><td>Constant particle number, volume, temperature</td><td>Equilibration</td></tr><tr><td>NPT</td><td>Constant particle number, pressure, temperature</td><td>Production</td></tr></table>
 
-<h2>Common Force Fields</h2>
+<h2>Force Fields and Analysis</h2>
+<h3>Common Force Fields</h3>
 
 <table><tr><th>Force Field</th><th>Best For</th><th>Reference</th></tr><tr><td>------------</td><td>---------</td><td>-----------</td></tr><tr><td>OPLS-AA</td><td>Proteins, organic molecules</td><td>Jorgensen et al. (1996)</td></tr><tr><td>CHARMM36</td><td>Proteins, nucleic acids</td><td>Best et al. (2012)</td></tr><tr><td>AMBER ff19SB</td><td>Proteins</td><td>Tian et al. (2020)</td></tr><tr><td>ReaxFF</td><td>Reactive systems, bond breaking</td><td>van Duin et al. (2001)</td></tr><tr><td>Martini</td><td>Coarse-grained biomolecular</td><td>Marrink et al. (2007)</td></tr></table>
 
-<h2>Trajectory Analysis with Python</h2>
+<h3>Trajectory Analysis with Python</h3>
 
 <p>After the simulation finishes, analyze the trajectory:</p>
 
@@ -177,7 +179,7 @@ rdf_oo = rdf.InterRDF(oxygen, oxygen, nbins=200, range=(0, 10.0))
 rdf_oo.run()
 </code></pre>
 
-<h2>Troubleshooting</h2>
+<h3>Troubleshooting</h3>
 
 <table><tr><th>Problem</th><th>Solution</th></tr><tr><td>---------</td><td>----------</td></tr><tr><td>"Lost atoms" error</td><td>Decrease timestep or increase neighbor list skin</td></tr><tr><td>Energy not converging</td><td>Run longer minimization or use softer initial conditions</td></tr><tr><td>Simulation too slow</td><td>Use GPU (Kokkos package) or coarser force field</td></tr><tr><td>Segfault</td><td>Check atom type consistency in input script</td></tr></table>
 

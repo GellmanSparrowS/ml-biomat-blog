@@ -22,7 +22,8 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.model_selection import cross_val_score
 ```
 
-## Data Preparation
+## From Data to Model
+### Data Preparation
 
 ```python
 data = pd.DataFrame({
@@ -33,7 +34,7 @@ data = pd.DataFrame({
 })
 ```
 
-## Model Selection for Small Data
+### Model Selection for Small Data
 
 | Model | Small-data advantage | Watch out for |
 |------|---------------------|--------------|
@@ -51,7 +52,7 @@ for name, model in models.items():
     print(f"{name}: MAE = {-scores.mean():.3f} +/- {scores.std():.3f}")
 ```
 
-## Uncertainty Quantification
+### Uncertainty Quantification
 
 ```python
 def predict_with_uncertainty(model, X, n_iter=100):
@@ -91,4 +92,3 @@ The curse of dimensionality hits materials ML particularly hard. Each experiment
 Uncertainty quantification distinguishes good ML practice from wishful thinking. Bootstrapping provides a simple, non-parametric way to estimate prediction intervals. Train 100 models on bootstrapped samples of your data, and the distribution of predictions at each point gives a confidence interval. This approach requires no distributional assumptions and works with any model type.
 
 Domain adaptation addresses the simulation-to-experiment gap. Models trained on abundant simulation data often fail on experimental measurements due to systematic differences. Domain adaptation techniques from transfer learning can align the feature distributions, allowing models trained on simulations to generalize to experimental data with minimal fine-tuning.
-

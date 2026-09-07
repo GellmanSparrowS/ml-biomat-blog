@@ -45,7 +45,8 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 
 A fiber network needs a minimum density to transmit load — the **percolation threshold**. Below this density, the network is a disconnected "soup" of fibers. Above it, a continuous load-bearing path forms.
 
-## Experimental Characterization
+## Methods and Materials
+### Experimental Characterization
 
 Common techniques to probe fiber network mechanics:
 
@@ -55,7 +56,7 @@ Common techniques to probe fiber network mechanics:
 - **SEM/TEM imaging**: network architecture visualization
 - **SAXS/WAXS**: molecular-level structural changes during deformation
 
-## Computational Modeling
+### Computational Modeling
 
 Three main approaches:
 
@@ -65,7 +66,7 @@ Three main approaches:
 
 Multiscale approaches combine these to predict macroscale properties from molecular parameters.
 
-## Common Biomaterial Fiber Systems
+### Common Biomaterial Fiber Systems
 
 - **Silk fibroin**: exceptional toughness, programmable degradation
 - **Collagen**: hierarchical structure, cell-instructive
