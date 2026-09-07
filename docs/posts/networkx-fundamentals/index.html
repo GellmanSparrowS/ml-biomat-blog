@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/networkx-fundamentals.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX Fundamentals with Python", "description": "A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research.", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 3827, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals/", "image": "https://ml-biomat.com/static/images/og/networkx-fundamentals.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NetworkX Fundamentals with Python", "item": "https://ml-biomat.com/posts/networkx-fundamentals/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX Fundamentals with Python", "description": "A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research.", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 3836, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals/", "image": "https://ml-biomat.com/static/images/og/networkx-fundamentals.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NetworkX Fundamentals with Python", "item": "https://ml-biomat.com/posts/networkx-fundamentals/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
@@ -45,7 +45,8 @@
 </div>
 </header>
 <div class="content">
-<h2>1. Why NetworkX — From Intuition to Tool</h2>
+<h2>Graph Fundamentals</h2>
+<h3>1. Why NetworkX — From Intuition to Tool</h3>
 
 <p>Before understanding NetworkX, take a step back and consider "relationships" themselves. In your proteome, one protein activates another; a bone trabecula transmits stress to another through a contact point; a neuron fires downstream; a city's roads connect it to neighboring cities. All of these phenomena share the same formal structure: a set of <strong>entities</strong> and <strong>connections</strong> between them. Mathematics abstracts this as a graph, \(G = (V, E)\), consisting of a vertex set \(V\) and an edge set \(E\).</p>
 
@@ -71,7 +72,7 @@ import matplotlib.pyplot as plt
 
 <hr>
 
-<h2>2. Four Graph Types — Which Structure Fits Your Problem?</h2>
+<h3>2. Four Graph Types — Which Structure Fits Your Problem?</h3>
 
 <p>The first step when facing a real problem is deciding which type of graph best models it. NetworkX provides four core classes, and the choice directly affects the behavior of every subsequent algorithm.</p>
 
@@ -83,7 +84,7 @@ import matplotlib.pyplot as plt
 
 <hr>
 
-<h2>3. Building Graphs — Nodes, Edges, and Attributes</h2>
+<h3>3. Building Graphs — Nodes, Edges, and Attributes</h3>
 
 <p>Once you have chosen a graph type, the next step is loading data into the graph object. NetworkX's add/remove API is highly Pythonic, allowing you to build graphs from many sources: one-by-one additions, batch imports, or conversion from dictionaries and matrices.</p>
 
@@ -148,7 +149,8 @@ K = nx.from_dict_of_lists(adj_dict)
 
 <hr>
 
-<h2>4. Degree, Path Length, and Clustering — Three Keys to Reading a Network</h2>
+<h2>Network Metrics</h2>
+<h3>4. Degree, Path Length, and Clustering — Three Keys to Reading a Network</h3>
 
 <p>Once a graph is built, the first questions researchers typically ask are: which nodes are "important"? How far does information need to travel from A to B? Does this system tend to form tight cliques or remain open? These three questions correspond to three foundational network metrics: <strong>degree</strong>, <strong>shortest path</strong>, and <strong>clustering coefficient</strong>. Mastering these three is equivalent to learning the basic grammar for reading any network.</p>
 
@@ -195,7 +197,7 @@ print(f&quot;Transitivity (global clustering): {trans:.4f}&quot;)
 
 <hr>
 
-<h2>5. Centrality — Who Matters Most in a Network?</h2>
+<h3>5. Centrality — Who Matters Most in a Network?</h3>
 
 <p>Centrality is the richest—and most easily misused—family of concepts in network analysis. The central question is: what does "important" mean? Different answers give rise to different metrics, each capturing a distinct facet of importance. Researchers must choose based on domain knowledge rather than defaulting to node degree.</p>
 
@@ -236,7 +238,7 @@ print(&quot;Top by Eigenvector: &quot;, top_node(eigenvector))
 
 <hr>
 
-<h2>6. Shortest-Path Algorithms — From Dijkstra to Floyd</h2>
+<h3>6. Shortest-Path Algorithms — From Dijkstra to Floyd</h3>
 
 <p>Shortest-path computation is one of the most deeply studied problems in graph theory and one of the most frequently needed operations in practice. NetworkX includes several algorithms; understanding their applicability conditions is essential for choosing the right one.</p>
 
@@ -275,7 +277,8 @@ else:
 
 <hr>
 
-<h2>7. Classic Network Models — Random, Small-World, and Scale-Free</h2>
+<h2>Advanced Topics</h2>
+<h3>7. Classic Network Models — Random, Small-World, and Scale-Free</h3>
 
 <p>Understanding real networks requires a reference baseline: what does "random" look like, and what deviations from it are meaningful? NetworkX provides built-in generators for three theoretically fundamental models.</p>
 
@@ -310,7 +313,7 @@ print(f&quot;BA avg clustering: {nx.average_clustering(G_ba):.4f}&quot;)
 
 <hr>
 
-<h2>8. Visualization — Making Graphs Speak</h2>
+<h3>8. Visualization — Making Graphs Speak</h3>
 
 <p>NetworkX is not a professional visualization tool, but its Matplotlib interface is sufficient for rapid exploration. For publication-quality figures, dedicated software such as Gephi, Cytoscape (biological networks), or Graphviz is recommended. For research presentations and draft figures, NetworkX + Matplotlib does the job.</p>
 
@@ -352,7 +355,7 @@ plt.show()
 
 <hr>
 
-<h2>9. Community Detection and Graph Generators — Advanced Tools</h2>
+<h3>9. Community Detection and Graph Generators — Advanced Tools</h3>
 
 <p>When a network grows too large to comprehend visually, <strong>community detection</strong> becomes the primary tool for revealing structure. A community is a set of nodes with dense internal connections and sparse external ones—analogous to protein complexes (functional modules), crystal grains in materials (clusters of aligned atoms), or interest groups in social networks.</p>
 
@@ -397,7 +400,7 @@ G_star     = nx.star_graph(10)                 # Hub-and-spoke
 
 <hr>
 
-<h2>10. Performance Considerations and Further Resources</h2>
+<h3>10. Performance Considerations and Further Resources</h3>
 
 <p>NetworkX prioritizes flexibility and readability over raw speed. Its pure-Python dict-of-dicts architecture is a bottleneck for graphs exceeding one million nodes or requiring real-time computation. Common alternatives include <strong>igraph</strong> (C core, Python interface, significantly faster for most metrics), <strong>graph-tool</strong> (C++/OpenMP, for very large graphs), and <strong>cuGraph</strong> (NVIDIA RAPIDS, GPU-accelerated, for billion-scale graphs). A 2025 benchmarking study published in <em>Social Network Analysis and Mining</em> confirmed that igraph and graph-tool outperform NetworkX substantially on computationally intensive tasks such as community detection and betweenness centrality, though NetworkX's seamless integration with NumPy, SciPy, and Pandas remains its core competitive advantage for research workflows.</p>
 

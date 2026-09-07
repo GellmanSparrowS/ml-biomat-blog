@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python实战AFM力曲线分析：从原始数据到力学性能", "description": "手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 744, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Python实战AFM力曲线分析：从原始数据到力学性能", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python实战AFM力曲线分析：从原始数据到力学性能", "description": "手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 748, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Python实战AFM力曲线分析：从原始数据到力学性能", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -49,7 +49,8 @@
 
 <p>做AFM力谱实验的朋友都知道：仪器导出一堆txt文件，在商业软件里手动处理几个小时。这个教程给你<strong>一套完整的Python流程</strong>，从读数据到出杨氏模量，不依赖任何商业软件。只用numpy、scipy、matplotlib。</p>
 
-<h2>1. AFM力曲线数据结构</h2>
+<h2>核心分析流程</h2>
+<h3>1. AFM力曲线数据结构</h3>
 
 <p>一次典型的AFM力曲线记录的是<strong>微悬臂偏转</strong>随压电陶瓷移动趋近和远离样品：</p>
 
@@ -63,7 +64,7 @@ import matplotlib.pyplot as plt
 from scipy import signal, optimize
 </code></pre>
 
-<h2>2. 加载典型数据</h2>
+<h3>2. 加载典型数据</h3>
 
 <p>绝大多数AFM仪器导出的是表格数据，常见格式：</p>
 
@@ -84,7 +85,7 @@ z_piezo, deflection = load_afm_curve(&quot;force_curve_001.txt&quot;, skip_rows=
 </code></pre>
 
 </ul>
-<h3>处理Bruker头部</h3>
+<h4>处理Bruker头部</h4>
 
 <p>Bruker NanoScope文件头部长度不固定，下面是自动检测的鲁棒方法：</p>
 
@@ -101,7 +102,7 @@ def load_bruker_curve(filepath):
     return data[:, 0], data[:, 1]
 </code></pre>
 
-<h2>3. 偏转-力转换</h2>
+<h3>3. 偏转-力转换</h3>
 
 <p>微悬臂偏转（单位：伏特）需转换为力（单位：纳牛）：</p>
 
@@ -121,7 +122,7 @@ sensitivity = 45.0  # nm/V，偏转灵敏度
 force = deflection_to_force(deflection, k, sensitivity)
 </code></pre>
 
-<h2>4. 基线校正</h2>
+<h3>4. 基线校正</h3>
 
 <p>非接触区的力曲线应该是平坦的（零力），但实际中存在热漂移和激光干涉造成的微小斜率：</p>
 
@@ -136,7 +137,7 @@ def baseline_correct(z_piezo, force, contact_idx):
     return force - baseline
 </code></pre>
 
-<h2>5. 接触点检测</h2>
+<h3>5. 接触点检测</h3>
 
 <p>这是最关键的步骤。稳健方法：找力的导数显著偏离基线噪声的地方。</p>
 
@@ -164,7 +165,7 @@ contact_z = z_piezo[contact_idx]
 print(f&quot;接触点: z = {contact_z:.1f} nm&quot;)
 </code></pre>
 
-<h2>6. 粘附力提取</h2>
+<h3>6. 粘附力提取</h3>
 
 <p>回退曲线上的最小力就是粘附力（拔拉事件）：</p>
 
@@ -179,7 +180,7 @@ def extract_adhesion(z_piezo, force, contact_idx):
     return adhesion_force if adhesion_force &lt; 0 else 0.0
 </code></pre>
 
-<h2>7. Hertz模型拟合杨氏模量</h2>
+<h3>7. Hertz模型拟合杨氏模量</h3>
 
 <p>球形压头在弹性半空间上的Hertz模型：</p>
 
@@ -225,7 +226,8 @@ def fit_youngs_modulus(z_piezo, force, contact_idx,
     return E, E_std
 </code></pre>
 
-<h2>8. 批量处理</h2>
+<h2>批量处理与进阶主题</h2>
+<h3>8. 批量处理</h3>
 
 <p>一次典型实验通常有几十条力曲线：</p>
 
@@ -264,11 +266,11 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 # df.to_csv(&quot;mechanical_properties.csv&quot;, index=False)
 </code></pre>
 
-<h2>9. 常见坑</h2>
+<h3>9. 常见坑</h3>
 
 <table><tr><th>问题</th><th>可能原因</th><th>解决方法</th></tr><tr><td>------</td><td>---------</td><td>---------</td></tr><tr><td>接触点太早</td><td>基线噪声大</td><td>增大 <code>threshold_factor</code></td></tr><tr><td>负杨氏模量</td><td>接触点方向反了</td><td>检查z_piezo符号约定</td></tr><tr><td>基底效应</td><td>压入深度过大</td><td><code>fit_range_nm</code> < 样品厚度10%</td></tr><tr><td>零粘附</td><td>回退段未记录</td><td>AFM方法中启用回退</td></tr><tr><td>结果离散</td><td>样品不均或针尖污染</td><td>逐条检查再批量拟合</td></tr></table>
 
-<h2>10. 替代模型</h2>
+<h3>10. 替代模型</h3>
 
 <p>Hertz假设线弹性。对粘弹性生物材料，考虑：</p>
 

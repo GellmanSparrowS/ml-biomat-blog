@@ -12,7 +12,8 @@ description: "手把手教你用Python处理AFM力曲线数据：从基线校正
 
 做AFM力谱实验的朋友都知道：仪器导出一堆txt文件，在商业软件里手动处理几个小时。这个教程给你**一套完整的Python流程**，从读数据到出杨氏模量，不依赖任何商业软件。只用numpy、scipy、matplotlib。
 
-## 1. AFM力曲线数据结构
+## 核心分析流程
+### 1. AFM力曲线数据结构
 
 一次典型的AFM力曲线记录的是**微悬臂偏转**随压电陶瓷移动趋近和远离样品：
 
@@ -30,7 +31,7 @@ import matplotlib.pyplot as plt
 from scipy import signal, optimize
 ```
 
-## 2. 加载典型数据
+### 2. 加载典型数据
 
 绝大多数AFM仪器导出的是表格数据，常见格式：
 
@@ -49,7 +50,7 @@ def load_afm_curve(filepath, skip_rows=0):
 z_piezo, deflection = load_afm_curve("force_curve_001.txt", skip_rows=320)
 ```
 
-### 处理Bruker头部
+#### 处理Bruker头部
 
 Bruker NanoScope文件头部长度不固定，下面是自动检测的鲁棒方法：
 
@@ -66,7 +67,7 @@ def load_bruker_curve(filepath):
     return data[:, 0], data[:, 1]
 ```
 
-## 3. 偏转-力转换
+### 3. 偏转-力转换
 
 微悬臂偏转（单位：伏特）需转换为力（单位：纳牛）：
 
@@ -86,7 +87,7 @@ sensitivity = 45.0  # nm/V，偏转灵敏度
 force = deflection_to_force(deflection, k, sensitivity)
 ```
 
-## 4. 基线校正
+### 4. 基线校正
 
 非接触区的力曲线应该是平坦的（零力），但实际中存在热漂移和激光干涉造成的微小斜率：
 
@@ -101,7 +102,7 @@ def baseline_correct(z_piezo, force, contact_idx):
     return force - baseline
 ```
 
-## 5. 接触点检测
+### 5. 接触点检测
 
 这是最关键的步骤。稳健方法：找力的导数显著偏离基线噪声的地方。
 
@@ -129,7 +130,7 @@ contact_z = z_piezo[contact_idx]
 print(f"接触点: z = {contact_z:.1f} nm")
 ```
 
-## 6. 粘附力提取
+### 6. 粘附力提取
 
 回退曲线上的最小力就是粘附力（拔拉事件）：
 
@@ -144,7 +145,7 @@ def extract_adhesion(z_piezo, force, contact_idx):
     return adhesion_force if adhesion_force < 0 else 0.0
 ```
 
-## 7. Hertz模型拟合杨氏模量
+### 7. Hertz模型拟合杨氏模量
 
 球形压头在弹性半空间上的Hertz模型：
 
@@ -190,7 +191,8 @@ def fit_youngs_modulus(z_piezo, force, contact_idx,
     return E, E_std
 ```
 
-## 8. 批量处理
+## 批量处理与进阶主题
+### 8. 批量处理
 
 一次典型实验通常有几十条力曲线：
 
@@ -229,7 +231,7 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 # df.to_csv("mechanical_properties.csv", index=False)
 ```
 
-## 9. 常见坑
+### 9. 常见坑
 
 | 问题 | 可能原因 | 解决方法 |
 |------|---------|---------|
@@ -239,7 +241,7 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 | 零粘附 | 回退段未记录 | AFM方法中启用回退 |
 | 结果离散 | 样品不均或针尖污染 | 逐条检查再批量拟合 |
 
-## 10. 替代模型
+### 10. 替代模型
 
 Hertz假设线弹性。对粘弹性生物材料，考虑：
 
@@ -269,4 +271,3 @@ AFM力谱学已经从接触模式下的简单力曲线记录发展为一个成�
 粘附力映射在生物材料表征中具有特殊价值。丝素蛋白、胶原蛋白和细胞外基质等材料表现出复杂的表面化学特性，粘附力分布可以揭示表面功能化、蛋白质吸附和交联密度的空间变化。将粘附力映射与形貌像叠加，可以直观地将表面化学性质与结构特征联系起来。
 
 数据处理的标准化和自动化是当前的研究热点。不同的基线校正方法、接触点确定算法和拟合模型可能导致同一组数据得到显著不同的模量值。开源数据处理工具如AtomicJ和PyJibe正在推动AFM数据分析的标准化。建立社区共识的数据处理流程对于提高研究的可复现性和可比性至关重要。
-

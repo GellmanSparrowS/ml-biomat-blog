@@ -8,7 +8,8 @@ slug: "networkx-fundamentals"
 description: "A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research."
 ---
 
-## 1. Why NetworkX — From Intuition to Tool
+## Graph Fundamentals
+### 1. Why NetworkX — From Intuition to Tool
 
 Before understanding NetworkX, take a step back and consider "relationships" themselves. In your proteome, one protein activates another; a bone trabecula transmits stress to another through a contact point; a neuron fires downstream; a city's roads connect it to neighboring cities. All of these phenomena share the same formal structure: a set of **entities** and **connections** between them. Mathematics abstracts this as a graph, \(G = (V, E)\), consisting of a vertex set \(V\) and an edge set \(E\).
 
@@ -34,7 +35,7 @@ import matplotlib.pyplot as plt
 
 ---
 
-## 2. Four Graph Types — Which Structure Fits Your Problem?
+### 2. Four Graph Types — Which Structure Fits Your Problem?
 
 The first step when facing a real problem is deciding which type of graph best models it. NetworkX provides four core classes, and the choice directly affects the behavior of every subsequent algorithm.
 
@@ -51,7 +52,7 @@ All four classes share nearly identical APIs, so switching between them carries 
 
 ---
 
-## 3. Building Graphs — Nodes, Edges, and Attributes
+### 3. Building Graphs — Nodes, Edges, and Attributes
 
 Once you have chosen a graph type, the next step is loading data into the graph object. NetworkX's add/remove API is highly Pythonic, allowing you to build graphs from many sources: one-by-one additions, batch imports, or conversion from dictionaries and matrices.
 
@@ -116,7 +117,8 @@ K = nx.from_dict_of_lists(adj_dict)
 
 ---
 
-## 4. Degree, Path Length, and Clustering — Three Keys to Reading a Network
+## Network Metrics
+### 4. Degree, Path Length, and Clustering — Three Keys to Reading a Network
 
 Once a graph is built, the first questions researchers typically ask are: which nodes are "important"? How far does information need to travel from A to B? Does this system tend to form tight cliques or remain open? These three questions correspond to three foundational network metrics: **degree**, **shortest path**, and **clustering coefficient**. Mastering these three is equivalent to learning the basic grammar for reading any network.
 
@@ -163,7 +165,7 @@ Together, these three metrics give a coarse portrait of any network. High averag
 
 ---
 
-## 5. Centrality — Who Matters Most in a Network?
+### 5. Centrality — Who Matters Most in a Network?
 
 Centrality is the richest—and most easily misused—family of concepts in network analysis. The central question is: what does "important" mean? Different answers give rise to different metrics, each capturing a distinct facet of importance. Researchers must choose based on domain knowledge rather than defaulting to node degree.
 
@@ -204,7 +206,7 @@ A practical recommendation: in network analysis papers, always report multiple c
 
 ---
 
-## 6. Shortest-Path Algorithms — From Dijkstra to Floyd
+### 6. Shortest-Path Algorithms — From Dijkstra to Floyd
 
 Shortest-path computation is one of the most deeply studied problems in graph theory and one of the most frequently needed operations in practice. NetworkX includes several algorithms; understanding their applicability conditions is essential for choosing the right one.
 
@@ -243,7 +245,8 @@ For structural and materials researchers, shortest paths can be interpreted as *
 
 ---
 
-## 7. Classic Network Models — Random, Small-World, and Scale-Free
+## Advanced Topics
+### 7. Classic Network Models — Random, Small-World, and Scale-Free
 
 Understanding real networks requires a reference baseline: what does "random" look like, and what deviations from it are meaningful? NetworkX provides built-in generators for three theoretically fundamental models.
 
@@ -283,7 +286,7 @@ For structural mechanics researchers: scale-free networks are highly robust agai
 
 ---
 
-## 8. Visualization — Making Graphs Speak
+### 8. Visualization — Making Graphs Speak
 
 NetworkX is not a professional visualization tool, but its Matplotlib interface is sufficient for rapid exploration. For publication-quality figures, dedicated software such as Gephi, Cytoscape (biological networks), or Graphviz is recommended. For research presentations and draft figures, NetworkX + Matplotlib does the job.
 
@@ -325,7 +328,7 @@ Practical tips: encode centrality in node color, degree in node size, and edge w
 
 ---
 
-## 9. Community Detection and Graph Generators — Advanced Tools
+### 9. Community Detection and Graph Generators — Advanced Tools
 
 When a network grows too large to comprehend visually, **community detection** becomes the primary tool for revealing structure. A community is a set of nodes with dense internal connections and sparse external ones—analogous to protein complexes (functional modules), crystal grains in materials (clusters of aligned atoms), or interest groups in social networks.
 
@@ -370,7 +373,7 @@ For materials and structural mechanics researchers, hexagonal (`hexagonal_lattic
 
 ---
 
-## 10. Performance Considerations and Further Resources
+### 10. Performance Considerations and Further Resources
 
 NetworkX prioritizes flexibility and readability over raw speed. Its pure-Python dict-of-dicts architecture is a bottleneck for graphs exceeding one million nodes or requiring real-time computation. Common alternatives include **igraph** (C core, Python interface, significantly faster for most metrics), **graph-tool** (C++/OpenMP, for very large graphs), and **cuGraph** (NVIDIA RAPIDS, GPU-accelerated, for billion-scale graphs). A 2025 benchmarking study published in *Social Network Analysis and Mining* confirmed that igraph and graph-tool outperform NetworkX substantially on computationally intensive tasks such as community detection and betweenness centrality, though NetworkX's seamless integration with NumPy, SciPy, and Pandas remains its core competitive advantage for research workflows.
 

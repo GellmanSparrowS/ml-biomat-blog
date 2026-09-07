@@ -14,7 +14,8 @@ If you work with AFM force spectroscopy on soft biomaterials (collagen fibers, s
 
 This guide gives you **a complete, copy-paste-ready Python pipeline** that handles everything from raw data loading to Young's modulus extraction. No commercial software required. Just `numpy`, `scipy`, and `matplotlib`.
 
-## 1. Understanding AFM Force Curve Data
+## The Core Analysis Pipeline
+### 1. Understanding AFM Force Curve Data
 
 A typical AFM force curve records **cantilever deflection** (in volts or nanometers) as the piezo moves the tip toward and away from the sample:
 
@@ -32,7 +33,7 @@ import matplotlib.pyplot as plt
 from scipy import signal, optimize
 ```
 
-## 2. Loading Typical AFM Data Files
+### 2. Loading Typical AFM Data Files
 
 Most AFM instruments export tabular data. Common formats:
 
@@ -50,7 +51,7 @@ def load_afm_curve(filepath, skip_rows=0):
 z_piezo, deflection = load_afm_curve("force_curve_001.txt", skip_rows=320)
 ```
 
-### Handling Bruker Headers
+#### Handling Bruker Headers
 
 ```python
 def load_bruker_curve(filepath):
@@ -64,7 +65,7 @@ def load_bruker_curve(filepath):
     return data[:, 0], data[:, 1]
 ```
 
-## 3. Converting Deflection to Force
+### 3. Converting Deflection to Force
 
 ```python
 def deflection_to_force(deflection_V, spring_constant, sensitivity_nm_per_V):
@@ -77,7 +78,7 @@ sensitivity = 45.0  # nm/V
 force = deflection_to_force(deflection, k, sensitivity)
 ```
 
-## 4. Baseline Correction
+### 4. Baseline Correction
 
 ```python
 def baseline_correct(z_piezo, force, contact_idx):
@@ -87,7 +88,7 @@ def baseline_correct(z_piezo, force, contact_idx):
     return force - baseline
 ```
 
-## 5. Finding the Contact Point
+### 5. Finding the Contact Point
 
 ```python
 def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
@@ -105,7 +106,7 @@ def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
     return len(force) // 2
 ```
 
-## 6. Extracting Adhesion Force
+### 6. Extracting Adhesion Force
 
 ```python
 def extract_adhesion(z_piezo, force, contact_idx):
@@ -115,7 +116,7 @@ def extract_adhesion(z_piezo, force, contact_idx):
     return adhesion_force if adhesion_force < 0 else 0.0
 ```
 
-## 7. Hertz Model Fitting for Young's Modulus
+### 7. Hertz Model Fitting for Young's Modulus
 
 For a spherical indenter on a flat elastic half-space:
 
@@ -146,7 +147,8 @@ def fit_youngs_modulus(z_piezo, force, contact_idx, tip_radius_nm=20.0,
     return E, E_std
 ```
 
-## 8. Batch Processing
+## Scaling and Advanced Topics
+### 8. Batch Processing
 
 ```python
 import glob
@@ -169,7 +171,7 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
     return results
 ```
 
-## 9. Common Pitfalls
+### 9. Common Pitfalls
 
 | Problem | Likely Cause | Fix |
 |---------|-------------|-----|
@@ -178,7 +180,7 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 | Substrate effect | Too deep indentation | `fit_range_nm` < 10% of thickness |
 | Zero adhesion | No retract data | Enable retract in AFM method |
 
-## 10. Alternative Models
+### 10. Alternative Models
 
 - **Sneddon model**: for conical indenters: F = (2/pi) E* tan(alpha) delta^2
 - **JKR model**: includes adhesion in contact mechanics
@@ -195,4 +197,3 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 - Hertz, H. (1882). On the contact of elastic solids. *J. Reine Angew. Math.*, 92, 156-171.
 - Sneddon, I.N. (1965). The relation between load and penetration. *Int. J. Eng. Sci.*, 3(1), 47-57.
 - JPK Instruments. *A Practical Guide to AFM Force Spectroscopy*.
-

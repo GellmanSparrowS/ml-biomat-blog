@@ -7,7 +7,8 @@ lang: "en"
 slug: "python-env-setup"
 description: "A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students."
 ---
-## 1. Why Environment Management Matters — The Version Conflict Problem
+## Getting Started
+### 1. Why Environment Management Matters — The Version Conflict Problem
 
 Many graduate students have a frustrating first encounter with Python. You find a script online for processing AFM data or XRD diffraction patterns, install the required libraries following a tutorial, and it works. A few weeks later, your supervisor sends a machine learning analysis script. After installing its dependencies, the original script suddenly crashes with a version incompatibility error — and you haven't changed a thing. This experience is almost universal among graduate students, and the root cause is straightforward: when every package is installed into the same global Python environment, conflicting version requirements between projects inevitably cause breakage.
 
@@ -21,7 +22,7 @@ Mastering Conda virtual environment management is the key step between "being ab
 
 ---
 
-## 2. Anaconda or Miniconda — Choose What Fits, Don't Overthink It
+### 2. Anaconda or Miniconda — Choose What Fits, Don't Overthink It
 
 Before installing Conda, it is important to clarify a common source of confusion: Anaconda and Miniconda are two different installer packages, but they install the same core `conda` tool and are functionally identical in terms of environment management. The difference is only in how many packages come pre-installed. Every command in the rest of this guide works identically regardless of which one you choose.
 
@@ -35,7 +36,7 @@ One additional option worth introducing: **Mamba**. Mamba is not a standalone in
 
 ---
 
-## 3. Platform-Specific Installation: Windows, macOS, and Linux
+### 3. Platform-Specific Installation: Windows, macOS, and Linux
 
 Installation procedures differ meaningfully across operating systems. The most critical distinction is the Apple Silicon versus Intel distinction on macOS. The following covers each platform in full; follow the section that corresponds to your system.
 
@@ -85,7 +86,8 @@ If you work on a university or institute HPC cluster, first check whether Conda 
 
 ---
 
-## 4. Creating and Managing Virtual Environments — Core Isolation Operations
+## Daily Workflow
+### 4. Creating and Managing Virtual Environments — Core Isolation Operations
 
 With the motivation for virtual environments established, the actual creation and management commands are quite intuitive. This section covers the full lifecycle of an environment, including the critically important reproducibility workflow.
 
@@ -145,7 +147,7 @@ This workflow ensures that your code produces the same output on your supervisor
 
 ---
 
-## 5. Installing Core Scientific Computing Packages — Understanding What Each Tool Does
+### 5. Installing Core Scientific Computing Packages — Understanding What Each Tool Does
 
 With the target environment activated, you can install the packages needed for scientific computing. The following describes each major package from a functional perspective — understanding what each tool is for helps you reach for the right one when a new analysis task arises, rather than blindly installing everything in sight.
 
@@ -180,7 +182,7 @@ Domain-specific libraries worth knowing: for bioinformatics, `conda install -c c
 
 ---
 
-## 6. JupyterLab — The Core Interactive Scientific Computing Environment
+### 6. JupyterLab — The Core Interactive Scientific Computing Environment
 
 JupyterLab is the most widely used interactive computing environment in modern scientific research. Running in a browser, it integrates in a single interface: code editing and execution, inline figure display, Markdown text with LaTeX mathematical formula rendering, file system browsing, and an embedded terminal. For scientific work that must simultaneously present experimental data, computational logic, visualization results, and scientific interpretation, the Notebook format — a "computational document" — has irreplaceable value. A Notebook is not merely a programming tool; it is a medium for recording the scientific exploration process, making "code as experimental record" a practical reality.
 
@@ -219,7 +221,7 @@ Practical JupyterLab techniques worth internalizing: **Magic Commands** are Jupy
 
 ---
 
-## 7. VS Code Integration — From Exploratory Analysis to Engineering-Grade Development
+### 7. VS Code Integration — From Exploratory Analysis to Engineering-Grade Development
 
 JupyterLab is ideal for exploratory analysis: you are uncertain about the data structure, trying things step by step, with each step's output immediately visible. When the analysis logic stabilizes and you need to produce reproducible scripts, build data processing pipelines, or write analysis modules that others can import and reuse, **VS Code (Visual Studio Code)** becomes the more appropriate environment. The two are complementary rather than competing: a common workflow is to explore in JupyterLab, confirm the logic, then refactor into clean `.py` scripts in VS Code.
 
@@ -234,7 +236,8 @@ The most valuable VS Code feature for researchers working with remote computatio
 
 ---
 
-## 8. The conda–pip Relationship and Best Practices
+## Maintenance and Troubleshooting
+### 8. The conda–pip Relationship and Best Practices
 
 When managing environments with conda, you will eventually encounter packages unavailable in conda channels that can only be installed with pip. Understanding the division of responsibility between conda and pip is key to avoiding dependency conflicts and environment corruption.
 
@@ -260,7 +263,7 @@ pip install some-niche-library-only-on-pypi
 
 ---
 
-## 9. Network Acceleration for Users in China
+### 9. Network Acceleration for Users in China
 
 Users in China frequently encounter very slow download speeds or connection timeouts when installing conda packages, because conda's default download servers are located outside the country. Switching to domestic mirror servers maintained by Chinese universities can increase installation speeds by orders of magnitude. The following configuration uses **Tsinghua University's TUNA mirror**, which is noted for high update frequency and reliability:
 
@@ -291,7 +294,7 @@ If `conda install` continues to stall on "Solving environment..." even after con
 
 ---
 
-## 10. Troubleshooting Reference
+### 10. Troubleshooting Reference
 
 Even with careful adherence to the steps above, environment configuration issues can still arise. The following covers the most frequently encountered failure patterns, organized by symptom, root cause, and solution.
 
