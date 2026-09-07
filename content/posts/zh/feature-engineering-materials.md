@@ -46,7 +46,7 @@ def engineer_features(df):
 ## 参考文献
 - Kuhn, M. & Johnson, K. (2019). *Feature Engineering and Selection*. CRC Press.
 - Ramprasad, R. et al. (2017). Machine learning in materials informatics. *npj Computational Materials*, 3, 54.
-
+- Guyon, I. & Elisseeff, A. (2003). An introduction to variable and feature selection. *Journal of Machine Learning Research*, 3, 1157-1182.
 
 ## 深入探讨：特征缩放与标准化
 
@@ -58,5 +58,3 @@ StandardScaler将每个特征转换为均值为零标准差为一的分布。这
 
 特征工程的质量远比模型选择重要。在材料科学的小样本场景中，一两个精心构造的物理特征对模型性能的提升往往超过尝试十种不同算法。花时间理解你的数据，与领域专家讨论，让物理直觉指导特征构造——这是任何自动化工具都无法替代的人类价值。
 
-## 参考文献
-- Guyon, I. & Elisseeff, A. (2003). An introduction to variable and feature selection. *Journal of Machine Learning Research*, 3, 1157-1182.

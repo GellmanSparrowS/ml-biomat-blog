@@ -101,10 +101,9 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 | 标尺错误 | 始终验证像素-纳米标定 |
 
 ## 参考资料
-
 - van der Walt, S. et al. (2014). scikit-image. *PeerJ*, 2, e453.
 - GitHub: [scikit-image/scikit-image](https://github.com/scikit-image/scikit-image)
-
+- Ronneberger, O. et al. (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation. *MICCAI*, 234-241.
 
 ## 深入探讨：图像分割算法的选择
 
@@ -114,5 +113,3 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 
 机器学习方法正在改变SEM图像分析的范式。传统的滤波与阈值方法需要手动调整参数，而训练好的深度学习模型可以在各种成像条件下自动识别纤维特征。U-Net是图像分割的常用架构，仅需少量标注图像就能取得很好的效果。对于有大量重复性SEM分析需求的研究组，考虑训练一个专门的纤维分割模型是值得的投资。
 
-## 参考文献
-- Ronneberger, O. et al. (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation. *MICCAI*, 234-241.

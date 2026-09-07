@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "多尺度模拟在纤维生物材料中的应用入门", "description": "多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 305, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/", "image": "https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "多尺度模拟在纤维生物材料中的应用入门", "item": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "多尺度模拟在纤维生物材料中的应用入门", "description": "多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 289, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/", "image": "https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "多尺度模拟在纤维生物材料中的应用入门", "item": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -157,19 +157,13 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <p>A: 没有完美的。通常需要自己写 Python 胶水代码把 MD 输出转成 FEA 输入。这也是本文想帮你的地方。</p>
 
 <h2>参考资料</h2>
-
 <ul>
 <li>Noid, W.G. (2013). Coarse-grained models for biomolecular systems. <em>J. Chem. Phys.</em></li>
 <li>中国力学学会生物力学专业委员会 — 年度学术会议论文集</li>
 <li>GROMACS 中文教程（可在 GitHub 搜索相关仓库）</li>
-
-</ul>
-<h2>参考文献</h2>
-<ul>
-<li>Noid, W.G. (2013). Coarse-grained models for biomolecular systems. <em>J. Chem. Phys.</em></li>
 <li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS.</em></li>
 <li>GROMACS: www.gromacs.org</li>
-
+<li>Zhang, L. et al. (2018). Deep Potential Molecular Dynamics: A Scalable Model. <em>Physical Review Letters</em>, 120, 143001.</li>
 
 </ul>
 <h2>讨论：多尺度模拟的未来方向</h2>
@@ -179,11 +173,6 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <p>自动化工作流是降低多尺度模拟门槛的关键。目前从全原子MD到粗粒化再到有限元的流程需要大量手工操作和专业知识。自动化工具如pyCHARMM和BioBB等正在封装最佳实践，让非专家也能运行多尺度模拟。这与深度学习的发展相辅相成——当数据生成变得自动化，数据驱动的发现就更加可行。</p>
 
 <p>不确定度量化应该成为多尺度模拟的标准组成部分。目前大多数多尺度模拟研究只报告单一的"确定性"结果，忽略了各尺度模型的累积误差。贝叶斯框架和蒙特卡洛方法可以量化从分子参数到宏观性能的误差传播。在向实验科学家提供计算指导时，报告预测区间比报告单一数值更有价值。</p>
-
-<h2>参考文献</h2>
-<ul>
-<li>Zhang, L. et al. (2018). Deep Potential Molecular Dynamics: A Scalable Model. <em>Physical Review Letters</em>, 120, 143001.</li>
-</ul>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>

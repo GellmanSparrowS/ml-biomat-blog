@@ -49,7 +49,8 @@ description: "丝素蛋白：从分子结构到力学功能。面向生物与材
 ## 参考文献
 - Keten, S. et al. (2010). Nanoconfinement controls stiffness, strength and toughness of beta-sheet crystals in silk. *Nature Materials*, 9, 359-367.
 - Omenetto, F.G. & Kaplan, D.L. (2010). New opportunities for an ancient material. *Science*, 329(5991), 528-531.
-
+- Shao, Z. & Vollrath, F. (2002). Surprising strength of silkworm silk. *Nature*, 418, 741.
+- Porter, D. & Vollrath, F. (2009). Silk as a biomimetic ideal for structural polymers. *Advanced Materials*, 21, 487-492.
 
 ## 丝素蛋白力学性能的微观起源
 
@@ -59,6 +60,3 @@ description: "丝素蛋白：从分子结构到力学功能。面向生物与材
 
 丝素的力学性能还表现出显著的各向异性——沿着纤维轴向的模量和强度远高于横向方向。这种各向异性是beta-折叠晶体和分子链沿纤维轴择优取向的直接结果。在再生丝素材料的制备中，通过控制加工条件诱导分子取向是获得优异力学性能的关键策略。
 
-## 参考文献
-- Shao, Z. & Vollrath, F. (2002). Surprising strength of silkworm silk. *Nature*, 418, 741.
-- Porter, D. & Vollrath, F. (2009). Silk as a biomimetic ideal for structural polymers. *Advanced Materials*, 21, 487-492.

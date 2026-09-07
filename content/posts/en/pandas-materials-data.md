@@ -84,7 +84,7 @@ with pd.ExcelWriter("results.xlsx") as writer:
 ## References
 - McKinney, W. (2010). Data Structures for Statistical Computing in Python. *Proc. SciPy*, 56-61.
 - pandas.pydata.org - Pandas documentation.
-
+- McKinney, W. (2012). *Python for Data Analysis*. O'Reilly Media.
 
 ## Advanced Data Operations
 
@@ -108,5 +108,3 @@ When dealing with multiple experimental conditions, the groupby transform method
 df["normalized_modulus"] = df.groupby("treatment")["modulus_GPa"].transform(lambda x: x / x.mean())
 ```
 
-## References
-- McKinney, W. (2012). *Python for Data Analysis*. O'Reilly Media.

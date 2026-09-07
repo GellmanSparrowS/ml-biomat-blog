@@ -116,10 +116,9 @@ to_drop = [col for col in upper_tri.columns
 - Interaction features have physical justification
 
 ## References
-
 - Kuhn, M. & Johnson, K. (2019). *Feature Engineering and Selection*. CRC Press.
 - Ramprasad, R. et al. (2017). Machine learning in materials informatics. *npj Computational Materials*, 3, 54.
-
+- Ramprasad, R. et al. (2017). Machine learning in materials informatics: Recent applications and prospects. *npj Computational Materials*, 3, 54.
 
 ## Advanced Feature Engineering Strategies
 
@@ -131,5 +130,3 @@ For data with strong hierarchical structure (fiber -> bundle -> network), hierar
 
 When experimental measurements are limited, simulation-informed features can bridge the gap. Run coarse-grained simulations across a parameter space, extract features from the simulation outputs, and use these as supplementary features alongside experimental data. The simulations capture the underlying physics while the experimental data anchors the predictions to reality.
 
-## References
-- Ramprasad, R. et al. (2017). Machine learning in materials informatics: Recent applications and prospects. *npj Computational Materials*, 3, 54.

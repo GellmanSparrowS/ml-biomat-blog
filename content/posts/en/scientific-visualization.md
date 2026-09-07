@@ -120,14 +120,11 @@ plt.savefig("figure.svg")  # Fully editable in Illustrator/Inkscape
 - **Use consistent fonts**: Same family, size across all panels
 
 ## References
-
 - Rougier, N.P. et al. (2014). Ten simple rules for better figures. *PLoS Computational Biology*, 10(9), e1003833.
 - Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. *Computing in Science & Engineering*, 9(3), 90-95.
-
-## References
-- Rougier, N.P. et al. (2014). Ten simple rules for better figures. *PLoS Computational Biology*, 10(9), e1003833.
 - Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. *CSE*, 9(3), 90-95.
-
+- Stone, M. (2006). Choosing colors for data visualization. *Business Intelligence Network*.
+- Tufte, E. (2001). *The Visual Display of Quantitative Information*. Graphics Press.
 
 ## Advanced Tips for Publication Figures
 
@@ -137,6 +134,3 @@ Color accessibility matters. Approximately 8% of males have some form of color v
 
 Figure legends should be positioned to minimize white space while avoiding data occlusion. The bbox_to_anchor parameter in Matplotlib allows precise placement outside the axes. For multi-panel figures, consider placing a single legend that applies to all panels rather than repeating legends in each subplot. This saves space and reduces visual clutter.
 
-## References
-- Stone, M. (2006). Choosing colors for data visualization. *Business Intelligence Network*.
-- Tufte, E. (2001). *The Visual Display of Quantitative Information*. Graphics Press.

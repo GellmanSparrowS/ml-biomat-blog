@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/fiber-network-mechanics-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "纤维网络力学基础：生物材料研究的关键概念", "description": "纤维网络力学基础：生物材料研究的关键概念。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 157, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/fiber-network-mechanics-zh/", "image": "https://ml-biomat.com/static/images/og/fiber-network-mechanics-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "生物·材料·结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "纤维网络力学基础：生物材料研究的关键概念", "item": "https://ml-biomat.com/posts/fiber-network-mechanics-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "纤维网络力学基础：生物材料研究的关键概念", "description": "纤维网络力学基础：生物材料研究的关键概念。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 155, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/fiber-network-mechanics-zh/", "image": "https://ml-biomat.com/static/images/og/fiber-network-mechanics-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "生物·材料·结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "纤维网络力学基础：生物材料研究的关键概念", "item": "https://ml-biomat.com/posts/fiber-network-mechanics-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -87,7 +87,8 @@ stress = 0.1 * strain + 5.0 * strain**3
 <ul>
 <li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS</em>, 103(33), 12285-12290.</li>
 <li>Picu, R.C. (2011). Mechanics of random fiber networks. <em>Soft Matter</em>, 7, 6768-6785.</li>
-
+<li>Stauffer, D. & Aharony, A. (1994). <em>Introduction to Percolation Theory</em>. Taylor & Francis.</li>
+<li>Head, D.A. et al. (2003). Distinct regimes of elastic response and deformation modes of cross-linked cytoskeletal and semiflexible polymer networks. <em>Physical Review E</em>, 68(6), 061907.</li>
 
 </ul>
 <h2>深入研究：逾渗理论与纤维网络力学</h2>
@@ -97,12 +98,6 @@ stress = 0.1 * strain + 5.0 * strain**3
 <p>逾渗转变在生物材料中有重要的实际意义。例如胶原蛋白纤维在伤口愈合过程中逐渐沉积并交联。在早期阶段，纤维密度低于逾渗阈值，组织几乎没有力学强度。当纤维密度超过阈值后，组织突然获得承载能力。理解逾渗转变有助于设计组织工程支架，确保支架在植入后立即具有足够的力学支撑。</p>
 
 <p>从计算角度看，逾渗分析可以通过网络建模来实现。使用随机纤维网络生成算法创建不同密度的网络结构，然后计算网络的刚度矩阵来确定其是否能够承载载荷。Python结合NetworkX等图论库可以高效地进行这类分析。</p>
-
-<h2>参考文献</h2>
-<ul>
-<li>Stauffer, D. & Aharony, A. (1994). <em>Introduction to Percolation Theory</em>. Taylor & Francis.</li>
-<li>Head, D.A. et al. (2003). Distinct regimes of elastic response and deformation modes of cross-linked cytoskeletal and semiflexible polymer networks. <em>Physical Review E</em>, 68(6), 061907.</li>
-</ul>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>

@@ -191,16 +191,12 @@ print(f"Constrained result: {result.x}")
 ```
 
 ## References
-
 - Virtanen, P. et al. (2020). SciPy 1.0. *Nature Methods*, 17, 261-272.
 - Lin, D.C. et al. (2007). Robust strategies for automated AFM force curve analysis. *J. Biomech. Eng.*, 129(6), 904-912.
 - Oliver, W.C. & Pharr, G.M. (1992). An improved technique for determining hardness and elastic modulus. *J. Mater. Res.*, 7(6), 1564-1583.
-
-## References
-- Virtanen, P. et al. (2020). SciPy 1.0. *Nature Methods*, 17, 261-272.
 - Johnson, M.L. & Faunt, L.M. (1992). Parameter estimation. *Methods in Enzymology*, 210, 1-37.
 - Lin, D.C. et al. (2007). Robust AFM force curve analysis. *J. Biomech. Eng.*, 129(6), 904-912.
-
+- Burnham, K.P. & Anderson, D.R. (2002). *Model Selection and Multimodel Inference*. Springer.
 
 ## Model Selection and Goodness of Fit
 
@@ -210,5 +206,3 @@ Cross-validation is essential when the goal is prediction rather than descriptio
 
 When reporting fitted parameters in publications, include not just the best-fit values and standard errors but also the correlation matrix between parameters. Highly correlated parameters indicate that the model may be overparameterized—different combinations of parameter values produce nearly identical fits. This is a red flag that should be discussed transparently.
 
-## References
-- Burnham, K.P. & Anderson, D.R. (2002). *Model Selection and Multimodel Inference*. Springer.

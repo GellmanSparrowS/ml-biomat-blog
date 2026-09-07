@@ -112,16 +112,12 @@ A: 原子尺度的热涨落、特定氢键模式、溶剂效应需要额外处�
 A: 没有完美的。通常需要自己写 Python 胶水代码把 MD 输出转成 FEA 输入。这也是本文想帮你的地方。
 
 ## 参考资料
-
 - Noid, W.G. (2013). Coarse-grained models for biomolecular systems. *J. Chem. Phys.*
 - 中国力学学会生物力学专业委员会 — 年度学术会议论文集
 - GROMACS 中文教程（可在 GitHub 搜索相关仓库）
-
-## 参考文献
-- Noid, W.G. (2013). Coarse-grained models for biomolecular systems. *J. Chem. Phys.*
 - Buehler, M.J. (2006). Nature designs tough collagen. *PNAS.*
 - GROMACS: www.gromacs.org
-
+- Zhang, L. et al. (2018). Deep Potential Molecular Dynamics: A Scalable Model. *Physical Review Letters*, 120, 143001.
 
 ## 讨论：多尺度模拟的未来方向
 
@@ -131,5 +127,3 @@ A: 没有完美的。通常需要自己写 Python 胶水代码把 MD 输出转�
 
 不确定度量化应该成为多尺度模拟的标准组成部分。目前大多数多尺度模拟研究只报告单一的"确定性"结果，忽略了各尺度模型的累积误差。贝叶斯框架和蒙特卡洛方法可以量化从分子参数到宏观性能的误差传播。在向实验科学家提供计算指导时，报告预测区间比报告单一数值更有价值。
 
-## 参考文献
-- Zhang, L. et al. (2018). Deep Potential Molecular Dynamics: A Scalable Model. *Physical Review Letters*, 120, 143001.

@@ -55,7 +55,8 @@ stress = 0.1 * strain + 5.0 * strain**3
 ## 参考文献
 - Buehler, M.J. (2006). Nature designs tough collagen. *PNAS*, 103(33), 12285-12290.
 - Picu, R.C. (2011). Mechanics of random fiber networks. *Soft Matter*, 7, 6768-6785.
-
+- Stauffer, D. & Aharony, A. (1994). *Introduction to Percolation Theory*. Taylor & Francis.
+- Head, D.A. et al. (2003). Distinct regimes of elastic response and deformation modes of cross-linked cytoskeletal and semiflexible polymer networks. *Physical Review E*, 68(6), 061907.
 
 ## 深入研究：逾渗理论与纤维网络力学
 
@@ -65,6 +66,3 @@ stress = 0.1 * strain + 5.0 * strain**3
 
 从计算角度看，逾渗分析可以通过网络建模来实现。使用随机纤维网络生成算法创建不同密度的网络结构，然后计算网络的刚度矩阵来确定其是否能够承载载荷。Python结合NetworkX等图论库可以高效地进行这类分析。
 
-## 参考文献
-- Stauffer, D. & Aharony, A. (1994). *Introduction to Percolation Theory*. Taylor & Francis.
-- Head, D.A. et al. (2003). Distinct regimes of elastic response and deformation modes of cross-linked cytoskeletal and semiflexible polymer networks. *Physical Review E*, 68(6), 061907.

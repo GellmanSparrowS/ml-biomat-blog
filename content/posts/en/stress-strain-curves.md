@@ -79,11 +79,10 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 - Over-interpreting noise without smoothing
 
 ## References
-
 - Callister, W.D. (2018). *Materials Science and Engineering: An Introduction*. Wiley.
 - Meyers, M.A. & Chawla, K.K. (2009). *Mechanical Behavior of Materials*. Cambridge.
 - GitHub: [MechAnalyzer](https://github.com/nickabattista/mech_analyzer) — open-source stress-strain analysis tool.
-
+- Dorfmann, A. & Ogden, R.W. (2004). A constitutive model for the Mullins effect. *International Journal of Solids and Structures*, 41, 1855-1878.
 
 ## Advanced Topics in Stress-Strain Analysis
 
@@ -93,5 +92,3 @@ The strain rate sensitivity of biomaterials reflects their viscoelastic nature. 
 
 Cyclic loading reveals the Mullins effect in many biomaterials: the stress required to reach a given strain decreases with repeated cycling. This stress softening stabilizes after several cycles and is attributed to the progressive rupture of weaker sacrificial bonds within the network. The stabilized cycle is typically reported as the preconditioned response.
 
-## References
-- Dorfmann, A. & Ogden, R.W. (2004). A constitutive model for the Mullins effect. *International Journal of Solids and Structures*, 41, 1855-1878.

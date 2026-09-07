@@ -255,16 +255,12 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 ```
 
 ## 参考资料
-
 - Cappella, B. & Dietler, G. (1999). Force-distance curves by atomic force microscopy. *Surface Science Reports*, 34(1-3), 1-104.
 - Hertz, H. (1882). On the contact of elastic solids. *J. Reine Angew. Math.*, 92, 156-171.
 - Sneddon, I.N. (1965). The relation between load and penetration. *Int. J. Eng. Sci.*, 3(1), 47-57.
 - JPK Instruments Application Note: *A Practical Guide to AFM Force Spectroscopy and Data Analysis*.
-
-## 参考文献
 - Cappella, B. & Dietler, G. (1999). Force-distance curves by AFM. *Surface Science Reports*, 34(1-3), 1-104.
-- Hertz, H. (1882). On the contact of elastic solids. *J. Reine Angew. Math.*, 92, 156-171.
-
+- Hermanowicz, P. et al. (2014). AtomicJ: An open source software for analysis of force curves. *Review of Scientific Instruments*, 85(6), 063703.
 
 ## 讨论：AFM力谱学在生物材料定量分析中的进展
 
@@ -274,5 +270,3 @@ AFM力谱学已经从接触模式下的简单力曲线记录发展为一个成�
 
 数据处理的标准化和自动化是当前的研究热点。不同的基线校正方法、接触点确定算法和拟合模型可能导致同一组数据得到显著不同的模量值。开源数据处理工具如AtomicJ和PyJibe正在推动AFM数据分析的标准化。建立社区共识的数据处理流程对于提高研究的可复现性和可比性至关重要。
 
-## 参考文献
-- Hermanowicz, P. et al. (2014). AtomicJ: An open source software for analysis of force curves. *Review of Scientific Instruments*, 85(6), 063703.

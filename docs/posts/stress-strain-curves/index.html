@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/stress-strain-curves.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Stress-Strain Curves: A Materials Science Primer", "description": "A beginner-friendly guide to interpreting stress-strain curves: elastic modulus, yield strength, ultimate strength, toughness, and how these concepts apply to soft biomaterials.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 623, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/stress-strain-curves/", "image": "https://ml-biomat.com/static/images/og/stress-strain-curves.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "Stress-Strain Curves: A Materials Science Primer", "item": "https://ml-biomat.com/posts/stress-strain-curves/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Stress-Strain Curves: A Materials Science Primer", "description": "A beginner-friendly guide to interpreting stress-strain curves: elastic modulus, yield strength, ultimate strength, toughness, and how these concepts apply to soft biomaterials.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 621, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/stress-strain-curves/", "image": "https://ml-biomat.com/static/images/og/stress-strain-curves.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "Stress-Strain Curves: A Materials Science Primer", "item": "https://ml-biomat.com/posts/stress-strain-curves/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -108,12 +108,11 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 
 </ul>
 <h2>References</h2>
-
 <ul>
 <li>Callister, W.D. (2018). <em>Materials Science and Engineering: An Introduction</em>. Wiley.</li>
 <li>Meyers, M.A. & Chawla, K.K. (2009). <em>Mechanical Behavior of Materials</em>. Cambridge.</li>
 <li>GitHub: <a href="https://github.com/nickabattista/mech_analyzer">MechAnalyzer</a> — open-source stress-strain analysis tool.</li>
-
+<li>Dorfmann, A. & Ogden, R.W. (2004). A constitutive model for the Mullins effect. <em>International Journal of Solids and Structures</em>, 41, 1855-1878.</li>
 
 </ul>
 <h2>Advanced Topics in Stress-Strain Analysis</h2>
@@ -123,11 +122,6 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 <p>The strain rate sensitivity of biomaterials reflects their viscoelastic nature. At higher strain rates, the material appears stiffer because polymer chains have less time to relax and reorganize under load. For physiologically meaningful results, test soft tissues and hydrogels at strain rates matching their in vivo loading conditions: approximately 0.01 to 0.1 per second for most connective tissues.</p>
 
 <p>Cyclic loading reveals the Mullins effect in many biomaterials: the stress required to reach a given strain decreases with repeated cycling. This stress softening stabilizes after several cycles and is attributed to the progressive rupture of weaker sacrificial bonds within the network. The stabilized cycle is typically reported as the preconditioned response.</p>
-
-<h2>References</h2>
-<ul>
-<li>Dorfmann, A. & Ogden, R.W. (2004). A constitutive model for the Mullins effect. <em>International Journal of Solids and Structures</em>, 41, 1855-1878.</li>
-</ul>
 </div>
 </article><section class="cta-banner">
 <h3>💬 Questions or Feedback?</h3>

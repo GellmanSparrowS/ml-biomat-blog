@@ -82,7 +82,7 @@ def predict_with_uncertainty(model, X, n_iter=100):
 ## References
 - Yang Y., Bai R., Gao W. et al. (2024). Optimizing biomimetic 3D fibrous networks via DRL. *Advanced Science*, 2413293.
 - Ramprasad, R. et al. (2017). Machine learning in materials informatics. *npj Computational Materials*, 3, 54.
-
+- Butler, K.T. et al. (2018). Machine learning for molecular and materials science. *Nature*, 559, 547-555.
 
 ## Practical Considerations for ML in Materials
 
@@ -92,5 +92,3 @@ Uncertainty quantification distinguishes good ML practice from wishful thinking.
 
 Domain adaptation addresses the simulation-to-experiment gap. Models trained on abundant simulation data often fail on experimental measurements due to systematic differences. Domain adaptation techniques from transfer learning can align the feature distributions, allowing models trained on simulations to generalize to experimental data with minimal fine-tuning.
 
-## References
-- Butler, K.T. et al. (2018). Machine learning for molecular and materials science. *Nature*, 559, 547-555.

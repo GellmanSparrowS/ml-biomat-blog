@@ -128,12 +128,11 @@ rdf_oo.run()
 | 模拟太慢 | 用GPU(Kokkos)或更粗的力场 |
 
 ## 参考资料
-
 - LAMMPS文档: [docs.lammps.org](https://docs.lammps.org)
 - MDAnalysis: [mdanalysis.org](https://www.mdanalysis.org)
 - Allen & Tildesley (2017). *Computer Simulation of Liquids*. Oxford.
 - GitHub: [lammps/lammps](https://github.com/lammps/lammps)
-
+- Huang, J. et al. (2017). CHARMM36m: an improved force field for folded and intrinsically disordered proteins. *Nature Methods*, 14, 71-73.
 
 ## 深入探讨：力场选择与验证
 
@@ -143,5 +142,3 @@ rdf_oo.run()
 
 力场验证是经常被忽视但至关重要的步骤。在进行大规模生产模拟之前，用你知道正确结果的简单系统验证力场——例如计算水的密度和扩散系数，或者计算已知实验值的短肽构象分布。如果力场无法重现这些基本性质，那么对复杂系统的模拟结果就需要谨慎解释。这是一个非常重要的科学原则——永远在你可控的范围内验证你的方法。
 
-## 参考文献
-- Huang, J. et al. (2017). CHARMM36m: an improved force field for folded and intrinsically disordered proteins. *Nature Methods*, 14, 71-73.

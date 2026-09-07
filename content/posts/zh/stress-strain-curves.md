@@ -59,7 +59,7 @@ def compute_properties(strain, stress):
 ## 参考文献
 - Callister, W.D. (2018). *Materials Science and Engineering*. Wiley.
 - Meyers, M.A. (2009). *Mechanical Behavior of Materials*. Cambridge.
-
+- Fratzl, P. et al. (2004). Structure and mechanical quality of the collagen-mineral nano-composite in bone. *Journal of Materials Chemistry*, 14(14), 2115-2123.
 
 ## 生物材料的特殊力学行为
 
@@ -69,5 +69,3 @@ def compute_properties(strain, stress):
 
 滞后和能量耗散是另一个关键特征。生物材料的加载和卸载曲线通常形成滞回环，环的面积代表每个变形周期中耗散的能量。这种能量耗散机制对材料韧性至关重要：通过在微观尺度上牺牲弱键，材料在宏观尺度上保持完整。丝素蛋白的优异韧性很大程度上归功于其纳米尺度上beta折叠结晶与非晶域之间的能量耗散机制。
 
-## 参考文献
-- Fratzl, P. et al. (2004). Structure and mechanical quality of the collagen-mineral nano-composite in bone. *Journal of Materials Chemistry*, 14(14), 2115-2123.
