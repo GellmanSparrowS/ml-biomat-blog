@@ -2,6 +2,7 @@
 """Post-build health checks -> _qa/site_report.html (open in browser)."""
 import argparse
 import html
+import os
 import json
 import re
 import webbrowser
@@ -125,7 +126,10 @@ def main():
     for c in checks:
         print(("PASS " if c["ok"] else "FAIL "), c["name"], "-", c["detail"])
     if a.open:
-        webbrowser.open(out.as_uri())
+        try:
+            os.startfile(str(out))
+        except Exception:
+            webbrowser.open(out.as_uri())
 
 
 if __name__ == "__main__":

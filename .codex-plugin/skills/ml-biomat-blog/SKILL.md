@@ -99,8 +99,9 @@ title, date, category, tags[], lang, slug, description. Bilingual: same category
 ## Secrets & Local Preview (2026-09-07)
 - Tokens (GitHub / PyPI / Cloudflare) are stored OUTSIDE the repo at
   E:\Auto_TEST\.secrets.json with restricted permissions. NEVER commit tokens.
-- Build locally, then visually confirm: python preview.py
-  (serves docs/ on http://127.0.0.1:8866 and opens the browser).
-- Run post-build health checks: python qa_check.py --open
-  (writes _qa/site_report.html; _qa/ is gitignored, never deployed).
+- Local confirm, three options:
+  1) python snapshot.py --open  # no server; writes _preview/ and opens index.html directly
+  2) python preview.py          # live server at http://localhost:8866 (also lists LAN addresses)
+  3) python qa_check.py --open  # health report -> _qa/site_report.html
+- _preview/ and _qa/ are gitignored and never deployed.
 - Do not push until the user explicitly authorizes it.
