@@ -2,6 +2,7 @@
 (function(){
 // === CODE COPY (always visible, icon-style) ===
 document.addEventListener('DOMContentLoaded', function(){
+    if(window.hljs){window.hljs.highlightAll();}
     document.querySelectorAll('pre').forEach(function(block){
         var wrapper = document.createElement('div');
         wrapper.style.position = 'relative';

@@ -21,9 +21,8 @@
 <meta property="og:site_name" content="ML-Biomat">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
+</head>
 <body>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -131,7 +130,7 @@ BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
 <div class="catalog-item">Square<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">正方</span></div><div class="catalog-item">Triangle<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">三角</span></div><div class="catalog-item">Hexagon<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">六边</span></div><div class="catalog-item">Honeycomb<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">蜂窝</span></div><div class="catalog-item">Kagome<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">笼目</span></div><div class="catalog-item">Voronoi<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">泰森多边形</span></div><div class="catalog-item">Chiral<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">手性</span></div><div class="catalog-item">Reentrant<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">凹角</span></div><div class="catalog-item">Star<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">星形</span></div><div class="catalog-item">Cross<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">十字</span></div><div class="catalog-item">Diamond<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">钻石</span></div><div class="catalog-item">Missing Rib<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">缺肋</span></div>
 </div>
 <div class="img-container">
-<img src="/static/images/fibernet/01_2d_gallery.png" alt="Structure Gallery" class="img-full" loading="lazy" decoding="async">
+<img src="/static/images/fibernet/01_2d_gallery.webp" width="1600" height="1237" alt="Structure Gallery" class="img-full" loading="lazy" decoding="async">
 <p class="img-caption">12 unit types across 6 architecture families / 12种基元，6大结构家族</p>
 </div>
 </section>
@@ -140,27 +139,27 @@ BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
 <h2 style="text-align:center;font-size:1.05rem;margin-bottom:1rem">Showcase / 展示</h2>
 
 <div class="img-container">
-<img src="/static/images/fibernet/05_trajectory_dark.png" alt="Deformation Trajectory" class="img-full" loading="lazy" decoding="async">
+<img src="/static/images/fibernet/05_trajectory_dark.webp" width="1600" height="775" alt="Deformation Trajectory" class="img-full" loading="lazy" decoding="async">
 <p class="img-caption">8-frame deformation trajectory: honeycomb under stretch, colored by edge stretch ratio / 蜂窝拉伸8帧形变轨迹</p>
 </div>
 
 <div class="img-container">
-<img src="/static/images/fibernet/fem_showcase_dark.png" alt="FEM Deformation Showcase" class="img-full" loading="lazy" decoding="async">
+<img src="/static/images/fibernet/fem_showcase_dark.webp" width="1200" height="983" alt="FEM Deformation Showcase" class="img-full" loading="lazy" decoding="async">
 <p class="img-caption">Beam Frame FEM: uniaxial stretch (2x) and compression (0.5x) across topologies and fiber radii. Bright color = high von Mises stress. Welded frames with radius-dependent bending stiffness. / Euler-Bernoulli梁框架FEM：拉伸(2倍)与压缩(0.5倍)模拟，亮色=高von Mises应力</p>
 </div>
 
 <div class="img-container">
-<img src="/static/images/fibernet/voronoi_1.5x_auto.png" alt="Voronoi Stretch" class="img-full" loading="lazy" decoding="async">
+<img src="/static/images/fibernet/voronoi_1.5x_auto.webp" width="1600" height="825" alt="Voronoi Stretch" class="img-full" loading="lazy" decoding="async">
 <p class="img-caption">Voronoi structure under 1.5x uniaxial stretch &mdash; deformation and stress distribution / Voronoi 结构 1.5 倍单轴拉伸</p>
 </div>
 
 <div class="img-container">
-<img src="/static/images/fibernet/09_ml_analysis_dark.png" alt="ML Analysis" class="img-full" loading="lazy" decoding="async">
+<img src="/static/images/fibernet/09_ml_analysis_dark.webp" width="1600" height="1398" alt="ML Analysis" class="img-full" loading="lazy" decoding="async">
 <p class="img-caption">Machine learning analysis: confusion matrix, ROC curves, and learning curves / 机器学习分析面板</p>
 </div>
 
 <div class="img-container">
-<img src="/static/images/fibernet/11_rl_reward_dark.png" alt="RL Reward" class="img-full" loading="lazy" decoding="async">
+<img src="/static/images/fibernet/11_rl_reward_dark.webp" width="1600" height="623" alt="RL Reward" class="img-full" loading="lazy" decoding="async">
 <p class="img-caption">Reinforcement learning: reward per episode with monotonically increasing best reward / 强化学习训练曲线</p>
 </div>
 </section>

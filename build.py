@@ -208,7 +208,9 @@ def find_pair(post, by_lang):
 
 
 
-HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js"></script>\n<script>hljs.highlightAll();</script>\n<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>\n<body>\n'
+MATHJAX_SCRIPT = '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>'
+
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>\n{mathjax}</head>\n<body>\n'
 
 HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -250,10 +252,10 @@ HERO = '''<section class="hero">
 
 def make_head(title, desc, url, lang="en", og_type="website", ld="",
               home_active="", en_active="", zh_active="", wide="", title_suffix=" \u2014 ML-Biomat",
-              og_image=None, alternates=""):
+              og_image=None, alternates="", needs_math=False):
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
-        url=url, lang=lang, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates)
+        url=url, lang=lang, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates, mathjax=(MATHJAX_SCRIPT if needs_math else ""))
     header = HEADER.format(
         home_active=home_active, en_active=en_active, zh_active=zh_active,
         wide_class=" container-wide" if wide else "")
@@ -317,6 +319,7 @@ def build():
             alts += f'<link rel="alternate" hreflang="{other_code}" href="{SITE["base_url"]}/posts/{pair["slug"]}/">'
             alts += f'<link rel="alternate" hreflang="x-default" href="{SITE["base_url"]}/posts/{(p if p["lang"] == "en" else pair)["slug"]}/">'
         og_img = f'{SITE["base_url"]}/static/images/og/{p["slug"]}.png' if (Path("static/images/og") / f'{p["slug"]}.png').exists() else None
+        needs_math = ("$$" in p["html"]) or ("\\(" in p["html"]) or ("\\begin" in p["html"])
         cn = cat_name(p["category"], p["lang"])
         body = ARTICLE_HTML.format(
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
@@ -324,7 +327,7 @@ def build():
             lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + ENGAGE_BANNER + giscus_html
         html = make_head(title=p["title"], desc=p["description"] or p["title"],
                          url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=p["lang"],
-                         og_type="article", ld=article_ld(p), og_image=og_img, alternates=alts) + body + FOOT.format(year=datetime.now().year)
+                         og_type="article", ld=article_ld(p), og_image=og_img, alternates=alts, needs_math=needs_math) + body + FOOT.format(year=datetime.now().year)
         write_file(f"posts/{p['slug']}/index.html", html)
     print("  Posts done")
 
