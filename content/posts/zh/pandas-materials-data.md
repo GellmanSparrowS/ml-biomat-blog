@@ -15,6 +15,14 @@ import pandas as pd
 import numpy as np
 ```
 
+| 流程步骤 | 常用函数 | 作用 |
+|---|---|---|
+| 读取 | read_csv / read_excel | 从 CSV、Excel 加载实验数据 |
+| 清洗 | dropna / fillna / astype | 处理缺失值、修正确保类型正确 |
+| 分组 | groupby / agg | 按处理条件计算均值、标准差等 |
+| 合并 | merge / concat | 把多批次或多次实验整合成一个表 |
+| 导出 | to_csv / to_excel | 保存清洗后的结果供分析或投稿 |
+
 ## 一、数据读取：从多种格式加载实验数据
 
 实验数据通常以CSV或Excel文件存储。Pandas的read_csv和read_excel函数可以轻松加载这些文件。常见的编码问题可以用encoding参数解决：

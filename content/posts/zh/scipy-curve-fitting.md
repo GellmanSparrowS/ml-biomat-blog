@@ -18,6 +18,14 @@ from scipy.optimize import curve_fit
 
 ## 一、曲线拟合的基本原理
 
+| 问题类型 | 模型函数 | SciPy 工具 |
+|---|---|---|
+| 线性关系 | y = ax + b | np.polyfit 或 linregress |
+| 指数衰减 | a·exp(-t/τ) + c | curve_fit |
+| 幂律关系 | a·x^b | curve_fit（先取对数给出初猜） |
+| Hertz 压痕 | F = k·δ^n | curve_fit + 参数边界 |
+| 参数置信区间 | 由协方差矩阵估计 | curve_fit 返回的 pcov |
+
 曲线拟合的本质是找到一个数学模型的参数，使模型的预测值与实验测量值之间的差异最小。这个差异通常用残差平方和来衡量，因此曲线拟合也常被称为最小二乘法。
 
 SciPy的curve_fit不仅给出最优参数，还提供协方差矩阵，用来估计每个参数的不确定度。这对于科研论文中的误差报告非常重要。

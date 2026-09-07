@@ -9,7 +9,20 @@ description: "A comprehensive review of engineered superstructures: origami, hon
 ---
 
 ## Bending and Folding Dominated Designs
-### Section 1: Origami and Kirigami — Programming Three-Dimensional Deformation from Two-Dimensional Sheets
+#| Section | Design family | What it addresses |
+|---|---|---|
+| 1 | Origami / Kirigami | folding-programmed 3D deformation from 2D sheets |
+| 2 | Honeycombs / corrugations / perforated sheets | bending-dominated stiffness and energy absorption |
+| 3 | Auxetic metamaterials | negative Poisson's ratio mechanics and fabrication |
+| 4 | Chiral twisting / compliant structures | rotation-coupled deformation and flexibility |
+| 5 | Tensegrity / braided / interlocking assemblies | self-equilibrated and modular architectures |
+| 6 | 3D lattices / TPMS | architected stiffness, porosity, and surface design |
+| 7 | Buckling-induced / multistable structures | pattern switching and energy barriers |
+| 8 | Comparative mechanics | scaling laws and design maps |
+| 9 | ML-assisted design | inverse design, optimization, and fabrication |
+| 10 | Characterization / sustainability / outlook | validation, applications, and future trends |
+
+## Section 1: Origami and Kirigami — Programming Three-Dimensional Deformation from Two-Dimensional Sheets
 
 The central philosophy of engineering metamaterials is to replace composition with geometry. The traditional materials engineer asks "which material should I choose?", while the metamaterial engineer asks "how should I arrange matter?" Origami metamaterials take this philosophy to its logical extreme: three-dimensional deformation patterns are pre-encoded in two-dimensional sheets, and macroscopic shape change is achieved through local bending rather than global stretching. This is a fundamentally different mechanical strategy. Bending a thin sheet requires energy densities two to three orders of magnitude lower than stretching it in-plane, which means that simply changing fold geometry — without altering a single atom of the base material — can tune the effective modulus across an enormous range.
 

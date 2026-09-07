@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy完全入门：实验室数据处理必备", "description": "NumPy完全入门：实验室数据处理必备。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-27", "dateModified": "2026-06-27", "wordCount": 315, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course-zh/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NumPy完全入门：实验室数据处理必备", "item": "https://ml-biomat.com/posts/numpy-crash-course-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy完全入门：实验室数据处理必备", "description": "NumPy完全入门：实验室数据处理必备。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-27", "dateModified": "2026-06-27", "wordCount": 363, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course-zh/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NumPy完全入门：实验室数据处理必备", "item": "https://ml-biomat.com/posts/numpy-crash-course-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -54,6 +54,8 @@ import numpy as np
 </code></pre>
 
 <h2>一、什么是NumPy数组</h2>
+
+<table><tr><th>特性</th><th>Python 列表</th><th>NumPy 数组</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>元素类型</td><td>可以混装任意类型</td><td>同一数组内类型一致</td></tr><tr><td>运算方式</td><td>手动写循环逐项处理</td><td>向量化广播运算</td></tr><tr><td>内存占用</td><td>较高</td><td>较低</td></tr><tr><td>数学函数</td><td>需要逐个调用 math</td><td>内建 sin、exp、sum 等</td></tr><tr><td>适用场景</td><td>通用逻辑、小规模数据</td><td>数值实验、矩阵与实验数据</td></tr></table>
 
 <p>NumPy数组（ndarray）是多维数值数据的容器。与Python原生列表相比，NumPy数组有三个核心优势。第一是速度——底层用C语言实现，处理十万级数据点时比纯Python快几十倍。第二是向量化操作——对整个数组执行运算无需写for循环。第三是内存效率——数组在内存中连续存储，占用空间更小。</p>
 

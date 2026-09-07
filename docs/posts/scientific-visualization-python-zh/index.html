@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/scientific-visualization-python-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python科研绘图完全指南：从数据到发表级图表", "description": "Python科研绘图完全指南：从数据到发表级图表。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-27", "dateModified": "2026-06-27", "wordCount": 479, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scientific-visualization-python-zh/", "image": "https://ml-biomat.com/static/images/og/scientific-visualization-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Python科研绘图完全指南：从数据到发表级图表", "item": "https://ml-biomat.com/posts/scientific-visualization-python-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python科研绘图完全指南：从数据到发表级图表", "description": "Python科研绘图完全指南：从数据到发表级图表。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-27", "dateModified": "2026-06-27", "wordCount": 524, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scientific-visualization-python-zh/", "image": "https://ml-biomat.com/static/images/og/scientific-visualization-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Python科研绘图完全指南：从数据到发表级图表", "item": "https://ml-biomat.com/posts/scientific-visualization-python-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -61,6 +61,8 @@ plt.rcParams.update({
     &quot;savefig.dpi&quot;: 300, &quot;savefig.bbox&quot;: &quot;tight&quot;
 })
 </code></pre>
+
+<table><tr><th>图形类型</th><th>适用数据</th><th>科研用途</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>折线图</td><td>连续序列</td><td>应力-应变、时间变化曲线</td></tr><tr><td>散点图</td><td>两组连续变量</td><td>纤维直径与模量的关系</td></tr><tr><td>多幅子图</td><td>多图组合</td><td>论文中的一图四联图</td></tr><tr><td>箱线图 / 直方图</td><td>分布数据</td><td>组间比较、样本分布</td></tr><tr><td>热力图</td><td>矩阵数据</td><td>特征相关性可视化</td></tr></table>
 
 <h2>一、折线图：连续数据的标准选择</h2>
 

@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "description": "材料科学中的特征工程：从实验数据到机器学习就绪数据。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 126, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-zh/", "image": "https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "item": "https://ml-biomat.com/posts/feature-engineering-materials-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "description": "材料科学中的特征工程：从实验数据到机器学习就绪数据。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 169, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-zh/", "image": "https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "item": "https://ml-biomat.com/posts/feature-engineering-materials-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -46,6 +46,8 @@
 </header>
 <div class="content">
 <h2>真正的瓶颈</h2>
+
+<table><tr><th>特征工程手段</th><th>作用</th><th>材料研究示例</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>分类变量编码</td><td>把类别文本转成数值特征</td><td>溶剂类型、晶体结构、处理分组</td></tr><tr><td>数值变换</td><td>缩放、标准化或取对数</td><td>浓度、晶粒尺寸、模量</td></tr><tr><td>交互特征</td><td>组合两个或多个原始特征</td><td>密度×模量、氢键密度×结晶度</td></tr><tr><td>缺失值处理</td><td>填补或显式标记缺失</td><td>传感器缺失行、批次差异</td></tr><tr><td>小样本特征选择</td><td>去除冗余维度、保留关键信息</td><td>正则化、K-best、域先验</td></tr></table>
 
 <p>大多数材料ML教程从干净的CSV直接跳到模型拟合。现实中，你的数据分散在实验本、仪器导出文件和Excel表格里。特征工程是将原始观测转化为结构化特征矩阵的过程，占实际工作量的80%。</p>
 
