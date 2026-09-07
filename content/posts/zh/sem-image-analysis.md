@@ -17,7 +17,8 @@ import numpy as np
 from skimage import io, filters, measure, morphology
 ```
 
-## 第一步：加载和预处理
+## 分析流程
+### 第一步：加载和预处理
 
 ```python
 img = io.imread("sem_fiber_network.tif", as_gray=True)
@@ -28,7 +29,7 @@ from scipy.ndimage import gaussian_filter
 img_denoised = gaussian_filter(img_norm, sigma=1.0)
 ```
 
-## 第二步：阈值分割
+### 第二步：阈值分割
 
 ```python
 methods = {"Otsu": filters.threshold_otsu(img_denoised),
@@ -39,7 +40,7 @@ binary = img_denoised > thresh
 print(f"纤维覆盖率: {binary.mean()*100:.1f}%")
 ```
 
-## 第三步：清理二值掩膜
+### 第三步：清理二值掩膜
 
 ```python
 cleaned = morphology.remove_small_objects(binary, min_size=50)
@@ -47,7 +48,7 @@ closed = morphology.binary_closing(cleaned, morphology.disk(2))
 skeleton = morphology.skeletonize(closed)  # 用于取向分析
 ```
 
-## 第四步：测量纤维属性
+### 第四步：测量纤维属性
 
 ```python
 labels = measure.label(closed)
@@ -63,7 +64,7 @@ print(f"发现 {len(df_fibers)} 个纤维片段")
 print(f"平均直径: {df_fibers['直径_px'].mean():.1f} +/- {df_fibers['直径_px'].std():.1f} px")
 ```
 
-## 第五步：取向分析
+### 第五步：取向分析
 
 ![纤维取向分布的极坐标直方图，优势取向约 90 度](/static/images/posts/sem-image-analysis/orientation-zh.webp)
 
@@ -75,7 +76,7 @@ dominant_angle = theta[np.argmax(sinogram.sum(axis=0))]
 print(f"主取向: {dominant_angle:.1f} 度")
 ```
 
-## 第六步：批量处理
+### 第六步：批量处理
 
 ```python
 import glob
@@ -114,4 +115,3 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 分水岭算法是处理粘连纤维时的有效工具。当纤维在SEM图像中紧密接触时，简单的全局阈值无法将粘连的纤维分开。分水岭算法通过将图像视为地形图——像素值为高度——然后模拟"注水"过程来找到不同纤维之间的分界线。结合距离变换，分水岭算法可以准确分离紧密相邻的纤维。
 
 机器学习方法正在改变SEM图像分析的范式。传统的滤波与阈值方法需要手动调整参数，而训练好的深度学习模型可以在各种成像条件下自动识别纤维特征。U-Net是图像分割的常用架构，仅需少量标注图像就能取得很好的效果。对于有大量重复性SEM分析需求的研究组，考虑训练一个专门的纤维分割模型是值得的投资。
-

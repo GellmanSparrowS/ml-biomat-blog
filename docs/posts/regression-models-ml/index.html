@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/regression-models-ml.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Common Regression Models in Machine Learning", "description": "A systematic guide to linear regression, Ridge, Lasso, polynomial regression, SVR, decision trees, random forests, and gradient boosting for scientific and engineering applications, with complete code examples.", "datePublished": "2026-07-03", "dateModified": "2026-07-03", "wordCount": 5454, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/regression-models-ml/", "image": "https://ml-biomat.com/static/images/og/regression-models-ml.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "Common Regression Models in Machine Learning", "item": "https://ml-biomat.com/posts/regression-models-ml/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Common Regression Models in Machine Learning", "description": "A systematic guide to linear regression, Ridge, Lasso, polynomial regression, SVR, decision trees, random forests, and gradient boosting for scientific and engineering applications, with complete code examples.", "datePublished": "2026-07-03", "dateModified": "2026-07-03", "wordCount": 5471, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/regression-models-ml/", "image": "https://ml-biomat.com/static/images/og/regression-models-ml.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "Common Regression Models in Machine Learning", "item": "https://ml-biomat.com/posts/regression-models-ml/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
@@ -45,7 +45,8 @@
 </div>
 </header>
 <div class="content">
-<h2>1. The Nature of Regression — From Numerical Prediction to Function Approximation</h2>
+<h2>Foundations</h2>
+<h3>1. The Nature of Regression — From Numerical Prediction to Function Approximation</h3>
 
 <p>The most fundamental distinction between regression and classification lies in the nature of the output: classification predicts discrete category labels, whereas regression predicts continuous numerical values. This difference, while seemingly minor, profoundly shapes model design choices, loss function selection, and the interpretation of evaluation metrics. In biology, materials science, and structural mechanics, regression problems are essentially ubiquitous: predicting elastic modulus from material composition and processing parameters, estimating binding free energy from protein sequence features, inferring full-field stress distributions from a subset of finite-element outputs, or predicting residual fatigue life from sensor time-series data. Whether an accurate and generalizable regression model can be built largely determines the practical credibility of data-driven science — the aspiration to let computation substitute for experimentation.</p>
 
@@ -93,7 +94,7 @@ def evaluate(name, y_true, y_pred):
 
 <hr>
 
-<h2>2. Linear Regression — The Most Concise Baseline</h2>
+<h3>2. Linear Regression — The Most Concise Baseline</h3>
 
 <p>Linear regression is both the starting point for all regression models and one of the most widely used statistical tools in scientific research. Its assumption is extremely simple: the target value is a linear combination of input features plus random noise. This assumption provides a good approximation in many scientific contexts — Young's modulus versus composition in materials science, dose-response relationships in biology, and the stress-strain relationship during the linear-elastic phase in structural mechanics. Understanding linear regression is not only a prerequisite for learning more complex models; the derivation itself reveals the most fundamental concepts of supervised learning: the loss function, least-squares estimation, and their geometric interpretation.</p>
 
@@ -140,7 +141,8 @@ plt.show()
 
 <hr>
 
-<h2>3. Ridge and Lasso — The Art of Regularization</h2>
+<h2>Regularization and Nonlinear Models</h2>
+<h3>3. Ridge and Lasso — The Art of Regularization</h3>
 
 <p>When the number of features approaches or exceeds the sample count (\(d \approx N\) or \(d > N\)), or when features are highly correlated, ordinary linear regression encounters a severe numerical problem: \(\mathbf{X}^T\mathbf{X}\) becomes nearly singular, coefficient estimate variances explode, and predictions become wildly unstable. This is the classic recipe for overfitting. Regularization addresses this by adding a penalty term on coefficient magnitude to the loss function, forcing the model to "not be too greedy" — accepting a slight increase in bias in exchange for a substantial reduction in variance. From a Bayesian perspective, regularization is equivalent to imposing a prior distribution on the parameters: L2 regularization corresponds to a Gaussian prior, and L1 regularization corresponds to a Laplacian prior. Understanding these two forms of regularization is equivalent to understanding the bias-variance tradeoff in the context of linear models.</p>
 
@@ -199,7 +201,7 @@ evaluate(&quot;Ridge (CV-tuned alpha)&quot;, y_test, ridge_cv.predict(X_test_sc)
 
 <hr>
 
-<h2>4. Polynomial Regression and Feature Engineering — Breaking the Linear Constraint</h2>
+<h3>4. Polynomial Regression and Feature Engineering — Breaking the Linear Constraint</h3>
 
 <img src="/static/images/posts/regression-models-ml/poly-en.webp" alt="Polynomial regression fit on synthetic data: degree-1 line underfits while degree-3 captures the nonlinear trend" loading="lazy">
 
@@ -250,7 +252,7 @@ evaluate(&quot;Poly(3) + Ridge&quot;, y_test, best_pipe.predict(X_test))
 
 <hr>
 
-<h2>5. Support Vector Regression — The ε-Insensitive Tube</h2>
+<h3>5. Support Vector Regression — The ε-Insensitive Tube</h3>
 
 <p>Support Vector Regression (SVR) transfers the margin-maximization philosophy of SVMs to regression tasks, but with a fundamentally different objective: rather than finding the hyperplane that maximally separates classes, SVR seeks the widest possible <strong>tube</strong> (ε-tube) that encloses as many training points as possible, penalizing only those that fall outside it. This design introduces a concept absent from ordinary regression: the <strong>ε-insensitive loss</strong>.</p>
 
@@ -294,7 +296,8 @@ evaluate(&quot;Linear SVR&quot;, y_test, lin_svr.predict(X_test_sc))
 
 <hr>
 
-<h2>6. Decision Tree and Random Forest Regression — Piecewise Approximation to Ensemble Averaging</h2>
+<h2>Tree-Based and Boosting Models</h2>
+<h3>6. Decision Tree and Random Forest Regression — Piecewise Approximation to Ensemble Averaging</h3>
 
 <p>Decision trees are not limited to classification — they perform regression just as naturally. A Decision Tree Regressor recursively partitions the feature space into rectangular regions, assigning each leaf node the mean target value of all training samples within that region. The model is therefore a <strong>piecewise constant function</strong> approximator: finer partitioning (deeper tree) produces a more staircase-like function that fits training data more closely, but generalizes less well to new inputs. The overfitting behavior of decision tree regression is particularly transparent: an unconstrained deep tree achieves R² = 1 on the training set but may achieve R² < 0 on the test set.</p>
 
@@ -343,7 +346,7 @@ print(f&quot;Mean predictive uncertainty (std): {pred_std.mean():.4f}&quot;)
 
 <hr>
 
-<h2>7. Gradient Boosting Regression — XGBoost and LightGBM</h2>
+<h3>7. Gradient Boosting Regression — XGBoost and LightGBM</h3>
 
 <p>Gradient boosting regression is currently among the strongest algorithms for structured-data regression tasks and is the predominant winning solution in data science competitions involving tabular data. The core idea is: <strong>sequentially accumulate a series of weak learners (shallow decision trees), each one fitting the residuals of all previous trees, gradually approximating the target function</strong>. Unlike random forests — which train trees in parallel and average their outputs — gradient boosting trains trees serially, with each new tree specifically targeting whatever the current ensemble is getting wrong. This is equivalent to performing gradient descent in function space, hence the name.</p>
 
@@ -427,7 +430,8 @@ except Exception:
 
 <hr>
 
-<h2>8. Regression Evaluation Metrics — Choosing Between MSE, MAE, and R²</h2>
+<h2>Evaluation and Model Selection</h2>
+<h3>8. Regression Evaluation Metrics — Choosing Between MSE, MAE, and R²</h3>
 
 <p>After training a regression model, how do we accurately characterize its performance? Regression evaluation is subtler than classification: different error metrics embed different implicit assumptions about what constitutes "good prediction," and choosing the wrong metric can lead to seriously misleading conclusions. Reporting multiple metrics simultaneously, supported by diagnostic plots, is responsible scientific practice.</p>
 
@@ -503,7 +507,7 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
 
 <hr>
 
-<h2>9. A Practical Model-Selection Guide</h2>
+<h3>9. A Practical Model-Selection Guide</h3>
 
 <p>As in classification, no regression algorithm is universally optimal. Different algorithms exhibit different adaptations to dataset size, feature structure, noise distribution, extrapolation requirements, and interpretability constraints. A principled selection strategy is more important than chasing the highest numerical benchmark.</p>
 

@@ -16,7 +16,8 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 ```
 
-## 1. What Is Curve Fitting?
+## Foundations
+### 1. What Is Curve Fitting?
 
 Curve fitting means finding the parameters of a mathematical model that best match your data. For example, if you pull on a silk fiber and record force vs. extension, the slope of the initial linear region is the fiber's stiffness. Fitting a line gives you that slope plus an uncertainty estimate.
 
@@ -25,7 +26,7 @@ The general workflow:
 2. Call `curve_fit(f, x_data, y_data)` which returns optimal parameters and their covariance
 3. Extract parameters and uncertainties from the results
 
-## 2. Linear Regression: The Foundation
+### 2. Linear Regression: The Foundation
 
 Most materials characterization starts with linear fitting. Young's modulus from a stress-strain curve, calibration curves, and many standard analyses use linear regression.
 
@@ -64,7 +65,8 @@ plt.xlabel('Strain'); plt.ylabel('Stress (MPa)')
 plt.legend(); plt.tight_layout()
 ```
 
-## 3. Exponential Decay: Stress Relaxation
+## Fitting Physical Models
+### 3. Exponential Decay: Stress Relaxation
 
 ![Measured stress-relaxation data with an exponential decay fit and equilibrium stress level](/static/images/posts/scipy-curve-fitting/relaxation-en.webp)
 
@@ -98,7 +100,7 @@ plt.xlabel('Time (s)'); plt.ylabel('Stress (kPa)')
 plt.legend(); plt.tight_layout()
 ```
 
-## 4. Hertz Model: AFM Nanoindentation
+### 4. Hertz Model: AFM Nanoindentation
 
 Atomic Force Microscopy (AFM) nanoindentation measures the stiffness of tiny sample regions. The Hertz model relates indentation depth to force for an elastic half-space:
 
@@ -126,7 +128,7 @@ print(f"Young's modulus: {E/1000:.1f} kPa")
 - Multiple locations show consistent results
 - Loading rate independence (or report the rate)
 
-## 5. Viscoelastic Models
+### 5. Viscoelastic Models
 
 Many biomaterials show both elastic and viscous behavior. The Standard Linear Solid (SLS) model captures this:
 
@@ -151,7 +153,8 @@ print(f"Equilibrium modulus: {popt[1]:.1f} kPa")
 print(f"Viscosity: {popt[2]:.1f} kPa*s")
 ```
 
-## 6. Confidence Intervals
+## Uncertainty and Beyond
+### 6. Confidence Intervals
 
 Never report fitted parameters without uncertainties. The covariance matrix from curve_fit gives standard errors:
 
@@ -170,7 +173,7 @@ for i, (param, name) in enumerate(zip(popt, ['E_star'])):
     print(f"{name}: {param:.1f} +/- {ci:.1f} (95% CI)")
 ```
 
-## 7. Common Pitfalls
+### 7. Common Pitfalls
 
 | Problem | Cause | Fix |
 |---------|-------|-----|
@@ -180,7 +183,7 @@ for i, (param, name) in enumerate(zip(popt, ['E_star'])):
 | Fit looks wrong at edges | Model doesn't fit extremes | Check if model is appropriate |
 | NaN in covariance | Over-parameterized | Simplify model or fix some parameters |
 
-## 8. When curve_fit Is Not Enough
+### 8. When curve_fit Is Not Enough
 
 ```python
 from scipy.optimize import minimize
@@ -207,4 +210,3 @@ Choosing between competing models requires more than just comparing R-squared va
 Cross-validation is essential when the goal is prediction rather than description. Leave-one-out cross-validation is appropriate for very small datasets common in materials research. For each data point, fit the model without that point and calculate the prediction error. The average error across all points gives a realistic estimate of predictive performance.
 
 When reporting fitted parameters in publications, include not just the best-fit values and standard errors but also the correlation matrix between parameters. Highly correlated parameters indicate that the model may be overparameterized—different combinations of parameter values produce nearly identical fits. This is a red flag that should be discussed transparently.
-

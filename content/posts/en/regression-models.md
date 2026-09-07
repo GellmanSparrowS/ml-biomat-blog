@@ -9,7 +9,8 @@ description: "A systematic guide to linear regression, Ridge, Lasso, polynomial 
 ---
 
 
-## 1. The Nature of Regression — From Numerical Prediction to Function Approximation
+## Foundations
+### 1. The Nature of Regression — From Numerical Prediction to Function Approximation
 
 The most fundamental distinction between regression and classification lies in the nature of the output: classification predicts discrete category labels, whereas regression predicts continuous numerical values. This difference, while seemingly minor, profoundly shapes model design choices, loss function selection, and the interpretation of evaluation metrics. In biology, materials science, and structural mechanics, regression problems are essentially ubiquitous: predicting elastic modulus from material composition and processing parameters, estimating binding free energy from protein sequence features, inferring full-field stress distributions from a subset of finite-element outputs, or predicting residual fatigue life from sensor time-series data. Whether an accurate and generalizable regression model can be built largely determines the practical credibility of data-driven science — the aspiration to let computation substitute for experimentation.
 
@@ -57,7 +58,7 @@ def evaluate(name, y_true, y_pred):
 
 ---
 
-## 2. Linear Regression — The Most Concise Baseline
+### 2. Linear Regression — The Most Concise Baseline
 
 Linear regression is both the starting point for all regression models and one of the most widely used statistical tools in scientific research. Its assumption is extremely simple: the target value is a linear combination of input features plus random noise. This assumption provides a good approximation in many scientific contexts — Young's modulus versus composition in materials science, dose-response relationships in biology, and the stress-strain relationship during the linear-elastic phase in structural mechanics. Understanding linear regression is not only a prerequisite for learning more complex models; the derivation itself reveals the most fundamental concepts of supervised learning: the loss function, least-squares estimation, and their geometric interpretation.
 
@@ -104,7 +105,8 @@ plt.show()
 
 ---
 
-## 3. Ridge and Lasso — The Art of Regularization
+## Regularization and Nonlinear Models
+### 3. Ridge and Lasso — The Art of Regularization
 
 When the number of features approaches or exceeds the sample count (\(d \approx N\) or \(d > N\)), or when features are highly correlated, ordinary linear regression encounters a severe numerical problem: \(\mathbf{X}^T\mathbf{X}\) becomes nearly singular, coefficient estimate variances explode, and predictions become wildly unstable. This is the classic recipe for overfitting. Regularization addresses this by adding a penalty term on coefficient magnitude to the loss function, forcing the model to "not be too greedy" — accepting a slight increase in bias in exchange for a substantial reduction in variance. From a Bayesian perspective, regularization is equivalent to imposing a prior distribution on the parameters: L2 regularization corresponds to a Gaussian prior, and L1 regularization corresponds to a Laplacian prior. Understanding these two forms of regularization is equivalent to understanding the bias-variance tradeoff in the context of linear models.
 
@@ -163,7 +165,7 @@ Selecting \(\lambda\) (called `alpha` in scikit-learn) through cross-validation 
 
 ---
 
-## 4. Polynomial Regression and Feature Engineering — Breaking the Linear Constraint
+### 4. Polynomial Regression and Feature Engineering — Breaking the Linear Constraint
 
 ![Polynomial regression fit on synthetic data: degree-1 line underfits while degree-3 captures the nonlinear trend](/static/images/posts/regression-models-ml/poly-en.webp)
 
@@ -214,7 +216,7 @@ Using a `Pipeline` to encapsulate the entire preprocessing-modeling chain has tw
 
 ---
 
-## 5. Support Vector Regression — The ε-Insensitive Tube
+### 5. Support Vector Regression — The ε-Insensitive Tube
 
 Support Vector Regression (SVR) transfers the margin-maximization philosophy of SVMs to regression tasks, but with a fundamentally different objective: rather than finding the hyperplane that maximally separates classes, SVR seeks the widest possible **tube** (ε-tube) that encloses as many training points as possible, penalizing only those that fall outside it. This design introduces a concept absent from ordinary regression: the **ε-insensitive loss**.
 
@@ -258,7 +260,8 @@ SVR's primary limitation mirrors that of classification SVMs: training complexit
 
 ---
 
-## 6. Decision Tree and Random Forest Regression — Piecewise Approximation to Ensemble Averaging
+## Tree-Based and Boosting Models
+### 6. Decision Tree and Random Forest Regression — Piecewise Approximation to Ensemble Averaging
 
 Decision trees are not limited to classification — they perform regression just as naturally. A Decision Tree Regressor recursively partitions the feature space into rectangular regions, assigning each leaf node the mean target value of all training samples within that region. The model is therefore a **piecewise constant function** approximator: finer partitioning (deeper tree) produces a more staircase-like function that fits training data more closely, but generalizes less well to new inputs. The overfitting behavior of decision tree regression is particularly transparent: an unconstrained deep tree achieves R² = 1 on the training set but may achieve R² < 0 on the test set.
 
@@ -307,7 +310,7 @@ print(f"Mean predictive uncertainty (std): {pred_std.mean():.4f}")
 
 ---
 
-## 7. Gradient Boosting Regression — XGBoost and LightGBM
+### 7. Gradient Boosting Regression — XGBoost and LightGBM
 
 Gradient boosting regression is currently among the strongest algorithms for structured-data regression tasks and is the predominant winning solution in data science competitions involving tabular data. The core idea is: **sequentially accumulate a series of weak learners (shallow decision trees), each one fitting the residuals of all previous trees, gradually approximating the target function**. Unlike random forests — which train trees in parallel and average their outputs — gradient boosting trains trees serially, with each new tree specifically targeting whatever the current ensemble is getting wrong. This is equivalent to performing gradient descent in function space, hence the name.
 
@@ -391,7 +394,8 @@ Key gradient boosting tuning principles: smaller `learning_rate` paired with mor
 
 ---
 
-## 8. Regression Evaluation Metrics — Choosing Between MSE, MAE, and R²
+## Evaluation and Model Selection
+### 8. Regression Evaluation Metrics — Choosing Between MSE, MAE, and R²
 
 After training a regression model, how do we accurately characterize its performance? Regression evaluation is subtler than classification: different error metrics embed different implicit assumptions about what constitutes "good prediction," and choosing the wrong metric can lead to seriously misleading conclusions. Reporting multiple metrics simultaneously, supported by diagnostic plots, is responsible scientific practice.
 
@@ -467,7 +471,7 @@ Beyond numerical metrics, two diagnostic plots should always accompany regressio
 
 ---
 
-## 9. A Practical Model-Selection Guide
+### 9. A Practical Model-Selection Guide
 
 As in classification, no regression algorithm is universally optimal. Different algorithms exhibit different adaptations to dataset size, feature structure, noise distribution, extrapolation requirements, and interpretability constraints. A principled selection strategy is more important than chasing the highest numerical benchmark.
 

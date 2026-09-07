@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/sem-image-analysis-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SEM图像分析实战：纤维形态的自动化测量", "description": "SEM图像分析实战：纤维形态的自动化测量。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 261, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/sem-image-analysis-zh/", "image": "https://ml-biomat.com/static/images/og/sem-image-analysis-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "SEM图像分析实战：纤维形态的自动化测量", "item": "https://ml-biomat.com/posts/sem-image-analysis-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SEM图像分析实战：纤维形态的自动化测量", "description": "SEM图像分析实战：纤维形态的自动化测量。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 263, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/sem-image-analysis-zh/", "image": "https://ml-biomat.com/static/images/og/sem-image-analysis-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "SEM图像分析实战：纤维形态的自动化测量", "item": "https://ml-biomat.com/posts/sem-image-analysis-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -54,7 +54,8 @@ import numpy as np
 from skimage import io, filters, measure, morphology
 </code></pre>
 
-<h2>第一步：加载和预处理</h2>
+<h2>分析流程</h2>
+<h3>第一步：加载和预处理</h3>
 
 <pre><code class="language-python">
 img = io.imread(&quot;sem_fiber_network.tif&quot;, as_gray=True)
@@ -65,7 +66,7 @@ from scipy.ndimage import gaussian_filter
 img_denoised = gaussian_filter(img_norm, sigma=1.0)
 </code></pre>
 
-<h2>第二步：阈值分割</h2>
+<h3>第二步：阈值分割</h3>
 
 <pre><code class="language-python">
 methods = {&quot;Otsu&quot;: filters.threshold_otsu(img_denoised),
@@ -76,7 +77,7 @@ binary = img_denoised &gt; thresh
 print(f&quot;纤维覆盖率: {binary.mean()*100:.1f}%&quot;)
 </code></pre>
 
-<h2>第三步：清理二值掩膜</h2>
+<h3>第三步：清理二值掩膜</h3>
 
 <pre><code class="language-python">
 cleaned = morphology.remove_small_objects(binary, min_size=50)
@@ -84,7 +85,7 @@ closed = morphology.binary_closing(cleaned, morphology.disk(2))
 skeleton = morphology.skeletonize(closed)  # 用于取向分析
 </code></pre>
 
-<h2>第四步：测量纤维属性</h2>
+<h3>第四步：测量纤维属性</h3>
 
 <pre><code class="language-python">
 labels = measure.label(closed)
@@ -100,7 +101,7 @@ print(f&quot;发现 {len(df_fibers)} 个纤维片段&quot;)
 print(f&quot;平均直径: {df_fibers[&#x27;直径_px&#x27;].mean():.1f} +/- {df_fibers[&#x27;直径_px&#x27;].std():.1f} px&quot;)
 </code></pre>
 
-<h2>第五步：取向分析</h2>
+<h3>第五步：取向分析</h3>
 
 <img src="/static/images/posts/sem-image-analysis/orientation-zh.webp" alt="纤维取向分布的极坐标直方图，优势取向约 90 度" loading="lazy">
 
@@ -112,7 +113,7 @@ dominant_angle = theta[np.argmax(sinogram.sum(axis=0))]
 print(f&quot;主取向: {dominant_angle:.1f} 度&quot;)
 </code></pre>
 
-<h2>第六步：批量处理</h2>
+<h3>第六步：批量处理</h3>
 
 <pre><code class="language-python">
 import glob

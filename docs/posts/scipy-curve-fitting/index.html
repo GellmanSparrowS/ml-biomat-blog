@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/scipy-curve-fitting.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "description": "A comprehensive guide to curve fitting with SciPy for materials and biology researchers. Linear regression, exponential decay, Hertz indentation, viscoelastic models, with complete code and real examples.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 1258, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "item": "https://ml-biomat.com/posts/scipy-curve-fitting/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "description": "A comprehensive guide to curve fitting with SciPy for materials and biology researchers. Linear regression, exponential decay, Hertz indentation, viscoelastic models, with complete code and real examples.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 1268, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "item": "https://ml-biomat.com/posts/scipy-curve-fitting/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -53,7 +53,8 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 </code></pre>
 
-<h2>1. What Is Curve Fitting?</h2>
+<h2>Foundations</h2>
+<h3>1. What Is Curve Fitting?</h3>
 
 <p>Curve fitting means finding the parameters of a mathematical model that best match your data. For example, if you pull on a silk fiber and record force vs. extension, the slope of the initial linear region is the fiber's stiffness. Fitting a line gives you that slope plus an uncertainty estimate.</p>
 
@@ -64,7 +65,7 @@ import matplotlib.pyplot as plt
 <li>Extract parameters and uncertainties from the results</li>
 
 </ol>
-<h2>2. Linear Regression: The Foundation</h2>
+<h3>2. Linear Regression: The Foundation</h3>
 
 <p>Most materials characterization starts with linear fitting. Young's modulus from a stress-strain curve, calibration curves, and many standard analyses use linear regression.</p>
 
@@ -103,7 +104,8 @@ plt.xlabel(&#x27;Strain&#x27;); plt.ylabel(&#x27;Stress (MPa)&#x27;)
 plt.legend(); plt.tight_layout()
 </code></pre>
 
-<h2>3. Exponential Decay: Stress Relaxation</h2>
+<h2>Fitting Physical Models</h2>
+<h3>3. Exponential Decay: Stress Relaxation</h3>
 
 <img src="/static/images/posts/scipy-curve-fitting/relaxation-en.webp" alt="Measured stress-relaxation data with an exponential decay fit and equilibrium stress level" loading="lazy">
 
@@ -137,7 +139,7 @@ plt.xlabel(&#x27;Time (s)&#x27;); plt.ylabel(&#x27;Stress (kPa)&#x27;)
 plt.legend(); plt.tight_layout()
 </code></pre>
 
-<h2>4. Hertz Model: AFM Nanoindentation</h2>
+<h3>4. Hertz Model: AFM Nanoindentation</h3>
 
 <p>Atomic Force Microscopy (AFM) nanoindentation measures the stiffness of tiny sample regions. The Hertz model relates indentation depth to force for an elastic half-space:</p>
 
@@ -167,7 +169,7 @@ print(f&quot;Young&#x27;s modulus: {E/1000:.1f} kPa&quot;)
 <li>Loading rate independence (or report the rate)</li>
 
 </ul>
-<h2>5. Viscoelastic Models</h2>
+<h3>5. Viscoelastic Models</h3>
 
 <p>Many biomaterials show both elastic and viscous behavior. The Standard Linear Solid (SLS) model captures this:</p>
 
@@ -192,7 +194,8 @@ print(f&quot;Equilibrium modulus: {popt[1]:.1f} kPa&quot;)
 print(f&quot;Viscosity: {popt[2]:.1f} kPa*s&quot;)
 </code></pre>
 
-<h2>6. Confidence Intervals</h2>
+<h2>Uncertainty and Beyond</h2>
+<h3>6. Confidence Intervals</h3>
 
 <p>Never report fitted parameters without uncertainties. The covariance matrix from curve_fit gives standard errors:</p>
 
@@ -211,11 +214,11 @@ for i, (param, name) in enumerate(zip(popt, [&#x27;E_star&#x27;])):
     print(f&quot;{name}: {param:.1f} +/- {ci:.1f} (95% CI)&quot;)
 </code></pre>
 
-<h2>7. Common Pitfalls</h2>
+<h3>7. Common Pitfalls</h3>
 
 <table><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr><tr><td>---------</td><td>-------</td><td>-----</td></tr><tr><td>"Optimal parameters not found"</td><td>Bad initial guess</td><td>Visualize data, try different p0</td></tr><tr><td>Negative modulus</td><td>No bounds</td><td>Add <code>bounds=(0, None)</code></td></tr><tr><td>Huge uncertainties</td><td>Too few data points</td><td>Collect more data in the region of interest</td></tr><tr><td>Fit looks wrong at edges</td><td>Model doesn't fit extremes</td><td>Check if model is appropriate</td></tr><tr><td>NaN in covariance</td><td>Over-parameterized</td><td>Simplify model or fix some parameters</td></tr></table>
 
-<h2>8. When curve_fit Is Not Enough</h2>
+<h3>8. When curve_fit Is Not Enough</h3>
 
 <pre><code class="language-python">
 from scipy.optimize import minimize

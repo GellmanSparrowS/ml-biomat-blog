@@ -45,7 +45,8 @@ The `stratify=y` argument ensures that class proportions are preserved in both t
 
 ---
 
-## 2. Logistic Regression — Linear Classification Through a Probabilistic Lens
+## Core Algorithms
+### 2. Logistic Regression — Linear Classification Through a Probabilistic Lens
 
 Despite its name, logistic regression is a classification model through and through. It is the first classifier most practitioners learn and one of the most frequently used baselines in both academic research and industry, precisely because it not only outputs a predicted class but also a calibrated probability estimate. Understanding logistic regression amounts to understanding the probabilistic foundations shared by nearly all parametric classifiers.
 
@@ -92,7 +93,7 @@ Logistic regression's key limitation is that it can only learn **linear** decisi
 
 ---
 
-## 3. Support Vector Machines — The Widest Possible Margin
+### 3. Support Vector Machines — The Widest Possible Margin
 
 Support vector machines (SVMs) were developed by Cortes, Vapnik, and colleagues in the 1990s. After the introduction of the kernel trick, SVMs briefly held the status of state-of-the-art classifier across many domains. For small datasets and high-dimensional data — such as gene expression profiling — they remain highly competitive. Their design philosophy stems from a provocative question: among the infinitely many hyperplanes that correctly separate two classes, which one is the best?
 
@@ -130,7 +131,7 @@ SVMs have notable limitations: training complexity approaches \(O(N^2)\) to \(O(
 
 ---
 
-## 4. Decision Trees — Transparent, Rule-Based Classification
+### 4. Decision Trees — Transparent, Rule-Based Classification
 
 Decision trees are among the most interpretable classifiers in machine learning. Their decision logic can be understood directly by human experts — a crucial property in high-stakes domains such as medical diagnosis and structural failure analysis. When asked "why was this sample classified as fatigue fracture?", a decision tree can answer with a clear if-then-else chain; a black-box neural network cannot.
 
@@ -183,7 +184,7 @@ Decision trees naturally produce **feature importance scores** by tallying the t
 
 ---
 
-## 5. Random Forests and Ensemble Learning — The Wisdom of Crowds
+### 5. Random Forests and Ensemble Learning — The Wisdom of Crowds
 
 A single decision tree is intuitive but prone to overfitting. Random forests address this by combining many trees, embodying a simple yet profound principle: **an ensemble of weak learners consistently outperforms a single strong learner**. Understanding random forests requires first grasping one of machine learning's central conceptual tensions: the bias-variance tradeoff.
 
@@ -235,7 +236,7 @@ Practical recommendation: random forests are the most reliably "out-of-the-box" 
 
 ---
 
-## 6. k-Nearest Neighbors — The Laziest Learner
+### 6. k-Nearest Neighbors — The Laziest Learner
 
 k-Nearest Neighbors (k-NN) is the most intuitively transparent algorithm in machine learning and the canonical example of **lazy learning**. Its premise reflects an everyday heuristic: **you can infer someone's characteristics by looking at who they are close to**. In feature space, k-NN locates the k training samples nearest to a test point and assigns the majority class label among those neighbors. There is no training phase at all — the algorithm simply memorizes the entire training set and defers all computation to prediction time.
 
@@ -284,7 +285,7 @@ Setting `weights='distance'` makes each neighbor's vote inversely proportional t
 
 ---
 
-## 7. Naive Bayes — The Minimalist Philosophy of Probabilistic Inference
+### 7. Naive Bayes — The Minimalist Philosophy of Probabilistic Inference
 
 Naive Bayes is a family of probabilistic classifiers grounded in Bayes' theorem. Celebrated for its extreme simplicity and training speed, it has a long history in text classification (spam detection) and biological sequence analysis. Understanding it requires first grasping the conceptual core of Bayes' theorem: how to **systematically update beliefs in light of observed evidence**.
 
@@ -328,7 +329,8 @@ Naive Bayes' strengths are training speed (\(O(Nd)\)), well-calibrated probabili
 
 ---
 
-## 8. Evaluation Metrics — Accuracy Is Just the Beginning
+## Evaluation and Model Selection
+### 8. Evaluation Metrics — Accuracy Is Just the Beginning
 
 Once a classifier is trained, how should its performance be measured? Many beginners default to **accuracy** — the fraction of correctly classified samples. But accuracy is a dangerous oversimplification, especially under class imbalance. If 99% of a medical dataset consists of healthy subjects, a classifier that always predicts "healthy" achieves 99% accuracy while being completely useless for disease detection. Choosing the right evaluation metric is, fundamentally, an act of encoding what it means to be wrong in the specific context of your problem.
 
@@ -409,7 +411,7 @@ Finally, **K-fold cross-validation** is the gold standard for estimating general
 
 ---
 
-## 9. A Practical Model-Selection Guide — No Free Lunch
+### 9. A Practical Model-Selection Guide — No Free Lunch
 
 No classifier is optimal for every problem. This is formalized by the **No Free Lunch Theorem**: when averaged over all possible datasets, every algorithm has identical expected performance. In practice, model selection requires reasoning across several dimensions simultaneously — not defaulting to whichever algorithm won last year's Kaggle competition.
 

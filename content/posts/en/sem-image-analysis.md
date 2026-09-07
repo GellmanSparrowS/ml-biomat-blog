@@ -18,7 +18,8 @@ import matplotlib.pyplot as plt
 from skimage import io, filters, measure, morphology, feature
 ```
 
-## Step 1: Load and Preprocess
+## The Analysis Pipeline
+### Step 1: Load and Preprocess
 
 ```python
 # Load SEM image (8-bit or 16-bit TIFF)
@@ -33,7 +34,7 @@ from scipy.ndimage import gaussian_filter
 img_denoised = gaussian_filter(img_norm, sigma=1.0)
 ```
 
-## Step 2: Thresholding
+### Step 2: Thresholding
 
 Choosing the right threshold method is critical:
 
@@ -52,7 +53,7 @@ binary = img_denoised > thresh
 print(f"Fiber coverage: {binary.mean()*100:.1f}%")
 ```
 
-## Step 3: Clean the Binary Mask
+### Step 3: Clean the Binary Mask
 
 ```python
 # Remove small noise objects (< 50 pixels)
@@ -66,7 +67,7 @@ closed = morphology.binary_closing(cleaned, selem)
 skeleton = morphology.skeletonize(closed)
 ```
 
-## Step 4: Measure Fiber Properties
+### Step 4: Measure Fiber Properties
 
 ```python
 # Label connected regions
@@ -89,7 +90,7 @@ print(f"Mean diameter: {df_fibers['diameter_px'].mean():.1f} +/- {df_fibers['dia
 print(f"Mean aspect ratio: {df_fibers['aspect_ratio'].mean():.2f}")
 ```
 
-## Step 5: Orientation Analysis
+### Step 5: Orientation Analysis
 
 ![Polar histogram of fiber orientation with a dominant alignment near 90 degrees](/static/images/posts/sem-image-analysis/orientation-en.webp)
 
@@ -108,7 +109,7 @@ dominant_angle = theta[np.argmax(orientation_profile)]
 print(f"Dominant fiber orientation: {dominant_angle:.1f} degrees")
 ```
 
-## Step 6: Batch Processing
+### Step 6: Batch Processing
 
 ```python
 import glob

@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/sem-image-analysis.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical SEM Image Analysis for Biomaterials Research", "description": "How to analyze SEM images of fiber networks with Python: thresholding, fiber measurement, orientation analysis, and batch processing using scikit-image.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 508, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/sem-image-analysis/", "image": "https://ml-biomat.com/static/images/og/sem-image-analysis.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Wet-lab Data Processing", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Practical SEM Image Analysis for Biomaterials Research", "item": "https://ml-biomat.com/posts/sem-image-analysis/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical SEM Image Analysis for Biomaterials Research", "description": "How to analyze SEM images of fiber networks with Python: thresholding, fiber measurement, orientation analysis, and batch processing using scikit-image.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 512, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/sem-image-analysis/", "image": "https://ml-biomat.com/static/images/og/sem-image-analysis.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Wet-lab Data Processing", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Practical SEM Image Analysis for Biomaterials Research", "item": "https://ml-biomat.com/posts/sem-image-analysis/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -55,7 +55,8 @@ import matplotlib.pyplot as plt
 from skimage import io, filters, measure, morphology, feature
 </code></pre>
 
-<h2>Step 1: Load and Preprocess</h2>
+<h2>The Analysis Pipeline</h2>
+<h3>Step 1: Load and Preprocess</h3>
 
 <pre><code class="language-python">
 # Load SEM image (8-bit or 16-bit TIFF)
@@ -70,7 +71,7 @@ from scipy.ndimage import gaussian_filter
 img_denoised = gaussian_filter(img_norm, sigma=1.0)
 </code></pre>
 
-<h2>Step 2: Thresholding</h2>
+<h3>Step 2: Thresholding</h3>
 
 <p>Choosing the right threshold method is critical:</p>
 
@@ -89,7 +90,7 @@ binary = img_denoised &gt; thresh
 print(f&quot;Fiber coverage: {binary.mean()*100:.1f}%&quot;)
 </code></pre>
 
-<h2>Step 3: Clean the Binary Mask</h2>
+<h3>Step 3: Clean the Binary Mask</h3>
 
 <pre><code class="language-python">
 # Remove small noise objects (&lt; 50 pixels)
@@ -103,7 +104,7 @@ closed = morphology.binary_closing(cleaned, selem)
 skeleton = morphology.skeletonize(closed)
 </code></pre>
 
-<h2>Step 4: Measure Fiber Properties</h2>
+<h3>Step 4: Measure Fiber Properties</h3>
 
 <pre><code class="language-python">
 # Label connected regions
@@ -126,7 +127,7 @@ print(f&quot;Mean diameter: {df_fibers[&#x27;diameter_px&#x27;].mean():.1f} +/- 
 print(f&quot;Mean aspect ratio: {df_fibers[&#x27;aspect_ratio&#x27;].mean():.2f}&quot;)
 </code></pre>
 
-<h2>Step 5: Orientation Analysis</h2>
+<h3>Step 5: Orientation Analysis</h3>
 
 <img src="/static/images/posts/sem-image-analysis/orientation-en.webp" alt="Polar histogram of fiber orientation with a dominant alignment near 90 degrees" loading="lazy">
 
@@ -145,7 +146,7 @@ dominant_angle = theta[np.argmax(orientation_profile)]
 print(f&quot;Dominant fiber orientation: {dominant_angle:.1f} degrees&quot;)
 </code></pre>
 
-<h2>Step 6: Batch Processing</h2>
+<h3>Step 6: Batch Processing</h3>
 
 <pre><code class="language-python">
 import glob
