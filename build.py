@@ -186,6 +186,19 @@ def site_ld():
     })
 
 
+def person_ld():
+    return ld_json({
+        "@context": "https://schema.org", "@type": "Person",
+        "name": "Yunhao Yang", "alternateName": "杨云浩",
+        "jobTitle": "PhD Student", "affiliation": {"@type": "Organization", "name": "Fudan University"},
+        "url": SITE["base_url"] + "/about/",
+        "sameAs": [
+            "https://github.com/GellmanSparrowS",
+            "https://www.researchgate.net/profile/Yunhao-Yang-7"
+        ]
+    })
+
+
 def write_file(path, content):
     p = Path(BUILD_DIR) / path
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -231,7 +244,7 @@ def find_pair(post, by_lang):
 
 MATHJAX_SCRIPT = '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>'
 
-HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>\n{mathjax}</head>\n<body>\n'
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>\n{mathjax}</head>\n<body>\n<canvas id="bg-canvas" aria-hidden="true"></canvas>\n'
 
 HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -246,7 +259,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<canvas id="bg-network" aria-hidden="true"></canvas>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{lang_label}</span>\n<h3><a href="/posts/{slug}/">{title}</a></h3>\n<div class="card-meta"><span>{date}</span><span>\u00b7</span><span>{read_min} min read</span></div>\n<p class="card-desc">{desc}</p>\n<div class="card-tags">{tags_html}</div>\n</article>'
 
@@ -478,7 +491,7 @@ def build():
 
     # About page
     about_body = Path("content/about-body.html").read_text(encoding="utf-8")
-    html = make_head(title="About", desc="About ML-Biomat: A bilingual technical blog exploring machine learning and multiscale modeling for fiber-based biomaterials. By Yunhao Yang at Fudan University.", url=f'{SITE["base_url"]}/about/') + about_body + FOOT.format(year=datetime.now().year)
+    html = make_head(title="Yunhao Yang 杨云浩 — About / 关于", desc="Yunhao Yang 杨云浩：复旦大学高分子科学系博士生，ML-Biomat 双语技术博客作者。Focus: machine learning, multiscale modeling, and fiber-based biomaterials.", url=f'{SITE["base_url"]}/about/', ld=person_ld()) + about_body + FOOT.format(year=datetime.now().year)
     write_file("about/index.html", html)
 
     # Privacy Policy page (required for AdSense)
@@ -684,7 +697,7 @@ def build():
     
     # --- CV Page ---
     cv_body = Path("content/cv-body.html").read_text(encoding="utf-8")
-    cv_page = make_head(title="CV \u2014 Yunhao Yang", desc="Academic CV of Yunhao Yang, PhD student at Fudan University, Dept. of Macromolecular Science. Research in AI-driven multiscale modeling for biomaterials design.", url=SITE["base_url"] + "/cv/") + cv_body + FOOT.format(year=datetime.now().year)
+    cv_page = make_head(title="Yunhao Yang 杨云浩 — CV / 简历", desc="Yunhao Yang 杨云浩：复旦大学高分子科学系博士生。研究方向为 AI 驱动的多尺度模拟与纤维生物材料理性设计。Academic CV: AI-driven multiscale modeling for biomaterials.", url=SITE["base_url"] + "/cv/", ld=person_ld()) + cv_body + FOOT.format(year=datetime.now().year)
     write_file("cv/index.html", cv_page)
 
 
