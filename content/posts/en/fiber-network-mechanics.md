@@ -10,6 +10,8 @@ description: "An introduction to the mechanical behavior of fiber-based biomater
 
 ## Why Fiber Networks Matter
 
+![Schematic disordered fiber network with fibers, cross-links, and pores](/static/images/posts/fiber-network-mechanics/network-en.webp)
+
 Nature builds structural materials from fibers: collagen in tendons, silk in cocoons, cellulose in plant cell walls. These **disordered fiber networks** achieve remarkable mechanical properties — high strength-to-weight ratios, strain-stiffening, and toughness — through architecture rather than chemistry alone.
 
 Understanding fiber network mechanics is essential for designing better biomaterials.

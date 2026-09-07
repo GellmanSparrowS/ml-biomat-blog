@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/regression-models-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "常用的机器学习回归模型：从线性基准到梯度提升", "description": "常用的机器学习回归模型：从线性基准到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-07-03", "dateModified": "2026-07-03", "wordCount": 2094, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/regression-models-zh/", "image": "https://ml-biomat.com/static/images/og/regression-models-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "常用的机器学习回归模型：从线性基准到梯度提升", "item": "https://ml-biomat.com/posts/regression-models-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "常用的机器学习回归模型：从线性基准到梯度提升", "description": "常用的机器学习回归模型：从线性基准到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-07-03", "dateModified": "2026-07-03", "wordCount": 2097, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/regression-models-zh/", "image": "https://ml-biomat.com/static/images/og/regression-models-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "常用的机器学习回归模型：从线性基准到梯度提升", "item": "https://ml-biomat.com/posts/regression-models-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script></head>
@@ -206,6 +206,8 @@ _, coef_path, _ = lasso_path(X_train_sc, y_train, alphas=alphas)
 <hr>
 
 <h2>四、多项式回归与特征工程——突破线性枷锁</h2>
+
+<img src="/static/images/posts/regression-models-ml/poly-zh.webp" alt="多项式回归拟合示意：1 次欠拟合，3 次捕捉非线性趋势" loading="lazy">
 
 <p>线性回归假设目标值是特征的线性函数，这在很多实际问题中过于简单。应力-应变关系在塑性阶段是非线性的，酶催化反应遵循 Michaelis-Menten 动力学，材料疲劳寿命与应力幅呈幂律关系——这些都是明显的非线性现象。多项式回归（Polynomial Regression）是引入非线性的最简单方式：把原始特征的多项式组合作为新特征，喂给一个普通的线性回归。这个看似简单的思路实际上揭示了机器学习中一个深刻的一般性原理：<strong>特征工程（Feature Engineering）</strong>——通过变换和组合原始特征来提升模型表达能力，往往比直接换用更复杂的模型更有效，且在样本量有限时尤为重要。</p>
 

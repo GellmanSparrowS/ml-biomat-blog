@@ -165,6 +165,8 @@ Selecting \(\lambda\) (called `alpha` in scikit-learn) through cross-validation 
 
 ## 4. Polynomial Regression and Feature Engineering — Breaking the Linear Constraint
 
+![Polynomial regression fit on synthetic data: degree-1 line underfits while degree-3 captures the nonlinear trend](/static/images/posts/regression-models-ml/poly-en.webp)
+
 The assumption that target values are linear functions of features is too restrictive for many real-world problems. The stress-strain relationship enters a nonlinear regime at plasticity onset; enzyme-catalyzed reactions follow Michaelis-Menten kinetics; material fatigue life follows a power-law relationship with stress amplitude. These are all fundamentally nonlinear. Polynomial regression is the simplest way to introduce nonlinearity: generate polynomial combinations of the original features and feed them into an ordinary linear regression. This seemingly simple idea reveals a deep general principle: **feature engineering** — transforming and combining raw features to enhance the model's expressive power — is often more effective than switching to a more complex model, and is particularly impactful when sample sizes are limited.
 
 For a single feature \(x\), the polynomial feature vector is \((1, x, x^2, \ldots, x^p)\), and the regression model becomes:

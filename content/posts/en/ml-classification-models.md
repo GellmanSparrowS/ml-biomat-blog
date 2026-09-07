@@ -10,6 +10,8 @@ description: "A practical guide to major classification models in machine learni
 
 ## 1. What Is Classification — From Labels to Decision Boundaries
 
+![Two-class points separated by a decision boundary in a 2D feature space](/static/images/posts/ml-classification-models/boundary-en.webp)
+
 Classification is the most fundamental and widely applied task in supervised machine learning. Its goal is straightforward: given an input sample, determine which predefined category it belongs to. This description may sound deceptively simple, but nearly every scientific or engineering problem that requires a "judgment call" can be framed within this structure. Distinguishing healthy cells from cancerous ones in microscopy images, identifying cracks versus intact regions in X-ray scans, differentiating fatigue fracture from ductile failure in materials testing — all of these are classification problems. Whether a classification model can be built that is accurate, interpretable, and computationally efficient often determines the scientific ceiling of a computational research project.
 
 Formally, a classification problem is defined as follows. We are given a training dataset \(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N\), where \(\mathbf{x}_i \in \mathbb{R}^d\) is the feature vector of the i-th sample (d-dimensional) and \(y_i \in \{1, 2, \ldots, K\}\) is its class label. The objective is to learn a mapping \(f: \mathbb{R}^d \rightarrow \{1, 2, \ldots, K\}\) that generalizes correctly to new, unseen samples. When \(K=2\), this is **binary classification**; when \(K>2\), it is **multi-class classification**.
