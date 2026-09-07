@@ -95,3 +95,12 @@ title, date, category, tags[], lang, slug, description. Bilingual: same category
 - Bing flags descriptions < 150 chars; Chinese is judged by raw char count.
 - Target: 60-100 Chinese chars, 150-250 English chars.
 - Use description field in YAML frontmatter; build.py reads it directly.
+
+## Secrets & Local Preview (2026-09-07)
+- Tokens (GitHub / PyPI / Cloudflare) are stored OUTSIDE the repo at
+  E:\Auto_TEST\.secrets.json with restricted permissions. NEVER commit tokens.
+- Build locally, then visually confirm: python preview.py
+  (serves docs/ on http://127.0.0.1:8866 and opens the browser).
+- Run post-build health checks: python qa_check.py --open
+  (writes _qa/site_report.html; _qa/ is gitignored, never deployed).
+- Do not push until the user explicitly authorizes it.
