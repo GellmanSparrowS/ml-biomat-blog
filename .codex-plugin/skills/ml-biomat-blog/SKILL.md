@@ -4,16 +4,18 @@ E:\Auto_TEST\ml-biomat-blog\
 GitHub: GellmanSparrowS/ml-biomat-blog (token: E:\Auto_TEST\.ml-biomat-token)
 Domain: ml-biomat.com (GitHub Pages, main /docs)
 
-## Build & Push
+## Build & Commit (NO AUTO-PUSH)
 cd E:\Auto_TEST\ml-biomat-blog
 python build.py
-echo ml-biomat.com > docs\CNAME
-git add -A; git commit -m "msg"; git push origin main
+git add -A; git commit -m "msg"
+# NEVER `git push` unless the user explicitly authorizes it.
 
 ## Content Pipeline
 - content/TODO.json: article queue
 - content/INVENTORY.md: content inventory
-- auto_writer.py: writer framework
+- article_writer.py: sectioned anti-truncation writer (preferred)
+- chart_gen.py: chart + table helpers (run with anaconda python)
+- auto_writer.py: legacy queue reader
 - Coverage check auto-runs on build
 
 ## BOM Warning
@@ -26,7 +28,7 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - **Deep nesting**: Keep H2 count <= 7 per article. Use ### for sub-sections.
 - **BOM**: PowerShell Set-Content adds BOM. Use Python write for .md files.
 - **.nojekyll**: Always auto-generate .nojekyll in docs/ to bypass Jekyll.
-- **Git push fails**: Use GitHub Contents API (PUT /contents/{path}) as fallback.
+- **Push is disabled by default**: only push when the user explicitly asks.
 
 ## Critical: Encoding (updated 2026-06-29)
 - NEVER use backslash-x hex escapes in Python strings for write_text(encoding=utf-8). They get DOUBLE-ENCODED. Use backslash-u escapes instead.
@@ -39,12 +41,11 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - Applies to build.py, generate.py, and ALL Python files across repos.
 
 
-## Auto-Push Rule (updated 2026-06-30)
-- After completing articles + python build.py, ALWAYS push the full changeset without waiting for user prompt.
-- Push scope: ALL changed files (config.py, content/posts/*.md, docs/*, SKILL.md).
-- If git push fails (network), use GitHub Contents API batch upload automatically.
-- Priority: push build output (docs/) and source (content/) first; then verify GitHub Pages deployment.
-- Do not leave un-pushed local changes at end of session.
+## Push Policy (updated 2026-09-07)
+- NEVER push to GitHub unless the user explicitly authorizes it.
+- Local commits are allowed and recommended for rollback.
+- `git status` may show "ahead of origin/main" after prior API-based uploads; ignore it.
+- The live site already mirrors the local tree; verify against https://ml-biomat.com/.
 
 ## Article Depth Rule (2026-06-30)
 - Section count: 4-12 is ideal. Depth over breadth.
@@ -54,22 +55,32 @@ PowerShell Set-Content adds BOM. Use apply_patch or Python write for .md files.
 - Avoid shallow bullet lists; prefer connected paragraphs that build understanding.
 
 ## Auto-Completion Rule (2026-06-30)
-- If a task (article + build + push) is not complete at end of session, continue in next turn.
-- Do not stop at partial work. Complete the full cycle: write -> build -> verify -> push.
-- Respect GitHub API rate limits: batch pushes, retry SSL failures, do not hammer.
+- Complete the full LOCAL cycle: write -> build -> verify -> local commit.
+- Do not stop at partial work; use _drafts/ part files so an interrupted write resumes cleanly.
 
-## Long-Form Chinese Writing (2026-06-30)
-- exec_command here-string has a content size limit (~800 hanzi per call). Not suitable for articles.
-- apply_patch CAN create Python generator scripts using unicode escapes (pure ASCII, no PS issues).
-- Best for 8000+ hanzi: use apply_patch to build a _gen_article.py script, then run it once.
-- Never mix write-mode and append-mode on the same file across parallel exec_command calls.
-- The Python generator script pattern is the only reliable method for long Chinese articles.
+## Long-Form Writing (updated 2026-09-07)
+- Do NOT write articles as one giant here-string; it truncates around ~800 hanzi.
+- Use article_writer.py: one section per part file, then assemble + validate.
+  1) python article_writer.py new <slug> --lang <en|zh> --category <cat> --title "..." --desc "..." --tags a,b
+  2) write each section to _drafts/<slug>/part-NN.md (Python write_text, utf-8)
+  3) python article_writer.py assemble <slug> --check-only   # validate length/H2/images
+  4) python article_writer.py assemble <slug>                # write the final post
+- Validation defaults: EN >= 800 words, ZH >= 3000 hanzi, H2 <= 7. Override with --min-words / --max-h2.
+- Keep one concept per section; prefer connected paragraphs over bullet lists.
 
 ## MathJax / LaTeX Rendering (2026-07-03)
 MathJax 3 auto-injected in build.py for post pages. After LaTeX-heavy articles, clear browser cache (Ctrl+Shift+R). If formulas fail, check backslash escaping.
 
 ## Cache and Deployment (2026-07-03)
-GitHub Pages deploys 1-2 min after push. Hard refresh to verify. Stale content: check Actions tab for deployment status.
+GitHub Pages deploys 1-2 min after the user pushes local commits. Hard refresh to verify. Stale content: check the Pages deployment status.
+
+## Figures & Tables (2026-09-07)
+- Generate charts from data with chart_gen.py (run with anaconda python):
+  python chart_gen.py line --csv data.csv --x x --y y --out static/images/posts/<slug>/fig.webp --webp
+  (also: bar, scatter; `table` prints a Markdown table from CSV)
+- Put figures in static/images/posts/<slug>/ and reference them in the .md:
+  ![alt](/static/images/posts/<slug>/fig.webp)
+- Prefer WebP; article_writer.py assemble validates that local image references exist.
 
 ## Post-Frontmatter Checklist
 title, date, category, tags[], lang, slug, description. Bilingual: same category, EN slug xxx-ml, ZH xxx-zh.
