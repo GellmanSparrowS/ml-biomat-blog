@@ -252,7 +252,7 @@ POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{
 
 POST_ROW = '<li class="post-row"><span class="row-date">{date}</span><a href="/posts/{slug}/">{title}</a></li>'
 
-ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="/categories/{cat_slug}/">{cat_name}</a>\n</div>\n</header>\n<div class="content">\n{toc}{html}\n</div>\n</article>'
+ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="/categories/{cat_slug}/">{cat_name}</a>\n</div>\n</header>\n<div class="card-tags" style="margin:.3rem 0 .6rem">{tags_html}</div>\n<div class="content">\n{toc}{html}\n</div>\n</article>'
 
 
 GISCUS_SCRIPT = '<section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)"><h2>Comments</h2><script src="https://giscus.app/client.js" data-repo="GellmanSparrowS/ml-biomat-blog" data-repo-id="R_kgDOTEwhsA" data-category="General" data-category-id="DIC_kwDOTEwhsM4CpPbT" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script></section>'
@@ -369,9 +369,10 @@ def build():
             related_html = '<section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple">' + "".join(
                 POST_ROW.format(date=q["date"], title=hm.escape(q["title"]), slug=q["slug"]) for q in related
             ) + "</ul></section>"
+        tag_links = "".join(f'<a class="tag-pill" href="{tag_href(t)}">{hm.escape(t)}</a>' for t in p["tags"])
         body = ARTICLE_HTML.format(
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
-            cat_slug=p["category"], cat_name=cn, html=p["html"], toc=p["toc"],
+            cat_slug=p["category"], cat_name=cn, html=p["html"], toc=p["toc"], tags_html=tag_links,
             lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + prev_next + ENGAGE_BANNER + related_html + giscus_html
         html = make_head(title=p["title"], desc=p["description"] or p["title"],
                          url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=p["lang"],
