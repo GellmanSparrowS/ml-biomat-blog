@@ -25,7 +25,8 @@ Hierarchical superstructures refer to materials that exhibit ordered organizatio
 
 The universal design principle is **separation of stiffness and toughness across scales**. Hard crystalline domains provide strength and stiffness, soft amorphous domains provide extensibility and toughness, and the interfaces between them dissipate energy through sacrificial bonds, hydrogen bond networks, and geometric interlocking.
 
-## 1. Silk Fibroin: Beta-Sheet Crystals and Nanofibrils
+## Biological Examples: Nature's Nested Designs
+### 1. Silk Fibroin: Beta-Sheet Crystals and Nanofibrils
 
 Silk fibroin from Bombyx mori is a model system for hierarchical structures. From low to high:
 
@@ -37,7 +38,7 @@ Key mechanical strategy: **Crystalline domains serve as cross-linking nodes** wi
 
 Related: [Silk Fibroin: From Molecular Structure to Mechanical Function](/posts/silk-fibroin-structure-mechanics/)
 
-## 2. Collagen: Triple Helix to Tough Fibers
+### 2. Collagen: Triple Helix to Tough Fibers
 
 Collagen, the most abundant protein in mammals, exhibits:
 
@@ -49,7 +50,7 @@ The characteristic J-shaped stress-strain curve results from hierarchical uncrim
 
 Related: [Stress-Strain Curve Biomechanics](/posts/stress-strain-curves/)
 
-## 3. Bone: Organic-Inorganic Composite Hierarchy
+### 3. Bone: Organic-Inorganic Composite Hierarchy
 
 Bone represents the most complex biological composite, organized across seven hierarchical levels:
 
@@ -60,7 +61,7 @@ Bone represents the most complex biological composite, organized across seven hi
 
 Key design: **Minerals provide compressive strength**, collagen provides tensile toughness, and the lamellar/osteonal architecture deflects propagating cracks. Together, these mechanisms give bone a fracture toughness three orders of magnitude higher than pure hydroxyapatite.
 
-## 4. Nacre (Mother-of-Pearl): Brick-and-Mortar Toughness
+### 4. Nacre (Mother-of-Pearl): Brick-and-Mortar Toughness
 
 Nacre's celebrated structure:
 
@@ -70,7 +71,7 @@ Nacre's celebrated structure:
 
 The brick-and-mortar architecture achieves **3000x the toughness of pure aragonite**. Under load, platelets slide and the organic layers stretch, providing massive energy dissipation. Nanoscale asperities on platelet surfaces create mechanical interlocking that prevents complete pullout at low stress. This strategy has been widely mimicked in ceramic composites and body armor.
 
-## 5. Spider Silk: Crystalline/Amorphous Networks
+### 5. Spider Silk: Crystalline/Amorphous Networks
 
 Spider dragline silk shares structural principles with silkworm silk but with added complexity:
 
@@ -80,7 +81,7 @@ Spider dragline silk shares structural principles with silkworm silk but with ad
 
 Spider silk achieves toughness values of ~160 MJ/m3 and exhibits a unique "supercontraction" phenomenon - spontaneous shrinkage up to 50% in length under humid conditions, governed by hydration-driven rearrangements in the amorphous domains. The key to its performance lies in the precise size control of crystalline nanoparticles: too large leads to brittle fracture, too small fails to effectively transfer load.
 
-## 6. Cellulose: Multi-Layered Cell Wall Design
+### 6. Cellulose: Multi-Layered Cell Wall Design
 
 Cellulose, Earth's most abundant biopolymer, features:
 
@@ -90,7 +91,8 @@ Cellulose, Earth's most abundant biopolymer, features:
 
 This helical arrangement gives cellulose fibers extreme axial strength (~1 GPa) while retaining flexibility. Modern nanocellulose materials are attempting to reconstruct this hierarchical architecture in synthetic systems.
 
-## Common Design Principles
+## Design Principles and Synthesis
+### Common Design Principles
 
 Across these six systems, we can distill universal principles:
 
@@ -100,11 +102,12 @@ Across these six systems, we can distill universal principles:
 4. **Adaptivity**: Many biomaterials dynamically adjust their structure in response to mechanical load (e.g., Wolff's law in bone)
 5. **Water as a structural participant**: Water is not merely a solvent but an active structural component, modulating mechanical response through hydration-dependent hydrogen bond networks
 
-## Hierarchical Self-Assembly
+### Hierarchical Self-Assembly
 
 A defining feature of biological hierarchies is that they form via self-assembly rather than directed fabrication. Each level spontaneously organizes under specific physicochemical conditions, requiring no external templates. For example, silkworms produce silk fibers under ambient conditions through shear-flow-induced crystallization, outperforming any synthetic fiber-spinning process in energy efficiency and precision. Understanding these self-assembly pathways is key to sustainable biomimetic manufacturing.
 
-## Research Methods
+## Experimental and Analysis Methods
+### Research Methods
 
 Studying hierarchical structures requires a multi-method approach:
 
@@ -119,7 +122,7 @@ Studying hierarchical structures requires a multi-method approach:
 
 Recent advances in machine-learned force fields (ANI, NequIP, MACE) are bridging the gap between DFT accuracy and MD efficiency, enabling accurate simulations at larger spatiotemporal scales. In situ mechanical testing (SEM/AFM) now allows direct observation of hierarchical structure evolution during loading.
 
-## Quantitative Characterization
+### Quantitative Characterization
 
 Understanding hierarchical structures requires quantitative metrics beyond qualitative description:
 

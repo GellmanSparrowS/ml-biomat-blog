@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "多尺度模拟在纤维生物材料中的应用入门", "description": "多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 289, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/", "image": "https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "多尺度模拟在纤维生物材料中的应用入门", "item": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "多尺度模拟在纤维生物材料中的应用入门", "description": "多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 326, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/", "image": "https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "多尺度模拟在纤维生物材料中的应用入门", "item": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -52,6 +52,8 @@
 <p>本文提供一个实用的路线图：有哪些方法、什么时候用哪种、以及如何用 Python 把它们串联起来。</p>
 
 <h2>三个尺度的工具箱</h2>
+
+<table><tr><th>尺度</th><th>长度范围</th><th>核心物理</th><th>常用方法</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>分子</td><td>埃～纳米</td><td>化学键、热运动、静电</td><td>DFT、MD（ASE、GROMACS、LAMMPS）</td></tr><tr><td>介观</td><td>纳米～微米</td><td>网络拓扑、链动力学</td><td>粗粒化MD、DPD、网络模型</td></tr><tr><td>连续介质</td><td>微米～毫米</td><td>弹性、塑性、流动</td><td>有限元FEM、均匀化</td></tr></table>
 
 <h3>分子尺度（埃～纳米）</h3>
 

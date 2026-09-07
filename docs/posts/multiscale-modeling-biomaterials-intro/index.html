@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "A Practical Introduction to Multiscale Modeling for Biomaterials", "description": "A practical overview of multiscale modeling approaches for fiber-based biomaterials: from molecular dynamics to continuum mechanics, with Python code examples.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 543, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro/", "image": "https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "A Practical Introduction to Multiscale Modeling for Biomaterials", "item": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "A Practical Introduction to Multiscale Modeling for Biomaterials", "description": "A practical overview of multiscale modeling approaches for fiber-based biomaterials: from molecular dynamics to continuum mechanics, with Python code examples.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 606, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro/", "image": "https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "A Practical Introduction to Multiscale Modeling for Biomaterials", "item": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 </head>
@@ -41,7 +41,7 @@
 <span class="lang-badge en">EN</span>
 <h1>A Practical Introduction to Multiscale Modeling for Biomaterials</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/multiscale-modeling/">Multiscale Modeling</a>
+<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/multiscale-modeling/">Multiscale Modeling</a>
 </div>
 </header>
 <div class="content">
@@ -52,6 +52,8 @@
 <p>This post gives you a practical roadmap: what methods exist, when to use each, and how to combine them with Python.</p>
 
 <h2>The Three Scales</h2>
+
+<table><tr><th>Scale</th><th>Length range</th><th>Key physics</th><th>Typical methods</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>Molecular</td><td>Angstrom - nm</td><td>bonds, thermal motion, electrostatics</td><td>DFT, MD (ASE, GROMACS, LAMMPS)</td></tr><tr><td>Mesoscale</td><td>nm - micrometer</td><td>network topology, chain dynamics</td><td>coarse-grained MD, DPD, network models</td></tr><tr><td>Continuum</td><td>micrometer - mm</td><td>elasticity, plasticity, flow</td><td>FEM, homogenization</td></tr></table>
 
 <h3>1. Molecular Scale (angstroms to nanometers)</h3>
 

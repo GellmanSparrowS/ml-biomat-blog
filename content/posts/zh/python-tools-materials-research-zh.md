@@ -19,6 +19,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 ```
 
+| 类别 | 库 | 典型用途 |
+|---|---|---|
+| 核心科学计算 | NumPy、SciPy | 数组运算、信号处理、曲线拟合 |
+| 表格数据 | Pandas | 实验数据清洗与分组统计 |
+| 绘图 | Matplotlib、Seaborn | 发表级图表与统计图 |
+| 原子尺度模拟 | ASE、pymatgen | 结构建模、DFT/MD 流程、LAMMPS 输入输出 |
+| 机器学习 | scikit-learn | 回归、分类、特征重要性 |
+| 图像分析 | scikit-image | 显微图像分割与测量 |
+
 ## 一、NumPy：科学计算的基石
 
 NumPy的核心是多维数组对象ndarray。与Python原生的列表相比，NumPy数组存储连续、运算向量化，处理十万级数据点时快几十倍。

@@ -16,6 +16,15 @@ This post covers the essential Python stack for a materials researcher, with con
 
 ## The Core Stack
 
+| Category | Libraries | Typical use |
+|---|---|---|
+| Core scientific computing | NumPy, SciPy | array math, signal processing, curve fitting |
+| Tabular data | Pandas | cleaning and grouping experimental datasets |
+| Plotting | Matplotlib, Seaborn | publication figures and statistical plots |
+| Atomistic simulation | ASE, pymatgen | structures, DFT/MD workflows, LAMMPS I/O |
+| Machine learning | scikit-learn | regression, classification, feature importance |
+| Image analysis | scikit-image | microscopy segmentation and measurement |
+
 ### NumPy &amp; SciPy
 
 The foundation. If you're processing experimental data, these two cover 80% of your needs:

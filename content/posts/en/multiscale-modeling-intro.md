@@ -16,6 +16,12 @@ This post gives you a practical roadmap: what methods exist, when to use each, a
 
 ## The Three Scales
 
+| Scale | Length range | Key physics | Typical methods |
+|---|---|---|---|
+| Molecular | Angstrom - nm | bonds, thermal motion, electrostatics | DFT, MD (ASE, GROMACS, LAMMPS) |
+| Mesoscale | nm - micrometer | network topology, chain dynamics | coarse-grained MD, DPD, network models |
+| Continuum | micrometer - mm | elasticity, plasticity, flow | FEM, homogenization |
+
 ### 1. Molecular Scale (angstroms to nanometers)
 
 **Method: Molecular Dynamics (MD)**
