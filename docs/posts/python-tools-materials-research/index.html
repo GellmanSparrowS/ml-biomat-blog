@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,18 +46,18 @@
 </div>
 </header>
 <div class="content">
-<h2>Why Python for Materials Science</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-python-for-materials-science">Why Python for Materials Science</a></li><li class="toc-h2"><a href="#core-scientific-stack">Core Scientific Stack</a></li><li class="toc-h3"><a href="#the-core-stack">The Core Stack</a></li><li class="toc-h3"><a href="#numpy-scipy">NumPy & SciPy</a></li><li class="toc-h3"><a href="#pandas">Pandas</a></li><li class="toc-h3"><a href="#matplotlib-seaborn">Matplotlib & Seaborn</a></li><li class="toc-h3"><a href="#materials-specific-libraries">Materials-Specific Libraries</a></li><li class="toc-h3"><a href="#ase-atomic-simulation-environment">ASE (Atomic Simulation Environment)</a></li><li class="toc-h3"><a href="#pymatgen-python-materials-genomics">pymatgen (Python Materials Genomics)</a></li><li class="toc-h2"><a href="#analysis-and-machine-learning">Analysis and Machine Learning</a></li><li class="toc-h3"><a href="#machine-learning-for-materials">Machine Learning for Materials</a></li><li class="toc-h3"><a href="#scikit-learn-your-first-ml-model">scikit-learn — Your First ML Model</a></li><li class="toc-h3"><a href="#feature-importance-what-drives-performance">Feature Importance — What Drives Performance?</a></li><li class="toc-h3"><a href="#image-analysis-for-microscopy">Image Analysis for Microscopy</a></li><li class="toc-h2"><a href="#workflow-and-setup">Workflow and Setup</a></li><li class="toc-h3"><a href="#putting-it-together-a-research-workflow">Putting It Together: A Research Workflow</a></li><li class="toc-h3"><a href="#quick-setup">Quick Setup</a></li><li class="toc-h2"><a href="#what-s-next">What's Next</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-python-for-materials-science">Why Python for Materials Science</h2>
 
 <p>Materials research generates data everywhere: AFM force curves, SEM images, MD trajectories, XRD patterns, mechanical testing logs. Python has become the lingua franca for processing this data—and for good reason: it's free, readable, and has an ecosystem purpose-built for scientific computing.</p>
 
 <p>This post covers the essential Python stack for a materials researcher, with concrete code examples you can copy into your Jupyter notebook.</p>
 
-<h2>Core Scientific Stack</h2>
-<h3>The Core Stack</h3>
+<h2 id="core-scientific-stack">Core Scientific Stack</h2>
+<h3 id="the-core-stack">The Core Stack</h3>
 
 <table><tr><th>Category</th><th>Libraries</th><th>Typical use</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>Core scientific computing</td><td>NumPy, SciPy</td><td>array math, signal processing, curve fitting</td></tr><tr><td>Tabular data</td><td>Pandas</td><td>cleaning and grouping experimental datasets</td></tr><tr><td>Plotting</td><td>Matplotlib, Seaborn</td><td>publication figures and statistical plots</td></tr><tr><td>Atomistic simulation</td><td>ASE, pymatgen</td><td>structures, DFT/MD workflows, LAMMPS I/O</td></tr><tr><td>Machine learning</td><td>scikit-learn</td><td>regression, classification, feature importance</td></tr><tr><td>Image analysis</td><td>scikit-image</td><td>microscopy segmentation and measurement</td></tr></table>
 
-<h3>NumPy &amp; SciPy</h3>
+<h3 id="numpy-scipy">NumPy &amp; SciPy</h3>
 
 <p>The foundation. If you're processing experimental data, these two cover 80% of your needs:</p>
 
@@ -79,7 +80,7 @@ adhesion_force = -force[peaks[0]] if len(peaks) &gt; 0 else 0
 print(f&quot;Adhesion force: {adhesion_force:.2f} nN&quot;)
 </code></pre>
 
-<h3>Pandas</h3>
+<h3 id="pandas">Pandas</h3>
 
 <p>When your data is tabular (mechanical tests with multiple samples, conditions, repeats):</p>
 
@@ -97,7 +98,7 @@ summary = df.groupby(&quot;treatment&quot;).agg({
 print(summary)
 </code></pre>
 
-<h3>Matplotlib &amp; Seaborn</h3>
+<h3 id="matplotlib-seaborn">Matplotlib &amp; Seaborn</h3>
 
 <p>Publication-quality figures with minimal code:</p>
 
@@ -120,9 +121,9 @@ plt.tight_layout()
 plt.savefig(&quot;mechanical_properties.pdf&quot;, dpi=300)
 </code></pre>
 
-<h3>Materials-Specific Libraries</h3>
+<h3 id="materials-specific-libraries">Materials-Specific Libraries</h3>
 
-<h3>ASE (Atomic Simulation Environment)</h3>
+<h3 id="ase-atomic-simulation-environment">ASE (Atomic Simulation Environment)</h3>
 
 <p>For atomistic data—reading structure files, building supercells, computing properties:</p>
 
@@ -142,7 +143,7 @@ ana = Analysis(supercell)
 rdf = ana.get_rdf(rmax=15.0, nbins=200)
 </code></pre>
 
-<h3>pymatgen (Python Materials Genomics)</h3>
+<h3 id="pymatgen-python-materials-genomics">pymatgen (Python Materials Genomics)</h3>
 
 <p>For crystal structures, phase diagrams, and materials informatics:</p>
 
@@ -158,10 +159,10 @@ elastic_tensor = ElasticTensor.from_stress_strain_dict(stress_strain_data)
 print(f&quot;Bulk modulus: {elastic_tensor.k_voigt:.2f} GPa&quot;)
 </code></pre>
 
-<h2>Analysis and Machine Learning</h2>
-<h3>Machine Learning for Materials</h3>
+<h2 id="analysis-and-machine-learning">Analysis and Machine Learning</h2>
+<h3 id="machine-learning-for-materials">Machine Learning for Materials</h3>
 
-<h3>scikit-learn — Your First ML Model</h3>
+<h3 id="scikit-learn-your-first-ml-model">scikit-learn — Your First ML Model</h3>
 
 <p>Predicting mechanical properties from composition/processing features:</p>
 
@@ -186,7 +187,7 @@ train_score = model.score(X_train_scaled, y_train)
 test_score = model.score(scaler.transform(X_test), y_test)
 </code></pre>
 
-<h3>Feature Importance — What Drives Performance?</h3>
+<h3 id="feature-importance-what-drives-performance">Feature Importance — What Drives Performance?</h3>
 
 <pre><code class="language-python">
 importances = model.feature_importances_
@@ -196,7 +197,7 @@ for i in range(min(10, len(feature_names))):
     print(f&quot;{feature_names[indices[i]]}: {importances[indices[i]]:.4f}&quot;)
 </code></pre>
 
-<h3>Image Analysis for Microscopy</h3>
+<h3 id="image-analysis-for-microscopy">Image Analysis for Microscopy</h3>
 
 <p>Processing SEM/TEM images to quantify fiber morphology:</p>
 
@@ -220,8 +221,8 @@ print(f&quot;Mean fiber diameter: {df_fibers[&#x27;minor_axis_length&#x27;].mean
 print(f&quot;Fiber orientation std: {np.std(df_fibers[&#x27;orientation&#x27;]):.2f} rad&quot;)
 </code></pre>
 
-<h2>Workflow and Setup</h2>
-<h3>Putting It Together: A Research Workflow</h3>
+<h2 id="workflow-and-setup">Workflow and Setup</h2>
+<h3 id="putting-it-together-a-research-workflow">Putting It Together: A Research Workflow</h3>
 
 <p>Here's how a typical multiscale project flows with Python:</p>
 
@@ -234,7 +235,7 @@ print(f&quot;Fiber orientation std: {np.std(df_fibers[&#x27;orientation&#x27;]):
 <li><strong>Version control everything</strong> (Git + DVC for data)</li>
 
 </ol>
-<h3>Quick Setup</h3>
+<h3 id="quick-setup">Quick Setup</h3>
 
 <pre><code class="language-bash">
 # Create a conda environment with everything you need
@@ -243,7 +244,7 @@ conda create -n matsci python=3.10 numpy scipy pandas matplotlib \
 conda activate matsci
 </code></pre>
 
-<h2>What's Next</h2>
+<h2 id="what-s-next">What's Next</h2>
 
 <p>In future posts, I'll cover:</p>
 <ul>
@@ -253,7 +254,7 @@ conda activate matsci
 <li>Building interactive dashboards with Streamlit for lab data</li>
 
 </ul>
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li>Hunter, J.D. (2007). Matplotlib: A 2D graphics environment. <em>CSE</em>, 9(3), 90-95.</li>
 <li>Larsen, A.H. et al. (2017). ASE: Atomic Simulation Environment. <em>J. Physics: Condensed Matter</em>, 29, 273002.</li>
@@ -263,7 +264,7 @@ conda activate matsci
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

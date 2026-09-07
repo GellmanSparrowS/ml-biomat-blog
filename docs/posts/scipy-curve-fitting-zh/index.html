@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,14 +46,14 @@
 </div>
 </header>
 <div class="content">
-<p>在材料科学和生物学实验中，我们经常需要从离散的数据点中提取连续的物理参数。比如从应力-应变曲线中提取杨氏模量、从松弛实验中提取松弛时间、从AFM压痕曲线中提取样品刚度。曲线拟合是连接实验数据和物理模型的桥梁，而SciPy的curve_fit是完成这一任务的利器。</p>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#一-曲线拟合的基本原理">一、曲线拟合的基本原理</a></li><li class="toc-h2"><a href="#二-线性回归-力学测试中最常用的方法">二、线性回归：力学测试中最常用的方法</a></li><li class="toc-h2"><a href="#三-指数衰减模型-应力松弛实验">三、指数衰减模型：应力松弛实验</a></li><li class="toc-h2"><a href="#四-hertz模型-afm纳米压痕分析">四、Hertz模型：AFM纳米压痕分析</a></li><li class="toc-h2"><a href="#五-置信区间-不要只报一个数字">五、置信区间：不要只报一个数字</a></li><li class="toc-h2"><a href="#六-常见问题和调试技巧">六、常见问题和调试技巧</a></li><li class="toc-h3"><a href="#七-延伸工具">七、延伸工具</a></li><li class="toc-h3"><a href="#参考文献">参考文献</a></li></ul></details><p>在材料科学和生物学实验中，我们经常需要从离散的数据点中提取连续的物理参数。比如从应力-应变曲线中提取杨氏模量、从松弛实验中提取松弛时间、从AFM压痕曲线中提取样品刚度。曲线拟合是连接实验数据和物理模型的桥梁，而SciPy的curve_fit是完成这一任务的利器。</p>
 
 <pre><code class="language-python">
 import numpy as np
 from scipy.optimize import curve_fit
 </code></pre>
 
-<h2>一、曲线拟合的基本原理</h2>
+<h2 id="一-曲线拟合的基本原理">一、曲线拟合的基本原理</h2>
 
 <table><tr><th>问题类型</th><th>模型函数</th><th>SciPy 工具</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>线性关系</td><td>y = ax + b</td><td>np.polyfit 或 linregress</td></tr><tr><td>指数衰减</td><td>a·exp(-t/τ) + c</td><td>curve_fit</td></tr><tr><td>幂律关系</td><td>a·x^b</td><td>curve_fit（先取对数给出初猜）</td></tr><tr><td>Hertz 压痕</td><td>F = k·δ^n</td><td>curve_fit + 参数边界</td></tr><tr><td>参数置信区间</td><td>由协方差矩阵估计</td><td>curve_fit 返回的 pcov</td></tr></table>
 
@@ -60,7 +61,7 @@ from scipy.optimize import curve_fit
 
 <p>SciPy的curve_fit不仅给出最优参数，还提供协方差矩阵，用来估计每个参数的不确定度。这对于科研论文中的误差报告非常重要。</p>
 
-<h2>二、线性回归：力学测试中最常用的方法</h2>
+<h2 id="二-线性回归-力学测试中最常用的方法">二、线性回归：力学测试中最常用的方法</h2>
 
 <pre><code class="language-python">
 strain = np.array([0.000, 0.005, 0.010, 0.015, 0.020])
@@ -78,7 +79,7 @@ r2 = 1 - np.sum(residuals**2) / np.sum((stress - np.mean(stress))**2)
 print(f&quot;杨氏模量: {E:.1f} +/- {E_std:.1f} MPa, R2={r2:.4f}&quot;)
 </code></pre>
 
-<h2>三、指数衰减模型：应力松弛实验</h2>
+<h2 id="三-指数衰减模型-应力松弛实验">三、指数衰减模型：应力松弛实验</h2>
 
 <img src="/static/images/posts/scipy-curve-fitting/relaxation-zh.webp" alt="测量应力松驰数据与指数表减拟合及平衡应力水平" loading="lazy">
 
@@ -97,7 +98,7 @@ A, tau, y0 = popt
 print(f&quot;松弛时间: {tau:.1f} min&quot;)
 </code></pre>
 
-<h2>四、Hertz模型：AFM纳米压痕分析</h2>
+<h2 id="四-hertz模型-afm纳米压痕分析">四、Hertz模型：AFM纳米压痕分析</h2>
 
 <pre><code class="language-python">
 indentation_nm = np.array([0, 10, 20, 30, 40, 50, 60])
@@ -114,7 +115,7 @@ print(f&quot;杨氏模量: {E_modulus/1000:.1f} kPa&quot;)
 
 <p>Hertz模型假设材料是各向同性线弹性的、压痕深度远小于样品厚度、针尖与样品之间无粘附作用。对于生物材料，这些假设不总是成立，因此得到的模量应视为表观模量而非绝对的本征材料参数。</p>
 
-<h2>五、置信区间：不要只报一个数字</h2>
+<h2 id="五-置信区间-不要只报一个数字">五、置信区间：不要只报一个数字</h2>
 
 <pre><code class="language-python">
 from scipy import stats
@@ -125,18 +126,18 @@ for i, (param, name) in enumerate(zip(popt, [&#x27;E_star&#x27;])):
     print(f&quot;{name}: {param:.1f} +/- {t_val*std:.1f} (95% CI)&quot;)
 </code></pre>
 
-<h2>六、常见问题和调试技巧</h2>
+<h2 id="六-常见问题和调试技巧">六、常见问题和调试技巧</h2>
 
 <p>拟合不收敛通常意味着初始猜测值离真实值太远。解决方法是先将数据和模型函数画出来，目测估计合理的参数值作为初始猜测。参数值不物理——比如杨氏模量为负数——可以通过设置合理的边界约束来避免。不确定度异常大时，通常意味着模型过于复杂而数据量太少，此时可以考虑简化模型或收集更多数据。</p>
 
-<h3>七、延伸工具</h3>
+<h3 id="七-延伸工具">七、延伸工具</h3>
 
 <pre><code class="language-python">
 from scipy.optimize import minimize
 result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, y), bounds=[(0, None)]*2)
 </code></pre>
 
-<h3>参考文献</h3>
+<h3 id="参考文献">参考文献</h3>
 <ul>
 <li>Virtanen, P. et al. (2020). SciPy 1.0. <em>Nature Methods</em>, 17, 261-272.</li>
 <li>Johnson, M.L. & Faunt, L.M. (1992). Parameter estimation. <em>Methods in Enzymology</em>, 210, 1-37.</li>
@@ -148,7 +149,7 @@ result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, 
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scientific-visualization-python-zh/">Python科研绘图完全指南：从数据到发表级图表</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

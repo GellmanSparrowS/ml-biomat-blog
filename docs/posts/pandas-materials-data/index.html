@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>Why Pandas</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-pandas">Why Pandas</a></li><li class="toc-h2"><a href="#the-pandas-workflow">The Pandas Workflow</a></li><li class="toc-h3"><a href="#reading-experimental-data">Reading Experimental Data</a></li><li class="toc-h3"><a href="#data-cleaning">Data Cleaning</a></li><li class="toc-h3"><a href="#group-statistics">Group Statistics</a></li><li class="toc-h3"><a href="#visualization">Visualization</a></li><li class="toc-h3"><a href="#export-results">Export Results</a></li><li class="toc-h2"><a href="#quick-troubleshooting">Quick Troubleshooting</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#advanced-data-operations">Advanced Data Operations</a></li></ul></details><h2 id="why-pandas">Why Pandas</h2>
 
 <p>Most researchers manually merge, filter, and plot experimental data in Excel -- error-prone and time-consuming. Pandas handles all of this with a few lines of code.</p>
 
@@ -55,8 +56,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 </code></pre>
 
-<h2>The Pandas Workflow</h2>
-<h3>Reading Experimental Data</h3>
+<h2 id="the-pandas-workflow">The Pandas Workflow</h2>
+<h3 id="reading-experimental-data">Reading Experimental Data</h3>
 
 <pre><code class="language-python">
 df = pd.read_excel(&quot;mechanical_tests.xlsx&quot;, sheet_name=&quot;Sheet1&quot;)
@@ -69,7 +70,7 @@ dfs = [pd.read_csv(f) for f in files]
 df_all = pd.concat(dfs, ignore_index=True)
 </code></pre>
 
-<h3>Data Cleaning</h3>
+<h3 id="data-cleaning">Data Cleaning</h3>
 
 <pre><code class="language-python">
 df = df.dropna(how=&quot;all&quot;)  # Remove fully empty rows
@@ -81,7 +82,7 @@ for col in [&quot;modulus&quot;, &quot;diameter&quot;]:
     df = df[(df[col] &gt; mean - 3*std) &amp; (df[col] &lt; mean + 3*std)]
 </code></pre>
 
-<h3>Group Statistics</h3>
+<h3 id="group-statistics">Group Statistics</h3>
 
 <pre><code class="language-python">
 summary = df.groupby(&quot;treatment&quot;).agg({
@@ -90,7 +91,7 @@ summary = df.groupby(&quot;treatment&quot;).agg({
 }).round(2)
 </code></pre>
 
-<h3>Visualization</h3>
+<h3 id="visualization">Visualization</h3>
 
 <pre><code class="language-python">
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
@@ -101,7 +102,7 @@ axes[1,0].imshow(corr, cmap=&quot;RdBu_r&quot;, vmin=-1, vmax=1)
 plt.tight_layout()
 </code></pre>
 
-<h3>Export Results</h3>
+<h3 id="export-results">Export Results</h3>
 
 <pre><code class="language-python">
 summary.to_csv(&quot;mechanical_summary.csv&quot;)
@@ -111,18 +112,18 @@ with pd.ExcelWriter(&quot;results.xlsx&quot;) as writer:
     summary.to_excel(writer, sheet_name=&quot;Summary&quot;)
 </code></pre>
 
-<h2>Quick Troubleshooting</h2>
+<h2 id="quick-troubleshooting">Quick Troubleshooting</h2>
 
 <table><tr><th>Problem</th><th>Fix</th></tr><tr><td>---------</td><td>-----</td></tr><tr><td>Encoding error</td><td><code>pd.read_csv("file.csv", encoding="utf-8")</code> or <code>"gbk"</code></td></tr><tr><td>Large file slow</td><td>Specify <code>dtype</code> or use <code>chunksize</code></td></tr><tr><td>Date format wrong</td><td><code>pd.to_datetime(df["date"], format="%Y-%m-%d")</code></td></tr></table>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li>McKinney, W. (2010). Data Structures for Statistical Computing in Python. <em>Proc. SciPy</em>, 56-61.</li>
 <li>pandas.pydata.org - Pandas documentation.</li>
 <li>McKinney, W. (2012). <em>Python for Data Analysis</em>. O'Reilly Media.</li>
 
 </ul>
-<h2>Advanced Data Operations</h2>
+<h2 id="advanced-data-operations">Advanced Data Operations</h2>
 
 <p>Merging data from multiple sources is a common task in materials research. Suppose you have mechanical test results in one CSV file and fiber morphology measurements from SEM analysis in another. Pandas merge function allows you to combine these datasets on a common key such as sample ID:</p>
 
@@ -148,7 +149,7 @@ df[&quot;normalized_modulus&quot;] = df.groupby(&quot;treatment&quot;)[&quot;mod
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

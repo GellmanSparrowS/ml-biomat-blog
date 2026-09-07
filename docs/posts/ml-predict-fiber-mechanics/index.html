@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>The Problem</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#the-problem">The Problem</a></li><li class="toc-h2"><a href="#from-data-to-model">From Data to Model</a></li><li class="toc-h3"><a href="#data-preparation">Data Preparation</a></li><li class="toc-h3"><a href="#model-selection-for-small-data">Model Selection for Small Data</a></li><li class="toc-h3"><a href="#uncertainty-quantification">Uncertainty Quantification</a></li><li class="toc-h2"><a href="#advanced-directions">Advanced Directions</a></li><li class="toc-h2"><a href="#key-takeaways">Key Takeaways</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#practical-considerations-for-ml-in-materials">Practical Considerations for ML in Materials</a></li></ul></details><h2 id="the-problem">The Problem</h2>
 
 <p>Fiber biomaterial mechanics (Young's modulus, ultimate strength, toughness) depend on many factors: fiber diameter, orientation, crosslink density, water content, strain rate. Traditional regression handles linear relationships poorly, and fiber networks exhibit highly nonlinear behavior.</p>
 
@@ -59,8 +60,8 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.model_selection import cross_val_score
 </code></pre>
 
-<h2>From Data to Model</h2>
-<h3>Data Preparation</h3>
+<h2 id="from-data-to-model">From Data to Model</h2>
+<h3 id="data-preparation">Data Preparation</h3>
 
 <pre><code class="language-python">
 data = pd.DataFrame({
@@ -71,7 +72,7 @@ data = pd.DataFrame({
 })
 </code></pre>
 
-<h3>Model Selection for Small Data</h3>
+<h3 id="model-selection-for-small-data">Model Selection for Small Data</h3>
 
 <table><tr><th>Model</th><th>Small-data advantage</th><th>Watch out for</th></tr><tr><td>------</td><td>---------------------</td><td>--------------</td></tr><tr><td>Random Forest</td><td>Insensitive to hyperparams, feature importance</td><td>Keep max_depth small</td></tr><tr><td>Gradient Boosting</td><td>High accuracy, handles nonlinearity</td><td>Easy to overfit, low lr needed</td></tr><tr><td>Gaussian Process</td><td>Built-in uncertainty, perfect for n<100</td><td>O(n^3), avoid n>1000</td></tr></table>
 
@@ -85,7 +86,7 @@ for name, model in models.items():
     print(f&quot;{name}: MAE = {-scores.mean():.3f} +/- {scores.std():.3f}&quot;)
 </code></pre>
 
-<h3>Uncertainty Quantification</h3>
+<h3 id="uncertainty-quantification">Uncertainty Quantification</h3>
 
 <pre><code class="language-python">
 def predict_with_uncertainty(model, X, n_iter=100):
@@ -97,7 +98,7 @@ def predict_with_uncertainty(model, X, n_iter=100):
     return np.mean(predictions, axis=0), np.std(predictions, axis=0)
 </code></pre>
 
-<h2>Advanced Directions</h2>
+<h2 id="advanced-directions">Advanced Directions</h2>
 
 <ul>
 <li><strong>GNN</strong>: model fiber networks as graphs</li>
@@ -106,7 +107,7 @@ def predict_with_uncertainty(model, X, n_iter=100):
 <li><strong>PINNs</strong>: inject constitutive equations as NN constraints</li>
 
 </ul>
-<h2>Key Takeaways</h2>
+<h2 id="key-takeaways">Key Takeaways</h2>
 
 <ol>
 <li>Small data is not a blocker -- Bayesian methods and GPs are designed for it</li>
@@ -117,14 +118,14 @@ def predict_with_uncertainty(model, X, n_iter=100):
 <li>Yang Y., Bai R., Gao W. et al. (2024). <em>Advanced Science</em>, 2413293.</li>
 
 </ol>
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li>Yang Y., Bai R., Gao W. et al. (2024). Optimizing biomimetic 3D fibrous networks via DRL. <em>Advanced Science</em>, 2413293.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
 <li>Butler, K.T. et al. (2018). Machine learning for molecular and materials science. <em>Nature</em>, 559, 547-555.</li>
 
 </ul>
-<h2>Practical Considerations for ML in Materials</h2>
+<h2 id="practical-considerations-for-ml-in-materials">Practical Considerations for ML in Materials</h2>
 
 <p>The curse of dimensionality hits materials ML particularly hard. Each experimental condition adds a dimension, and with limited data, models quickly overfit. Dimensionality reduction via principal component analysis or feature selection based on physical insight is essential before training.</p>
 
@@ -136,7 +137,7 @@ def predict_with_uncertainty(model, X, n_iter=100):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

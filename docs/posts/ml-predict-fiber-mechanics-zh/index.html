@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>问题的本质</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#问题的本质">问题的本质</a></li><li class="toc-h2"><a href="#核心流程">核心流程</a></li><li class="toc-h3"><a href="#第一步-数据准备">第一步：数据准备</a></li><li class="toc-h3"><a href="#典型的数据长什么样">典型的数据长什么样</a></li><li class="toc-h3"><a href="#关键预处理步骤">关键预处理步骤</a></li><li class="toc-h3"><a href="#第二步-特征工程">第二步：特征工程</a></li><li class="toc-h3"><a href="#利用领域知识构造交互特征">利用领域知识构造交互特征</a></li><li class="toc-h3"><a href="#第三步-模型选择与评估">第三步：模型选择与评估</a></li><li class="toc-h3"><a href="#为什么选这些模型">为什么选这些模型</a></li><li class="toc-h3"><a href="#第四步-不确定性很重要">第四步：不确定性很重要</a></li><li class="toc-h3"><a href="#第五步-特征重要性-告诉老板为什么">第五步：特征重要性——告诉老板为什么</a></li><li class="toc-h2"><a href="#进阶方向">进阶方向</a></li><li class="toc-h2"><a href="#要点总结">要点总结</a></li><li class="toc-h2"><a href="#代码获取">代码获取</a></li><li class="toc-h2"><a href="#探讨-机器学习在纤维材料领域的独特挑战">探讨：机器学习在纤维材料领域的独特挑战</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="问题的本质">问题的本质</h2>
 
 <p>纤维生物材料的力学性能（杨氏模量、极限强度、断裂韧性）取决于大量因素：纤维直径、取向分布、交联密度、含水量、温度、应变率……传统的单变量回归只能处理线性关系，而纤维网络的高度非线性行为需要机器学习来捕捉。</p>
 
@@ -53,10 +54,10 @@
 
 <p>本文的策略是：在数据稀缺的约束下，用合理的特征工程和模型选择得到可靠的预测。</p>
 
-<h2>核心流程</h2>
-<h3>第一步：数据准备</h3>
+<h2 id="核心流程">核心流程</h2>
+<h3 id="第一步-数据准备">第一步：数据准备</h3>
 
-<h3>典型的数据长什么样</h3>
+<h3 id="典型的数据长什么样">典型的数据长什么样</h3>
 
 <pre><code class="language-python">
 import pandas as pd
@@ -73,7 +74,7 @@ data = pd.DataFrame({
 })
 </code></pre>
 
-<h3>关键预处理步骤</h3>
+<h3 id="关键预处理步骤">关键预处理步骤</h3>
 
 <pre><code class="language-python">
 from sklearn.model_selection import train_test_split
@@ -97,9 +98,9 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 </code></pre>
 
-<h3>第二步：特征工程</h3>
+<h3 id="第二步-特征工程">第二步：特征工程</h3>
 
-<h3>利用领域知识构造交互特征</h3>
+<h3 id="利用领域知识构造交互特征">利用领域知识构造交互特征</h3>
 
 <p>纤维材料的力学性能通常有物理意义明确的交互关系：</p>
 
@@ -120,7 +121,7 @@ def add_domain_features(df):
 data_aug = add_domain_features(data)
 </code></pre>
 
-<h3>第三步：模型选择与评估</h3>
+<h3 id="第三步-模型选择与评估">第三步：模型选择与评估</h3>
 
 <p><strong>核心原则：数据少 → 选偏差高的模型，配合强正则化。</strong></p>
 
@@ -154,11 +155,11 @@ for name, model in models.items():
     print(f&quot;{name}: MAE = {-scores.mean():.3f} ± {scores.std():.3f} GPa&quot;)
 </code></pre>
 
-<h3>为什么选这些模型</h3>
+<h3 id="为什么选这些模型">为什么选这些模型</h3>
 
 <table><tr><th>模型</th><th>小数据优势</th><th>要注意</th></tr><tr><td>------</td><td>-----------</td><td>--------</td></tr><tr><td><strong>Random Forest</strong></td><td>对超参数不敏感，自带特征重要性</td><td>max_depth 要小</td></tr><tr><td><strong>Gradient Boosting</strong></td><td>精度高，可处理非线性</td><td>容易过拟合，lr 要低</td></tr><tr><td><strong>Gaussian Process</strong></td><td>自带不确定性估计，适合小样本</td><td>计算量 O(n³)，n>1000 慎用</td></tr></table>
 
-<h3>第四步：不确定性很重要</h3>
+<h3 id="第四步-不确定性很重要">第四步：不确定性很重要</h3>
 
 <p>材料科学中，只说"预测模量 2.8 GPa"不够，你需要给出置信区间：</p>
 
@@ -182,7 +183,7 @@ for i in range(len(mean_pred)):
           f&quot;(actual: {y_test[i]:.2f})&quot;)
 </code></pre>
 
-<h3>第五步：特征重要性——告诉老板为什么</h3>
+<h3 id="第五步-特征重要性-告诉老板为什么">第五步：特征重要性——告诉老板为什么</h3>
 
 <p>ML 模型不仅要做预测，还要帮助理解物理机制：</p>
 
@@ -204,7 +205,7 @@ plt.tight_layout()
 plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight&quot;)
 </code></pre>
 
-<h2>进阶方向</h2>
+<h2 id="进阶方向">进阶方向</h2>
 
 <p>数据多起来之后，可以考虑：</p>
 
@@ -215,7 +216,7 @@ plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight
 <li><strong>物理信息神经网络 (PINN)</strong> —— 把本构方程作为约束注入神经网络</li>
 
 </ul>
-<h2>要点总结</h2>
+<h2 id="要点总结">要点总结</h2>
 
 <ol>
 <li><strong>数据少不是不做的理由</strong> — 贝叶斯方法和高斯过程专为小样本设计</li>
@@ -224,12 +225,12 @@ plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight
 <li><strong>开源你的代码和数据</strong> — GitHub 上的可复现代码会让论文更有说服力</li>
 
 </ol>
-<h2>代码获取</h2>
+<h2 id="代码获取">代码获取</h2>
 
 <p>本文完整代码可在 <a href="https://github.com/GellmanSparrowS">GitHub</a> 获取（持续更新中）。</p>
 
 
-<h2>探讨：机器学习在纤维材料领域的独特挑战</h2>
+<h2 id="探讨-机器学习在纤维材料领域的独特挑战">探讨：机器学习在纤维材料领域的独特挑战</h2>
 
 <p>纤维生物材料的机器学习应用面临几个独特的挑战。首先是数据量小——纤维材料的制备和表征通常耗时且昂贵，一个研究组数年的实验可能只产生几十到几百个数据点，这与互联网公司数百万量级的数据形成鲜明对比。小样本意味着传统的深度学习几乎不可能——没有足够的数据来训练复杂的神经网络。</p>
 
@@ -239,7 +240,7 @@ plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight
 
 <p>最有前景的方向是物理信息神经网络（PINN）。PINN将描述纤维力学行为的偏微分方程直接编码到神经网络的损失函数中，确保模型的预测满足基本物理规律。这种方法特别适合纤维网络——你不需要让模型"发现"物理学，而是告诉模型"必须遵守"已知的物理学。</p>
 
-<h2>参考文献</h2>
+<h2 id="参考文献">参考文献</h2>
 <ul>
 <li>Raissi, M. et al. (2019). Physics-informed neural networks: A deep learning framework for solving forward and inverse problems. <em>Science</em>, 367(6473), 1021-1026.</li>
 </ul>
@@ -248,7 +249,7 @@ plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

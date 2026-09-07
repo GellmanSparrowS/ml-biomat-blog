@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,8 +46,8 @@
 </div>
 </header>
 <div class="content">
-<h2>Getting Started</h2>
-<h3>1. Why Environment Management Matters — The Version Conflict Problem</h3>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#getting-started">Getting Started</a></li><li class="toc-h3"><a href="#1-why-environment-management-matters-the-version-conflict-problem">1. Why Environment Management Matters — The Version Conflict Problem</a></li><li class="toc-h3"><a href="#2-anaconda-or-miniconda-choose-what-fits-don-t-overthink-it">2. Anaconda or Miniconda — Choose What Fits, Don't Overthink It</a></li><li class="toc-h3"><a href="#3-platform-specific-installation-windows-macos-and-linux">3. Platform-Specific Installation: Windows, macOS, and Linux</a></li><li class="toc-h2"><a href="#daily-workflow">Daily Workflow</a></li><li class="toc-h3"><a href="#4-creating-and-managing-virtual-environments-core-isolation-operations">4. Creating and Managing Virtual Environments — Core Isolation Operations</a></li><li class="toc-h3"><a href="#5-installing-core-scientific-computing-packages-understanding-what-each-tool-does">5. Installing Core Scientific Computing Packages — Understanding What Each Tool Does</a></li><li class="toc-h3"><a href="#6-jupyterlab-the-core-interactive-scientific-computing-environment">6. JupyterLab — The Core Interactive Scientific Computing Environment</a></li><li class="toc-h3"><a href="#7-vs-code-integration-from-exploratory-analysis-to-engineering-grade-development">7. VS Code Integration — From Exploratory Analysis to Engineering-Grade Development</a></li><li class="toc-h2"><a href="#maintenance-and-troubleshooting">Maintenance and Troubleshooting</a></li><li class="toc-h3"><a href="#8-the-conda-pip-relationship-and-best-practices">8. The conda–pip Relationship and Best Practices</a></li><li class="toc-h3"><a href="#9-network-acceleration-for-users-in-china">9. Network Acceleration for Users in China</a></li><li class="toc-h3"><a href="#10-troubleshooting-reference">10. Troubleshooting Reference</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="getting-started">Getting Started</h2>
+<h3 id="1-why-environment-management-matters-the-version-conflict-problem">1. Why Environment Management Matters — The Version Conflict Problem</h3>
 
 <p>Many graduate students have a frustrating first encounter with Python. You find a script online for processing AFM data or XRD diffraction patterns, install the required libraries following a tutorial, and it works. A few weeks later, your supervisor sends a machine learning analysis script. After installing its dependencies, the original script suddenly crashes with a version incompatibility error — and you haven't changed a thing. This experience is almost universal among graduate students, and the root cause is straightforward: when every package is installed into the same global Python environment, conflicting version requirements between projects inevitably cause breakage.</p>
 
@@ -60,7 +61,7 @@
 
 <hr>
 
-<h3>2. Anaconda or Miniconda — Choose What Fits, Don't Overthink It</h3>
+<h3 id="2-anaconda-or-miniconda-choose-what-fits-don-t-overthink-it">2. Anaconda or Miniconda — Choose What Fits, Don't Overthink It</h3>
 
 <p>Before installing Conda, it is important to clarify a common source of confusion: Anaconda and Miniconda are two different installer packages, but they install the same core <code>conda</code> tool and are functionally identical in terms of environment management. The difference is only in how many packages come pre-installed. Every command in the rest of this guide works identically regardless of which one you choose.</p>
 
@@ -74,7 +75,7 @@
 
 <hr>
 
-<h3>3. Platform-Specific Installation: Windows, macOS, and Linux</h3>
+<h3 id="3-platform-specific-installation-windows-macos-and-linux">3. Platform-Specific Installation: Windows, macOS, and Linux</h3>
 
 <p>Installation procedures differ meaningfully across operating systems. The most critical distinction is the Apple Silicon versus Intel distinction on macOS. The following covers each platform in full; follow the section that corresponds to your system.</p>
 
@@ -124,8 +125,8 @@ conda --version
 
 <hr>
 
-<h2>Daily Workflow</h2>
-<h3>4. Creating and Managing Virtual Environments — Core Isolation Operations</h3>
+<h2 id="daily-workflow">Daily Workflow</h2>
+<h3 id="4-creating-and-managing-virtual-environments-core-isolation-operations">4. Creating and Managing Virtual Environments — Core Isolation Operations</h3>
 
 <p>With the motivation for virtual environments established, the actual creation and management commands are quite intuitive. This section covers the full lifecycle of an environment, including the critically important reproducibility workflow.</p>
 
@@ -175,7 +176,7 @@ conda env create -f environment.yml
 
 <hr>
 
-<h3>5. Installing Core Scientific Computing Packages — Understanding What Each Tool Does</h3>
+<h3 id="5-installing-core-scientific-computing-packages-understanding-what-each-tool-does">5. Installing Core Scientific Computing Packages — Understanding What Each Tool Does</h3>
 
 <p>With the target environment activated, you can install the packages needed for scientific computing. The following describes each major package from a functional perspective — understanding what each tool is for helps you reach for the right one when a new analysis task arises, rather than blindly installing everything in sight.</p>
 
@@ -210,7 +211,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvi
 
 <hr>
 
-<h3>6. JupyterLab — The Core Interactive Scientific Computing Environment</h3>
+<h3 id="6-jupyterlab-the-core-interactive-scientific-computing-environment">6. JupyterLab — The Core Interactive Scientific Computing Environment</h3>
 
 <p>JupyterLab is the most widely used interactive computing environment in modern scientific research. Running in a browser, it integrates in a single interface: code editing and execution, inline figure display, Markdown text with LaTeX mathematical formula rendering, file system browsing, and an embedded terminal. For scientific work that must simultaneously present experimental data, computational logic, visualization results, and scientific interpretation, the Notebook format — a "computational document" — has irreplaceable value. A Notebook is not merely a programming tool; it is a medium for recording the scientific exploration process, making "code as experimental record" a practical reality.</p>
 
@@ -249,7 +250,7 @@ python -m ipykernel install --user --name matsci --display-name &quot;Python (ma
 
 <hr>
 
-<h3>7. VS Code Integration — From Exploratory Analysis to Engineering-Grade Development</h3>
+<h3 id="7-vs-code-integration-from-exploratory-analysis-to-engineering-grade-development">7. VS Code Integration — From Exploratory Analysis to Engineering-Grade Development</h3>
 
 <p>JupyterLab is ideal for exploratory analysis: you are uncertain about the data structure, trying things step by step, with each step's output immediately visible. When the analysis logic stabilizes and you need to produce reproducible scripts, build data processing pipelines, or write analysis modules that others can import and reuse, <strong>VS Code (Visual Studio Code)</strong> becomes the more appropriate environment. The two are complementary rather than competing: a common workflow is to explore in JupyterLab, confirm the logic, then refactor into clean <code>.py</code> scripts in VS Code.</p>
 
@@ -266,8 +267,8 @@ python -m ipykernel install --user --name matsci --display-name &quot;Python (ma
 
 <hr>
 
-<h2>Maintenance and Troubleshooting</h2>
-<h3>8. The conda–pip Relationship and Best Practices</h3>
+<h2 id="maintenance-and-troubleshooting">Maintenance and Troubleshooting</h2>
+<h3 id="8-the-conda-pip-relationship-and-best-practices">8. The conda–pip Relationship and Best Practices</h3>
 
 <p>When managing environments with conda, you will eventually encounter packages unavailable in conda channels that can only be installed with pip. Understanding the division of responsibility between conda and pip is key to avoiding dependency conflicts and environment corruption.</p>
 
@@ -293,7 +294,7 @@ pip install some-niche-library-only-on-pypi
 
 <hr>
 
-<h3>9. Network Acceleration for Users in China</h3>
+<h3 id="9-network-acceleration-for-users-in-china">9. Network Acceleration for Users in China</h3>
 
 <p>Users in China frequently encounter very slow download speeds or connection timeouts when installing conda packages, because conda's default download servers are located outside the country. Switching to domestic mirror servers maintained by Chinese universities can increase installation speeds by orders of magnitude. The following configuration uses <strong>Tsinghua University's TUNA mirror</strong>, which is noted for high update frequency and reliability:</p>
 
@@ -324,7 +325,7 @@ trusted-host = mirrors.tuna.tsinghua.edu.cn
 
 <hr>
 
-<h3>10. Troubleshooting Reference</h3>
+<h3 id="10-troubleshooting-reference">10. Troubleshooting Reference</h3>
 
 <p>Even with careful adherence to the steps above, environment configuration issues can still arise. The following covers the most frequently encountered failure patterns, organized by symptom, root cause, and solution.</p>
 
@@ -356,7 +357,7 @@ trusted-host = mirrors.tuna.tsinghua.edu.cn
 
 <hr>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ol>
 <li>Anaconda, Inc. (2024). Anaconda Distribution Documentation. Anaconda, Inc. https://docs.anaconda.com</li>
@@ -380,7 +381,7 @@ trusted-host = mirrors.tuna.tsinghua.edu.cn
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

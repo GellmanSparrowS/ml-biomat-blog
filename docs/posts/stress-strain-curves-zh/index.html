@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,13 +46,13 @@
 </div>
 </header>
 <div class="content">
-<h2>为什么每个材料人都要懂这个</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么每个材料人都要懂这个">为什么每个材料人都要懂这个</a></li><li class="toc-h2"><a href="#曲线的五个关键区域">曲线的五个关键区域</a></li><li class="toc-h2"><a href="#python计算力学参数">Python计算力学参数</a></li><li class="toc-h2"><a href="#生物材料的特殊性">生物材料的特殊性</a></li><li class="toc-h2"><a href="#常见错误">常见错误</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#生物材料的特殊力学行为">生物材料的特殊力学行为</a></li></ul></details><h2 id="为什么每个材料人都要懂这个">为什么每个材料人都要懂这个</h2>
 
 <p>应力-应变曲线是材料科学最重要的图。它告诉你材料有多硬、能拉多长、吸收多少能量。无论你研究丝素蛋白、水凝胶还是骨头，这都是基础。</p>
 
 <p><strong>应力 = 力 / 截面积。应变 = 长度变化量 / 原始长度。</strong></p>
 
-<h2>曲线的五个关键区域</h2>
+<h2 id="曲线的五个关键区域">曲线的五个关键区域</h2>
 
 <table><tr><th>区域</th><th>发生什么</th><th>关键参数</th></tr><tr><td>------</td><td>------</td><td>------</td></tr><tr><td>弹性区</td><td>变形可逆</td><td>杨氏模量 E</td></tr><tr><td>屈服点</td><td>永久变形开始</td><td>屈服强度</td></tr><tr><td>塑性区</td><td>永久变形累积</td><td>加工硬化</td></tr><tr><td>极限点</td><td>最大应力</td><td>抗拉强度 UTS</td></tr><tr><td>断裂点</td><td>材料破坏</td><td>断裂伸长率</td></tr></table>
 
@@ -61,7 +62,7 @@
 
 <p><em>典型数量级数值；随来源、含水量与应变率变化。</em></p>
 
-<h2>Python计算力学参数</h2>
+<h2 id="python计算力学参数">Python计算力学参数</h2>
 
 <pre><code class="language-python">
 import numpy as np
@@ -73,22 +74,22 @@ def compute_properties(strain, stress):
     return {&quot;E_MPa&quot;: E, &quot;UTS_MPa&quot;: UTS, &quot;elongation_pct&quot;: strain[-1]*100, &quot;toughness_MJ_m3&quot;: toughness}
 </code></pre>
 
-<h2>生物材料的特殊性</h2>
+<h2 id="生物材料的特殊性">生物材料的特殊性</h2>
 
 <p>软生物材料与金属行为不同：没有明显屈服点（用0.2%偏移法）、应变率依赖（报告速率）、含水量影响巨大（始终在水合态下测试）、J形曲线常见（趾区+线性区）、滞回是能量耗散而非塑性。</p>
 
-<h2>常见错误</h2>
+<h2 id="常见错误">常见错误</h2>
 
 <p>混淆工程应力与真实应力（大应变>10%时差异显著）、不报告样品尺寸、夹具滑移被误认为额外应变。</p>
 
-<h2>参考文献</h2>
+<h2 id="参考文献">参考文献</h2>
 <ul>
 <li>Callister, W.D. (2018). <em>Materials Science and Engineering</em>. Wiley.</li>
 <li>Meyers, M.A. (2009). <em>Mechanical Behavior of Materials</em>. Cambridge.</li>
 <li>Fratzl, P. et al. (2004). Structure and mechanical quality of the collagen-mineral nano-composite in bone. <em>Journal of Materials Chemistry</em>, 14(14), 2115-2123.</li>
 
 </ul>
-<h2>生物材料的特殊力学行为</h2>
+<h2 id="生物材料的特殊力学行为">生物材料的特殊力学行为</h2>
 
 <p>生物材料的应力-应变曲线有几个区别于传统工程材料的特征。J形曲线是最常见的特殊形状：在低应变区，应力随应变缓慢增加（趾区），这对应纤维网络的几何重排和取向化过程。随着应变增大，越来越多的纤维被拉直并沿载荷方向排列，曲线迅速变陡。这种J形行为赋予生物材料独特的保护功能：在正常生理条件下，材料保持柔韧（趾区），但在受到冲击或过载时迅速变硬以抵抗损伤。</p>
 
@@ -100,7 +101,7 @@ def compute_properties(strain, stress):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures-zh/">工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures-zh/">生物材料的层级超结构：从分子到宏观的力学设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

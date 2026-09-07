@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,8 +46,8 @@
 </div>
 </header>
 <div class="content">
-<h2>Foundations</h2>
-<h3>1. The Nature of Regression — From Numerical Prediction to Function Approximation</h3>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#foundations">Foundations</a></li><li class="toc-h3"><a href="#1-the-nature-of-regression-from-numerical-prediction-to-function-approximation">1. The Nature of Regression — From Numerical Prediction to Function Approximation</a></li><li class="toc-h3"><a href="#2-linear-regression-the-most-concise-baseline">2. Linear Regression — The Most Concise Baseline</a></li><li class="toc-h2"><a href="#regularization-and-nonlinear-models">Regularization and Nonlinear Models</a></li><li class="toc-h3"><a href="#3-ridge-and-lasso-the-art-of-regularization">3. Ridge and Lasso — The Art of Regularization</a></li><li class="toc-h3"><a href="#4-polynomial-regression-and-feature-engineering-breaking-the-linear-constraint">4. Polynomial Regression and Feature Engineering — Breaking the Linear Constraint</a></li><li class="toc-h3"><a href="#5-support-vector-regression-the-insensitive-tube">5. Support Vector Regression — The ε-Insensitive Tube</a></li><li class="toc-h2"><a href="#tree-based-and-boosting-models">Tree-Based and Boosting Models</a></li><li class="toc-h3"><a href="#6-decision-tree-and-random-forest-regression-piecewise-approximation-to-ensemble-averaging">6. Decision Tree and Random Forest Regression — Piecewise Approximation to Ensemble Averaging</a></li><li class="toc-h3"><a href="#7-gradient-boosting-regression-xgboost-and-lightgbm">7. Gradient Boosting Regression — XGBoost and LightGBM</a></li><li class="toc-h2"><a href="#evaluation-and-model-selection">Evaluation and Model Selection</a></li><li class="toc-h3"><a href="#8-regression-evaluation-metrics-choosing-between-mse-mae-and-r">8. Regression Evaluation Metrics — Choosing Between MSE, MAE, and R²</a></li><li class="toc-h3"><a href="#9-a-practical-model-selection-guide">9. A Practical Model-Selection Guide</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="foundations">Foundations</h2>
+<h3 id="1-the-nature-of-regression-from-numerical-prediction-to-function-approximation">1. The Nature of Regression — From Numerical Prediction to Function Approximation</h3>
 
 <p>The most fundamental distinction between regression and classification lies in the nature of the output: classification predicts discrete category labels, whereas regression predicts continuous numerical values. This difference, while seemingly minor, profoundly shapes model design choices, loss function selection, and the interpretation of evaluation metrics. In biology, materials science, and structural mechanics, regression problems are essentially ubiquitous: predicting elastic modulus from material composition and processing parameters, estimating binding free energy from protein sequence features, inferring full-field stress distributions from a subset of finite-element outputs, or predicting residual fatigue life from sensor time-series data. Whether an accurate and generalizable regression model can be built largely determines the practical credibility of data-driven science — the aspiration to let computation substitute for experimentation.</p>
 
@@ -94,7 +95,7 @@ def evaluate(name, y_true, y_pred):
 
 <hr>
 
-<h3>2. Linear Regression — The Most Concise Baseline</h3>
+<h3 id="2-linear-regression-the-most-concise-baseline">2. Linear Regression — The Most Concise Baseline</h3>
 
 <p>Linear regression is both the starting point for all regression models and one of the most widely used statistical tools in scientific research. Its assumption is extremely simple: the target value is a linear combination of input features plus random noise. This assumption provides a good approximation in many scientific contexts — Young's modulus versus composition in materials science, dose-response relationships in biology, and the stress-strain relationship during the linear-elastic phase in structural mechanics. Understanding linear regression is not only a prerequisite for learning more complex models; the derivation itself reveals the most fundamental concepts of supervised learning: the loss function, least-squares estimation, and their geometric interpretation.</p>
 
@@ -141,8 +142,8 @@ plt.show()
 
 <hr>
 
-<h2>Regularization and Nonlinear Models</h2>
-<h3>3. Ridge and Lasso — The Art of Regularization</h3>
+<h2 id="regularization-and-nonlinear-models">Regularization and Nonlinear Models</h2>
+<h3 id="3-ridge-and-lasso-the-art-of-regularization">3. Ridge and Lasso — The Art of Regularization</h3>
 
 <p>When the number of features approaches or exceeds the sample count (\(d \approx N\) or \(d > N\)), or when features are highly correlated, ordinary linear regression encounters a severe numerical problem: \(\mathbf{X}^T\mathbf{X}\) becomes nearly singular, coefficient estimate variances explode, and predictions become wildly unstable. This is the classic recipe for overfitting. Regularization addresses this by adding a penalty term on coefficient magnitude to the loss function, forcing the model to "not be too greedy" — accepting a slight increase in bias in exchange for a substantial reduction in variance. From a Bayesian perspective, regularization is equivalent to imposing a prior distribution on the parameters: L2 regularization corresponds to a Gaussian prior, and L1 regularization corresponds to a Laplacian prior. Understanding these two forms of regularization is equivalent to understanding the bias-variance tradeoff in the context of linear models.</p>
 
@@ -201,7 +202,7 @@ evaluate(&quot;Ridge (CV-tuned alpha)&quot;, y_test, ridge_cv.predict(X_test_sc)
 
 <hr>
 
-<h3>4. Polynomial Regression and Feature Engineering — Breaking the Linear Constraint</h3>
+<h3 id="4-polynomial-regression-and-feature-engineering-breaking-the-linear-constraint">4. Polynomial Regression and Feature Engineering — Breaking the Linear Constraint</h3>
 
 <img src="/static/images/posts/regression-models-ml/poly-en.webp" alt="Polynomial regression fit on synthetic data: degree-1 line underfits while degree-3 captures the nonlinear trend" loading="lazy">
 
@@ -252,7 +253,7 @@ evaluate(&quot;Poly(3) + Ridge&quot;, y_test, best_pipe.predict(X_test))
 
 <hr>
 
-<h3>5. Support Vector Regression — The ε-Insensitive Tube</h3>
+<h3 id="5-support-vector-regression-the-insensitive-tube">5. Support Vector Regression — The ε-Insensitive Tube</h3>
 
 <p>Support Vector Regression (SVR) transfers the margin-maximization philosophy of SVMs to regression tasks, but with a fundamentally different objective: rather than finding the hyperplane that maximally separates classes, SVR seeks the widest possible <strong>tube</strong> (ε-tube) that encloses as many training points as possible, penalizing only those that fall outside it. This design introduces a concept absent from ordinary regression: the <strong>ε-insensitive loss</strong>.</p>
 
@@ -296,8 +297,8 @@ evaluate(&quot;Linear SVR&quot;, y_test, lin_svr.predict(X_test_sc))
 
 <hr>
 
-<h2>Tree-Based and Boosting Models</h2>
-<h3>6. Decision Tree and Random Forest Regression — Piecewise Approximation to Ensemble Averaging</h3>
+<h2 id="tree-based-and-boosting-models">Tree-Based and Boosting Models</h2>
+<h3 id="6-decision-tree-and-random-forest-regression-piecewise-approximation-to-ensemble-averaging">6. Decision Tree and Random Forest Regression — Piecewise Approximation to Ensemble Averaging</h3>
 
 <p>Decision trees are not limited to classification — they perform regression just as naturally. A Decision Tree Regressor recursively partitions the feature space into rectangular regions, assigning each leaf node the mean target value of all training samples within that region. The model is therefore a <strong>piecewise constant function</strong> approximator: finer partitioning (deeper tree) produces a more staircase-like function that fits training data more closely, but generalizes less well to new inputs. The overfitting behavior of decision tree regression is particularly transparent: an unconstrained deep tree achieves R² = 1 on the training set but may achieve R² < 0 on the test set.</p>
 
@@ -346,7 +347,7 @@ print(f&quot;Mean predictive uncertainty (std): {pred_std.mean():.4f}&quot;)
 
 <hr>
 
-<h3>7. Gradient Boosting Regression — XGBoost and LightGBM</h3>
+<h3 id="7-gradient-boosting-regression-xgboost-and-lightgbm">7. Gradient Boosting Regression — XGBoost and LightGBM</h3>
 
 <p>Gradient boosting regression is currently among the strongest algorithms for structured-data regression tasks and is the predominant winning solution in data science competitions involving tabular data. The core idea is: <strong>sequentially accumulate a series of weak learners (shallow decision trees), each one fitting the residuals of all previous trees, gradually approximating the target function</strong>. Unlike random forests — which train trees in parallel and average their outputs — gradient boosting trains trees serially, with each new tree specifically targeting whatever the current ensemble is getting wrong. This is equivalent to performing gradient descent in function space, hence the name.</p>
 
@@ -430,8 +431,8 @@ except Exception:
 
 <hr>
 
-<h2>Evaluation and Model Selection</h2>
-<h3>8. Regression Evaluation Metrics — Choosing Between MSE, MAE, and R²</h3>
+<h2 id="evaluation-and-model-selection">Evaluation and Model Selection</h2>
+<h3 id="8-regression-evaluation-metrics-choosing-between-mse-mae-and-r">8. Regression Evaluation Metrics — Choosing Between MSE, MAE, and R²</h3>
 
 <p>After training a regression model, how do we accurately characterize its performance? Regression evaluation is subtler than classification: different error metrics embed different implicit assumptions about what constitutes "good prediction," and choosing the wrong metric can lead to seriously misleading conclusions. Reporting multiple metrics simultaneously, supported by diagnostic plots, is responsible scientific practice.</p>
 
@@ -507,7 +508,7 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
 
 <hr>
 
-<h3>9. A Practical Model-Selection Guide</h3>
+<h3 id="9-a-practical-model-selection-guide">9. A Practical Model-Selection Guide</h3>
 
 <p>As in classification, no regression algorithm is universally optimal. Different algorithms exhibit different adaptations to dataset size, feature structure, noise distribution, extrapolation requirements, and interpretability constraints. A principled selection strategy is more important than chasing the highest numerical benchmark.</p>
 
@@ -525,7 +526,7 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
 
 <hr>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ol>
 <li>Friedman, J. H. (2001). Greedy function approximation: A gradient boosting machine. <em>Annals of Statistics</em>, 29(5), 1189–1232. https://doi.org/10.1214/aos/1013203451</li>
@@ -549,7 +550,7 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

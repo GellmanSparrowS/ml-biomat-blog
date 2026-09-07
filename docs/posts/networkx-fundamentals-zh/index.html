@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,8 +46,8 @@
 </div>
 </header>
 <div class="content">
-<h2>图论基础</h2>
-<h3>一、为什么需要 NetworkX——从直觉到工具</h3>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#图论基础">图论基础</a></li><li class="toc-h3"><a href="#一-为什么需要-networkx-从直觉到工具">一、为什么需要 NetworkX——从直觉到工具</a></li><li class="toc-h3"><a href="#二-图的四种类型-你的问题是哪种图">二、图的四种类型——你的问题是哪种图？</a></li><li class="toc-h3"><a href="#三-构建图-节点-边与属性的核心操作">三、构建图——节点、边与属性的核心操作</a></li><li class="toc-h2"><a href="#网络指标">网络指标</a></li><li class="toc-h3"><a href="#四-度-路径与聚类-读懂一张图的三把钥匙">四、度、路径与聚类——读懂一张图的三把钥匙</a></li><li class="toc-h3"><a href="#五-中心性-谁在网络中-最重要">五、中心性——谁在网络中"最重要"？</a></li><li class="toc-h3"><a href="#六-最短路径算法-从-dijkstra-到-floyd">六、最短路径算法——从 Dijkstra 到 Floyd</a></li><li class="toc-h3"><a href="#七-经典网络模型-随机图-小世界与无标度">七、经典网络模型——随机图、小世界与无标度</a></li><li class="toc-h2"><a href="#进阶主题">进阶主题</a></li><li class="toc-h3"><a href="#八-可视化-让图说话">八、可视化——让图说话</a></li><li class="toc-h3"><a href="#九-社区检测与图生成器-进阶工具">九、社区检测与图生成器——进阶工具</a></li><li class="toc-h3"><a href="#十-性能考量与进阶资源">十、性能考量与进阶资源</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="图论基础">图论基础</h2>
+<h3 id="一-为什么需要-networkx-从直觉到工具">一、为什么需要 NetworkX——从直觉到工具</h3>
 
 <p>在理解 NetworkX 之前，先退一步，想想"关系"本身。你的蛋白质组里，一个蛋白质激活另一个蛋白质；一根骨小梁和另一根通过接触点传递应力；一个神经元向下游神经元发放脉冲；一个城市的公路把它和若干相邻城市连通。这些现象在形式上都是一样的：一堆<strong>实体</strong>，以及实体之间的<strong>连接关系</strong>。数学把这种形式抽象为图（Graph），由节点集合 \(V\)（Vertex）和边集合 \(E\)（Edge）构成，记作 \(G = (V, E)\)。</p>
 
@@ -73,7 +74,7 @@ import matplotlib.pyplot as plt
 
 <hr>
 
-<h3>二、图的四种类型——你的问题是哪种图？</h3>
+<h3 id="二-图的四种类型-你的问题是哪种图">二、图的四种类型——你的问题是哪种图？</h3>
 
 <p>拿到一个真实问题，第一步是判断它适合用哪种图来建模。NetworkX 提供了四个核心类，它们的选择直接影响后续所有算法的行为。</p>
 
@@ -85,7 +86,7 @@ import matplotlib.pyplot as plt
 
 <hr>
 
-<h3>三、构建图——节点、边与属性的核心操作</h3>
+<h3 id="三-构建图-节点-边与属性的核心操作">三、构建图——节点、边与属性的核心操作</h3>
 
 <p>理解了图的类型之后，下一步是把数据"装入"图对象。NetworkX 的增删节点与边的接口设计非常 Pythonic，允许你从各种来源构建图：逐条添加、批量导入、从字典或矩阵转换。</p>
 
@@ -158,8 +159,8 @@ K = nx.from_dict_of_lists(adj_dict)
 
 <hr>
 
-<h2>网络指标</h2>
-<h3>四、度、路径与聚类——读懂一张图的三把钥匙</h3>
+<h2 id="网络指标">网络指标</h2>
+<h3 id="四-度-路径与聚类-读懂一张图的三把钥匙">四、度、路径与聚类——读懂一张图的三把钥匙</h3>
 
 <p>一旦图构建好，研究者面对的第一批问题通常是：哪些节点"重要"？信息需要走多远才能从 A 到 B？这个系统倾向于形成小团体还是保持开放？这三个问题分别对应网络分析的三个最基础的量：<strong>度（Degree）</strong>、<strong>最短路径（Shortest Path）</strong>和<strong>聚类系数（Clustering Coefficient）</strong>。理解这三者，等于掌握了阅读任何网络的最基本语法。</p>
 
@@ -219,7 +220,7 @@ print(f&quot;Transitivity: {transitivity:.4f}&quot;)
 
 <hr>
 
-<h3>五、中心性——谁在网络中"最重要"？</h3>
+<h3 id="五-中心性-谁在网络中-最重要">五、中心性——谁在网络中"最重要"？</h3>
 
 <p>中心性（Centrality）是网络分析中最丰富、也最容易被误用的一组概念。核心问题是：什么叫做"重要"？不同的答案孕育了不同的中心性指标，它们彼此互补，有时结论截然不同。研究者需要结合领域知识选择合适的指标，而不是盲目套用"节点度越高越重要"这种朴素直觉。</p>
 
@@ -269,7 +270,7 @@ print(&quot;Top by Eigenvector: &quot;, top_node(eigenvector))
 
 <hr>
 
-<h3>六、最短路径算法——从 Dijkstra 到 Floyd</h3>
+<h3 id="六-最短路径算法-从-dijkstra-到-floyd">六、最短路径算法——从 Dijkstra 到 Floyd</h3>
 
 <p>最短路径是图论中被研究最深的问题之一，也是实际应用中出现频率最高的计算任务。NetworkX 内置了多种算法，理解它们的适用条件，才能选对工具避免计算浪费。</p>
 
@@ -323,7 +324,7 @@ print(f&quot;Network diameter: {diameter}&quot;)
 
 <hr>
 
-<h3>七、经典网络模型——随机图、小世界与无标度</h3>
+<h3 id="七-经典网络模型-随机图-小世界与无标度">七、经典网络模型——随机图、小世界与无标度</h3>
 
 <p>理解真实网络，需要一把参考尺：什么叫"随机"，什么叫"不随机"？NetworkX 内置了几个理论上极重要的网络生成器，理解它们，就理解了现代网络科学的基础语言。</p>
 
@@ -369,8 +370,8 @@ print(f&quot;Max degree in BA graph: {max(degree_sequence)}&quot;)
 
 <hr>
 
-<h2>进阶主题</h2>
-<h3>八、可视化——让图说话</h3>
+<h2 id="进阶主题">进阶主题</h2>
+<h3 id="八-可视化-让图说话">八、可视化——让图说话</h3>
 
 <p>NetworkX 不是专业可视化工具，但它内置了对 Matplotlib 的接口，足以在探索阶段快速看懂网络结构。真正的出版级可视化通常需要 Gephi、Cytoscape（生物网络）或 Graphviz 等专用软件，但 NetworkX + Matplotlib 完全可以胜任科研汇报和论文草图。</p>
 
@@ -421,7 +422,7 @@ plt.show()
 
 <hr>
 
-<h3>九、社区检测与图生成器——进阶工具</h3>
+<h3 id="九-社区检测与图生成器-进阶工具">九、社区检测与图生成器——进阶工具</h3>
 
 <p>当一个网络大到难以直观理解时，<strong>社区检测（Community Detection）</strong>成为揭示结构的核心手段。社区是指内部连接稠密、外部连接稀疏的节点集合——类比于蛋白质复合物（功能模块）、材料中的晶粒（相同晶向的原子群）、社交网络中的兴趣圈子。</p>
 
@@ -486,7 +487,7 @@ print(nx.info(G_hex))
 
 <hr>
 
-<h3>十、性能考量与进阶资源</h3>
+<h3 id="十-性能考量与进阶资源">十、性能考量与进阶资源</h3>
 
 <p>NetworkX 的设计优先考虑灵活性和可读性，代价是在大规模图上的性能。它基于纯 Python 的字典结构，对于超过百万节点或需要实时处理的场景，应考虑替代方案。常见的替代或补充库包括：<strong>igraph</strong>（C 语言核心，Python 接口，速度远快于 NetworkX）、<strong>graph-tool</strong>（C++核心，OpenMP 并行，适合超大图）、<strong>cuGraph</strong>（基于 NVIDIA RAPIDS，GPU 加速，面向亿级节点）。一项 2025 年发表于 <em>Social Network Analysis and Mining</em> 的对比研究指出，在社区检测和介数中心性等计算密集型任务上，igraph 和 graph-tool 的性能显著优于 NetworkX，但 NetworkX 的生态整合（与 NumPy/SciPy/Pandas 的无缝对接）和易学性仍是其核心竞争力。</p>
 
@@ -504,7 +505,7 @@ print(nx.info(G_hex))
 
 <hr>
 
-<h2>参考文献</h2>
+<h2 id="参考文献">参考文献</h2>
 
 <ol>
 <li>Hagberg, A. A., Schult, D. A., & Swart, P. J. (2008). Exploring network structure, dynamics, and function using NetworkX. <em>Proceedings of the 7th Python in Science Conference (SciPy 2008)</em>, 11–16.</li>
@@ -528,7 +529,7 @@ print(nx.info(G_hex))
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合完全指南：从线性回归到非线性建模</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scientific-visualization-python-zh/">Python科研绘图完全指南：从数据到发表级图表</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

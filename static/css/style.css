@@ -141,15 +141,15 @@ pre code{font-family:var(--font-mono);font-size:inherit;background:none;padding:
     .container{padding:0 1rem}
 }
 @media(prefers-color-scheme:dark){
-    :root{
+    :root:not([data-theme="light"]){
         --c-bg:#0f172a;--c-surface:#1e293b;--c-fg:#e2e8f0;
         --c-fg-soft:#94a3b8;--c-muted:#64748b;
         --c-primary:#60a5fa;--c-primary-soft:#1e3a5f;
         --c-accent:#2dd4bf;--c-accent-soft:#134e4a;
         --c-border:#334155;--c-code-bg:#1e293b;--c-code-fg:#cbd5e1
     }
-    .card-lang.en,.lang-badge.en{background:#1e3a5f;color:#93c5fd}
-    .card-lang.zh,.lang-badge.zh{background:#450a0a;color:#fca5a5}
+    :root:not([data-theme="light"]) .card-lang.en,:root:not([data-theme="light"]) .lang-badge.en{background:#1e3a5f;color:#93c5fd}
+    :root:not([data-theme="light"]) .card-lang.zh,:root:not([data-theme="light"]) .lang-badge.zh{background:#450a0a;color:#fca5a5}
 }
 /* ===== CV Page ===== */
 .pub-list{font-size:.9rem;line-height:1.85;text-align:justify}
@@ -313,3 +313,29 @@ h2:hover .anchor-link,h3:hover .anchor-link,h2:focus-within .anchor-link,h3:focu
 /* === Mermaid diagrams === */
 .mermaid{text-align:center;margin:1.5rem 0;overflow-x:auto}
 .mermaid svg{max-width:100%;height:auto}
+
+/* ===== Auto TOC ===== */
+.toc{margin:0 0 2rem;padding:1rem 1.25rem;background:var(--c-code-bg);border:1px solid var(--c-border);border-radius:var(--r);font-size:.9rem}
+.toc summary{font-weight:700;cursor:pointer;margin-bottom:.5rem;color:var(--c-primary)}
+.toc ul{list-style:none;padding-left:0}
+.toc li{margin:.25rem 0}
+.toc a{color:var(--c-fg-soft);text-decoration:none}
+.toc a:hover{color:var(--c-primary)}
+.toc .toc-h3{padding-left:1.1rem;font-size:.92em}
+/* ===== Related posts ===== */
+.related{margin:2rem 0;padding:1.25rem 1.5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r)}
+.related h2{font-size:1.05rem;margin-bottom:.6rem}
+/* ===== Theme toggle ===== */
+.theme-toggle{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-sm);color:var(--c-fg-soft);cursor:pointer;font-size:1rem;width:34px;height:32px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex:none}
+.theme-toggle:hover{border-color:var(--c-primary);color:var(--c-primary)}
+/* ===== Manual dark override ===== */
+:root[data-theme="dark"]{
+    --c-bg:#0f172a;--c-surface:#1e293b;--c-fg:#e2e8f0;
+    --c-fg-soft:#94a3b8;--c-muted:#64748b;
+    --c-primary:#60a5fa;--c-primary-soft:#1e3a5f;
+    --c-accent:#2dd4bf;--c-accent-soft:#134e4a;
+    --c-border:#334155;--c-code-bg:#1e293b;--c-code-fg:#cbd5e1
+}
+:root[data-theme="dark"] .card-lang.en,:root[data-theme="dark"] .lang-badge.en{background:#1e3a5f;color:#93c5fd}
+:root[data-theme="dark"] .card-lang.zh,:root[data-theme="dark"] .lang-badge.zh{background:#450a0a;color:#fca5a5}
+@media print{.theme-toggle,.toc,.related{display:none!important}}

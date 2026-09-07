@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>为什么自动化SEM分析</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么自动化sem分析">为什么自动化SEM分析</a></li><li class="toc-h2"><a href="#分析流程">分析流程</a></li><li class="toc-h3"><a href="#第一步-加载和预处理">第一步：加载和预处理</a></li><li class="toc-h3"><a href="#第二步-阈值分割">第二步：阈值分割</a></li><li class="toc-h3"><a href="#第三步-清理二值掩膜">第三步：清理二值掩膜</a></li><li class="toc-h3"><a href="#第四步-测量纤维属性">第四步：测量纤维属性</a></li><li class="toc-h3"><a href="#第五步-取向分析">第五步：取向分析</a></li><li class="toc-h3"><a href="#第六步-批量处理">第六步：批量处理</a></li><li class="toc-h2"><a href="#常见坑">常见坑</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#深入探讨-图像分割算法的选择">深入探讨：图像分割算法的选择</a></li></ul></details><h2 id="为什么自动化sem分析">为什么自动化SEM分析</h2>
 
 <p>手动从SEM图像测量纤维直径和取向费时、主观、不可重复。Python脚本能在几秒内一致地处理每张图像。本指南使用scikit-image，专为科学图像分析设计的库。</p>
 
@@ -54,8 +55,8 @@ import numpy as np
 from skimage import io, filters, measure, morphology
 </code></pre>
 
-<h2>分析流程</h2>
-<h3>第一步：加载和预处理</h3>
+<h2 id="分析流程">分析流程</h2>
+<h3 id="第一步-加载和预处理">第一步：加载和预处理</h3>
 
 <pre><code class="language-python">
 img = io.imread(&quot;sem_fiber_network.tif&quot;, as_gray=True)
@@ -66,7 +67,7 @@ from scipy.ndimage import gaussian_filter
 img_denoised = gaussian_filter(img_norm, sigma=1.0)
 </code></pre>
 
-<h3>第二步：阈值分割</h3>
+<h3 id="第二步-阈值分割">第二步：阈值分割</h3>
 
 <pre><code class="language-python">
 methods = {&quot;Otsu&quot;: filters.threshold_otsu(img_denoised),
@@ -77,7 +78,7 @@ binary = img_denoised &gt; thresh
 print(f&quot;纤维覆盖率: {binary.mean()*100:.1f}%&quot;)
 </code></pre>
 
-<h3>第三步：清理二值掩膜</h3>
+<h3 id="第三步-清理二值掩膜">第三步：清理二值掩膜</h3>
 
 <pre><code class="language-python">
 cleaned = morphology.remove_small_objects(binary, min_size=50)
@@ -85,7 +86,7 @@ closed = morphology.binary_closing(cleaned, morphology.disk(2))
 skeleton = morphology.skeletonize(closed)  # 用于取向分析
 </code></pre>
 
-<h3>第四步：测量纤维属性</h3>
+<h3 id="第四步-测量纤维属性">第四步：测量纤维属性</h3>
 
 <pre><code class="language-python">
 labels = measure.label(closed)
@@ -101,7 +102,7 @@ print(f&quot;发现 {len(df_fibers)} 个纤维片段&quot;)
 print(f&quot;平均直径: {df_fibers[&#x27;直径_px&#x27;].mean():.1f} +/- {df_fibers[&#x27;直径_px&#x27;].std():.1f} px&quot;)
 </code></pre>
 
-<h3>第五步：取向分析</h3>
+<h3 id="第五步-取向分析">第五步：取向分析</h3>
 
 <img src="/static/images/posts/sem-image-analysis/orientation-zh.webp" alt="纤维取向分布的极坐标直方图，优势取向约 90 度" loading="lazy">
 
@@ -113,7 +114,7 @@ dominant_angle = theta[np.argmax(sinogram.sum(axis=0))]
 print(f&quot;主取向: {dominant_angle:.1f} 度&quot;)
 </code></pre>
 
-<h3>第六步：批量处理</h3>
+<h3 id="第六步-批量处理">第六步：批量处理</h3>
 
 <pre><code class="language-python">
 import glob
@@ -131,18 +132,18 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
     return pd.DataFrame(results)
 </code></pre>
 
-<h2>常见坑</h2>
+<h2 id="常见坑">常见坑</h2>
 
 <table><tr><th>问题</th><th>解决</th></tr><tr><td>------</td><td>------</td></tr><tr><td>光照不均</td><td>用滚动球背景扣除</td></tr><tr><td>纤维粘连</td><td>用分水岭分割</td></tr><tr><td>过分割</td><td>增大min_size</td></tr><tr><td>标尺错误</td><td>始终验证像素-纳米标定</td></tr></table>
 
-<h2>参考资料</h2>
+<h2 id="参考资料">参考资料</h2>
 <ul>
 <li>van der Walt, S. et al. (2014). scikit-image. <em>PeerJ</em>, 2, e453.</li>
 <li>GitHub: <a href="https://github.com/scikit-image/scikit-image">scikit-image/scikit-image</a></li>
 <li>Ronneberger, O. et al. (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation. <em>MICCAI</em>, 234-241.</li>
 
 </ul>
-<h2>深入探讨：图像分割算法的选择</h2>
+<h2 id="深入探讨-图像分割算法的选择">深入探讨：图像分割算法的选择</h2>
 
 <p>阈值分割是SEM图像分析最关键的一步，直接影响后续所有量化结果的准确性。Otsu方法假设图像直方图是双峰的——纤维（前景）和背景形成两个明显分离的灰度峰。对于高对比度、光照均匀的SEM图像，Otsu通常是最佳选择。但对于光照不均或背景复杂的图像，局部自适应阈值方法更为合适。</p>
 
@@ -154,7 +155,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

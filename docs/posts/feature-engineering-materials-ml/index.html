@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>The Real Bottleneck</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#the-real-bottleneck">The Real Bottleneck</a></li><li class="toc-h2"><a href="#core-feature-engineering-workflow">Core Feature Engineering Workflow</a></li><li class="toc-h3"><a href="#from-raw-data-to-feature-matrix">From Raw Data to Feature Matrix</a></li><li class="toc-h3"><a href="#encoding-categorical-variables">Encoding Categorical Variables</a></li><li class="toc-h3"><a href="#domain-driven-interaction-features">Domain-Driven Interaction Features</a></li><li class="toc-h3"><a href="#handling-missing-values">Handling Missing Values</a></li><li class="toc-h3"><a href="#feature-selection-for-small-datasets">Feature Selection for Small Datasets</a></li><li class="toc-h2"><a href="#checklist">Checklist</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#advanced-feature-engineering-strategies">Advanced Feature Engineering Strategies</a></li></ul></details><h2 id="the-real-bottleneck">The Real Bottleneck</h2>
 
 <p>Most materials ML tutorials start with a clean CSV and jump straight to model fitting. In reality, your data lives in lab notebooks, instrument exports, and Excel sheets. <strong>Feature engineering</strong> is where 80% of the work happens.</p>
 
@@ -55,8 +56,8 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 </code></pre>
 
-<h2>Core Feature Engineering Workflow</h2>
-<h3>From Raw Data to Feature Matrix</h3>
+<h2 id="core-feature-engineering-workflow">Core Feature Engineering Workflow</h2>
+<h3 id="from-raw-data-to-feature-matrix">From Raw Data to Feature Matrix</h3>
 
 <p>Typical raw data from a biomaterials experiment:</p>
 
@@ -72,7 +73,7 @@ df = pd.DataFrame({
 })
 </code></pre>
 
-<h3>Encoding Categorical Variables</h3>
+<h3 id="encoding-categorical-variables">Encoding Categorical Variables</h3>
 
 <pre><code class="language-python">
 encoder = OneHotEncoder(sparse_output=False, drop=&quot;first&quot;)
@@ -85,7 +86,7 @@ df_encoded = pd.concat([
 ], axis=1)
 </code></pre>
 
-<h3>Domain-Driven Interaction Features</h3>
+<h3 id="domain-driven-interaction-features">Domain-Driven Interaction Features</h3>
 
 <p>This is where materials knowledge adds value:</p>
 
@@ -107,7 +108,7 @@ def engineer_materials_features(df):
     return df
 </code></pre>
 
-<h3>Handling Missing Values</h3>
+<h3 id="handling-missing-values">Handling Missing Values</h3>
 
 <p>For small datasets, avoid blind mean imputation:</p>
 
@@ -125,7 +126,7 @@ def smart_impute(df, group_col=&quot;treatment&quot;):
     return df
 </code></pre>
 
-<h3>Feature Selection for Small Datasets</h3>
+<h3 id="feature-selection-for-small-datasets">Feature Selection for Small Datasets</h3>
 
 <p>With <100 samples, avoid automated selection:</p>
 
@@ -144,7 +145,7 @@ to_drop = [col for col in upper_tri.columns
 </code></pre>
 
 </ol>
-<h2>Checklist</h2>
+<h2 id="checklist">Checklist</h2>
 
 <ul>
 <li>All features numeric</li>
@@ -154,14 +155,14 @@ to_drop = [col for col in upper_tri.columns
 <li>Interaction features have physical justification</li>
 
 </ul>
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li>Kuhn, M. & Johnson, K. (2019). <em>Feature Engineering and Selection</em>. CRC Press.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics: Recent applications and prospects. <em>npj Computational Materials</em>, 3, 54.</li>
 
 </ul>
-<h2>Advanced Feature Engineering Strategies</h2>
+<h2 id="advanced-feature-engineering-strategies">Advanced Feature Engineering Strategies</h2>
 
 <p>Domain-specific feature engineering can dramatically improve model performance with limited data. For fiber biomaterials, consider these physics-informed features that capture known structure-property relationships.</p>
 
@@ -175,7 +176,7 @@ to_drop = [col for col in upper_tri.columns
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

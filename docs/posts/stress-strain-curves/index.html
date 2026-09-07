@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>Why This Matters</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-this-matters">Why This Matters</a></li><li class="toc-h2"><a href="#key-regions">Key Regions</a></li><li class="toc-h2"><a href="#computing-mechanical-properties">Computing Mechanical Properties</a></li><li class="toc-h2"><a href="#biomaterials-considerations">Biomaterials Considerations</a></li><li class="toc-h2"><a href="#common-mistakes">Common Mistakes</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#advanced-topics-in-stress-strain-analysis">Advanced Topics in Stress-Strain Analysis</a></li></ul></details><h2 id="why-this-matters">Why This Matters</h2>
 
 <p>The stress-strain curve is the single most important graph in materials science. It tells you how a material responds to force: stiffness, stretch before breaking, energy absorption. Whether you work with silk fibers, hydrogels, or bone, understanding this curve is fundamental.</p>
 
@@ -56,7 +57,7 @@ Stress = F / A0
 Strain = (L - L0) / L0
 </code></pre>
 
-<h2>Key Regions</h2>
+<h2 id="key-regions">Key Regions</h2>
 
 <table><tr><th>Region</th><th>What Happens</th><th>Key Parameter</th></tr><tr><td>--------</td><td>-------------</td><td>---------------</td></tr><tr><td>Elastic</td><td>Reversible deformation</td><td>Young's Modulus E</td></tr><tr><td>Yield</td><td>Permanent deformation begins</td><td>Yield Strength</td></tr><tr><td>Plastic</td><td>Permanent deformation accumulates</td><td>Strain Hardening</td></tr><tr><td>Ultimate</td><td>Maximum stress capacity</td><td>Ultimate Tensile Strength (UTS)</td></tr><tr><td>Fracture</td><td>Material breaks</td><td>Elongation at Break</td></tr></table>
 
@@ -66,7 +67,7 @@ Strain = (L - L0) / L0
 
 <p><em>Typical order-of-magnitude values; they vary with source, hydration, and strain rate.</em></p>
 
-<h2>Computing Mechanical Properties</h2>
+<h2 id="computing-mechanical-properties">Computing Mechanical Properties</h2>
 
 <pre><code class="language-python">
 import numpy as np
@@ -79,7 +80,7 @@ def compute_mechanical_properties(strain, stress):
     return {&quot;E_MPa&quot;: E, &quot;UTS_MPa&quot;: UTS, &quot;Elongation_pct&quot;: strain[-1] * 100, &quot;Toughness_MJ_m3&quot;: toughness}
 </code></pre>
 
-<h2>Biomaterials Considerations</h2>
+<h2 id="biomaterials-considerations">Biomaterials Considerations</h2>
 
 <p>Soft biomaterials behave differently from metals:</p>
 
@@ -98,7 +99,7 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 </code></pre>
 
 </ol>
-<h2>Common Mistakes</h2>
+<h2 id="common-mistakes">Common Mistakes</h2>
 
 <ul>
 <li>Confusing engineering vs true stress (diverge at >10% strain)</li>
@@ -107,7 +108,7 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 <li>Over-interpreting noise without smoothing</li>
 
 </ul>
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li>Callister, W.D. (2018). <em>Materials Science and Engineering: An Introduction</em>. Wiley.</li>
 <li>Meyers, M.A. & Chawla, K.K. (2009). <em>Mechanical Behavior of Materials</em>. Cambridge.</li>
@@ -115,7 +116,7 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 <li>Dorfmann, A. & Ogden, R.W. (2004). A constitutive model for the Mullins effect. <em>International Journal of Solids and Structures</em>, 41, 1855-1878.</li>
 
 </ul>
-<h2>Advanced Topics in Stress-Strain Analysis</h2>
+<h2 id="advanced-topics-in-stress-strain-analysis">Advanced Topics in Stress-Strain Analysis</h2>
 
 <p>True stress and true strain differ from engineering values at large deformations. Engineering stress uses the original cross-sectional area, while true stress accounts for the instantaneous area reduction during deformation. For strains beyond 10%, the difference becomes significant. Most published data for soft biomaterials report engineering stress unless otherwise specified, so always check the methodology section when comparing literature values.</p>
 
@@ -127,7 +128,7 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

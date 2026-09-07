@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,8 +46,8 @@
 </div>
 </header>
 <div class="content">
-<h2>Graph Fundamentals</h2>
-<h3>1. Why NetworkX — From Intuition to Tool</h3>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#graph-fundamentals">Graph Fundamentals</a></li><li class="toc-h3"><a href="#1-why-networkx-from-intuition-to-tool">1. Why NetworkX — From Intuition to Tool</a></li><li class="toc-h3"><a href="#2-four-graph-types-which-structure-fits-your-problem">2. Four Graph Types — Which Structure Fits Your Problem?</a></li><li class="toc-h3"><a href="#3-building-graphs-nodes-edges-and-attributes">3. Building Graphs — Nodes, Edges, and Attributes</a></li><li class="toc-h2"><a href="#network-metrics">Network Metrics</a></li><li class="toc-h3"><a href="#4-degree-path-length-and-clustering-three-keys-to-reading-a-network">4. Degree, Path Length, and Clustering — Three Keys to Reading a Network</a></li><li class="toc-h3"><a href="#5-centrality-who-matters-most-in-a-network">5. Centrality — Who Matters Most in a Network?</a></li><li class="toc-h3"><a href="#6-shortest-path-algorithms-from-dijkstra-to-floyd">6. Shortest-Path Algorithms — From Dijkstra to Floyd</a></li><li class="toc-h2"><a href="#advanced-topics">Advanced Topics</a></li><li class="toc-h3"><a href="#7-classic-network-models-random-small-world-and-scale-free">7. Classic Network Models — Random, Small-World, and Scale-Free</a></li><li class="toc-h3"><a href="#8-visualization-making-graphs-speak">8. Visualization — Making Graphs Speak</a></li><li class="toc-h3"><a href="#9-community-detection-and-graph-generators-advanced-tools">9. Community Detection and Graph Generators — Advanced Tools</a></li><li class="toc-h3"><a href="#10-performance-considerations-and-further-resources">10. Performance Considerations and Further Resources</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="graph-fundamentals">Graph Fundamentals</h2>
+<h3 id="1-why-networkx-from-intuition-to-tool">1. Why NetworkX — From Intuition to Tool</h3>
 
 <p>Before understanding NetworkX, take a step back and consider "relationships" themselves. In your proteome, one protein activates another; a bone trabecula transmits stress to another through a contact point; a neuron fires downstream; a city's roads connect it to neighboring cities. All of these phenomena share the same formal structure: a set of <strong>entities</strong> and <strong>connections</strong> between them. Mathematics abstracts this as a graph, \(G = (V, E)\), consisting of a vertex set \(V\) and an edge set \(E\).</p>
 
@@ -72,7 +73,7 @@ import matplotlib.pyplot as plt
 
 <hr>
 
-<h3>2. Four Graph Types — Which Structure Fits Your Problem?</h3>
+<h3 id="2-four-graph-types-which-structure-fits-your-problem">2. Four Graph Types — Which Structure Fits Your Problem?</h3>
 
 <p>The first step when facing a real problem is deciding which type of graph best models it. NetworkX provides four core classes, and the choice directly affects the behavior of every subsequent algorithm.</p>
 
@@ -84,7 +85,7 @@ import matplotlib.pyplot as plt
 
 <hr>
 
-<h3>3. Building Graphs — Nodes, Edges, and Attributes</h3>
+<h3 id="3-building-graphs-nodes-edges-and-attributes">3. Building Graphs — Nodes, Edges, and Attributes</h3>
 
 <p>Once you have chosen a graph type, the next step is loading data into the graph object. NetworkX's add/remove API is highly Pythonic, allowing you to build graphs from many sources: one-by-one additions, batch imports, or conversion from dictionaries and matrices.</p>
 
@@ -149,8 +150,8 @@ K = nx.from_dict_of_lists(adj_dict)
 
 <hr>
 
-<h2>Network Metrics</h2>
-<h3>4. Degree, Path Length, and Clustering — Three Keys to Reading a Network</h3>
+<h2 id="network-metrics">Network Metrics</h2>
+<h3 id="4-degree-path-length-and-clustering-three-keys-to-reading-a-network">4. Degree, Path Length, and Clustering — Three Keys to Reading a Network</h3>
 
 <p>Once a graph is built, the first questions researchers typically ask are: which nodes are "important"? How far does information need to travel from A to B? Does this system tend to form tight cliques or remain open? These three questions correspond to three foundational network metrics: <strong>degree</strong>, <strong>shortest path</strong>, and <strong>clustering coefficient</strong>. Mastering these three is equivalent to learning the basic grammar for reading any network.</p>
 
@@ -197,7 +198,7 @@ print(f&quot;Transitivity (global clustering): {trans:.4f}&quot;)
 
 <hr>
 
-<h3>5. Centrality — Who Matters Most in a Network?</h3>
+<h3 id="5-centrality-who-matters-most-in-a-network">5. Centrality — Who Matters Most in a Network?</h3>
 
 <p>Centrality is the richest—and most easily misused—family of concepts in network analysis. The central question is: what does "important" mean? Different answers give rise to different metrics, each capturing a distinct facet of importance. Researchers must choose based on domain knowledge rather than defaulting to node degree.</p>
 
@@ -238,7 +239,7 @@ print(&quot;Top by Eigenvector: &quot;, top_node(eigenvector))
 
 <hr>
 
-<h3>6. Shortest-Path Algorithms — From Dijkstra to Floyd</h3>
+<h3 id="6-shortest-path-algorithms-from-dijkstra-to-floyd">6. Shortest-Path Algorithms — From Dijkstra to Floyd</h3>
 
 <p>Shortest-path computation is one of the most deeply studied problems in graph theory and one of the most frequently needed operations in practice. NetworkX includes several algorithms; understanding their applicability conditions is essential for choosing the right one.</p>
 
@@ -277,8 +278,8 @@ else:
 
 <hr>
 
-<h2>Advanced Topics</h2>
-<h3>7. Classic Network Models — Random, Small-World, and Scale-Free</h3>
+<h2 id="advanced-topics">Advanced Topics</h2>
+<h3 id="7-classic-network-models-random-small-world-and-scale-free">7. Classic Network Models — Random, Small-World, and Scale-Free</h3>
 
 <p>Understanding real networks requires a reference baseline: what does "random" look like, and what deviations from it are meaningful? NetworkX provides built-in generators for three theoretically fundamental models.</p>
 
@@ -313,7 +314,7 @@ print(f&quot;BA avg clustering: {nx.average_clustering(G_ba):.4f}&quot;)
 
 <hr>
 
-<h3>8. Visualization — Making Graphs Speak</h3>
+<h3 id="8-visualization-making-graphs-speak">8. Visualization — Making Graphs Speak</h3>
 
 <p>NetworkX is not a professional visualization tool, but its Matplotlib interface is sufficient for rapid exploration. For publication-quality figures, dedicated software such as Gephi, Cytoscape (biological networks), or Graphviz is recommended. For research presentations and draft figures, NetworkX + Matplotlib does the job.</p>
 
@@ -355,7 +356,7 @@ plt.show()
 
 <hr>
 
-<h3>9. Community Detection and Graph Generators — Advanced Tools</h3>
+<h3 id="9-community-detection-and-graph-generators-advanced-tools">9. Community Detection and Graph Generators — Advanced Tools</h3>
 
 <p>When a network grows too large to comprehend visually, <strong>community detection</strong> becomes the primary tool for revealing structure. A community is a set of nodes with dense internal connections and sparse external ones—analogous to protein complexes (functional modules), crystal grains in materials (clusters of aligned atoms), or interest groups in social networks.</p>
 
@@ -400,7 +401,7 @@ G_star     = nx.star_graph(10)                 # Hub-and-spoke
 
 <hr>
 
-<h3>10. Performance Considerations and Further Resources</h3>
+<h3 id="10-performance-considerations-and-further-resources">10. Performance Considerations and Further Resources</h3>
 
 <p>NetworkX prioritizes flexibility and readability over raw speed. Its pure-Python dict-of-dicts architecture is a bottleneck for graphs exceeding one million nodes or requiring real-time computation. Common alternatives include <strong>igraph</strong> (C core, Python interface, significantly faster for most metrics), <strong>graph-tool</strong> (C++/OpenMP, for very large graphs), and <strong>cuGraph</strong> (NVIDIA RAPIDS, GPU-accelerated, for billion-scale graphs). A 2025 benchmarking study published in <em>Social Network Analysis and Mining</em> confirmed that igraph and graph-tool outperform NetworkX substantially on computationally intensive tasks such as community detection and betweenness centrality, though NetworkX's seamless integration with NumPy, SciPy, and Pandas remains its core competitive advantage for research workflows.</p>
 
@@ -418,7 +419,7 @@ G_star     = nx.star_graph(10)                 # Hub-and-spoke
 
 <hr>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ol>
 <li>Hagberg, A. A., Schult, D. A., & Swart, P. J. (2008). Exploring network structure, dynamics, and function using NetworkX. <em>Proceedings of the 7th Python in Science Conference (SciPy 2008)</em>, 11–16.</li>
@@ -486,7 +487,7 @@ Learn more:
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

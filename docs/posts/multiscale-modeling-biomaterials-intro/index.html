@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,17 +46,17 @@
 </div>
 </header>
 <div class="content">
-<h2>Why Multiscale Modeling Matters</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-multiscale-modeling-matters">Why Multiscale Modeling Matters</a></li><li class="toc-h2"><a href="#the-three-scales">The Three Scales</a></li><li class="toc-h3"><a href="#1-molecular-scale-angstroms-to-nanometers">1. Molecular Scale (angstroms to nanometers)</a></li><li class="toc-h3"><a href="#2-mesoscale-nanometers-to-micrometers">2. Mesoscale (nanometers to micrometers)</a></li><li class="toc-h3"><a href="#3-continuum-scale-micrometers-to-millimeters">3. Continuum Scale (micrometers to millimeters)</a></li><li class="toc-h2"><a href="#bridging-scales-with-python">Bridging Scales with Python</a></li><li class="toc-h2"><a href="#key-challenges-practical-tips">Key Challenges & Practical Tips</a></li><li class="toc-h2"><a href="#what-s-next">What's Next</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-multiscale-modeling-matters">Why Multiscale Modeling Matters</h2>
 
 <p>Fiber-based biomaterials—collagen networks, silk fibroin, cellulose, engineered protein scaffolds—exhibit mechanical behavior that spans <strong>six orders of magnitude</strong> in length scale: from angstrom-level hydrogen bonds to millimeter-level tissue architecture. Understanding how nanoscale interactions drive macroscale properties requires multiscale modeling.</p>
 
 <p>This post gives you a practical roadmap: what methods exist, when to use each, and how to combine them with Python.</p>
 
-<h2>The Three Scales</h2>
+<h2 id="the-three-scales">The Three Scales</h2>
 
 <table><tr><th>Scale</th><th>Length range</th><th>Key physics</th><th>Typical methods</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>Molecular</td><td>Angstrom - nm</td><td>bonds, thermal motion, electrostatics</td><td>DFT, MD (ASE, GROMACS, LAMMPS)</td></tr><tr><td>Mesoscale</td><td>nm - micrometer</td><td>network topology, chain dynamics</td><td>coarse-grained MD, DPD, network models</td></tr><tr><td>Continuum</td><td>micrometer - mm</td><td>elasticity, plasticity, flow</td><td>FEM, homogenization</td></tr></table>
 
-<h3>1. Molecular Scale (angstroms to nanometers)</h3>
+<h3 id="1-molecular-scale-angstroms-to-nanometers">1. Molecular Scale (angstroms to nanometers)</h3>
 
 <p><strong>Method: Molecular Dynamics (MD)</strong></p>
 
@@ -87,7 +88,7 @@ def compute_persistence_length(positions, kbt=4.114, n_segments=10):
     return np.mean(dot_products) / np.linalg.norm(vectors[0])**2
 </code></pre>
 
-<h3>2. Mesoscale (nanometers to micrometers)</h3>
+<h3 id="2-mesoscale-nanometers-to-micrometers">2. Mesoscale (nanometers to micrometers)</h3>
 
 <p><strong>Method: Coarse-Grained (CG) MD or Brownian Dynamics</strong></p>
 
@@ -100,7 +101,7 @@ def compute_persistence_length(positions, kbt=4.114, n_segments=10):
 </ul>
 <p>The key idea: run all-atom MD on a representative subsystem, extract effective potentials between CG beads, then simulate the full system at CG resolution.</p>
 
-<h3>3. Continuum Scale (micrometers to millimeters)</h3>
+<h3 id="3-continuum-scale-micrometers-to-millimeters">3. Continuum Scale (micrometers to millimeters)</h3>
 
 <p><strong>Method: Finite Element Analysis (FEA)</strong></p>
 
@@ -113,7 +114,7 @@ def compute_persistence_length(positions, kbt=4.114, n_segments=10):
 </ul>
 <p>The challenge: how do you get the constitutive parameters from molecular simulations?</p>
 
-<h2>Bridging Scales with Python</h2>
+<h2 id="bridging-scales-with-python">Bridging Scales with Python</h2>
 
 <p>The real power comes from linking these scales. Here's a minimal example of how to pass MD-derived stiffness to an FEA material model:</p>
 
@@ -133,7 +134,7 @@ def youngs_modulus_from_md(stress, strain):
 # results = solve_fe(mesh, material, boundary_conditions)
 </code></pre>
 
-<h2>Key Challenges &amp; Practical Tips</h2>
+<h2 id="key-challenges-practical-tips">Key Challenges &amp; Practical Tips</h2>
 
 <ol>
 <li><strong>Choosing the right force field</strong> — validate against experimental data (AFM nanoindentation, SAXS)</li>
@@ -142,11 +143,11 @@ def youngs_modulus_from_md(stress, strain):
 <li><strong>Uncertainty quantification</strong> — always report error bars from ensemble averaging</li>
 
 </ol>
-<h2>What's Next</h2>
+<h2 id="what-s-next">What's Next</h2>
 
 <p>In the next post, I'll walk through a complete workflow: all-atom MD of a collagen microfibril → coarse-graining via MSCG → FEA of a fiber network, entirely driven by Python scripts.</p>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ul>
 <li>Noid, W.G. (2013). Perspective: Coarse-grained models for biomolecular systems. <em>J. Chem. Phys.</em></li>
@@ -158,7 +159,7 @@ def youngs_modulus_from_md(stress, strain):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation/">Molecular Dynamics Basics: Your First LAMMPS Simulation</a></li><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

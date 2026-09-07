@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>真正的瓶颈</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#真正的瓶颈">真正的瓶颈</a></li><li class="toc-h2"><a href="#分类变量编码">分类变量编码</a></li><li class="toc-h2"><a href="#域知识驱动的交互特征">域知识驱动的交互特征</a></li><li class="toc-h2"><a href="#小样本特征选择">小样本特征选择</a></li><li class="toc-h2"><a href="#检查清单">检查清单</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#深入探讨-特征缩放与标准化">深入探讨：特征缩放与标准化</a></li></ul></details><h2 id="真正的瓶颈">真正的瓶颈</h2>
 
 <table><tr><th>特征工程手段</th><th>作用</th><th>材料研究示例</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>分类变量编码</td><td>把类别文本转成数值特征</td><td>溶剂类型、晶体结构、处理分组</td></tr><tr><td>数值变换</td><td>缩放、标准化或取对数</td><td>浓度、晶粒尺寸、模量</td></tr><tr><td>交互特征</td><td>组合两个或多个原始特征</td><td>密度×模量、氢键密度×结晶度</td></tr><tr><td>缺失值处理</td><td>填补或显式标记缺失</td><td>传感器缺失行、批次差异</td></tr><tr><td>小样本特征选择</td><td>去除冗余维度、保留关键信息</td><td>正则化、K-best、域先验</td></tr></table>
 
@@ -56,7 +57,7 @@ import pandas as pd; import numpy as np
 df = pd.DataFrame({&quot;纤维直径_nm&quot;: [45,52,48], &quot;交联密度_pct&quot;: [2.5,1.8,3.2], &quot;处理&quot;: [&quot;甲醇&quot;,&quot;乙醇&quot;,&quot;水&quot;], &quot;杨氏模量_GPa&quot;: [2.8,1.9,2.3]})
 </code></pre>
 
-<h2>分类变量编码</h2>
+<h2 id="分类变量编码">分类变量编码</h2>
 
 <pre><code class="language-python">
 from sklearn.preprocessing import OneHotEncoder
@@ -64,7 +65,7 @@ encoder = OneHotEncoder(sparse_output=False, drop=&quot;first&quot;)
 encoded = encoder.fit_transform(df[[&quot;处理&quot;]])
 </code></pre>
 
-<h2>域知识驱动的交互特征</h2>
+<h2 id="域知识驱动的交互特征">域知识驱动的交互特征</h2>
 
 <pre><code class="language-python">
 def engineer_features(df):
@@ -74,22 +75,22 @@ def engineer_features(df):
     return df
 </code></pre>
 
-<h2>小样本特征选择</h2>
+<h2 id="小样本特征选择">小样本特征选择</h2>
 
 <p>样本少于100时避免自动化特征选择。改用：相关性分析（去除|r|>0.95的特征）、方差阈值（去除近常数特征）、域知识筛选（只保留物理上合理的特征）。</p>
 
-<h2>检查清单</h2>
+<h2 id="检查清单">检查清单</h2>
 
 <p>所有特征已数值化、没有特征泄露目标变量、缺失值已处理、分类变量已编码、交互特征有物理依据。</p>
 
-<h2>参考文献</h2>
+<h2 id="参考文献">参考文献</h2>
 <ul>
 <li>Kuhn, M. & Johnson, K. (2019). <em>Feature Engineering and Selection</em>. CRC Press.</li>
 <li>Ramprasad, R. et al. (2017). Machine learning in materials informatics. <em>npj Computational Materials</em>, 3, 54.</li>
 <li>Guyon, I. & Elisseeff, A. (2003). An introduction to variable and feature selection. <em>Journal of Machine Learning Research</em>, 3, 1157-1182.</li>
 
 </ul>
-<h2>深入探讨：特征缩放与标准化</h2>
+<h2 id="深入探讨-特征缩放与标准化">深入探讨：特征缩放与标准化</h2>
 
 <p>特征缩放是机器学习预处理中容易被忽视但至关重要的步骤。不同物理量通常具有截然不同的量级——纤维直径可能只有几十纳米，而杨氏模量可能有几个吉帕。如果不进行缩放，依赖距离的模型会将量级大的特征视为更重要，即使它们物理上并不更关键。</p>
 
@@ -103,7 +104,7 @@ def engineer_features(df):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

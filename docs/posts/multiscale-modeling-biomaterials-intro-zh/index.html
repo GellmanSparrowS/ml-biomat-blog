@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,17 +46,17 @@
 </div>
 </header>
 <div class="content">
-<h2>为什么要做多尺度模拟</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么要做多尺度模拟">为什么要做多尺度模拟</a></li><li class="toc-h2"><a href="#三个尺度的工具箱">三个尺度的工具箱</a></li><li class="toc-h3"><a href="#分子尺度-埃-纳米">分子尺度（埃～纳米）</a></li><li class="toc-h3"><a href="#介观尺度-纳米-微米">介观尺度（纳米～微米）</a></li><li class="toc-h3"><a href="#连续介质尺度-微米-毫米">连续介质尺度（微米～毫米）</a></li><li class="toc-h2"><a href="#用-python-串联多尺度">用 Python 串联多尺度</a></li><li class="toc-h2"><a href="#实操建议">实操建议</a></li><li class="toc-h2"><a href="#常见问题">常见问题</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#讨论-多尺度模拟的未来方向">讨论：多尺度模拟的未来方向</a></li></ul></details><h2 id="为什么要做多尺度模拟">为什么要做多尺度模拟</h2>
 
 <p>纤维类生物材料——胶原蛋白网络、丝素蛋白、纤维素、工程蛋白支架——其力学行为横跨 <strong>六个数量级</strong> 的长度尺度：从埃级的氢键到毫米级的组织架构。要理解纳米尺度的相互作用如何决定宏观力学性能，多尺度模拟是不可或缺的工具。</p>
 
 <p>本文提供一个实用的路线图：有哪些方法、什么时候用哪种、以及如何用 Python 把它们串联起来。</p>
 
-<h2>三个尺度的工具箱</h2>
+<h2 id="三个尺度的工具箱">三个尺度的工具箱</h2>
 
 <table><tr><th>尺度</th><th>长度范围</th><th>核心物理</th><th>常用方法</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>分子</td><td>埃～纳米</td><td>化学键、热运动、静电</td><td>DFT、MD（ASE、GROMACS、LAMMPS）</td></tr><tr><td>介观</td><td>纳米～微米</td><td>网络拓扑、链动力学</td><td>粗粒化MD、DPD、网络模型</td></tr><tr><td>连续介质</td><td>微米～毫米</td><td>弹性、塑性、流动</td><td>有限元FEM、均匀化</td></tr></table>
 
-<h3>分子尺度（埃～纳米）</h3>
+<h3 id="分子尺度-埃-纳米">分子尺度（埃～纳米）</h3>
 
 <p><strong>方法：分子动力学（MD）</strong></p>
 
@@ -84,7 +85,7 @@ for rate in strain_rates:
     print(f&quot;Strain rate {rate:.1e}: preparing MD run...&quot;)
 </code></pre>
 
-<h3>介观尺度（纳米～微米）</h3>
+<h3 id="介观尺度-纳米-微米">介观尺度（纳米～微米）</h3>
 
 <p><strong>方法：粗粒化分子动力学（CG-MD）或布朗动力学</strong></p>
 
@@ -97,7 +98,7 @@ for rate in strain_rates:
 </ul>
 <p>核心思路：在全原子 MD 的结果上做"平均"，把原子间的复杂相互作用等效为珠子间较少的有效参数。</p>
 
-<h3>连续介质尺度（微米～毫米）</h3>
+<h3 id="连续介质尺度-微米-毫米">连续介质尺度（微米～毫米）</h3>
 
 <p><strong>方法：有限元分析（FEA）</strong></p>
 
@@ -110,7 +111,7 @@ for rate in strain_rates:
 </ul>
 <p>关键问题：从分子模拟中得到的刚度如何映射到 FEA 的材料卡片？</p>
 
-<h2>用 Python 串联多尺度</h2>
+<h2 id="用-python-串联多尺度">用 Python 串联多尺度</h2>
 
 <p>多尺度模拟的真正威力在于打通上下游。以下是一个最简示例，展示如何将 MD 算出的杨氏模量传递给 FEA：</p>
 
@@ -135,7 +136,7 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
     return fea_params
 </code></pre>
 
-<h2>实操建议</h2>
+<h2 id="实操建议">实操建议</h2>
 
 <ol>
 <li><strong>力场选择要谨慎</strong> — 用 AFM 纳米压痕、SAXS 等实验数据验证</li>
@@ -144,7 +145,7 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <li><strong>不确定度量化</strong> — 从系综平均给出误差范围，不要只报告单一数值</li>
 
 </ol>
-<h2>常见问题</h2>
+<h2 id="常见问题">常见问题</h2>
 
 <p><strong>Q: 我不会 MD，能用 ML 替代吗？</strong></p>
 
@@ -158,7 +159,7 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 
 <p>A: 没有完美的。通常需要自己写 Python 胶水代码把 MD 输出转成 FEA 输入。这也是本文想帮你的地方。</p>
 
-<h2>参考资料</h2>
+<h2 id="参考资料">参考资料</h2>
 <ul>
 <li>Noid, W.G. (2013). Coarse-grained models for biomolecular systems. <em>J. Chem. Phys.</em></li>
 <li>中国力学学会生物力学专业委员会 — 年度学术会议论文集</li>
@@ -168,7 +169,7 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <li>Zhang, L. et al. (2018). Deep Potential Molecular Dynamics: A Scalable Model. <em>Physical Review Letters</em>, 120, 143001.</li>
 
 </ul>
-<h2>讨论：多尺度模拟的未来方向</h2>
+<h2 id="讨论-多尺度模拟的未来方向">讨论：多尺度模拟的未来方向</h2>
 
 <p>多尺度模拟的未来在于三个方向的融合：机器学习加速、自动化工作流和不确定度量化的标准化。机器学习力场正在快速发展，DeepMD和NequIP等软件包可以从DFT级别的计算数据中训练出高精度的经典力场，使纳秒到微秒尺度的MD模拟保持量子力学精度。这对生物材料领域尤其重要——传统力场难以描述丝素蛋白中beta-折叠形成的氢键网络的精确能量分布，而机器学习力场提供了新的解决方案。</p>
 
@@ -180,7 +181,7 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation-zh/">分子动力学入门：你的第一个LAMMPS模拟</a></li><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

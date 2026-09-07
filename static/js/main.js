@@ -192,3 +192,30 @@ document.addEventListener('DOMContentLoaded',function(){
     };
     document.head.appendChild(script);
 })();
+
+// ===== THEME TOGGLE =====
+(function(){
+    var KEY = 'ml-biomat-theme';
+    function currentTheme(){ return document.documentElement.getAttribute('data-theme'); }
+    function render(){
+        var btn = document.getElementById('theme-toggle');
+        if(btn) btn.textContent = currentTheme() === 'dark' ? '\u2600' : '\u263e';
+    }
+    function apply(){
+        try {
+            var saved = localStorage.getItem(KEY);
+            if(saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
+        } catch(e) {}
+        render();
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+        apply();
+        var btn = document.getElementById('theme-toggle');
+        if(btn) btn.addEventListener('click', function(){
+            var next = currentTheme() === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            try { localStorage.setItem(KEY, next); } catch(e) {}
+            render();
+        });
+    });
+})();

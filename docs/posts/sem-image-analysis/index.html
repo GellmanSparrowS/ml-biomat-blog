@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>Why Automate SEM Analysis?</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-automate-sem-analysis">Why Automate SEM Analysis?</a></li><li class="toc-h2"><a href="#the-analysis-pipeline">The Analysis Pipeline</a></li><li class="toc-h3"><a href="#step-1-load-and-preprocess">Step 1: Load and Preprocess</a></li><li class="toc-h3"><a href="#step-2-thresholding">Step 2: Thresholding</a></li><li class="toc-h3"><a href="#step-3-clean-the-binary-mask">Step 3: Clean the Binary Mask</a></li><li class="toc-h3"><a href="#step-4-measure-fiber-properties">Step 4: Measure Fiber Properties</a></li><li class="toc-h3"><a href="#step-5-orientation-analysis">Step 5: Orientation Analysis</a></li><li class="toc-h3"><a href="#step-6-batch-processing">Step 6: Batch Processing</a></li><li class="toc-h2"><a href="#common-pitfalls">Common Pitfalls</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-automate-sem-analysis">Why Automate SEM Analysis?</h2>
 
 <p>Manual measurement of fiber diameters and orientations from SEM images is tedious, subjective, and irreproducible. A Python script does it consistently in seconds per image. This guide uses scikit-image, a library purpose-built for scientific image analysis.</p>
 
@@ -55,8 +56,8 @@ import matplotlib.pyplot as plt
 from skimage import io, filters, measure, morphology, feature
 </code></pre>
 
-<h2>The Analysis Pipeline</h2>
-<h3>Step 1: Load and Preprocess</h3>
+<h2 id="the-analysis-pipeline">The Analysis Pipeline</h2>
+<h3 id="step-1-load-and-preprocess">Step 1: Load and Preprocess</h3>
 
 <pre><code class="language-python">
 # Load SEM image (8-bit or 16-bit TIFF)
@@ -71,7 +72,7 @@ from scipy.ndimage import gaussian_filter
 img_denoised = gaussian_filter(img_norm, sigma=1.0)
 </code></pre>
 
-<h3>Step 2: Thresholding</h3>
+<h3 id="step-2-thresholding">Step 2: Thresholding</h3>
 
 <p>Choosing the right threshold method is critical:</p>
 
@@ -90,7 +91,7 @@ binary = img_denoised &gt; thresh
 print(f&quot;Fiber coverage: {binary.mean()*100:.1f}%&quot;)
 </code></pre>
 
-<h3>Step 3: Clean the Binary Mask</h3>
+<h3 id="step-3-clean-the-binary-mask">Step 3: Clean the Binary Mask</h3>
 
 <pre><code class="language-python">
 # Remove small noise objects (&lt; 50 pixels)
@@ -104,7 +105,7 @@ closed = morphology.binary_closing(cleaned, selem)
 skeleton = morphology.skeletonize(closed)
 </code></pre>
 
-<h3>Step 4: Measure Fiber Properties</h3>
+<h3 id="step-4-measure-fiber-properties">Step 4: Measure Fiber Properties</h3>
 
 <pre><code class="language-python">
 # Label connected regions
@@ -127,7 +128,7 @@ print(f&quot;Mean diameter: {df_fibers[&#x27;diameter_px&#x27;].mean():.1f} +/- 
 print(f&quot;Mean aspect ratio: {df_fibers[&#x27;aspect_ratio&#x27;].mean():.2f}&quot;)
 </code></pre>
 
-<h3>Step 5: Orientation Analysis</h3>
+<h3 id="step-5-orientation-analysis">Step 5: Orientation Analysis</h3>
 
 <img src="/static/images/posts/sem-image-analysis/orientation-en.webp" alt="Polar histogram of fiber orientation with a dominant alignment near 90 degrees" loading="lazy">
 
@@ -146,7 +147,7 @@ dominant_angle = theta[np.argmax(orientation_profile)]
 print(f&quot;Dominant fiber orientation: {dominant_angle:.1f} degrees&quot;)
 </code></pre>
 
-<h3>Step 6: Batch Processing</h3>
+<h3 id="step-6-batch-processing">Step 6: Batch Processing</h3>
 
 <pre><code class="language-python">
 import glob
@@ -176,11 +177,11 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 # df_summary.to_csv(&quot;sem_analysis_summary.csv&quot;, index=False)
 </code></pre>
 
-<h2>Common Pitfalls</h2>
+<h2 id="common-pitfalls">Common Pitfalls</h2>
 
 <table><tr><th>Problem</th><th>Solution</th></tr><tr><td>---------</td><td>----------</td></tr><tr><td>Uneven illumination</td><td>Apply rolling ball background subtraction</td></tr><tr><td>Touching fibers</td><td>Use watershed segmentation</td></tr><tr><td>Over-segmentation</td><td>Increase <code>min_size</code> in <code>remove_small_objects</code></td></tr><tr><td>Wrong scale bar</td><td>Always verify pixel-to-nm calibration</td></tr><tr><td>Saturated pixels</td><td>Use 16-bit images, avoid overexposure</td></tr></table>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ul>
 <li>van der Walt, S. et al. (2014). scikit-image: image processing in Python. <em>PeerJ</em>, 2, e453.</li>
@@ -192,7 +193,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

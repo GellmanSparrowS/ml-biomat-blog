@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,11 +46,11 @@
 </div>
 </header>
 <div class="content">
-<p>Nature's structural materials - from silk to bone, nacre to wood - possess mechanical properties far beyond those of their individual chemical constituents. The core secret is not chemistry but architecture: hierarchical superstructures, where multiple levels of organization from molecular to macroscopic collaborate to produce mechanical responses that vastly exceed the sum of their parts.</p>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#what-are-hierarchical-superstructures">What Are Hierarchical Superstructures?</a></li><li class="toc-h2"><a href="#biological-examples-nature-s-nested-designs">Biological Examples: Nature's Nested Designs</a></li><li class="toc-h3"><a href="#1-silk-fibroin-beta-sheet-crystals-and-nanofibrils">1. Silk Fibroin: Beta-Sheet Crystals and Nanofibrils</a></li><li class="toc-h3"><a href="#2-collagen-triple-helix-to-tough-fibers">2. Collagen: Triple Helix to Tough Fibers</a></li><li class="toc-h3"><a href="#3-bone-organic-inorganic-composite-hierarchy">3. Bone: Organic-Inorganic Composite Hierarchy</a></li><li class="toc-h3"><a href="#4-nacre-mother-of-pearl-brick-and-mortar-toughness">4. Nacre (Mother-of-Pearl): Brick-and-Mortar Toughness</a></li><li class="toc-h3"><a href="#5-spider-silk-crystalline-amorphous-networks">5. Spider Silk: Crystalline/Amorphous Networks</a></li><li class="toc-h3"><a href="#6-cellulose-multi-layered-cell-wall-design">6. Cellulose: Multi-Layered Cell Wall Design</a></li><li class="toc-h2"><a href="#design-principles-and-synthesis">Design Principles and Synthesis</a></li><li class="toc-h3"><a href="#common-design-principles">Common Design Principles</a></li><li class="toc-h3"><a href="#hierarchical-self-assembly">Hierarchical Self-Assembly</a></li><li class="toc-h2"><a href="#experimental-and-analysis-methods">Experimental and Analysis Methods</a></li><li class="toc-h3"><a href="#research-methods">Research Methods</a></li><li class="toc-h3"><a href="#quantitative-characterization">Quantitative Characterization</a></li><li class="toc-h2"><a href="#blog-navigation">Blog Navigation</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><p>Nature's structural materials - from silk to bone, nacre to wood - possess mechanical properties far beyond those of their individual chemical constituents. The core secret is not chemistry but architecture: hierarchical superstructures, where multiple levels of organization from molecular to macroscopic collaborate to produce mechanical responses that vastly exceed the sum of their parts.</p>
 
 <p>This article serves as a navigational guide for the Bio-Materials-Structures category, systematically surveying six archetypal hierarchical systems and the mechanical design principles they embody.</p>
 
-<h2>What Are Hierarchical Superstructures?</h2>
+<h2 id="what-are-hierarchical-superstructures">What Are Hierarchical Superstructures?</h2>
 
 <p>Hierarchical superstructures refer to materials that exhibit ordered organization across multiple spatial scales, with each level contributing uniquely to mechanical performance. A typical structural hierarchy spans:</p>
 
@@ -57,8 +58,8 @@
 
 <p>The universal design principle is <strong>separation of stiffness and toughness across scales</strong>. Hard crystalline domains provide strength and stiffness, soft amorphous domains provide extensibility and toughness, and the interfaces between them dissipate energy through sacrificial bonds, hydrogen bond networks, and geometric interlocking.</p>
 
-<h2>Biological Examples: Nature's Nested Designs</h2>
-<h3>1. Silk Fibroin: Beta-Sheet Crystals and Nanofibrils</h3>
+<h2 id="biological-examples-nature-s-nested-designs">Biological Examples: Nature's Nested Designs</h2>
+<h3 id="1-silk-fibroin-beta-sheet-crystals-and-nanofibrils">1. Silk Fibroin: Beta-Sheet Crystals and Nanofibrils</h3>
 
 <p>Silk fibroin from Bombyx mori is a model system for hierarchical structures. From low to high:</p>
 
@@ -72,7 +73,7 @@
 
 <p>Related: <a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function</a></p>
 
-<h3>2. Collagen: Triple Helix to Tough Fibers</h3>
+<h3 id="2-collagen-triple-helix-to-tough-fibers">2. Collagen: Triple Helix to Tough Fibers</h3>
 
 <p>Collagen, the most abundant protein in mammals, exhibits:</p>
 
@@ -86,7 +87,7 @@
 
 <p>Related: <a href="/posts/stress-strain-curves/">Stress-Strain Curve Biomechanics</a></p>
 
-<h3>3. Bone: Organic-Inorganic Composite Hierarchy</h3>
+<h3 id="3-bone-organic-inorganic-composite-hierarchy">3. Bone: Organic-Inorganic Composite Hierarchy</h3>
 
 <p>Bone represents the most complex biological composite, organized across seven hierarchical levels:</p>
 
@@ -99,7 +100,7 @@
 </ul>
 <p>Key design: <strong>Minerals provide compressive strength</strong>, collagen provides tensile toughness, and the lamellar/osteonal architecture deflects propagating cracks. Together, these mechanisms give bone a fracture toughness three orders of magnitude higher than pure hydroxyapatite.</p>
 
-<h3>4. Nacre (Mother-of-Pearl): Brick-and-Mortar Toughness</h3>
+<h3 id="4-nacre-mother-of-pearl-brick-and-mortar-toughness">4. Nacre (Mother-of-Pearl): Brick-and-Mortar Toughness</h3>
 
 <p>Nacre's celebrated structure:</p>
 
@@ -111,7 +112,7 @@
 </ul>
 <p>The brick-and-mortar architecture achieves <strong>3000x the toughness of pure aragonite</strong>. Under load, platelets slide and the organic layers stretch, providing massive energy dissipation. Nanoscale asperities on platelet surfaces create mechanical interlocking that prevents complete pullout at low stress. This strategy has been widely mimicked in ceramic composites and body armor.</p>
 
-<h3>5. Spider Silk: Crystalline/Amorphous Networks</h3>
+<h3 id="5-spider-silk-crystalline-amorphous-networks">5. Spider Silk: Crystalline/Amorphous Networks</h3>
 
 <p>Spider dragline silk shares structural principles with silkworm silk but with added complexity:</p>
 
@@ -123,7 +124,7 @@
 </ul>
 <p>Spider silk achieves toughness values of ~160 MJ/m3 and exhibits a unique "supercontraction" phenomenon - spontaneous shrinkage up to 50% in length under humid conditions, governed by hydration-driven rearrangements in the amorphous domains. The key to its performance lies in the precise size control of crystalline nanoparticles: too large leads to brittle fracture, too small fails to effectively transfer load.</p>
 
-<h3>6. Cellulose: Multi-Layered Cell Wall Design</h3>
+<h3 id="6-cellulose-multi-layered-cell-wall-design">6. Cellulose: Multi-Layered Cell Wall Design</h3>
 
 <p>Cellulose, Earth's most abundant biopolymer, features:</p>
 
@@ -135,8 +136,8 @@
 </ul>
 <p>This helical arrangement gives cellulose fibers extreme axial strength (~1 GPa) while retaining flexibility. Modern nanocellulose materials are attempting to reconstruct this hierarchical architecture in synthetic systems.</p>
 
-<h2>Design Principles and Synthesis</h2>
-<h3>Common Design Principles</h3>
+<h2 id="design-principles-and-synthesis">Design Principles and Synthesis</h2>
+<h3 id="common-design-principles">Common Design Principles</h3>
 
 <p>Across these six systems, we can distill universal principles:</p>
 
@@ -148,12 +149,12 @@
 <li><strong>Water as a structural participant</strong>: Water is not merely a solvent but an active structural component, modulating mechanical response through hydration-dependent hydrogen bond networks</li>
 
 </ol>
-<h3>Hierarchical Self-Assembly</h3>
+<h3 id="hierarchical-self-assembly">Hierarchical Self-Assembly</h3>
 
 <p>A defining feature of biological hierarchies is that they form via self-assembly rather than directed fabrication. Each level spontaneously organizes under specific physicochemical conditions, requiring no external templates. For example, silkworms produce silk fibers under ambient conditions through shear-flow-induced crystallization, outperforming any synthetic fiber-spinning process in energy efficiency and precision. Understanding these self-assembly pathways is key to sustainable biomimetic manufacturing.</p>
 
-<h2>Experimental and Analysis Methods</h2>
-<h3>Research Methods</h3>
+<h2 id="experimental-and-analysis-methods">Experimental and Analysis Methods</h2>
+<h3 id="research-methods">Research Methods</h3>
 
 <p>Studying hierarchical structures requires a multi-method approach:</p>
 
@@ -161,7 +162,7 @@
 
 <p>Recent advances in machine-learned force fields (ANI, NequIP, MACE) are bridging the gap between DFT accuracy and MD efficiency, enabling accurate simulations at larger spatiotemporal scales. In situ mechanical testing (SEM/AFM) now allows direct observation of hierarchical structure evolution during loading.</p>
 
-<h3>Quantitative Characterization</h3>
+<h3 id="quantitative-characterization">Quantitative Characterization</h3>
 
 <p>Understanding hierarchical structures requires quantitative metrics beyond qualitative description:</p>
 
@@ -174,7 +175,7 @@
 </ul>
 <p>These metrics provide trainable features for machine learning models and clear optimization targets for biomimetic design.</p>
 
-<h2>Blog Navigation</h2>
+<h2 id="blog-navigation">Blog Navigation</h2>
 
 <p>Articles in the Bio-Materials-Structures category cover this landscape systematically:</p>
 
@@ -190,7 +191,7 @@
 </ul>
 <p>Planned future content includes: collagen tensile MD simulation, cellulose coarse-grained modeling, bone multiscale FEM, and nacre-inspired composite optimization.</p>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ol>
 <li>Wegst, U.G.K., et al. (2015). Bioinspired structural materials. <em>Nature Materials</em>, 14, 23-36.</li>
@@ -205,7 +206,7 @@
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

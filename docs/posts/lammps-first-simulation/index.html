@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>What is Molecular Dynamics?</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#what-is-molecular-dynamics">What is Molecular Dynamics?</a></li><li class="toc-h2"><a href="#getting-started">Getting Started</a></li><li class="toc-h3"><a href="#installing-lammps">Installing LAMMPS</a></li><li class="toc-h3"><a href="#anatomy-of-a-lammps-input-script">Anatomy of a LAMMPS Input Script</a></li><li class="toc-h3"><a href="#your-first-simulation-water-box">Your First Simulation: Water Box</a></li><li class="toc-h3"><a href="#key-parameters-explained">Key Parameters Explained</a></li><li class="toc-h2"><a href="#force-fields-and-analysis">Force Fields and Analysis</a></li><li class="toc-h3"><a href="#common-force-fields">Common Force Fields</a></li><li class="toc-h3"><a href="#trajectory-analysis-with-python">Trajectory Analysis with Python</a></li><li class="toc-h3"><a href="#troubleshooting">Troubleshooting</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="what-is-molecular-dynamics">What is Molecular Dynamics?</h2>
 
 <p>MD simulates the motion of atoms by solving Newton's equations (F=ma) at each timestep. Given initial positions, velocities, and a force field (potential energy function), MD predicts how a system evolves over time.</p>
 
@@ -56,8 +57,8 @@
 <li>What happens to a protein under tensile load?</li>
 
 </ul>
-<h2>Getting Started</h2>
-<h3>Installing LAMMPS</h3>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="installing-lammps">Installing LAMMPS</h3>
 
 <p>LAMMPS (Large-scale Atomic/Molecular Massively Parallel Simulator) from Sandia National Labs is the most widely used open-source MD code.</p>
 
@@ -83,7 +84,7 @@ conda activate lammps
 lmp_serial -h
 </code></pre>
 
-<h3>Anatomy of a LAMMPS Input Script</h3>
+<h3 id="anatomy-of-a-lammps-input-script">Anatomy of a LAMMPS Input Script</h3>
 
 <p>A LAMMPS input file has four essential sections:</p>
 
@@ -111,7 +112,7 @@ dump            traj all custom 100 dump.lammpstrj id type x y z
 run             10000
 </code></pre>
 
-<h3>Your First Simulation: Water Box</h3>
+<h3 id="your-first-simulation-water-box">Your First Simulation: Water Box</h3>
 
 <p>Let's simulate 500 water molecules at room temperature using the TIP3P model:</p>
 
@@ -145,16 +146,16 @@ fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
 run             100000
 </code></pre>
 
-<h3>Key Parameters Explained</h3>
+<h3 id="key-parameters-explained">Key Parameters Explained</h3>
 
 <table><tr><th>Parameter</th><th>Meaning</th><th>Typical Value</th></tr><tr><td>-----------</td><td>---------</td><td>---------------</td></tr><tr><td>timestep</td><td>Integration step size</td><td>1.0-2.0 fs</td></tr><tr><td>cutoff</td><td>Non-bonded interaction cutoff</td><td>10-12 Angstrom</td></tr><tr><td>temperature</td><td>System temperature</td><td>300 K (room temp)</td></tr><tr><td>NVT</td><td>Constant particle number, volume, temperature</td><td>Equilibration</td></tr><tr><td>NPT</td><td>Constant particle number, pressure, temperature</td><td>Production</td></tr></table>
 
-<h2>Force Fields and Analysis</h2>
-<h3>Common Force Fields</h3>
+<h2 id="force-fields-and-analysis">Force Fields and Analysis</h2>
+<h3 id="common-force-fields">Common Force Fields</h3>
 
 <table><tr><th>Force Field</th><th>Best For</th><th>Reference</th></tr><tr><td>------------</td><td>---------</td><td>-----------</td></tr><tr><td>OPLS-AA</td><td>Proteins, organic molecules</td><td>Jorgensen et al. (1996)</td></tr><tr><td>CHARMM36</td><td>Proteins, nucleic acids</td><td>Best et al. (2012)</td></tr><tr><td>AMBER ff19SB</td><td>Proteins</td><td>Tian et al. (2020)</td></tr><tr><td>ReaxFF</td><td>Reactive systems, bond breaking</td><td>van Duin et al. (2001)</td></tr><tr><td>Martini</td><td>Coarse-grained biomolecular</td><td>Marrink et al. (2007)</td></tr></table>
 
-<h3>Trajectory Analysis with Python</h3>
+<h3 id="trajectory-analysis-with-python">Trajectory Analysis with Python</h3>
 
 <p>After the simulation finishes, analyze the trajectory:</p>
 
@@ -179,11 +180,11 @@ rdf_oo = rdf.InterRDF(oxygen, oxygen, nbins=200, range=(0, 10.0))
 rdf_oo.run()
 </code></pre>
 
-<h3>Troubleshooting</h3>
+<h3 id="troubleshooting">Troubleshooting</h3>
 
 <table><tr><th>Problem</th><th>Solution</th></tr><tr><td>---------</td><td>----------</td></tr><tr><td>"Lost atoms" error</td><td>Decrease timestep or increase neighbor list skin</td></tr><tr><td>Energy not converging</td><td>Run longer minimization or use softer initial conditions</td></tr><tr><td>Simulation too slow</td><td>Use GPU (Kokkos package) or coarser force field</td></tr><tr><td>Segfault</td><td>Check atom type consistency in input script</td></tr></table>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ul>
 <li>LAMMPS documentation: <a href="https://docs.lammps.org">docs.lammps.org</a></li>
@@ -196,7 +197,7 @@ rdf_oo.run()
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro/">A Practical Introduction to Multiscale Modeling for Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,8 +46,8 @@
 </div>
 </header>
 <div class="content">
-<h2>Neural Network Foundations</h2>
-<h3>1. The Nature of Deep Learning — From Feature Engineering to Representation Learning</h3>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#neural-network-foundations">Neural Network Foundations</a></li><li class="toc-h3"><a href="#1-the-nature-of-deep-learning-from-feature-engineering-to-representation-learning">1. The Nature of Deep Learning — From Feature Engineering to Representation Learning</a></li><li class="toc-h3"><a href="#2-the-basic-components-neurons-layers-and-activation-functions">2. The Basic Components — Neurons, Layers, and Activation Functions</a></li><li class="toc-h2"><a href="#how-networks-learn">How Networks Learn</a></li><li class="toc-h3"><a href="#3-forward-propagation-and-loss-functions-from-input-to-prediction">3. Forward Propagation and Loss Functions — From Input to Prediction</a></li><li class="toc-h3"><a href="#4-backpropagation-and-gradient-descent-how-networks-learn-from-errors">4. Backpropagation and Gradient Descent — How Networks Learn from Errors</a></li><li class="toc-h2"><a href="#architectures">Architectures</a></li><li class="toc-h3"><a href="#5-convolutional-neural-networks-spatial-feature-extraction">5. Convolutional Neural Networks — Spatial Feature Extraction</a></li><li class="toc-h3"><a href="#6-sequence-models-and-attention-lstm-and-transformer">6. Sequence Models and Attention — LSTM and Transformer</a></li><li class="toc-h2"><a href="#practical-training-and-scope">Practical Training and Scope</a></li><li class="toc-h3"><a href="#7-regularization-and-training-techniques-from-overfitting-to-generalization">7. Regularization and Training Techniques — From Overfitting to Generalization</a></li><li class="toc-h3"><a href="#8-when-to-use-deep-learning-its-scope-and-relationship-to-classical-ml">8. When to Use Deep Learning — Its Scope and Relationship to Classical ML</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="neural-network-foundations">Neural Network Foundations</h2>
+<h3 id="1-the-nature-of-deep-learning-from-feature-engineering-to-representation-learning">1. The Nature of Deep Learning — From Feature Engineering to Representation Learning</h3>
 
 <p>In the chapter on regression models, we emphasized feature engineering at every turn: transforming raw data — material composition, grain size, heat-treatment temperature — through logarithms, power laws, and interaction terms into forms that models can handle efficiently. This approach works extremely well when sample sizes are limited and domain knowledge is rich. When data dimensionality is extremely high and internal structure is extremely complex, however — a single cell micrograph contains millions of pixels, a protein sequence encodes folding information across multiple length scales, a finite-element mesh holds displacement fields at hundreds of thousands of nodes — hand-designed features face a fundamental bottleneck. It is not a question of effort; the complexity of the problem simply exceeds what human intuition can extract from raw data.</p>
 
@@ -60,7 +61,7 @@
 
 <hr>
 
-<h3>2. The Basic Components — Neurons, Layers, and Activation Functions</h3>
+<h3 id="2-the-basic-components-neurons-layers-and-activation-functions">2. The Basic Components — Neurons, Layers, and Activation Functions</h3>
 
 <p>The term "neural network" originates from a rough analogy to biological neural systems: biological neurons receive chemical signals through dendrites, accumulate them in the cell body, and fire an electrical signal along the axon when the threshold is exceeded. Mathematically, an artificial neuron receives an output vector \(\mathbf{x} \in \mathbb{R}^d\) from the previous layer, computes a weighted sum plus a bias, and passes the result through a nonlinear function (the activation function):</p>
 
@@ -109,8 +110,8 @@ plt.tight_layout(); plt.show()
 
 <hr>
 
-<h2>How Networks Learn</h2>
-<h3>3. Forward Propagation and Loss Functions — From Input to Prediction</h3>
+<h2 id="how-networks-learn">How Networks Learn</h2>
+<h3 id="3-forward-propagation-and-loss-functions-from-input-to-prediction">3. Forward Propagation and Loss Functions — From Input to Prediction</h3>
 
 <p>Once the layer-wise operation is understood, forward propagation is simply the process of passing input data sequentially through the layers until the output layer produces a prediction. For an L-layer fully connected network, forward propagation is expressed as the following recursion:</p>
 
@@ -140,7 +141,7 @@ plt.tight_layout(); plt.show()
 
 <hr>
 
-<h3>4. Backpropagation and Gradient Descent — How Networks Learn from Errors</h3>
+<h3 id="4-backpropagation-and-gradient-descent-how-networks-learn-from-errors">4. Backpropagation and Gradient Descent — How Networks Learn from Errors</h3>
 
 <p>Forward propagation produces predictions; the loss function quantifies the errors. The central remaining question is: how should the millions of model parameters be adjusted to minimize the loss? The answer is the <strong>Backpropagation</strong> algorithm — the core engine that makes the entire deep learning engineering stack possible, formalized in Rumelhart, Hinton, and Williams' landmark 1986 Nature paper.</p>
 
@@ -216,8 +217,8 @@ print(f&quot;Final val   MSE: {history[&#x27;val&#x27;][-1]:.4f}&quot;)
 
 <hr>
 
-<h2>Architectures</h2>
-<h3>5. Convolutional Neural Networks — Spatial Feature Extraction</h3>
+<h2 id="architectures">Architectures</h2>
+<h3 id="5-convolutional-neural-networks-spatial-feature-extraction">5. Convolutional Neural Networks — Spatial Feature Extraction</h3>
 
 <p>A fully connected MLP has a fundamental limitation: it is entirely oblivious to the spatial structure of its inputs. Flattening a 224 × 224 micrograph into a 150,528-dimensional vector and feeding it into an MLP forces the network to discover from scratch — through first-layer weights — that neighboring pixels are more relevant to each other than distant ones. This is not only computationally explosive (the first layer alone has hundreds of millions of parameters), it is data-catastrophically inefficient. <strong>Convolutional Neural Networks (CNNs)</strong> solve this problem structurally through three inductive biases: local connectivity, weight sharing, and translation invariance.</p>
 
@@ -284,7 +285,7 @@ print(&quot;Params:&quot;, f&quot;{sum(p.numel() for p in model.parameters()):,}
 
 <hr>
 
-<h3>6. Sequence Models and Attention — LSTM and Transformer</h3>
+<h3 id="6-sequence-models-and-attention-lstm-and-transformer">6. Sequence Models and Attention — LSTM and Transformer</h3>
 
 <p>Biology, materials science, and mechanics all generate abundant sequential data: protein amino acid sequences (folding and ligand binding prediction), gene sequences, fatigue load time-series from sensors, step-by-step finite-element time histories of structural dynamic responses, and multi-step process sequences in material fabrication. The defining characteristic of such data is that the current output depends on its history, with the relevant historical horizon unknown a priori. Fully connected MLPs and CNNs have fundamental limitations in modeling temporal dependencies; <strong>Recurrent Neural Networks (RNNs)</strong> and their descendants are designed explicitly for this class of problems.</p>
 
@@ -341,8 +342,8 @@ print(&quot;Attn:&quot;, attn(torch.randn(B, T, 64)).shape)       # → [4, 20, 
 
 <hr>
 
-<h2>Practical Training and Scope</h2>
-<h3>7. Regularization and Training Techniques — From Overfitting to Generalization</h3>
+<h2 id="practical-training-and-scope">Practical Training and Scope</h2>
+<h3 id="7-regularization-and-training-techniques-from-overfitting-to-generalization">7. Regularization and Training Techniques — From Overfitting to Generalization</h3>
 
 <p>A deep network's parameter count routinely exceeds the training sample count by several orders of magnitude, meaning it is theoretically capable of memorizing every training example — including noise — perfectly. Preventing this and enabling the model to learn genuinely generalizable patterns is the central practical challenge of deep learning.</p>
 
@@ -415,7 +416,7 @@ print(f&quot;Trainable / Total: {trainable:,} / {total:,}&quot;)
 
 <hr>
 
-<h3>8. When to Use Deep Learning — Its Scope and Relationship to Classical ML</h3>
+<h3 id="8-when-to-use-deep-learning-its-scope-and-relationship-to-classical-ml">8. When to Use Deep Learning — Its Scope and Relationship to Classical ML</h3>
 
 <p>After working through the technical details of deep learning, the most important question is one that should have been asked at the outset: <strong>does this problem actually require deep learning?</strong> In a research context, reaching for a deep network because it seems "advanced" or because the methodology needs to appear sufficiently complex is a waste of computational resources, researcher time, and scientific rigor. The following dimensions provide a principled decision framework.</p>
 
@@ -435,7 +436,7 @@ print(f&quot;Trainable / Total: {trainable:,} / {total:,}&quot;)
 
 <hr>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ol>
 <li>LeCun, Y., Bengio, Y., & Hinton, G. (2015). Deep learning. <em>Nature</em>, 521(7553), 436–444. https://doi.org/10.1038/nature14539</li>
@@ -459,7 +460,7 @@ print(f&quot;Trainable / Total: {trainable:,} / {total:,}&quot;)
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

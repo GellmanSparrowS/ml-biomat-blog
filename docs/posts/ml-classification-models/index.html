@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>1. What Is Classification — From Labels to Decision Boundaries</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#1-what-is-classification-from-labels-to-decision-boundaries">1. What Is Classification — From Labels to Decision Boundaries</a></li><li class="toc-h2"><a href="#core-algorithms">Core Algorithms</a></li><li class="toc-h3"><a href="#2-logistic-regression-linear-classification-through-a-probabilistic-lens">2. Logistic Regression — Linear Classification Through a Probabilistic Lens</a></li><li class="toc-h3"><a href="#3-support-vector-machines-the-widest-possible-margin">3. Support Vector Machines — The Widest Possible Margin</a></li><li class="toc-h3"><a href="#4-decision-trees-transparent-rule-based-classification">4. Decision Trees — Transparent, Rule-Based Classification</a></li><li class="toc-h3"><a href="#5-random-forests-and-ensemble-learning-the-wisdom-of-crowds">5. Random Forests and Ensemble Learning — The Wisdom of Crowds</a></li><li class="toc-h3"><a href="#6-k-nearest-neighbors-the-laziest-learner">6. k-Nearest Neighbors — The Laziest Learner</a></li><li class="toc-h3"><a href="#7-naive-bayes-the-minimalist-philosophy-of-probabilistic-inference">7. Naive Bayes — The Minimalist Philosophy of Probabilistic Inference</a></li><li class="toc-h2"><a href="#evaluation-and-model-selection">Evaluation and Model Selection</a></li><li class="toc-h3"><a href="#8-evaluation-metrics-accuracy-is-just-the-beginning">8. Evaluation Metrics — Accuracy Is Just the Beginning</a></li><li class="toc-h3"><a href="#9-a-practical-model-selection-guide-no-free-lunch">9. A Practical Model-Selection Guide — No Free Lunch</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="1-what-is-classification-from-labels-to-decision-boundaries">1. What Is Classification — From Labels to Decision Boundaries</h2>
 
 <img src="/static/images/posts/ml-classification-models/boundary-en.webp" alt="Two-class points separated by a decision boundary in a 2D feature space" loading="lazy">
 
@@ -82,8 +83,8 @@ X_test  = scaler.transform(X_test)   # Apply training statistics only
 
 <hr>
 
-<h2>Core Algorithms</h2>
-<h3>2. Logistic Regression — Linear Classification Through a Probabilistic Lens</h3>
+<h2 id="core-algorithms">Core Algorithms</h2>
+<h3 id="2-logistic-regression-linear-classification-through-a-probabilistic-lens">2. Logistic Regression — Linear Classification Through a Probabilistic Lens</h3>
 
 <p>Despite its name, logistic regression is a classification model through and through. It is the first classifier most practitioners learn and one of the most frequently used baselines in both academic research and industry, precisely because it not only outputs a predicted class but also a calibrated probability estimate. Understanding logistic regression amounts to understanding the probabilistic foundations shared by nearly all parametric classifiers.</p>
 
@@ -130,7 +131,7 @@ for i, cls in enumerate([&#x27;setosa&#x27;, &#x27;versicolor&#x27;, &#x27;virgi
 
 <hr>
 
-<h3>3. Support Vector Machines — The Widest Possible Margin</h3>
+<h3 id="3-support-vector-machines-the-widest-possible-margin">3. Support Vector Machines — The Widest Possible Margin</h3>
 
 <p>Support vector machines (SVMs) were developed by Cortes, Vapnik, and colleagues in the 1990s. After the introduction of the kernel trick, SVMs briefly held the status of state-of-the-art classifier across many domains. For small datasets and high-dimensional data — such as gene expression profiling — they remain highly competitive. Their design philosophy stems from a provocative question: among the infinitely many hyperplanes that correctly separate two classes, which one is the best?</p>
 
@@ -168,7 +169,7 @@ print(f&quot;Test accuracy: {accuracy_score(y_test, best_svm.predict(X_test)):.4
 
 <hr>
 
-<h3>4. Decision Trees — Transparent, Rule-Based Classification</h3>
+<h3 id="4-decision-trees-transparent-rule-based-classification">4. Decision Trees — Transparent, Rule-Based Classification</h3>
 
 <p>Decision trees are among the most interpretable classifiers in machine learning. Their decision logic can be understood directly by human experts — a crucial property in high-stakes domains such as medical diagnosis and structural failure analysis. When asked "why was this sample classified as fatigue fracture?", a decision tree can answer with a clear if-then-else chain; a black-box neural network cannot.</p>
 
@@ -221,7 +222,7 @@ print(&quot;Feature importances:&quot;, dict(zip(feature_names, tree.feature_imp
 
 <hr>
 
-<h3>5. Random Forests and Ensemble Learning — The Wisdom of Crowds</h3>
+<h3 id="5-random-forests-and-ensemble-learning-the-wisdom-of-crowds">5. Random Forests and Ensemble Learning — The Wisdom of Crowds</h3>
 
 <p>A single decision tree is intuitive but prone to overfitting. Random forests address this by combining many trees, embodying a simple yet profound principle: <strong>an ensemble of weak learners consistently outperforms a single strong learner</strong>. Understanding random forests requires first grasping one of machine learning's central conceptual tensions: the bias-variance tradeoff.</p>
 
@@ -273,7 +274,7 @@ print(f&quot;Gradient Boosting Test accuracy: {accuracy_score(y_test, gb.predict
 
 <hr>
 
-<h3>6. k-Nearest Neighbors — The Laziest Learner</h3>
+<h3 id="6-k-nearest-neighbors-the-laziest-learner">6. k-Nearest Neighbors — The Laziest Learner</h3>
 
 <p>k-Nearest Neighbors (k-NN) is the most intuitively transparent algorithm in machine learning and the canonical example of <strong>lazy learning</strong>. Its premise reflects an everyday heuristic: <strong>you can infer someone's characteristics by looking at who they are close to</strong>. In feature space, k-NN locates the k training samples nearest to a test point and assigns the majority class label among those neighbors. There is no training phase at all — the algorithm simply memorizes the entire training set and defers all computation to prediction time.</p>
 
@@ -322,7 +323,7 @@ print(f&quot;Test accuracy: {accuracy_score(y_test, knn.predict(X_test)):.4f}&qu
 
 <hr>
 
-<h3>7. Naive Bayes — The Minimalist Philosophy of Probabilistic Inference</h3>
+<h3 id="7-naive-bayes-the-minimalist-philosophy-of-probabilistic-inference">7. Naive Bayes — The Minimalist Philosophy of Probabilistic Inference</h3>
 
 <p>Naive Bayes is a family of probabilistic classifiers grounded in Bayes' theorem. Celebrated for its extreme simplicity and training speed, it has a long history in text classification (spam detection) and biological sequence analysis. Understanding it requires first grasping the conceptual core of Bayes' theorem: how to <strong>systematically update beliefs in light of observed evidence</strong>.</p>
 
@@ -366,8 +367,8 @@ print(&quot;Feature means per class:\n&quot;, gnb.theta_)
 
 <hr>
 
-<h2>Evaluation and Model Selection</h2>
-<h3>8. Evaluation Metrics — Accuracy Is Just the Beginning</h3>
+<h2 id="evaluation-and-model-selection">Evaluation and Model Selection</h2>
+<h3 id="8-evaluation-metrics-accuracy-is-just-the-beginning">8. Evaluation Metrics — Accuracy Is Just the Beginning</h3>
 
 <p>Once a classifier is trained, how should its performance be measured? Many beginners default to <strong>accuracy</strong> — the fraction of correctly classified samples. But accuracy is a dangerous oversimplification, especially under class imbalance. If 99% of a medical dataset consists of healthy subjects, a classifier that always predicts "healthy" achieves 99% accuracy while being completely useless for disease detection. Choosing the right evaluation metric is, fundamentally, an act of encoding what it means to be wrong in the specific context of your problem.</p>
 
@@ -445,7 +446,7 @@ plt.show()
 
 <hr>
 
-<h3>9. A Practical Model-Selection Guide — No Free Lunch</h3>
+<h3 id="9-a-practical-model-selection-guide-no-free-lunch">9. A Practical Model-Selection Guide — No Free Lunch</h3>
 
 <p>No classifier is optimal for every problem. This is formalized by the <strong>No Free Lunch Theorem</strong>: when averaged over all possible datasets, every algorithm has identical expected performance. In practice, model selection requires reasoning across several dimensions simultaneously — not defaulting to whichever algorithm won last year's Kaggle competition.</p>
 
@@ -463,7 +464,7 @@ plt.show()
 
 <hr>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ol>
 <li>Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011). Scikit-learn: Machine learning in Python. <em>Journal of Machine Learning Research</em>, 12, 2825–2830.</li>
@@ -487,7 +488,7 @@ plt.show()
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

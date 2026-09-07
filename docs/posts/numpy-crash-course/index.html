@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>Why Every Materials Scientist Needs NumPy</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-every-materials-scientist-needs-numpy">Why Every Materials Scientist Needs NumPy</a></li><li class="toc-h2"><a href="#core-array-operations">Core Array Operations</a></li><li class="toc-h3"><a href="#1-the-numpy-array-your-data-container">1. The NumPy Array: Your Data Container</a></li><li class="toc-h3"><a href="#array-properties">Array Properties</a></li><li class="toc-h3"><a href="#2-loading-experimental-data">2. Loading Experimental Data</a></li><li class="toc-h3"><a href="#3-element-wise-operations-no-loops">3. Element-Wise Operations (No Loops)</a></li><li class="toc-h3"><a href="#4-statistics-and-aggregation">4. Statistics and Aggregation</a></li><li class="toc-h2"><a href="#data-manipulation">Data Manipulation</a></li><li class="toc-h3"><a href="#5-boolean-indexing-filter-data">5. Boolean Indexing (Filter Data)</a></li><li class="toc-h3"><a href="#6-reshaping-and-combining-arrays">6. Reshaping and Combining Arrays</a></li><li class="toc-h3"><a href="#7-saving-results">7. Saving Results</a></li><li class="toc-h2"><a href="#putting-it-together">Putting It Together</a></li><li class="toc-h3"><a href="#8-end-to-end-example-afm-force-curve-processing">8. End-to-End Example: AFM Force Curve Processing</a></li><li class="toc-h3"><a href="#9-common-pitfalls">9. Common Pitfalls</a></li><li class="toc-h3"><a href="#10-when-to-use-what">10. When to Use What</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-every-materials-scientist-needs-numpy">Why Every Materials Scientist Needs NumPy</h2>
 
 <p>If you process experimental data, NumPy is non-negotiable. It turns raw <code>.txt</code> files from your tensile tester, AFM, or XRD into Python arrays you can analyze, plot, and export. This guide assumes you have Python installed and takes you from zero to productive with real lab data.</p>
 
@@ -53,8 +54,8 @@
 import numpy as np
 </code></pre>
 
-<h2>Core Array Operations</h2>
-<h3>1. The NumPy Array: Your Data Container</h3>
+<h2 id="core-array-operations">Core Array Operations</h2>
+<h3 id="1-the-numpy-array-your-data-container">1. The NumPy Array: Your Data Container</h3>
 
 <p>A NumPy array is a grid of numbers — like a column in Excel, but faster and more powerful:</p>
 
@@ -70,7 +71,7 @@ ones = np.ones(50)                 # 50-element vector of ones
 empty = np.empty(100)              # Uninitialized (fast, but fill before use)
 </code></pre>
 
-<h3>Array Properties</h3>
+<h3 id="array-properties">Array Properties</h3>
 
 <pre><code class="language-python">
 arr = np.array([[1, 2, 3], [4, 5, 6]])
@@ -80,7 +81,7 @@ print(arr.dtype)    # int64 — data type
 print(arr.size)     # 6 — total elements
 </code></pre>
 
-<h3>2. Loading Experimental Data</h3>
+<h3 id="2-loading-experimental-data">2. Loading Experimental Data</h3>
 
 <p>Most lab instruments export tabular data. NumPy handles all common formats:</p>
 
@@ -105,7 +106,7 @@ time, force, displacement = data[:, 0], data[:, 1], data[:, 2]
 data_with_nans = np.genfromtxt(&quot;messy_data.csv&quot;, delimiter=&quot;,&quot;, skip_header=1, filling_values=0)
 </code></pre>
 
-<h3>3. Element-Wise Operations (No Loops)</h3>
+<h3 id="3-element-wise-operations-no-loops">3. Element-Wise Operations (No Loops)</h3>
 
 <p>NumPy's real power: operations apply to every element simultaneously. No <code>for</code> loops needed:</p>
 
@@ -130,7 +131,7 @@ deflection_nm = deflection * sensitivity
 force = k * deflection_nm * 1e-9 * 1e9     # Convert to nN
 </code></pre>
 
-<h3>4. Statistics and Aggregation</h3>
+<h3 id="4-statistics-and-aggregation">4. Statistics and Aggregation</h3>
 
 <pre><code class="language-python">
 # Basic statistics
@@ -152,8 +153,8 @@ column_means = data.mean(axis=0)        # Mean of each column
 row_stds = data.std(axis=1)             # Std of each row
 </code></pre>
 
-<h2>Data Manipulation</h2>
-<h3>5. Boolean Indexing (Filter Data)</h3>
+<h2 id="data-manipulation">Data Manipulation</h2>
+<h3 id="5-boolean-indexing-filter-data">5. Boolean Indexing (Filter Data)</h3>
 
 <p>This is probably the NumPy feature you will use most:</p>
 
@@ -178,7 +179,7 @@ idx_max = np.argmax(stresses)           # Index of maximum
 idx_where = np.where(stresses &gt; 30)[0]  # Indices where condition is True
 </code></pre>
 
-<h3>6. Reshaping and Combining Arrays</h3>
+<h3 id="6-reshaping-and-combining-arrays">6. Reshaping and Combining Arrays</h3>
 
 <pre><code class="language-python">
 # Reshape
@@ -197,7 +198,7 @@ centered = data - data.mean(axis=0)     # Subtract column means
 normalized = data / data.max(axis=0)    # Normalize each column
 </code></pre>
 
-<h3>7. Saving Results</h3>
+<h3 id="7-saving-results">7. Saving Results</h3>
 
 <pre><code class="language-python">
 # Simple text export
@@ -213,8 +214,8 @@ archive = np.load(&quot;experiment.npz&quot;)
 print(archive[&quot;strain&quot;])
 </code></pre>
 
-<h2>Putting It Together</h2>
-<h3>8. End-to-End Example: AFM Force Curve Processing</h3>
+<h2 id="putting-it-together">Putting It Together</h2>
+<h3 id="8-end-to-end-example-afm-force-curve-processing">8. End-to-End Example: AFM Force Curve Processing</h3>
 
 <p>Here is a complete pipeline from raw data to mechanical properties:</p>
 
@@ -251,17 +252,17 @@ E, _ = np.polyfit(indentation[fit_mask], contact_force[fit_mask], 1)
 print(f&quot;Young&#x27;s modulus: {E:.1f} nN/nm (relative)&quot;)
 </code></pre>
 
-<h3>9. Common Pitfalls</h3>
+<h3 id="9-common-pitfalls">9. Common Pitfalls</h3>
 
 <table><tr><th>Problem</th><th>Solution</th></tr><tr><td>---------</td><td>----------</td></tr><tr><td><code>np.loadtxt</code> fails on header lines</td><td>Use <code>skiprows=N</code> to skip header</td></tr><tr><td>Missing values cause errors</td><td>Use <code>np.genfromtxt</code> with <code>filling_values</code></td></tr><tr><td>Wrong shape from slicing</td><td>Check with <code>.shape</code> — <code>data[:, 0]</code> is 1D, <code>data[:, :1]</code> is 2D</td></tr><tr><td>Operator <code>*</code> does element-wise</td><td>For matrix multiply, use <code>@</code> or <code>np.dot</code></td></tr><tr><td>NaN from division by zero</td><td>Use <code>np.divide(a, b, where=b!=0)</code></td></tr></table>
 
-<h3>10. When to Use What</h3>
+<h3 id="10-when-to-use-what">10. When to Use What</h3>
 
 <table><tr><th>Task</th><th>NumPy Function</th></tr><tr><td>------</td><td>---------------</td></tr><tr><td>Load tabular data</td><td><code>loadtxt</code>, <code>genfromtxt</code></td></tr><tr><td>Linear fit</td><td><code>polyfit(x, y, 1)</code></td></tr><tr><td>Statistics</td><td><code>mean</code>, <code>std</code>, <code>median</code>, <code>percentile</code></td></tr><tr><td>Filter data</td><td>Boolean indexing <code>arr[mask]</code></td></tr><tr><td>Find peaks</td><td>In SciPy: <code>scipy.signal.find_peaks</code></td></tr><tr><td>FFT (frequency analysis)</td><td><code>np.fft.fft</code></td></tr></table>
 
 <p>NumPy is the foundation. Once you are comfortable here, SciPy adds optimization, curve fitting, signal processing — all building on NumPy arrays.</p>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 
 <ul>
 <li>Harris, C.R. et al. (2020). Array programming with NumPy. <em>Nature</em>, 585, 357-362.</li>
@@ -273,7 +274,7 @@ print(f&quot;Young&#x27;s modulus: {E:.1f} nN/nm (relative)&quot;)
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

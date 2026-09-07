@@ -34,9 +34,23 @@ def inline_md(t):
     t = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', t)
     return t
 
+def slugify(text):
+    s = hm.unescape(re.sub(r'<[^>]+>', '', text)).lower()
+    return re.sub(r'[^a-z0-9\u4e00-\u9fff]+', '-', s).strip('-')
+
+def build_toc(html):
+    heads = re.findall(r'<h([23]) id="([^"]+)">(.*?)</h\1>', html)
+    if len(heads) < 2:
+        return ""
+    items = []
+    for lvl, hid, inner in heads:
+        label = hm.unescape(re.sub(r'<[^>]+>', '', inner))
+        cls = "toc-h3" if lvl == "3" else "toc-h2"
+        items.append(f'<li class="{cls}"><a href="#{hid}">{label}</a></li>')
+    return '<details class="toc" open><summary>Contents / 目录</summary><ul>' + "".join(items) + "</ul></details>"
 
 def md_to_html(text):
-    lines = text.split("\n"); out = []; in_code = False; in_mermaid = False; in_list = False; list_tag = ""; i = 0
+    lines = text.split("\n"); out = []; in_code = False; in_mermaid = False; in_list = False; list_tag = ""; i = 0; used_ids = {}
     while i < len(lines):
         line = lines[i]
         if line.strip().startswith("```"):
@@ -57,7 +71,13 @@ def md_to_html(text):
         if in_list and not re.match(r'^(\d+\.\s|[-*]\s)', line.strip()) and line.strip():
             out.append(f"</{list_tag}>"); in_list = False
         m = re.match(r'^(#{1,6})\s+(.+)$', line)
-        if m: lvl = len(m.group(1)); out.append(f"<h{lvl}>{inline_md(m.group(2))}</h{lvl}>"); i += 1; continue
+        if m:
+            lvl = len(m.group(1)); inner = inline_md(m.group(2)); hid = slugify(inner)
+            if hid in used_ids:
+                used_ids[hid] += 1; hid = f"{hid}-{used_ids[hid]}"
+            else:
+                used_ids[hid] = 1
+            out.append(f'<h{lvl} id="{hid}">{inner}</h{lvl}>'); i += 1; continue
         m = re.match(r'^[-*]\s+(.+)$', line)
         if m:
             if not in_list: out.append("<ul>"); in_list = True; list_tag = "ul"
@@ -102,6 +122,7 @@ def load_posts():
                 try: posted = datetime.strptime(meta.get("date", "2025-01-01"), "%Y-%m-%d")
                 except ValueError: posted = datetime(2025, 1, 1)
                 html_content = md_to_html(body)
+                toc = build_toc(html_content)
                 wc = len(body.split()); read_min = max(1, wc // 200)
                 posts.append({
                     "title": meta.get("title", slug.replace("-", " ").title()),
@@ -109,7 +130,7 @@ def load_posts():
                     "datetime": posted, "category": meta.get("category", "uncategorized"),
                     "tags": meta.get("tags", []), "lang": meta.get("lang", "en"),
                     "description": meta.get("description", ""),
-                    "html": html_content, "read_min": read_min, "word_count": wc,
+                    "html": html_content, "toc": toc, "read_min": read_min, "word_count": wc,
                 })
     posts.sort(key=lambda p: p["datetime"], reverse=True)
     return posts
@@ -220,6 +241,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/"{en_active}>EN</a><a href="/zh/"{zh_active}>中文</a></span>
 </div></header>
 <main class="container{wide_class}">'''
@@ -230,7 +252,7 @@ POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{
 
 POST_ROW = '<li class="post-row"><span class="row-date">{date}</span><a href="/posts/{slug}/">{title}</a></li>'
 
-ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="/categories/{cat_slug}/">{cat_name}</a>\n</div>\n</header>\n<div class="content">\n{html}\n</div>\n</article>'
+ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="/categories/{cat_slug}/">{cat_name}</a>\n</div>\n</header>\n<div class="content">\n{toc}{html}\n</div>\n</article>'
 
 
 GISCUS_SCRIPT = '<section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)"><h2>Comments</h2><script src="https://giscus.app/client.js" data-repo="GellmanSparrowS/ml-biomat-blog" data-repo-id="R_kgDOTEwhsA" data-category="General" data-category-id="DIC_kwDOTEwhsM4CpPbT" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script></section>'
@@ -321,10 +343,19 @@ def build():
         og_img = f'{SITE["base_url"]}/static/images/og/{p["slug"]}.png' if (Path("static/images/og") / f'{p["slug"]}.png').exists() else None
         needs_math = ("$$" in p["html"]) or ("\\(" in p["html"]) or ("\\begin" in p["html"])
         cn = cat_name(p["category"], p["lang"])
+        same_cat = [q for q in posts if q["category"] == p["category"] and q["slug"] != p["slug"]]
+        related = [q for q in same_cat if q["lang"] == p["lang"]][:3]
+        if len(related) < 3:
+            related += [q for q in same_cat if q["lang"] != p["lang"]][:3 - len(related)]
+        related_html = ""
+        if related:
+            related_html = '<section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple">' + "".join(
+                POST_ROW.format(date=q["date"], title=hm.escape(q["title"]), slug=q["slug"]) for q in related
+            ) + "</ul></section>"
         body = ARTICLE_HTML.format(
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
-            cat_slug=p["category"], cat_name=cn, html=p["html"],
-            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + ENGAGE_BANNER + giscus_html
+            cat_slug=p["category"], cat_name=cn, html=p["html"], toc=p["toc"],
+            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + ENGAGE_BANNER + related_html + giscus_html
         html = make_head(title=p["title"], desc=p["description"] or p["title"],
                          url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=p["lang"],
                          og_type="article", ld=article_ld(p), og_image=og_img, alternates=alts, needs_math=needs_math) + body + FOOT.format(year=datetime.now().year)

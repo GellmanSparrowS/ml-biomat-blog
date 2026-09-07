@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,12 +46,12 @@
 </div>
 </header>
 <div class="content">
-<h2>为什么写这个教程</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么写这个教程">为什么写这个教程</a></li><li class="toc-h2"><a href="#核心分析流程">核心分析流程</a></li><li class="toc-h3"><a href="#1-afm力曲线数据结构">1. AFM力曲线数据结构</a></li><li class="toc-h3"><a href="#2-加载典型数据">2. 加载典型数据</a></li><li class="toc-h3"><a href="#3-偏转-力转换">3. 偏转-力转换</a></li><li class="toc-h3"><a href="#4-基线校正">4. 基线校正</a></li><li class="toc-h3"><a href="#5-接触点检测">5. 接触点检测</a></li><li class="toc-h3"><a href="#6-粘附力提取">6. 粘附力提取</a></li><li class="toc-h3"><a href="#7-hertz模型拟合杨氏模量">7. Hertz模型拟合杨氏模量</a></li><li class="toc-h2"><a href="#批量处理与进阶主题">批量处理与进阶主题</a></li><li class="toc-h3"><a href="#8-批量处理">8. 批量处理</a></li><li class="toc-h3"><a href="#9-常见坑">9. 常见坑</a></li><li class="toc-h3"><a href="#10-替代模型">10. 替代模型</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#讨论-afm力谱学在生物材料定量分析中的进展">讨论：AFM力谱学在生物材料定量分析中的进展</a></li></ul></details><h2 id="为什么写这个教程">为什么写这个教程</h2>
 
 <p>做AFM力谱实验的朋友都知道：仪器导出一堆txt文件，在商业软件里手动处理几个小时。这个教程给你<strong>一套完整的Python流程</strong>，从读数据到出杨氏模量，不依赖任何商业软件。只用numpy、scipy、matplotlib。</p>
 
-<h2>核心分析流程</h2>
-<h3>1. AFM力曲线数据结构</h3>
+<h2 id="核心分析流程">核心分析流程</h2>
+<h3 id="1-afm力曲线数据结构">1. AFM力曲线数据结构</h3>
 
 <p>一次典型的AFM力曲线记录的是<strong>微悬臂偏转</strong>随压电陶瓷移动趋近和远离样品：</p>
 
@@ -64,7 +65,7 @@ import matplotlib.pyplot as plt
 from scipy import signal, optimize
 </code></pre>
 
-<h3>2. 加载典型数据</h3>
+<h3 id="2-加载典型数据">2. 加载典型数据</h3>
 
 <p>绝大多数AFM仪器导出的是表格数据，常见格式：</p>
 
@@ -85,7 +86,7 @@ z_piezo, deflection = load_afm_curve(&quot;force_curve_001.txt&quot;, skip_rows=
 </code></pre>
 
 </ul>
-<h4>处理Bruker头部</h4>
+<h4 id="处理bruker头部">处理Bruker头部</h4>
 
 <p>Bruker NanoScope文件头部长度不固定，下面是自动检测的鲁棒方法：</p>
 
@@ -102,7 +103,7 @@ def load_bruker_curve(filepath):
     return data[:, 0], data[:, 1]
 </code></pre>
 
-<h3>3. 偏转-力转换</h3>
+<h3 id="3-偏转-力转换">3. 偏转-力转换</h3>
 
 <p>微悬臂偏转（单位：伏特）需转换为力（单位：纳牛）：</p>
 
@@ -122,7 +123,7 @@ sensitivity = 45.0  # nm/V，偏转灵敏度
 force = deflection_to_force(deflection, k, sensitivity)
 </code></pre>
 
-<h3>4. 基线校正</h3>
+<h3 id="4-基线校正">4. 基线校正</h3>
 
 <p>非接触区的力曲线应该是平坦的（零力），但实际中存在热漂移和激光干涉造成的微小斜率：</p>
 
@@ -137,7 +138,7 @@ def baseline_correct(z_piezo, force, contact_idx):
     return force - baseline
 </code></pre>
 
-<h3>5. 接触点检测</h3>
+<h3 id="5-接触点检测">5. 接触点检测</h3>
 
 <p>这是最关键的步骤。稳健方法：找力的导数显著偏离基线噪声的地方。</p>
 
@@ -165,7 +166,7 @@ contact_z = z_piezo[contact_idx]
 print(f&quot;接触点: z = {contact_z:.1f} nm&quot;)
 </code></pre>
 
-<h3>6. 粘附力提取</h3>
+<h3 id="6-粘附力提取">6. 粘附力提取</h3>
 
 <p>回退曲线上的最小力就是粘附力（拔拉事件）：</p>
 
@@ -180,7 +181,7 @@ def extract_adhesion(z_piezo, force, contact_idx):
     return adhesion_force if adhesion_force &lt; 0 else 0.0
 </code></pre>
 
-<h3>7. Hertz模型拟合杨氏模量</h3>
+<h3 id="7-hertz模型拟合杨氏模量">7. Hertz模型拟合杨氏模量</h3>
 
 <p>球形压头在弹性半空间上的Hertz模型：</p>
 
@@ -226,8 +227,8 @@ def fit_youngs_modulus(z_piezo, force, contact_idx,
     return E, E_std
 </code></pre>
 
-<h2>批量处理与进阶主题</h2>
-<h3>8. 批量处理</h3>
+<h2 id="批量处理与进阶主题">批量处理与进阶主题</h2>
+<h3 id="8-批量处理">8. 批量处理</h3>
 
 <p>一次典型实验通常有几十条力曲线：</p>
 
@@ -266,11 +267,11 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 # df.to_csv(&quot;mechanical_properties.csv&quot;, index=False)
 </code></pre>
 
-<h3>9. 常见坑</h3>
+<h3 id="9-常见坑">9. 常见坑</h3>
 
 <table><tr><th>问题</th><th>可能原因</th><th>解决方法</th></tr><tr><td>------</td><td>---------</td><td>---------</td></tr><tr><td>接触点太早</td><td>基线噪声大</td><td>增大 <code>threshold_factor</code></td></tr><tr><td>负杨氏模量</td><td>接触点方向反了</td><td>检查z_piezo符号约定</td></tr><tr><td>基底效应</td><td>压入深度过大</td><td><code>fit_range_nm</code> < 样品厚度10%</td></tr><tr><td>零粘附</td><td>回退段未记录</td><td>AFM方法中启用回退</td></tr><tr><td>结果离散</td><td>样品不均或针尖污染</td><td>逐条检查再批量拟合</td></tr></table>
 
-<h3>10. 替代模型</h3>
+<h3 id="10-替代模型">10. 替代模型</h3>
 
 <p>Hertz假设线弹性。对粘弹性生物材料，考虑：</p>
 
@@ -287,7 +288,7 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 </code></pre>
 
 </ul>
-<h2>参考资料</h2>
+<h2 id="参考资料">参考资料</h2>
 <ul>
 <li>Cappella, B. & Dietler, G. (1999). Force-distance curves by atomic force microscopy. <em>Surface Science Reports</em>, 34(1-3), 1-104.</li>
 <li>Hertz, H. (1882). On the contact of elastic solids. <em>J. Reine Angew. Math.</em>, 92, 156-171.</li>
@@ -297,7 +298,7 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 <li>Hermanowicz, P. et al. (2014). AtomicJ: An open source software for analysis of force curves. <em>Review of Scientific Instruments</em>, 85(6), 063703.</li>
 
 </ul>
-<h2>讨论：AFM力谱学在生物材料定量分析中的进展</h2>
+<h2 id="讨论-afm力谱学在生物材料定量分析中的进展">讨论：AFM力谱学在生物材料定量分析中的进展</h2>
 
 <p>AFM力谱学已经从接触模式下的简单力曲线记录发展为一个成熟的定量纳米力学分析平台。峰值力轻敲模式代表了技术上的重要进步——它在每个像素点记录完整的力曲线，同时保持了与传统轻敲模式相当的成像速度。这意味着你可以在一张图像中同时获得形貌信息和定量力学信息，大大提高了实验效率。</p>
 
@@ -309,7 +310,7 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,14 +46,14 @@
 </div>
 </header>
 <div class="content">
-<h2>Why This Guide Exists</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-this-guide-exists">Why This Guide Exists</a></li><li class="toc-h2"><a href="#the-core-analysis-pipeline">The Core Analysis Pipeline</a></li><li class="toc-h3"><a href="#1-understanding-afm-force-curve-data">1. Understanding AFM Force Curve Data</a></li><li class="toc-h3"><a href="#2-loading-typical-afm-data-files">2. Loading Typical AFM Data Files</a></li><li class="toc-h3"><a href="#3-converting-deflection-to-force">3. Converting Deflection to Force</a></li><li class="toc-h3"><a href="#4-baseline-correction">4. Baseline Correction</a></li><li class="toc-h3"><a href="#5-finding-the-contact-point">5. Finding the Contact Point</a></li><li class="toc-h3"><a href="#6-extracting-adhesion-force">6. Extracting Adhesion Force</a></li><li class="toc-h3"><a href="#7-hertz-model-fitting-for-young-s-modulus">7. Hertz Model Fitting for Young's Modulus</a></li><li class="toc-h2"><a href="#scaling-and-advanced-topics">Scaling and Advanced Topics</a></li><li class="toc-h3"><a href="#8-batch-processing">8. Batch Processing</a></li><li class="toc-h3"><a href="#9-common-pitfalls">9. Common Pitfalls</a></li><li class="toc-h3"><a href="#10-alternative-models">10. Alternative Models</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-this-guide-exists">Why This Guide Exists</h2>
 
 <p>If you work with AFM force spectroscopy on soft biomaterials (collagen fibers, silk, hydrogels, cells), you have probably faced the same frustration: your instrument exports a pile of <code>.txt</code> or <code>.csv</code> files, and you spend hours manually processing them in proprietary software or Excel.</p>
 
 <p>This guide gives you <strong>a complete, copy-paste-ready Python pipeline</strong> that handles everything from raw data loading to Young's modulus extraction. No commercial software required. Just <code>numpy</code>, <code>scipy</code>, and <code>matplotlib</code>.</p>
 
-<h2>The Core Analysis Pipeline</h2>
-<h3>1. Understanding AFM Force Curve Data</h3>
+<h2 id="the-core-analysis-pipeline">The Core Analysis Pipeline</h2>
+<h3 id="1-understanding-afm-force-curve-data">1. Understanding AFM Force Curve Data</h3>
 
 <p>A typical AFM force curve records <strong>cantilever deflection</strong> (in volts or nanometers) as the piezo moves the tip toward and away from the sample:</p>
 
@@ -66,7 +67,7 @@ import matplotlib.pyplot as plt
 from scipy import signal, optimize
 </code></pre>
 
-<h3>2. Loading Typical AFM Data Files</h3>
+<h3 id="2-loading-typical-afm-data-files">2. Loading Typical AFM Data Files</h3>
 
 <p>Most AFM instruments export tabular data. Common formats:</p>
 
@@ -86,7 +87,7 @@ z_piezo, deflection = load_afm_curve(&quot;force_curve_001.txt&quot;, skip_rows=
 </code></pre>
 
 </ul>
-<h4>Handling Bruker Headers</h4>
+<h4 id="handling-bruker-headers">Handling Bruker Headers</h4>
 
 <pre><code class="language-python">
 def load_bruker_curve(filepath):
@@ -100,7 +101,7 @@ def load_bruker_curve(filepath):
     return data[:, 0], data[:, 1]
 </code></pre>
 
-<h3>3. Converting Deflection to Force</h3>
+<h3 id="3-converting-deflection-to-force">3. Converting Deflection to Force</h3>
 
 <pre><code class="language-python">
 def deflection_to_force(deflection_V, spring_constant, sensitivity_nm_per_V):
@@ -113,7 +114,7 @@ sensitivity = 45.0  # nm/V
 force = deflection_to_force(deflection, k, sensitivity)
 </code></pre>
 
-<h3>4. Baseline Correction</h3>
+<h3 id="4-baseline-correction">4. Baseline Correction</h3>
 
 <pre><code class="language-python">
 def baseline_correct(z_piezo, force, contact_idx):
@@ -123,7 +124,7 @@ def baseline_correct(z_piezo, force, contact_idx):
     return force - baseline
 </code></pre>
 
-<h3>5. Finding the Contact Point</h3>
+<h3 id="5-finding-the-contact-point">5. Finding the Contact Point</h3>
 
 <pre><code class="language-python">
 def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
@@ -141,7 +142,7 @@ def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
     return len(force) // 2
 </code></pre>
 
-<h3>6. Extracting Adhesion Force</h3>
+<h3 id="6-extracting-adhesion-force">6. Extracting Adhesion Force</h3>
 
 <pre><code class="language-python">
 def extract_adhesion(z_piezo, force, contact_idx):
@@ -151,7 +152,7 @@ def extract_adhesion(z_piezo, force, contact_idx):
     return adhesion_force if adhesion_force &lt; 0 else 0.0
 </code></pre>
 
-<h3>7. Hertz Model Fitting for Young's Modulus</h3>
+<h3 id="7-hertz-model-fitting-for-young-s-modulus">7. Hertz Model Fitting for Young's Modulus</h3>
 
 <p>For a spherical indenter on a flat elastic half-space:</p>
 
@@ -182,8 +183,8 @@ def fit_youngs_modulus(z_piezo, force, contact_idx, tip_radius_nm=20.0,
     return E, E_std
 </code></pre>
 
-<h2>Scaling and Advanced Topics</h2>
-<h3>8. Batch Processing</h3>
+<h2 id="scaling-and-advanced-topics">Scaling and Advanced Topics</h2>
+<h3 id="8-batch-processing">8. Batch Processing</h3>
 
 <pre><code class="language-python">
 import glob
@@ -206,11 +207,11 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
     return results
 </code></pre>
 
-<h3>9. Common Pitfalls</h3>
+<h3 id="9-common-pitfalls">9. Common Pitfalls</h3>
 
 <table><tr><th>Problem</th><th>Likely Cause</th><th>Fix</th></tr><tr><td>---------</td><td>-------------</td><td>-----</td></tr><tr><td>Contact point too early</td><td>Baseline noise</td><td>Increase <code>threshold_factor</code></td></tr><tr><td>Negative modulus</td><td>Wrong direction</td><td>Check z_piezo sign convention</td></tr><tr><td>Substrate effect</td><td>Too deep indentation</td><td><code>fit_range_nm</code> < 10% of thickness</td></tr><tr><td>Zero adhesion</td><td>No retract data</td><td>Enable retract in AFM method</td></tr></table>
 
-<h3>10. Alternative Models</h3>
+<h3 id="10-alternative-models">10. Alternative Models</h3>
 
 <ul>
 <li><strong>Sneddon model</strong>: for conical indenters: F = (2/pi) E* tan(alpha) delta^2</li>
@@ -224,7 +225,7 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 </code></pre>
 
 </ul>
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li>Cappella, B. & Dietler, G. (1999). Force-distance curves by AFM. <em>Surface Science Reports</em>, 34(1-3), 1-104.</li>
 <li>Hertz, H. (1882). On the contact of elastic solids. <em>J. Reine Angew. Math.</em>, 92, 156-171.</li>
@@ -236,7 +237,7 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

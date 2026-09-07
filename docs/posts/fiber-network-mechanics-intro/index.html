@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<h2>Why Fiber Networks Matter</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-fiber-networks-matter">Why Fiber Networks Matter</a></li><li class="toc-h2"><a href="#key-mechanical-behaviors">Key Mechanical Behaviors</a></li><li class="toc-h3"><a href="#1-strain-stiffening">1. Strain-Stiffening</a></li><li class="toc-h3"><a href="#2-architecture-property-relationships">2. Architecture-Property Relationships</a></li><li class="toc-h3"><a href="#3-percolation-threshold">3. Percolation Threshold</a></li><li class="toc-h2"><a href="#methods-and-materials">Methods and Materials</a></li><li class="toc-h3"><a href="#experimental-characterization">Experimental Characterization</a></li><li class="toc-h3"><a href="#computational-modeling">Computational Modeling</a></li><li class="toc-h3"><a href="#common-biomaterial-fiber-systems">Common Biomaterial Fiber Systems</a></li><li class="toc-h2"><a href="#key-references">Key References</a></li><li class="toc-h2"><a href="#computational-modeling-of-fiber-networks">Computational Modeling of Fiber Networks</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-fiber-networks-matter">Why Fiber Networks Matter</h2>
 
 <img src="/static/images/posts/fiber-network-mechanics/network-en.webp" alt="Schematic disordered fiber network with fibers, cross-links, and pores" loading="lazy">
 
@@ -53,9 +54,9 @@
 
 <p>Understanding fiber network mechanics is essential for designing better biomaterials.</p>
 
-<h2>Key Mechanical Behaviors</h2>
+<h2 id="key-mechanical-behaviors">Key Mechanical Behaviors</h2>
 
-<h3>1. Strain-Stiffening</h3>
+<h3 id="1-strain-stiffening">1. Strain-Stiffening</h3>
 
 <p>Unlike metals (which soften after yield), fiber networks <strong>stiffen as you stretch them</strong>. At low strains, fibers reorient and align. At high strains, aligned fibers bear load axially:</p>
 
@@ -68,16 +69,16 @@ strain = np.linspace(0, 0.5, 100)
 stress = 0.1 * strain + 5.0 * strain**3  # simplified
 </code></pre>
 
-<h3>2. Architecture-Property Relationships</h3>
+<h3 id="2-architecture-property-relationships">2. Architecture-Property Relationships</h3>
 
 <table><tr><th>Parameter</th><th>Effect on Mechanics</th></tr><tr><td>-----------</td><td>-------------------</td></tr><tr><td>Fiber diameter</td><td>Thinner fibers = more flexible network</td></tr><tr><td>Network density (mg/cm3)</td><td>Higher density = higher modulus</td></tr><tr><td>Crosslink density</td><td>More crosslinks = stiffer, less ductile</td></tr><tr><td>Fiber orientation</td><td>Aligned fibers = anisotropic properties</td></tr><tr><td>Fiber aspect ratio</td><td>Longer fibers = better load transfer</td></tr></table>
 
-<h3>3. Percolation Threshold</h3>
+<h3 id="3-percolation-threshold">3. Percolation Threshold</h3>
 
 <p>A fiber network needs a minimum density to transmit load — the <strong>percolation threshold</strong>. Below this density, the network is a disconnected "soup" of fibers. Above it, a continuous load-bearing path forms.</p>
 
-<h2>Methods and Materials</h2>
-<h3>Experimental Characterization</h3>
+<h2 id="methods-and-materials">Methods and Materials</h2>
+<h3 id="experimental-characterization">Experimental Characterization</h3>
 
 <p>Common techniques to probe fiber network mechanics:</p>
 
@@ -89,7 +90,7 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <li><strong>SAXS/WAXS</strong>: molecular-level structural changes during deformation</li>
 
 </ul>
-<h3>Computational Modeling</h3>
+<h3 id="computational-modeling">Computational Modeling</h3>
 
 <p>Three main approaches:</p>
 
@@ -101,7 +102,7 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 </ol>
 <p>Multiscale approaches combine these to predict macroscale properties from molecular parameters.</p>
 
-<h3>Common Biomaterial Fiber Systems</h3>
+<h3 id="common-biomaterial-fiber-systems">Common Biomaterial Fiber Systems</h3>
 
 <ul>
 <li><strong>Silk fibroin</strong>: exceptional toughness, programmable degradation</li>
@@ -110,7 +111,7 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <li><strong>Electrospun polymers</strong>: tunable architecture, scalable production</li>
 
 </ul>
-<h2>Key References</h2>
+<h2 id="key-references">Key References</h2>
 
 <ul>
 <li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS</em>, 103(33), 12285-12290.</li>
@@ -119,7 +120,7 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 
 
 </ul>
-<h2>Computational Modeling of Fiber Networks</h2>
+<h2 id="computational-modeling-of-fiber-networks">Computational Modeling of Fiber Networks</h2>
 
 <p>Discrete fiber network models represent each fiber as a beam element with bending, stretching, and torsional stiffness. These models capture the transition from bending-dominated to stretching-dominated deformation that underlies strain-stiffening. Open-source tools like FiberSim and custom Python scripts using the finite element method enable researchers to generate representative volume elements of random fiber networks and simulate their mechanical response.</p>
 
@@ -127,7 +128,7 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 
 <p>Machine learning surrogates offer a promising alternative. A neural network trained on thousands of discrete network simulations can predict mechanical properties orders of magnitude faster than direct simulation, enabling rapid screening of network architectures for desired properties. This approach combines the accuracy of physics-based simulation with the speed of data-driven prediction.</p>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li>Stein, A.M. et al. (2011). An algorithm for extracting the network geometry of 3D collagen gels. <em>Journal of Microscopy</em>, 232(3), 463-475.</li>
 <li>Zagar, G. et al. (2015). From mechanical micromodeling to continuum modeling of fibrous networks. <em>International Journal of Solids and Structures</em>, 57, 78-88.</li>
@@ -137,7 +138,7 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

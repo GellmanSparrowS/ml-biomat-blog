@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,15 +46,15 @@
 </div>
 </header>
 <div class="content">
-<h2>为什么纤维网络很重要</h2>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么纤维网络很重要">为什么纤维网络很重要</a></li><li class="toc-h2"><a href="#关键力学行为">关键力学行为</a></li><li class="toc-h3"><a href="#应变强化">应变强化</a></li><li class="toc-h3"><a href="#架构-性能关系">架构-性能关系</a></li><li class="toc-h3"><a href="#逾渗阈值">逾渗阈值</a></li><li class="toc-h2"><a href="#实验表征">实验表征</a></li><li class="toc-h2"><a href="#计算模拟">计算模拟</a></li><li class="toc-h2"><a href="#常见生物材料纤维体系">常见生物材料纤维体系</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#深入研究-逾渗理论与纤维网络力学">深入研究：逾渗理论与纤维网络力学</a></li></ul></details><h2 id="为什么纤维网络很重要">为什么纤维网络很重要</h2>
 
 <img src="/static/images/posts/fiber-network-mechanics/network-zh.webp" alt="无序纤维网络示意：纤维、交联与孔隙" loading="lazy">
 
 <p>自然界用纤维构建结构材料：肌腱中的胶原蛋白、蚕茧中的丝素蛋白、植物细胞壁中的纤维素。这些无序纤维网络通过架构而非化学组成实现卓越的力学性能——高比强度、应变强化和韧性。理解纤维网络力学对设计更好的生物材料至关重要。</p>
 
-<h2>关键力学行为</h2>
+<h2 id="关键力学行为">关键力学行为</h2>
 
-<h3>应变强化</h3>
+<h3 id="应变强化">应变强化</h3>
 
 <p>与金属不同，纤维网络越拉越硬。低应变时，纤维重新取向排列。高应变时，已排列的纤维轴向承载：</p>
 
@@ -63,27 +64,27 @@ strain = np.linspace(0, 0.5, 100)
 stress = 0.1 * strain + 5.0 * strain**3
 </code></pre>
 
-<h3>架构-性能关系</h3>
+<h3 id="架构-性能关系">架构-性能关系</h3>
 
 <table><tr><th>参数</th><th>对力学的影响</th></tr><tr><td>------</td><td>------------</td></tr><tr><td>纤维直径</td><td>更细 = 网络更柔</td></tr><tr><td>网络密度</td><td>更高 = 模量更高</td></tr><tr><td>交联密度</td><td>更多交联 = 更刚，韧性下降</td></tr><tr><td>纤维取向</td><td>取向排列 = 各向异性</td></tr><tr><td>纤维长径比</td><td>更长 = 更好的载荷传递</td></tr></table>
 
-<h3>逾渗阈值</h3>
+<h3 id="逾渗阈值">逾渗阈值</h3>
 
 <p>纤维网络需要最低密度才能传递载荷。低于此密度，网络是互不连接的纤维"汤"。高于阈值，形成连续的载荷传递路径。</p>
 
-<h2>实验表征</h2>
+<h2 id="实验表征">实验表征</h2>
 
 <p>常用的纤维网络力学探测：AFM纳米压痕（局部刚度）、拉伸测试（宏观应力-应变）、流变学（粘弹性G'、G""）、SEM/TEM成像（网络架构可视化）、SAXS/WAXS（变形过程中分子级结构变化）。</p>
 
-<h2>计算模拟</h2>
+<h2 id="计算模拟">计算模拟</h2>
 
 <p>三种主要方法：分子动力学MD（原子分辨率）、粗粒化CG模型（介观尺度）、有限元FE模型（连续介质）。多尺度方法结合三者，从分子参数预测宏观性能。</p>
 
-<h2>常见生物材料纤维体系</h2>
+<h2 id="常见生物材料纤维体系">常见生物材料纤维体系</h2>
 
 <p>丝素蛋白（优异韧性）、胶原蛋白（层级结构、细胞指导性）、纤维素纳米纤维（高刚度）、静电纺丝聚合物（架构可调）。</p>
 
-<h2>参考文献</h2>
+<h2 id="参考文献">参考文献</h2>
 <ul>
 <li>Buehler, M.J. (2006). Nature designs tough collagen. <em>PNAS</em>, 103(33), 12285-12290.</li>
 <li>Picu, R.C. (2011). Mechanics of random fiber networks. <em>Soft Matter</em>, 7, 6768-6785.</li>
@@ -91,7 +92,7 @@ stress = 0.1 * strain + 5.0 * strain**3
 <li>Head, D.A. et al. (2003). Distinct regimes of elastic response and deformation modes of cross-linked cytoskeletal and semiflexible polymer networks. <em>Physical Review E</em>, 68(6), 061907.</li>
 
 </ul>
-<h2>深入研究：逾渗理论与纤维网络力学</h2>
+<h2 id="深入研究-逾渗理论与纤维网络力学">深入研究：逾渗理论与纤维网络力学</h2>
 
 <p>纤维网络的力学行为由两个关键因素决定：网络的连通性和单根纤维的力学属性。逾渗理论提供理解网络连通性的数学框架。当纤维密度低于临界值时，网络由孤立纤维或无应力承载能力的松散团簇组成。超过临界密度后，纤维之间形成足够多的连接点，网络突然获得了承载能力——这就是逾渗转变。对于典型的随机纤维网络，逾渗阈值与纤维长径比成反比：纤维越长越细，越容易在较低密度下形成连通网络。</p>
 
@@ -103,7 +104,7 @@ stress = 0.1 * strain + 5.0 * strain**3
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures-zh/">工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures-zh/">生物材料的层级超结构：从分子到宏观的力学设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,7 +46,7 @@
 </div>
 </header>
 <div class="content">
-<p>When you run an experiment, you get data points. To extract meaningful physical parameters from those points, you need to fit a model. SciPy's <code>optimize.curve_fit</code> is the workhorse for this task. This guide covers everything from a simple straight-line fit to complex nonlinear models, with every example grounded in real materials or biology data.</p>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#foundations">Foundations</a></li><li class="toc-h3"><a href="#1-what-is-curve-fitting">1. What Is Curve Fitting?</a></li><li class="toc-h3"><a href="#2-linear-regression-the-foundation">2. Linear Regression: The Foundation</a></li><li class="toc-h2"><a href="#fitting-physical-models">Fitting Physical Models</a></li><li class="toc-h3"><a href="#3-exponential-decay-stress-relaxation">3. Exponential Decay: Stress Relaxation</a></li><li class="toc-h3"><a href="#4-hertz-model-afm-nanoindentation">4. Hertz Model: AFM Nanoindentation</a></li><li class="toc-h3"><a href="#5-viscoelastic-models">5. Viscoelastic Models</a></li><li class="toc-h2"><a href="#uncertainty-and-beyond">Uncertainty and Beyond</a></li><li class="toc-h3"><a href="#6-confidence-intervals">6. Confidence Intervals</a></li><li class="toc-h3"><a href="#7-common-pitfalls">7. Common Pitfalls</a></li><li class="toc-h3"><a href="#8-when-curve-fit-is-not-enough">8. When curve_fit Is Not Enough</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#model-selection-and-goodness-of-fit">Model Selection and Goodness of Fit</a></li></ul></details><p>When you run an experiment, you get data points. To extract meaningful physical parameters from those points, you need to fit a model. SciPy's <code>optimize.curve_fit</code> is the workhorse for this task. This guide covers everything from a simple straight-line fit to complex nonlinear models, with every example grounded in real materials or biology data.</p>
 
 <pre><code class="language-python">
 import numpy as np
@@ -53,8 +54,8 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 </code></pre>
 
-<h2>Foundations</h2>
-<h3>1. What Is Curve Fitting?</h3>
+<h2 id="foundations">Foundations</h2>
+<h3 id="1-what-is-curve-fitting">1. What Is Curve Fitting?</h3>
 
 <p>Curve fitting means finding the parameters of a mathematical model that best match your data. For example, if you pull on a silk fiber and record force vs. extension, the slope of the initial linear region is the fiber's stiffness. Fitting a line gives you that slope plus an uncertainty estimate.</p>
 
@@ -65,7 +66,7 @@ import matplotlib.pyplot as plt
 <li>Extract parameters and uncertainties from the results</li>
 
 </ol>
-<h3>2. Linear Regression: The Foundation</h3>
+<h3 id="2-linear-regression-the-foundation">2. Linear Regression: The Foundation</h3>
 
 <p>Most materials characterization starts with linear fitting. Young's modulus from a stress-strain curve, calibration curves, and many standard analyses use linear regression.</p>
 
@@ -104,8 +105,8 @@ plt.xlabel(&#x27;Strain&#x27;); plt.ylabel(&#x27;Stress (MPa)&#x27;)
 plt.legend(); plt.tight_layout()
 </code></pre>
 
-<h2>Fitting Physical Models</h2>
-<h3>3. Exponential Decay: Stress Relaxation</h3>
+<h2 id="fitting-physical-models">Fitting Physical Models</h2>
+<h3 id="3-exponential-decay-stress-relaxation">3. Exponential Decay: Stress Relaxation</h3>
 
 <img src="/static/images/posts/scipy-curve-fitting/relaxation-en.webp" alt="Measured stress-relaxation data with an exponential decay fit and equilibrium stress level" loading="lazy">
 
@@ -139,7 +140,7 @@ plt.xlabel(&#x27;Time (s)&#x27;); plt.ylabel(&#x27;Stress (kPa)&#x27;)
 plt.legend(); plt.tight_layout()
 </code></pre>
 
-<h3>4. Hertz Model: AFM Nanoindentation</h3>
+<h3 id="4-hertz-model-afm-nanoindentation">4. Hertz Model: AFM Nanoindentation</h3>
 
 <p>Atomic Force Microscopy (AFM) nanoindentation measures the stiffness of tiny sample regions. The Hertz model relates indentation depth to force for an elastic half-space:</p>
 
@@ -169,7 +170,7 @@ print(f&quot;Young&#x27;s modulus: {E/1000:.1f} kPa&quot;)
 <li>Loading rate independence (or report the rate)</li>
 
 </ul>
-<h3>5. Viscoelastic Models</h3>
+<h3 id="5-viscoelastic-models">5. Viscoelastic Models</h3>
 
 <p>Many biomaterials show both elastic and viscous behavior. The Standard Linear Solid (SLS) model captures this:</p>
 
@@ -194,8 +195,8 @@ print(f&quot;Equilibrium modulus: {popt[1]:.1f} kPa&quot;)
 print(f&quot;Viscosity: {popt[2]:.1f} kPa*s&quot;)
 </code></pre>
 
-<h2>Uncertainty and Beyond</h2>
-<h3>6. Confidence Intervals</h3>
+<h2 id="uncertainty-and-beyond">Uncertainty and Beyond</h2>
+<h3 id="6-confidence-intervals">6. Confidence Intervals</h3>
 
 <p>Never report fitted parameters without uncertainties. The covariance matrix from curve_fit gives standard errors:</p>
 
@@ -214,11 +215,11 @@ for i, (param, name) in enumerate(zip(popt, [&#x27;E_star&#x27;])):
     print(f&quot;{name}: {param:.1f} +/- {ci:.1f} (95% CI)&quot;)
 </code></pre>
 
-<h3>7. Common Pitfalls</h3>
+<h3 id="7-common-pitfalls">7. Common Pitfalls</h3>
 
 <table><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr><tr><td>---------</td><td>-------</td><td>-----</td></tr><tr><td>"Optimal parameters not found"</td><td>Bad initial guess</td><td>Visualize data, try different p0</td></tr><tr><td>Negative modulus</td><td>No bounds</td><td>Add <code>bounds=(0, None)</code></td></tr><tr><td>Huge uncertainties</td><td>Too few data points</td><td>Collect more data in the region of interest</td></tr><tr><td>Fit looks wrong at edges</td><td>Model doesn't fit extremes</td><td>Check if model is appropriate</td></tr><tr><td>NaN in covariance</td><td>Over-parameterized</td><td>Simplify model or fix some parameters</td></tr></table>
 
-<h3>8. When curve_fit Is Not Enough</h3>
+<h3 id="8-when-curve-fit-is-not-enough">8. When curve_fit Is Not Enough</h3>
 
 <pre><code class="language-python">
 from scipy.optimize import minimize
@@ -230,7 +231,7 @@ result = minimize(objective, [1.0, 0.1], args=(x, y, linear), bounds=[(0, None)]
 print(f&quot;Constrained result: {result.x}&quot;)
 </code></pre>
 
-<h2>References</h2>
+<h2 id="references">References</h2>
 <ul>
 <li>Virtanen, P. et al. (2020). SciPy 1.0. <em>Nature Methods</em>, 17, 261-272.</li>
 <li>Lin, D.C. et al. (2007). Robust strategies for automated AFM force curve analysis. <em>J. Biomech. Eng.</em>, 129(6), 904-912.</li>
@@ -240,7 +241,7 @@ print(f&quot;Constrained result: {result.x}&quot;)
 <li>Burnham, K.P. & Anderson, D.R. (2002). <em>Model Selection and Multimodel Inference</em>. Springer.</li>
 
 </ul>
-<h2>Model Selection and Goodness of Fit</h2>
+<h2 id="model-selection-and-goodness-of-fit">Model Selection and Goodness of Fit</h2>
 
 <p>Choosing between competing models requires more than just comparing R-squared values. The Akaike Information Criterion (AIC) penalizes models with more parameters, helping avoid overfitting. For nested models, the F-test provides a formal statistical comparison.</p>
 
@@ -252,7 +253,7 @@ print(f&quot;Constrained result: {result.x}&quot;)
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

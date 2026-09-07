@@ -34,6 +34,7 @@
 <a href="/about/">About / 关于</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 <span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
@@ -45,9 +46,9 @@
 </div>
 </header>
 <div class="content">
-<p>生物材料研究越来越依赖分子动力学( Molecular Dynamics, MD)模拟来理解蛋白质、纤维和多糖在原子尺度的行为。在众多MD软件中，GROMACS(GROningen MAchine for Chemical Simulations)因其开源、高效和活跃的社区而成为最广泛使用的工具之一。本文以溶菌酶(lysozyme)为例，完整演示GROMACS MD模拟的全流程，涵盖从结构获取到轨迹分析的所有步骤。</p>
+<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么选择gromacs">为什么选择GROMACS</a></li><li class="toc-h2"><a href="#入门与基础流程">入门与基础流程</a></li><li class="toc-h3"><a href="#安装与配置">安装与配置</a></li><li class="toc-h3"><a href="#md模拟基本流程">MD模拟基本流程</a></li><li class="toc-h3"><a href="#实战案例-溶菌酶在水溶液中的模拟">实战案例：溶菌酶在水溶液中的模拟</a></li><li class="toc-h3"><a href="#步骤1-获取结构文件">步骤1：获取结构文件</a></li><li class="toc-h3"><a href="#步骤2-生成拓扑文件">步骤2：生成拓扑文件</a></li><li class="toc-h3"><a href="#步骤3-定义模拟盒子">步骤3：定义模拟盒子</a></li><li class="toc-h3"><a href="#步骤4-溶剂化">步骤4：溶剂化</a></li><li class="toc-h3"><a href="#步骤5-添加抗衡离子">步骤5：添加抗衡离子</a></li><li class="toc-h3"><a href="#步骤6-能量最小化-em">步骤6：能量最小化(EM)</a></li><li class="toc-h3"><a href="#步骤7-nvt平衡">步骤7：NVT平衡</a></li><li class="toc-h3"><a href="#步骤8-npt平衡">步骤8：NPT平衡</a></li><li class="toc-h3"><a href="#步骤9-生产模拟">步骤9：生产模拟</a></li><li class="toc-h2"><a href="#分析与优化">分析与优化</a></li><li class="toc-h3"><a href="#轨迹分析">轨迹分析</a></li><li class="toc-h3"><a href="#rmsd-均方根偏差">RMSD(均方根偏差)</a></li><li class="toc-h3"><a href="#rmsf-均方根涨落">RMSF(均方根涨落)</a></li><li class="toc-h3"><a href="#回转半径-rg">回转半径(Rg)</a></li><li class="toc-h3"><a href="#氢键分析">氢键分析</a></li><li class="toc-h3"><a href="#性能优化与多尺度衔接">性能优化与多尺度衔接</a></li><li class="toc-h2"><a href="#总结">总结</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#附录-python轨迹分析代码-python轨迹分析代码-附录">附录：Python轨迹分析代码 Python轨迹分析代码(附录)</a></li><li class="toc-h2"><a href="#常见问题与拓展">常见问题与拓展</a></li><li class="toc-h3"><a href="#常见问题与调试">常见问题与调试</a></li><li class="toc-h3"><a href="#模拟崩溃怎么办">模拟崩溃怎么办？</a></li><li class="toc-h3"><a href="#npt密度不稳定">NPT密度不稳定？</a></li><li class="toc-h3"><a href="#gpu性能优化">GPU性能优化</a></li><li class="toc-h3"><a href="#gromacs在生物材料研究中的应用前景">GROMACS在生物材料研究中的应用前景</a></li></ul></details><p>生物材料研究越来越依赖分子动力学( Molecular Dynamics, MD)模拟来理解蛋白质、纤维和多糖在原子尺度的行为。在众多MD软件中，GROMACS(GROningen MAchine for Chemical Simulations)因其开源、高效和活跃的社区而成为最广泛使用的工具之一。本文以溶菌酶(lysozyme)为例，完整演示GROMACS MD模拟的全流程，涵盖从结构获取到轨迹分析的所有步骤。</p>
 
-<h2>为什么选择GROMACS</h2>
+<h2 id="为什么选择gromacs">为什么选择GROMACS</h2>
 
 <p>GROMACS的核心优势：</p>
 
@@ -61,8 +62,8 @@
 </ul>
 <p>对于生物材料研究者，GROMACS可模拟丝素蛋白beta-折叠、胶原蛋白力学拉伸、纤维素溶剂效应、蛋白-配体相互作用等关键问题。</p>
 
-<h2>入门与基础流程</h2>
-<h3>安装与配置</h3>
+<h2 id="入门与基础流程">入门与基础流程</h2>
+<h3 id="安装与配置">安装与配置</h3>
 
 <p>GROMACS支持Linux、macOS和Windows(WSL)。推荐conda安装：</p>
 
@@ -80,15 +81,15 @@ conda install -c conda-forge -c bioconda gromacs=&quot;2024.*=*cuda*&quot;
 
 <p>安装完成后用<code>gmx --version</code>确认版本和GPU支持状态。</p>
 
-<h3>MD模拟基本流程</h3>
+<h3 id="md模拟基本流程">MD模拟基本流程</h3>
 
 <table><tr><th>步骤</th><th>命令</th><th>目的</th><th>耗时</th></tr><tr><td>------</td><td>------</td><td>------</td><td>------</td></tr><tr><td>1. 结构获取</td><td>-</td><td>PDB下载</td><td>手动</td></tr><tr><td>2. 拓扑生成</td><td>gmx pdb2gmx</td><td>生成拓扑和力场</td><td><1s</td></tr><tr><td>3. 定义盒子</td><td>gmx editconf</td><td>设定盒子大小</td><td><1s</td></tr><tr><td>4. 溶剂化</td><td>gmx solvate</td><td>填充水分子</td><td>数秒</td></tr><tr><td>5. 添加离子</td><td>gmx genion</td><td>中和电荷</td><td>数秒</td></tr><tr><td>6. 能量最小化</td><td>gmx grompp+mdrun</td><td>消除原子碰撞</td><td>数分钟</td></tr><tr><td>7. NVT平衡</td><td>gmx grompp+mdrun</td><td>稳定温度</td><td>数小时</td></tr><tr><td>8. NPT平衡</td><td>gmx grompp+mdrun</td><td>稳定压力</td><td>数小时</td></tr><tr><td>9. 生产模拟</td><td>gmx grompp+mdrun</td><td>采集轨迹</td><td>数小时-天</td></tr><tr><td>10. 轨迹分析</td><td>gmx rms/rmsf/...</td><td>提取物理量</td><td>数分钟</td></tr></table>
 
 <p>下面以PDB ID 1AKI(溶菌酶)为例逐步演示。</p>
 
-<h3>实战案例：溶菌酶在水溶液中的模拟</h3>
+<h3 id="实战案例-溶菌酶在水溶液中的模拟">实战案例：溶菌酶在水溶液中的模拟</h3>
 
-<h3>步骤1：获取结构文件</h3>
+<h3 id="步骤1-获取结构文件">步骤1：获取结构文件</h3>
 
 <p>从蛋白质数据库(PDB, https://www.rcsb.org/)下载溶菌酶结构：</p>
 
@@ -97,7 +98,7 @@ wget https://files.rcsb.org/download/1AKI.pdb
 grep -v HOH 1AKI.pdb &gt; protein.pdb
 </code></pre>
 
-<h3>步骤2：生成拓扑文件</h3>
+<h3 id="步骤2-生成拓扑文件">步骤2：生成拓扑文件</h3>
 
 <p><code>pdb2gmx</code>将PDB转换为包含力场参数的拓扑文件，推荐AMBER99SB-ILDN力场：</p>
 
@@ -107,7 +108,7 @@ gmx pdb2gmx -f protein.pdb -o processed.gro -water spc -ff amber99sb-ildn -ignh
 
 <p>生成文件：<code>processed.gro</code>(坐标)、<code>topol.top</code>(拓扑)、<code>posre.itp</code>(位置限制)。</p>
 
-<h3>步骤3：定义模拟盒子</h3>
+<h3 id="步骤3-定义模拟盒子">步骤3：定义模拟盒子</h3>
 
 <pre><code class="language-bash">
 gmx editconf -f processed.gro -o box.gro -c -d 1.0 -bt cubic
@@ -115,7 +116,7 @@ gmx editconf -f processed.gro -o box.gro -c -d 1.0 -bt cubic
 
 <p><code>-d 1.0</code>表示蛋白表面到盒子边缘最小距离1.0nm，确保周期性边界条件不会导致蛋白与自身镜像交互。</p>
 
-<h3>步骤4：溶剂化</h3>
+<h3 id="步骤4-溶剂化">步骤4：溶剂化</h3>
 
 <p>用SPC水分子填充盒子：</p>
 
@@ -123,7 +124,7 @@ gmx editconf -f processed.gro -o box.gro -c -d 1.0 -bt cubic
 gmx solvate -cp box.gro -cs spc216.gro -o solv.gro -p topol.top
 </code></pre>
 
-<h3>步骤5：添加抗衡离子</h3>
+<h3 id="步骤5-添加抗衡离子">步骤5：添加抗衡离子</h3>
 
 <p>中和体系净电荷：</p>
 
@@ -140,7 +141,7 @@ gmx genion -s ions.tpr -o neutral.gro -p topol.top -pname NA -nname CL -neutral
 
 <p>可用<code>-conc 0.15</code>模拟150mM NaCl生理条件。</p>
 
-<h3>步骤6：能量最小化(EM)</h3>
+<h3 id="步骤6-能量最小化-em">步骤6：能量最小化(EM)</h3>
 
 <p>创建<code>em.mdp</code>：</p>
 
@@ -166,7 +167,7 @@ gmx mdrun -v -deffnm em
 
 <p>检查收敛：<code>gmx energy -f em.edr -o potential.xvg</code></p>
 
-<h3>步骤7：NVT平衡</h3>
+<h3 id="步骤7-nvt平衡">步骤7：NVT平衡</h3>
 
 <p>创建<code>nvt.mdp</code>(V-rescale恒温器)：</p>
 
@@ -193,7 +194,7 @@ gmx grompp -f nvt.mdp -c em.gro -r em.gro -p topol.top -o nvt.tpr
 gmx mdrun -v -deffnm nvt
 </code></pre>
 
-<h3>步骤8：NPT平衡</h3>
+<h3 id="步骤8-npt平衡">步骤8：NPT平衡</h3>
 
 <p>使用Parrinello-Rahman压力耦合，创建<code>npt.mdp</code>：</p>
 
@@ -221,7 +222,7 @@ gmx mdrun -v -deffnm npt
 
 <p>检查密度：<code>gmx energy -f npt.edr -o density.xvg</code>，应稳定在~1000 kg/m^3</p>
 
-<h3>步骤9：生产模拟</h3>
+<h3 id="步骤9-生产模拟">步骤9：生产模拟</h3>
 
 <p>创建<code>md.mdp</code>，移除位置限制，至少50ns：</p>
 
@@ -249,10 +250,10 @@ gmx mdrun -v -deffnm md -nb gpu
 
 <p><code>-nb gpu</code>将非键计算卸载到GPU，可提速5-10倍。</p>
 
-<h2>分析与优化</h2>
-<h3>轨迹分析</h3>
+<h2 id="分析与优化">分析与优化</h2>
+<h3 id="轨迹分析">轨迹分析</h3>
 
-<h3>RMSD(均方根偏差)</h3>
+<h3 id="rmsd-均方根偏差">RMSD(均方根偏差)</h3>
 
 <p>RMSD衡量蛋白质构象相对于参考结构的整体偏离程度，是判断模拟是否达到平衡的最重要指标。球状蛋白的RMSD通常在0.1-0.3 nm范围内趋于平稳。</p>
 
@@ -261,7 +262,7 @@ gmx rms -s md.tpr -f md.xtc -o rmsd.xvg -tu ns
 # 选择backbone进行拟合和计算
 </code></pre>
 
-<h3>RMSF(均方根涨落)</h3>
+<h3 id="rmsf-均方根涨落">RMSF(均方根涨落)</h3>
 
 <p>RMSF反映每个残基的柔性，高RMSF区域通常是loop区，低RMSF区域对应于稳定的二级结构。</p>
 
@@ -270,7 +271,7 @@ gmx rmsf -s md.tpr -f md.xtc -o rmsf.xvg -res
 # 选择backbone
 </code></pre>
 
-<h3>回转半径(Rg)</h3>
+<h3 id="回转半径-rg">回转半径(Rg)</h3>
 
 <p>Rg描述蛋白质的整体紧凑度，是可靠的折叠状态指示器。</p>
 
@@ -278,7 +279,7 @@ gmx rmsf -s md.tpr -f md.xtc -o rmsf.xvg -res
 gmx gyrate -s md.tpr -f md.xtc -o gyrate.xvg
 </code></pre>
 
-<h3>氢键分析</h3>
+<h3 id="氢键分析">氢键分析</h3>
 
 <p>氢键维持二级结构。GROMACS可定量分析蛋白质内部和蛋白-水之间的氢键。</p>
 
@@ -290,7 +291,7 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_num.xvg
 gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 </code></pre>
 
-<h3>性能优化与多尺度衔接</h3>
+<h3 id="性能优化与多尺度衔接">性能优化与多尺度衔接</h3>
 
 <ol>
 <li><strong>GPU加速</strong>：使用<code>-nb gpu -pme gpu</code>将非键和PME都卸载到GPU</li>
@@ -300,11 +301,11 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 <li><strong>多尺度衔接</strong>：GROMACS处于分子尺度关键位置——向上可供粗粒化(Martini)和有限元(Abaqus)模型，向下可参考QM(Gaussian)计算结果，轨迹数据还是训练ML力场(ANI, NequIP, MACE)的天然素材</li>
 
 </ol>
-<h2>总结</h2>
+<h2 id="总结">总结</h2>
 
 <p>本文以溶菌酶为例，完整演示了GROMACS MD模拟的标准流程：结构获取→拓扑生成→溶剂化→离子添加→EM→NVT/NPT平衡→生产MD→轨迹分析(RMSD/RMSF/Rg/氢键)。该工作流适用于大多数可溶性蛋白质。对于纤维生物材料(丝素、胶原、纤维素)，需特别注意周期性边界条件和力场选择，将在后续文章中讨论。</p>
 
-<h2>参考文献</h2>
+<h2 id="参考文献">参考文献</h2>
 
 <ol>
 <li>Abraham, M.J., et al. (2015). GROMACS: High performance molecular simulations through multi-level parallelism from laptops to supercomputers. <em>SoftwareX</em>, 1-2, 19-25.</li>
@@ -316,7 +317,7 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 
 
 </ol>
-<h2>附录：Python轨迹分析代码 Python轨迹分析代码(附录)</h2>
+<h2 id="附录-python轨迹分析代码-python轨迹分析代码-附录">附录：Python轨迹分析代码 Python轨迹分析代码(附录)</h2>
 
 <p>以下Python代码演示如何对GROMACS生成的xvg文件进行可视化和统计分析：</p>
 
@@ -350,10 +351,10 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 
 <p>这段代码可以作为每次模拟分析的关键脚本。RMSD反映蛋白质整体稳定性，Rg反映紧凑度变化，氢键数量反映二级结构保守性。三者结合可以快速评估模拟质量。</p>
 
-<h2>常见问题与拓展</h2>
-<h3>常见问题与调试</h3>
+<h2 id="常见问题与拓展">常见问题与拓展</h2>
+<h3 id="常见问题与调试">常见问题与调试</h3>
 
-<h3>模拟崩溃怎么办？</h3>
+<h3 id="模拟崩溃怎么办">模拟崩溃怎么办？</h3>
 
 <ol>
 <li><strong>检查能量最小化是否收敛</strong>：EM后的Fmax应低于1000 kJ/(mol·nm)</li>
@@ -362,7 +363,7 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li><strong>确认力场与体系匹配</strong>：比如含有金属离子时需要特殊参数</li>
 
 </ol>
-<h3>NPT密度不稳定？</h3>
+<h3 id="npt密度不稳定">NPT密度不稳定？</h3>
 
 <ul>
 <li>确保压力耦合时间常数tau_p设置合理(1-5 ps)</li>
@@ -370,7 +371,7 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li>如果压力震荡太大，可先用Berendsen耦合预平衡，再切换到Parrinello-Rahman</li>
 
 </ul>
-<h3>GPU性能优化</h3>
+<h3 id="gpu性能优化">GPU性能优化</h3>
 
 <ul>
 <li>使用<code>-nb gpu -pme gpu</code>参数，将非键和PME计算全部卸载到GPU</li>
@@ -379,7 +380,7 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li>使用<code>update gpu</code>参数让GPU负责坐标更新</li>
 
 </ul>
-<h3>GROMACS在生物材料研究中的应用前景</h3>
+<h3 id="gromacs在生物材料研究中的应用前景">GROMACS在生物材料研究中的应用前景</h3>
 
 <p>对于生物材料研究者，GROMACS是连接分子尺度与宏观力学性能的核心工具。典型应用场景包括：</p>
 
@@ -397,7 +398,7 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <h3>💬 Questions or Feedback?</h3>
 <p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
 <a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation-zh/">分子动力学入门：你的第一个LAMMPS模拟</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门</a></li><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
