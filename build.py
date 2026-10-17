@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Static blog generator — outputs to docs/ for GitHub Pages. Bilingual EN+ZH."""
-import argparse, os, re, json, shutil, html as hm, urllib.parse
+import argparse, hashlib, os, re, json, shutil, html as hm, urllib.parse
 from datetime import datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
@@ -261,6 +261,16 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 <main class="container{wide_class}">'''
 
 FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<canvas id="bg-network" aria-hidden="true"></canvas>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+
+
+def versioned_asset(url):
+    digest = hashlib.sha256((ROOT / url.lstrip("/")).read_bytes()).hexdigest()[:12]
+    return f"{url}?v={digest}"
+
+
+# Changed assets get a fresh URL for returning visitors; unchanged builds stay stable.
+HEAD_TOP = HEAD_TOP.replace("/static/css/style.css", versioned_asset("/static/css/style.css"))
+FOOT = FOOT.replace("/static/js/main.js", versioned_asset("/static/js/main.js"))
 
 POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{lang_label}</span>\n<h3><a href="/posts/{slug}/">{title}</a></h3>\n<div class="card-meta"><span>{date}</span><span>\u00b7</span><span>{read_min} min read</span></div>\n<p class="card-desc">{desc}</p>\n<div class="card-tags">{tags_html}</div>\n</article>'
 
