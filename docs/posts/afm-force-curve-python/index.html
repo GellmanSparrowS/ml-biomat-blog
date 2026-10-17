@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="Practical AFM Force Curve Analysis with Python">
 <meta property="og:description" content="A step-by-step guide to processing AFM force curves in Python: baseline correction, contact point detection, adhesion force, and Young&#x27;s modulus fitting with Hertz/Sneddon models.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/afm-force-curve-python/" class="active">EN</a><a href="/posts/afm-force-curve-python-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -59,7 +59,7 @@
 
 <p>A typical AFM force curve records <strong>cantilever deflection</strong> (in volts or nanometers) as the piezo moves the tip toward and away from the sample:</p>
 
-<table><tr><th>Segment</th><th>What happens</th><th>What you extract</th></tr><tr><td>---------</td><td>-------------</td><td>-----------------</td></tr><tr><td>Approach</td><td>Tip approaches surface</td><td>Contact point, sample stiffness</td></tr><tr><td>Contact</td><td>Tip presses into sample</td><td>Elastic modulus (via fitting)</td></tr><tr><td>Retract</td><td>Tip pulls away</td><td>Adhesion force, unbinding events</td></tr></table>
+<table><tr><th>Segment</th><th>What happens</th><th>What you extract</th></tr><tr><td>Approach</td><td>Tip approaches surface</td><td>Contact point, sample stiffness</td></tr><tr><td>Contact</td><td>Tip presses into sample</td><td>Elastic modulus (via fitting)</td></tr><tr><td>Retract</td><td>Tip pulls away</td><td>Adhesion force, unbinding events</td></tr></table>
 
 <img src="/static/images/posts/afm-force-curve-python/force-curve-en.webp" alt="Schematic AFM force-distance curve showing baseline, contact point, approach, retract, and adhesion pull-off" loading="lazy">
 
@@ -211,7 +211,7 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 
 <h3 id="9-common-pitfalls">9. Common Pitfalls</h3>
 
-<table><tr><th>Problem</th><th>Likely Cause</th><th>Fix</th></tr><tr><td>---------</td><td>-------------</td><td>-----</td></tr><tr><td>Contact point too early</td><td>Baseline noise</td><td>Increase <code>threshold_factor</code></td></tr><tr><td>Negative modulus</td><td>Wrong direction</td><td>Check z_piezo sign convention</td></tr><tr><td>Substrate effect</td><td>Too deep indentation</td><td><code>fit_range_nm</code> < 10% of thickness</td></tr><tr><td>Zero adhesion</td><td>No retract data</td><td>Enable retract in AFM method</td></tr></table>
+<table><tr><th>Problem</th><th>Likely Cause</th><th>Fix</th></tr><tr><td>Contact point too early</td><td>Baseline noise</td><td>Increase <code>threshold_factor</code></td></tr><tr><td>Negative modulus</td><td>Wrong direction</td><td>Check z_piezo sign convention</td></tr><tr><td>Substrate effect</td><td>Too deep indentation</td><td><code>fit_range_nm</code> < 10% of thickness</td></tr><tr><td>Zero adhesion</td><td>No retract data</td><td>Enable retract in AFM method</td></tr></table>
 
 <h3 id="10-alternative-models">10. Alternative Models</h3>
 
@@ -264,7 +264,6 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

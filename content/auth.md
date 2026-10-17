@@ -6,7 +6,9 @@ ML-Biomat is a public static blog. No authentication is required to access any c
 
 ## Public Resources
 All content is freely available without registration:
-- Blog articles: https://ml-biomat.com/posts/
+- English articles: https://ml-biomat.com/en/
+- 中文文章: https://ml-biomat.com/zh/
+- Article categories: https://ml-biomat.com/categories/
 - llms.txt: https://ml-biomat.com/llms.txt
 - API catalog: https://ml-biomat.com/.well-known/api-catalog
 - Agent skills: https://ml-biomat.com/.well-known/agent-skills/index.json

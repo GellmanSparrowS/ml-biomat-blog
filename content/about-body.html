@@ -5,8 +5,8 @@
       <h1>杨云浩 <span lang="en">Yunhao Yang</span></h1>
       <p class="profile-affiliation">复旦大学 · 高分子科学系 · 博士研究生</p>
       <p class="profile-advisor">生物大分子课题组 &nbsp; / &nbsp; 导师：凌盛杰教授</p>
-      <p class="profile-statement">用物理 AI 与多尺度模拟，<br>连接纤维材料的结构、性能与制造。</p>
-      <p class="profile-summary">我的研究围绕纤维网络与生物材料的理性设计展开，将结构生成、力学模拟与机器学习结合，探索从数字设计走向可制造材料的研究方法，并把计算流程整理为可复用的开源工具。</p>
+      <p class="profile-statement">跨尺度生物材料体系与结构<br>的理性设计</p>
+      <p class="profile-summary">杨云浩，复旦大学高分子科学系博士研究生，曾任复旦大学张江研究院工程师。主要研究方向为物理人工智能与多尺度模拟，致力于跨尺度生物材料体系与结构的理性设计。已在 Nature Communications 等期刊发表论文十余篇；获首届世界人工智能开源大赛 · AI for Research 亚军、中国发明协会发明创业奖成果奖二等奖（第三完成人）及瑞清冠名奖学金等荣誉。</p>
       <div class="profile-actions">
         <a class="profile-button" href="#selected-work">查看代表工作 <span aria-hidden="true">↓</span></a>
         <a class="profile-text-link" href="/cv/">完整学术简历 <span aria-hidden="true">↗</span></a>
@@ -19,40 +19,68 @@
   </header>
 
   <nav class="profile-index" aria-label="个人主页章节">
+    <a href="#research">研究主线</a>
     <a href="#selected-work">代表工作</a>
+    <a href="#gallery">研究图集</a>
     <a href="#industry">校企合作</a>
     <a href="#publications">精选论文</a>
-    <a href="#connect">学术链接</a>
+    <a href="#honors">荣誉奖项</a>
+    <a href="#moments">活动照片</a>
   </nav>
+
+  <section class="profile-section profile-research" id="research" aria-labelledby="research-title">
+    <div class="profile-section-head"><h2 id="research-title">研究内容</h2></div>
+    <div class="profile-scale-flow">
+      <div><h3>生物材料体系与跨尺度结构</h3><p>从分子、纤维到网络及宏观材料，关注组成、层级结构和相互作用如何影响材料的力学行为与功能。研究涉及结构蛋白、纤维网络与柔性材料等体系。</p></div>
+      <div><h3>物理人工智能与多尺度模拟</h3><p>将物理信息与机器学习方法结合，通过多尺度模拟、实验验证和优化设计，建立结构与性能之间的联系，服务于材料体系与结构的理性设计。</p></div>
+    </div>
+  </section>
 
   <section class="profile-section" id="selected-work" aria-labelledby="work-title">
     <div class="profile-section-head">
       <p class="profile-eyebrow" lang="en">SELECTED WORK</p>
-      <h2 id="work-title">从结构设计到材料实现</h2>
-      <p>以力学问题为起点，把建模、预测与设计连成可检验的研究流程。</p>
+      <h2 id="work-title">代表研究与项目</h2>
     </div>
 
-    <div class="profile-work">
+    <div class="profile-work" id="work-manufacturing">
       <p class="profile-work-label">01 <span>可制造设计</span></p>
       <div class="profile-work-body">
-        <h3>让纤维网络设计与制造约束相互衔接</h3>
+        <h3>可制造纤维网络的智能设计</h3>
         <p>围绕纤维连续路径与拓扑约束，开展可制造纤维网络的 AI 引导设计研究。将拓扑生成、有限元分析、图神经网络与强化学习串联，并通过三维打印样品验证设计，实现从结构方案到物理材料的贯通。</p>
         <p class="profile-work-meta" lang="en">REFINe · Nature Communications · 2026</p>
         <a class="profile-text-link" href="https://doi.org/10.1038/s41467-026-76045-x">阅读论文 <span aria-hidden="true">↗</span></a>
+        <details class="profile-details">
+          <summary>研究问题、方法与成果<span class="profile-details-symbol" aria-hidden="true">+</span></summary>
+          <dl>
+            <div><dt>研究问题</dt><dd>如何在设计阶段同时考虑纤维网络的力学表现与连续制造要求，使数字拓扑能够转化为可编织、可打印的结构？</dd></div>
+            <div><dt>研究方法</dt><dd>构建 REFINe 框架，以 TOPNet 算法保持纤维路径的连续性；结合自动化有限元分析、物理启发的图神经网络和强化学习，完成力学响应预测与拓扑优化，再将平面网络映射到曲面。</dd></div>
+            <div><dt>成果与验证</dt><dd>论文中的优化结构相较初始设计实现约 50% 的强度提升与约 20% 的质量降低，并通过 SLA 与 FDM 三维打印样品开展实验验证。</dd></div>
+          </dl>
+          <p class="profile-detail-source"><a href="https://www.nature.com/articles/s41467-026-76045-x">论文全文、图表与补充材料 <span aria-hidden="true">↗</span></a></p>
+        </details>
       </div>
     </div>
 
-    <div class="profile-work">
+    <div class="profile-work" id="work-physics-ai">
       <p class="profile-work-label">02 <span>物理引导学习</span></p>
       <div class="profile-work-body">
-        <h3>从网络拓扑预测形变与力学响应</h3>
+        <h3>无序纤维网络的形变与力学预测</h3>
         <p>参与物理引导图神经网络研究，将网络连接关系与物理信息融入学习过程，预测无序纤维材料的形变及应力–应变响应，为复杂网络的快速力学评估与结构设计提供计算方法。</p>
         <p class="profile-work-meta" lang="en">GNMP · Nano Letters · 2026</p>
         <a class="profile-text-link" href="https://doi.org/10.1021/acs.nanolett.5c04895">阅读论文 <span aria-hidden="true">↗</span></a>
+        <details class="profile-details">
+          <summary>研究问题、方法与成果<span class="profile-details-symbol" aria-hidden="true">+</span></summary>
+          <dl>
+            <div><dt>研究问题</dt><dd>无序纤维网络的稀疏连接与非均匀形变增加了力学预测的难度。如何利用网络结构信息，快速预测节点形变与整体应力–应变响应？</dd></div>
+            <div><dt>研究方法</dt><dd>将图注意力消息传递、多尺度物理嵌入与键长引导的调度策略结合，构建 GNMP 预测方法，描述二维半柔性网络中的非仿射重排。</dd></div>
+            <div><dt>成果与验证</dt><dd>研究将预测结果与分子动力学模拟进行比较，并通过三维打印网络实验考察形变模式与结构描述量，为纤维网络的快速力学评估提供方法。</dd></div>
+          </dl>
+          <p class="profile-detail-source"><a href="https://doi.org/10.1021/acs.nanolett.5c04895">论文与方法 <span aria-hidden="true">↗</span></a><a href="https://pubmed.ncbi.nlm.nih.gov/41451561/">论文摘要 <span aria-hidden="true">↗</span></a></p>
+        </details>
       </div>
     </div>
 
-    <div class="profile-work profile-work-open">
+    <div class="profile-work profile-work-open" id="work-open-source">
       <p class="profile-work-label">03 <span>开源工具</span></p>
       <div class="profile-work-body">
         <h3>FiberNet / FiberScope</h3>
@@ -62,23 +90,35 @@
           <a class="profile-text-link" href="https://modelscope.cn/studios/GellmanSparrow/FiberScope">体验 FiberScope <span aria-hidden="true">↗</span></a>
           <a class="profile-text-link" href="/fibernet/">项目介绍 <span aria-hidden="true">→</span></a>
         </div>
-        <figure class="profile-research-figure">
-          <a href="/static/images/fibernet/01_2d_gallery.webp" aria-label="查看 FiberNet 结构图原图">
-            <img src="/static/images/fibernet/01_2d_gallery.webp" alt="FiberNet 生成的十二类二维网络结构示例，包括蜂窝、笼目、手性与 Voronoi 网络" width="1600" height="1237" loading="lazy" decoding="async">
-          </a>
-          <figcaption>FiberNet 的二维网络结构示例。<span>结构生成 · 拓扑表征 · 计算设计</span></figcaption>
-        </figure>
+        <details class="profile-details">
+          <summary>工具流程与使用入口<span class="profile-details-symbol" aria-hidden="true">+</span></summary>
+          <dl>
+            <div><dt>使用问题</dt><dd>把分散的结构生成、模拟、分析与设计步骤接入同一套工作流，便于在 Python 中批量研究，也便于通过图形界面探索结构。</dd></div>
+            <div><dt>工具方法</dt><dd>FiberNet 提供二维与三维网络生成、梁框架 FEM、结构描述量分析和目标曲线搜索等接口；FiberScope 提供结构编辑、轨迹查看与几何导出入口。</dd></div>
+            <div><dt>示例与输出</dt><dd>公开示例覆盖网络生成、模拟结果保存与重载、结构特征提取，以及平面和曲面连续路径的构建；配套源码与方法说明记录各步骤的参数和输出。</dd></div>
+          </dl>
+          <p class="profile-detail-source"><a href="https://github.com/GellmanSparrowS/fibernet#start-here">入门与工作流说明 <span aria-hidden="true">↗</span></a><a href="https://github.com/GellmanSparrowS/fibernet/tree/main/examples">可运行示例 <span aria-hidden="true">↗</span></a></p>
+        </details>
       </div>
     </div>
   </section>
 
+  <section class="profile-section" id="gallery" aria-labelledby="gallery-title">
+    <div class="profile-section-head"><h2 id="gallery-title">研究图集</h2></div>
+    <!-- PROFILE_RESEARCH_ALBUMS -->
+  </section>
   <section class="profile-section" id="industry" aria-labelledby="industry-title">
     <div class="profile-section-head">
       <p class="profile-eyebrow" lang="en">INDUSTRY COLLABORATION</p>
-      <h2 id="industry-title">把计算设计带入应用场景</h2>
-      <p>参与与安踏体育用品集团的合作，围绕 AI 辅助设计与运动鞋中底的力学超结构开展研究。</p>
+      <h2 id="industry-title">校企合作</h2>
+      <p>参与与安踏体育用品集团的合作，围绕 AI 辅助设计、运动鞋中底力学超结构与网格式鞋垫的数字化设计开展研究。</p>
     </div>
     <dl class="profile-collaboration">
+      <div>
+        <dt>安踏网格式鞋垫数字化设计程序开发</dt>
+        <dd>开发面向网格式鞋垫结构设计的数字化程序。</dd>
+        <dd class="profile-date"><span>2026.09 — 至今</span><span>项目计划至 2027.09</span></dd>
+      </div>
       <div>
         <dt>AI 增强设计引擎</dt>
         <dd>面向材料与结构设计的校企合作项目。</dd>
@@ -90,7 +130,6 @@
         <dd class="profile-date">2024.12 — 2025.06</dd>
       </div>
     </dl>
-    <p class="profile-recognition"><span>2026</span> 世界人工智能开源大赛 · AI for Research 亚军 <a href="https://swdfz.fudan.edu.cn/fd/36/c54394a785718/page.htm" aria-label="在复旦大学个人介绍中查看荣誉">↗</a></p>
   </section>
 
   <section class="profile-section" id="publications" aria-labelledby="publications-title">
@@ -100,6 +139,11 @@
     </div>
     <ol class="profile-publications">
       <li>
+        <p class="profile-publication-venue" lang="en">npj Flexible Electronics · 2026</p>
+        <h3 lang="en">Machine Learning–Driven Structural Optimization of Zigzag Silk Fibroin Ionic Conductors for Spatially Resolved Wearable Motion Detection</h3>
+        <p lang="en"><strong>Yang Y.</strong>, Sun S., Xu C. et al.</p>
+      </li>
+      <li>
         <p class="profile-publication-venue" lang="en">Nature Communications · 2026</p>
         <h3 lang="en"><a href="https://doi.org/10.1038/s41467-026-76045-x">A manufacturability-informed topology framework for AI-guided design of fibrous network materials</a></h3>
         <p lang="en"><strong>Yang Y.</strong>, Ren J., Cao L. et al. <span>17, 9237.</span></p>
@@ -107,21 +151,40 @@
       <li>
         <p class="profile-publication-venue" lang="en">Nano Letters · 2026</p>
         <h3 lang="en"><a href="https://doi.org/10.1021/acs.nanolett.5c04895">Physics-informed graph neural networks for predicting deformation in disordered fibrous materials</a></h3>
-        <p lang="en">Yang S., <strong>Yang Y.</strong>, Huang C. et al. <span>26(1), 205–213.</span></p>
+        <p lang="en">Yang S.<sup>#</sup>, <strong>Yang Y.</strong><sup>#</sup>, Huang C. et al. <span>26(1), 205–213.</span></p>
       </li>
       <li>
         <p class="profile-publication-venue" lang="en">Advanced Science · 2025</p>
         <h3 lang="en"><a href="https://doi.org/10.1002/advs.202413293">Optimizing biomimetic 3D disordered fibrous network structures for lightweight, high-strength materials via deep reinforcement learning</a></h3>
-        <p lang="en"><strong>Yang Y.</strong>, Bai R., Gao W. et al. <span>12, 2413293.</span></p>
+        <p lang="en"><strong>Yang Y.</strong><sup>#</sup>, Bai R.<sup>#</sup>, Gao W. et al. <span>12, 2413293.</span></p>
       </li>
+      <li>
+        <p class="profile-publication-venue" lang="en">Advanced Functional Materials · 2026</p>
+        <h3 lang="en"><a href="https://doi.org/10.1002/adfm.76164">Processing-history-programmed silk fibers integrating mechanical robustness, ionic conduction, and optical waveguiding for intelligent wearables</a></h3>
+        <p lang="en">Ma C.<sup>#</sup>, Ma X.<sup>#</sup>, <strong>Yang Y.</strong><sup>#</sup> et al. <span>36, e76164.</span></p>
+      </li>
+      <li>
+        <p class="profile-publication-venue" lang="en">AI for Science · 2025</p>
+        <h3 lang="en"><a href="https://iopscience.iop.org/article/10.1088/3050-287X/adfaf7">Artificial intelligence for fibrous network design and mechanics</a></h3>
+        <p lang="en"><strong>Yang Y.</strong>, Cao L., Ren J. et al. <span>1, 012001.</span></p>
+      </li>
+    </ol>
+    <p class="profile-publication-note"><sup>#</sup> 共同第一作者。</p>
+  </section>
+
+  <section class="profile-section" id="honors" aria-labelledby="honors-title">
+    <div class="profile-section-head"><p class="profile-eyebrow" lang="en">SELECTED HONORS</p><h2 id="honors-title">荣誉与奖项</h2></div>
+    <ol class="profile-honors">
+      <li><span class="profile-honor-year">2026</span><div><h3>首届世界人工智能开源大赛 · AI for Research 亚军</h3><p>人工智能与科研创新</p></div></li>
+      <li><span class="profile-honor-year">2026</span><div><h3>中国发明协会发明创业奖成果奖二等奖</h3><p>第三完成人</p></div></li>
+      <li><span class="profile-honor-year">2026</span><div><h3>瑞清冠名奖学金</h3><p>复旦大学</p></div></li>
     </ol>
   </section>
 
   <section class="profile-section profile-connect" id="connect" aria-labelledby="connect-title">
     <div>
       <p class="profile-eyebrow" lang="en">CONNECT &amp; EXPLORE</p>
-      <h2 id="connect-title">学术交流与研究记录</h2>
-      <p>在这里分享研究工作、开源工具，以及机器学习与多尺度模拟的实践笔记。</p>
+      <h2 id="connect-title">学术链接</h2>
     </div>
     <div class="profile-external-links">
       <a href="https://github.com/GellmanSparrowS">GitHub <span aria-hidden="true">↗</span></a>
@@ -132,4 +195,14 @@
       <a href="/en/">Notes in English <span aria-hidden="true">→</span></a>
     </div>
   </section>
+  <section class="profile-section" id="moments" aria-labelledby="moments-title">
+    <div class="profile-section-head"><h2 id="moments-title">活动照片</h2></div>
+    <!-- PROFILE_EVENT_ALBUMS -->
+  </section>
+  <dialog id="photo-viewer" class="profile-viewer" aria-labelledby="photo-viewer-title" aria-describedby="photo-viewer-caption">
+    <div class="profile-viewer-header"><h2 id="photo-viewer-title">照片集</h2><button type="button" data-viewer-close aria-label="关闭照片浏览" autofocus>关闭 ×</button></div>
+    <div class="profile-viewer-media"><img id="photo-viewer-image" class="profile-gallery-image" alt=""><p id="photo-viewer-error" hidden>图片加载未完成，可通过下方链接打开大图。</p></div>
+    <p id="photo-viewer-caption" aria-live="polite"></p>
+    <div class="profile-viewer-controls"><button type="button" data-viewer-prev aria-label="上一张照片">← 上一张</button><span id="photo-viewer-count" aria-live="polite"></span><button type="button" data-viewer-next aria-label="下一张照片">下一张 →</button><a id="photo-viewer-original" target="_blank" rel="noopener">打开大图 ↗</a></div>
+  </dialog>
 </article>

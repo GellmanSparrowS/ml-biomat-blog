@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """Static blog generator — outputs to docs/ for GitHub Pages. Bilingual EN+ZH."""
 import argparse, hashlib, os, re, json, shutil, html as hm, urllib.parse
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
 
@@ -98,7 +99,10 @@ def md_to_html(text):
             while i < len(lines) and "|" in lines[i]: tl.append(lines[i]); i += 1
             rows = []
             for ri, rl in enumerate(tl):
-                cells = [inline_md(c.strip()) for c in rl.strip().strip("|").split("|")]
+                raw_cells = [c.strip() for c in rl.strip().strip("|").split("|")]
+                if ri == 1 and all(re.fullmatch(r":?-{3,}:?", cell) for cell in raw_cells):
+                    continue
+                cells = [inline_md(cell) for cell in raw_cells]
                 tag = "th" if ri == 0 else "td"
                 rows.append("<tr>" + "".join(f"<{tag}>{c}</{tag}>" for c in cells) + "</tr>")
             out.append(f"<table>{''.join(rows)}</table>"); continue
@@ -256,11 +260,11 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/"{en_active}>EN</a><a href="/zh/"{zh_active}>中文</a></span>
+<span class="lang-switch"><a href="{en_href}"{en_active}>EN</a><a href="{zh_href}"{zh_active}>中文</a></span>
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<canvas id="bg-network" aria-hidden="true"></canvas>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 
 def versioned_asset(url):
@@ -298,14 +302,40 @@ HERO = '''<section class="hero">
 
 def make_head(title, desc, url, lang="en", og_type="website", ld="",
               home_active="", en_active="", zh_active="", wide="", title_suffix=" \u2014 ML-Biomat",
-              og_image=None, alternates="", needs_math=False):
+              og_image=None, alternates="", needs_math=False, en_href="/en/", zh_href="/zh/"):
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
         url=url, lang=lang, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates, mathjax=(MATHJAX_SCRIPT if needs_math else ""))
     header = HEADER.format(
-        home_active=home_active, en_active=en_active, zh_active=zh_active,
+        home_active=home_active, en_active=en_active, zh_active=zh_active, en_href=en_href, zh_href=zh_href,
         wide_class=" container-wide" if wide else "")
     return head + header
+
+
+
+def render_profile_albums(section):
+    albums = json.loads((ROOT / "content/profile-albums.json").read_text(encoding="utf-8"))
+    cards = []
+    for album in albums:
+        if album["section"] != section:
+            continue
+        pictures = album["images"]
+        cover = pictures[0]
+        label = hm.escape(album["title"])
+        items = []
+        for number, photo in enumerate(pictures, 1):
+            caption = hm.escape(photo["caption"], quote=True)
+            src = versioned_asset(photo["src"])
+            thumb = versioned_asset(photo["thumb"])
+            items.append(f'<a href="{src}" data-album-link data-caption="{caption}" target="_blank" rel="noopener" aria-label="查看大图：{caption}"><img class="profile-gallery-image" src="{thumb}" alt="{caption}" width="{photo["width"]}" height="{photo["height"]}" loading="lazy" decoding="async"><span aria-hidden="true">{number:02d}</span></a>')
+        source = ''
+        if album.get("source_url"):
+            source = f'<p class="profile-album-source"><a href="{hm.escape(album["source_url"], quote=True)}" target="_blank" rel="noopener">{hm.escape(album["source_label"])} ↗</a></p>'
+        cards.append(f'''<details class="profile-album {hm.escape(album["type"])}" data-album="{hm.escape(album["id"])}" data-album-title="{label}">
+          <summary><span class="profile-album-cover"><img class="profile-gallery-image" src="{versioned_asset(cover["thumb"])}" alt="{hm.escape(cover["caption"], quote=True)}" width="{cover["width"]}" height="{cover["height"]}" loading="lazy" decoding="async"></span>
+          <span class="profile-album-info"><span class="profile-album-date">{hm.escape(album["date"])}</span><span class="profile-album-title">{label}</span><span class="profile-album-action"><span>{len(pictures)} 张</span><span class="album-open-label">查看 ＋</span><span class="album-close-label">收起 −</span></span></span></summary>
+          <div class="profile-album-thumbnails">{''.join(items)}</div>{source}</details>''')
+    return '<div class="profile-albums profile-albums-' + section + '">' + ''.join(cards) + '</div>'
 
 
 def tag_href(tag):
@@ -437,9 +467,15 @@ def build():
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
             cat_slug=p["category"], cat_name=cn, html=p["html"], toc=p["toc"], tags_html=tag_links,
             lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + prev_next + ENGAGE_BANNER + related_html + giscus_html
+        en_post = p if p["lang"] == "en" else pair
+        zh_post = p if p["lang"] == "zh" else pair
         html = make_head(title=p["title"], desc=p["description"] or p["title"],
-                         url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=p["lang"],
-                         og_type="article", ld=article_ld(p), og_image=og_img, alternates=alts, needs_math=needs_math) + body + FOOT.format(year=datetime.now().year)
+                         url=f'{SITE["base_url"]}/posts/{p["slug"]}/', lang=hreflang_code(p["lang"]),
+                         og_type="article", ld=article_ld(p), og_image=og_img, alternates=alts, needs_math=needs_math,
+                         en_href=f'/posts/{en_post["slug"]}/' if en_post else "/en/",
+                         zh_href=f'/posts/{zh_post["slug"]}/' if zh_post else "/zh/",
+                         en_active=' class="active"' if p["lang"] == "en" else "",
+                         zh_active=' class="active"' if p["lang"] == "zh" else "") + body + FOOT.format(year=datetime.now().year)
         write_file(f"posts/{p['slug']}/index.html", html)
     print("  Posts done")
 
@@ -470,11 +506,10 @@ def build():
     # Language-specific pages
     for lang, lp, label in [("en", en, "English"), ("zh", zh, "\u4e2d\u6587")]:
         desc = SITE[f"description_{lang}"]
-        hero_lang = HERO.format(desc_en=SITE["description_en"] if lang == "en" else desc,
-                                 desc_zh=SITE["description_zh"] if lang == "zh" else desc)
+        hero_lang = f'<section class="hero"><h1>ML-Biomat</h1><p class="subtitle">{hm.escape(desc)}</p></section>'
         body = hero_lang
         body += f'<section class="section-head"><h2><span class="lang-dot {lang}"></span>{label} Articles</h2></section>'
-        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in lp[:12]) + '</div>'
+        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in lp) + '</div>'
         body += ENGAGE_BANNER
         ha = ' class="active"' if lang == "en" else ""
         za = ' class="active"' if lang == "zh" else ""
@@ -509,7 +544,8 @@ def build():
             body += "".join(POST_ROW.format(date=p["date"], title=hm.escape(p["title"]), slug=p["slug"]) for p in en_cp) + '</ul></div>'
         if zh_cp:
             body += '<div class="cat-col"><h3><span class="lang-dot zh"></span>中文</h3><ul class="post-list-simple">'
-            body += "".join(POST_ROW.format(date=p["date"], title=hm.escape(p["title"]), slug=p["slug"]) for p in zh_cp) + '</ul>'
+            body += "".join(POST_ROW.format(date=p["date"], title=hm.escape(p["title"]), slug=p["slug"]) for p in zh_cp) + '</ul></div>'
+        body += "</div>"
         html = make_head(title=f'{info["name_en"]} Posts', desc=f'{info["name_en"]} articles',
                          url=f'{SITE["base_url"]}/categories/{s}/') + body + FOOT.format(year=datetime.now().year)
         write_file(f"categories/{s}/index.html", html)
@@ -542,7 +578,10 @@ def build():
 
     # About page
     about_body = Path("content/about-body.html").read_text(encoding="utf-8")
-    html = make_head(title="Yunhao Yang 杨云浩 — 个人主页 / Profile", desc="杨云浩 Yunhao Yang：复旦大学博士研究生。研究方向、代表成果、科研项目与开源工具。Research, selected work, projects, and open-source tools.", url=f'{SITE["base_url"]}/about/', lang="zh", ld=person_ld(), wide=True) + about_body + FOOT.format(year=datetime.now().year)
+    about_body = about_body.replace("<!-- PROFILE_RESEARCH_ALBUMS -->", render_profile_albums("research"))
+    about_body = about_body.replace("<!-- PROFILE_EVENT_ALBUMS -->", render_profile_albums("events"))
+    about_body += f'<script src="{versioned_asset("/static/js/profile.js")}" defer></script>'
+    html = make_head(title="Yunhao Yang 杨云浩 — 个人主页 / Profile", desc="杨云浩 Yunhao Yang：复旦大学博士研究生。跨尺度生物材料体系与结构的理性设计。研究成果、荣誉奖项与学术活动。Rational design of biomaterial systems and structures across scales.", url=f'{SITE["base_url"]}/about/', lang="zh-CN", ld=person_ld(), wide=True) + about_body + FOOT.format(year=datetime.now().year)
     write_file("about/index.html", html)
 
     # Privacy Policy page (required for AdSense)
@@ -678,7 +717,7 @@ def build():
       <link>{SITE['base_url']}/posts/{p['slug']}/</link>
       <guid>{SITE['base_url']}/posts/{p['slug']}/</guid>
       <description>{hm.escape(p['description'] or '')}</description>
-      <pubDate>{p['date']}T00:00:00+08:00</pubDate>
+      <pubDate>{format_datetime(p['datetime'].replace(tzinfo=timezone(timedelta(hours=8))))}</pubDate>
     </item>""")
     rss = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -702,10 +741,13 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/tools/stress-strain/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/about/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/cv/</loc><priority>0.6</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/cv/en/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/categories/</loc><priority>0.7</priority></url>',
     ]
     for s in CATEGORIES:
+        if not any(p["category"] == s for p in posts):
+            continue
         urls.append(f'  <url><loc>{SITE["base_url"]}/categories/{s}/</loc><priority>0.6</priority></url>')
     for p in posts:
         urls.append(f'  <url><loc>{SITE["base_url"]}/posts/{p["slug"]}/</loc><priority>0.8</priority><lastmod>{p["date"]}</lastmod></url>')
@@ -747,10 +789,23 @@ def build():
             shutil.copy2(src, cv_photo)
 
 
-    # --- CV Page ---
-    cv_body = Path("content/cv-body.html").read_text(encoding="utf-8")
-    cv_page = make_head(title="Yunhao Yang 杨云浩 — CV / 简历", desc="Yunhao Yang 杨云浩：复旦大学高分子科学系博士生。研究方向为 AI 驱动的多尺度模拟与纤维生物材料理性设计。Academic CV: AI-driven multiscale modeling for biomaterials.", url=SITE["base_url"] + "/cv/", ld=person_ld()) + cv_body + FOOT.format(year=datetime.now().year)
-    write_file("cv/index.html", cv_page)
+    # --- Separate Chinese and English academic CVs ---
+    cv_alternates = (
+        f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/cv/">'
+        f'<link rel="alternate" hreflang="en" href="{SITE["base_url"]}/cv/en/">'
+        f'<link rel="alternate" hreflang="x-default" href="{SITE["base_url"]}/cv/">'
+    )
+    for source, route, language, title, description in [
+        ("cv-body.html", "cv/", "zh-CN", "杨云浩 — 学术简历", "杨云浩，复旦大学高分子科学系。研究方向、主要荣誉、完整论文、专利与合作项目。"),
+        ("cv-en-body.html", "cv/en/", "en", "Yunhao Yang — Academic CV", "Academic CV of Yunhao Yang, Fudan University. Rational design of biomaterial systems and structures across scales."),
+    ]:
+        cv_body = (Path("content") / source).read_text(encoding="utf-8")
+        cv_page = make_head(title=title, desc=description, url=SITE["base_url"] + "/" + route,
+                            lang=language, ld=person_ld(), alternates=cv_alternates,
+                            en_href="/cv/en/", zh_href="/cv/",
+                            en_active=' class="active"' if language == "en" else "",
+                            zh_active=' class="active"' if language == "zh-CN" else "")
+        write_file(route + "index.html", cv_page + cv_body + FOOT.format(year=datetime.now().year))
 
 
     # --- llms.txt for AI crawlers ---

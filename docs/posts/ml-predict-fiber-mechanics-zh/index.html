@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="机器学习预测纤维材料力学性能：从数据准备到模型部署">
 <meta property="og:description" content="机器学习预测纤维材料力学性能：从数据准备到模型部署。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/ml-predict-fiber-mechanics/">EN</a><a href="/posts/ml-predict-fiber-mechanics-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -159,7 +159,7 @@ for name, model in models.items():
 
 <h3 id="为什么选这些模型">为什么选这些模型</h3>
 
-<table><tr><th>模型</th><th>小数据优势</th><th>要注意</th></tr><tr><td>------</td><td>-----------</td><td>--------</td></tr><tr><td><strong>Random Forest</strong></td><td>对超参数不敏感，自带特征重要性</td><td>max_depth 要小</td></tr><tr><td><strong>Gradient Boosting</strong></td><td>精度高，可处理非线性</td><td>容易过拟合，lr 要低</td></tr><tr><td><strong>Gaussian Process</strong></td><td>自带不确定性估计，适合小样本</td><td>计算量 O(n³)，n>1000 慎用</td></tr></table>
+<table><tr><th>模型</th><th>小数据优势</th><th>要注意</th></tr><tr><td><strong>Random Forest</strong></td><td>对超参数不敏感，自带特征重要性</td><td>max_depth 要小</td></tr><tr><td><strong>Gradient Boosting</strong></td><td>精度高，可处理非线性</td><td>容易过拟合，lr 要低</td></tr><tr><td><strong>Gaussian Process</strong></td><td>自带不确定性估计，适合小样本</td><td>计算量 O(n³)，n>1000 慎用</td></tr></table>
 
 <h3 id="第四步-不确定性很重要">第四步：不确定性很重要</h3>
 
@@ -276,7 +276,6 @@ plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

@@ -6,6 +6,8 @@ import os
 import json
 import re
 import webbrowser
+import xml.etree.ElementTree as ET
+from email.utils import parsedate_to_datetime
 from datetime import datetime
 from pathlib import Path
 from html.parser import HTMLParser
@@ -83,7 +85,7 @@ def run():
 
     req = ["CNAME", ".nojekyll", "ads.txt", "robots.txt", "sitemap.xml", "rss.xml",
            "search.json", "404.html", "index.html", "llms.txt", "llms-full.txt",
-           "about/index.html", "cv/index.html"]
+           "about/index.html", "cv/index.html", "cv/en/index.html"]
     missing = [f for f in req if not (DOCS / f).exists()]
     checks.append(check("Required files", not missing,
                         "missing=" + ",".join(missing) if missing else "all present"))
@@ -95,11 +97,31 @@ def run():
     rss_n = rss.count("<item>")
     checks.append(check("RSS items == posts", rss_n == total, "rss=%d posts=%d" % (rss_n, total)))
 
+    try:
+        rss_dates = ET.fromstring(rss).findall("./channel/item/pubDate")
+        valid_dates = len(rss_dates) == total and all(parsedate_to_datetime(node.text).tzinfo is not None for node in rss_dates)
+    except (ValueError, TypeError, ET.ParseError):
+        valid_dates = False
+    checks.append(check("RSS publication dates", valid_dates, "reader-compatible dates" if valid_dates else "invalid or missing dates"))
+
     sm = (DOCS / "sitemap.xml").read_text(encoding="utf-8") if (DOCS / "sitemap.xml").exists() else ""
     locs = re.findall(r"<loc>(.*?)</loc>", sm)
     dups = sorted({u for u in locs if locs.count(u) > 1})
     checks.append(check("Sitemap has no duplicated URLs", not dups,
                         "dups=" + ",".join(dups) if dups else "unique urls=%d" % len(locs)))
+
+    missing_sitemap = []
+    for url in locs:
+        path = unquote(urlsplit(url).path).lstrip("/")
+        target = (DOCS / path).resolve()
+        if not target.is_relative_to(DOCS.resolve()):
+            missing_sitemap.append(url)
+            continue
+        if target.is_dir() or urlsplit(url).path.endswith("/"):
+            target = target / "index.html"
+        if not target.is_file():
+            missing_sitemap.append(url)
+    checks.append(check("Sitemap destinations", not missing_sitemap, ", ".join(missing_sitemap) if missing_sitemap else "all listed pages exist"))
 
     try:
         search_n = len(json.loads((DOCS / "search.json").read_text(encoding="utf-8")))

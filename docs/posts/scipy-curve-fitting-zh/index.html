@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="SciPy曲线拟合完全指南：从线性回归到非线性建模">
 <meta property="og:description" content="SciPy曲线拟合完全指南：从线性回归到非线性建模。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/scipy-curve-fitting/">EN</a><a href="/posts/scipy-curve-fitting-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -57,7 +57,7 @@ from scipy.optimize import curve_fit
 
 <h2 id="一-曲线拟合的基本原理">一、曲线拟合的基本原理</h2>
 
-<table><tr><th>问题类型</th><th>模型函数</th><th>SciPy 工具</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>线性关系</td><td>y = ax + b</td><td>np.polyfit 或 linregress</td></tr><tr><td>指数衰减</td><td>a·exp(-t/τ) + c</td><td>curve_fit</td></tr><tr><td>幂律关系</td><td>a·x^b</td><td>curve_fit（先取对数给出初猜）</td></tr><tr><td>Hertz 压痕</td><td>F = k·δ^n</td><td>curve_fit + 参数边界</td></tr><tr><td>参数置信区间</td><td>由协方差矩阵估计</td><td>curve_fit 返回的 pcov</td></tr></table>
+<table><tr><th>问题类型</th><th>模型函数</th><th>SciPy 工具</th></tr><tr><td>线性关系</td><td>y = ax + b</td><td>np.polyfit 或 linregress</td></tr><tr><td>指数衰减</td><td>a·exp(-t/τ) + c</td><td>curve_fit</td></tr><tr><td>幂律关系</td><td>a·x^b</td><td>curve_fit（先取对数给出初猜）</td></tr><tr><td>Hertz 压痕</td><td>F = k·δ^n</td><td>curve_fit + 参数边界</td></tr><tr><td>参数置信区间</td><td>由协方差矩阵估计</td><td>curve_fit 返回的 pcov</td></tr></table>
 
 <p>曲线拟合的本质是找到一个数学模型的参数，使模型的预测值与实验测量值之间的差异最小。这个差异通常用残差平方和来衡量，因此曲线拟合也常被称为最小二乘法。</p>
 
@@ -176,7 +176,6 @@ result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, 
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

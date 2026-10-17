@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="Practical Curve Fitting with SciPy: From Basics to Advanced Models">
 <meta property="og:description" content="A comprehensive guide to curve fitting with SciPy for materials and biology researchers. Linear regression, exponential decay, Hertz indentation, viscoelastic models, with complete code and real examples.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/scipy-curve-fitting/" class="active">EN</a><a href="/posts/scipy-curve-fitting-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -219,7 +219,7 @@ for i, (param, name) in enumerate(zip(popt, [&#x27;E_star&#x27;])):
 
 <h3 id="7-common-pitfalls">7. Common Pitfalls</h3>
 
-<table><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr><tr><td>---------</td><td>-------</td><td>-----</td></tr><tr><td>"Optimal parameters not found"</td><td>Bad initial guess</td><td>Visualize data, try different p0</td></tr><tr><td>Negative modulus</td><td>No bounds</td><td>Add <code>bounds=(0, None)</code></td></tr><tr><td>Huge uncertainties</td><td>Too few data points</td><td>Collect more data in the region of interest</td></tr><tr><td>Fit looks wrong at edges</td><td>Model doesn't fit extremes</td><td>Check if model is appropriate</td></tr><tr><td>NaN in covariance</td><td>Over-parameterized</td><td>Simplify model or fix some parameters</td></tr></table>
+<table><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr><tr><td>"Optimal parameters not found"</td><td>Bad initial guess</td><td>Visualize data, try different p0</td></tr><tr><td>Negative modulus</td><td>No bounds</td><td>Add <code>bounds=(0, None)</code></td></tr><tr><td>Huge uncertainties</td><td>Too few data points</td><td>Collect more data in the region of interest</td></tr><tr><td>Fit looks wrong at edges</td><td>Model doesn't fit extremes</td><td>Check if model is appropriate</td></tr><tr><td>NaN in covariance</td><td>Over-parameterized</td><td>Simplify model or fix some parameters</td></tr></table>
 
 <h3 id="8-when-curve-fit-is-not-enough">8. When curve_fit Is Not Enough</h3>
 
@@ -280,7 +280,6 @@ print(f&quot;Constrained result: {result.x}&quot;)
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

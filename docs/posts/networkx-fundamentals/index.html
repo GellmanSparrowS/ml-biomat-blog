@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="NetworkX Fundamentals with Python">
 <meta property="og:description" content="A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/networkx-fundamentals/" class="active">EN</a><a href="/posts/networkx-fundamentals-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -81,7 +81,7 @@ import matplotlib.pyplot as plt
 
 <p><code>Graph</code> is the most basic <strong>undirected graph</strong>: edges have no direction, \((u, v)\) and \((v, u)\) represent the same edge, and at most one edge exists between any pair of nodes. Use cases include protein interaction networks (interactions are symmetric), undirected skeletal networks, and friendship graphs. <code>DiGraph</code> is a <strong>directed graph</strong>: edges have direction, \((u, v)\) differs from \((v, u)\). Use cases include gene regulatory networks (A activating B does not imply B activating A), hyperlink graphs, and directed stress propagation paths. <code>MultiGraph</code> allows <strong>multiple undirected edges</strong> between the same pair of nodes—useful when different types of relationships coexist for the same node pair. <code>MultiDiGraph</code> combines directed edges with multiple-edge support.</p>
 
-<table><tr><th>Class</th><th>Directed</th><th>Parallel Edges</th><th>Typical Use</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td><code>Graph</code></td><td>No</td><td>No</td><td>PPI networks, undirected lattices</td></tr><tr><td><code>DiGraph</code></td><td>Yes</td><td>No</td><td>Gene regulatory, citation networks</td></tr><tr><td><code>MultiGraph</code></td><td>No</td><td>Yes</td><td>Multi-modal transportation</td></tr><tr><td><code>MultiDiGraph</code></td><td>Yes</td><td>Yes</td><td>Directed multi-relational networks</td></tr></table>
+<table><tr><th>Class</th><th>Directed</th><th>Parallel Edges</th><th>Typical Use</th></tr><tr><td><code>Graph</code></td><td>No</td><td>No</td><td>PPI networks, undirected lattices</td></tr><tr><td><code>DiGraph</code></td><td>Yes</td><td>No</td><td>Gene regulatory, citation networks</td></tr><tr><td><code>MultiGraph</code></td><td>No</td><td>Yes</td><td>Multi-modal transportation</td></tr><tr><td><code>MultiDiGraph</code></td><td>Yes</td><td>Yes</td><td>Directed multi-relational networks</td></tr></table>
 
 <p>All four classes share nearly identical APIs, so switching between them carries minimal cost. When uncertain, start with <code>Graph</code> or <code>DiGraph</code> and migrate to multi-edge versions if needed.</p>
 
@@ -310,7 +310,7 @@ print(f&quot;BA avg clustering: {nx.average_clustering(G_ba):.4f}&quot;)
 
 <p>Comparing the three models yields crucial intuitions:</p>
 
-<table><tr><th>Property</th><th>ER Random</th><th>WS Small-World</th><th>BA Scale-Free</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>Degree dist.</td><td>Poisson</td><td>Near-Poisson</td><td>Power law</td></tr><tr><td>Clustering</td><td>Low</td><td>High</td><td>Medium (decreases with size)</td></tr><tr><td>Avg path length</td><td>Short</td><td>Short</td><td>Short</td></tr><tr><td>Robustness</td><td>Uniform failure</td><td>Uniform failure</td><td>Robust to random, fragile to targeted attack</td></tr></table>
+<table><tr><th>Property</th><th>ER Random</th><th>WS Small-World</th><th>BA Scale-Free</th></tr><tr><td>Degree dist.</td><td>Poisson</td><td>Near-Poisson</td><td>Power law</td></tr><tr><td>Clustering</td><td>Low</td><td>High</td><td>Medium (decreases with size)</td></tr><tr><td>Avg path length</td><td>Short</td><td>Short</td><td>Short</td></tr><tr><td>Robustness</td><td>Uniform failure</td><td>Uniform failure</td><td>Robust to random, fragile to targeted attack</td></tr></table>
 
 <p>For structural mechanics researchers: scale-free networks are highly robust against random node removal (most nodes have low degree, so random removal rarely matters) but catastrophically vulnerable to targeted attacks on hub nodes. This maps directly onto certain metamaterial and biological skeleton failure modes—seemingly strong, yet harboring a critical Achilles' heel.</p>
 
@@ -514,7 +514,6 @@ Learn more:
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

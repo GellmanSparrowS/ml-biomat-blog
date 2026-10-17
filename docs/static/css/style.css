@@ -454,36 +454,36 @@ body{
 @media print{#bg-network{display:none!important}}
 
 /* ===== Personal profile: styles are scoped to this page ===== */
-.profile-page{padding:2.75rem 0 1rem;max-width:980px;margin:0 auto;overflow-wrap:anywhere}
-.profile-page .profile-hero{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:2.5rem;align-items:start;padding:1rem 0 2.75rem}
+.profile-page{padding:2rem 0 1rem;max-width:980px;margin:0 auto;overflow-wrap:anywhere}
+.profile-page .profile-hero{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:2.5rem;align-items:start;padding:.5rem 0 2rem}
 .profile-page .profile-eyebrow{font-size:.68rem;letter-spacing:.14em;font-weight:700;color:var(--c-primary);line-height:1.6;margin:0 0 .9rem}
-.profile-page h1{font-size:2.65rem;line-height:1.2;letter-spacing:.015em;color:var(--c-fg);font-weight:750;margin:0 0 1.2rem}
+.profile-page h1{font-size:2.35rem;line-height:1.2;letter-spacing:.015em;color:var(--c-fg);font-weight:700;margin:0 0 1rem}
 .profile-page h1 span{display:block;font-size:1.3rem;letter-spacing:.01em;font-weight:400;color:var(--c-fg-soft);margin-top:.5rem}
 .profile-page .profile-affiliation{font-size:.94rem;font-weight:650;color:var(--c-fg);line-height:1.7}
 .profile-page .profile-advisor{font-size:.8rem;line-height:1.7;color:var(--c-fg-soft);margin-top:.3rem}
-.profile-page .profile-statement{font-size:1.38rem;font-weight:650;letter-spacing:.01em;line-height:1.65;margin:1.65rem 0 .8rem;color:var(--c-fg)}
-.profile-page .profile-summary{font-size:.92rem;line-height:1.95;color:var(--c-fg-soft);max-width:570px}
+.profile-page .profile-statement{font-size:1.3rem;font-weight:650;letter-spacing:.01em;line-height:1.55;margin:1.35rem 0 .65rem;color:var(--c-fg)}
+.profile-page .profile-summary{font-size:.92rem;line-height:1.85;color:var(--c-fg-soft);max-width:570px}
 .profile-page .profile-portrait{margin:0;padding-top:.2rem}
 .profile-page .profile-portrait img{display:block;width:160px;height:190px;object-fit:cover;object-position:center;border-radius:3px;border:1px solid var(--c-border);box-shadow:10px 10px 0 var(--c-primary-soft)}
 .profile-page .profile-portrait figcaption{font-size:.67rem;line-height:1.6;letter-spacing:.015em;color:var(--c-fg-soft);margin-top:1.4rem}
-.profile-page .profile-actions{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;margin-top:1.5rem}
+.profile-page .profile-actions{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;margin-top:1.25rem}
 .profile-page .profile-button{display:inline-flex;align-items:center;gap:1.2rem;padding:.65rem 1rem;background:var(--c-primary-soft);color:var(--c-primary);border:1px solid var(--c-primary-soft);border-radius:5px;font-size:.83rem;font-weight:650;transition:border-color .15s,background .15s}
 .profile-page .profile-button:hover{border-color:var(--c-primary);background:var(--c-surface)}
 .profile-page .profile-text-link{display:inline-flex;gap:.6rem;align-items:center;font-size:.82rem;font-weight:600;line-height:1.6;color:var(--c-primary)}
 .profile-page .profile-text-link:hover{text-decoration:underline;text-underline-offset:4px}
-.profile-page .profile-index{display:flex;gap:1.9rem;flex-wrap:wrap;padding:1rem 0;border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)}
+.profile-page .profile-index{display:flex;gap:1.65rem;flex-wrap:wrap;padding:.8rem 0;border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)}
 .profile-page .profile-index a{font-size:.78rem;font-weight:600;color:var(--c-fg-soft)}
 .profile-page .profile-index a:hover{color:var(--c-primary)}
-.profile-page .profile-section{padding-top:3.3rem;scroll-margin-top:90px}
-.profile-page .profile-section-head{margin-bottom:1.6rem}
+.profile-page .profile-section{padding-top:2.6rem;scroll-margin-top:90px}
+.profile-page .profile-section-head{margin-bottom:1.15rem}
 .profile-page .profile-section-head .profile-eyebrow{margin-bottom:.4rem}
-.profile-page h2{font-size:1.4rem;font-weight:700;line-height:1.45;color:var(--c-fg);letter-spacing:.01em}
+.profile-page h2{font-size:1.3rem;font-weight:700;line-height:1.45;color:var(--c-fg);letter-spacing:.01em}
 .profile-page .profile-section-head>p:last-child:not(.profile-eyebrow){font-size:.86rem;line-height:1.85;color:var(--c-fg-soft);margin-top:.6rem;max-width:640px}
-.profile-page .profile-work{display:grid;grid-template-columns:105px minmax(0,1fr);gap:1.7rem;padding:1.7rem 0;border-top:1px solid var(--c-border)}
+.profile-page .profile-work{display:grid;grid-template-columns:105px minmax(0,1fr);gap:1.7rem;padding:1.4rem 0;border-top:1px solid var(--c-border)}
 .profile-page .profile-work-label{font-size:.76rem;font-family:var(--font-mono);color:var(--c-primary);padding-top:.1rem}
 .profile-page .profile-work-label span{display:block;font-family:var(--font-sans);font-size:.73rem;color:var(--c-fg-soft);margin-top:.45rem}
-.profile-page .profile-work h3{font-size:1.07rem;font-weight:650;line-height:1.6;color:var(--c-fg);margin-bottom:.6rem}
-.profile-page .profile-work-body>p{font-size:.88rem;line-height:1.95;color:var(--c-fg-soft)}
+.profile-page .profile-work h3{font-size:1rem;font-weight:650;line-height:1.6;color:var(--c-fg);margin-bottom:.6rem}
+.profile-page .profile-work-body>p{font-size:.88rem;line-height:1.85;color:var(--c-fg-soft)}
 .profile-page .profile-work-body .profile-work-meta{font-size:.72rem;letter-spacing:.025em;line-height:1.7;margin:.8rem 0 .55rem;color:var(--c-fg-soft)}
 .profile-page .profile-inline-links{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.9rem}
 .profile-page .profile-research-figure{margin:1.4rem 0 0}
@@ -518,9 +518,9 @@ body{
 .profile-page .profile-external-links a{font-size:.75rem;line-height:1.5;display:flex;gap:.5rem;justify-content:space-between;color:var(--c-fg-soft)}
 .profile-page .profile-external-links a:hover{color:var(--c-primary)}
 .profile-page a:focus-visible{outline:2px solid var(--c-primary);outline-offset:5px;border-radius:2px}
-@media(min-width:960px){.profile-page .profile-hero{grid-template-columns:minmax(0,1fr) 200px;gap:4rem}.profile-page .profile-portrait img{width:200px;height:240px}.profile-page h1 span{display:inline-block;margin-left:.5rem;font-size:1.4rem}.profile-page .profile-statement{font-size:1.55rem}.profile-page .profile-work{grid-template-columns:130px minmax(0,1fr);gap:2rem}}
+@media(min-width:960px){.profile-page .profile-hero{grid-template-columns:minmax(0,1fr) 200px;gap:4rem}.profile-page .profile-portrait img{width:200px;height:240px}.profile-page h1 span{display:inline-block;margin-left:.5rem;font-size:1.25rem}.profile-page .profile-statement{font-size:1.4rem}.profile-page .profile-work{grid-template-columns:130px minmax(0,1fr);gap:2rem}}
 @media(max-width:600px){.profile-page{padding-top:1.5rem}.profile-page .profile-hero{grid-template-columns:minmax(0,1fr) 88px;column-gap:1.1rem;row-gap:0;padding:.5rem 0 2rem}.profile-page .profile-intro{display:contents}.profile-page .profile-intro>.profile-eyebrow,.profile-page .profile-intro>h1,.profile-page .profile-affiliation,.profile-page .profile-advisor{grid-column:1}.profile-page .profile-portrait{grid-column:2;grid-row:1 / span 4}.profile-page .profile-statement,.profile-page .profile-summary,.profile-page .profile-actions{grid-column:1 / -1}.profile-page h1{font-size:2rem}.profile-page h1 span{font-size:1.05rem}.profile-page .profile-portrait img{width:88px;height:110px;box-shadow:6px 6px 0 var(--c-primary-soft)}.profile-page .profile-portrait figcaption{font-size:.56rem;margin-top:1rem}.profile-page .profile-statement{font-size:1.12rem;margin-top:1.3rem}.profile-page .profile-statement br{display:none}.profile-page .profile-summary{font-size:.86rem}.profile-page .profile-affiliation{font-size:.82rem}.profile-page .profile-advisor{font-size:.72rem}.profile-page .profile-actions{gap:1rem}.profile-page .profile-button{font-size:.76rem;padding:.6rem .8rem;gap:.7rem}.profile-page .profile-index{justify-content:space-between;gap:.6rem}.profile-page .profile-index a{font-size:.72rem}.profile-page .profile-section{padding-top:2.4rem}.profile-page h2{font-size:1.23rem}.profile-page .profile-work{grid-template-columns:1fr;gap:.65rem;padding:1.3rem 0}.profile-page .profile-work-label span{display:inline;margin-left:.65rem}.profile-page .profile-work h3{font-size:1rem}.profile-page .profile-collaboration>div{grid-template-columns:1fr}.profile-page .profile-collaboration .profile-date{grid-column:1;grid-row:auto;margin-top:.55rem}.profile-page .profile-section-head-inline{align-items:start}.profile-page .profile-section-head-inline>.profile-text-link{font-size:.74rem;margin-top:1.6rem}.profile-page .profile-connect{grid-template-columns:1fr;gap:1.5rem;margin-top:2.2rem;padding-top:2rem}.profile-page .profile-external-links{grid-template-columns:1fr 1fr 1fr;gap:1rem}.profile-page .profile-research-figure figcaption span{display:none}}
-@media(max-width:380px){.profile-page .profile-hero{grid-template-columns:1fr}.profile-page .profile-portrait{grid-column:1;grid-row:1;display:flex;gap:1.2rem;align-items:center;padding-bottom:.5rem}.profile-page .profile-portrait figcaption{margin:0}.profile-page .profile-external-links{grid-template-columns:1fr 1fr}}
+@media(max-width:380px){.profile-page .profile-hero{grid-template-columns:minmax(0,1fr) 72px}.profile-page .profile-portrait img{width:72px}.profile-page .profile-external-links{grid-template-columns:1fr 1fr}}
 @media print{.profile-page{padding:0}.profile-page .profile-section{break-inside:avoid}.profile-page .profile-portrait img{box-shadow:none}.profile-page .profile-index{display:none}}
 
 /* Keep the existing site navigation and footer within small screens. */
@@ -535,4 +535,220 @@ body{
   .header-inner .nav-links a{padding:.3rem .55rem;font-size:.78rem;white-space:nowrap}
   .footer-inner{max-width:100%;padding:0 1rem}
   .footer-links{flex-wrap:wrap;justify-content:center;gap:.55rem 1rem;max-width:100%}
+}
+
+/* Research topics, progressive details and complete scientific thumbnails. */
+.profile-page .profile-themes{display:flex;gap:.8rem 1.15rem;list-style:none;margin:1.2rem 0 0;padding:0}
+.profile-page .profile-themes li{min-width:0;flex:1 1 0}
+.profile-page .profile-themes li+li{border-left:1px solid var(--c-border);padding-left:1.15rem}
+.profile-page .profile-themes a{font-size:.79rem;font-weight:650;line-height:1.6;color:var(--c-fg);display:block}
+.profile-page .profile-themes a:hover{color:var(--c-primary)}
+.profile-page .profile-themes span{display:block;font-size:.68rem;font-weight:400;line-height:1.65;color:var(--c-fg-soft);margin-top:.3rem}
+.profile-page .profile-work{scroll-margin-top:110px}
+.profile-page .profile-details{margin:1.2rem 0 0;border:0;border-top:1px solid var(--c-border);border-radius:0;overflow:visible}
+.profile-page .profile-details summary{display:flex;justify-content:space-between;align-items:center;gap:1rem;list-style:none;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--c-fg-soft);padding:.7rem 0;background:none}
+.profile-page .profile-details summary::-webkit-details-marker{display:none}
+.profile-page .profile-details summary::before{display:none}
+.profile-page .profile-details summary:hover{color:var(--c-primary)}
+.profile-page .profile-details summary:focus-visible{outline:2px solid var(--c-primary);outline-offset:4px;border-radius:2px}
+.profile-page .profile-details-symbol{display:inline-block;font-weight:400;font-size:1.15rem;line-height:1;color:var(--c-primary);transition:transform .15s}
+.profile-page .profile-details[open] .profile-details-symbol{transform:rotate(45deg)}
+.profile-page .profile-details[open] summary{color:var(--c-primary)}
+.profile-page .profile-details dl{padding:.25rem 0 .25rem 1rem;margin:.25rem 0 .5rem;border-left:2px solid var(--c-primary-soft)}
+.profile-page .profile-details dl>div+div{margin-top:.9rem}
+.profile-page .profile-details dt{font-size:.75rem;font-weight:650;line-height:1.7;color:var(--c-fg);margin-bottom:.2rem}
+.profile-page .profile-details dd{font-size:.82rem;line-height:1.95;color:var(--c-fg-soft);margin:0}
+.profile-page .profile-detail-source{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;padding-left:1.1rem;font-size:.75rem;line-height:1.8}
+.profile-page .profile-detail-source a{color:var(--c-primary)}
+.profile-page .profile-detail-source a:hover{text-decoration:underline;text-underline-offset:3px}
+.profile-page .profile-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 1.6rem}
+.profile-page .profile-gallery figure{margin:0;min-width:0}
+.profile-page .profile-gallery-frame{display:flex;align-items:center;justify-content:center;aspect-ratio:16/11;background:#09090e;border:1px solid var(--c-border);border-radius:4px;overflow:hidden;transition:border-color .15s}
+.profile-page .profile-gallery-frame:hover{border-color:var(--c-primary)}
+.profile-page .profile-gallery-image{display:block;width:100%;height:100%;object-fit:contain;opacity:1}
+.profile-page .profile-gallery figcaption{padding-top:.85rem}
+.profile-page .profile-gallery-type{display:block;font-size:.66rem;letter-spacing:.04em;color:var(--c-primary);line-height:1.6;margin-bottom:.3rem}
+.profile-page .profile-gallery h3{font-size:.95rem;font-weight:650;line-height:1.65;color:var(--c-fg);margin:0 0 .3rem}
+.profile-page .profile-gallery figcaption p{font-size:.79rem;line-height:1.85;color:var(--c-fg-soft)}
+@media(max-width:600px){
+  .profile-page .profile-themes{grid-column:1/-1;gap:.65rem;margin-top:1.1rem}
+  .profile-page .profile-themes li+li{padding-left:.65rem}
+  .profile-page .profile-themes a{font-size:.75rem}
+  .profile-page .profile-themes span{font-size:.64rem}
+  .profile-page .profile-index{gap:.55rem .8rem;justify-content:flex-start}
+  .profile-page .profile-index a{font-size:.7rem}
+  .profile-page .profile-details dd{font-size:.8rem}
+  .profile-page .profile-gallery{gap:1.5rem 1rem}
+  .profile-page .profile-gallery h3{font-size:.86rem}
+  .profile-page .profile-gallery figcaption p{font-size:.75rem}
+}
+@media(max-width:480px){.profile-page .profile-gallery{grid-template-columns:1fr;gap:1.7rem}.profile-page .profile-gallery-frame{aspect-ratio:16/10}.profile-page .profile-gallery h3{font-size:.93rem}}
+@media(prefers-reduced-motion:reduce){.profile-page .profile-details-symbol{transition:none}}
+.profile-page .profile-collaboration .profile-date span{display:block;line-height:1.85}
+.profile-page .profile-collaboration .profile-date span+span{font-size:.65rem}
+
+/* CV: allow long academic entries to wrap within the mobile reading column. */
+@media(max-width:768px){
+  .cv-page{width:calc(100vw - 2rem);max-width:100%;min-width:0;overflow-wrap:anywhere}
+  .cv-page .content{min-width:0}
+  .cv-page .content table{display:table;table-layout:fixed;width:100%;max-width:100%;white-space:normal}
+  .cv-page .content table td{white-space:normal;overflow-wrap:anywhere;text-align:left}
+  .cv-page .content table td:first-child{width:96px!important;min-width:0;padding:.5rem;white-space:normal!important}
+  .cv-page .content p,.cv-page .content li{text-align:left}
+  .cv-page .pub-list{padding-left:1.2rem}
+}
+
+/* Profile research, honors and compact albums. Images retain their full aspect ratio. */
+.profile-page .profile-portrait img{height:auto;aspect-ratio:1;object-fit:contain}
+.profile-page .profile-scale-flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;border-top:1px solid var(--c-border);padding-top:1.2rem}
+.profile-page .profile-scale-flow>div{min-width:0}
+.profile-page .profile-scale-flow>div+div{border-left:1px solid var(--c-border);padding-left:1.4rem}
+.profile-page .profile-scale-flow span{font-size:.68rem;color:var(--c-primary);letter-spacing:.05em}
+.profile-page .profile-scale-flow h3{font-size:.97rem;margin:0 0 .55rem;line-height:1.6}
+.profile-page .profile-scale-flow p{font-size:.875rem;line-height:1.85;color:var(--c-fg-soft)}
+.profile-page .profile-honors{padding:0;margin:0;list-style:none;border-top:1px solid var(--c-border)}
+.profile-page .profile-honors li{display:grid;grid-template-columns:90px minmax(0,1fr);gap:1.3rem;padding:1.25rem 0;border-bottom:1px solid var(--c-border)}
+.profile-page .profile-honor-year{font-size:.85rem;color:var(--c-primary);font-family:var(--font-mono)}
+.profile-page .profile-honors h3{font-size:1rem;line-height:1.6}
+.profile-page .profile-honors p{font-size:.78rem;color:var(--c-fg-soft);margin-top:.35rem}
+.profile-page .profile-albums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem;align-items:start}
+.profile-page .profile-albums-events{grid-template-columns:repeat(3,minmax(0,1fr))}
+.profile-page .profile-album{margin:0;border:1px solid var(--c-border);border-radius:7px;overflow:hidden;background:var(--c-surface)}
+.profile-page .profile-album summary{list-style:none;cursor:pointer;padding:0;background:none;color:var(--c-fg);font-weight:400;display:block}
+.profile-page .profile-album summary::before,.profile-page .profile-album summary::after{display:none}
+.profile-page .profile-album summary::-webkit-details-marker{display:none}
+.profile-page .profile-album summary:focus-visible{outline:3px solid var(--c-primary);outline-offset:-3px;border-radius:7px}
+.profile-page .profile-album-cover{display:flex;width:100%;aspect-ratio:16/11;align-items:center;justify-content:center;background:var(--c-primary-soft);border-bottom:1px solid var(--c-border)}
+.profile-page .profile-album img{display:block;width:100%;height:100%;max-width:100%;object-fit:contain;opacity:1;margin:0;border:0;border-radius:0}
+.profile-page .profile-album.scientific .profile-album-cover,.profile-page .profile-album.scientific .profile-album-thumbnails a{background:#fff}
+.profile-page .profile-album.dark-media .profile-album-cover,.profile-page .profile-album.dark-media .profile-album-thumbnails a{background:#09090e}
+.profile-page .profile-album-info{display:block;padding:.8rem .95rem}
+.profile-page .profile-album-date{display:block;color:var(--c-primary);font-size:.78rem;letter-spacing:.02em;margin-bottom:.3rem}
+.profile-page .profile-album-title{display:block;font-size:.94rem;font-weight:650;line-height:1.6}
+.profile-page .profile-album-description{display:block;font-size:.77rem;color:var(--c-fg-soft);line-height:1.8;margin-top:.35rem}
+.profile-page .profile-album-action{display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.8125rem;color:var(--c-primary);margin-top:.65rem}
+.profile-page .album-close-label,.profile-page .profile-album[open] .album-open-label{display:none}
+.profile-page .profile-album[open] .album-close-label{display:inline}
+.profile-page .profile-album-thumbnails{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;padding:0 1rem 1rem}
+.profile-page .profile-album-thumbnails a{display:flex;position:relative;aspect-ratio:4/3;background:var(--c-primary-soft);border:1px solid var(--c-border);border-radius:3px;overflow:hidden;align-items:center;justify-content:center}
+.profile-page .profile-album-thumbnails span{position:absolute;right:3px;bottom:3px;background:rgba(14,24,42,.8);color:white;padding:0 .25rem;font-size:.75rem;line-height:1.65;border-radius:2px}
+.profile-page .profile-album-source{padding:0 .95rem .9rem;font-size:.8125rem}
+.profile-page .profile-album-source a{color:var(--c-fg-soft)}
+.profile-viewer{position:fixed;inset:0;margin:auto;width:min(1100px,calc(100vw - 2rem));max-width:none;max-height:94vh;max-height:94dvh;padding:1rem 1.25rem;background:var(--c-surface);color:var(--c-fg);border:1px solid var(--c-border);border-radius:9px;overflow:auto;box-shadow:0 24px 100px rgba(0,0,0,.4)}
+.profile-viewer::backdrop{background:rgba(8,14,25,.82);backdrop-filter:blur(5px)}
+.profile-viewer-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding-bottom:.7rem}
+.profile-page .profile-viewer h2{font-size:1rem;margin:0;line-height:1.5}
+.profile-viewer button,.profile-viewer-controls a{font:inherit;font-size:.875rem;min-height:40px;border:1px solid var(--c-border);border-radius:4px;padding:.5rem .7rem;background:var(--c-primary-soft);color:var(--c-primary);cursor:pointer;white-space:nowrap;text-decoration:none}
+.profile-viewer button:disabled{opacity:.4;cursor:default}
+.profile-viewer button:focus-visible,.profile-viewer a:focus-visible{outline:2px solid var(--c-primary);outline-offset:3px}
+.profile-viewer-media{display:flex;align-items:center;justify-content:center;width:100%;height:64vh;height:64dvh;min-height:140px;background:#10131b;position:relative;border-radius:4px;overflow:hidden}
+.profile-viewer .profile-viewer-media img{display:block;width:100%;height:100%;object-fit:contain;opacity:1;margin:0;border:0;border-radius:0}
+#photo-viewer-error{position:absolute;background:#10131b;color:white;padding:1rem;font-size:.8rem}
+#photo-viewer-error[hidden]{display:none}
+#photo-viewer-caption{font-size:.875rem;color:var(--c-fg-soft);line-height:1.7;margin:.8rem 0}
+.profile-viewer-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.6rem;font-size:.8125rem}
+#photo-viewer-count{min-width:3rem;text-align:center;font-variant-numeric:tabular-nums}
+.profile-viewer-controls a{margin-left:auto}
+.cv-language-nav{display:flex;flex-wrap:wrap;gap:.5rem 1rem;font-size:.9rem}
+@media(max-width:800px){.profile-page .profile-albums-events{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+  .profile-page .profile-scale-flow{grid-template-columns:1fr;gap:1.1rem}
+  .profile-page .profile-scale-flow>div+div{border-left:0;border-top:1px solid var(--c-border);padding:1.1rem 0 0}
+  .profile-page .profile-albums{grid-template-columns:1fr;gap:1.2rem}
+  .profile-page .profile-honors li{grid-template-columns:50px minmax(0,1fr);gap:.65rem}
+  .profile-page .profile-honors h3{font-size:.9rem}
+  .profile-viewer{padding:.75rem;width:calc(100vw - 1rem)}
+  .profile-viewer-media{height:54vh;height:54dvh}
+  .profile-viewer-controls a{margin-left:0}
+}
+@media print{.profile-page .profile-album summary{break-inside:avoid}.profile-viewer{display:none!important}}
+
+.profile-page .profile-scale-flow>div{scroll-margin-top:110px}
+.profile-page .profile-publication-note{font-size:.72rem;color:var(--c-fg-soft);margin-top:.75rem}
+
+
+/* Compact reading rhythm for the profile and the two language-specific CV pages. */
+.cv-page{padding-top:1.2rem}
+.cv-page>.section-title{font-size:1.5rem;line-height:1.35;margin-bottom:1rem}
+.cv-page .content{font-size:.9375rem;line-height:1.85;margin-top:1.4rem}
+.cv-page .content h2{font-size:1.2rem;line-height:1.5;margin:1.9rem 0 .6rem;padding-bottom:.35rem}
+.cv-page .content>h2:first-child{margin-top:0}
+.cv-page .content h2::after{height:2px;width:32px}
+.cv-page .content p{margin:.65rem 0}
+.cv-page .content table{margin:.85rem 0}
+@media(max-width:600px){
+  .profile-page{padding-top:1.15rem}
+  .profile-page .profile-hero{padding:.3rem 0 1.55rem;column-gap:1rem}
+  .profile-page .profile-eyebrow{font-size:.75rem;letter-spacing:.06em;margin-bottom:.65rem}
+  .profile-page h1{font-size:1.75rem;margin-bottom:.8rem}
+  .profile-page h1 span{font-size:1rem;margin-top:.35rem}
+  .profile-page .profile-affiliation{font-size:.875rem;line-height:1.6}
+  .profile-page .profile-advisor{font-size:.8125rem;line-height:1.65}
+  .profile-page .profile-portrait figcaption{display:none}
+  .profile-page .profile-statement{font-size:1.125rem;line-height:1.6;margin:1.1rem 0 .6rem}
+  .profile-page .profile-summary,.profile-page .profile-work-body>p,.profile-page .profile-scale-flow p,
+  .profile-page .profile-section-head>p:last-child:not(.profile-eyebrow),.profile-page .profile-details dd,
+  .profile-page .profile-collaboration dd,.profile-page .profile-honors p,.profile-page .profile-connect p:last-child{font-size:.875rem;line-height:1.85}
+  .profile-page .profile-actions{gap:.9rem;margin-top:1.1rem}
+  .profile-page .profile-button{font-size:.875rem;min-height:40px;padding:.5rem .75rem;gap:.6rem}
+  .profile-page .profile-text-link{font-size:.8125rem;min-height:36px}
+  .profile-page .profile-index{gap:.15rem 1.1rem;padding:.55rem 0}
+  .profile-page .profile-index a{font-size:.8125rem;line-height:1.6;padding:.4rem 0}
+  .profile-page .profile-section{padding-top:1.9rem}
+  .profile-page .profile-section-head{margin-bottom:.95rem}
+  .profile-page h2{font-size:1.125rem;line-height:1.5}
+  .profile-page .profile-scale-flow{padding-top:.9rem;gap:.9rem}
+  .profile-page .profile-scale-flow>div+div{padding-top:.9rem}
+  .profile-page .profile-scale-flow h3,.profile-page .profile-work h3,.profile-page .profile-honors h3{font-size:.9375rem;line-height:1.6}
+  .profile-page .profile-work{gap:.5rem;padding:1.15rem 0}
+  .profile-page .profile-work-label,.profile-page .profile-work-label span{font-size:.8125rem}
+  .profile-page .profile-work-body .profile-work-meta{font-size:.78125rem;line-height:1.65;margin:.65rem 0 .35rem}
+  .profile-page .profile-details{margin-top:.85rem}
+  .profile-page .profile-details summary{font-size:.8125rem;min-height:42px;padding:.6rem 0}
+  .profile-page .profile-details dt{font-size:.8125rem}
+  .profile-page .profile-detail-source{font-size:.8125rem}
+  .profile-page .profile-collaboration>div{padding:1rem 0}
+  .profile-page .profile-collaboration dt{font-size:.9375rem}
+  .profile-page .profile-collaboration .profile-date,.profile-page .profile-collaboration .profile-date span+span{font-size:.78125rem}
+  .profile-page .profile-section-head-inline>.profile-text-link{font-size:.8125rem;margin-top:1rem}
+  .profile-page .profile-publications li{padding:1.05rem 0}
+  .profile-page .profile-publications h3{font-size:.875rem;line-height:1.7}
+  .profile-page .profile-publication-venue,.profile-page .profile-publications li>p:last-child,.profile-page .profile-publication-note{font-size:.8125rem}
+  .profile-page .profile-honors li{padding:1rem 0}
+  .profile-page .profile-connect{margin-top:1.8rem;padding-top:1.5rem;gap:1.1rem}
+  .profile-page .profile-external-links a{font-size:.8125rem;min-height:32px;align-items:center}
+  .profile-page .profile-albums{gap:1rem}
+  .profile-page .profile-album-title{font-size:.9375rem}
+  .profile-viewer-header{gap:.6rem}
+  .profile-page .profile-viewer h2{font-size:.9375rem}
+  .cv-page{padding-top:.8rem}
+  .cv-page>.section-title{font-size:1.35rem;margin-bottom:.75rem}
+  .cv-page>.section-title span{font-size:.875rem!important}
+  .cv-page>img{width:112px!important;height:112px!important;object-fit:contain!important;margin-bottom:.55rem!important}
+  .cv-page>p,.cv-page .cv-language-nav{font-size:.875rem;line-height:1.7}
+  .cv-page .content{font-size:.875rem;line-height:1.8;margin-top:1.15rem}
+  .cv-page .content h2{font-size:1.125rem;line-height:1.5;margin:1.5rem 0 .45rem}
+  .cv-page .content h3{font-size:.9375rem;margin:1.2rem 0 .4rem}
+  .cv-page .content p{margin:.55rem 0}
+  .cv-page .content table,.cv-page table td,.cv-page ul,.cv-page ol{font-size:.875rem;line-height:1.8}
+  .cv-page .content table{margin:.7rem 0}
+  .cv-page .content table td{padding:.45rem .55rem}
+  .cv-page .content li{margin:.5rem 0}
+  .cv-page .content>h2:first-child{margin-top:0}
+}
+
+
+/* Let reading columns shrink; long code and tables scroll within their own boxes. */
+main.container{width:100%;min-width:0}
+main.container>*,.post-grid>*,.cat-grid>*,.content,.fibernet-page{min-width:0}
+.article-header,.content,.post-card,.post-row>a{overflow-wrap:anywhere}
+.post-row>a{min-width:0}
+.post-row .row-date{flex-shrink:0}
+.content pre,.fibernet-page pre,.fn-code,.fn-code-sm{max-width:100%;min-width:0;overflow-x:auto;overflow-wrap:normal}
+.content table,.about-card table,.fibernet-page table{max-width:100%}
+@media(max-width:640px){
+  .section-head{gap:.5rem .75rem;flex-wrap:wrap}
+  .post-row{gap:.65rem}
+  .article-header h1{font-size:1.5rem;line-height:1.35}
+  .content table,.about-card table,.fibernet-page table{overflow-x:auto}
 }

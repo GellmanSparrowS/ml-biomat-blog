@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="多尺度模拟在纤维生物材料中的应用入门">
 <meta property="og:description" content="多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/multiscale-modeling-biomaterials-intro/">EN</a><a href="/posts/multiscale-modeling-biomaterials-intro-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -56,7 +56,7 @@
 
 <h2 id="三个尺度的工具箱">三个尺度的工具箱</h2>
 
-<table><tr><th>尺度</th><th>长度范围</th><th>核心物理</th><th>常用方法</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>分子</td><td>埃～纳米</td><td>化学键、热运动、静电</td><td>DFT、MD（ASE、GROMACS、LAMMPS）</td></tr><tr><td>介观</td><td>纳米～微米</td><td>网络拓扑、链动力学</td><td>粗粒化MD、DPD、网络模型</td></tr><tr><td>连续介质</td><td>微米～毫米</td><td>弹性、塑性、流动</td><td>有限元FEM、均匀化</td></tr></table>
+<table><tr><th>尺度</th><th>长度范围</th><th>核心物理</th><th>常用方法</th></tr><tr><td>分子</td><td>埃～纳米</td><td>化学键、热运动、静电</td><td>DFT、MD（ASE、GROMACS、LAMMPS）</td></tr><tr><td>介观</td><td>纳米～微米</td><td>网络拓扑、链动力学</td><td>粗粒化MD、DPD、网络模型</td></tr><tr><td>连续介质</td><td>微米～毫米</td><td>弹性、塑性、流动</td><td>有限元FEM、均匀化</td></tr></table>
 
 <h3 id="分子尺度-埃-纳米">分子尺度（埃～纳米）</h3>
 
@@ -208,7 +208,6 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

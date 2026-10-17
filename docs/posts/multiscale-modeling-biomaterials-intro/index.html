@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="A Practical Introduction to Multiscale Modeling for Biomaterials">
 <meta property="og:description" content="A practical overview of multiscale modeling approaches for fiber-based biomaterials: from molecular dynamics to continuum mechanics, with Python code examples.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/multiscale-modeling-biomaterials-intro/" class="active">EN</a><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -56,7 +56,7 @@
 
 <h2 id="the-three-scales">The Three Scales</h2>
 
-<table><tr><th>Scale</th><th>Length range</th><th>Key physics</th><th>Typical methods</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>Molecular</td><td>Angstrom - nm</td><td>bonds, thermal motion, electrostatics</td><td>DFT, MD (ASE, GROMACS, LAMMPS)</td></tr><tr><td>Mesoscale</td><td>nm - micrometer</td><td>network topology, chain dynamics</td><td>coarse-grained MD, DPD, network models</td></tr><tr><td>Continuum</td><td>micrometer - mm</td><td>elasticity, plasticity, flow</td><td>FEM, homogenization</td></tr></table>
+<table><tr><th>Scale</th><th>Length range</th><th>Key physics</th><th>Typical methods</th></tr><tr><td>Molecular</td><td>Angstrom - nm</td><td>bonds, thermal motion, electrostatics</td><td>DFT, MD (ASE, GROMACS, LAMMPS)</td></tr><tr><td>Mesoscale</td><td>nm - micrometer</td><td>network topology, chain dynamics</td><td>coarse-grained MD, DPD, network models</td></tr><tr><td>Continuum</td><td>micrometer - mm</td><td>elasticity, plasticity, flow</td><td>FEM, homogenization</td></tr></table>
 
 <h3 id="1-molecular-scale-angstroms-to-nanometers">1. Molecular Scale (angstroms to nanometers)</h3>
 
@@ -186,7 +186,6 @@ def youngs_modulus_from_md(stress, strain):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

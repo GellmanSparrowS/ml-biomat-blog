@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="NetworkX 基础：用 Python 理解、构建与分析网络">
 <meta property="og:description" content="NetworkX 基础：用 Python 理解、构建与分析网络。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/networkx-fundamentals/">EN</a><a href="/posts/networkx-fundamentals-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -82,7 +82,7 @@ import matplotlib.pyplot as plt
 
 <p><code>Graph</code> 是最基础的<strong>无向图</strong>：边没有方向，\((u, v)\) 和 \((v, u)\) 表示同一条边，且两节点之间至多一条边。适用场景：蛋白质互作网络（互作是对称的）、无向骨架网络、朋友关系图。<code>DiGraph</code> 是<strong>有向图</strong>（有向图，Directed Graph）：边有方向，\((u, v)\) 表示从 u 指向 v 的单向连接，与 \((v, u)\) 不同。适用场景：基因调控网络（A 激活 B 不等于 B 激活 A）、网页超链接图、有向应力传播路径。<code>MultiGraph</code> 是允许两节点之间存在<strong>多条无向边</strong>的图，适合建模不同类型的关系共存于同一节点对之间的情况，例如两个城市之间既有公路又有铁路。<code>MultiDiGraph</code> 则是上述二者的结合——有向且多边。</p>
 
-<table><tr><th>类名</th><th>有向</th><th>允许平行边</th><th>典型应用</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td><code>Graph</code></td><td>否</td><td>否</td><td>蛋白质互作、无向晶格</td></tr><tr><td><code>DiGraph</code></td><td>是</td><td>否</td><td>基因调控、引文网络</td></tr><tr><td><code>MultiGraph</code></td><td>否</td><td>是</td><td>多模态交通网络</td></tr><tr><td><code>MultiDiGraph</code></td><td>是</td><td>是</td><td>有向多关系网络</td></tr></table>
+<table><tr><th>类名</th><th>有向</th><th>允许平行边</th><th>典型应用</th></tr><tr><td><code>Graph</code></td><td>否</td><td>否</td><td>蛋白质互作、无向晶格</td></tr><tr><td><code>DiGraph</code></td><td>是</td><td>否</td><td>基因调控、引文网络</td></tr><tr><td><code>MultiGraph</code></td><td>否</td><td>是</td><td>多模态交通网络</td></tr><tr><td><code>MultiDiGraph</code></td><td>是</td><td>是</td><td>有向多关系网络</td></tr></table>
 
 <p>四个类共享几乎相同的 API，切换代价极低。在不确定的时候，从 <code>Graph</code> 或 <code>DiGraph</code> 开始，日后如有需要再迁移到多边版本。</p>
 
@@ -366,7 +366,7 @@ print(f&quot;Max degree in BA graph: {max(degree_sequence)}&quot;)
 
 <p>比较这三个模型，得到的直觉非常重要：</p>
 
-<table><tr><th>属性</th><th>ER 随机图</th><th>WS 小世界</th><th>BA 无标度</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>度分布</td><td>泊松分布</td><td>近泊松</td><td>幂律</td></tr><tr><td>聚类系数</td><td>低</td><td>高</td><td>中（随规模下降）</td></tr><tr><td>平均路径</td><td>短</td><td>短</td><td>短</td></tr><tr><td>鲁棒性</td><td>均匀失效</td><td>均匀失效</td><td>随机失效鲁棒，靶向攻击脆弱</td></tr></table>
+<table><tr><th>属性</th><th>ER 随机图</th><th>WS 小世界</th><th>BA 无标度</th></tr><tr><td>度分布</td><td>泊松分布</td><td>近泊松</td><td>幂律</td></tr><tr><td>聚类系数</td><td>低</td><td>高</td><td>中（随规模下降）</td></tr><tr><td>平均路径</td><td>短</td><td>短</td><td>短</td></tr><tr><td>鲁棒性</td><td>均匀失效</td><td>均匀失效</td><td>随机失效鲁棒，靶向攻击脆弱</td></tr></table>
 
 <p>对结构力学研究者：无标度网络对"随机去除节点"高度鲁棒（因为绝大多数节点度数很低，随机去掉不影响连通性），但对"靶向攻击枢纽节点"极度脆弱。这与某些超材料或生物骨架的失效模式高度对应——看似坚固，却有致命弱点。</p>
 
@@ -556,7 +556,6 @@ print(nx.info(G_hex))
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="ML Classification Models: A Practical Overview">
 <meta property="og:description" content="A practical guide to major classification models in machine learning - logistic regression, decision trees, SVMs, and gradient boosting - covering intuition, tradeoffs, and reusable Python code.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/ml-classification-models/" class="active">EN</a><a href="/posts/ml-classification-models-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -376,7 +376,7 @@ print(&quot;Feature means per class:\n&quot;, gnb.theta_)
 
 <p>The foundation of all evaluation metrics is the <strong>confusion matrix</strong>. For binary classification:</p>
 
-<table><tr><th></th><th>Predicted Positive</th><th>Predicted Negative</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td><strong>Actually Positive</strong></td><td>TP (True Positive)</td><td>FN (False Negative — missed)</td></tr><tr><td><strong>Actually Negative</strong></td><td>FP (False Positive — false alarm)</td><td>TN (True Negative)</td></tr></table>
+<table><tr><th></th><th>Predicted Positive</th><th>Predicted Negative</th></tr><tr><td><strong>Actually Positive</strong></td><td>TP (True Positive)</td><td>FN (False Negative — missed)</td></tr><tr><td><strong>Actually Negative</strong></td><td>FP (False Positive — false alarm)</td><td>TN (True Negative)</td></tr></table>
 
 <p>From these four counts, a coherent family of metrics emerges:</p>
 
@@ -460,7 +460,7 @@ plt.show()
 
 <p><strong>Class imbalance</strong> is pervasive in real-world scientific data and must be addressed independently of model choice. Nearly all scikit-learn classifiers support <code>class_weight='balanced'</code>, which automatically adjusts loss contributions inversely proportional to class frequency. Alternatively, SMOTE oversampling of the minority class at the data level can be effective.</p>
 
-<table><tr><th>Model</th><th>Train Speed</th><th>Predict Speed</th><th>Interpretability</th><th>Needs Scaling</th><th>Small Data</th><th>High-Dim Sparse</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>Logistic Regression</td><td>Fast</td><td>Fast</td><td>High</td><td>Yes</td><td>✓</td><td>✓ (L1)</td></tr><tr><td>SVM (RBF)</td><td>Medium–Slow</td><td>Medium</td><td>Low</td><td>Yes</td><td>✓</td><td>✗</td></tr><tr><td>Decision Tree</td><td>Fast</td><td>Fast</td><td>Highest</td><td>No</td><td>Medium</td><td>✗</td></tr><tr><td>Random Forest</td><td>Medium</td><td>Medium</td><td>Medium</td><td>No</td><td>Medium</td><td>Medium</td></tr><tr><td>Gradient Boosting</td><td>Slow</td><td>Medium</td><td>Medium</td><td>No</td><td>✗</td><td>Medium</td></tr><tr><td>k-NN</td><td>None (lazy)</td><td>Slow</td><td>Medium</td><td>Yes</td><td>✓</td><td>✗</td></tr><tr><td>Naive Bayes</td><td>Very Fast</td><td>Very Fast</td><td>Medium</td><td>No</td><td>✓</td><td>✓</td></tr></table>
+<table><tr><th>Model</th><th>Train Speed</th><th>Predict Speed</th><th>Interpretability</th><th>Needs Scaling</th><th>Small Data</th><th>High-Dim Sparse</th></tr><tr><td>Logistic Regression</td><td>Fast</td><td>Fast</td><td>High</td><td>Yes</td><td>✓</td><td>✓ (L1)</td></tr><tr><td>SVM (RBF)</td><td>Medium–Slow</td><td>Medium</td><td>Low</td><td>Yes</td><td>✓</td><td>✗</td></tr><tr><td>Decision Tree</td><td>Fast</td><td>Fast</td><td>Highest</td><td>No</td><td>Medium</td><td>✗</td></tr><tr><td>Random Forest</td><td>Medium</td><td>Medium</td><td>Medium</td><td>No</td><td>Medium</td><td>Medium</td></tr><tr><td>Gradient Boosting</td><td>Slow</td><td>Medium</td><td>Medium</td><td>No</td><td>✗</td><td>Medium</td></tr><tr><td>k-NN</td><td>None (lazy)</td><td>Slow</td><td>Medium</td><td>Yes</td><td>✓</td><td>✗</td></tr><tr><td>Naive Bayes</td><td>Very Fast</td><td>Very Fast</td><td>Medium</td><td>No</td><td>✓</td><td>✓</td></tr></table>
 
 <p><strong>Practical recommendation</strong>: always begin with a simple baseline — logistic regression or random forest — to understand the intrinsic difficulty of the data and identify the most informative features. A carefully tuned random forest will satisfy the accuracy requirements of most structured scientific datasets while remaining far more interpretable than a neural network. Reserve deep learning for situations where data are abundant (N > 10,000), computational infrastructure is available, and classical methods have been rigorously shown to be insufficient.</p>
 
@@ -515,7 +515,6 @@ plt.show()
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

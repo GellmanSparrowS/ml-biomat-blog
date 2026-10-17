@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="Hierarchical Superstructures in Biomaterials">
 <meta property="og:description" content="A navigational guide to hierarchical superstructures in biomaterials: silk fibroin, collagen, bone, nacre, spider silk, and cellulose analyzed through their structure-mechanics relationships.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/bio-hierarchical-structures/" class="active">EN</a><a href="/posts/bio-hierarchical-structures-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -56,7 +56,7 @@
 
 <p>Hierarchical superstructures refer to materials that exhibit ordered organization across multiple spatial scales, with each level contributing uniquely to mechanical performance. A typical structural hierarchy spans:</p>
 
-<table><tr><th>Level</th><th>Scale</th><th>Structural Units</th><th>Mechanical Role</th></tr><tr><td>-------</td><td>-------</td><td>-----------------</td><td>-----------------</td></tr><tr><td>Molecular</td><td>0.1-10 nm</td><td>Amino acids, secondary structures</td><td>Elastic units, H-bond networks</td></tr><tr><td>Nanoscale</td><td>10-100 nm</td><td>Nanoparticles, nanofibrils, crystalline/amorphous domains</td><td>Toughening mechanisms, sacrificial bonds</td></tr><tr><td>Microscale</td><td>0.1-10 um</td><td>Microfibers, fiber bundles, lamellae</td><td>Load transfer, crack deflection</td></tr><tr><td>Macroscale</td><td>>10 um</td><td>Macroscopic fibers, osteons, growth rings</td><td>Macroscopic mechanical response, damage tolerance</td></tr></table>
+<table><tr><th>Level</th><th>Scale</th><th>Structural Units</th><th>Mechanical Role</th></tr><tr><td>Molecular</td><td>0.1-10 nm</td><td>Amino acids, secondary structures</td><td>Elastic units, H-bond networks</td></tr><tr><td>Nanoscale</td><td>10-100 nm</td><td>Nanoparticles, nanofibrils, crystalline/amorphous domains</td><td>Toughening mechanisms, sacrificial bonds</td></tr><tr><td>Microscale</td><td>0.1-10 um</td><td>Microfibers, fiber bundles, lamellae</td><td>Load transfer, crack deflection</td></tr><tr><td>Macroscale</td><td>>10 um</td><td>Macroscopic fibers, osteons, growth rings</td><td>Macroscopic mechanical response, damage tolerance</td></tr></table>
 
 <p>The universal design principle is <strong>separation of stiffness and toughness across scales</strong>. Hard crystalline domains provide strength and stiffness, soft amorphous domains provide extensibility and toughness, and the interfaces between them dissipate energy through sacrificial bonds, hydrogen bond networks, and geometric interlocking.</p>
 
@@ -160,7 +160,7 @@
 
 <p>Studying hierarchical structures requires a multi-method approach:</p>
 
-<table><tr><th>Method</th><th>Resolution</th><th>Target</th><th>Application</th></tr><tr><td>--------</td><td>-----------</td><td>--------</td><td>-------------</td></tr><tr><td>TEM</td><td>0.1 nm</td><td>Atomic arrangement</td><td>Beta-sheet crystal imaging</td></tr><tr><td>SEM</td><td>1-10 nm</td><td>Surface morphology</td><td>Fiber fracture surfaces, nacre brick-mortar</td></tr><tr><td>AFM</td><td><1 nm</td><td>Surface topology, force curves</td><td>Single molecule/fiber mechanics</td></tr><tr><td>SAXS/WAXS</td><td>1-100 nm</td><td>Crystal size, orientation</td><td>Silk crystallinity index</td></tr><tr><td>MD Simulation</td><td>0.1-100 nm</td><td>Atomistic mechanics</td><td>Sacrificial bond rupture, crystal sliding</td></tr><tr><td>FEM</td><td>um-mm</td><td>Macroscopic response</td><td>Hierarchical model validation</td></tr></table>
+<table><tr><th>Method</th><th>Resolution</th><th>Target</th><th>Application</th></tr><tr><td>TEM</td><td>0.1 nm</td><td>Atomic arrangement</td><td>Beta-sheet crystal imaging</td></tr><tr><td>SEM</td><td>1-10 nm</td><td>Surface morphology</td><td>Fiber fracture surfaces, nacre brick-mortar</td></tr><tr><td>AFM</td><td><1 nm</td><td>Surface topology, force curves</td><td>Single molecule/fiber mechanics</td></tr><tr><td>SAXS/WAXS</td><td>1-100 nm</td><td>Crystal size, orientation</td><td>Silk crystallinity index</td></tr><tr><td>MD Simulation</td><td>0.1-100 nm</td><td>Atomistic mechanics</td><td>Sacrificial bond rupture, crystal sliding</td></tr><tr><td>FEM</td><td>um-mm</td><td>Macroscopic response</td><td>Hierarchical model validation</td></tr></table>
 
 <p>Recent advances in machine-learned force fields (ANI, NequIP, MACE) are bridging the gap between DFT accuracy and MD efficiency, enabling accurate simulations at larger spatiotemporal scales. In situ mechanical testing (SEM/AFM) now allows direct observation of hierarchical structure evolution during loading.</p>
 
@@ -233,7 +233,6 @@
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

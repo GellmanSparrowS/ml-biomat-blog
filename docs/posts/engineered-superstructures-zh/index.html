@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计">
 <meta property="og:description" content="工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/engineered-superstructures/">EN</a><a href="/posts/engineered-superstructures-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -147,7 +147,7 @@
 
 <p>下表将主要超结构按密度标度指数 n、泊松比范围、制备方法和典型应用进行系统比较，为工程选型提供快速参考：</p>
 
-<table><tr><th>类型</th><th>n 值</th><th>泊松比范围</th><th>制备方法</th><th>典型应用</th></tr><tr><td>-----------------</td><td>--------</td><td>-----------------</td><td>---------------</td><td>--------------------</td></tr><tr><td>Miura-ori</td><td>~2</td><td>-1 ~ +0.5</td><td>压痕/光固化</td><td>可展开结构</td></tr><tr><td>Kirigami</td><td>1 ~ 2</td><td>正/零/负</td><td>激光切割</td><td>软体驱动器</td></tr><tr><td>正六边形蜂巢</td><td>~2</td><td>~0.3</td><td>FDM/SLS</td><td>轻量化夹层板</td></tr><tr><td>凹角/重入蜂巢</td><td>~2</td><td>-1 ~ 0</td><td>FDM/SLA</td><td>冲击防护</td></tr><tr><td>手性拉胀</td><td>1 ~ 2</td><td>~-1</td><td>双光子聚合</td><td>力学传感</td></tr><tr><td>Octet truss</td><td>~1</td><td>~0.3</td><td>SLS/SLA</td><td>极高比强度承载</td></tr><tr><td>Gyroid (TPMS)</td><td>~1.5</td><td>0.2 ~ 0.4</td><td>SLA/DLP</td><td>生物支架</td></tr><tr><td>张拉整体</td><td>可调</td><td>可调</td><td>手工/3D 打印</td><td>可展开/主动减振</td></tr><tr><td>双稳态超结构</td><td>非线性</td><td>依赖构型</td><td>SLA/SLS</td><td>能量捕获/逻辑门</td></tr></table>
+<table><tr><th>类型</th><th>n 值</th><th>泊松比范围</th><th>制备方法</th><th>典型应用</th></tr><tr><td>Miura-ori</td><td>~2</td><td>-1 ~ +0.5</td><td>压痕/光固化</td><td>可展开结构</td></tr><tr><td>Kirigami</td><td>1 ~ 2</td><td>正/零/负</td><td>激光切割</td><td>软体驱动器</td></tr><tr><td>正六边形蜂巢</td><td>~2</td><td>~0.3</td><td>FDM/SLS</td><td>轻量化夹层板</td></tr><tr><td>凹角/重入蜂巢</td><td>~2</td><td>-1 ~ 0</td><td>FDM/SLA</td><td>冲击防护</td></tr><tr><td>手性拉胀</td><td>1 ~ 2</td><td>~-1</td><td>双光子聚合</td><td>力学传感</td></tr><tr><td>Octet truss</td><td>~1</td><td>~0.3</td><td>SLS/SLA</td><td>极高比强度承载</td></tr><tr><td>Gyroid (TPMS)</td><td>~1.5</td><td>0.2 ~ 0.4</td><td>SLA/DLP</td><td>生物支架</td></tr><tr><td>张拉整体</td><td>可调</td><td>可调</td><td>手工/3D 打印</td><td>可展开/主动减振</td></tr><tr><td>双稳态超结构</td><td>非线性</td><td>依赖构型</td><td>SLA/SLS</td><td>能量捕获/逻辑门</td></tr></table>
 
 <p>核心设计规则可以归纳如下。对于最大比强度的承载应用，选择 n → 1 的拉伸主导型点阵，尽量提高杆件的节点连通数至 Maxwell 临界值（三维为 Z = 12），并用高精度增材制造消除焊接缺陷和杆件弯曲。对于最大能量吸收的冲击防护，选择具有长平台应力的弯曲主导型结构，结合拉胀特性以提升局部密实化效率。对于可调性要求高的功能结构（可展开天线、可变形翼面），折纸超结构几乎是唯一选择，且应优先选择刚性可折叠类型以保证精确的折叠路径和形状精度。对于功能表面（防水、减阻、光学），Kirigami 和屈曲诱导薄膜超结构是最直接的平台，制造简单且成本低廉。</p>
 
@@ -234,7 +234,6 @@
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

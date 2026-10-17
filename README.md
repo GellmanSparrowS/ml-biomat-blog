@@ -1,16 +1,18 @@
 # ML-Biomat · 杨云浩的研究与开源项目
 
-个人介绍、纤维生物材料研究、机器学习与多尺度模拟教程。网站：<https://ml-biomat.com/>；个人主页：<https://ml-biomat.com/about/>。
+个人介绍、跨尺度生物材料体系与结构研究、机器学习与多尺度模拟教程。网站：<https://ml-biomat.com/>；个人主页：<https://ml-biomat.com/about/>。
 
 ## 修改入口
 
 | 内容 | 源文件 |
 | --- | --- |
 | 个人主页 | `content/about-body.html` |
-| 完整简历 | `content/cv-body.html` |
+| 中文简历 `/cv/` | `content/cv-body.html` |
+| English CV `/cv/en/` | `content/cv-en-body.html` |
+| 分组相册 | `content/profile-albums.json`、`static/images/profile/` |
 | FiberNet 展示 | `content/fibernet-body.html` |
 | 中英文文章 | `content/posts/zh/`、`content/posts/en/` |
-| 样式与交互 | `static/css/style.css`、`static/js/main.js` |
+| 样式与交互 | `static/css/style.css`、`static/js/main.js`、`static/js/profile.js` |
 | 导航、页面模板、生成流程 | `build.py` |
 | 站点信息与分类 | `config.py` |
 
@@ -45,3 +47,5 @@ GitHub 登录由本机凭据管理工具保存。仓库地址使用普通 HTTPS 
 ## 内容与检查
 
 文章保留语言、日期、分类、标签等 frontmatter。`python manage.py check` 检查已生成页面，包含文章/RSS/搜索一致性、站点地图、关键页面和解码后的内部链接。个人经历、论文署名和奖项状态以本人确认资料及原始公开来源为准。
+
+相册默认折叠；照片与论文图保持原比例、完整显示，使用统一相框与留白适配尺寸。图片内容变更后构建会更新资源版本。

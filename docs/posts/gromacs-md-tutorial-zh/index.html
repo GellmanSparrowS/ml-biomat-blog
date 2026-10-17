@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="GROMACS分子动力学模拟实战：从结构准备到轨迹分析">
 <meta property="og:description" content="GROMACS分子动力学模拟完整实战教程：以溶菌酶为实例，手把手演示从结构准备、能量最小化、平衡态到生产运行的全流程，含RMSD、RMSF、Rg和氢键轨迹分析。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/gromacs-md-tutorial/">EN</a><a href="/posts/gromacs-md-tutorial-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -85,7 +85,7 @@ conda install -c conda-forge -c bioconda gromacs=&quot;2024.*=*cuda*&quot;
 
 <h3 id="md模拟基本流程">MD模拟基本流程</h3>
 
-<table><tr><th>步骤</th><th>命令</th><th>目的</th><th>耗时</th></tr><tr><td>------</td><td>------</td><td>------</td><td>------</td></tr><tr><td>1. 结构获取</td><td>-</td><td>PDB下载</td><td>手动</td></tr><tr><td>2. 拓扑生成</td><td>gmx pdb2gmx</td><td>生成拓扑和力场</td><td><1s</td></tr><tr><td>3. 定义盒子</td><td>gmx editconf</td><td>设定盒子大小</td><td><1s</td></tr><tr><td>4. 溶剂化</td><td>gmx solvate</td><td>填充水分子</td><td>数秒</td></tr><tr><td>5. 添加离子</td><td>gmx genion</td><td>中和电荷</td><td>数秒</td></tr><tr><td>6. 能量最小化</td><td>gmx grompp+mdrun</td><td>消除原子碰撞</td><td>数分钟</td></tr><tr><td>7. NVT平衡</td><td>gmx grompp+mdrun</td><td>稳定温度</td><td>数小时</td></tr><tr><td>8. NPT平衡</td><td>gmx grompp+mdrun</td><td>稳定压力</td><td>数小时</td></tr><tr><td>9. 生产模拟</td><td>gmx grompp+mdrun</td><td>采集轨迹</td><td>数小时-天</td></tr><tr><td>10. 轨迹分析</td><td>gmx rms/rmsf/...</td><td>提取物理量</td><td>数分钟</td></tr></table>
+<table><tr><th>步骤</th><th>命令</th><th>目的</th><th>耗时</th></tr><tr><td>1. 结构获取</td><td>-</td><td>PDB下载</td><td>手动</td></tr><tr><td>2. 拓扑生成</td><td>gmx pdb2gmx</td><td>生成拓扑和力场</td><td><1s</td></tr><tr><td>3. 定义盒子</td><td>gmx editconf</td><td>设定盒子大小</td><td><1s</td></tr><tr><td>4. 溶剂化</td><td>gmx solvate</td><td>填充水分子</td><td>数秒</td></tr><tr><td>5. 添加离子</td><td>gmx genion</td><td>中和电荷</td><td>数秒</td></tr><tr><td>6. 能量最小化</td><td>gmx grompp+mdrun</td><td>消除原子碰撞</td><td>数分钟</td></tr><tr><td>7. NVT平衡</td><td>gmx grompp+mdrun</td><td>稳定温度</td><td>数小时</td></tr><tr><td>8. NPT平衡</td><td>gmx grompp+mdrun</td><td>稳定压力</td><td>数小时</td></tr><tr><td>9. 生产模拟</td><td>gmx grompp+mdrun</td><td>采集轨迹</td><td>数小时-天</td></tr><tr><td>10. 轨迹分析</td><td>gmx rms/rmsf/...</td><td>提取物理量</td><td>数分钟</td></tr></table>
 
 <p>下面以PDB ID 1AKI(溶菌酶)为例逐步演示。</p>
 
@@ -425,7 +425,6 @@ plt.tight_layout(); plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

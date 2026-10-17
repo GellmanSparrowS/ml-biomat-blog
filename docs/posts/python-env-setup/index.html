@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="Setting Up a Python Scientific Computing Environment">
 <meta property="og:description" content="A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/python-env-setup/" class="active">EN</a><a href="/posts/python-env-setup-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -174,7 +174,7 @@ conda env create -f environment.yml
 
 <p>This workflow ensures that your code produces the same output on your supervisor's machine, during peer review, and when you return to the project years later. It is the technical foundation of reproducibility in modern computational science.</p>
 
-<table><tr><th>Operation</th><th>Command</th></tr><tr><td>---</td><td>---</td></tr><tr><td>Create new environment</td><td><code>conda create -n name python=3.11 -y</code></td></tr><tr><td>Activate environment</td><td><code>conda activate name</code></td></tr><tr><td>Deactivate environment</td><td><code>conda deactivate</code></td></tr><tr><td>List all environments</td><td><code>conda env list</code></td></tr><tr><td>Delete an environment</td><td><code>conda env remove -n name</code></td></tr><tr><td>Export environment config</td><td><code>conda env export > environment.yml</code></td></tr><tr><td>Rebuild from config file</td><td><code>conda env create -f environment.yml</code></td></tr><tr><td>List installed packages</td><td><code>conda list</code></td></tr><tr><td>Update a package</td><td><code>conda update package-name</code></td></tr></table>
+<table><tr><th>Operation</th><th>Command</th></tr><tr><td>Create new environment</td><td><code>conda create -n name python=3.11 -y</code></td></tr><tr><td>Activate environment</td><td><code>conda activate name</code></td></tr><tr><td>Deactivate environment</td><td><code>conda deactivate</code></td></tr><tr><td>List all environments</td><td><code>conda env list</code></td></tr><tr><td>Delete an environment</td><td><code>conda env remove -n name</code></td></tr><tr><td>Export environment config</td><td><code>conda env export > environment.yml</code></td></tr><tr><td>Rebuild from config file</td><td><code>conda env create -f environment.yml</code></td></tr><tr><td>List installed packages</td><td><code>conda list</code></td></tr><tr><td>Update a package</td><td><code>conda update package-name</code></td></tr></table>
 
 <hr>
 
@@ -408,7 +408,6 @@ trusted-host = mirrors.tuna.tsinghua.edu.cn
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

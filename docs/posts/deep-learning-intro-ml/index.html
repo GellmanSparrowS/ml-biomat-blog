@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="The Nature of Deep Learning">
 <meta property="og:description" content="A systematic introduction to deep learning: neurons, activation functions, backpropagation, regularization, and transfer learning, with practical guidance on when deep learning is the right tool in materials science.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/deep-learning-intro-ml/" class="active">EN</a><a href="/posts/deep-learning-intro-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -432,7 +432,7 @@ print(f&quot;Trainable / Total: {trainable:,} / {total:,}&quot;)
 
 <p><strong>Extrapolation capacity</strong> is the fifth dimension, particularly critical in materials design and inverse engineering. Deep networks — like tree-based models — are fundamentally data-driven interpolators, not generalizations of physical laws. Their predictions outside the training distribution are unreliable by construction. When predicting material properties under conditions not covered by the training set (extreme temperatures, novel composition spaces), explicitly embedding physical constraints into the network (PINNs) or adopting uncertainty-aware Bayesian approaches is far more defensible than simply scaling up the network.</p>
 
-<table><tr><th>Scenario</th><th>Data Type</th><th>Sample Size</th><th>Recommended Approach</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>Composition → property mapping</td><td>Tabular</td><td>< 500</td><td>Ridge / Lasso / Elastic Net</td></tr><tr><td>Multi-parameter process optimization</td><td>Tabular</td><td>500–10,000</td><td>Gradient Boosting (XGBoost/LGB)</td></tr><tr><td>Micrograph → property</td><td>Image</td><td>> 1,000</td><td>CNN (+ transfer learning if < 10k)</td></tr><tr><td>Fatigue load history → life</td><td>Time series</td><td>> 500</td><td>LSTM / Transformer</td></tr><tr><td>Molecule / crystal property</td><td>Graph</td><td>Any</td><td>Graph Neural Network (GNN)</td></tr><tr><td>PDE solving / field prediction</td><td>Coordinates + BC</td><td>Label-free</td><td>Physics-Informed NN (PINN)</td></tr><tr><td>High interpretability, small N</td><td>Any</td><td>< 200</td><td>Linear model or RF + SHAP</td></tr></table>
+<table><tr><th>Scenario</th><th>Data Type</th><th>Sample Size</th><th>Recommended Approach</th></tr><tr><td>Composition → property mapping</td><td>Tabular</td><td>< 500</td><td>Ridge / Lasso / Elastic Net</td></tr><tr><td>Multi-parameter process optimization</td><td>Tabular</td><td>500–10,000</td><td>Gradient Boosting (XGBoost/LGB)</td></tr><tr><td>Micrograph → property</td><td>Image</td><td>> 1,000</td><td>CNN (+ transfer learning if < 10k)</td></tr><tr><td>Fatigue load history → life</td><td>Time series</td><td>> 500</td><td>LSTM / Transformer</td></tr><tr><td>Molecule / crystal property</td><td>Graph</td><td>Any</td><td>Graph Neural Network (GNN)</td></tr><tr><td>PDE solving / field prediction</td><td>Coordinates + BC</td><td>Label-free</td><td>Physics-Informed NN (PINN)</td></tr><tr><td>High interpretability, small N</td><td>Any</td><td>< 200</td><td>Linear model or RF + SHAP</td></tr></table>
 
 <p>Deep learning and classical machine learning are not competing paradigms but complementary toolboxes. The hallmark of a skilled computational scientist is not allegiance to one paradigm or the other, but the judgment to select methods according to the problem's structure, data volume, interpretability requirements, and computational constraints. In materials science, structural mechanics, and biomechanics, knowing <strong>when not to use deep learning</strong> is often more valuable than knowing how to build a Transformer. That judgment — grounded in a clear understanding of each method's assumptions and failure modes — is the core competency that transcends any individual algorithm.</p>
 
@@ -487,7 +487,6 @@ print(f&quot;Trainable / Total: {trainable:,} / {total:,}&quot;)
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

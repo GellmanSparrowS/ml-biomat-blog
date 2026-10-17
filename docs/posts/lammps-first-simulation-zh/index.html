@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="分子动力学入门：你的第一个LAMMPS模拟">
 <meta property="og:description" content="分子动力学入门：你的第一个LAMMPS模拟。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/lammps-first-simulation/">EN</a><a href="/posts/lammps-first-simulation-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -132,12 +132,12 @@ run             100000                    # NPT生产
 
 <h3 id="关键参数">关键参数</h3>
 
-<table><tr><th>参数</th><th>含义</th><th>典型值</th></tr><tr><td>------</td><td>------</td><td>--------</td></tr><tr><td>timestep</td><td>积分步长</td><td>1.0-2.0 fs</td></tr><tr><td>cutoff</td><td>非键作用截断距离</td><td>10-12 埃</td></tr><tr><td>temperature</td><td>系统温度</td><td>300 K(室温)</td></tr><tr><td>NVT</td><td>恒粒子数/体积/温度</td><td>平衡阶段</td></tr><tr><td>NPT</td><td>恒粒子数/压力/温度</td><td>生产阶段</td></tr></table>
+<table><tr><th>参数</th><th>含义</th><th>典型值</th></tr><tr><td>timestep</td><td>积分步长</td><td>1.0-2.0 fs</td></tr><tr><td>cutoff</td><td>非键作用截断距离</td><td>10-12 埃</td></tr><tr><td>temperature</td><td>系统温度</td><td>300 K(室温)</td></tr><tr><td>NVT</td><td>恒粒子数/体积/温度</td><td>平衡阶段</td></tr><tr><td>NPT</td><td>恒粒子数/压力/温度</td><td>生产阶段</td></tr></table>
 
 <h2 id="力场与分析">力场与分析</h2>
 <h3 id="常用力场">常用力场</h3>
 
-<table><tr><th>力场</th><th>适用</th><th>参考文献</th></tr><tr><td>------</td><td>------</td><td>---------</td></tr><tr><td>OPLS-AA</td><td>蛋白质、有机分子</td><td>Jorgensen (1996)</td></tr><tr><td>CHARMM36</td><td>蛋白质、核酸</td><td>Best (2012)</td></tr><tr><td>AMBER ff19SB</td><td>蛋白质</td><td>Tian (2020)</td></tr><tr><td>ReaxFF</td><td>反应体系、断键</td><td>van Duin (2001)</td></tr><tr><td>Martini</td><td>粗粒化生物分子</td><td>Marrink (2007)</td></tr></table>
+<table><tr><th>力场</th><th>适用</th><th>参考文献</th></tr><tr><td>OPLS-AA</td><td>蛋白质、有机分子</td><td>Jorgensen (1996)</td></tr><tr><td>CHARMM36</td><td>蛋白质、核酸</td><td>Best (2012)</td></tr><tr><td>AMBER ff19SB</td><td>蛋白质</td><td>Tian (2020)</td></tr><tr><td>ReaxFF</td><td>反应体系、断键</td><td>van Duin (2001)</td></tr><tr><td>Martini</td><td>粗粒化生物分子</td><td>Marrink (2007)</td></tr></table>
 
 <h3 id="轨迹分析">轨迹分析</h3>
 
@@ -153,7 +153,7 @@ rdf_oo.run()
 
 <h3 id="常见问题">常见问题</h3>
 
-<table><tr><th>问题</th><th>解决</th></tr><tr><td>------</td><td>------</td></tr><tr><td>"Lost atoms"错误</td><td>减小timestep或增大neighbor list skin</td></tr><tr><td>能量不收敛</td><td>更长最小化或用更软的初始条件</td></tr><tr><td>模拟太慢</td><td>用GPU(Kokkos)或更粗的力场</td></tr></table>
+<table><tr><th>问题</th><th>解决</th></tr><tr><td>"Lost atoms"错误</td><td>减小timestep或增大neighbor list skin</td></tr><tr><td>能量不收敛</td><td>更长最小化或用更软的初始条件</td></tr><tr><td>模拟太慢</td><td>用GPU(Kokkos)或更粗的力场</td></tr></table>
 
 <h2 id="参考资料">参考资料</h2>
 <ul>
@@ -201,7 +201,6 @@ rdf_oo.run()
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

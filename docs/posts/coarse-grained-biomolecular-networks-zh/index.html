@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="生物分子网络的粗粒化建模：从映射方案到验证方法">
 <meta property="og:description" content="面向材料研究的生物分子网络粗粒化建模指南，系统讲解珠子映射原则、有效相互作用势、体系构建与平衡、以及如何用独立参考数据验证模型，帮助研究者避免常见的粗粒化陷阱。">
 <meta property="og:type" content="article">
@@ -34,7 +34,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/coarse-grained-biomolecular-networks/">EN</a><a href="/posts/coarse-grained-biomolecular-networks-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -70,7 +70,7 @@
 
 <p>下表总结了同一种材料在不同粗细层次上映射时会保留什么、又会失去什么。</p>
 
-<table><tr><th>映射层次</th><th>代表性单元</th><th>保留的信息</th><th>通常会丢失的信息</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>全原子</td><td>每个原子</td><td>电荷、化学键、精细构象</td><td>可达的时间与长度尺度</td></tr><tr><td>MARTINI 类</td><td>数个重原子对应一个珠子</td><td>极性与氢键倾向</td><td>扭转化学细节</td></tr><tr><td>残基 / 单体</td><td>每个残基或单体一个珠子</td><td>链连接性与天然接触</td><td>侧链堆积</td></tr><tr><td>网络</td><td>每个 Kuhn 链段一个位点</td><td>拓扑与交联密度</td><td>局部结构信息</td></tr></table>
+<table><tr><th>映射层次</th><th>代表性单元</th><th>保留的信息</th><th>通常会丢失的信息</th></tr><tr><td>全原子</td><td>每个原子</td><td>电荷、化学键、精细构象</td><td>可达的时间与长度尺度</td></tr><tr><td>MARTINI 类</td><td>数个重原子对应一个珠子</td><td>极性与氢键倾向</td><td>扭转化学细节</td></tr><tr><td>残基 / 单体</td><td>每个残基或单体一个珠子</td><td>链连接性与天然接触</td><td>侧链堆积</td></tr><tr><td>网络</td><td>每个 Kuhn 链段一个位点</td><td>拓扑与交联密度</td><td>局部结构信息</td></tr></table>
 
 <h2 id="有效相互作用势及其局限">有效相互作用势及其局限</h2>
 
@@ -146,7 +146,6 @@
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

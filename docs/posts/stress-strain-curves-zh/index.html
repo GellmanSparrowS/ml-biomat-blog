@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="应力-应变曲线解读：材料力学入门">
 <meta property="og:description" content="应力-应变曲线解读：材料力学入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/stress-strain-curves/">EN</a><a href="/posts/stress-strain-curves-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -56,11 +56,11 @@
 
 <h2 id="曲线的五个关键区域">曲线的五个关键区域</h2>
 
-<table><tr><th>区域</th><th>发生什么</th><th>关键参数</th></tr><tr><td>------</td><td>------</td><td>------</td></tr><tr><td>弹性区</td><td>变形可逆</td><td>杨氏模量 E</td></tr><tr><td>屈服点</td><td>永久变形开始</td><td>屈服强度</td></tr><tr><td>塑性区</td><td>永久变形累积</td><td>加工硬化</td></tr><tr><td>极限点</td><td>最大应力</td><td>抗拉强度 UTS</td></tr><tr><td>断裂点</td><td>材料破坏</td><td>断裂伸长率</td></tr></table>
+<table><tr><th>区域</th><th>发生什么</th><th>关键参数</th></tr><tr><td>弹性区</td><td>变形可逆</td><td>杨氏模量 E</td></tr><tr><td>屈服点</td><td>永久变形开始</td><td>屈服强度</td></tr><tr><td>塑性区</td><td>永久变形累积</td><td>加工硬化</td></tr><tr><td>极限点</td><td>最大应力</td><td>抗拉强度 UTS</td></tr><tr><td>断裂点</td><td>材料破坏</td><td>断裂伸长率</td></tr></table>
 
 <img src="/static/images/posts/stress-strain-curves/curve-zh.webp" alt="应力-应变曲线示意图：标注趾区、弹性区、屈服点、塑性/加工硬化区、抗拉强度与断裂点" loading="lazy">
 
-<table><tr><th>材料</th><th>杨氏模量 (MPa)</th><th>抗拉强度 (MPa)</th><th>断裂伸长率 (%)</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>低碳钢</td><td>~200,000</td><td>~400</td><td>~25</td></tr><tr><td>皮质骨</td><td>~17,000</td><td>~120</td><td>~2</td></tr><tr><td>丝素蛋白纤维</td><td>~8,000</td><td>~500</td><td>~20</td></tr><tr><td>胶原肌腱</td><td>~1,200</td><td>~100</td><td>~10</td></tr><tr><td>橡胶</td><td>~1.5</td><td>~20</td><td>~500</td></tr></table>
+<table><tr><th>材料</th><th>杨氏模量 (MPa)</th><th>抗拉强度 (MPa)</th><th>断裂伸长率 (%)</th></tr><tr><td>低碳钢</td><td>~200,000</td><td>~400</td><td>~25</td></tr><tr><td>皮质骨</td><td>~17,000</td><td>~120</td><td>~2</td></tr><tr><td>丝素蛋白纤维</td><td>~8,000</td><td>~500</td><td>~20</td></tr><tr><td>胶原肌腱</td><td>~1,200</td><td>~100</td><td>~10</td></tr><tr><td>橡胶</td><td>~1.5</td><td>~20</td><td>~500</td></tr></table>
 
 <p><em>典型数量级数值；随来源、含水量与应变率变化。</em></p>
 
@@ -128,7 +128,6 @@ def compute_properties(strain, stress):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

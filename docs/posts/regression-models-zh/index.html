@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="常用的机器学习回归模型：从线性基准到梯度提升">
 <meta property="og:description" content="常用的机器学习回归模型：从线性基准到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/regression-models-ml/">EN</a><a href="/posts/regression-models-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -570,7 +570,7 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
 
 <p><strong>噪声与离群点的约束</strong>：数据较干净时，MSE 损失（普通最小二乘和梯度提升的默认损失）表现最好；数据含有较多离群点时，MAE 损失（对应中位数回归）、SVR（ε-不敏感损失）和 Huber 损失下的回归（<code>HuberRegressor</code>，在小误差区域用 MSE，大误差区域自动切换为 MAE）更稳健，不会被少数极端异常值主导。</p>
 
-<table><tr><th>模型</th><th>数据量</th><th>非线性</th><th>外推</th><th>可解释性</th><th>离群点鲁棒性</th><th>需要缩放</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>线性回归</td><td>小～大</td><td>差</td><td>好（线性延伸）</td><td>最高</td><td>差</td><td>是</td></tr><tr><td>岭 / Lasso</td><td>小～大</td><td>差</td><td>好</td><td>高</td><td>差</td><td>是</td></tr><tr><td>多项式 + 岭</td><td>小～中</td><td>中</td><td>差（震荡）</td><td>中</td><td>差</td><td>是</td></tr><tr><td>SVR（RBF）</td><td>小～中</td><td>好</td><td>中</td><td>低</td><td>好</td><td>是</td></tr><tr><td>决策树</td><td>中～大</td><td>好</td><td>差（常数）</td><td>高</td><td>中</td><td>否</td></tr><tr><td>随机森林</td><td>中～大</td><td>好</td><td>差（常数）</td><td>中</td><td>中</td><td>否</td></tr><tr><td>梯度提升</td><td>中～大</td><td>最好</td><td>差（常数）</td><td>中</td><td>中（可调）</td><td>否</td></tr></table>
+<table><tr><th>模型</th><th>数据量</th><th>非线性</th><th>外推</th><th>可解释性</th><th>离群点鲁棒性</th><th>需要缩放</th></tr><tr><td>线性回归</td><td>小～大</td><td>差</td><td>好（线性延伸）</td><td>最高</td><td>差</td><td>是</td></tr><tr><td>岭 / Lasso</td><td>小～大</td><td>差</td><td>好</td><td>高</td><td>差</td><td>是</td></tr><tr><td>多项式 + 岭</td><td>小～中</td><td>中</td><td>差（震荡）</td><td>中</td><td>差</td><td>是</td></tr><tr><td>SVR（RBF）</td><td>小～中</td><td>好</td><td>中</td><td>低</td><td>好</td><td>是</td></tr><tr><td>决策树</td><td>中～大</td><td>好</td><td>差（常数）</td><td>高</td><td>中</td><td>否</td></tr><tr><td>随机森林</td><td>中～大</td><td>好</td><td>差（常数）</td><td>中</td><td>中</td><td>否</td></tr><tr><td>梯度提升</td><td>中～大</td><td>最好</td><td>差（常数）</td><td>中</td><td>中（可调）</td><td>否</td></tr></table>
 
 <p><strong>实践工作流建议</strong>：在一个新回归问题上，建议按如下顺序推进。首先用线性回归（或岭回归）建立基线，获得特征重要性的初步判断和可解释的边际效应；然后检验残差图，判断是否存在明显的非线性结构；如果有，先尝试引入多项式特征或物理启发的变换，因为这最节约数据；如果样本量允许且非线性程度高，转向随机森林；最后在有充足样本时，用交叉验证比较随机森林和梯度提升，选择泛化性能更好的。在整个过程中，SHAP 值分析是连接"模型预测性能"和"科学机理解释"的桥梁，不应被视为可选步骤而是标准流程的一部分。</p>
 
@@ -625,7 +625,6 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

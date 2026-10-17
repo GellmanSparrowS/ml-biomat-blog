@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function doSearchDropdown(q){
+    q = q.toLowerCase();
     var results = searchData.filter(function(p){
         return p.title.toLowerCase().indexOf(q) >= 0 ||
                (p.description||'').toLowerCase().indexOf(q) >= 0 ||
@@ -143,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 window.addEventListener('scroll', function(){
     var winH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    var scrolled = (window.scrollY / winH) * 100;
+    var scrolled = winH > 0 ? Math.max(0, Math.min(100, (window.scrollY / winH) * 100)) : 0;
     var bar = document.getElementById('progress-bar');
     if(bar) bar.style.width = scrolled + '%';
     var btn = document.getElementById('back-to-top');
@@ -184,7 +185,7 @@ document.addEventListener('DOMContentLoaded',function(){
     var script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js';
     script.onload = function(){
-        mediumZoom('article img, .img-full, .about-card img', {
+        mediumZoom('article img:not(.profile-gallery-image), .img-full, .about-card img', {
             margin: 24,
             background: 'rgba(0,0,0,.9)',
             scrollOffset: 0,
@@ -228,7 +229,7 @@ document.addEventListener('DOMContentLoaded',function(){
         if(!links.length) return;
         var map = {};
         links.forEach(function(a){
-            var h = document.querySelector(a.getAttribute('href'));
+            var h = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
             if(h) map[h.id] = a;
         });
         var obs = new IntersectionObserver(function(entries){
@@ -247,125 +248,276 @@ document.addEventListener('DOMContentLoaded',function(){
     });
 })();
 
-// ===== SUBTLE REACTIVE BACKGROUND NETWORK =====
+// ===== CONTINUOUS FIBER NETWORK BACKGROUND =====
+// Decorative shared-node geometry: an illustration of connected fibers, not a solver output.
 (function(){
-    var canvas = document.getElementById('bg-canvas');
-    if(!canvas) return;
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var ctx = canvas.getContext('2d');
-    var W = 0, H = 0, nodes = [];
-    var mouse = {x:-9999, y:-9999};
-    function resize(){
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-        var n = Math.min(90, Math.max(28, Math.floor(W * H / 25000)));
-        nodes = [];
-        for(var i = 0; i < n; i++){
-            nodes.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2});
-        }
-    }
-    function isDark(){
-        var t = document.documentElement.getAttribute('data-theme');
-        if(t === 'dark') return true;
-        if(t === 'light') return false;
-        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    function step(){
-        ctx.clearRect(0, 0, W, H);
-        var dark = isDark();
-        for(var i = 0; i < nodes.length; i++){
-            var a = nodes[i];
-            var dx = a.x - mouse.x, dy = a.y - mouse.y, d2 = dx*dx + dy*dy;
-            if(d2 < 26000){
-                var f = (160 - d2/160) * 0.008;
-                a.vx += dx * f || 0.02;
-                a.vy += dy * f || 0.02;
-            }
-            a.vx *= 0.995; a.vy *= 0.995;
-            if(Math.abs(a.vx) < 0.02) a.vx += (Math.random()-0.5)*0.04;
-            if(Math.abs(a.vy) < 0.02) a.vy += (Math.random()-0.5)*0.04;
-            a.x += a.vx; a.y += a.vy;
-            if(a.x < -30) a.x = W + 30; if(a.x > W + 30) a.x = -30;
-            if(a.y < -30) a.y = H + 30; if(a.y > H + 30) a.y = -30;
-        }
-        for(var i = 0; i < nodes.length; i++){
-            for(var k = i + 1; k < nodes.length; k++){
-                var p = nodes[i], q = nodes[k];
-                var dd = (p.x-q.x)*(p.x-q.x) + (p.y-q.y)*(p.y-q.y);
-                if(dd < 42000){
-                    var alpha = (1 - dd/42000) * (dark ? 0.16 : 0.11);
-                    ctx.strokeStyle = 'rgba(59,130,246,' + alpha.toFixed(3) + ')';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
-                }
-            }
-        }
-        for(var m = 0; m < nodes.length; m++){
-            ctx.beginPath();
-            ctx.arc(nodes[m].x, nodes[m].y, dark ? 1.9 : 1.6, 0, 6.2832);
-            ctx.fillStyle = 'rgba(59,130,246,' + (dark ? 0.42 : 0.34) + ')';
-            ctx.fill();
-        }
-        requestAnimationFrame(step);
-    }
-    window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', function(e){ mouse.x = e.clientX; mouse.y = e.clientY; });
-    window.addEventListener('touchmove', function(e){ if(e.touches.length){ mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; } }, {passive:true});
-    window.addEventListener('mouseleave', function(){ mouse.x = -9999; mouse.y = -9999; });
-    resize();
-    requestAnimationFrame(step);
-})();
+    'use strict';
+    function initFiberBackground(){
+        var canvas = document.getElementById('bg-canvas');
+        var legacy = document.getElementById('bg-network');
+        if(legacy){ legacy.hidden = true; legacy.style.display = 'none'; }
+        if(!canvas || canvas.dataset.ambient === 'fiber-network') return;
+        var ctx = canvas.getContext('2d', {alpha:true});
+        if(!ctx) return;
+        canvas.dataset.ambient = 'fiber-network';
+        canvas.setAttribute('aria-hidden', 'true');
+        canvas.style.opacity = '1';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.position = 'fixed';
+        canvas.style.inset = '0';
+        canvas.style.zIndex = '0';
+        canvas.style.contain = 'strict';
 
-// ===== SUBTLE PARTICLE NETWORK BACKGROUND =====
-(function(){
-    var cv = document.getElementById('bg-network');
-    if(!cv || !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var ctx = cv.getContext('2d');
-    var W, H, nodes = [], mouse = {x:-9999, y:-9999};
-    var N = Math.min(60, Math.max(28, Math.floor(window.innerWidth / 28)));
-    function resize(){
-        W = cv.width = window.innerWidth; H = cv.height = window.innerHeight;
-        nodes = [];
-        for(var i=0;i<N;i++){
-            nodes.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22});
+        var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        var coarseQuery = window.matchMedia('(pointer: coarse)');
+        var fineQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+        var printQuery = window.matchMedia('print');
+        var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        var main = document.querySelector('main');
+        var width = 0, height = 0, dpr = 1, columns = 0, rows = 0;
+        var nodes = [], rowFibers = [], columnFibers = [], diagonalFibers = [];
+        var mask = null, palette = null, mobile = false, lowPower = false;
+        var animation = 0, resizeFrame = 0, elapsed = 0, previousTime = 0, lastPaint = 0;
+        var slowFrames = 0, performanceLimited = false, pendingResize = false;
+        var frameInterval = 1000 / 28;
+        var pointer = {x:0, y:0, targetX:0, targetY:0, amount:0, targetAmount:0, updated:0, positioned:false};
+
+        function listen(query, callback){
+            if(query.addEventListener) query.addEventListener('change', callback);
+            else query.addListener(callback);
         }
-    }
-    function colors(){
-        var s=getComputedStyle(document.documentElement);
-        return [s.getPropertyValue('--c-primary').trim()||'#2f6bff', s.getPropertyValue('--c-accent').trim()||'#0eb7a6'];
-    }
-    function frame(){
-        ctx.clearRect(0,0,W,H);
-        var c=colors();
-        for(var i=0;i<nodes.length;i++){
-            var n=nodes[i];
-            n.x+=n.vx; n.y+=n.vy;
-            if(n.x<0||n.x>W) n.vx*=-1;
-            if(n.y<0||n.y>H) n.vy*=-1;
-            var dx=mouse.x-n.x, dy=mouse.y-n.y, d=Math.hypot(dx,dy);
-            if(d<140){ n.x-=dx/d*.6; n.y-=dy/d*.6; }
+        function noise(seed){
+            var value = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+            return value - Math.floor(value);
         }
-        ctx.lineWidth=1;
-        for(var a=0;a<nodes.length;a++){
-            for(var b=a+1;b<nodes.length;b++){
-                var dx=nodes[a].x-nodes[b].x, dy=nodes[a].y-nodes[b].y, d=dx*dx+dy*dy;
-                var lim=130;
-                if(d<lim*lim){
-                    var alpha=(1-Math.sqrt(d)/lim)*.16;
-                    ctx.strokeStyle='rgba(90,130,200,'+alpha.toFixed(3)+')';
-                    ctx.beginPath();ctx.moveTo(nodes[a].x,nodes[a].y);ctx.lineTo(nodes[b].x,nodes[b].y);ctx.stroke();
+        function isDark(){
+            var selected = document.documentElement.getAttribute('data-theme');
+            return selected === 'dark' || (selected !== 'light' && darkQuery.matches);
+        }
+        function readPalette(){
+            palette = isDark()
+                ? {fiber:'113,153,194', accent:'93,179,173', line:.43, highlight:.58, joint:.64}
+                : {fiber:'71,103,143', accent:'40,125,128', line:.37, highlight:.49, joint:.53};
+        }
+        function staticMode(){
+            return motionQuery.matches || mobile || lowPower || performanceLimited;
+        }
+        function pixelRatio(){
+            return Math.min(window.devicePixelRatio || 1, (mobile || lowPower) ? 1.5 : 2);
+        }
+        function stop(){
+            if(animation){ cancelAnimationFrame(animation); animation = 0; }
+            previousTime = 0;
+        }
+        function setMask(){
+            var rect = main ? main.getBoundingClientRect() : {left:width*.15, right:width*.85};
+            var left = Math.max(18, Math.min(width*.42, rect.left + 14));
+            var right = Math.min(width - 18, Math.max(width*.58, rect.right - 14));
+            var feather = mobile ? 30 : 80;
+            mask = ctx.createLinearGradient(0, 0, width, 0);
+            mask.addColorStop(0, 'rgba(0,0,0,.96)');
+            mask.addColorStop(Math.max(0, left - feather)/width, 'rgba(0,0,0,.9)');
+            mask.addColorStop(left/width, 'rgba(0,0,0,.055)');
+            mask.addColorStop(right/width, 'rgba(0,0,0,.055)');
+            mask.addColorStop(Math.min(width, right + feather)/width, 'rgba(0,0,0,.9)');
+            mask.addColorStop(1, 'rgba(0,0,0,.96)');
+        }
+        function createGeometry(){
+            nodes = []; rowFibers = []; columnFibers = []; diagonalFibers = [];
+            columns = mobile ? 6 : Math.max(8, Math.min(16, Math.ceil(width / 125) + 1));
+            rows = mobile ? 7 : Math.max(7, Math.min(12, Math.ceil(height / 115) + 1));
+            var stepX = (width + 150) / (columns - 1);
+            var stepY = (height + 140) / (rows - 1);
+            for(var row = 0; row < rows; row++){
+                var rowPath = [];
+                for(var col = 0; col < columns; col++){
+                    var seed = row * 31 + col * 7;
+                    var node = {
+                        baseX:col * stepX - 75 + (noise(seed)-.5)*stepX*.5,
+                        baseY:row * stepY - 70 + (noise(seed+21)-.5)*stepY*.5,
+                        u:col/(columns-1), v:row/(rows-1), phase:noise(seed+7)*Math.PI*2,
+                        x:0, y:0
+                    };
+                    nodes.push(node); rowPath.push(node);
+                }
+                rowFibers.push(rowPath);
+            }
+            for(var c = 0; c < columns; c++){
+                var columnPath = [];
+                for(var r = 0; r < rows; r++) columnPath.push(nodes[r * columns + c]);
+                columnFibers.push(columnPath);
+            }
+            // A few continuous diagonal fibers connect the same junctions at a larger scale.
+            if(!mobile){
+                for(var start = -rows + 2; start < columns - 1; start += 3){
+                    var diagonal = [];
+                    for(var rr = 0; rr < rows; rr++){
+                        var cc = start + rr;
+                        if(cc >= 0 && cc < columns) diagonal.push(nodes[rr*columns+cc]);
+                    }
+                    if(diagonal.length > 2) diagonalFibers.push(diagonal);
                 }
             }
         }
-        for(var k=0;k<nodes.length;k++){
-            var p=nodes[k];
-            ctx.fillStyle='rgba(120,160,230,.5)';
-            ctx.beginPath();ctx.arc(p.x,p.y,1.6,0,6.2832);ctx.fill();
+        function clearPointer(){ pointer.targetAmount = 0; }
+        function updatePointer(time){
+            if(!fineQuery.matches || staticMode()){
+                pointer.amount = 0; pointer.targetAmount = 0; pointer.positioned = false;
+                pointer.updated = time;
+                return;
+            }
+            var delta = Math.max(0, Math.min(.1, time-pointer.updated));
+            pointer.updated = time;
+            var positionBlend = 1-Math.exp(-delta*12);
+            var strengthBlend = 1-Math.exp(-delta*5);
+            pointer.x += (pointer.targetX-pointer.x)*positionBlend;
+            pointer.y += (pointer.targetY-pointer.y)*positionBlend;
+            pointer.amount += (pointer.targetAmount-pointer.amount)*strengthBlend;
+            if(pointer.targetAmount === 0 && pointer.amount < .0001) pointer.amount = 0;
         }
-        requestAnimationFrame(frame);
+        function trackPointer(event){
+            if(!fineQuery.matches || staticMode() || document.hidden ||
+                (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen')) return;
+            if(!Number.isFinite(event.clientX) || !Number.isFinite(event.clientY)) return;
+            if(!pointer.positioned){
+                pointer.x = event.clientX; pointer.y = event.clientY; pointer.positioned = true;
+            }
+            pointer.targetX = event.clientX; pointer.targetY = event.clientY;
+            pointer.targetAmount = 1;
+        }
+        function updateGeometry(time){
+            updatePointer(time);
+            var amplitude = mobile ? 9 : 15;
+            for(var i = 0; i < nodes.length; i++){
+                var node = nodes[i];
+                node.x = node.baseX + Math.sin(time*.19 + node.v*5.1 + node.u*2)*amplitude
+                    + Math.sin(time*.12 + node.phase)*4;
+                node.y = node.baseY + Math.cos(time*.16 + node.u*4.3 - node.v*1.7)*amplitude
+                    + Math.cos(time*.11 + node.phase)*4;
+                // Shared junctions bend gently near a fine pointer; the 20px core avoids a singular force.
+                if(pointer.amount > 0){
+                    var dx = node.x-pointer.x, dy = node.y-pointer.y;
+                    var distance = Math.sqrt(dx*dx+dy*dy);
+                    if(distance < 180){
+                        var falloff = 1-distance/180;
+                        var scale = 6.5*falloff*falloff*pointer.amount/Math.max(distance,20);
+                        node.x += dx*scale; node.y += dy*scale;
+                    }
+                }
+            }
+        }
+        function trace(fiber){
+            ctx.beginPath(); ctx.moveTo(fiber[0].x, fiber[0].y);
+            // Interpolating cubic curves meet at the shared junctions, preserving connectivity.
+            for(var i = 0; i < fiber.length-1; i++){
+                var before = fiber[Math.max(0, i-1)];
+                var a = fiber[i], b = fiber[i+1];
+                var after = fiber[Math.min(fiber.length-1, i+2)];
+                ctx.bezierCurveTo(a.x+(b.x-before.x)/6, a.y+(b.y-before.y)/6,
+                    b.x-(after.x-a.x)/6, b.y-(after.y-a.y)/6, b.x, b.y);
+            }
+        }
+        function drawFibers(fibers, color, alpha, lineWidth){
+            ctx.strokeStyle = 'rgba('+color+','+alpha+')';
+            ctx.lineWidth = lineWidth;
+            for(var i = 0; i < fibers.length; i++){ trace(fibers[i]); ctx.stroke(); }
+        }
+        function paint(){
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.clearRect(0, 0, width, height);
+            ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+            updateGeometry(elapsed);
+            var strength = mobile ? .68 : 1;
+            drawFibers(rowFibers, palette.fiber, palette.line*.78*strength, .9);
+            drawFibers(columnFibers, palette.fiber, palette.line*strength, 1.05);
+            drawFibers(diagonalFibers, palette.accent, palette.line*.56, .8);
+            // A pair of accent fibers gives the field a clear continuous visual route.
+            var accents = [columnFibers[1], columnFibers[columns-2]];
+            drawFibers(accents, palette.accent, palette.highlight*strength, 1.35);
+            ctx.fillStyle = 'rgba('+palette.fiber+','+(palette.joint*strength)+')';
+            for(var j = 0; j < nodes.length; j++){
+                var point = nodes[j];
+                ctx.beginPath(); ctx.arc(point.x, point.y, mobile ? 1.15 : 1.45, 0, Math.PI*2); ctx.fill();
+            }
+            // Protect the reading column while retaining visible fibers along both page edges.
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.fillStyle = mask; ctx.fillRect(0, 0, width, height);
+            ctx.globalCompositeOperation = 'source-over';
+        }
+        function frame(timestamp){
+            animation = 0;
+            if(document.hidden || printQuery.matches){ stop(); canvas.dataset.motion = 'paused'; return; }
+            if(staticMode()){ previousTime = 0; canvas.dataset.motion = 'static'; return; }
+            if(pixelRatio() !== dpr){ resize(); return; }
+            if(!previousTime) previousTime = timestamp;
+            elapsed += Math.min((timestamp - previousTime)/1000, .08);
+            previousTime = timestamp;
+            if(timestamp-lastPaint >= frameInterval){
+                var started = performance.now();
+                paint(); lastPaint = timestamp;
+                slowFrames = performance.now()-started > 12 ? slowFrames+1 : Math.max(0,slowFrames-1);
+                if(slowFrames >= 18){
+                    performanceLimited = true;
+                    canvas.dataset.motion = 'static';
+                    previousTime = 0;
+                    return;
+                }
+            }
+            animation = requestAnimationFrame(frame);
+        }
+        function synchronize(){
+            stop();
+            if(document.hidden || printQuery.matches){ canvas.dataset.motion = 'paused'; return; }
+            if(pendingResize){ resize(); return; }
+            readPalette(); paint();
+            if(staticMode()){ canvas.dataset.motion = 'static'; return; }
+            canvas.dataset.motion = 'animated';
+            lastPaint = 0;
+            animation = requestAnimationFrame(frame);
+        }
+        function resize(){
+            pendingResize = false; stop();
+            width = Math.max(1, window.innerWidth); height = Math.max(1, window.innerHeight);
+            mobile = width <= 640 || coarseQuery.matches;
+            lowPower = !!((connection && connection.saveData) ||
+                (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
+                (navigator.deviceMemory && navigator.deviceMemory < 4));
+            dpr = pixelRatio();
+            canvas.width = Math.round(width*dpr); canvas.height = Math.round(height*dpr);
+            canvas.style.width = width+'px'; canvas.style.height = height+'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            createGeometry(); setMask(); synchronize();
+        }
+        function scheduleResize(){
+            pendingResize = true;
+            if(document.hidden || resizeFrame) return;
+            resizeFrame = requestAnimationFrame(function(){ resizeFrame = 0; resize(); });
+        }
+        window.addEventListener('pointermove', trackPointer, {passive:true});
+        window.addEventListener('pointerout', function(event){ if(!event.relatedTarget) clearPointer(); }, {passive:true});
+        window.addEventListener('blur', clearPointer, {passive:true});
+        document.documentElement.addEventListener('pointerleave', clearPointer, {passive:true});
+        document.addEventListener('visibilitychange', function(){
+            if(document.hidden) clearPointer();
+            if(document.hidden && resizeFrame){ cancelAnimationFrame(resizeFrame); resizeFrame = 0; }
+            synchronize();
+        });
+        window.addEventListener('pagehide', function(){
+            clearPointer(); stop();
+            if(resizeFrame){ cancelAnimationFrame(resizeFrame); resizeFrame = 0; }
+            canvas.dataset.motion = 'paused';
+        });
+        window.addEventListener('pageshow', scheduleResize);
+        window.addEventListener('resize', scheduleResize, {passive:true});
+        listen(motionQuery, synchronize); listen(darkQuery, synchronize);
+        listen(coarseQuery, scheduleResize); listen(printQuery, synchronize);
+        listen(fineQuery, function(){ clearPointer(); synchronize(); });
+        if(connection && connection.addEventListener) connection.addEventListener('change', scheduleResize);
+        new MutationObserver(synchronize).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+        if(main && window.ResizeObserver) new ResizeObserver(scheduleResize).observe(main);
+        resize();
     }
-    window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', function(e){mouse.x=e.clientX;mouse.y=e.clientY;});
-    window.addEventListener('mouseout', function(){mouse.x=-9999;mouse.y=-9999;});
-    resize(); frame();
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initFiberBackground);
+    else initFiberBackground();
 })();

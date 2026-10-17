@@ -1,9 +1,9 @@
-<article><style>
-.fibernet-page { max-width:880px; margin:0 auto; }
+<article class="fibernet-article"><style>
+.fibernet-article, .fibernet-page, .fibernet-page section > *, .fibernet-page .about-card { min-width:0; }
+.fibernet-page { max-width:880px; width:100%; margin:0 auto; }
+.fn-two-column { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; margin-bottom:2.5rem; }
+.fn-stats-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; }
 .fibernet-hero { text-align:center; padding:3rem 1.5rem 2rem; margin-bottom:2.5rem; background:linear-gradient(160deg,#1e293b 0%,#1e3a5f 50%,#0f172a 100%); border-radius:12px; border:1px solid #334155; box-shadow:0 4px 24px rgba(0,0,0,.15); position:relative; }
-.version-selector { position:absolute; top:1rem; right:1rem; z-index:10; }
-.version-selector select { background:#1e293b; color:#cbd5e1; border:1px solid #475569; border-radius:6px; padding:.35rem .7rem; font-size:.75rem; font-family:var(--font-mono); cursor:pointer; outline:none; }
-.version-selector select:focus { border-color:var(--c-primary); }
 .pip-copy { position:relative; display:inline-block; max-width:480px; width:100%; margin:.3rem 0; }
 .pip-copy pre { background:#0f172a; color:#e2e8f0; border-radius:8px; padding:.8rem 1.2rem; font-family:var(--font-mono); font-size:.88rem; line-height:1.5; text-align:left; margin:0; overflow-x:auto; white-space:pre-wrap; word-break:break-all; }
 .catalog-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:.5rem; margin-bottom:1.5rem; }
@@ -16,22 +16,20 @@
 .fn-code-sm { background:var(--c-code-bg); border-radius:8px; padding:.9rem 1.1rem; font-family:var(--font-mono); font-size:.76rem; line-height:1.65; overflow-x:auto; }
 .perf-card { text-align:center; padding:.8rem .3rem; background:var(--c-code-bg); border-radius:8px; }
 .perf-card .label { font-size:.72rem; color:var(--c-muted); margin-top:.2rem; }
-@media (max-width:640px) { .catalog-grid { grid-template-columns:repeat(3,1fr); } }
+@media (max-width:640px) {
+  .catalog-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .fn-two-column { grid-template-columns:minmax(0,1fr); }
+  .fn-stats-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .fibernet-hero { padding:2rem 1rem; }
+}
 </style>
 
 <div class="fibernet-page">
 
-<div class="version-selector">
-<select onchange="if(this.value)location.href=this.value">
-<option value="#" selected>v4.0.5 (Latest)</option>
-<option value="#">v1.24.0 (Stable)</option>
-</select>
-</div>
-
 <div class="fibernet-hero">
 <div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem">
-<span style="background:var(--c-primary);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.03em">v4.0.5</span>
-<span style="background:rgba(168,85,247,.2);color:#c4b5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">12 Unit Types</span>
+<span style="background:var(--c-primary);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.03em">PyPI 4.2.0</span>
+<span style="background:rgba(168,85,247,.2);color:#c4b5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">12 Shown Units</span>
 <span style="background:rgba(20,184,166,.2);color:#5eead4;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">GPU Accelerated</span>
 <span style="background:rgba(234,179,8,.2);color:#fde68a;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">FEM Simulation</span>
 <span style="background:rgba(59,130,246,.2);color:#93c5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">ML + RL Ready</span>
@@ -48,7 +46,7 @@ Python Toolkit for Fiber Network Design, Simulation &amp; Intelligent Optimizati
 <pre>pip install fibernet</pre>
 </div>
 <div class="pip-copy">
-<pre>pip install fibernet[full]</pre>
+<pre>pip install "fibernet[full]"</pre>
 </div>
 
 <div style="margin-top:1rem;display:flex;gap:.8rem;justify-content:center">
@@ -57,21 +55,21 @@ Python Toolkit for Fiber Network Design, Simulation &amp; Intelligent Optimizati
 </div>
 </div>
 
-<section style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2.5rem">
-<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-primary)">12</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Unit Types / 基元</div></div>
-<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-primary)">94</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Features / 特征维度</div></div>
-<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-accent)">368D</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Parametric Space / 参数空间</div></div>
+<section class="fn-stats-grid" style="margin-bottom:2.5rem">
+<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-primary)">12</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Shown Units / 展示基元</div></div>
+<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-primary)">94</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">ML Features / ML 特征维度</div></div>
+<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-accent)">368D</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Example Space / 示例参数空间</div></div>
 <div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-accent)">3</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Platforms / 平台</div></div>
 </section>
 
-<section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
+<section class="fn-two-column">
 <div class="about-card">
 <h2>What is FiberNet? / 是什么</h2>
 <p style="font-size:.9rem;line-height:1.85;color:var(--c-fg-soft);text-align:justify">
-A research-grade Python toolkit for <strong>computational design of fiber network metamaterials</strong>. Complete closed-loop workflow: parametric generation, GPU-accelerated simulation, feature extraction, machine learning prediction, and reinforcement learning optimization — all through a unified Python API.
+A research-grade Python toolkit for <strong>computational design of fiber network metamaterials</strong>. Python APIs support parametric generation, simulation, feature extraction, machine learning prediction, and optimization workflows.
 </p>
 <p style="font-size:.88rem;line-height:1.85;color:var(--c-fg-soft);margin-top:.5rem;text-align:justify">
-面向纤维网络超材料计算设计的 Python 工具包。从参数化生成、GPU 加速模拟、特征提取到机器学习预测与强化学习优化，完整闭环工作流通过统一 API 调用。
+面向纤维网络超材料计算设计的 Python 工具包。通过 Python API 开展参数化生成、力学模拟、特征提取、机器学习预测与结构优化。
 </p>
 <p style="font-size:.78rem;color:var(--c-muted);margin-top:.8rem">
 BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
@@ -81,7 +79,7 @@ BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
 <h2>Why FiberNet? / 为什么选择</h2>
 <ul style="line-height:2.1;font-size:.88rem;list-style:none;padding:0">
 <li><strong>One-line APIs</strong> — generate, simulate, predict, optimize in a single call<br><span style="font-size:.76rem;color:var(--c-muted)">一行代码完成生成、模拟、预测、优化</span></li>
-<li><strong>GPU acceleration</strong> — large-scale structural simulation with millisecond latency<br><span style="font-size:.76rem;color:var(--c-muted)">GPU 加速大规模结构模拟</span></li>
+<li><strong>GPU acceleration</strong> — simulation through the optional Taichi backend<br><span style="font-size:.76rem;color:var(--c-muted)">GPU 加速大规模结构模拟</span></li>
 <li><strong>Parametric design</strong> — continuous parameter space for inverse design and optimization<br><span style="font-size:.76rem;color:var(--c-muted)">连续参数空间支持逆向设计与优化</span></li>
 <li><strong>Rich features</strong> — structural, topological, and mechanical descriptors out of the box<br><span style="font-size:.76rem;color:var(--c-muted)">内置结构、拓扑与力学特征描述符</span></li>
 </ul>
@@ -142,8 +140,9 @@ best = fn.run_bayesian_optimization(obj, space, n_iter=50)
 </code></pre>
 </div>
 <div class="about-card">
-<h2>FEM in 3 Lines / 三行FEM</h2>
+<h2>FEM Quick Start / FEM 快速开始</h2>
 <pre><code class="language-python">
+import fibernet as fn
 from fibernet.ml import BeamFrameFEM
 
 solver = BeamFrameFEM(E=1e9, nu=0.3)
@@ -159,11 +158,11 @@ print(f"Max displacement: {result['max_displacement']:.4f} m")
 <h2>Installation / 安装</h2>
 <pre><code class="language-bash">
 pip install fibernet            # Core / 核心
-pip install fibernet[full]      # ML + RL + Viz + Accel
-pip install fibernet[ml]        # scikit-learn, pandas
-pip install fibernet[rl]        # gymnasium, scikit-optimize
-pip install fibernet[accel]     # taichi (GPU)
-pip install fibernet[viz]       # pyvista (3D)
+pip install "fibernet[full]"      # ML + RL + Viz + Accel
+pip install "fibernet[ml]"        # scikit-learn, pandas
+pip install "fibernet[rl]"        # gymnasium, scikit-optimize
+pip install "fibernet[accel]"     # taichi (GPU)
+pip install "fibernet[viz]"       # pyvista (3D)
 </code></pre>
 <h3 style="font-size:.88rem;margin:1rem 0 .4rem">Platforms / 平台</h3>
 <table style="width:100%;font-size:.82rem;border-collapse:collapse">
@@ -172,7 +171,7 @@ pip install fibernet[viz]       # pyvista (3D)
 </div>
 </section>
 
-<section style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
+<section class="fn-two-column">
 <div class="about-card">
 <h2>Machine Learning / 机器学习</h2>
 <p style="font-size:.85rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem;text-align:justify">
@@ -219,7 +218,7 @@ features = fn.GraphFeatureExtractor().extract(g)
 g.displace_node(g.get_internal_nodes()[0], [0.1, 0.2])
 </code></pre>
 
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem">
+<div class="fn-stats-grid" style="margin-top:1.5rem">
 <div class="perf-card"><div class="label">Generation<br><span style="font-size:.62rem">生成</span></div></div>
 <div class="perf-card"><div class="label">Simulation<br><span style="font-size:.62rem">模拟</span></div></div>
 <div class="perf-card"><div class="label">Machine Learning<br><span style="font-size:.62rem">机器学习</span></div></div>

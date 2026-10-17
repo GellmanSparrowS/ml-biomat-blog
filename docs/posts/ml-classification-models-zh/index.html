@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="常用的机器学习分类模型：从逻辑回归到梯度提升">
 <meta property="og:description" content="常用的机器学习分类模型：从逻辑回归到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/ml-classification-models/">EN</a><a href="/posts/ml-classification-models-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -383,7 +383,7 @@ print(&quot;Per-class feature means:\n&quot;, gnb.theta_)
 
 <p>理解评估指标的基础是<strong>混淆矩阵（Confusion Matrix）</strong>。对二分类问题，混淆矩阵有四个格子：</p>
 
-<table><tr><th></th><th>预测正类</th><th>预测负类</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td><strong>实际正类</strong></td><td>TP（真正例）</td><td>FN（假负例，漏报）</td></tr><tr><td><strong>实际负类</strong></td><td>FP（假正例，误报）</td><td>TN（真负例）</td></tr></table>
+<table><tr><th></th><th>预测正类</th><th>预测负类</th></tr><tr><td><strong>实际正类</strong></td><td>TP（真正例）</td><td>FN（假负例，漏报）</td></tr><tr><td><strong>实际负类</strong></td><td>FP（假正例，误报）</td><td>TN（真负例）</td></tr></table>
 
 <p>从这四个数字派生出一系列关键指标：</p>
 
@@ -465,7 +465,7 @@ plt.show()
 
 <p><strong>类别不平衡</strong>几乎在真实科研数据中普遍存在，需要在任何模型中单独处理：调整类权重（几乎所有 sklearn 分类器都支持 <code>class_weight='balanced'</code>），或在数据层面用 SMOTE 过采样少数类。</p>
 
-<table><tr><th>模型</th><th>训练速度</th><th>预测速度</th><th>可解释性</th><th>特征缩放</th><th>小数据</th><th>高维稀疏</th></tr><tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr><tr><td>逻辑回归</td><td>快</td><td>快</td><td>高</td><td>需要</td><td>✓</td><td>✓（L1）</td></tr><tr><td>SVM（RBF）</td><td>中~慢</td><td>中</td><td>低</td><td>需要</td><td>✓</td><td>✗</td></tr><tr><td>决策树</td><td>快</td><td>快</td><td>最高</td><td>不需要</td><td>中</td><td>✗</td></tr><tr><td>随机森林</td><td>中</td><td>中</td><td>中</td><td>不需要</td><td>中</td><td>中</td></tr><tr><td>梯度提升</td><td>慢</td><td>中</td><td>中</td><td>不需要</td><td>✗</td><td>中</td></tr><tr><td>k-NN</td><td>无（懒惰）</td><td>慢</td><td>中</td><td>需要</td><td>✓</td><td>✗</td></tr><tr><td>朴素贝叶斯</td><td>极快</td><td>极快</td><td>中</td><td>不需要</td><td>✓</td><td>✓</td></tr></table>
+<table><tr><th>模型</th><th>训练速度</th><th>预测速度</th><th>可解释性</th><th>特征缩放</th><th>小数据</th><th>高维稀疏</th></tr><tr><td>逻辑回归</td><td>快</td><td>快</td><td>高</td><td>需要</td><td>✓</td><td>✓（L1）</td></tr><tr><td>SVM（RBF）</td><td>中~慢</td><td>中</td><td>低</td><td>需要</td><td>✓</td><td>✗</td></tr><tr><td>决策树</td><td>快</td><td>快</td><td>最高</td><td>不需要</td><td>中</td><td>✗</td></tr><tr><td>随机森林</td><td>中</td><td>中</td><td>中</td><td>不需要</td><td>中</td><td>中</td></tr><tr><td>梯度提升</td><td>慢</td><td>中</td><td>中</td><td>不需要</td><td>✗</td><td>中</td></tr><tr><td>k-NN</td><td>无（懒惰）</td><td>慢</td><td>中</td><td>需要</td><td>✓</td><td>✗</td></tr><tr><td>朴素贝叶斯</td><td>极快</td><td>极快</td><td>中</td><td>不需要</td><td>✓</td><td>✓</td></tr></table>
 
 <p>实践建议：在一个新问题上，永远先建立一个简单基线（逻辑回归或随机森林），了解数据的基础难度和特征的相对重要性，再根据结果决定是否需要更复杂的模型。一个精心调参的随机森林，往往能在大多数结构化科研数据问题上给出令人满意的结果，且解释性远优于神经网络。对"是否要上神经网络"这个问题，答案通常是：除非你有充足的数据（N > 10,000）、充分的计算资源，且经典方法已经确实无法满足需求，否则先把经典分类器做好。</p>
 
@@ -519,7 +519,6 @@ plt.show()
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

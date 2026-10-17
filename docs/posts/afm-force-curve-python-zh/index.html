@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="Python实战AFM力曲线分析：从原始数据到力学性能">
 <meta property="og:description" content="手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/afm-force-curve-python/">EN</a><a href="/posts/afm-force-curve-python-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -57,7 +57,7 @@
 
 <p>一次典型的AFM力曲线记录的是<strong>微悬臂偏转</strong>随压电陶瓷移动趋近和远离样品：</p>
 
-<table><tr><th>阶段</th><th>物理含义</th><th>提取参数</th></tr><tr><td>------</td><td>---------</td><td>---------</td></tr><tr><td>逼近</td><td>针尖向样品靠近</td><td>接触点、样品刚度</td></tr><tr><td>接触</td><td>针尖压入样品</td><td>弹性模量 (通过拟合)</td></tr><tr><td>回退</td><td>针尖拉离样品</td><td>粘附力、解结合事件</td></tr></table>
+<table><tr><th>阶段</th><th>物理含义</th><th>提取参数</th></tr><tr><td>逼近</td><td>针尖向样品靠近</td><td>接触点、样品刚度</td></tr><tr><td>接触</td><td>针尖压入样品</td><td>弹性模量 (通过拟合)</td></tr><tr><td>回退</td><td>针尖拉离样品</td><td>粘附力、解结合事件</td></tr></table>
 
 <img src="/static/images/posts/afm-force-curve-python/force-curve-zh.webp" alt="AFM力-距离曲线示意图：显示基线、接触点、逼近、回退与粘附回拉" loading="lazy">
 
@@ -271,7 +271,7 @@ def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
 
 <h3 id="9-常见坑">9. 常见坑</h3>
 
-<table><tr><th>问题</th><th>可能原因</th><th>解决方法</th></tr><tr><td>------</td><td>---------</td><td>---------</td></tr><tr><td>接触点太早</td><td>基线噪声大</td><td>增大 <code>threshold_factor</code></td></tr><tr><td>负杨氏模量</td><td>接触点方向反了</td><td>检查z_piezo符号约定</td></tr><tr><td>基底效应</td><td>压入深度过大</td><td><code>fit_range_nm</code> < 样品厚度10%</td></tr><tr><td>零粘附</td><td>回退段未记录</td><td>AFM方法中启用回退</td></tr><tr><td>结果离散</td><td>样品不均或针尖污染</td><td>逐条检查再批量拟合</td></tr></table>
+<table><tr><th>问题</th><th>可能原因</th><th>解决方法</th></tr><tr><td>接触点太早</td><td>基线噪声大</td><td>增大 <code>threshold_factor</code></td></tr><tr><td>负杨氏模量</td><td>接触点方向反了</td><td>检查z_piezo符号约定</td></tr><tr><td>基底效应</td><td>压入深度过大</td><td><code>fit_range_nm</code> < 样品厚度10%</td></tr><tr><td>零粘附</td><td>回退段未记录</td><td>AFM方法中启用回退</td></tr><tr><td>结果离散</td><td>样品不均或针尖污染</td><td>逐条检查再批量拟合</td></tr></table>
 
 <h3 id="10-替代模型">10. 替代模型</h3>
 
@@ -337,7 +337,6 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="GROMACS MD Tutorial: Structure Prep to Trajectory Analysis">
 <meta property="og:description" content="A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/gromacs-md-tutorial/" class="active">EN</a><a href="/posts/gromacs-md-tutorial-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -87,7 +87,7 @@ conda install -c conda-forge -c bioconda gromacs=&quot;2024.*=*cuda*&quot;
 
 <p>A complete MD simulation proceeds through the following stages:</p>
 
-<table><tr><th>Step</th><th>Command</th><th>Purpose</th><th>Typical Time</th></tr><tr><td>------</td><td>---------</td><td>---------</td><td>-------------</td></tr><tr><td>1. Structure</td><td>wget PDB</td><td>Acquire initial coordinates</td><td>manual</td></tr><tr><td>2. Topology</td><td>gmx pdb2gmx</td><td>Generate topology and force field</td><td>< 1 s</td></tr><tr><td>3. Box</td><td>gmx editconf</td><td>Define simulation box</td><td>< 1 s</td></tr><tr><td>4. Solvate</td><td>gmx solvate</td><td>Fill with water molecules</td><td>seconds</td></tr><tr><td>5. Ions</td><td>gmx genion</td><td>Neutralize system charge</td><td>seconds</td></tr><tr><td>6. EM</td><td>gmx grompp + mdrun</td><td>Eliminate atomic clashes</td><td>minutes</td></tr><tr><td>7. NVT</td><td>gmx grompp + mdrun</td><td>Stabilize temperature</td><td>hours</td></tr><tr><td>8. NPT</td><td>gmx grompp + mdrun</td><td>Stabilize pressure/density</td><td>hours</td></tr><tr><td>9. Production</td><td>gmx grompp + mdrun</td><td>Collect trajectory data</td><td>hours-days</td></tr><tr><td>10. Analysis</td><td>gmx rms/rmsf/...</td><td>Extract observables</td><td>minutes</td></tr></table>
+<table><tr><th>Step</th><th>Command</th><th>Purpose</th><th>Typical Time</th></tr><tr><td>1. Structure</td><td>wget PDB</td><td>Acquire initial coordinates</td><td>manual</td></tr><tr><td>2. Topology</td><td>gmx pdb2gmx</td><td>Generate topology and force field</td><td>< 1 s</td></tr><tr><td>3. Box</td><td>gmx editconf</td><td>Define simulation box</td><td>< 1 s</td></tr><tr><td>4. Solvate</td><td>gmx solvate</td><td>Fill with water molecules</td><td>seconds</td></tr><tr><td>5. Ions</td><td>gmx genion</td><td>Neutralize system charge</td><td>seconds</td></tr><tr><td>6. EM</td><td>gmx grompp + mdrun</td><td>Eliminate atomic clashes</td><td>minutes</td></tr><tr><td>7. NVT</td><td>gmx grompp + mdrun</td><td>Stabilize temperature</td><td>hours</td></tr><tr><td>8. NPT</td><td>gmx grompp + mdrun</td><td>Stabilize pressure/density</td><td>hours</td></tr><tr><td>9. Production</td><td>gmx grompp + mdrun</td><td>Collect trajectory data</td><td>hours-days</td></tr><tr><td>10. Analysis</td><td>gmx rms/rmsf/...</td><td>Extract observables</td><td>minutes</td></tr></table>
 
 <h3 id="worked-example-lysozyme-in-water">Worked Example: Lysozyme in Water</h3>
 
@@ -412,7 +412,6 @@ plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

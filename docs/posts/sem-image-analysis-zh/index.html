@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="SEM图像分析实战：纤维形态的自动化测量">
 <meta property="og:description" content="SEM图像分析实战：纤维形态的自动化测量。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/sem-image-analysis/">EN</a><a href="/posts/sem-image-analysis-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -136,7 +136,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 
 <h2 id="常见坑">常见坑</h2>
 
-<table><tr><th>问题</th><th>解决</th></tr><tr><td>------</td><td>------</td></tr><tr><td>光照不均</td><td>用滚动球背景扣除</td></tr><tr><td>纤维粘连</td><td>用分水岭分割</td></tr><tr><td>过分割</td><td>增大min_size</td></tr><tr><td>标尺错误</td><td>始终验证像素-纳米标定</td></tr></table>
+<table><tr><th>问题</th><th>解决</th></tr><tr><td>光照不均</td><td>用滚动球背景扣除</td></tr><tr><td>纤维粘连</td><td>用分水岭分割</td></tr><tr><td>过分割</td><td>增大min_size</td></tr><tr><td>标尺错误</td><td>始终验证像素-纳米标定</td></tr></table>
 
 <h2 id="参考资料">参考资料</h2>
 <ul>
@@ -182,7 +182,6 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

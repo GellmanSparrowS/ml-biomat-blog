@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="NumPy for Materials Research: From Zero to Productive">
 <meta property="og:description" content="Learn NumPy from scratch with real materials science examples: loading experimental data, array operations, statistics, curve fitting, and batch processing.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/numpy-crash-course/" class="active">EN</a><a href="/posts/numpy-crash-course-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -256,11 +256,11 @@ print(f&quot;Young&#x27;s modulus: {E:.1f} nN/nm (relative)&quot;)
 
 <h3 id="9-common-pitfalls">9. Common Pitfalls</h3>
 
-<table><tr><th>Problem</th><th>Solution</th></tr><tr><td>---------</td><td>----------</td></tr><tr><td><code>np.loadtxt</code> fails on header lines</td><td>Use <code>skiprows=N</code> to skip header</td></tr><tr><td>Missing values cause errors</td><td>Use <code>np.genfromtxt</code> with <code>filling_values</code></td></tr><tr><td>Wrong shape from slicing</td><td>Check with <code>.shape</code> — <code>data[:, 0]</code> is 1D, <code>data[:, :1]</code> is 2D</td></tr><tr><td>Operator <code>*</code> does element-wise</td><td>For matrix multiply, use <code>@</code> or <code>np.dot</code></td></tr><tr><td>NaN from division by zero</td><td>Use <code>np.divide(a, b, where=b!=0)</code></td></tr></table>
+<table><tr><th>Problem</th><th>Solution</th></tr><tr><td><code>np.loadtxt</code> fails on header lines</td><td>Use <code>skiprows=N</code> to skip header</td></tr><tr><td>Missing values cause errors</td><td>Use <code>np.genfromtxt</code> with <code>filling_values</code></td></tr><tr><td>Wrong shape from slicing</td><td>Check with <code>.shape</code> — <code>data[:, 0]</code> is 1D, <code>data[:, :1]</code> is 2D</td></tr><tr><td>Operator <code>*</code> does element-wise</td><td>For matrix multiply, use <code>@</code> or <code>np.dot</code></td></tr><tr><td>NaN from division by zero</td><td>Use <code>np.divide(a, b, where=b!=0)</code></td></tr></table>
 
 <h3 id="10-when-to-use-what">10. When to Use What</h3>
 
-<table><tr><th>Task</th><th>NumPy Function</th></tr><tr><td>------</td><td>---------------</td></tr><tr><td>Load tabular data</td><td><code>loadtxt</code>, <code>genfromtxt</code></td></tr><tr><td>Linear fit</td><td><code>polyfit(x, y, 1)</code></td></tr><tr><td>Statistics</td><td><code>mean</code>, <code>std</code>, <code>median</code>, <code>percentile</code></td></tr><tr><td>Filter data</td><td>Boolean indexing <code>arr[mask]</code></td></tr><tr><td>Find peaks</td><td>In SciPy: <code>scipy.signal.find_peaks</code></td></tr><tr><td>FFT (frequency analysis)</td><td><code>np.fft.fft</code></td></tr></table>
+<table><tr><th>Task</th><th>NumPy Function</th></tr><tr><td>Load tabular data</td><td><code>loadtxt</code>, <code>genfromtxt</code></td></tr><tr><td>Linear fit</td><td><code>polyfit(x, y, 1)</code></td></tr><tr><td>Statistics</td><td><code>mean</code>, <code>std</code>, <code>median</code>, <code>percentile</code></td></tr><tr><td>Filter data</td><td>Boolean indexing <code>arr[mask]</code></td></tr><tr><td>Find peaks</td><td>In SciPy: <code>scipy.signal.find_peaks</code></td></tr><tr><td>FFT (frequency analysis)</td><td><code>np.fft.fft</code></td></tr></table>
 
 <p>NumPy is the foundation. Once you are comfortable here, SciPy adds optimization, curve fitting, signal processing — all building on NumPy arrays.</p>
 
@@ -301,7 +301,6 @@ print(f&quot;Young&#x27;s modulus: {E:.1f} nN/nm (relative)&quot;)
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

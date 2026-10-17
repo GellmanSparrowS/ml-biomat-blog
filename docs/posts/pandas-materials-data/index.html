@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="Pandas for Materials Data Processing">
 <meta property="og:description" content="A practical guide to Pandas for materials research data: load heterogeneous lab files, clean and merge measurements, run grouped statistics, and create publication-ready summaries and plots.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/pandas-materials-data/" class="active">EN</a><a href="/posts/pandas-materials-data-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -116,7 +116,7 @@ with pd.ExcelWriter(&quot;results.xlsx&quot;) as writer:
 
 <h2 id="quick-troubleshooting">Quick Troubleshooting</h2>
 
-<table><tr><th>Problem</th><th>Fix</th></tr><tr><td>---------</td><td>-----</td></tr><tr><td>Encoding error</td><td><code>pd.read_csv("file.csv", encoding="utf-8")</code> or <code>"gbk"</code></td></tr><tr><td>Large file slow</td><td>Specify <code>dtype</code> or use <code>chunksize</code></td></tr><tr><td>Date format wrong</td><td><code>pd.to_datetime(df["date"], format="%Y-%m-%d")</code></td></tr></table>
+<table><tr><th>Problem</th><th>Fix</th></tr><tr><td>Encoding error</td><td><code>pd.read_csv("file.csv", encoding="utf-8")</code> or <code>"gbk"</code></td></tr><tr><td>Large file slow</td><td>Specify <code>dtype</code> or use <code>chunksize</code></td></tr><tr><td>Date format wrong</td><td><code>pd.to_datetime(df["date"], format="%Y-%m-%d")</code></td></tr></table>
 
 <h2 id="references">References</h2>
 <ul>
@@ -176,7 +176,6 @@ df[&quot;normalized_modulus&quot;] = df.groupby(&quot;treatment&quot;)[&quot;mod
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

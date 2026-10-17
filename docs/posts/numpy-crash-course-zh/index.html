@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="NumPy完全入门：实验室数据处理必备">
 <meta property="og:description" content="NumPy完全入门：实验室数据处理必备。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/numpy-crash-course/">EN</a><a href="/posts/numpy-crash-course-zh/" class="active">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -58,7 +58,7 @@ import numpy as np
 
 <h2 id="一-什么是numpy数组">一、什么是NumPy数组</h2>
 
-<table><tr><th>特性</th><th>Python 列表</th><th>NumPy 数组</th></tr><tr><td>---</td><td>---</td><td>---</td></tr><tr><td>元素类型</td><td>可以混装任意类型</td><td>同一数组内类型一致</td></tr><tr><td>运算方式</td><td>手动写循环逐项处理</td><td>向量化广播运算</td></tr><tr><td>内存占用</td><td>较高</td><td>较低</td></tr><tr><td>数学函数</td><td>需要逐个调用 math</td><td>内建 sin、exp、sum 等</td></tr><tr><td>适用场景</td><td>通用逻辑、小规模数据</td><td>数值实验、矩阵与实验数据</td></tr></table>
+<table><tr><th>特性</th><th>Python 列表</th><th>NumPy 数组</th></tr><tr><td>元素类型</td><td>可以混装任意类型</td><td>同一数组内类型一致</td></tr><tr><td>运算方式</td><td>手动写循环逐项处理</td><td>向量化广播运算</td></tr><tr><td>内存占用</td><td>较高</td><td>较低</td></tr><tr><td>数学函数</td><td>需要逐个调用 math</td><td>内建 sin、exp、sum 等</td></tr><tr><td>适用场景</td><td>通用逻辑、小规模数据</td><td>数值实验、矩阵与实验数据</td></tr></table>
 
 <p>NumPy数组（ndarray）是多维数值数据的容器。与Python原生列表相比，NumPy数组有三个核心优势。第一是速度——底层用C语言实现，处理十万级数据点时比纯Python快几十倍。第二是向量化操作——对整个数组执行运算无需写for循环。第三是内存效率——数组在内存中连续存储，占用空间更小。</p>
 
@@ -235,7 +235,6 @@ np.save(&quot;processed.npy&quot;, data); loaded = np.load(&quot;processed.npy&q
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>

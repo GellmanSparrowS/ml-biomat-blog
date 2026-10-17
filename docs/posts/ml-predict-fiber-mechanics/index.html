@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=ea19f68515bd">
+<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
 <meta property="og:title" content="ML for Fiber Mechanics: Data Prep to Model Deployment">
 <meta property="og:description" content="Step-by-step guide to predicting fiber biomaterial mechanical properties with ML: data cleaning, feature engineering, model selection, and uncertainty quantification.">
 <meta property="og:type" content="article">
@@ -36,7 +36,7 @@
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/en/">EN</a><a href="/zh/">中文</a></span>
+<span class="lang-switch"><a href="/posts/ml-predict-fiber-mechanics/" class="active">EN</a><a href="/posts/ml-predict-fiber-mechanics-zh/">中文</a></span>
 </div></header>
 <main class="container"><article>
 <header class="article-header">
@@ -76,7 +76,7 @@ data = pd.DataFrame({
 
 <h3 id="model-selection-for-small-data">Model Selection for Small Data</h3>
 
-<table><tr><th>Model</th><th>Small-data advantage</th><th>Watch out for</th></tr><tr><td>------</td><td>---------------------</td><td>--------------</td></tr><tr><td>Random Forest</td><td>Insensitive to hyperparams, feature importance</td><td>Keep max_depth small</td></tr><tr><td>Gradient Boosting</td><td>High accuracy, handles nonlinearity</td><td>Easy to overfit, low lr needed</td></tr><tr><td>Gaussian Process</td><td>Built-in uncertainty, perfect for n<100</td><td>O(n^3), avoid n>1000</td></tr></table>
+<table><tr><th>Model</th><th>Small-data advantage</th><th>Watch out for</th></tr><tr><td>Random Forest</td><td>Insensitive to hyperparams, feature importance</td><td>Keep max_depth small</td></tr><tr><td>Gradient Boosting</td><td>High accuracy, handles nonlinearity</td><td>Easy to overfit, low lr needed</td></tr><tr><td>Gaussian Process</td><td>Built-in uncertainty, perfect for n<100</td><td>O(n^3), avoid n>1000</td></tr></table>
 
 <pre><code class="language-python">
 models = {
@@ -164,7 +164,6 @@ def predict_with_uncertainty(model, X, n_iter=100):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<canvas id="bg-network" aria-hidden="true"></canvas>
-<script src="/static/js/main.js?v=044761bd6d61" defer></script>
+<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
 </body>
 </html>
