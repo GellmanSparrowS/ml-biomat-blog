@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Local preview server. Binds all interfaces and auto-opens a browser."""
+"""Local preview server. Defaults to loopback; use --open to launch a browser."""
 import argparse
 import os
 import socket
@@ -22,7 +22,7 @@ class Handler(SimpleHTTPRequestHandler):
 def lan_ips():
     ips = set()
     try:
-        for info in socket.getaddrinfo(socket.gethostname(), None):
+        for info in socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET):
             ip = info[4][0]
             if ip and ip not in ("127.0.0.1", "::1"):
                 ips.add(ip)
@@ -40,19 +40,22 @@ def open_url(url):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--host", default="127.0.0.1", help="Bind address; use 0.0.0.0 for LAN access.")
     ap.add_argument("--port", type=int, default=8866)
-    ap.add_argument("--no-open", action="store_true")
+    browser = ap.add_mutually_exclusive_group()
+    browser.add_argument("--open", action="store_true", help="Open the preview in a browser.")
+    browser.add_argument("--no-open", action="store_true", help="Compatibility option; already the default.")
     a = ap.parse_args()
     if not (DOCS / "index.html").exists():
         raise SystemExit("docs/index.html not found. Run: python build.py")
-    httpd = ThreadingHTTPServer(("0.0.0.0", a.port), Handler)
-    urls = ["http://localhost:%d/" % a.port, "http://127.0.0.1:%d/" % a.port]
-    for ip in lan_ips():
-        urls.append("http://%s:%d/" % (ip, a.port))
+    httpd = ThreadingHTTPServer((a.host, a.port), Handler)
+    port = httpd.server_port
+    hosts = ["127.0.0.1"] + lan_ips() if a.host == "0.0.0.0" else [a.host]
+    urls = ["http://%s:%d/" % (host, port) for host in hosts]
     print("Serving", DOCS)
     for u in urls:
         print("  ", u)
-    if not a.no_open:
+    if a.open:
         threading.Timer(1.0, open_url, args=(urls[0],)).start()
     print("Ctrl+C to stop")
     try:

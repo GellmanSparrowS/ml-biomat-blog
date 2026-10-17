@@ -1,63 +1,135 @@
-<article><h1 class="section-title">About / 关于</h1>
+<article class="profile-page" lang="zh-CN">
+  <header class="profile-hero">
+    <div class="profile-intro">
+      <p class="profile-eyebrow" lang="en">YUNHAO YANG · RESEARCH &amp; OPEN SOURCE</p>
+      <h1>杨云浩 <span lang="en">Yunhao Yang</span></h1>
+      <p class="profile-affiliation">复旦大学 · 高分子科学系 · 博士研究生</p>
+      <p class="profile-advisor">生物大分子课题组 &nbsp; / &nbsp; 导师：凌盛杰教授</p>
+      <p class="profile-statement">用物理 AI 与多尺度模拟，<br>连接纤维材料的结构、性能与制造。</p>
+      <p class="profile-summary">我的研究围绕纤维网络与生物材料的理性设计展开，将结构生成、力学模拟与机器学习结合，探索从数字设计走向可制造材料的研究方法，并把计算流程整理为可复用的开源工具。</p>
+      <div class="profile-actions">
+        <a class="profile-button" href="#selected-work">查看代表工作 <span aria-hidden="true">↓</span></a>
+        <a class="profile-text-link" href="/cv/">完整学术简历 <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <figure class="profile-portrait">
+      <img src="/static/images/photo-sq.jpg" alt="杨云浩的个人照片" width="320" height="320" fetchpriority="high">
+      <figcaption lang="en">Fudan University<br>Biomacromolecules Group</figcaption>
+    </figure>
+  </header>
 
-<div class="about-grid">
-<div class="about-card" style="grid-column:1/-1;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:start">
-<img src="/static/images/photo-sq.jpg" alt="Yunhao Yang" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--c-border);flex-shrink:0" loading="lazy">
-<div style="flex:1;min-width:250px">
-<h2>Yunhao Yang / 杨云浩</h2>
-<p style="font-size:.92rem;line-height:1.7;color:var(--c-fg-soft);margin:.3rem 0">
-PhD Student, <strong>Fudan University</strong> — Dept. of Macromolecular Science<br>
-<span style="font-size:.88rem;color:var(--c-fg-soft)">博士研究生，复旦大学 · 高分子科学系</span><br>
-Advisor: Prof. Shengjie Ling — BMG-FDU<br>
-<span style="font-size:.88rem;color:var(--c-fg-soft)">导师：凌盛杰教授 · 生物大分子课题组</span><br>
-<em>AI-driven multiscale modeling for biomaterials design</em><br>
-<em style="font-size:.85rem">基于物理AI与多尺度模拟的纤维生物材料理性设计</em>
-</p>
-<p style="font-size:.85rem">
-<a href="https://swdfz.fudan.edu.cn/">Lab (CN) / 课题组</a> ·
-<a href="https://swdfz.fudan.edu.cn/swdfzen/">Lab (EN)</a> ·
-<a href="https://www.researchgate.net/profile/Yunhao-Yang-7">ResearchGate</a> ·
-<a href="https://github.com/GellmanSparrowS">GitHub</a> ·
-<a href="/cv/">CV / 简历</a>
-</p>
-</div>
-</div>
+  <nav class="profile-index" aria-label="个人主页章节">
+    <a href="#selected-work">代表工作</a>
+    <a href="#industry">校企合作</a>
+    <a href="#publications">精选论文</a>
+    <a href="#connect">学术链接</a>
+  </nav>
 
-<div class="about-card">
-<h2>This Blog / 关于本站</h2>
-<p>Exploring the intersection of <strong>machine learning</strong>, <strong>multiscale simulation</strong>, and <strong>fiber-based biomaterials</strong>. Tutorials, research notes, and reproducible code — for scientists, by a scientist.</p>
-<hr style="margin:.8rem 0;border-color:var(--c-border)">
-<p style="font-size:.9rem;color:var(--c-fg-soft)">探索<strong>机器学习</strong>、<strong>多尺度模拟</strong>与<strong>纤维生物材料</strong>的交叉前沿。教程、研究笔记、可复现代码——科学家写给科学家。</p>
-</div>
+  <section class="profile-section" id="selected-work" aria-labelledby="work-title">
+    <div class="profile-section-head">
+      <p class="profile-eyebrow" lang="en">SELECTED WORK</p>
+      <h2 id="work-title">从结构设计到材料实现</h2>
+      <p>以力学问题为起点，把建模、预测与设计连成可检验的研究流程。</p>
+    </div>
 
-<div class="about-card">
-<h2>Topics / 主题</h2>
-<ul style="line-height:1.9">
-<li>Python for scientific computing<br><span style="font-size:.82rem;color:var(--c-muted)">Python 科学计算</span></li>
-<li>Multiscale modeling (MD, CG, FE)<br><span style="font-size:.82rem;color:var(--c-muted)">多尺度模拟</span></li>
-<li>ML in materials science<br><span style="font-size:.82rem;color:var(--c-muted)">材料科学中的机器学习</span></li>
-<li>Research data pipelines<br><span style="font-size:.82rem;color:var(--c-muted)">研究数据流程</span></li>
-<li>Wet-lab data processing<br><span style="font-size:.82rem;color:var(--c-muted)">湿实验数据处理</span></li>
-<li>Reproducible workflows<br><span style="font-size:.82rem;color:var(--c-muted)">可复现工作流</span></li>
-</ul>
-</div>
+    <div class="profile-work">
+      <p class="profile-work-label">01 <span>可制造设计</span></p>
+      <div class="profile-work-body">
+        <h3>让纤维网络设计与制造约束相互衔接</h3>
+        <p>围绕纤维连续路径与拓扑约束，开展可制造纤维网络的 AI 引导设计研究。将拓扑生成、有限元分析、图神经网络与强化学习串联，并通过三维打印样品验证设计，实现从结构方案到物理材料的贯通。</p>
+        <p class="profile-work-meta" lang="en">REFINe · Nature Communications · 2026</p>
+        <a class="profile-text-link" href="https://doi.org/10.1038/s41467-026-76045-x">阅读论文 <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
 
-<div class="about-card">
-<h2>Links / 链接</h2>
-<ul>
-<li><a href="https://github.com/GellmanSparrowS/ml-biomat-blog">Site Source / 网站源码</a></li>
-<li><a href="/rss.xml">RSS Feed / RSS订阅</a></li>
-<li><a href="/sitemap.xml">Sitemap / 网站地图</a></li>
-<li><a href="/cv/">Full CV / 完整简历</a></li>
-</ul>
-</div>
+    <div class="profile-work">
+      <p class="profile-work-label">02 <span>物理引导学习</span></p>
+      <div class="profile-work-body">
+        <h3>从网络拓扑预测形变与力学响应</h3>
+        <p>参与物理引导图神经网络研究，将网络连接关系与物理信息融入学习过程，预测无序纤维材料的形变及应力–应变响应，为复杂网络的快速力学评估与结构设计提供计算方法。</p>
+        <p class="profile-work-meta" lang="en">GNMP · Nano Letters · 2026</p>
+        <a class="profile-text-link" href="https://doi.org/10.1021/acs.nanolett.5c04895">阅读论文 <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
 
-<div class="about-card" style="grid-column:1/-1">
-<h2>Support / 支持</h2>
-<p style="font-size:.9rem;color:var(--c-fg-soft);margin-bottom:1rem">If you find this blog helpful, consider buying me a coffee. / 如果觉得有用，可以请我喝杯咖啡。</p>
-<div class="donate-grid">
-<div class="donate-card"><img src="/static/images/wechat.png" alt="WeChat Pay" loading="lazy"><p>WeChat / 微信赞赏</p></div>
-<div class="donate-card"><img src="/static/images/alipay.jpg" alt="Alipay" loading="lazy"><p>Alipay / 支付宝</p></div>
-</div>
-</div>
-</div></article>
+    <div class="profile-work profile-work-open">
+      <p class="profile-work-label">03 <span>开源工具</span></p>
+      <div class="profile-work-body">
+        <h3>FiberNet / FiberScope</h3>
+        <p>面向纤维网络设计、模拟与智能优化的开源项目。FiberNet 提供 Python 计算工具，FiberScope 提供交互式研究入口，让结构生成、力学分析与逆向设计更便于使用和复现。</p>
+        <div class="profile-inline-links">
+          <a class="profile-text-link" href="https://github.com/GellmanSparrowS/fibernet">GitHub 源码 <span aria-hidden="true">↗</span></a>
+          <a class="profile-text-link" href="https://modelscope.cn/studios/GellmanSparrow/FiberScope">体验 FiberScope <span aria-hidden="true">↗</span></a>
+          <a class="profile-text-link" href="/fibernet/">项目介绍 <span aria-hidden="true">→</span></a>
+        </div>
+        <figure class="profile-research-figure">
+          <a href="/static/images/fibernet/01_2d_gallery.webp" aria-label="查看 FiberNet 结构图原图">
+            <img src="/static/images/fibernet/01_2d_gallery.webp" alt="FiberNet 生成的十二类二维网络结构示例，包括蜂窝、笼目、手性与 Voronoi 网络" width="1600" height="1237" loading="lazy" decoding="async">
+          </a>
+          <figcaption>FiberNet 的二维网络结构示例。<span>结构生成 · 拓扑表征 · 计算设计</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-section" id="industry" aria-labelledby="industry-title">
+    <div class="profile-section-head">
+      <p class="profile-eyebrow" lang="en">INDUSTRY COLLABORATION</p>
+      <h2 id="industry-title">把计算设计带入应用场景</h2>
+      <p>参与与安踏体育用品集团的合作，围绕 AI 辅助设计与运动鞋中底的力学超结构开展研究。</p>
+    </div>
+    <dl class="profile-collaboration">
+      <div>
+        <dt>AI 增强设计引擎</dt>
+        <dd>面向材料与结构设计的校企合作项目。</dd>
+        <dd class="profile-date">2023.12 — 2024.06</dd>
+      </div>
+      <div>
+        <dt>运动鞋中底力学超结构设计</dt>
+        <dd>围绕运动鞋中底的轻量化结构与力学设计开展合作。</dd>
+        <dd class="profile-date">2024.12 — 2025.06</dd>
+      </div>
+    </dl>
+    <p class="profile-recognition"><span>2026</span> 世界人工智能开源大赛 · AI for Research 亚军 <a href="https://swdfz.fudan.edu.cn/fd/36/c54394a785718/page.htm" aria-label="在复旦大学个人介绍中查看荣誉">↗</a></p>
+  </section>
+
+  <section class="profile-section" id="publications" aria-labelledby="publications-title">
+    <div class="profile-section-head profile-section-head-inline">
+      <div><p class="profile-eyebrow" lang="en">SELECTED PUBLICATIONS</p><h2 id="publications-title">精选论文</h2></div>
+      <a class="profile-text-link" href="/cv/">查看全部论文 <span aria-hidden="true">→</span></a>
+    </div>
+    <ol class="profile-publications">
+      <li>
+        <p class="profile-publication-venue" lang="en">Nature Communications · 2026</p>
+        <h3 lang="en"><a href="https://doi.org/10.1038/s41467-026-76045-x">A manufacturability-informed topology framework for AI-guided design of fibrous network materials</a></h3>
+        <p lang="en"><strong>Yang Y.</strong>, Ren J., Cao L. et al. <span>17, 9237.</span></p>
+      </li>
+      <li>
+        <p class="profile-publication-venue" lang="en">Nano Letters · 2026</p>
+        <h3 lang="en"><a href="https://doi.org/10.1021/acs.nanolett.5c04895">Physics-informed graph neural networks for predicting deformation in disordered fibrous materials</a></h3>
+        <p lang="en">Yang S., <strong>Yang Y.</strong>, Huang C. et al. <span>26(1), 205–213.</span></p>
+      </li>
+      <li>
+        <p class="profile-publication-venue" lang="en">Advanced Science · 2025</p>
+        <h3 lang="en"><a href="https://doi.org/10.1002/advs.202413293">Optimizing biomimetic 3D disordered fibrous network structures for lightweight, high-strength materials via deep reinforcement learning</a></h3>
+        <p lang="en"><strong>Yang Y.</strong>, Bai R., Gao W. et al. <span>12, 2413293.</span></p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="profile-section profile-connect" id="connect" aria-labelledby="connect-title">
+    <div>
+      <p class="profile-eyebrow" lang="en">CONNECT &amp; EXPLORE</p>
+      <h2 id="connect-title">学术交流与研究记录</h2>
+      <p>在这里分享研究工作、开源工具，以及机器学习与多尺度模拟的实践笔记。</p>
+    </div>
+    <div class="profile-external-links">
+      <a href="https://github.com/GellmanSparrowS">GitHub <span aria-hidden="true">↗</span></a>
+      <a href="https://orcid.org/0009-0005-1314-1325">ORCID <span aria-hidden="true">↗</span></a>
+      <a href="https://www.researchgate.net/profile/Yunhao-Yang-7">ResearchGate <span aria-hidden="true">↗</span></a>
+      <a href="https://swdfz.fudan.edu.cn/fd/36/c54394a785718/page.htm">复旦大学个人介绍 <span aria-hidden="true">↗</span></a>
+      <a href="/zh/">中文研究笔记 <span aria-hidden="true">→</span></a>
+      <a href="/en/">Notes in English <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</article>

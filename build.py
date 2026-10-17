@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """Static blog generator — outputs to docs/ for GitHub Pages. Bilingual EN+ZH."""
-import os, re, json, shutil, html as hm, urllib.parse
+import argparse, os, re, json, shutil, html as hm, urllib.parse
 from datetime import datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
 
-ROOT = Path(os.getcwd()) if os.getcwd().endswith("ml-biomat-blog") else Path(__file__).parent.resolve()
+ROOT = Path(__file__).resolve().parent
+INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
 os.chdir(str(ROOT))
 
 
@@ -251,7 +252,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 <nav class="nav-links">
 <a href="/"{home_active}>Home / 首页</a>
 <a href="/fibernet/">Library / 库</a>
-<a href="/about/">About / 关于</a>
+<a href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -259,7 +260,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">About / 关于</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<canvas id="bg-network" aria-hidden="true"></canvas>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<canvas id="bg-network" aria-hidden="true"></canvas>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{lang_label}</span>\n<h3><a href="/posts/{slug}/">{title}</a></h3>\n<div class="card-meta"><span>{date}</span><span>\u00b7</span><span>{read_min} min read</span></div>\n<p class="card-desc">{desc}</p>\n<div class="card-tags">{tags_html}</div>\n</article>'
 
@@ -302,7 +303,46 @@ def tag_href(tag):
 
 
 def tag_path(tag):
-    return "tags/" + urllib.parse.quote(tag, safe="") + "/index.html"
+    # HTTP servers decode URL paths before looking up files on disk.
+    if not tag or tag in (".", "..") or "/" in tag or "\\" in tag:
+        raise ValueError(f"Tag must be a single directory name: {tag!r}")
+    return "tags/" + tag + "/index.html"
+
+
+def clean_legacy_tag_pages(tags):
+    """Remove only recognized generated pages with old URL-encoded directory names."""
+    output_root = (ROOT / BUILD_DIR).resolve()
+    if output_root == ROOT or not output_root.is_relative_to(ROOT):
+        raise ValueError("Build directory resolves outside the project")
+    tags_root = (output_root / "tags").resolve()
+    if tags_root.parent != output_root:
+        raise ValueError("Tag output directory resolves outside the build directory")
+    active_dirs = {(output_root / tag_path(tag)).parent.resolve() for tag in tags}
+    removed = 0
+    for tag in tags:
+        old_dir = tags_root / urllib.parse.quote(tag, safe="")
+        resolved = old_dir.resolve()
+        if resolved in active_dirs or not old_dir.exists():
+            continue
+        if resolved.parent != tags_root or old_dir.is_symlink():
+            raise ValueError(f"Unsafe legacy tag directory: {old_dir}")
+        # Keep any directory containing hand-added files or unrecognized content.
+        entries = list(old_dir.iterdir())
+        old_page = old_dir / "index.html"
+        if len(entries) != 1 or entries[0] != old_page or not old_page.is_file():
+            continue
+        if old_page.is_symlink() or old_page.resolve().parent != resolved:
+            raise ValueError(f"Unsafe legacy tag page: {old_page}")
+        text = old_page.read_text(encoding="utf-8")
+        canonical = f'<link rel="canonical" href="{SITE["base_url"]}{tag_href(tag)}">'
+        heading = '<span class="highlight">' + hm.escape(tag) + '</span>'
+        if canonical not in text or heading not in text:
+            continue
+        old_page.unlink()
+        old_dir.rmdir()
+        removed += 1
+    if removed:
+        print(f"  Removed {removed} legacy encoded tag directories")
 
 
 def post_card(p):
@@ -323,13 +363,13 @@ def check_coverage(posts):
     """Validate EN/ZH article pairing coverage. Prints a table at build time."""
     en_posts = {p["slug"]: p for p in posts if p["lang"] == "en"}
     zh_posts = {p["slug"]: p for p in posts if p["lang"] == "zh"}
-    
+
     # Category-level stats
     from collections import defaultdict
     cat_stats = defaultdict(lambda: {"EN": 0, "ZH": 0})
     for p in posts:
         cat_stats[p["category"]]["EN" if p["lang"]=="en" else "ZH"] += 1
-    
+
     print("\n  Coverage Report:")
     print(f"  {'Category':<25} {'EN':>4} {'ZH':>4} {'Status'}")
     print(f"  {'-'*25} {'-'*4} {'-'*4} {'-'*10}")
@@ -337,7 +377,7 @@ def check_coverage(posts):
         stats = cat_stats[cat]
         status = "OK" if stats["EN"] > 0 and stats["ZH"] > 0 else "MISSING"
         print(f"  {cat:<25} {stats['EN']:>4} {stats['ZH']:>4} {status}")
-    
+
     # Slug-based pair check disabled - use category-level coverage above
     # New articles should follow slug convention: EN {topic}, ZH {topic}-zh
 
@@ -482,6 +522,7 @@ def build():
         body += '<ul class="post-list-simple">' + "".join(POST_ROW.format(date=q["date"], title=hm.escape(q["title"]), slug=q["slug"]) for q in sorted(tp, key=lambda x: x["datetime"], reverse=True)) + "</ul>"
         html = make_head(title=f"{tg} — Tag", desc=f"Articles tagged with {tg}", url=f'{SITE["base_url"]}{tag_href(tg)}') + body + FOOT.format(year=datetime.now().year)
         write_file(tag_path(tg), html)
+    clean_legacy_tag_pages(tag_posts)
     print("  Tags done")
 
     # FiberNet page
@@ -491,7 +532,7 @@ def build():
 
     # About page
     about_body = Path("content/about-body.html").read_text(encoding="utf-8")
-    html = make_head(title="Yunhao Yang 杨云浩 — About / 关于", desc="Yunhao Yang 杨云浩：复旦大学高分子科学系博士生，ML-Biomat 双语技术博客作者。Focus: machine learning, multiscale modeling, and fiber-based biomaterials.", url=f'{SITE["base_url"]}/about/', ld=person_ld()) + about_body + FOOT.format(year=datetime.now().year)
+    html = make_head(title="Yunhao Yang 杨云浩 — 个人主页 / Profile", desc="杨云浩 Yunhao Yang：复旦大学博士研究生。研究方向、代表成果、科研项目与开源工具。Research, selected work, projects, and open-source tools.", url=f'{SITE["base_url"]}/about/', lang="zh", ld=person_ld(), wide=True) + about_body + FOOT.format(year=datetime.now().year)
     write_file("about/index.html", html)
 
     # Privacy Policy page (required for AdSense)
@@ -650,6 +691,7 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/fibernet/</loc><priority>0.7</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/tools/stress-strain/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/about/</loc><priority>0.6</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/cv/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/categories/</loc><priority>0.7</priority></url>',
     ]
@@ -659,7 +701,7 @@ def build():
         urls.append(f'  <url><loc>{SITE["base_url"]}/posts/{p["slug"]}/</loc><priority>0.8</priority><lastmod>{p["date"]}</lastmod></url>')
     write_file("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{chr(10).join(urls)}\n</urlset>')
 
-    
+
     # ads.txt for Google AdSense
     write_file("ads.txt", "google.com, pub-7464969092761889, DIRECT, f08c47fec0942fa0")
 
@@ -694,7 +736,7 @@ def build():
             cv_photo.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, cv_photo)
 
-    
+
     # --- CV Page ---
     cv_body = Path("content/cv-body.html").read_text(encoding="utf-8")
     cv_page = make_head(title="Yunhao Yang 杨云浩 — CV / 简历", desc="Yunhao Yang 杨云浩：复旦大学高分子科学系博士生。研究方向为 AI 驱动的多尺度模拟与纤维生物材料理性设计。Academic CV: AI-driven multiscale modeling for biomaterials.", url=SITE["base_url"] + "/cv/", ld=person_ld()) + cv_body + FOOT.format(year=datetime.now().year)
@@ -734,32 +776,62 @@ def build():
     )
     print(f"  {len(posts)} posts, {len(en)} EN + {len(zh)} ZH")
     print(f"  Pages generated: posts/{len(posts)}, en, zh, about, categories, rss, sitemap")
-    # --- IndexNow key file ---
-    indexnow_key = "cbd023642a994753b6b98784c0489ce7"
-    (Path(BUILD_DIR) / f"{indexnow_key}.txt").write_text(indexnow_key, encoding="utf-8")
+    # Public verification file; building never sends network requests.
+    (Path(BUILD_DIR) / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
 
-    # --- IndexNow auto-submission ---
+
+def submit_indexnow():
+    """Notify search engines about an already deployed build; never rebuild or push."""
     import urllib.request
-    url_list = [f"{SITE['base_url']}/posts/{p['slug']}/" for p in posts]
-    url_list.append(f"{SITE['base_url']}/")
+    import xml.etree.ElementTree as ET
+
+    output_root = ROOT / BUILD_DIR
+    sitemap_path = output_root / "sitemap.xml"
+    key_path = output_root / f"{INDEXNOW_KEY}.txt"
+    if not sitemap_path.is_file() or not key_path.is_file():
+        raise SystemExit("Build the site and deploy it before submitting IndexNow.")
+    sitemap = ET.parse(sitemap_path)
+    url_list = list(dict.fromkeys(
+        node.text.strip()
+        for node in sitemap.iter("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
+        if node.text and node.text.strip()
+    ))
+    site_host = urllib.parse.urlsplit(SITE["base_url"]).netloc
+    if not url_list or any(
+        urllib.parse.urlsplit(url).netloc != site_host for url in url_list
+    ):
+        raise SystemExit("Sitemap must contain URLs for the configured site.")
     data = json.dumps({
-        "host": "ml-biomat.com",
-        "key": indexnow_key,
-        "keyLocation": f"{SITE['base_url']}/{indexnow_key}.txt",
-        "urlList": url_list
-    }).encode('utf-8')
-    req = urllib.request.Request(
-        "https://api.indexnow.org/indexnow",
-        data=data,
-        headers={"Content-Type": "application/json"}
+        "host": site_host,
+        "key": INDEXNOW_KEY,
+        "keyLocation": f"{SITE['base_url']}/{INDEXNOW_KEY}.txt",
+        "urlList": url_list,
+    }).encode("utf-8")
+    request = urllib.request.Request(
+        "https://api.indexnow.org/indexnow", data=data,
+        headers={"Content-Type": "application/json"},
     )
     try:
-        urllib.request.urlopen(req, timeout=10)
-        print(f"  IndexNow: submitted {len(url_list)} URLs")
-    except Exception as e:
-        print(f"  IndexNow: submission error ({e})")
+        with urllib.request.urlopen(request, timeout=20) as response:
+            if response.status not in (200, 202):
+                raise RuntimeError(f"Unexpected HTTP status: {response.status}")
+        print(f"IndexNow: submitted {len(url_list)} deployed sitemap URLs")
+    except Exception as exc:
+        raise SystemExit(f"IndexNow submission failed: {exc}") from exc
 
+
+def main():
+    parser = argparse.ArgumentParser(description="Build ML-Biomat offline.")
+    parser.add_argument(
+        "--submit-indexnow", action="store_true",
+        help="Submit the existing sitemap after deployment, without rebuilding.",
+    )
+    args = parser.parse_args()
+    if args.submit_indexnow:
+        submit_indexnow()
+    else:
+        build()
 
 
 if __name__ == "__main__":
-    build()
+    main()

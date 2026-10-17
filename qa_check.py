@@ -8,6 +8,8 @@ import re
 import webbrowser
 from datetime import datetime
 from pathlib import Path
+from html.parser import HTMLParser
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent
 DOCS = ROOT / "docs"
@@ -30,6 +32,44 @@ def check(name, ok, detail=""):
     return {"name": name, "ok": bool(ok), "detail": detail}
 
 
+class LocalLinks(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.urls = []
+
+    def handle_starttag(self, tag, attrs):
+        for name, value in attrs:
+            if name in ("href", "src", "action") and value:
+                self.urls.append(value)
+
+
+def broken_local_links():
+    """Resolve internal links as an HTTP server does, including URL decoding."""
+    docs_root = DOCS.resolve()
+    broken = set()
+    for page in sorted(DOCS.rglob("*.html")):
+        parser = LocalLinks()
+        parser.feed(page.read_text(encoding="utf-8"))
+        for url in parser.urls:
+            try:
+                parsed = urlsplit(url)
+                if parsed.scheme or parsed.netloc or not parsed.path:
+                    continue
+                decoded = unquote(parsed.path)
+                target = (docs_root / decoded.lstrip("/")) if decoded.startswith("/") else (page.parent / decoded)
+                target = target.resolve()
+                if not target.is_relative_to(docs_root):
+                    broken.add((str(page.relative_to(DOCS)), url))
+                    continue
+                if target.is_dir() or decoded.endswith("/"):
+                    target = target / "index.html"
+                if not target.is_file():
+                    broken.add((str(page.relative_to(DOCS)), url))
+            except ValueError:
+                broken.add((str(page.relative_to(DOCS)), url))
+    return sorted(broken)
+
+
 def run():
     checks = []
     posts = []
@@ -42,7 +82,8 @@ def run():
     checks.append(check("EN/ZH articles balanced", en == zh, "en=%d zh=%d" % (en, zh)))
 
     req = ["CNAME", ".nojekyll", "ads.txt", "robots.txt", "sitemap.xml", "rss.xml",
-           "search.json", "404.html", "index.html", "llms.txt", "llms-full.txt"]
+           "search.json", "404.html", "index.html", "llms.txt", "llms-full.txt",
+           "about/index.html", "cv/index.html"]
     missing = [f for f in req if not (DOCS / f).exists()]
     checks.append(check("Required files", not missing,
                         "missing=" + ",".join(missing) if missing else "all present"))
@@ -68,6 +109,13 @@ def run():
 
     docs_n = len(list((DOCS / "posts").glob("*/index.html")))
     checks.append(check("Generated post pages == posts", docs_n == total, "pages=%d posts=%d" % (docs_n, total)))
+
+    broken = broken_local_links()
+    link_detail = (
+        "%d broken references: " % len(broken)
+        + "; ".join("%s -> %s" % item for item in broken[:12])
+    ) if broken else "all internal links resolve"
+    checks.append(check("Internal links and assets", not broken, link_detail))
 
     issue_rows = []
     for lang, stem, m in posts:
@@ -130,7 +178,8 @@ def main():
             os.startfile(str(out))
         except Exception:
             webbrowser.open(out.as_uri())
+    return 1 if fails else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
