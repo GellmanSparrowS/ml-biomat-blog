@@ -85,7 +85,7 @@ def run():
 
     req = ["CNAME", ".nojekyll", "ads.txt", "robots.txt", "sitemap.xml", "rss.xml",
            "search.json", "404.html", "index.html", "llms.txt", "llms-full.txt",
-           "about/index.html", "cv/index.html", "cv/en/index.html"]
+           "about/index.html", "about/en/index.html", "cv/index.html", "cv/en/index.html"]
     missing = [f for f in req if not (DOCS / f).exists()]
     checks.append(check("Required files", not missing,
                         "missing=" + ",".join(missing) if missing else "all present"))

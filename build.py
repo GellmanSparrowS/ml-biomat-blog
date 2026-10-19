@@ -302,38 +302,57 @@ HERO = '''<section class="hero">
 
 def make_head(title, desc, url, lang="en", og_type="website", ld="",
               home_active="", en_active="", zh_active="", wide="", title_suffix=" \u2014 ML-Biomat",
-              og_image=None, alternates="", needs_math=False, en_href="/en/", zh_href="/zh/"):
+              og_image=None, alternates="", needs_math=False, en_href="/en/", zh_href="/zh/", navigation_language=None):
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
         url=url, lang=lang, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates, mathjax=(MATHJAX_SCRIPT if needs_math else ""))
-    header = HEADER.format(
+    header = localize_navigation(HEADER, navigation_language).format(
         home_active=home_active, en_active=en_active, zh_active=zh_active, en_href=en_href, zh_href=zh_href,
         wide_class=" container-wide" if wide else "")
     return head + header
 
 
 
-def render_profile_albums(section):
+def localize_navigation(markup, language):
+    # Keep the existing navigation elsewhere; profile and CV opt into English.
+    if language == "en":
+        markup = markup.replace('href="/about/">Profile / 个人简介', 'href="/about/en/">Profile')
+        markup = markup.replace('Home / 首页', 'Home').replace('Library / 库', 'Library').replace('Tools / 工具', 'Tools')
+    return markup
+
+
+def make_footer(language=None):
+    return localize_navigation(FOOT, language).format(year=datetime.now().year)
+
+
+def render_profile_albums(section, language="zh-CN"):
     albums = json.loads((ROOT / "content/profile-albums.json").read_text(encoding="utf-8"))
+    english = language == "en"
+    def label_for(item, key):
+        return hm.escape(item[key + "_en"] if english else item[key], quote=True)
+    view_label = "View full image: " if english else "查看大图："
+    open_label = "View ＋" if english else "查看 ＋"
+    close_label = "Close −" if english else "收起 −"
     cards = []
     for album in albums:
         if album["section"] != section:
             continue
         pictures = album["images"]
         cover = pictures[0]
-        label = hm.escape(album["title"])
+        label = label_for(album, "title")
+        count_label = f'{len(pictures)} {"photo" if len(pictures) == 1 else "photos"}' if english else f'{len(pictures)} 张'
         items = []
         for number, photo in enumerate(pictures, 1):
-            caption = hm.escape(photo["caption"], quote=True)
+            caption = label_for(photo, "caption")
             src = versioned_asset(photo["src"])
             thumb = versioned_asset(photo["thumb"])
-            items.append(f'<a href="{src}" data-album-link data-caption="{caption}" target="_blank" rel="noopener" aria-label="查看大图：{caption}"><img class="profile-gallery-image" src="{thumb}" alt="{caption}" width="{photo["width"]}" height="{photo["height"]}" loading="lazy" decoding="async"><span aria-hidden="true">{number:02d}</span></a>')
+            items.append(f'<a href="{src}" data-album-link data-caption="{caption}" target="_blank" rel="noopener" aria-label="{view_label}{caption}"><img class="profile-gallery-image" src="{thumb}" alt="{caption}" width="{photo["width"]}" height="{photo["height"]}" loading="lazy" decoding="async"><span aria-hidden="true">{number:02d}</span></a>')
         source = ''
         if album.get("source_url"):
-            source = f'<p class="profile-album-source"><a href="{hm.escape(album["source_url"], quote=True)}" target="_blank" rel="noopener">{hm.escape(album["source_label"])} ↗</a></p>'
+            source = f'<p class="profile-album-source"><a href="{hm.escape(album["source_url"], quote=True)}" target="_blank" rel="noopener">{label_for(album, "source_label")} ↗</a></p>'
         cards.append(f'''<details class="profile-album {hm.escape(album["type"])}" data-album="{hm.escape(album["id"])}" data-album-title="{label}">
-          <summary><span class="profile-album-cover"><img class="profile-gallery-image" src="{versioned_asset(cover["thumb"])}" alt="{hm.escape(cover["caption"], quote=True)}" width="{cover["width"]}" height="{cover["height"]}" loading="lazy" decoding="async"></span>
-          <span class="profile-album-info"><span class="profile-album-date">{hm.escape(album["date"])}</span><span class="profile-album-title">{label}</span><span class="profile-album-action"><span>{len(pictures)} 张</span><span class="album-open-label">查看 ＋</span><span class="album-close-label">收起 −</span></span></span></summary>
+          <summary><span class="profile-album-cover"><img class="profile-gallery-image" src="{versioned_asset(cover["thumb"])}" alt="{label_for(cover, "caption")}" width="{cover["width"]}" height="{cover["height"]}" loading="lazy" decoding="async"></span>
+          <span class="profile-album-info"><span class="profile-album-date">{label_for(album, "date")}</span><span class="profile-album-title">{label}</span><span class="profile-album-action"><span>{count_label}</span><span class="album-open-label">{open_label}</span><span class="album-close-label">{close_label}</span></span></span></summary>
           <div class="profile-album-thumbnails">{''.join(items)}</div>{source}</details>''')
     return '<div class="profile-albums profile-albums-' + section + '">' + ''.join(cards) + '</div>'
 
@@ -576,13 +595,26 @@ def build():
     html = make_head(title="FiberNet", desc="FiberNet: A Python toolkit for fiber network generation, simulation, and intelligent optimization. 12 unit types, GPU acceleration, ML and RL integration.", url=SITE["base_url"] + "/fibernet/") + fibernet_body + FOOT.format(year=datetime.now().year)
     write_file("fibernet/index.html", html)
 
-    # About page
-    about_body = Path("content/about-body.html").read_text(encoding="utf-8")
-    about_body = about_body.replace("<!-- PROFILE_RESEARCH_ALBUMS -->", render_profile_albums("research"))
-    about_body = about_body.replace("<!-- PROFILE_EVENT_ALBUMS -->", render_profile_albums("events"))
-    about_body += f'<script src="{versioned_asset("/static/js/profile.js")}" defer></script>'
-    html = make_head(title="Yunhao Yang 杨云浩 — 个人主页 / Profile", desc="杨云浩 Yunhao Yang：复旦大学博士研究生。跨尺度生物材料体系与结构的理性设计。研究成果、荣誉奖项与学术活动。Rational design of biomaterial systems and structures across scales.", url=f'{SITE["base_url"]}/about/', lang="zh-CN", ld=person_ld(), wide=True) + about_body + FOOT.format(year=datetime.now().year)
-    write_file("about/index.html", html)
+    # Separate Chinese and English personal profiles.
+    profile_alternates = (
+        f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/about/">'
+        f'<link rel="alternate" hreflang="en" href="{SITE["base_url"]}/about/en/">'
+        f'<link rel="alternate" hreflang="x-default" href="{SITE["base_url"]}/about/">'
+    )
+    for source, route, language, title, description in [
+        ("about-body.html", "about/", "zh-CN", "杨云浩 Yunhao Yang — 个人主页", "杨云浩，复旦大学博士研究生。跨尺度生物材料体系与结构的理性设计。研究成果、荣誉奖项与学术活动。"),
+        ("about-en-body.html", "about/en/", "en", "Yunhao Yang — Research Profile", "Yunhao Yang, PhD student at Fudan University. Rational design of biomaterial systems and structures across scales. Research, publications, awards, and photographs."),
+    ]:
+        about_body = (Path("content") / source).read_text(encoding="utf-8")
+        about_body = about_body.replace("<!-- PROFILE_RESEARCH_ALBUMS -->", render_profile_albums("research", language))
+        about_body = about_body.replace("<!-- PROFILE_EVENT_ALBUMS -->", render_profile_albums("events", language))
+        about_body += f'<script src="{versioned_asset("/static/js/profile.js")}" defer></script>'
+        profile_head = make_head(title=title, desc=description, url=SITE["base_url"] + "/" + route,
+                                 lang=language, ld=person_ld(), wide=True, alternates=profile_alternates,
+                                 en_href="/about/en/", zh_href="/about/", navigation_language=language,
+                                 en_active=' class="active"' if language == "en" else "",
+                                 zh_active=' class="active"' if language == "zh-CN" else "")
+        write_file(route + "index.html", profile_head + about_body + make_footer(language))
 
     # Privacy Policy page (required for AdSense)
     privacy_body = """<article class="content">
@@ -740,6 +772,7 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/fibernet/</loc><priority>0.7</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/tools/stress-strain/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/about/</loc><priority>0.6</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/about/en/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/cv/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/cv/en/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
@@ -802,10 +835,10 @@ def build():
         cv_body = (Path("content") / source).read_text(encoding="utf-8")
         cv_page = make_head(title=title, desc=description, url=SITE["base_url"] + "/" + route,
                             lang=language, ld=person_ld(), alternates=cv_alternates,
-                            en_href="/cv/en/", zh_href="/cv/",
+                            en_href="/cv/en/", zh_href="/cv/", navigation_language=language,
                             en_active=' class="active"' if language == "en" else "",
                             zh_active=' class="active"' if language == "zh-CN" else "")
-        write_file(route + "index.html", cv_page + cv_body + FOOT.format(year=datetime.now().year))
+        write_file(route + "index.html", cv_page + cv_body + make_footer(language))
 
 
     # --- llms.txt for AI crawlers ---

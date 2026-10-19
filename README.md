@@ -6,7 +6,8 @@
 
 | 内容 | 源文件 |
 | --- | --- |
-| 个人主页 | `content/about-body.html` |
+| 中文个人主页 `/about/` | `content/about-body.html` |
+| English profile `/about/en/` | `content/about-en-body.html` |
 | 中文简历 `/cv/` | `content/cv-body.html` |
 | English CV `/cv/en/` | `content/cv-en-body.html` |
 | 分组相册 | `content/profile-albums.json`、`static/images/profile/` |
