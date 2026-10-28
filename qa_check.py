@@ -131,6 +131,276 @@ def tag_integrity_errors(posts):
     return sorted(set(errors))
 
 
+
+class PageNode:
+    """Small standard-library DOM for semantic checks, independent of CSS layout."""
+    def __init__(self, tag='', attrs=()):
+        self.tag, self.attrs, self.children = tag, dict(attrs), []
+
+    def text(self):
+        return ''.join(child.text() if isinstance(child, PageNode) else child for child in self.children)
+
+    def find(self, tag=None, cls=None, attr=None, value=None):
+        result = []
+        for child in self.children:
+            if not isinstance(child, PageNode):
+                continue
+            if ((tag is None or child.tag == tag)
+                    and (cls is None or cls in child.attrs.get('class', '').split())
+                    and (attr is None or attr in child.attrs)
+                    and (value is None or child.attrs.get(attr) == value)):
+                result.append(child)
+            result.extend(child.find(tag, cls, attr, value))
+        return result
+
+
+class PageParser(HTMLParser):
+    VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}
+
+    def __init__(self, source):
+        super().__init__(convert_charrefs=True)
+        self.root = PageNode()
+        self.stack = [self.root]
+        self.feed(source)
+
+    def handle_starttag(self, tag, attrs):
+        node = PageNode(tag, attrs)
+        self.stack[-1].children.append(node)
+        if tag not in self.VOID:
+            self.stack.append(node)
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in self.VOID:
+            self.handle_endtag(tag)
+
+    def handle_endtag(self, tag):
+        for index in range(len(self.stack) - 1, 0, -1):
+            if self.stack[index].tag == tag:
+                del self.stack[index:]
+                break
+
+    def handle_data(self, text):
+        self.stack[-1].children.append(text)
+
+
+def generated_dom(route, errors):
+    path = DOCS / route.lstrip('/') / 'index.html'
+    if not path.is_file():
+        errors.append(route + ': missing page')
+        return None
+    return PageParser(path.read_text(encoding='utf-8')).root
+
+
+def localized_switch_errors(dom, route, zh, en):
+    switches = dom.find(cls='lang-switch')
+    links = switches[0].find('a') if len(switches) == 1 else []
+    actual = {node.attrs.get('data-language'): node.attrs.get('href') for node in links}
+    return [] if actual == {'zh': zh, 'en': en} else [route + ': language switch loses page type or topic']
+
+
+def homepage_errors(items, categories):
+    errors = []
+    for route, lang in [('/', 'zh'), ('/zh/', 'zh'), ('/en/', 'en')]:
+        dom = generated_dom(route, errors)
+        if dom is None:
+            continue
+        title = ('Rational design of biomaterial systems and structures across scales' if lang == 'en'
+                 else '跨尺度生物材料体系与结构的理性设计')
+        h1 = dom.find('h1')
+        locale = dom.find('html')
+        if len(h1) != 1 or h1[0].text().strip() != title or h1[0].find('br'):
+            errors.append(route + ': research statement missing, duplicated or forcibly broken')
+        if not locale or locale[0].attrs.get('lang') != ('en' if lang == 'en' else 'zh-CN'):
+            errors.append(route + ': wrong document language')
+        identity = dom.find(cls='home-identity')
+        if len(identity) != 1 or ('Yunhao Yang' if lang == 'en' else '杨云浩') not in identity[0].text():
+            errors.append(route + ': personal identity missing')
+        errors.extend(localized_switch_errors(dom, route, '/', '/en/'))
+        expected_topics = {key: sum(i['lang'] == lang and i['category'] == key for i in items)
+                           for key in categories}
+        expected_topics = {key: n for key, n in expected_topics.items() if n}
+        navs = dom.find(cls='home-topic-index')
+        links = navs[0].find('a') if len(navs) == 1 else []
+        expected_links = {'/categories/' + key + ('/en/' if lang == 'en' else '/'): (key, count)
+                          for key, count in expected_topics.items()}
+        if len(links) != len(expected_links) or {a.attrs.get('href') for a in links} != set(expected_links):
+            errors.append(route + ': home topic routes incomplete or wrong language')
+        for link in links:
+            key_count = expected_links.get(link.attrs.get('href'))
+            if key_count:
+                key, count = key_count
+                counts = link.find('small')
+                if categories[key]['name_' + lang] not in link.text() or len(counts) != 1 or counts[0].text().strip() != str(count):
+                    errors.append(route + ': home topic label/count mismatch: ' + key)
+        allowed = {i['url']: i for i in items if i['lang'] == lang}
+        picks = dom.find('a', cls='home-lesson')
+        if len(picks) != 3 or len({a.attrs.get('href') for a in picks}) != 3:
+            errors.append(route + ': three distinct tutorial picks required')
+        for pick in picks:
+            item = allowed.get(pick.attrs.get('href'))
+            heading = pick.find('h3')
+            if not item or len(heading) != 1 or heading[0].text().strip() != item['title']:
+                errors.append(route + ': tutorial pick title or language mismatch')
+        direct = dom.find(cls='home-links')
+        expected = {'/about/en/', '/categories/en/', '/fibernet/en/'} if lang == 'en' else {'/about/', '/categories/', '/fibernet/'}
+        if len(direct) != 1 or {a.attrs.get('href') for a in direct[0].find('a')} != expected:
+            errors.append(route + ': primary home links lose locale')
+    for route in ['/articles/', '/articles/en/']:
+        if not (DOCS / route.lstrip('/') / 'index.html').is_file():
+            errors.append(route + ': separate article collection missing')
+    return errors
+
+
+def collection_errors(items, categories):
+    """Every catalog row must match its source and occur once in its primary topic."""
+    errors = []
+    for lang in ['zh', 'en']:
+        suffix = 'en/' if lang == 'en' else ''
+        localized = [i for i in items if i['lang'] == lang]
+        topics = {key: [i for i in localized if i['category'] == key] for key in categories}
+        topics = {key: group for key, group in topics.items() if group}
+        routes = [('/categories/' + suffix, None, True), ('/articles/' + suffix, None, False)]
+        routes += [('/categories/' + key + '/' + suffix, key, False) for key in topics]
+        for route, topic, overview in routes:
+            dom = generated_dom(route, errors)
+            if dom is None:
+                continue
+            selected = topics[topic] if topic else localized
+            expected = {item['url']: item for item in selected}
+            rows = dom.find('article', cls='explore-row')
+            seen = []
+            for row in rows:
+                links = row.find('a', cls='tutorial-card-main')
+                headings = row.find('h2')
+                url = links[0].attrs.get('href') if len(links) == 1 else None
+                seen.append(url)
+                item = expected.get(url)
+                labels = row.find(cls='topic-name')
+                if (not item or row.attrs.get('data-topic') != item['category'] or len(headings) != 1
+                        or headings[0].text().strip() != item['title'] or len(labels) != 1
+                        or labels[0].text().strip() != categories[item['category']]['name_' + lang]):
+                    errors.append(route + ': row language/title/topic mismatch: ' + str(url))
+            if len(seen) != len(expected) or set(seen) != set(expected):
+                errors.append(route + ': missing, duplicated or foreign-language articles')
+            layout = dom.find(attr='data-explore-mode')
+            results = dom.find(cls='explore-results')
+            cards = dom.find(cls='topic-overview-card')
+            if (len(layout) != 1 or layout[0].attrs.get('data-explore-mode') != ('overview' if overview else 'articles')
+                    or len(results) != 1 or ('hidden' in results[0].attrs) != overview):
+                errors.append(route + ': incorrect initial overview/list state')
+            if overview:
+                if len(cards) != len(topics) or {c.attrs.get('data-color') for c in cards} != set(topics):
+                    errors.append(route + ': overview must cover each active primary topic once')
+                for card in cards:
+                    key = card.attrs.get('data-color')
+                    covers = card.find('a', cls='topic-cover')
+                    if key not in topics or len(covers) != 1:
+                        errors.append(route + ': invalid topic overview card')
+                        continue
+                    cover = covers[0]
+                    heading, count = cover.find('h2'), cover.find('span')
+                    if (cover.attrs.get('href') != '/categories/' + key + '/' + suffix or len(heading) != 1
+                            or heading[0].text().strip() != categories[key]['name_' + lang]
+                            or len(count) != 1 or count[0].text().strip() != str(len(topics[key])) + (' articles' if lang == 'en' else ' 篇')):
+                        errors.append(route + ': overview label/count/route mismatch: ' + key)
+            elif cards:
+                errors.append(route + ': overview unexpectedly duplicated inside article list')
+            select = dom.find('select', cls='topic-select')
+            expected_values = ({'/categories/' + suffix} | {'/categories/' + key + '/' + suffix for key in topics}
+                               if topic else {'all'} | set(topics))
+            options = select[0].find('option') if len(select) == 1 else []
+            if len(options) != len(expected_values) or {o.attrs.get('value') for o in options} != expected_values:
+                errors.append(route + ': native mobile topic choices incomplete or wrong language')
+            elif topic:
+                selected_options = [o.attrs.get('value') for o in options if 'selected' in o.attrs]
+                if 'data-topic-navigation' not in select[0].attrs or selected_options != [route]:
+                    errors.append(route + ': native topic navigation not initialized')
+            else:
+                buttons = dom.find('button', attr='data-topic-filter')
+                if ('data-topic-selection' not in select[0].attrs or len(buttons) != len(expected_values)
+                        or {b.attrs['data-topic-filter'] for b in buttons} != expected_values
+                        or [b.attrs['data-topic-filter'] for b in buttons if b.attrs.get('aria-pressed') == 'true'] != ['all']):
+                    errors.append(route + ': topic filter controls not initialized')
+            if topic:
+                total = dom.find(cls='topic-total')
+                headings = dom.find('h1')
+                if (len(total) != 1 or total[0].text().strip() != str(len(selected)) + (' articles' if lang == 'en' else ' 篇')
+                        or len(headings) != 1 or not headings[0].text().startswith(categories[topic]['name_' + lang])
+                        or dom.find(attr='data-results-title')):
+                    errors.append(route + ': topic title/count missing or repeated')
+            base = '/categories/' + topic + '/' if topic else ('/categories/' if overview else '/articles/')
+            errors.extend(localized_switch_errors(dom, route, base, base + 'en/'))
+    return errors
+
+
+def gallery_errors():
+    """Photo inventories, localized captions and direct openers agree with their source."""
+    errors = []
+    albums = json.loads((ROOT / 'content/profile-albums.json').read_text(encoding='utf-8'))
+    events = {album['id']: album for album in albums if album.get('section') == 'events'}
+    for route, lang in [('/', 'zh'), ('/zh/', 'zh'), ('/en/', 'en'), ('/about/', 'zh'), ('/about/en/', 'en')]:
+        dom = generated_dom(route, errors)
+        if dom is None:
+            continue
+        activities = dom.find('article', cls='pr-activity')
+        if len(activities) != len(events) or {a.attrs.get('id') for a in activities} != {'activity-' + key for key in events}:
+            errors.append(route + ': activity inventory missing or duplicated')
+        for activity in activities:
+            album = events.get(activity.attrs.get('id', '').removeprefix('activity-'))
+            if not album:
+                continue
+            title = album['title_en' if lang == 'en' else 'title']
+            images = activity.find('a', attr='data-pr-image')
+            expected = [(i['src'], i['caption_en' if lang == 'en' else 'caption']) for i in album['images']]
+            actual = [(i.attrs.get('href'), i.attrs.get('data-caption')) for i in images]
+            opener = activity.find('a', attr='data-pr-open')
+            if actual != expected or activity.attrs.get('data-title') != title or 'data-pr-gallery' not in activity.attrs:
+                errors.append(route + ': activity photos or localized captions differ: ' + album['id'])
+            if len(opener) != 1 or opener[0].attrs.get('href') != expected[0][0] or opener[0].text().strip() != title:
+                errors.append(route + ': activity title must open its own gallery: ' + album['id'])
+        dialogs = dom.find('dialog', cls='pr-viewer')
+        if len(dialogs) != 1:
+            errors.append(route + ': one native gallery dialog required')
+        else:
+            dialog = dialogs[0]
+            ids = {n.attrs['id'] for n in dialog.find(attr='id')}
+            if any(dialog.attrs.get(a) not in ids for a in ['aria-labelledby', 'aria-describedby']):
+                errors.append(route + ': gallery accessible name/caption missing')
+            for attr in ['data-pr-close', 'data-pr-prev', 'data-pr-next', 'data-pr-count']:
+                if len(dialog.find(attr=attr)) != 1:
+                    errors.append(route + ': gallery control missing or duplicated: ' + attr)
+        for gallery in dom.find(attr='data-pr-gallery'):
+            for image in gallery.find('a', attr='data-pr-image'):
+                thumbs = image.find('img')
+                if len(thumbs) != 1 or not thumbs[0].attrs.get('alt') or thumbs[0].attrs.get('alt') != image.attrs.get('data-caption'):
+                    errors.append(route + ': gallery thumbnail/caption missing')
+        if route.startswith('/about/'):
+            for anchor in ['research', 'publications', 'projects', 'honors', 'activities']:
+                if len(dom.find(attr='id', value=anchor)) != 1:
+                    errors.append(route + ': profile section missing or duplicated: ' + anchor)
+            for paper in dom.find('article', cls='pr-paper'):
+                citation = paper.find(cls='pr-paper-title')
+                linked = citation[0].find('a') if citation else []
+                headings = paper.find('h3')
+                links = headings[0].find('a') if headings else []
+                if linked and linked[0].attrs.get('href') not in {a.attrs.get('href') for a in links}:
+                    errors.append(route + ': paper heading omits its publication link')
+        if dom.find(cls='pr-scope') or dom.find(cls='pr-project'):
+            errors.append(route + ': removed scope/tool blocks returned')
+        for node in dom.find('a') + dom.find('button'):
+            if re.search(r'^(?:阅读全文|方法与结果|查看\s*\d+\s*张照片|图片出处|Read paper|Methods.*results|View \d+ photos|Photo source)\b', node.text().strip(), re.I):
+                errors.append(route + ': redundant page-level action returned')
+        assets = {urlsplit(node.attrs.get('href', node.attrs.get('src', ''))).path for node in dom.find('link') + dom.find('script')}
+        if not {'/static/css/profile-layout.css', '/static/js/profile-gallery.js'} <= assets:
+            errors.append(route + ': profile/gallery assets missing')
+        for node in dom.find('link') + dom.find('script'):
+            url = node.attrs.get('href', node.attrs.get('src', ''))
+            if '/.local/' in url or '/static/preview/' in url or 'site-preview' in url or '/redesign/' in url:
+                errors.append(route + ': preview-only asset URL in production: ' + url)
+    return errors
+
+
 def run():
     checks = []
     posts = []
@@ -261,17 +531,25 @@ def run():
         home='/en/' if english else '/'
         if f'href="{home}" class="site-brand"' not in header:
             chrome_errors.append(relative+': home loses locale')
+        shared = PageParser(page).root
+        assets = {urlsplit(node.attrs.get('href', node.attrs.get('src', ''))).path for node in shared.find('link') + shared.find('script')}
+        if not {'/static/css/site-layout.css', '/static/css/site-refinement.css', '/static/js/site-catalog.js'} <= assets:
+            chrome_errors.append(relative+': shared layout assets missing')
+        if len(shared.find('body', cls='site-layout')) != 1:
+            chrome_errors.append(relative+': shared layout body class missing')
     checks.append(check('Shared navigation and dark-first shell',not chrome_errors,'; '.join(chrome_errors[:15]) if chrome_errors else 'All generated pages retain both language controls, matching navigation, and dark initialization'))
-    home_errors=[]
-    for path,language in [('index.html','zh-CN'),('en/index.html','en'),('zh/index.html','zh-CN')]:
-        page=(DOCS/path).read_text(encoding='utf8')
-        if '<h1>ML-Biomat</h1>' not in page or '<html lang="'+language+'"' not in page:
-            home_errors.append(path)
-        header=re.search(r'<span class="lang-switch">(.*?)</span>',page,re.S)[1]
-        if 'href="/en/"' not in header or 'href="/"' not in header:home_errors.append(path+': wrong counterpart')
-    for path in ['articles/index.html','articles/en/index.html']:
-        if not (DOCS/path).is_file():home_errors.append(path)
-    checks.append(check('Home language switch preserves page type',not home_errors,', '.join(home_errors) if home_errors else 'Chinese and English homepages remain homepages; article collections have separate routes'))
+    from content_tools import catalog
+    catalog_curriculum = dict(curriculum, lessons=[dict(lesson, url='/tutorials/polymer-ai/' + lesson['slug'] + '/') for lesson in lessons])
+    items = catalog.entries(loaded, catalog_curriculum)
+    home_errors = homepage_errors(items, build.CATEGORIES)
+    checks.append(check('Home language switch preserves page type', not home_errors,
+                        '; '.join(home_errors[:15]) if home_errors else 'Localized research homepages, topic counts, tutorial picks and same-page language links agree'))
+    category_errors = collection_errors(items, build.CATEGORIES)
+    checks.append(check('Localized topic overview and complete article collections', not category_errors,
+                        '; '.join(category_errors[:15]) if category_errors else 'Each active topic appears once; overview, full lists and topic pages match source titles, language, counts and mobile controls'))
+    profile_errors = gallery_errors()
+    checks.append(check('Localized profile and homepage galleries', not profile_errors,
+                        '; '.join(profile_errors[:15]) if profile_errors else 'Activity images and captions match source; direct photo/title openers, accessible dialogs and publication links are present'))
     primary_errors=[]
     for lesson in lessons:
         if len(lesson['categories'])!=1:primary_errors.append(lesson['slug'])

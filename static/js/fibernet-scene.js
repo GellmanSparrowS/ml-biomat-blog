@@ -1,4 +1,5 @@
-/* FiberNet decorative geometry scene.
+/* LOCAL PREVIEW ONLY: optional drag interaction on canvas[data-draggable].
+   FiberNet geometry scene.
    Fixed 3D Voronoi edge geometry. Camera movement and view-depth shading only.
    Provenance and reproducible generator (not shown in the interface):
 {
@@ -30,7 +31,31 @@
     const edges=geometry.edges.map(([a,b])=>({a:projected[a],b:projected[b]}));
     const modestDevice=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=4;
     let width=0,height=0,phase=0,last=0,raf=0,inView=false,px=0,py=0,ax=0,ay=0,frames=0;
+    const draggable=canvas.hasAttribute('data-draggable');
+    let yawOffset=0,pitchOffset=0,drag=null,pendingTouch=null,resumeAge=3;
     let colors={blue:'#6288a5',teal:'#5fa89b'};
+    const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
+    function viewAngles(){return {yaw:.52+phase+yawOffset+px,pitch:clamp(-.28+Math.sin(phase*.57)*.16+pitchOffset+py,-1.3,1.3)}}
+    function autoWeight(){const t=clamp((resumeAge-.65)/1.6,0,1);return drag?0:t*t*(3-2*t)}
+    function holdParallax(){yawOffset+=px;pitchOffset+=py;px=py=ax=ay=0}
+    function limitPitch(value){const base=-.28+Math.sin(phase*.57)*.16;return clamp(value,-1.3-base,1.3-base)}
+    function beginDrag(event){
+      holdParallax();
+      drag={id:event.pointerId,x:event.clientX,y:event.clientY,yaw:yawOffset,pitch:pitchOffset,scale:2.9/Math.max(200,Math.min(width,height))};
+      pendingTouch=null;resumeAge=0;last=0;
+      try{canvas.setPointerCapture(event.pointerId)}catch(_){}
+      canvas.style.cursor='grabbing';
+      canvas.focus({preventScroll:true});request();
+    }
+    function finishDrag(event){
+      if(pendingTouch&&(!event||pendingTouch.id===event.pointerId))pendingTouch=null;
+      if(!drag||(event&&event.pointerId!==drag.id))return;
+      const id=drag.id;drag=null;resumeAge=0;last=0;ax=ay=0;
+      canvas.style.cursor='grab';
+      try{if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id)}catch(_){}
+      request();
+    }
+
     function blend(color,muted,weight){
       const parse=value=>/^#[0-9a-f]{6}$/i.test(value)?[1,3,5].map(i=>parseInt(value.slice(i,i+2),16)):null;
       const a=parse(color),b=parse(muted);
@@ -46,7 +71,7 @@
     }
     function draw(){
       if(!width||!height)return;
-      const yaw=.52+phase+px,pitch=-.28+Math.sin(phase*.57)*.16+py,roll=.1;
+      const {yaw,pitch}=viewAngles(),roll=.1;
       const cy=Math.cos(yaw),sy=Math.sin(yaw),cx=Math.cos(pitch),sx=Math.sin(pitch),cr=Math.cos(roll),sr=Math.sin(roll);
       const scale=Math.min(width*.45,height*.44);
       for(let i=0;i<points.length;i++){
@@ -72,7 +97,8 @@
       if(last&&t-last<interval){raf=requestAnimationFrame(frame);return}
       const dt=last?Math.min(.1,(t-last)/1000):0;last=t;
       if(!reduced.matches){
-        phase+=dt*(coarse.matches?.085:.12);
+        if(!drag)resumeAge+=dt;
+        phase+=dt*(coarse.matches?.085:.12)*autoWeight();
         const ease=1-Math.exp(-dt*7);px+=(ax-px)*ease;py+=(ay-py)*ease;
       }else px=py=ax=ay=0;
       draw();
@@ -88,25 +114,63 @@
     }
     new ResizeObserver(resize).observe(canvas);
     new IntersectionObserver(entries=>{
-      inView=entries[0].isIntersecting;if(inView){last=0;request()}else stop();
+      inView=entries[0].isIntersecting;if(inView){last=0;request()}else{finishDrag();stop()}
     },{threshold:.03}).observe(canvas);
+    if(draggable){
+      canvas.removeAttribute('aria-hidden');
+      if(!canvas.hasAttribute('tabindex'))canvas.tabIndex=0;
+      const english=document.documentElement.lang.startsWith('en');
+      if(!canvas.hasAttribute('aria-label'))canvas.setAttribute('aria-label',english?'3D fiber network. Drag or use arrow keys to rotate; Home resets the view.':'三维纤维网络。拖动或按方向键旋转，Home 键复位。');
+      canvas.setAttribute('role','img');
+      canvas.setAttribute('aria-keyshortcuts','ArrowLeft ArrowRight ArrowUp ArrowDown Home');
+      canvas.style.touchAction='pan-y pinch-zoom';canvas.style.cursor='grab';
+      canvas.addEventListener('pointerdown',e=>{
+        if(!e.isPrimary||e.button!==0||drag||pendingTouch)return;
+        if(e.pointerType==='touch')pendingTouch={id:e.pointerId,x:e.clientX,y:e.clientY};
+        else beginDrag(e);
+      },{passive:true});
+      canvas.addEventListener('pointerup',finishDrag,{passive:true});
+      canvas.addEventListener('pointercancel',finishDrag,{passive:true});
+      canvas.addEventListener('lostpointercapture',finishDrag,{passive:true});
+      canvas.addEventListener('keydown',e=>{
+        if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home'].includes(e.key))return;
+        e.preventDefault();finishDrag();holdParallax();const step=e.shiftKey?.3:.12;
+        if(e.key==='Home'){phase=0;yawOffset=pitchOffset=0}
+        if(e.key==='ArrowLeft')yawOffset-=step;
+        if(e.key==='ArrowRight')yawOffset+=step;
+        if(e.key==='ArrowUp')pitchOffset=limitPitch(pitchOffset+step);
+        if(e.key==='ArrowDown')pitchOffset=limitPitch(pitchOffset-step);
+        resumeAge=0;last=0;request();
+      });
+    }
     canvas.addEventListener('pointermove',e=>{
-      if(coarse.matches||reduced.matches||e.pointerType==='touch')return;
+      if(pendingTouch&&e.pointerId===pendingTouch.id){
+        const dx=e.clientX-pendingTouch.x,dy=e.clientY-pendingTouch.y;
+        if(Math.abs(dy)>8&&Math.abs(dy)>Math.abs(dx)*1.15)pendingTouch=null;
+        else if(Math.abs(dx)>9&&Math.abs(dx)>Math.abs(dy)*1.25)beginDrag(e);
+      }
+      if(drag){
+        if(e.pointerId!==drag.id)return;
+        yawOffset=drag.yaw+(e.clientX-drag.x)*drag.scale;
+        pitchOffset=limitPitch(drag.pitch-(e.clientY-drag.y)*drag.scale);
+        request();return;
+      }
+      if(coarse.matches||reduced.matches||e.pointerType==='touch'||resumeAge<.75)return;
       const r=canvas.getBoundingClientRect();
       ax=((e.clientX-r.left)/Math.max(1,width)-.5)*.17;
       ay=((e.clientY-r.top)/Math.max(1,height)-.5)*.12;
     },{passive:true});
     const leave=()=>{ax=ay=0};
     canvas.addEventListener('pointerleave',leave,{passive:true});
-    window.addEventListener('blur',leave,{passive:true});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else{last=0;request()}});
-    window.addEventListener('pagehide',stop,{passive:true});
+    window.addEventListener('blur',()=>{leave();finishDrag()},{passive:true});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden){finishDrag();stop()}else{last=0;request()}});
+    window.addEventListener('pagehide',()=>{finishDrag();stop()},{passive:true});
     window.addEventListener('pageshow',()=>{last=0;request()},{passive:true});
-    reduced.addEventListener('change',()=>{last=0;request()});
+    reduced.addEventListener('change',()=>{holdParallax();last=0;request()});
     coarse.addEventListener('change',resize);light.addEventListener('change',palette);
     new MutationObserver(palette).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme','class','style']});
-    // Read-only diagnostics for browser validation; no visual UI or interaction state.
-    canvas.fibernetScene={snapshot:()=>({nodes:points.length,edges:edges.length,phase,frames,inView,running:Boolean(raf),reduced:reduced.matches,coarse:coarse.matches,width,height,px,py}),finite:()=>projected.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.z))};
+    // Read-only diagnostics; no on-screen controls, counters or readouts.
+    canvas.fibernetScene={snapshot:()=>({nodes:points.length,edges:edges.length,phase,frames,inView,running:Boolean(raf),reduced:reduced.matches,coarse:coarse.matches,width,height,px,py,...viewAngles(),yawOffset,pitchOffset,draggable,dragging:Boolean(drag),pendingTouch:Boolean(pendingTouch),autoWeight:autoWeight(),resumeAge}),finite:()=>projected.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.z))};
     palette();resize();
   });
 })();

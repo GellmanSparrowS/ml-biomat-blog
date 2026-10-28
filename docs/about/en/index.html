@@ -22,8 +22,8 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Yunhao Yang", "alternateName": "杨云浩", "jobTitle": "PhD Student", "affiliation": {"@type": "Organization", "name": "Fudan University"}, "url": "https://ml-biomat.com/about/", "sameAs": ["https://github.com/GellmanSparrowS", "https://www.researchgate.net/profile/Yunhao-Yang-7"]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
-<body>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/profile-layout.css?v=15d8b8209ea0"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3f0dbd9f42e"></head>
+<body class="site-layout">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/en/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -31,227 +31,69 @@
 <input type="search" id="search-input" class="search-input" placeholder="Search…" aria-label="Search…" autocomplete="off">
 <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
 <span class="lang-switch"><a data-language="en" href="/about/en/" class="active" aria-current="true">EN</a><a data-language="zh" href="/about/">中文</a></span>
-</div></header><main class="container container-wide"><article class="profile-page" lang="en">
-  <header class="profile-hero">
-    <div class="profile-intro">
-      <h1>Yunhao Yang <span lang="zh-CN">杨云浩</span></h1>
-      <p class="profile-affiliation">Ph.D. Student · Department of Macromolecular Science · Fudan University</p>
-      <p class="profile-advisor">Biomacromolecules Group &nbsp; / &nbsp; Advisor: Prof. Shengjie Ling</p>
-      <p class="profile-statement">Rational design of biomaterial systems <br>and structures across scales</p>
-      <p class="profile-summary">Yunhao Yang is a Ph.D. student in the Department of Macromolecular Science at Fudan University and previously worked as an engineer at its Zhangjiang Institute. His research combines physics-informed artificial intelligence and multiscale simulation for the rational design of biomaterial systems and structures across scales. He has published more than ten papers in journals including Nature Communications. His honors include a runner-up finish in the AI for Research Track of the Inaugural World AI Open Source Competition, Second Prize in the Achievement Category of the China Invention Association's Invention and Entrepreneurship Award (third contributor), and the Ruiqing Scholarship.</p>
-      <div class="profile-actions">
-        <a class="profile-button" href="#selected-work">Selected work <span aria-hidden="true">↓</span></a>
-        <a class="profile-text-link" href="/cv/en/">Full academic CV <span aria-hidden="true">↗</span></a>
-        <a class="profile-text-link" href="/about/" lang="zh-CN" hreflang="zh-CN" aria-label="View this profile in Chinese">中文 <span aria-hidden="true">→</span></a>
-      </div>
+</div></header><main class="container container-wide"><article class="profile-redesign" lang="en">
+  <header class="pr-hero" id="research" aria-labelledby="pr-name">
+    <div class="pr-hero-copy">
+      <div class="pr-identity"><h1 id="pr-name">Yunhao Yang<span lang="zh-CN">杨云浩</span></h1><p class="pr-affiliation">Ph.D. Student · Department of Macromolecular Science · Fudan University</p><p class="pr-advisor">Biomacromolecules Group &nbsp; / &nbsp; Advisor: Prof. Shengjie Ling</p></div>
+      <h2 class="pr-statement">Rational design of biomaterial systems and structures across scales</h2>
+      <p class="pr-summary pr-prose">Yunhao Yang is a Ph.D. student in the Department of Macromolecular Science at Fudan University and previously worked as an engineer at its Zhangjiang Institute. His research combines physics-informed artificial intelligence and multiscale simulation for the rational design of biomaterial systems and structures across scales. He has published more than ten papers in journals including Nature Communications. His honors include a runner-up finish in the AI for Research Track of the Inaugural World AI Open Source Competition, Second Prize in the Achievement Category of the China Invention Association's Invention and Entrepreneurship Award (third contributor), and the Ruiqing Scholarship.</p>
+      <div class="pr-hero-actions"><a class="pr-button" href="#publications">Selected papers <span aria-hidden="true">↓</span></a><a class="pr-link" href="/cv/en/">Full academic CV <span aria-hidden="true">↗</span></a></div>
     </div>
-    <figure class="profile-portrait">
-      <img src="/static/images/photo-sq.jpg" alt="Portrait of Yunhao Yang" width="320" height="320" fetchpriority="high">
-      <figcaption>Fudan University<br>Biomacromolecules Group</figcaption>
-    </figure>
+    <aside class="pr-hero-aside"><figure class="pr-portrait"><img class="profile-gallery-image" src="/static/images/photo-sq.jpg" alt="Portrait of Yunhao Yang" width="320" height="320" fetchpriority="high"></figure></aside>
   </header>
-
-  <nav class="profile-index" aria-label="Profile sections">
-    <a href="#research">Research</a>
-    <a href="#selected-work">Selected work</a>
-    <a href="#gallery">Research gallery</a>
-    <a href="#industry">Industry</a>
-    <a href="#publications">Publications</a>
-    <a href="#honors">Honors</a>
-    <a href="#moments">Event photos</a>
-  </nav>
-
-  <section class="profile-section profile-research" id="research" aria-labelledby="research-title">
-    <div class="profile-section-head"><h2 id="research-title">Research</h2></div>
-    <div class="profile-scale-flow">
-      <div><h3>Biomaterial systems and structures across scales</h3><p>From molecules and fibers to networks and bulk materials, this research examines how composition, hierarchical structure, and interactions shape mechanical behavior and function. Systems of interest include structural proteins, fibrous networks, and flexible materials.</p></div>
-      <div><h3>Physics-informed AI and multiscale simulation</h3><p>This research combines physics-informed machine learning with multiscale simulation, experimental validation, and design optimization to establish structure–property relationships and support the rational design of material systems and structures.</p></div>
-    </div>
+  <nav class="pr-index" aria-label="Profile sections"><a href="#research">Overview</a><a href="#publications">Selected papers</a><a href="#projects">Collaborations</a><a href="#honors">Honors</a><a href="#activities">Activities</a></nav>
+  <section class="pr-section" id="publications" aria-labelledby="publications-title">
+    <div class="pr-section-head"><h2 id="publications-title">Selected papers</h2><a class="pr-link" href="/cv/en/">All publications <span aria-hidden="true">↗</span></a></div>
+    <div class="pr-papers"><article class="pr-paper" id="paper-nc" data-pr-gallery data-title="Nature Communications · 2026">
+      <header class="pr-paper-heading"><p class="pr-venue" lang="en">Nature Communications <span>· 2026</span></p>
+        <h3><a href="https://doi.org/10.1038/s41467-026-76045-x">Designing manufacturable fibrous networks</a></h3></header>
+      <figure class="pr-paper-figure"><a class="pr-image-link " href="/static/images/profile/paper-nc-2026.webp" data-pr-image data-caption="Nature Communications (2026)" target="_blank" rel="noopener" aria-label="View full image: Nature Communications (2026)"><img class="profile-gallery-image" src="/static/images/profile/paper-nc-2026-thumb.webp" alt="Nature Communications (2026)" width="1766" height="1163" loading="lazy" decoding="async"></a></figure>
+      <div class="pr-paper-copy">
+        <p class="pr-prose">Continuous fiber paths and manufacturing constraints are incorporated into topology design. Finite element analysis, physics-inspired graph neural networks, and reinforcement learning connect digital structures to 3D-printed materials.</p>
+        <div class="pr-citation" lang="en"><p class="pr-paper-title"><a href="https://doi.org/10.1038/s41467-026-76045-x">A manufacturability-informed topology framework for AI-guided design of fibrous network materials</a></p><p class="pr-authors"><strong>Yang Y.</strong>, Ren J., Cao L. et al. · 17, 9237</p></div></div>
+    </article><article class="pr-paper" id="paper-npj" data-pr-gallery data-title="npj Flexible Electronics · 2026">
+      <header class="pr-paper-heading"><p class="pr-venue" lang="en">npj Flexible Electronics <span>· 2026</span></p>
+        <h3>Structural optimization of silk fibroin ionic conductors</h3></header>
+      <figure class="pr-paper-figure"><a class="pr-image-link " href="/static/images/profile/paper-npj-2026.webp" data-pr-image data-caption="npj Flexible Electronics (2026)" target="_blank" rel="noopener" aria-label="View full image: npj Flexible Electronics (2026)"><img class="profile-gallery-image" src="/static/images/profile/paper-npj-2026-thumb.webp" alt="npj Flexible Electronics (2026)" width="2141" height="1185" loading="lazy" decoding="async"></a></figure>
+      <div class="pr-paper-copy">
+        <p class="pr-prose">Zigzag silk fibroin ionic conductors connect geometric parameterization, performance prediction, and reinforcement learning with structural optimization for spatially resolved wearable motion detection.</p>
+        <div class="pr-citation" lang="en"><p class="pr-paper-title">Machine Learning–Driven Structural Optimization of Zigzag Silk Fibroin Ionic Conductors for Spatially Resolved Wearable Motion Detection</p><p class="pr-authors"><strong>Yang Y.</strong>, Sun S., Xu C. et al.</p></div></div>
+    </article><article class="pr-paper" id="paper-nl" data-pr-gallery data-title="Nano Letters · 2026">
+      <header class="pr-paper-heading"><p class="pr-venue" lang="en">Nano Letters <span>· 2026</span></p>
+        <h3><a href="https://doi.org/10.1021/acs.nanolett.5c04895">Learning the deformation of disordered fibrous networks</a></h3></header>
+      <figure class="pr-paper-figure"><a class="pr-image-link " href="/static/images/profile/paper-nl-2026.webp" data-pr-image data-caption="Nano Letters (2026)" target="_blank" rel="noopener" aria-label="View full image: Nano Letters (2026)"><img class="profile-gallery-image" src="/static/images/profile/paper-nl-2026-thumb.webp" alt="Nano Letters (2026)" width="1614" height="990" loading="lazy" decoding="async"></a></figure>
+      <div class="pr-paper-copy">
+        <p class="pr-prose">This collaborative work incorporates network connectivity and physical information into graph neural networks to predict nonuniform deformation and stress–strain responses in disordered fibrous materials.</p>
+        <div class="pr-citation" lang="en"><p class="pr-paper-title"><a href="https://doi.org/10.1021/acs.nanolett.5c04895">Physics-informed graph neural networks for predicting deformation in disordered fibrous materials</a></p><p class="pr-authors">Yang S.<sup>#</sup>, <strong>Yang Y.</strong><sup>#</sup>, Huang C. et al. · 26(1), 205–213</p></div></div>
+    </article><article class="pr-paper" id="paper-as" data-pr-gallery data-title="Advanced Science · 2025">
+      <header class="pr-paper-heading"><p class="pr-venue" lang="en">Advanced Science <span>· 2025</span></p>
+        <h3><a href="https://doi.org/10.1002/advs.202413293">Lightweight, high-strength 3D fibrous networks</a></h3></header>
+      <figure class="pr-paper-figure"><a class="pr-image-link " href="/static/images/profile/paper-as-2025.webp" data-pr-image data-caption="Advanced Science (2025)" target="_blank" rel="noopener" aria-label="View full image: Advanced Science (2025)"><img class="profile-gallery-image" src="/static/images/profile/paper-as-2025-thumb.webp" alt="Advanced Science (2025)" width="2400" height="1810" loading="lazy" decoding="async"></a></figure>
+      <div class="pr-paper-copy">
+        <p class="pr-prose">Tensile simulation and deep reinforcement learning are combined for biomimetic three-dimensional disordered fibrous networks, exploring structural changes that bring lightweight design and mechanical performance together.</p>
+        <div class="pr-citation" lang="en"><p class="pr-paper-title"><a href="https://doi.org/10.1002/advs.202413293">Optimizing biomimetic 3D disordered fibrous network structures for lightweight, high-strength materials via deep reinforcement learning</a></p><p class="pr-authors"><strong>Yang Y.</strong><sup>#</sup>, Bai R.<sup>#</sup>, Gao W. et al. · 12, 2413293</p></div></div>
+    </article></div>
+    <div class="pr-further"><h3>Further publications</h3><ol lang="en"><li><p class="pr-venue">Advanced Functional Materials <span>· 2026</span></p><h4><a href="https://doi.org/10.1002/adfm.76164">Processing-history-programmed silk fibers integrating mechanical robustness, ionic conduction, and optical waveguiding for intelligent wearables</a></h4><p class="pr-authors">Ma C.<sup>#</sup>, Ma X.<sup>#</sup>, <strong>Yang Y.</strong><sup>#</sup> et al.</p></li><li><p class="pr-venue">ACS Nano <span>· 2026</span></p><h4>Early pathway selection precedes conformational locking in protein self-assembly</h4><p class="pr-authors">Peng R.<sup>#</sup>, Zhou L.<sup>#</sup>, Bai R., <strong>Yang Y.</strong> et al.</p></li><li><p class="pr-venue">AI for Science <span>· 2025</span></p><h4><a href="https://iopscience.iop.org/article/10.1088/3050-287X/adfaf7">Artificial intelligence for fibrous network design and mechanics</a></h4><p class="pr-authors"><strong>Yang Y.</strong>, Cao L., Ren J. et al.</p></li></ol><p class="pr-note"><sup>#</sup> Co-first authors.</p></div>
   </section>
-
-  <section class="profile-section" id="selected-work" aria-labelledby="work-title">
-    <div class="profile-section-head">
-      <h2 id="work-title">Research and projects</h2>
-    </div>
-
-    <div class="profile-work" id="work-manufacturing">
-      <p class="profile-work-label">01 <span>Manufacturable design</span></p>
-      <div class="profile-work-body">
-        <h3>AI-guided design of manufacturable fibrous networks</h3>
-        <p>This work addresses continuous fiber paths and topological constraints in the AI-guided design of manufacturable fibrous networks. It connects topology generation, finite element analysis, graph neural networks, and reinforcement learning, with validation using 3D-printed specimens to link structural designs to physical materials.</p>
-        <p class="profile-work-meta">REFINe · Nature Communications · 2026</p>
-        <a class="profile-text-link" href="https://doi.org/10.1038/s41467-026-76045-x">Read the paper <span aria-hidden="true">↗</span></a>
-        <details class="profile-details">
-          <summary>Research question, methods, and results<span class="profile-details-symbol" aria-hidden="true">+</span></summary>
-          <dl>
-            <div><dt>Research question</dt><dd>How can mechanical performance and continuous manufacturing requirements be considered together during design, so that digital topologies can become weavable and printable structures?</dd></div>
-            <div><dt>Methods</dt><dd>The REFINe framework uses the TOPNet algorithm to maintain continuous fiber paths. Automated finite element analysis, physics-inspired graph neural networks, and reinforcement learning support mechanical response prediction and topology optimization, followed by mapping planar networks onto curved surfaces.</dd></div>
-            <div><dt>Results and validation</dt><dd>The optimized structures reported in the paper achieve approximately 50% greater strength and 20% lower mass than the initial designs. Experiments use specimens fabricated by stereolithography (SLA) and fused deposition modeling (FDM).</dd></div>
-          </dl>
-          <p class="profile-detail-source"><a href="https://www.nature.com/articles/s41467-026-76045-x">Full paper, figures, and supplementary materials <span aria-hidden="true">↗</span></a></p>
-        </details>
-      </div>
-    </div>
-
-    <div class="profile-work" id="work-physics-ai">
-      <p class="profile-work-label">02 <span>Physics-informed learning</span></p>
-      <div class="profile-work-body">
-        <h3>Predicting deformation and mechanics in disordered fibrous networks</h3>
-        <p>He contributed to research on physics-informed graph neural networks that incorporate network connectivity and physical information to predict deformation and stress–strain responses in disordered fibrous materials, supporting rapid mechanical assessment and structural design.</p>
-        <p class="profile-work-meta">GNMP · Nano Letters · 2026</p>
-        <a class="profile-text-link" href="https://doi.org/10.1021/acs.nanolett.5c04895">Read the paper <span aria-hidden="true">↗</span></a>
-        <details class="profile-details">
-          <summary>Research question, methods, and results<span class="profile-details-symbol" aria-hidden="true">+</span></summary>
-          <dl>
-            <div><dt>Research question</dt><dd>Sparse connectivity and nonuniform deformation make the mechanics of disordered fibrous networks difficult to predict. How can network structure be used to rapidly predict nodal deformation and the overall stress–strain response?</dd></div>
-            <div><dt>Methods</dt><dd>The GNMP approach combines graph attention message passing, multiscale physical embeddings, and a bond-length-guided scheduling strategy to describe nonaffine rearrangements in two-dimensional semiflexible networks.</dd></div>
-            <div><dt>Results and validation</dt><dd>Predictions are compared with molecular dynamics simulations, while experiments on 3D-printed networks examine deformation patterns and structural descriptors, supporting rapid mechanical assessment of fibrous networks.</dd></div>
-          </dl>
-          <p class="profile-detail-source"><a href="https://doi.org/10.1021/acs.nanolett.5c04895">Paper and methods <span aria-hidden="true">↗</span></a><a href="https://pubmed.ncbi.nlm.nih.gov/41451561/">Abstract <span aria-hidden="true">↗</span></a></p>
-        </details>
-      </div>
-    </div>
-
-    <div class="profile-work profile-work-open" id="work-open-source">
-      <p class="profile-work-label">03 <span>Open-source tools</span></p>
-      <div class="profile-work-body">
-        <h3>FiberNet / FiberScope</h3>
-        <p>Open-source projects for fibrous network design, simulation, and intelligent optimization. FiberNet provides Python computational tools, while FiberScope offers an interactive research interface, making structure generation, mechanical analysis, and inverse design easier to use and reproduce.</p>
-        <div class="profile-inline-links">
-          <a class="profile-text-link" href="https://github.com/GellmanSparrowS/fibernet">Source on GitHub <span aria-hidden="true">↗</span></a>
-          <a class="profile-text-link" href="https://modelscope.cn/studios/GellmanSparrow/FiberScope">Try FiberScope <span aria-hidden="true">↗</span></a>
-          <a class="profile-text-link" href="/fibernet/en/">Project overview <span aria-hidden="true">→</span></a>
-        </div>
-        <details class="profile-details">
-          <summary>Workflow and tools<span class="profile-details-symbol" aria-hidden="true">+</span></summary>
-          <dl>
-            <div><dt>Research workflow</dt><dd>Bringing structure generation, simulation, analysis, and design into one workflow supports both batch studies in Python and interactive exploration through a graphical interface.</dd></div>
-            <div><dt>Tools and methods</dt><dd>FiberNet provides interfaces for 2D and 3D network generation, beam-frame finite element analysis, structural descriptor analysis, and searches against target curves. FiberScope provides structure editing, trajectory viewing, and geometry export.</dd></div>
-            <div><dt>Examples and outputs</dt><dd>Public examples cover network generation, saving and reloading simulation results, extracting structural features, and constructing continuous paths on planes and curved surfaces. Source code and documentation record the parameters and outputs for each step.</dd></div>
-          </dl>
-          <p class="profile-detail-source"><a href="https://github.com/GellmanSparrowS/fibernet#start-here">Getting started and workflows <span aria-hidden="true">↗</span></a><a href="https://github.com/GellmanSparrowS/fibernet/tree/main/examples">Runnable examples <span aria-hidden="true">↗</span></a></p>
-        </details>
-      </div>
-    </div>
+  <section class="pr-section pr-projects-section" id="projects" aria-labelledby="projects-title">
+    <div class="pr-section-head"><h2 id="projects-title">Collaborations</h2></div>
+    <div class="pr-industry"><h3>Collaboration with Anta Sports</h3><ol><li><p class="pr-date">Sep 2026 — Sep 2027</p><h4>Digital design software for Anta mesh insoles</h4><p class="pr-prose">Development of software for mesh insole structure design; ongoing.</p></li><li><p class="pr-date">Dec 2024 — Jun 2025</p><h4>Mechanical metamaterial design for sports shoe midsoles</h4><p class="pr-prose">Collaborative research on lightweight structures and mechanical design for sports shoe midsoles.</p></li><li><p class="pr-date">Dec 2023 — Jun 2024</p><h4>AI-enhanced design engine</h4><p class="pr-prose">An industry collaboration on material and structural design.</p></li></ol></div>
   </section>
-
-  <section class="profile-section" id="gallery" aria-labelledby="gallery-title">
-    <div class="profile-section-head"><h2 id="gallery-title">Research gallery</h2></div>
-    <div class="profile-albums profile-albums-research"><details class="profile-album scientific" data-album="papers" data-album-title="Publication Figures">
-          <summary><span class="profile-album-cover"><img class="profile-gallery-image" src="/static/images/profile/paper-nc-2026-thumb.webp?v=2c10d74bd762" alt="Nature Communications (2026)" width="1766" height="1163" loading="lazy" decoding="async"></span>
-          <span class="profile-album-info"><span class="profile-album-date">2025–2026</span><span class="profile-album-title">Publication Figures</span><span class="profile-album-action"><span>4 photos</span><span class="album-open-label">View ＋</span><span class="album-close-label">Close −</span></span></span></summary>
-          <div class="profile-album-thumbnails"><a href="/static/images/profile/paper-nc-2026.webp?v=66b26c4b5ab5" data-album-link data-caption="Nature Communications (2026)" target="_blank" rel="noopener" aria-label="View full image: Nature Communications (2026)"><img class="profile-gallery-image" src="/static/images/profile/paper-nc-2026-thumb.webp?v=2c10d74bd762" alt="Nature Communications (2026)" width="1766" height="1163" loading="lazy" decoding="async"><span aria-hidden="true">01</span></a><a href="/static/images/profile/paper-npj-2026.webp?v=4db8aef8707d" data-album-link data-caption="npj Flexible Electronics (2026)" target="_blank" rel="noopener" aria-label="View full image: npj Flexible Electronics (2026)"><img class="profile-gallery-image" src="/static/images/profile/paper-npj-2026-thumb.webp?v=23b3ee267554" alt="npj Flexible Electronics (2026)" width="2141" height="1185" loading="lazy" decoding="async"><span aria-hidden="true">02</span></a><a href="/static/images/profile/paper-nl-2026.webp?v=580186597247" data-album-link data-caption="Nano Letters (2026)" target="_blank" rel="noopener" aria-label="View full image: Nano Letters (2026)"><img class="profile-gallery-image" src="/static/images/profile/paper-nl-2026-thumb.webp?v=b6ee598d3827" alt="Nano Letters (2026)" width="1614" height="990" loading="lazy" decoding="async"><span aria-hidden="true">03</span></a><a href="/static/images/profile/paper-as-2025.webp?v=0cb9b245643e" data-album-link data-caption="Advanced Science (2025)" target="_blank" rel="noopener" aria-label="View full image: Advanced Science (2025)"><img class="profile-gallery-image" src="/static/images/profile/paper-as-2025-thumb.webp?v=a32c7a211f85" alt="Advanced Science (2025)" width="2400" height="1810" loading="lazy" decoding="async"><span aria-hidden="true">04</span></a></div></details><details class="profile-album scientific dark-media" data-album="fibernet" data-album-title="FiberNet">
-          <summary><span class="profile-album-cover"><img class="profile-gallery-image" src="/static/images/fibernet/01_2d_gallery.webp?v=fce8466dc2ec" alt="Two-dimensional networks" width="1600" height="1237" loading="lazy" decoding="async"></span>
-          <span class="profile-album-info"><span class="profile-album-date">FiberNet / FiberScope</span><span class="profile-album-title">FiberNet</span><span class="profile-album-action"><span>4 photos</span><span class="album-open-label">View ＋</span><span class="album-close-label">Close −</span></span></span></summary>
-          <div class="profile-album-thumbnails"><a href="/static/images/fibernet/01_2d_gallery.webp?v=fce8466dc2ec" data-album-link data-caption="Two-dimensional networks" target="_blank" rel="noopener" aria-label="View full image: Two-dimensional networks"><img class="profile-gallery-image" src="/static/images/fibernet/01_2d_gallery.webp?v=fce8466dc2ec" alt="Two-dimensional networks" width="1600" height="1237" loading="lazy" decoding="async"><span aria-hidden="true">01</span></a><a href="/static/images/fibernet/05_trajectory_dark.webp?v=49bfe332bfbb" data-album-link data-caption="Network deformation trajectories" target="_blank" rel="noopener" aria-label="View full image: Network deformation trajectories"><img class="profile-gallery-image" src="/static/images/fibernet/05_trajectory_dark.webp?v=49bfe332bfbb" alt="Network deformation trajectories" width="1600" height="775" loading="lazy" decoding="async"><span aria-hidden="true">02</span></a><a href="/static/images/fibernet/fem_showcase_dark.webp?v=9528bb432d96" data-album-link data-caption="Beam-frame finite element analysis" target="_blank" rel="noopener" aria-label="View full image: Beam-frame finite element analysis"><img class="profile-gallery-image" src="/static/images/fibernet/fem_showcase_dark.webp?v=9528bb432d96" alt="Beam-frame finite element analysis" width="1200" height="983" loading="lazy" decoding="async"><span aria-hidden="true">03</span></a><a href="/static/images/fibernet/voronoi_1.5x_auto.webp?v=e8a06dbbbab0" data-album-link data-caption="Local stretch ratio" target="_blank" rel="noopener" aria-label="View full image: Local stretch ratio"><img class="profile-gallery-image" src="/static/images/fibernet/voronoi_1.5x_auto.webp?v=e8a06dbbbab0" alt="Local stretch ratio" width="1600" height="825" loading="lazy" decoding="async"><span aria-hidden="true">04</span></a></div></details></div>
-  </section>
-  <section class="profile-section" id="industry" aria-labelledby="industry-title">
-    <div class="profile-section-head">
-      <h2 id="industry-title">Industry collaborations</h2>
-      <p>Collaborative research with Anta Sports on AI-assisted design, mechanical metamaterials for sports shoe midsoles, and the digital design of mesh insoles.</p>
-    </div>
-    <dl class="profile-collaboration">
-      <div>
-        <dt>Digital Design Software for Mesh Insoles</dt>
-        <dd>Development of digital software for designing mesh insole structures.</dd>
-        <dd class="profile-date"><span>Sep 2026 — Present</span><span>Planned through Sep 2027</span></dd>
-      </div>
-      <div>
-        <dt>AI-Enhanced Design Engine</dt>
-        <dd>An industry collaboration on material and structural design.</dd>
-        <dd class="profile-date">Dec 2023 — Jun 2024</dd>
-      </div>
-      <div>
-        <dt>Mechanical Metamaterial Design for Sports Shoe Midsoles</dt>
-        <dd>Collaborative work on lightweight structures and mechanical design for sports shoe midsoles.</dd>
-        <dd class="profile-date">Dec 2024 — Jun 2025</dd>
-      </div>
-    </dl>
-  </section>
-
-  <section class="profile-section" id="publications" aria-labelledby="publications-title">
-    <div class="profile-section-head profile-section-head-inline">
-      <div><h2 id="publications-title">Selected publications</h2></div>
-      <a class="profile-text-link" href="/cv/en/">All publications <span aria-hidden="true">→</span></a>
-    </div>
-    <ol class="profile-publications">
-      <li>
-        <p class="profile-publication-venue">npj Flexible Electronics · 2026</p>
-        <h3>Machine Learning–Driven Structural Optimization of Zigzag Silk Fibroin Ionic Conductors for Spatially Resolved Wearable Motion Detection</h3>
-        <p><strong>Yang Y.</strong>, Sun S., Xu C. et al.</p>
-      </li>
-      <li>
-        <p class="profile-publication-venue">Nature Communications · 2026</p>
-        <h3><a href="https://doi.org/10.1038/s41467-026-76045-x">A manufacturability-informed topology framework for AI-guided design of fibrous network materials</a></h3>
-        <p><strong>Yang Y.</strong>, Ren J., Cao L. et al. <span>17, 9237.</span></p>
-      </li>
-      <li>
-        <p class="profile-publication-venue">Nano Letters · 2026</p>
-        <h3><a href="https://doi.org/10.1021/acs.nanolett.5c04895">Physics-informed graph neural networks for predicting deformation in disordered fibrous materials</a></h3>
-        <p>Yang S.<sup>#</sup>, <strong>Yang Y.</strong><sup>#</sup>, Huang C. et al. <span>26(1), 205–213.</span></p>
-      </li>
-      <li>
-        <p class="profile-publication-venue">Advanced Science · 2025</p>
-        <h3><a href="https://doi.org/10.1002/advs.202413293">Optimizing biomimetic 3D disordered fibrous network structures for lightweight, high-strength materials via deep reinforcement learning</a></h3>
-        <p><strong>Yang Y.</strong><sup>#</sup>, Bai R.<sup>#</sup>, Gao W. et al. <span>12, 2413293.</span></p>
-      </li>
-      <li>
-        <p class="profile-publication-venue">Advanced Functional Materials · 2026</p>
-        <h3><a href="https://doi.org/10.1002/adfm.76164">Processing-history-programmed silk fibers integrating mechanical robustness, ionic conduction, and optical waveguiding for intelligent wearables</a></h3>
-        <p>Ma C.<sup>#</sup>, Ma X.<sup>#</sup>, <strong>Yang Y.</strong><sup>#</sup> et al. <span>36, e76164.</span></p>
-      </li>
-      <li>
-        <p class="profile-publication-venue">AI for Science · 2025</p>
-        <h3><a href="https://iopscience.iop.org/article/10.1088/3050-287X/adfaf7">Artificial intelligence for fibrous network design and mechanics</a></h3>
-        <p><strong>Yang Y.</strong>, Cao L., Ren J. et al. <span>1, 012001.</span></p>
-      </li>
-    </ol>
-    <p class="profile-publication-note"><sup>#</sup> Co-first authors.</p>
-  </section>
-
-  <section class="profile-section" id="honors" aria-labelledby="honors-title">
-    <div class="profile-section-head"><h2 id="honors-title">Honors and awards</h2></div>
-    <ol class="profile-honors">
-      <li><span class="profile-honor-year">2026</span><div><h3>Runner-up, AI for Research Track, Inaugural World AI Open Source Competition</h3><p>Artificial intelligence and research innovation</p></div></li>
-      <li><span class="profile-honor-year">2026</span><div><h3>Second Prize in the Achievement Category, Invention and Entrepreneurship Award, China Invention Association</h3><p>Third contributor</p></div></li>
-      <li><span class="profile-honor-year">2026</span><div><h3>Ruiqing Scholarship</h3><p>Fudan University</p></div></li>
-    </ol>
-  </section>
-
-  <section class="profile-section profile-connect" id="connect" aria-labelledby="connect-title">
-    <div>
-      <h2 id="connect-title">Academic links</h2>
-    </div>
-    <div class="profile-external-links">
-      <a href="https://github.com/GellmanSparrowS">GitHub <span aria-hidden="true">↗</span></a>
-      <a href="https://orcid.org/0009-0005-1314-1325">ORCID <span aria-hidden="true">↗</span></a>
-      <a href="https://www.researchgate.net/profile/Yunhao-Yang-7">ResearchGate <span aria-hidden="true">↗</span></a>
-      <a href="https://swdfz.fudan.edu.cn/fd/36/c54394a785718/page.htm">Fudan profile (Chinese) <span aria-hidden="true">↗</span></a>
-      <a href="/zh/">Notes in Chinese <span aria-hidden="true">→</span></a>
-      <a href="/articles/en/">Notes in English <span aria-hidden="true">→</span></a>
-    </div>
-  </section>
-  <section class="profile-section" id="moments" aria-labelledby="moments-title">
-    <div class="profile-section-head"><h2 id="moments-title">Event photos</h2></div>
-    <div class="profile-albums profile-albums-events"><details class="profile-album event" data-album="goai" data-album-title="Inaugural World AI Open Source Competition">
-          <summary><span class="profile-album-cover"><img class="profile-gallery-image" src="/static/images/profile/goai-presentation-thumb.webp?v=19f21de1c952" alt="September 2026 · Project presentation" width="2400" height="1600" loading="lazy" decoding="async"></span>
-          <span class="profile-album-info"><span class="profile-album-date">September 2026</span><span class="profile-album-title">Inaugural World AI Open Source Competition</span><span class="profile-album-action"><span>5 photos</span><span class="album-open-label">View ＋</span><span class="album-close-label">Close −</span></span></span></summary>
-          <div class="profile-album-thumbnails"><a href="/static/images/profile/goai-presentation.webp?v=3554165f5edc" data-album-link data-caption="September 2026 · Project presentation" target="_blank" rel="noopener" aria-label="View full image: September 2026 · Project presentation"><img class="profile-gallery-image" src="/static/images/profile/goai-presentation-thumb.webp?v=19f21de1c952" alt="September 2026 · Project presentation" width="2400" height="1600" loading="lazy" decoding="async"><span aria-hidden="true">01</span></a><a href="/static/images/profile/goai-awards.webp?v=eb926c5da24a" data-album-link data-caption="September 2026 · Award ceremony" target="_blank" rel="noopener" aria-label="View full image: September 2026 · Award ceremony"><img class="profile-gallery-image" src="/static/images/profile/goai-awards-thumb.webp?v=6175134646ae" alt="September 2026 · Award ceremony" width="2400" height="1350" loading="lazy" decoding="async"><span aria-hidden="true">02</span></a><a href="/static/images/profile/goai-poster.webp?v=430799ef8390" data-album-link data-caption="September 2026 · With the project poster" target="_blank" rel="noopener" aria-label="View full image: September 2026 · With the project poster"><img class="profile-gallery-image" src="/static/images/profile/goai-poster-thumb.webp?v=6ad258a7c704" alt="September 2026 · With the project poster" width="1939" height="2400" loading="lazy" decoding="async"><span aria-hidden="true">03</span></a><a href="/static/images/profile/goai-stage.webp?v=1b53e863ad70" data-album-link data-caption="September 2026 · Project presentation" target="_blank" rel="noopener" aria-label="View full image: September 2026 · Project presentation"><img class="profile-gallery-image" src="/static/images/profile/goai-stage-thumb.webp?v=0adc498ff5ad" alt="September 2026 · Project presentation" width="2400" height="1600" loading="lazy" decoding="async"><span aria-hidden="true">04</span></a><a href="/static/images/profile/goai-exchange.webp?v=84e5b495455a" data-album-link data-caption="September 2026 · Project poster" target="_blank" rel="noopener" aria-label="View full image: September 2026 · Project poster"><img class="profile-gallery-image" src="/static/images/profile/goai-exchange-thumb.webp?v=a3b8d46a67f4" alt="September 2026 · Project poster" width="2400" height="1600" loading="lazy" decoding="async"><span aria-hidden="true">05</span></a></div></details><details class="profile-album event" data-album="cctv" data-album-title="CCTV-1 · China in Intangible Cultural Heritage">
-          <summary><span class="profile-album-cover"><img class="profile-gallery-image" src="/static/images/profile/cctv-group-thumb.webp?v=9c798549df10" alt="June 2026 · Studio group photograph" width="2400" height="1518" loading="lazy" decoding="async"></span>
-          <span class="profile-album-info"><span class="profile-album-date">June 2026</span><span class="profile-album-title">CCTV-1 · China in Intangible Cultural Heritage</span><span class="profile-album-action"><span>4 photos</span><span class="album-open-label">View ＋</span><span class="album-close-label">Close −</span></span></span></summary>
-          <div class="profile-album-thumbnails"><a href="/static/images/profile/cctv-group.webp?v=949e89ec3d04" data-album-link data-caption="June 2026 · Studio group photograph" target="_blank" rel="noopener" aria-label="View full image: June 2026 · Studio group photograph"><img class="profile-gallery-image" src="/static/images/profile/cctv-group-thumb.webp?v=9c798549df10" alt="June 2026 · Studio group photograph" width="2400" height="1518" loading="lazy" decoding="async"><span aria-hidden="true">01</span></a><a href="/static/images/profile/cctv-studio.webp?v=15b3e8f096d6" data-album-link data-caption="June 2026 · Programme recording" target="_blank" rel="noopener" aria-label="View full image: June 2026 · Programme recording"><img class="profile-gallery-image" src="/static/images/profile/cctv-studio-thumb.webp?v=717813a23099" alt="June 2026 · Programme recording" width="1880" height="1882" loading="lazy" decoding="async"><span aria-hidden="true">02</span></a><a href="/static/images/profile/cctv-silk.webp?v=305c35573e03" data-album-link data-caption="June 2026 · Thermochromic silk artwork" target="_blank" rel="noopener" aria-label="View full image: June 2026 · Thermochromic silk artwork"><img class="profile-gallery-image" src="/static/images/profile/cctv-silk-thumb.webp?v=c4157cf96aee" alt="June 2026 · Thermochromic silk artwork" width="2214" height="1256" loading="lazy" decoding="async"><span aria-hidden="true">03</span></a><a href="/static/images/profile/cctv-interview.webp?v=c93e6b7277a6" data-album-link data-caption="June 2026 · Thermoresponsive yarn" target="_blank" rel="noopener" aria-label="View full image: June 2026 · Thermoresponsive yarn"><img class="profile-gallery-image" src="/static/images/profile/cctv-interview-thumb.webp?v=62ef08aaf6f9" alt="June 2026 · Thermoresponsive yarn" width="2172" height="1215" loading="lazy" decoding="async"><span aria-hidden="true">04</span></a></div></details><details class="profile-album event" data-album="fuzhou" data-album-title="Fuzhou New Area Project Roadshow">
-          <summary><span class="profile-album-cover"><img class="profile-gallery-image" src="/static/images/profile/fuzhou-report-thumb.webp?v=6eb034e62316" alt="January 2026 · Physics-guided AI for textile structural engineering · Project presentation in Fuzhou New Area" width="1080" height="810" loading="lazy" decoding="async"></span>
-          <span class="profile-album-info"><span class="profile-album-date">January 2026</span><span class="profile-album-title">Fuzhou New Area Project Roadshow</span><span class="profile-album-action"><span>1 photo</span><span class="album-open-label">View ＋</span><span class="album-close-label">Close −</span></span></span></summary>
-          <div class="profile-album-thumbnails"><a href="/static/images/profile/fuzhou-report.webp?v=690c96e5ec1c" data-album-link data-caption="January 2026 · Physics-guided AI for textile structural engineering · Project presentation in Fuzhou New Area" target="_blank" rel="noopener" aria-label="View full image: January 2026 · Physics-guided AI for textile structural engineering · Project presentation in Fuzhou New Area"><img class="profile-gallery-image" src="/static/images/profile/fuzhou-report-thumb.webp?v=6eb034e62316" alt="January 2026 · Physics-guided AI for textile structural engineering · Project presentation in Fuzhou New Area" width="1080" height="810" loading="lazy" decoding="async"><span aria-hidden="true">01</span></a></div><p class="profile-album-source"><a href="https://baike.baidu.com/item/%E6%9D%A8%E4%BA%91%E6%B5%A9/68860443" target="_blank" rel="noopener">Photo source ↗</a></p></details></div>
-  </section>
-  <dialog id="photo-viewer" class="profile-viewer" aria-labelledby="photo-viewer-title" aria-describedby="photo-viewer-caption">
-    <div class="profile-viewer-header"><h2 id="photo-viewer-title">Photo gallery</h2><button type="button" data-viewer-close aria-label="Close photo viewer" autofocus>Close ×</button></div>
-    <div class="profile-viewer-media"><img id="photo-viewer-image" class="profile-gallery-image" alt=""><p id="photo-viewer-error" hidden>The image could not be loaded. Use the link below to open the original.</p></div>
-    <p id="photo-viewer-caption" aria-live="polite"></p>
-    <div class="profile-viewer-controls"><button type="button" data-viewer-prev aria-label="Previous photo">← Previous</button><span id="photo-viewer-count" aria-live="polite"></span><button type="button" data-viewer-next aria-label="Next photo">Next →</button><a id="photo-viewer-original" target="_blank" rel="noopener">Open original ↗</a></div>
-  </dialog>
+  <section class="pr-section pr-honors-section" id="honors" aria-labelledby="honors-title"><div class="pr-section-head"><h2 id="honors-title">Honors & awards</h2></div><ol class="pr-honors"><li><time datetime="2026">2026</time><div><h3>Runner-up, AI for Research Track, Inaugural World AI Open Source Competition</h3></div></li><li><time datetime="2026">2026</time><div><h3>Second Prize in the Achievement Category, Invention and Entrepreneurship Award, China Invention Association</h3><p>Third contributor</p></div></li><li><time datetime="2026">2026</time><div><h3>Ruiqing Scholarship, Fudan University</h3></div></li></ol></section>
+  <section class="pr-section pr-activities-section" id="activities" aria-labelledby="activities-title"><div class="pr-section-head"><h2 id="activities-title">Academic activities & outreach</h2></div><div class="pr-activities"><article class="pr-activity" id="activity-goai" data-pr-gallery data-title="Inaugural World AI Open Source Competition">
+      <time datetime="2026-09">September 2026</time>
+      <div class="pr-activity-card"><figure class="pr-activity-photo"><a class="pr-image-link " href="/static/images/profile/goai-presentation.webp" data-pr-image data-caption="September 2026 · Project presentation" target="_blank" rel="noopener" aria-label="View full image: September 2026 · Project presentation"><img class="profile-gallery-image" src="/static/images/profile/goai-presentation-thumb.webp" alt="September 2026 · Project presentation" width="2400" height="1600" loading="lazy" decoding="async"></a><div hidden><a class="pr-image-link " href="/static/images/profile/goai-awards.webp" data-pr-image data-caption="September 2026 · Award ceremony" target="_blank" rel="noopener" aria-label="View full image: September 2026 · Award ceremony"><img class="profile-gallery-image" src="/static/images/profile/goai-awards-thumb.webp" alt="September 2026 · Award ceremony" width="2400" height="1350" loading="lazy" decoding="async"></a><a class="pr-image-link " href="/static/images/profile/goai-poster.webp" data-pr-image data-caption="September 2026 · With the project poster" target="_blank" rel="noopener" aria-label="View full image: September 2026 · With the project poster"><img class="profile-gallery-image" src="/static/images/profile/goai-poster-thumb.webp" alt="September 2026 · With the project poster" width="1939" height="2400" loading="lazy" decoding="async"></a><a class="pr-image-link " href="/static/images/profile/goai-stage.webp" data-pr-image data-caption="September 2026 · Project presentation" target="_blank" rel="noopener" aria-label="View full image: September 2026 · Project presentation"><img class="profile-gallery-image" src="/static/images/profile/goai-stage-thumb.webp" alt="September 2026 · Project presentation" width="2400" height="1600" loading="lazy" decoding="async"></a><a class="pr-image-link " href="/static/images/profile/goai-exchange.webp" data-pr-image data-caption="September 2026 · Project poster" target="_blank" rel="noopener" aria-label="View full image: September 2026 · Project poster"><img class="profile-gallery-image" src="/static/images/profile/goai-exchange-thumb.webp" alt="September 2026 · Project poster" width="2400" height="1600" loading="lazy" decoding="async"></a></div></figure><div class="pr-activity-copy"><h3><a class="pr-activity-title" href="/static/images/profile/goai-presentation.webp" data-pr-open aria-label="Browse photos: Inaugural World AI Open Source Competition" target="_blank" rel="noopener">Inaugural World AI Open Source Competition</a></h3><p class="pr-prose">Runner-up in the AI for Research Track.</p></div></div>
+    </article><article class="pr-activity" id="activity-cctv" data-pr-gallery data-title="CCTV-1 · China in Intangible Cultural Heritage">
+      <time datetime="2026-06">June 2026</time>
+      <div class="pr-activity-card"><figure class="pr-activity-photo"><a class="pr-image-link " href="/static/images/profile/cctv-group.webp" data-pr-image data-caption="June 2026 · Studio group photograph" target="_blank" rel="noopener" aria-label="View full image: June 2026 · Studio group photograph"><img class="profile-gallery-image" src="/static/images/profile/cctv-group-thumb.webp" alt="June 2026 · Studio group photograph" width="2400" height="1518" loading="lazy" decoding="async"></a><div hidden><a class="pr-image-link " href="/static/images/profile/cctv-studio.webp" data-pr-image data-caption="June 2026 · Programme recording" target="_blank" rel="noopener" aria-label="View full image: June 2026 · Programme recording"><img class="profile-gallery-image" src="/static/images/profile/cctv-studio-thumb.webp" alt="June 2026 · Programme recording" width="1880" height="1882" loading="lazy" decoding="async"></a><a class="pr-image-link " href="/static/images/profile/cctv-silk.webp" data-pr-image data-caption="June 2026 · Thermochromic silk artwork" target="_blank" rel="noopener" aria-label="View full image: June 2026 · Thermochromic silk artwork"><img class="profile-gallery-image" src="/static/images/profile/cctv-silk-thumb.webp" alt="June 2026 · Thermochromic silk artwork" width="2214" height="1256" loading="lazy" decoding="async"></a><a class="pr-image-link " href="/static/images/profile/cctv-interview.webp" data-pr-image data-caption="June 2026 · Thermoresponsive yarn" target="_blank" rel="noopener" aria-label="View full image: June 2026 · Thermoresponsive yarn"><img class="profile-gallery-image" src="/static/images/profile/cctv-interview-thumb.webp" alt="June 2026 · Thermoresponsive yarn" width="2172" height="1215" loading="lazy" decoding="async"></a></div></figure><div class="pr-activity-copy"><h3><a class="pr-activity-title" href="/static/images/profile/cctv-group.webp" data-pr-open aria-label="Browse photos: CCTV-1 · China in Intangible Cultural Heritage" target="_blank" rel="noopener">CCTV-1 · China in Intangible Cultural Heritage</a></h3><p class="pr-prose">Programme recording featuring thermoresponsive yarn and thermochromic silk artwork.</p></div></div>
+    </article><article class="pr-activity" id="activity-fuzhou" data-pr-gallery data-title="Fuzhou New Area Project Roadshow">
+      <time datetime="2026-01">January 2026</time>
+      <div class="pr-activity-card"><figure class="pr-activity-photo"><a class="pr-image-link " href="/static/images/profile/fuzhou-report.webp" data-pr-image data-caption="January 2026 · Physics-guided AI for textile structural engineering · Project presentation in Fuzhou New Area" target="_blank" rel="noopener" aria-label="View full image: January 2026 · Physics-guided AI for textile structural engineering · Project presentation in Fuzhou New Area"><img class="profile-gallery-image" src="/static/images/profile/fuzhou-report-thumb.webp" alt="January 2026 · Physics-guided AI for textile structural engineering · Project presentation in Fuzhou New Area" width="1080" height="810" loading="lazy" decoding="async"></a><div hidden></div></figure><div class="pr-activity-copy"><h3><a class="pr-activity-title" href="/static/images/profile/fuzhou-report.webp" data-pr-open aria-label="Browse photos: Fuzhou New Area Project Roadshow" target="_blank" rel="noopener">Fuzhou New Area Project Roadshow</a></h3><p class="pr-prose">Presentation: Physics-guided AI for textile structural engineering.</p></div></div>
+    </article></div></section>
+  <footer class="pr-academic-links"><a class="pr-link" href="/cv/en/">Full academic CV ↗</a><a href="https://orcid.org/0009-0005-1314-1325">ORCID ↗</a><a href="https://www.researchgate.net/profile/Yunhao-Yang-7">ResearchGate ↗</a><a href="https://github.com/GellmanSparrowS">GitHub ↗</a><a href="https://swdfz.fudan.edu.cn/fd/36/c54394a785718/page.htm">Fudan profile ↗</a></footer>
+  <dialog class="pr-viewer" aria-labelledby="pr-viewer-title" aria-describedby="pr-viewer-caption"><header><h2 id="pr-viewer-title">Image</h2><button type="button" data-pr-close aria-label="Close image" autofocus>×</button></header><div class="pr-viewer-stage"><img class="profile-gallery-image" alt=""><p class="pr-viewer-error" hidden>The image could not be loaded. Please try again.</p></div><p id="pr-viewer-caption"></p><div class="pr-viewer-controls"><button type="button" data-pr-prev aria-label="Previous image">←</button><span data-pr-count aria-live="polite"></span><button type="button" data-pr-next aria-label="Next image">→</button></div></dialog>
 </article>
-<script src="/static/js/profile.js?v=011aa8ccf2b7" defer></script></main>
+<script src="/static/js/profile-gallery.js?v=2b8f5428ba98" defer></script></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links"><a href="/about/en/">Profile</a><a href="/fibernet/en/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/en/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/en/">Privacy</a></div>
@@ -259,5 +101,5 @@
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
 <script src="/static/js/main.js?v=710f6dc90a82" defer></script>
-</body>
+<script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script></body>
 </html>

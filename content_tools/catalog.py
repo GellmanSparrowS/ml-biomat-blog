@@ -39,25 +39,17 @@ def category_cards(items, categories, lang='zh', bilingual=False):
 
 
 def render(items, categories, make_head, make_footer, write_file, base_url):
+    from . import site_layouts
     routes=[]
     for lang in ['zh','en']:
-        route=category_url(lang=lang); title='分类' if lang=='zh' else 'Categories'
         desc='按研究主题浏览图解、计算与实践。' if lang=='zh' else 'Explore explanations, calculations and practice by research topic.'
-        body=f'<header class="catalog-header"><h1>{title}</h1><p>{desc}</p></header>'+category_cards(items,categories,lang)
-        def page(title,desc,route,body,slug=''):
-            en=category_url(slug,'en'); zh=category_url(slug,'zh')
+        for slug in ['',*[key for key in categories if any(p['lang']==lang and p['category']==key for p in items)]]:
+            route=category_url(slug,lang)
+            title=categories[slug]['name_'+lang] if slug else ('分类' if lang=='zh' else 'Categories')
+            body=site_layouts.collection(items,categories,en=lang=='en',topic=slug or None)
+            en=category_url(slug,'en');zh=category_url(slug,'zh')
             alts=f'<link rel="alternate" hreflang="en" href="{base_url+en}"><link rel="alternate" hreflang="zh-CN" href="{base_url+zh}">'
             head=make_head(title=title,desc=desc,url=base_url+route,lang='en' if lang=='en' else 'zh-CN',wide=True,
-                           en_href=en,zh_href=zh,en_active=' class="active"' if lang=='en' else '',zh_active=' class="active"' if lang=='zh' else '',navigation_language=lang,alternates=alts)
-            write_file(route.lstrip('/')+'index.html',head+body+make_footer(lang))
-            routes.append(route)
-        page(title,desc,route,body)
-        for slug,info in categories.items():
-            selected=[p for p in items if p['lang']==lang and slug in p['categories']]
-            if not selected: continue
-            # Interleave sources by topic title, without privileging the imported package.
-            selected.sort(key=lambda p:p['title'].casefold())
-            name=info['name_'+lang]; scope=escape(info.get('description_'+lang,'')); count=f'{len(selected)} 篇' if lang=='zh' else f'{len(selected)} articles'
-            body=f'<a class="catalog-breadcrumb" href="{route}">{title} /</a><header class="catalog-header"><h1>{escape(name)}</h1><p>{scope}</p><span class="catalog-meta">{count}</span></header>'+grid(selected,categories)
-            page(name,name+' · '+desc,category_url(slug,lang),body,slug)
+                           en_href=en,zh_href=zh,navigation_language=lang,alternates=alts)
+            write_file(route.lstrip('/')+'index.html',head+body+make_footer(lang));routes.append(route)
     return routes

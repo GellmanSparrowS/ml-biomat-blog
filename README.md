@@ -10,15 +10,17 @@
 | English profile `/about/en/` | `content/about-en-body.html` |
 | 中文简历 `/cv/` | `content/cv-body.html` |
 | English CV `/cv/en/` | `content/cv-en-body.html` |
-| 分组相册 | `content/profile-albums.json`、`static/images/profile/` |
+| 相册素材与来源 | `content/profile-albums.json`、`static/images/profile/` |
+| 活动展示 | `content/about-body.html`、`content/about-en-body.html`；首页共用其中的活动条目 |
 | FiberNet 中英文展示 | `content/fibernet-body.html`、`content/fibernet-en-body.html`、`static/css/fibernet.css` |
 | 分类与教程 | `content_tools/catalog.py`、`content/tutorials/polymer-ai/`、`content_tools/tutorials.py` |
 | 教程图片、数据与下载 | `static/tutorials/polymer-ai/` |
 | 教程样式 | `static/css/tutorials.css` |
 | 中英文文章 | `content/posts/zh/`、`content/posts/en/` |
-| 样式与交互 | `static/css/style.css`、`static/js/main.js`、`static/js/profile.js` |
+| 全站布局与交互 | `static/css/style.css`、`static/css/site-layout.css`、`static/css/site-refinement.css`、`static/js/main.js`、`static/js/site-catalog.js` |
+| 个人页与活动图库 | `static/css/profile-layout.css`、`static/js/profile-gallery.js` |
 | 公共导航与主题初始化 | `content_tools/chrome.py`、`static/js/main.js` |
-| 中英首页、文章合集 | `content_tools/home.py` |
+| 中英首页、分类与文章合集 | `content_tools/home.py`、`content_tools/catalog.py`、`content_tools/site_layouts.py` |
 | 中英工具、隐私与标签页 | `content_tools/utility_pages.py`、`content_tools/tag_pages.py` |
 | 页面模板与生成流程 | `build.py` |
 | 站点信息与分类 | `config.py` |
@@ -75,3 +77,9 @@ GitHub 登录由本机凭据管理工具保存。仓库地址使用普通 HTTPS 
 默认主题在样式加载前设为暗色；访客手动选择亮色后，跨页和刷新保留。语言由明确URL决定，普通导航和Logo保持当前语言。没有英文译文的20篇教程仍保留EN控件的位置，以禁用状态呈现，不跳转到无关列表。
 
 每篇内容只有一个主分类，其余方法与材料信息用标签表达。中文44篇、英文24篇的主分类相互独立计数。`qa_check.py`同时检查各页公共导航、默认主题和首页成对关系；浏览器验收须使用空存储的新会话覆盖系统浅色和深色，实际点击主题及完整导航流程。
+
+## 已确认的研究主页布局
+
+首页与个人页共用活动内容和图库：首页为横向概览，个人页为完整纵向时间线。活动照片与题名直接打开相册；论文题名使用已确认的期刊链接。个人页保留横向合作项目，近期论文及荣誉标题位于内容上方。研究主线使用用户确认文字，不插入强制换行。
+
+布局通过正式源文件维护，`python manage.py build` 会同时生成首页、分类、文章合集和中英文个人页；无须依赖 `.local/` 下的历史预览生成器。

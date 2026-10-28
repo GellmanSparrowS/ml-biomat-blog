@@ -310,6 +310,16 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
     head = head.replace('<meta charset="utf-8">','<meta charset="utf-8">'+chrome.THEME_INIT)
     head = head.replace("</head>", f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}"></head>')
     route = urllib.parse.urlsplit(url).path or '/'
+    styles=[]
+    if route.startswith('/fibernet/'):
+        styles.append('/static/css/fibernet.css')
+    styles.append('/static/css/site-layout.css')
+    if route in ('/','/en/','/zh/') or route.startswith('/about/'):
+        styles.append('/static/css/profile-layout.css')
+    styles.append('/static/css/site-refinement.css')
+    head=head.replace('</head>', ''.join('<link rel="stylesheet" href="'+versioned_asset(path)+'">' for path in styles)+'</head>')
+    body_class='site-layout'+(' reading-page' if route.startswith('/posts/') else '')
+    head=head.replace('<body>','<body class="'+body_class+'">')
     return head + chrome.header(language, route, en_href, zh_href, bool(wide))
 
 
@@ -317,7 +327,7 @@ def make_footer(language='zh-CN'):
     footer=FOOT.format(year=datetime.now().year)
     footer=re.sub(r'<div class="footer-links">.*?</div>',chrome.footer_links(language),footer,flags=re.S)
     footer=footer.replace('id="back-to-top"', 'id="back-to-top" aria-label="'+('Back to top' if language=='en' else '返回顶部')+'"')
-    return footer
+    return footer.replace('</body>', '<script src="'+versioned_asset('/static/js/site-catalog.js')+'" defer></script></body>')
 
 
 def render_profile_albums(section, language="zh-CN"):
@@ -502,7 +512,7 @@ def build():
         write_file(f"posts/{p['slug']}/index.html", html)
     print("  Posts done")
 
-    home_routes = home.render(catalog_items, CATEGORIES, SITE, make_head, make_footer, write_file, site_ld)
+    home_routes = home.render(catalog_items, CATEGORIES, SITE, make_head, make_footer, write_file, site_ld, versioned_asset)
     print("  Paired home pages and separate article collections done")
 
     category_routes = catalog.render(catalog_items, CATEGORIES, make_head, make_footer, write_file, SITE['base_url'])
@@ -519,7 +529,6 @@ def build():
         desc='纤维网络生成、建模与分析的 Python 工具包。安装、示例与项目资源。' if language=='zh-CN' else 'A Python toolkit for fiber network generation, modeling and analysis. Installation, examples and project resources.'
         alts=f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/fibernet/"><link rel="alternate" hreflang="en" href="{SITE["base_url"]}/fibernet/en/">'
         document=make_head(title='FiberNet',desc=desc,url=SITE['base_url']+route,lang=language,wide=True,en_href='/fibernet/en/',zh_href='/fibernet/',alternates=alts)+body+make_footer(language)
-        document=document.replace('</head>', f'<link rel="stylesheet" href="{versioned_asset("/static/css/fibernet.css")}"></head>')
         write_file(route.lstrip('/')+'index.html',document)
 
     # Separate Chinese and English personal profiles.
@@ -535,7 +544,7 @@ def build():
         about_body = (Path("content") / source).read_text(encoding="utf-8")
         about_body = about_body.replace("<!-- PROFILE_RESEARCH_ALBUMS -->", render_profile_albums("research", language))
         about_body = about_body.replace("<!-- PROFILE_EVENT_ALBUMS -->", render_profile_albums("events", language))
-        about_body += f'<script src="{versioned_asset("/static/js/profile.js")}" defer></script>'
+        about_body += f'<script src="{versioned_asset("/static/js/profile-gallery.js")}" defer></script>'
         profile_head = make_head(title=title, desc=description, url=SITE["base_url"] + "/" + route,
                                  lang=language, ld=person_ld(), wide=True, alternates=profile_alternates,
                                  en_href="/about/en/", zh_href="/about/", navigation_language=language,
@@ -663,6 +672,8 @@ def build():
     if wk_src.exists():
         wk_dst = Path(BUILD_DIR) / ".well-known"
         if wk_dst.exists():
+            if wk_dst.resolve() != (ROOT / BUILD_DIR / ".well-known").resolve() or not wk_dst.resolve().is_relative_to((ROOT / BUILD_DIR).resolve()):
+                raise RuntimeError("Unexpected metadata output directory")
             shutil.rmtree(wk_dst)
         shutil.copytree(wk_src, wk_dst)
 

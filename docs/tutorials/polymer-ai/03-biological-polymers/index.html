@@ -22,8 +22,8 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "生命中的三类长链：蛋白质、糖链与核酸", "description": "认识三类生物大分子的单元、顺序与连接，用学习实验检查分子表示是否保留影响预测的排列信息。", "url": "https://ml-biomat.com/tutorials/polymer-ai/03-biological-polymers/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-03.css?v=e59a6f740eed"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
-<body>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-03.css?v=e59a6f740eed"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3f0dbd9f42e"></head>
+<body class="site-layout">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
@@ -368,7 +368,7 @@ graph_degree: 测试准确率 100.0%
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
 <script src="/static/js/main.js?v=710f6dc90a82" defer></script>
-<script>
+<script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script><script>
 (function(){
 (()=>{
   let sequence=Array.from({length:12},(_,i)=>i<6?'A':'B'),timer=null,seed=20261022;
