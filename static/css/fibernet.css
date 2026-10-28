@@ -1,14 +1,18 @@
 /* FiberNet project pages. The research-site theme provides the color tokens. */
 .fibernet-article,.fibernet-page,.fibernet-page section>*{min-width:0}
-.fibernet-page{width:100%;max-width:920px;margin:0 auto;color:var(--c-fg);font-size:15px;line-height:1.85}
+.fibernet-page{width:100%;max-width:1040px;margin:0 auto;color:var(--c-fg);font-size:15px;line-height:1.85}
 .fibernet-page a{overflow-wrap:anywhere}
-.fibernet-page .fn-hero{padding:2.2rem 1.6rem;margin-bottom:2rem;background:var(--c-code-bg);border:1px solid var(--c-border);border-radius:12px;text-align:center}
+.fibernet-page .fn-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:1.5rem;padding:1.3rem 0 2rem;margin-bottom:2rem;border-bottom:1px solid var(--c-border);text-align:left}
+.fibernet-page .fn-hero-copy{min-width:0}
+.fibernet-page .fn-scene{position:relative;min-width:0;height:360px;isolation:isolate}
+.fibernet-page .fn-scene-canvas{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:pan-y}
+.fibernet-page .fn-scene::before{content:"";position:absolute;inset:5%;border-radius:50%;background:radial-gradient(ellipse,color-mix(in srgb,var(--c-accent-soft) 35%,transparent),transparent 70%);pointer-events:none}
 .fibernet-page .fn-release{font-family:var(--font-mono);font-size:12px;color:var(--c-fg-soft);letter-spacing:.02em}
 .fibernet-page h1{font-size:2.6rem;line-height:1.2;margin:.5rem 0 .7rem;letter-spacing:-.035em}
 .fibernet-page .fn-lead{font-size:1.04rem;line-height:1.6;margin:.3rem auto;max-width:640px;color:var(--c-fg)}
 .fibernet-page .fn-intro{max-width:690px;margin:.7rem auto 0;color:var(--c-fg-soft)}
-.fibernet-page .fn-actions{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:center;margin:1.2rem 0 .6rem}
-.fibernet-page .fn-actions a{display:inline-flex;align-items:center;min-height:40px;padding:.4rem .95rem;border:1px solid var(--c-border);border-radius:6px;font-size:14px;text-decoration:none;color:var(--c-fg);background:var(--c-surface)}
+.fibernet-page .fn-actions{display:flex;flex-wrap:wrap;gap:.65rem;justify-content:flex-start;margin:1.2rem 0 .6rem}
+.fibernet-page .fn-actions a{display:inline-flex;align-items:center;min-height:40px;padding:.4rem .95rem;border:1px solid var(--c-border);border-radius:6px;font-size:13px;text-decoration:none;color:var(--c-fg);background:var(--c-surface)}
 .fibernet-page .fn-actions a:first-child{background:var(--c-primary);border-color:var(--c-primary);color:#fff}
 .fibernet-page .fn-language{font-size:13px;margin:.8rem 0 0;color:var(--c-fg-soft)}
 .fibernet-page .fn-section{margin:0 0 2rem}
@@ -35,7 +39,10 @@
 .fibernet-page :is(a,summary):focus-visible{outline:2px solid var(--c-primary);outline-offset:4px}
 @media(max-width:640px){
  .fibernet-page{font-size:14px;line-height:1.85}
- .fibernet-page .fn-hero{padding:20px 15px;margin-bottom:18px}
+ .fibernet-page .fn-hero{grid-template-columns:1fr;gap:0;padding:12px 0 16px;margin-bottom:18px}
+ .fibernet-page .fn-scene{height:230px;margin-top:8px}
+ .fibernet-page .fn-intro{margin-top:.6rem}
+ .fibernet-page .fn-language{margin-top:.6rem}
  .fibernet-page h1{font-size:24px}
  .fibernet-page .fn-lead{font-size:15px}
  .fibernet-page .fn-two-column{grid-template-columns:1fr;gap:.8rem;margin-bottom:1.45rem}
@@ -60,3 +67,6 @@
   .fibernet-page .fn-panel h3{font-size:16px}
 }
 @media screen and (max-width:360px){.fibernet-page h1{font-size:22px}}
+
+@media(min-width:641px) and (max-width:850px){.fibernet-page .fn-hero{gap:.8rem}.fibernet-page .fn-scene{height:300px}.fibernet-page .fn-actions{gap:.5rem}.fibernet-page .fn-actions a{padding:.35rem .65rem}}
+@media print{.fibernet-page .fn-scene{display:none}.fibernet-page .fn-hero{display:block}}

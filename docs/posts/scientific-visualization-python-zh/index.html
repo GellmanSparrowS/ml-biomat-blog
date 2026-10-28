@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Python科研绘图完全指南：从数据到发表级图表 — ML-Biomat</title>
+<title>Matplotlib与Seaborn科研绘图：图形选择与排版 — ML-Biomat</title>
 <meta name="description" content="使用 Matplotlib 与 Seaborn 绘制折线、散点、分布、热图和多幅子图，理解图形选择如何影响读者对数据的判断。结合配色、单位、不确定性、版面尺寸与导出设置，完成可直接用于论文排版的图表。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/scientific-visualization-python-zh/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="Python科研绘图完全指南：从数据到发表级图表">
+<meta property="og:title" content="Matplotlib与Seaborn科研绘图：图形选择与排版">
 <meta property="og:description" content="使用 Matplotlib 与 Seaborn 绘制折线、散点、分布、热图和多幅子图，理解图形选择如何影响读者对数据的判断。结合配色、单位、不确定性、版面尺寸与导出设置，完成可直接用于论文排版的图表。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/scientific-visualization-python-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/scientific-visualization-python-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python科研绘图完全指南：从数据到发表级图表", "description": "使用 Matplotlib 与 Seaborn 绘制折线、散点、分布、热图和多幅子图，理解图形选择如何影响读者对数据的判断。结合配色、单位、不确定性、版面尺寸与导出设置，完成可直接用于论文排版的图表。", "datePublished": "2026-06-27", "dateModified": "2026-10-28", "wordCount": 3219, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scientific-visualization-python-zh/", "image": "https://ml-biomat.com/static/images/og/scientific-visualization-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "Python科学计算", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Python科研绘图完全指南：从数据到发表级图表", "item": "https://ml-biomat.com/posts/scientific-visualization-python-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Matplotlib与Seaborn科研绘图：图形选择与排版", "description": "使用 Matplotlib 与 Seaborn 绘制折线、散点、分布、热图和多幅子图，理解图形选择如何影响读者对数据的判断。结合配色、单位、不确定性、版面尺寸与导出设置，完成可直接用于论文排版的图表。", "datePublished": "2026-06-27", "dateModified": "2026-10-28", "wordCount": 3219, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scientific-visualization-python-zh/", "image": "https://ml-biomat.com/static/images/og/scientific-visualization-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "Python科学计算", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Matplotlib与Seaborn科研绘图：图形选择与排版", "item": "https://ml-biomat.com/posts/scientific-visualization-python-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/python-tutorials/">Python科学计算</a></nav>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
-<h1>Python科研绘图完全指南：从数据到发表级图表</h1>
+<h1>Matplotlib与Seaborn科研绘图：图形选择与排版</h1>
 <div class="article-meta">
 <span>2026-06-27</span><span>·</span><span>8 分钟阅读</span><span>·</span><a href="/categories/python-tutorials/">Python科学计算</a>
 </div>
@@ -260,7 +260,7 @@ ax.plot(x, y2, &quot;--&quot;, label=&quot;Treated&quot;)
 
 <p>Python科研绘图的魅力在于其可复现性。一旦你写好了绘制某张图表的脚本，当实验数据更新时，只需重新运行脚本即可生成更新后的图表。这消除了手动更新Excel图表时常见的版本混乱和人为错误。将你的绘图脚本与论文放在同一个Git仓库中管理，是实现可复现研究的良好实践。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/python-tools-materials-research-zh/">← Python科研工具箱完全指南：材料科学与生物研究必备</a></span><span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合完全指南：从线性回归到非线性建模 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合完全指南：从线性回归到非线性建模</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/python-tools-materials-research-zh/">← 材料研究的Python工具箱：计算、绘图与数据分析</a></span><span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合：模型、残差与参数不确定性 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python科学计算环境：安装、配置与版本管理</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合：模型、残差与参数不确定性</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

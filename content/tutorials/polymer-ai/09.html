@@ -1,10 +1,10 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#backbone">01　读懂多肽的局部结构</a><a href="#folding">02　折叠、柔性与功能</a><a href="#evidence">03　从实验标签建立任务</a><a href="#models">04　逐步丰富序列表示</a><a href="#experiment">05　运行实验与阅读结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 9 节 · 让序列、构象与实验标注相互对照</p>
-<h1>蛋白质：从序列、折叠到柔性与功能<span>读懂一条生命长链，再让AI学习它的局部差异</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#backbone">01　读懂多肽的局部结构</a><a href="#folding">02　折叠、柔性与功能</a><a href="#evidence">03　从实验标签建立任务</a><a href="#models">04　逐步丰富序列表示</a><a href="#experiment">05　运行实验与阅读结果</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 9 节 · 让序列、构象与实验标注相互对照</p>
+<h1>蛋白质：从序列、折叠到柔性与功能</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">含酶洗衣液能帮助去除某些污渍，头发能弯曲，鸡蛋受热后会凝固，这些现象都与蛋白质有关。同样由氨基酸连接而成的长链，为什么能承担如此不同的工作？答案要从链的连接继续往下追：哪些位置能够转动，哪些部分常常靠在一起，哪些区域保留了许多不同的姿势。本节把这些分子图景接到一个实际AI任务上：输入蛋白质序列，学习哪些位置更可能属于实验标注的无序区域。</p>
-<p>这项任务能帮助研究者安排后续工作。例如，制作一个蛋白质片段用于实验时，需要知道截取位置可能落在稳定结构内部，还是处在柔性的连接区；比较一组候选序列时，也需要把局部性质的差异定位到具体残基。我们会使用公开参考数据，从最容易解释的氨基酸计数开始，逐步运行局部卷积网络和预训练蛋白质语言模型。读者可以在同一页查看完整代码、真实训练曲线，以及每一条预测究竟在什么标签上接受评价。</p>
+<p>这项任务能帮助研究者安排后续工作。例如，制作一个蛋白质片段用于实验时，需要知道截取位置可能落在稳定结构内部，还是处在柔性的连接区；比较一组候选序列时，也需要把局部性质的差异定位到具体残基。我们会使用公开参考数据，从最容易解释的氨基酸计数开始，逐步运行局部卷积网络和预训练蛋白质语言模型。模型以无序区参考标注评价逐残基预测，并通过训练曲线观察学习过程。</p>
 
 <section id="backbone"><h2><span class="num">01</span>一根有方向、有侧链、也有转动限制的长链</h2>
 <p>第三节介绍过蛋白质由氨基酸残基组成。现在把镜头拉近一点：沿多肽主链走，会反复经过氮原子、α碳原子和羰基碳原子，常记成N—Cα—C′。其中Cα连接着区分氨基酸种类的侧链。把主链比作一条连接带，侧链就像安装在不同位置的附件：有的容易与水接触，有的更适合埋在疏水环境中，有的带电，还有的能形成额外的共价连接。附件的种类和排列共同改变整条链的行为。</p>
@@ -78,7 +78,7 @@
 </section>
 
 <section id="experiment"><h2><span class="num">05</span>运行完整实验，读懂模型真正学会了什么</h2>
-<p>下面的代码从固定版本的参考文件开始，完成筛选、相似性分组、特征提取、模型训练和绘图。首次运行会下载约31 MB的ESM-2权重及参考数据，之后复用本地下载文件；序列分组与训练过程可以重新计算。环境需要NumPy、Matplotlib、scikit-learn、Biopython、PyTorch、Transformers和requests。本页保存的是CPU运行结果，使用PyTorch 2.14.1、Transformers 5.20.2与Biopython 1.88；页面中的公式、图像和交互已经嵌入，离线也能阅读。</p>
+<p>下面的代码从固定版本的参考文件开始，完成筛选、相似性分组、特征提取、模型训练和绘图。首次运行会下载约31 MB的ESM-2权重及参考数据，之后复用本地下载文件；序列分组与训练过程可以重新计算。环境需要NumPy、Matplotlib、scikit-learn、Biopython、PyTorch、Transformers和requests。本页保存的是CPU运行结果，使用PyTorch 2.14.1、Transformers 5.20.2与Biopython 1.88。</p>
 <p>阅读代码时，可以沿三处关键连接往下看：序列与标签长度必须一致，整条蛋白质先得到所属数据组，然后只有标签为0或1的位置进入损失和指标计算。预训练模型生成特征时去掉序列起始与结束的特殊标记，使第一个特征向量准确对应第一个真实残基。预测结果保存了每个位置的分数、每个模型的参数和数据划分，因而能够从一幅图追到具体样本与模型参数。</p>
 <div class="code-section" id="code-detail"><div class="code-bar"><span>完整Python例子 · PyTorch · Transformers · scikit-learn · Biopython · NumPy · Matplotlib</span><a download="L09_example.py" href="/static/tutorials/polymer-ai/assets/8494be76895f823dd6c243d2.py">下载代码</a></div><pre id="python-code"><code class="language-python"><span class="sd">"""Real CAID reference labels, similarity-group splits, and protein sequence learning.</span>
 <span class="sd">Install: numpy matplotlib scikit-learn biopython torch transformers requests.</span>

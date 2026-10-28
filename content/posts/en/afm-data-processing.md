@@ -9,7 +9,7 @@ slug: "afm-force-curve-python"
 description: "Convert AFM deflection into force, correct the baseline and identify contact before fitting indentation data. Calibration geometry, analytic Hertz curves and Python functions connect measured channels to adhesion and elastic modulus with explicit units."
 ---
 
-## Why This Guide Exists
+## From AFM Signals to Mechanical Properties {#why-this-guide-exists}
 
 If you work with AFM force spectroscopy on soft biomaterials (collagen fibers, silk, hydrogels, cells), you have probably faced the same frustration: your instrument exports a pile of `.txt` or `.csv` files, and you spend hours manually processing them in proprietary software or Excel.
 

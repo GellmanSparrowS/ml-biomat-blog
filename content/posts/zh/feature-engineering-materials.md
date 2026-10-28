@@ -1,5 +1,5 @@
 ---
-title: "材料科学中的特征工程：从实验数据到机器学习就绪数据"
+title: "材料特征工程：描述符构造、编码与特征选择"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "machine-learning"

@@ -1,5 +1,5 @@
 ---
-title: "Scientific Data Visualization with Python: Publication-Ready Figures"
+title: "Scientific Plotting with Matplotlib and Seaborn"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "python-tutorials"

@@ -1,5 +1,5 @@
 ---
-title: "NumPy完全入门：实验室数据处理必备"
+title: "NumPy实验数据处理：数组、索引与广播运算"
 date: "2026-06-27"
 updated: "2026-10-28"
 category: "python-tutorials"

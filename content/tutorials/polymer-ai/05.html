@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#rulers">01　给长链准备三把尺子</a><a href="#random-walk">02　为什么出现平方根</a><a href="#gyration">03　让全部珠子参加测量</a><a href="#learning">04　让AI学习尺寸规律</a><a href="#experiment">05　完整计算与长度外推</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 5 节 · 从分子姿势到可学习的尺寸</p>
-<h1>长链蜷起来以后有多大<span>末端距、回转半径与AI的长度外推</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#rulers">01　给长链准备三把尺子</a><a href="#random-walk">02　为什么出现平方根</a><a href="#gyration">03　让全部珠子参加测量</a><a href="#learning">04　让AI学习尺寸规律</a><a href="#experiment">05　完整计算与长度外推</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 5 节 · 从分子姿势到可学习的尺寸</p>
+<h1>高分子链尺寸：末端距、回转半径与标度关系</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">把一根耳机线拉直，再松松地放进掌心，线的长度没有变，占据的空间却变了。溶液中的长链也会遇到类似的问题：一条由许多单元连接起来的分子，沿着骨架可以很长，在空间里却常常蜷成一团。要判断它怎样穿过孔道、与另一条链接触，或者在溶液中呈现怎样的整体形状，首先得说明我们打算用哪一把尺子量它。</p>
 <p>这一节从熟悉的坐标和距离开始，逐步建立两种描述长链尺寸的量：末端距与回转半径。我们会亲手算一条很短的链，再统计许多随机生成的长链，最后让AI从链长和段长学习尺寸规律。学习实验里留出了一批更长的链，它们会帮助我们看清一个实际的研究问题：模型在已有样本附近算得准确，换到新的长度范围以后，会沿着什么规律继续预测？</p>

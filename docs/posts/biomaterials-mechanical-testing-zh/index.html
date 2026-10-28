@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>生物材料力学测试：试样制备、仪器设置与无伪影数据 — ML-Biomat</title>
+<title>生物材料力学测试：试样制备、应变测量与误差 — ML-Biomat</title>
 <meta name="description" content="从试样几何、水合状态、装夹与应变测量出发，建立可重复的生物材料力学测试流程。结合力到应力的换算、直径误差传播和报告要点，明确模量、强度与耗能所对应的测试条件。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/">
@@ -14,12 +14,12 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="生物材料力学测试：试样制备、仪器设置与无伪影数据">
+<meta property="og:title" content="生物材料力学测试：试样制备、应变测量与误差">
 <meta property="og:description" content="从试样几何、水合状态、装夹与应变测量出发，建立可重复的生物材料力学测试流程。结合力到应力的换算、直径误差传播和报告要点，明确模量、强度与耗能所对应的测试条件。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物材料力学测试：试样制备、仪器设置与无伪影数据", "description": "从试样几何、水合状态、装夹与应变测量出发，建立可重复的生物材料力学测试流程。结合力到应力的换算、直径误差传播和报告要点，明确模量、强度与耗能所对应的测试条件。", "datePublished": "2026-09-06", "dateModified": "2026-10-28", "wordCount": 5239, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "实验表征与数据分析", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "生物材料力学测试：试样制备、仪器设置与无伪影数据", "item": "https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物材料力学测试：试样制备、应变测量与误差", "description": "从试样几何、水合状态、装夹与应变测量出发，建立可重复的生物材料力学测试流程。结合力到应力的换算、直径误差传播和报告要点，明确模量、强度与耗能所对应的测试条件。", "datePublished": "2026-09-06", "dateModified": "2026-10-28", "wordCount": 5239, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "实验表征与数据分析", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "生物材料力学测试：试样制备、应变测量与误差", "item": "https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -34,7 +34,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/wet-lab-data/">实验表征与数据分析</a></nav>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
-<h1>生物材料力学测试：试样制备、仪器设置与无伪影数据</h1>
+<h1>生物材料力学测试：试样制备、应变测量与误差</h1>
 <div class="article-meta">
 <span>2026-09-06</span><span>·</span><span>14 分钟阅读</span><span>·</span><a href="/categories/wet-lab-data/">实验表征与数据分析</a>
 </div>
@@ -125,7 +125,7 @@
 <li>Instron. <a href="https://www.instron.com/en/resources/literature/compliance-correction/">Universal Testing Machine Compliance</a>.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/python-env-setup-zh/">← Python 科学计算环境完全搭建指南：从零到生产力</a></span><span><a href="/posts/coarse-grained-biomolecular-networks-zh/">生物分子网络的粗粒化建模：从映射方案到验证方法 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/python-env-setup-zh/">← Python科学计算环境：安装、配置与版本管理</a></span><span><a href="/posts/coarse-grained-biomolecular-networks-zh/">生物分子网络的粗粒化建模：从映射方案到验证方法 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力—应变分析：弹性模量、强度与能量密度</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM纤维图像分析：分割、直径与取向测量</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">AFM力曲线分析：信号标定与弹性模量拟合</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#water">01　水与长链怎样成胶</a><a href="#connections">02　从连接到贯通</a><a href="#mechanics">03　怎样承受一次变形</a><a href="#learning">04　让AI读懂网络</a><a href="#experiment">05　运行与解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 13 节 · 从含水长链到可以学习的力学网络</p>
-<h1>水很多，为什么还能成形：网络与凝胶<span>看清谁与谁连接，再问这些连接怎样传递一次变形</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#water">01　水与长链怎样成胶</a><a href="#connections">02　从连接到贯通</a><a href="#mechanics">03　怎样承受一次变形</a><a href="#learning">04　让AI读懂网络</a><a href="#experiment">05　运行与解释结果</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 13 节 · 从含水长链到可以学习的力学网络</p>
+<h1>高分子网络与凝胶：交联、贯通和弹性</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">一碗水会随容器改变形状，一块含有很多水的果冻却可以被切开、拿起，还会在轻碰后晃动。水没有突然变成硬材料，变化发生在水中的长链之间：一些连接把它们组织成能够共同响应变形的网络。研究这种结构，可以帮助我们理解食品的口感、软组织的支撑，以及怎样设计含水又有一定承载能力的生物材料。本节把这个问题交给物理计算和AI共同处理：先分清网络是否贯通，再预测它受到指定变形时需要多大的力。</p>
 <p>前一节讨论了分子在空间中怎样富集。现在把目光移到富集区域内部：即使有同样多的长链、同样多的连接，连接的位置也可能让样品表现完全不同。可以想象两张用相同数量绳子编成的网，一张把上下两端连在一起，另一张的绳子集中在两个互不相连的半边。计数相同，力却找不到相同的传递路线。这样的差别，正适合用图来表示，也为图神经网络提供了具体的科学任务。</p>

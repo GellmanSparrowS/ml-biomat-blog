@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计 — ML-Biomat</title>
+<title>工程超结构力学：折纸、蜂巢、拉胀与点阵 — ML-Biomat</title>
 <meta name="description" content="从变形机制比较折纸、旋转单元拉胀结构、蜂巢、点阵与多稳态结构。借助几何示意和密度标度曲线，建立结构选择与刚度、横向响应、吸能之间的联系，并讨论建模与制备方法。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/engineered-superstructures-zh/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计">
+<meta property="og:title" content="工程超结构力学：折纸、蜂巢、拉胀与点阵">
 <meta property="og:description" content="从变形机制比较折纸、旋转单元拉胀结构、蜂巢、点阵与多稳态结构。借助几何示意和密度标度曲线，建立结构选择与刚度、横向响应、吸能之间的联系，并讨论建模与制备方法。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/engineered-superstructures-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/engineered-superstructures-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计", "description": "从变形机制比较折纸、旋转单元拉胀结构、蜂巢、点阵与多稳态结构。借助几何示意和密度标度曲线，建立结构选择与刚度、横向响应、吸能之间的联系，并讨论建模与制备方法。", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 9915, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/engineered-superstructures-zh/", "image": "https://ml-biomat.com/static/images/og/engineered-superstructures-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "材料与结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计", "item": "https://ml-biomat.com/posts/engineered-superstructures-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "工程超结构力学：折纸、蜂巢、拉胀与点阵", "description": "从变形机制比较折纸、旋转单元拉胀结构、蜂巢、点阵与多稳态结构。借助几何示意和密度标度曲线，建立结构选择与刚度、横向响应、吸能之间的联系，并讨论建模与制备方法。", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 9915, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/engineered-superstructures-zh/", "image": "https://ml-biomat.com/static/images/og/engineered-superstructures-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "材料与结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "工程超结构力学：折纸、蜂巢、拉胀与点阵", "item": "https://ml-biomat.com/posts/engineered-superstructures-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">材料与结构</a></nav>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
-<h1>工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</h1>
+<h1>工程超结构力学：折纸、蜂巢、拉胀与点阵</h1>
 <div class="article-meta">
 <span>2026-06-30</span><span>·</span><span>26 分钟阅读</span><span>·</span><a href="/categories/biomaterials/">材料与结构</a>
 </div>

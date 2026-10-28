@@ -1,5 +1,5 @@
 ---
-title: "Engineered Superstructures: Origami, Lattices, and Beyond"
+title: "Engineered Superstructures: Origami, Auxetics and Lattices"
 date: "2026-06-30"
 updated: "2026-10-28"
 category: "biomaterials"

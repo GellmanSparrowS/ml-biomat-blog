@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ML for Fiber Mechanics: Data Prep to Model Deployment — ML-Biomat</title>
+<title>Predicting Fiber Mechanics: Features, Regression and Validation — ML-Biomat</title>
 <meta name="description" content="Build a small-data regression workflow for fiber mechanics, from specimen features and preprocessing to model comparison. Examine cross-validation, bootstrap variation, and feature importance to connect numerical predictions with material descriptors.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/ml-predict-fiber-mechanics/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="ML for Fiber Mechanics: Data Prep to Model Deployment">
+<meta property="og:title" content="Predicting Fiber Mechanics: Features, Regression and Validation">
 <meta property="og:description" content="Build a small-data regression workflow for fiber mechanics, from specimen features and preprocessing to model comparison. Examine cross-validation, bootstrap variation, and feature importance to connect numerical predictions with material descriptors.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/ml-predict-fiber-mechanics/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ML for Fiber Mechanics: Data Prep to Model Deployment", "description": "Build a small-data regression workflow for fiber mechanics, from specimen features and preprocessing to model comparison. Examine cross-validation, bootstrap variation, and feature importance to connect numerical predictions with material descriptors.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 503, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/", "image": "https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/en/"}, {"@type": "ListItem", "position": 3, "name": "ML for Fiber Mechanics: Data Prep to Model Deployment", "item": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Predicting Fiber Mechanics: Features, Regression and Validation", "description": "Build a small-data regression workflow for fiber mechanics, from specimen features and preprocessing to model comparison. Examine cross-validation, bootstrap variation, and feature importance to connect numerical predictions with material descriptors.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 503, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/", "image": "https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/en/"}, {"@type": "ListItem", "position": 3, "name": "Predicting Fiber Mechanics: Features, Regression and Validation", "item": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/machine-learning/en/">Machine Learning</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
-<h1>ML for Fiber Mechanics: Data Prep to Model Deployment</h1>
+<h1>Predicting Fiber Mechanics: Features, Regression and Validation</h1>
 <div class="article-meta">
 <span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/machine-learning/en/">Machine Learning</a>
 </div>
@@ -140,7 +140,7 @@ def predict_with_uncertainty(model, X, n_iter=100):
 
 <p>Domain adaptation addresses the simulation-to-experiment gap. Models trained on abundant simulation data often fail on experimental measurements due to systematic differences. Domain adaptation techniques from transfer learning can align the feature distributions, allowing models trained on simulations to generalize to experimental data with minimal fine-tuning.</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/lammps-first-simulation/">← Molecular Dynamics Basics: Your First LAMMPS Simulation</a></span><span><a href="/posts/multiscale-modeling-biomaterials-intro/">A Practical Introduction to Multiscale Modeling for Biomaterials →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/lammps-first-simulation/">← Molecular Dynamics Basics: Your First LAMMPS Simulation</a></span><span><a href="/posts/multiscale-modeling-biomaterials-intro/">Multiscale Modeling of Biomaterials: Models and Parameter Transfer →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-ml/">Deep Learning: Neural Networks, Backpropagation and Training</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">Machine Learning Classification: Models, Metrics and Validation</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

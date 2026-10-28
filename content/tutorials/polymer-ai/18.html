@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#recognition">01　识别需要哪些结构信息</a><a href="#graph">02　把连接写成图</a><a href="#messages">03　从消息到学习</a><a href="#geometry">04　几何与评价条件</a><a href="#experiment">05　运行并解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 18 节 · 让结构信息进入模型的每一步计算</p>
-<h1>怎样让模型读懂分子的连接与材料结构<span>从一张连接图，到可以训练的消息传递</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#recognition">01　识别需要哪些结构信息</a><a href="#graph">02　把连接写成图</a><a href="#messages">03　从消息到学习</a><a href="#geometry">04　几何与评价条件</a><a href="#experiment">05　运行并解释结果</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 18 节 · 让结构信息进入模型的每一步计算</p>
+<h1>图神经网络：分子连接的表示与性质预测</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">搭积木时，盒子里有哪些零件固然重要，零件怎样连接同样重要。相同数量的积木可以搭成桥，也可以围成一个框；相同组成的糖链，也可能因为连接位置和构型不同，表现出不同的分子识别。前面的章节已经用组成、局部结构特征和凝胶网络做过预测。本节把图神经网络的计算过程展开：先保存节点与连接，再让邻居交换信息，最后从整张图得到预测。我们会在真实糖链阵列数据上训练模型，并进一步讨论空间形状和物理对称性怎样帮助选择合适的表示。</p>
 

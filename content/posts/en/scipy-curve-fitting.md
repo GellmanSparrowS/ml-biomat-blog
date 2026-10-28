@@ -1,5 +1,5 @@
 ---
-title: "Practical Curve Fitting with SciPy: From Basics to Advanced Models"
+title: "SciPy Curve Fitting: Models, Residuals and Uncertainty"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "python-tutorials"

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NumPy for Materials Research: From Zero to Productive — ML-Biomat</title>
+<title>NumPy for Materials Data: Arrays, Indexing and Broadcasting — ML-Biomat</title>
 <meta name="description" content="Load experimental measurements into arrays and work with slicing, Boolean masks, broadcasting, and summary statistics. Use these operations to align observations, center columns, fit simple relationships, and save processed numerical results.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/numpy-crash-course/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="NumPy for Materials Research: From Zero to Productive">
+<meta property="og:title" content="NumPy for Materials Data: Arrays, Indexing and Broadcasting">
 <meta property="og:description" content="Load experimental measurements into arrays and work with slicing, Boolean masks, broadcasting, and summary statistics. Use these operations to align observations, center columns, fit simple relationships, and save processed numerical results.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/numpy-crash-course/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/numpy-crash-course.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy for Materials Research: From Zero to Productive", "description": "Load experimental measurements into arrays and work with slicing, Boolean masks, broadcasting, and summary statistics. Use these operations to align observations, center columns, fit simple relationships, and save processed numerical results.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 482, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Scientific Computing with Python", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "NumPy for Materials Research: From Zero to Productive", "item": "https://ml-biomat.com/posts/numpy-crash-course/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy for Materials Data: Arrays, Indexing and Broadcasting", "description": "Load experimental measurements into arrays and work with slicing, Boolean masks, broadcasting, and summary statistics. Use these operations to align observations, center columns, fit simple relationships, and save processed numerical results.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 482, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Scientific Computing with Python", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "NumPy for Materials Data: Arrays, Indexing and Broadcasting", "item": "https://ml-biomat.com/posts/numpy-crash-course/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/python-tutorials/en/">Scientific Computing with Python</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
-<h1>NumPy for Materials Research: From Zero to Productive</h1>
+<h1>NumPy for Materials Data: Arrays, Indexing and Broadcasting</h1>
 <div class="article-meta">
 <span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Scientific Computing with Python</a>
 </div>
@@ -278,7 +278,7 @@ print(f&quot;Contact stiffness: {contact_stiffness:.3f} nN/nm&quot;)
 <li>VanderPlas, J. (2016). <em>Python Data Science Handbook</em>. O'Reilly Media.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/multiscale-modeling-biomaterials-intro/">← A Practical Introduction to Multiscale Modeling for Biomaterials</a></span><span><a href="/posts/pandas-materials-data/">Pandas for Materials Data Processing →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/multiscale-modeling-biomaterials-intro/">← Multiscale Modeling of Biomaterials: Models and Parameter Transfer</a></span><span><a href="/posts/pandas-materials-data/">Pandas for Materials Data Processing →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">SciPy Curve Fitting: Models, Residuals and Uncertainty</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

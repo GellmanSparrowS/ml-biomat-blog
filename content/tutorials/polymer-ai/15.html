@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#silk">01　从溶液到丝线</a><a href="#processing">02　把加工过程写清</a><a href="#hierarchy">03　层级与界面怎样传力</a><a href="#learning">04　AI在什么时候得到信息</a><a href="#experiment">05　运行真实数据例子</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 15 节 · 把分子、加工与样品放进同一个研究问题</p>
-<h1>从分子到样品：制备、加工与层级结构<span>一根丝线的性能，也写在它走过的加工路径里</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#silk">01　从溶液到丝线</a><a href="#processing">02　把加工过程写清</a><a href="#hierarchy">03　层级与界面怎样传力</a><a href="#learning">04　AI在什么时候得到信息</a><a href="#experiment">05　运行真实数据例子</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 15 节 · 把分子、加工与样品放进同一个研究问题</p>
+<h1>从分子到样品：制备、加工与层级结构</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">同一团面，揉、擀、拉以后可以变成不同的形状；做好的面条再经过煮制和晾干，手感又会变化。原料给出了可能形成哪些结构的基础，加工决定其中哪些结构得以形成和保留。生物大分子材料也有这样的特点：知道一根丝线由什么蛋白质组成，还需要知道它怎样从含水原液变成纤维。本节沿着这条成形路线，认识牵伸、水分、时间尺度和层级结构，再用公开的丝纤维实验数据训练模型，比较制备前的工艺信息与制备后的结构信息分别能帮助我们预测什么。</p>
 
@@ -79,7 +79,7 @@
 </section>
 
 <section id="experiment"><h2><span class="num">05</span>运行完整例子，读懂四档工艺留下的证据</h2>
-<p>下面的代码从作者公开的数据地址取得工作簿，并核对文件内容的SHA-256值。它读取断裂点和代表性曲线，计算每档的均值与试样标准差，执行四次整档留出，最后绘制六幅图。第一次运行需要下载数据；把同一份Data.xlsx放在运行目录中以后，代码便会直接读取它。网页已经保存了本次执行的图像和数值，阅读公式、代码和结果都可以在本页完成。</p>
+<p>下面的代码从作者公开的数据地址取得工作簿，并核对文件内容的SHA-256值。它读取断裂点和代表性曲线，计算每档的均值与试样标准差，执行四次整档留出，最后绘制六幅图。第一次运行需要下载数据；把同一份Data.xlsx放在运行目录中以后，代码便会直接读取它。</p>
 <p>读代码时可以顺着数据走：observations保存108条断裂记录，groups保存四档条件的统计，X包含牵伸比和结构比例，Y包含两个性能目标。每次循环先确定留下哪一档，再用另外三档计算标准化参数和训练模型。代码另用线性方程的直接求解复算岭回归，检查它与软件模型给出的预测相同。这样，公式、模型调用和最终图中的数值能够相互对应。</p>
 <div class="code-section" id="code-detail"><div class="code-bar"><span>完整Python例子 · NumPy · scikit-learn · Matplotlib · openpyxl · requests</span><a download="L15_example.py" href="/static/tutorials/polymer-ai/assets/77e4a8b48e5b04ab0cc16dd4.py">下载代码</a></div><pre id="python-code"><code class="language-python"><span class="sd">"""Silk processing: reproduce a four-condition, group-held-out experiment.</span>
 

@@ -1,5 +1,5 @@
 ---
-title: "SciPy曲线拟合完全指南：从线性回归到非线性建模"
+title: "SciPy曲线拟合：模型、残差与参数不确定性"
 date: "2026-06-27"
 updated: "2026-10-28"
 category: "python-tutorials"

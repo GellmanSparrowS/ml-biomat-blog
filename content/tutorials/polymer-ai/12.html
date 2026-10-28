@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#objects">01　分清聚成了什么</a><a href="#mixing">02　混合自由能的来由</a><a href="#coexistence">03　两相与细胞富集</a><a href="#learning">04　让AI学习条件图</a><a href="#experiment">05　运行并检查边界</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 12 节 · 从分子间的联系到一张可以检验的相图</p>
-<h1>分子怎样聚到一起：自组装、相分离与凝聚体<span>先弄清“聚在一起”发生了什么，再让AI学习它发生的条件</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#objects">01　分清聚成了什么</a><a href="#mixing">02　混合自由能的来由</a><a href="#coexistence">03　两相与细胞富集</a><a href="#learning">04　让AI学习条件图</a><a href="#experiment">05　运行并检查边界</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 12 节 · 从分子间的联系到一张可以检验的相图</p>
+<h1>分子怎样聚到一起：自组装、相分离与凝聚体</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">把糖放进水中搅拌，通常会得到看起来均匀的一杯糖水；把油和水混合，则常会看到小液滴逐渐聚成两层。进入生物大分子的世界，情况更加丰富：蛋白质可以排成纤维，核酸可以组装成设计好的形状，某些分子还会在细胞中形成富集的小区域。它们都涉及分子之间的联系，却需要用不同的测量来回答“形成了什么”。本节从这些看得见的现象出发，学习怎样把一个聚集问题整理成可计算、可学习的科学任务。</p>
 <p>假设我们有一种蛋白质溶液，希望知道改变浓度和溶液条件后，它会保持均匀，还是出现分子较密集的区域。逐个配样观察能够积累证据，物理模型可以帮助安排条件，AI则可以从已经标好的样本中学习状态边界。后面的完整例子会建立一套明确的高分子溶液模型，数值求出共存边界，再训练分类器近似这张相图。数据、标签、模型与测试会在同一页展开，尤其关注最容易判断错的边界附近。</p>

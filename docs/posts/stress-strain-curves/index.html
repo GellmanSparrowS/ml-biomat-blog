@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Stress-Strain Curves: A Materials Science Primer — ML-Biomat</title>
+<title>Stress–Strain Analysis: Modulus, Strength and Energy Density — ML-Biomat</title>
 <meta name="description" content="Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/stress-strain-curves/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="Stress-Strain Curves: A Materials Science Primer">
+<meta property="og:title" content="Stress–Strain Analysis: Modulus, Strength and Energy Density">
 <meta property="og:description" content="Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/stress-strain-curves/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/stress-strain-curves.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Stress-Strain Curves: A Materials Science Primer", "description": "Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 581, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/stress-strain-curves/", "image": "https://ml-biomat.com/static/images/og/stress-strain-curves.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Experimental Characterization & Data Analysis", "item": "https://ml-biomat.com/categories/wet-lab-data/en/"}, {"@type": "ListItem", "position": 3, "name": "Stress-Strain Curves: A Materials Science Primer", "item": "https://ml-biomat.com/posts/stress-strain-curves/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Stress–Strain Analysis: Modulus, Strength and Energy Density", "description": "Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 581, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/stress-strain-curves/", "image": "https://ml-biomat.com/static/images/og/stress-strain-curves.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Experimental Characterization & Data Analysis", "item": "https://ml-biomat.com/categories/wet-lab-data/en/"}, {"@type": "ListItem", "position": 3, "name": "Stress–Strain Analysis: Modulus, Strength and Energy Density", "item": "https://ml-biomat.com/posts/stress-strain-curves/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/wet-lab-data/en/">Experimental Characterization & Data Analysis</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
-<h1>Stress-Strain Curves: A Materials Science Primer</h1>
+<h1>Stress–Strain Analysis: Modulus, Strength and Energy Density</h1>
 <div class="article-meta">
 <span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/wet-lab-data/en/">Experimental Characterization & Data Analysis</a>
 </div>
@@ -129,7 +129,7 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 
 <p>Cyclic loading reveals the Mullins effect in many biomaterials: the stress required to reach a given strain decreases with repeated cycling. This stress softening stabilizes after several cycles and is attributed to the progressive rupture of weaker sacrificial bonds within the network. The stabilized cycle is typically reported as the preconditioned response.</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/silk-fibroin-structure-mechanics/">← Silk Fibroin: From Molecular Structure to Mechanical Function</a></span><span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/silk-fibroin-structure-mechanics/">← Silk Fibroin: From Molecular Structure to Mechanical Function</a></span><span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">SEM Fiber Image Analysis: Segmentation, Diameter and Orientation</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

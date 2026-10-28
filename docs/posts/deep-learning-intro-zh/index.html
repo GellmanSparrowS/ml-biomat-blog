@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>深度学习的本质：从特征工程到表示学习 — ML-Biomat</title>
+<title>深度学习基础：神经网络、反向传播与模型训练 — ML-Biomat</title>
 <meta name="description" content="从神经元的加权求和与激活函数出发，逐步理解前向传播、损失函数、反向传播和梯度更新。再联系卷积、序列与注意力模型，讨论正则化、迁移学习及小样本研究中的选用方法。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/deep-learning-intro-zh/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="深度学习的本质：从特征工程到表示学习">
+<meta property="og:title" content="深度学习基础：神经网络、反向传播与模型训练">
 <meta property="og:description" content="从神经元的加权求和与激活函数出发，逐步理解前向传播、损失函数、反向传播和梯度更新。再联系卷积、序列与注意力模型，讨论正则化、迁移学习及小样本研究中的选用方法。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/deep-learning-intro-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/deep-learning-intro-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "深度学习的本质：从特征工程到表示学习", "description": "从神经元的加权求和与激活函数出发，逐步理解前向传播、损失函数、反向传播和梯度更新。再联系卷积、序列与注意力模型，讨论正则化、迁移学习及小样本研究中的选用方法。", "datePublished": "2026-07-03", "dateModified": "2026-10-28", "wordCount": 7258, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/deep-learning-intro-zh/", "image": "https://ml-biomat.com/static/images/og/deep-learning-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "深度学习的本质：从特征工程到表示学习", "item": "https://ml-biomat.com/posts/deep-learning-intro-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "深度学习基础：神经网络、反向传播与模型训练", "description": "从神经元的加权求和与激活函数出发，逐步理解前向传播、损失函数、反向传播和梯度更新。再联系卷积、序列与注意力模型，讨论正则化、迁移学习及小样本研究中的选用方法。", "datePublished": "2026-07-03", "dateModified": "2026-10-28", "wordCount": 7258, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/deep-learning-intro-zh/", "image": "https://ml-biomat.com/static/images/og/deep-learning-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "深度学习基础：神经网络、反向传播与模型训练", "item": "https://ml-biomat.com/posts/deep-learning-intro-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/machine-learning/">机器学习</a></nav>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
-<h1>深度学习的本质：从特征工程到表示学习</h1>
+<h1>深度学习基础：神经网络、反向传播与模型训练</h1>
 <div class="article-meta">
 <span>2026-07-03</span><span>·</span><span>20 分钟阅读</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
 </div>
@@ -507,7 +507,7 @@ print(f&quot;Trainable / Total params: {trainable:,} / {total:,}&quot;)
 <li>Goodfellow, I., Bengio, Y., & Courville, A. (2016). <em>Deep Learning</em>. MIT Press. https://www.deeplearningbook.org/</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/networkx-fundamentals-zh/">← NetworkX 基础：用 Python 理解、构建与分析网络</a></span><span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/networkx-fundamentals-zh/">← NetworkX 基础：用 Python 理解、构建与分析网络</a></span><span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/feature-engineering-materials-zh/">材料特征工程：描述符构造、编码与特征选择</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

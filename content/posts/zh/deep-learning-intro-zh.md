@@ -1,5 +1,5 @@
 ---
-title: "深度学习的本质：从特征工程到表示学习"
+title: "深度学习基础：神经网络、反向传播与模型训练"
 date: "2026-07-03"
 updated: "2026-10-28"
 category: "machine-learning"

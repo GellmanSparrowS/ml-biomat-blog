@@ -33,7 +33,7 @@
 <span class="lang-switch"><a data-language="en" role="link" aria-disabled="true" tabindex="-1" title="该页暂无英文版">EN</a><a data-language="zh" href="/tutorials/polymer-ai/10-glycan-connections/" class="active" aria-current="true">中文</a></span>
 </div></header><main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">材料与结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#connections">01　读懂糖链怎样连接</a><a href="#water">02　水合与材料支撑</a><a href="#recognition">03　从识别到实验数据</a><a href="#representation">04　让模型读懂连接</a><a href="#experiment">05　运行代码并解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从一根纤维到细胞表面的识别信号</p>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#connections">01　读懂糖链怎样连接</a><a href="#water">02　水合与材料支撑</a><a href="#recognition">03　从识别到实验数据</a><a href="#representation">04　让模型读懂连接</a><a href="#experiment">05　运行代码并解释结果</a><a href="#sources">资料与延伸阅读</a></nav></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从一根纤维到细胞表面的识别信号</p>
 <h1>糖链：连接方式怎样改变水合、识别与支撑</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">米饭里的淀粉和棉布里的纤维素，都以葡萄糖为基本构件，却在生活中承担着很不一样的工作。前者是常见的食物成分，后者形成可以纺成线的纤维。再看人体，细胞表面伸出的糖链参与识别，组织中的一些多糖则与水、离子和蛋白质共同影响材料的柔软程度。要理解这些差别，我们需要看清糖残基之间的连接，把化学结构、周围环境与实际测量接起来。</p>
@@ -121,7 +121,7 @@
 </section>
 
 <section id="experiment"><h2><span class="num">05</span>运行真实实验，读懂模型得到的结果</h2>
-<p>下面的完整程序会下载并核对同一份工作簿，解析糖链，保留符合结构规则的记录，再执行组成分组、表示构造和回归。首次运行需要网络读取数据，之后可使用已保存的文件。程序使用NumPy、SciPy、Matplotlib、openpyxl和requests，普通CPU即可完成本节实验。输出包括六幅图、全部学习样本与预测、排除记录和最终模型参数；本页已经展示实际运行结果，阅读时可以逐段对照。</p>
+<p>下面的完整程序会下载并核对同一份工作簿，解析糖链，保留符合结构规则的记录，再执行组成分组、表示构造和回归。首次运行需要网络读取数据，之后可使用已保存的文件。程序使用NumPy、SciPy、Matplotlib、openpyxl和requests，普通CPU即可完成本节实验。输出包括六幅图、全部学习样本与预测、排除记录和最终模型参数。</p>
 <div class="code-section" id="code-detail"><div class="code-bar"><span>完整Python例子 · NumPy · SciPy · Matplotlib · openpyxl · requests</span><a download="L10_example.py" href="/static/tutorials/polymer-ai/assets/4148e98a50b016fe520d0518.py">下载代码</a></div><pre id="python-code"><code class="language-python"><span class="sd">"""Glycan connectivity and a learned kernel: reproduce the real CMA1 array example.</span>
 <span class="sd">Install: python -m pip install numpy scipy matplotlib openpyxl requests</span>
 <span class="sd">Data: Lundstrøm et al. (2024), doi:10.3762/bjoc.20.31, CC BY 4.0.</span>

@@ -75,7 +75,12 @@ def md_to_html(text):
             out.append(f"</{list_tag}>"); in_list = False
         m = re.match(r'^(#{1,6})\s+(.+)$', line)
         if m:
-            lvl = len(m.group(1)); inner = inline_md(m.group(2)); hid = slugify(inner)
+            lvl = len(m.group(1))
+            raw_heading = m.group(2)
+            explicit_id = re.search(r'\s+\{#([^{}\s]+)\}$', raw_heading)
+            label = raw_heading[:explicit_id.start()] if explicit_id else raw_heading
+            inner = inline_md(label)
+            hid = explicit_id.group(1) if explicit_id else slugify(inner)
             if hid in used_ids:
                 used_ids[hid] += 1; hid = f"{hid}-{used_ids[hid]}"
             else:
@@ -510,6 +515,7 @@ def build():
     # FiberNet shares the same Chinese/English page contract as profiles and articles.
     for language, source, route in [('zh-CN','fibernet-body.html','/fibernet/'),('en','fibernet-en-body.html','/fibernet/en/')]:
         body = (Path('content')/source).read_text(encoding='utf-8')
+        body = body.replace('src="/static/js/fibernet-scene.js"', f'src="{versioned_asset("/static/js/fibernet-scene.js")}"')
         desc='纤维网络生成、建模与分析的 Python 工具包。安装、示例与项目资源。' if language=='zh-CN' else 'A Python toolkit for fiber network generation, modeling and analysis. Installation, examples and project resources.'
         alts=f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/fibernet/"><link rel="alternate" hreflang="en" href="{SITE["base_url"]}/fibernet/en/">'
         document=make_head(title='FiberNet',desc=desc,url=SITE['base_url']+route,lang=language,wide=True,en_href='/fibernet/en/',zh_href='/fibernet/',alternates=alts)+body+make_footer(language)

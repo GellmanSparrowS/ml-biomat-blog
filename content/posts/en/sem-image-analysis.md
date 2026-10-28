@@ -1,5 +1,5 @@
 ---
-title: "Practical SEM Image Analysis for Biomaterials Research"
+title: "SEM Fiber Image Analysis: Segmentation, Diameter and Orientation"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "wet-lab-data"

@@ -1,5 +1,5 @@
 ---
-title: "Python实战AFM力曲线分析：从原始数据到力学性能"
+title: "AFM力曲线分析：信号标定与弹性模量拟合"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "wet-lab-data"

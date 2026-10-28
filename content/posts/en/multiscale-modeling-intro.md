@@ -1,5 +1,5 @@
 ---
-title: "A Practical Introduction to Multiscale Modeling for Biomaterials"
+title: "Multiscale Modeling of Biomaterials: Models and Parameter Transfer"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "multiscale-modeling"
@@ -109,10 +109,6 @@ For a representative volume in small uniaxial loading with traction-free lateral
 2. **Scale bridging consistency** — ensure thermodynamic consistency across scales (temperature, pressure)
 3. **Computational cost** — use GPU-accelerated MD (GROMACS with CUDA) and parallel FEA
 4. **Uncertainty quantification** — always report error bars from ensemble averaging
-
-## What's Next
-
-In the next post, I'll walk through a complete workflow: all-atom MD of a collagen microfibril → coarse-graining via MSCG → FEA of a fiber network, entirely driven by Python scripts.
 
 ## References
 

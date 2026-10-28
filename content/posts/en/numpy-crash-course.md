@@ -1,5 +1,5 @@
 ---
-title: "NumPy for Materials Research: From Zero to Productive"
+title: "NumPy for Materials Data: Arrays, Indexing and Broadcasting"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "python-tutorials"

@@ -1,5 +1,5 @@
 ---
-title: "ML for Fiber Mechanics: Data Prep to Model Deployment"
+title: "Predicting Fiber Mechanics: Features, Regression and Validation"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "machine-learning"

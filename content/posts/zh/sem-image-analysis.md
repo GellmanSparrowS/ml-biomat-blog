@@ -1,5 +1,5 @@
 ---
-title: "SEM图像分析实战：纤维形态的自动化测量"
+title: "SEM纤维图像分析：分割、直径与取向测量"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "wet-lab-data"

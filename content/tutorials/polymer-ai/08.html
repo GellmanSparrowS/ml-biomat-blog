@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#time">01　给构象加上一条时间线</a><a href="#motion">02　热碰撞与阻力怎样配合</a><a href="#modes">03　一条链为什么有许多速度</a><a href="#learning">04　从过去学习未来</a><a href="#experiment">05　运行轨迹与检查预测</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 8 节 · 从构象照片走向带时间的分子轨迹</p>
-<h1>链怎样运动，又需要多久才能改变状态<span>热运动、松弛时间与AI轨迹学习</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#time">01　给构象加上一条时间线</a><a href="#motion">02　热碰撞与阻力怎样配合</a><a href="#modes">03　一条链为什么有许多速度</a><a href="#learning">04　从过去学习未来</a><a href="#experiment">05　运行轨迹与检查预测</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 8 节 · 从构象照片走向带时间的分子轨迹</p>
+<h1>高分子链动力学：Rouse模型、扩散与松弛</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">把一根软绳分别放进水和较黏的糖浆，轻轻拨动后，它们恢复形状的快慢会不同。绳子的连接没有变，周围流体对运动的阻碍却变了。分子尺度也存在这样的区别：两条链可以有相近的平均尺寸，却需要很不一样的时间才能重新安排姿势。本节给前面讨论的构象加上时间，理解链怎样扩散、哪些形变消退得快，以及AI能从一小段过去推断怎样的未来。</p>
 <p>时间尺度直接影响研究中的观察方式。记录分子时，相机间隔过长，快速运动会在两帧之间消失；模拟一条很慢的链时，密集保存许多帧，得到的也可能只是同一段缓慢变化的重复记录。我们将运行一批独立的链轨迹，让模型利用过去8次观测预测不同时间以后的状态，同时用已知的物理关系计算参照。读完这一节，就能把“预测得准不准”与“观察了什么、隔多久观察、要预测多远”放到一起判断。</p>

@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#question">01　一次测量能回答什么</a><a href="#laboratory">02　建立可计算的凝胶实验</a><a href="#uncertainty">03　把预测和把握程度一起算</a><a href="#selection">04　选择测量并校准区间</a><a href="#experiment">05　运行完整选样实验</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 19 节 · 让模型参与下一次实验的选择</p>
-<h1>下一次应该测什么、做哪个样品<span>从预测一条读数，到安排一轮研究</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#question">01　一次测量能回答什么</a><a href="#laboratory">02　建立可计算的凝胶实验</a><a href="#uncertainty">03　把预测和把握程度一起算</a><a href="#selection">04　选择测量并校准区间</a><a href="#experiment">05　运行完整选样实验</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 19 节 · 让模型参与下一次实验的选择</p>
+<h1>主动学习：用高斯过程选择下一次实验</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">调一碗面糊时，水多一点、面粉少一点，流动和成形的表现就会改变。研究生物凝胶也会遇到类似选择：改变浓度、连接程度或周围溶液后，材料会吸多少水，又会变得多软？可尝试的组合很多，测量却需要时间与样品。本节把AI放到这个选择发生的位置。模型除了预测性质，还要说明哪些地方了解得较少，并根据已经测得的结果，建议下一次去哪里取数据。我们会亲自运行三种选样策略，比较完整实验的误差、测量成本和预测区间。</p>
 
@@ -88,7 +88,7 @@
 </section>
 
 <section id="experiment"><h2><span class="num">05</span>运行完整实验，再从图里决定下一步</h2>
-<p>下面的Python从平衡方程开始生成数据，随后运行随机、空间覆盖和不确定性三种策略。为了观察起点与噪声带来的变化，每种策略都完成12轮实验；每轮固定36个训练条件，并保留每次新增条件、对应读数、三个核的权重以及独立校准分数。程序只需要NumPy、SciPy和Matplotlib，代码、运行结果和六幅图都放在本页。</p>
+<p>下面的Python从平衡方程开始生成数据，随后运行随机、空间覆盖和不确定性三种策略。为了观察起点与噪声带来的变化，每种策略都完成12轮实验；每轮固定36个训练条件，并保留每次新增条件、对应读数、三个核的权重以及独立校准分数。程序只需要NumPy、SciPy和Matplotlib。</p>
 <p>阅读代码时，可以先寻找三个核心部分。physical负责把条件转换成物理真值，MixtureGP负责根据当前数据计算预测，campaign负责按选样规则逐次增加数据。把这三部分分开以后，便能看见物理知识和学习算法各自承担什么：方程定义本例的材料响应，模型从有限读数逼近这个响应，策略决定哪些读数进入模型。换成真实实验时，主要需要替换取得新读数的接口，并继续保存测量条件。</p>
 <div class="code-section" id="code-detail"><div class="code-bar"><span>完整Python例子 · NumPy · SciPy · Matplotlib</span><a download="L19_example.py" href="/static/tutorials/polymer-ai/assets/c4c83e0fc169b2de9f309238.py">下载代码</a></div><pre id="python-code"><code class="language-python"><span class="sd">"""Sequential measurements in a defined neutral-gel virtual laboratory.</span>
 <span class="sd">Run: python example.py</span>

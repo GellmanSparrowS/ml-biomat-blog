@@ -340,7 +340,7 @@ For fiber biomaterials, GROMACS can simulate silk fibroin conformational transit
 
 ## Summary
 
-This tutorial demonstrated a complete GROMACS molecular dynamics workflow using lysozyme as an example: structure acquisition, topology generation, solvation, ion addition, energy minimization, NVT/NPT equilibration, production MD, and trajectory analysis (RMSD, RMSF, Rg, H-bonds). This pipeline applies to most soluble proteins and many biopolymer systems. For fiber biomaterials such as silk, collagen, and cellulose, special attention to periodic boundary conditions and force field selection is required, topics to be covered in subsequent articles.
+This tutorial demonstrated a complete GROMACS molecular dynamics workflow using lysozyme as an example: structure acquisition, topology generation, solvation, ion addition, energy minimization, NVT/NPT equilibration, production MD, and trajectory analysis (RMSD, RMSF, Rg, H-bonds). This pipeline applies to most soluble proteins and many biopolymer systems. For fiber biomaterials such as silk, collagen, and cellulose, special attention to periodic boundary conditions and force field selection is required.
 
 ## References
 

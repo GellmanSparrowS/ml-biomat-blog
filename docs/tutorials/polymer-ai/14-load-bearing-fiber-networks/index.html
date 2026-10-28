@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>纤维怎样织成能承载的网 — ML-Biomat</title>
+<title>纤维网络的承载机制：取向、拉伸与弯曲 — ML-Biomat</title>
 <meta name="description" content="从胶原层级结构与纤维图像出发，理解取向、拉伸和弯曲，并用受控梁网络训练卷积模型预测排列与加载响应。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/tutorials/polymer-ai/14-load-bearing-fiber-networks/">
@@ -14,12 +14,12 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="纤维怎样织成能承载的网">
+<meta property="og:title" content="纤维网络的承载机制：取向、拉伸与弯曲">
 <meta property="og:description" content="从胶原层级结构与纤维图像出发，理解取向、拉伸和弯曲，并用受控梁网络训练卷积模型预测排列与加载响应。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ml-biomat.com/tutorials/polymer-ai/14-load-bearing-fiber-networks/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "纤维怎样织成能承载的网", "description": "从胶原层级结构与纤维图像出发，理解取向、拉伸和弯曲，并用受控梁网络训练卷积模型预测排列与加载响应。", "url": "https://ml-biomat.com/tutorials/polymer-ai/14-load-bearing-fiber-networks/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "纤维网络的承载机制：取向、拉伸与弯曲", "description": "从胶原层级结构与纤维图像出发，理解取向、拉伸和弯曲，并用受控梁网络训练卷积模型预测排列与加载响应。", "url": "https://ml-biomat.com/tutorials/polymer-ai/14-load-bearing-fiber-networks/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
 <link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-14.css?v=2cf7ee4b570b"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -33,13 +33,13 @@
 <span class="lang-switch"><a data-language="en" role="link" aria-disabled="true" tabindex="-1" title="该页暂无英文版">EN</a><a data-language="zh" href="/tutorials/polymer-ai/14-load-bearing-fiber-networks/" class="active" aria-current="true">中文</a></span>
 </div></header><main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">材料与结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#biology">01　从分子到纤维</a><a href="#orientation">02　把排列写成数据</a><a href="#mechanics">03　拉伸与弯曲怎样分工</a><a href="#learning">04　从图像学习结构与响应</a><a href="#experiment">05　运行与检查结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从生物纤维的排列到图像中的力学线索</p>
-<h1>纤维怎样织成能承载的网</h1>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#biology">01　从分子到纤维</a><a href="#orientation">02　把排列写成数据</a><a href="#mechanics">03　拉伸与弯曲怎样分工</a><a href="#learning">04　从图像学习结构与响应</a><a href="#experiment">05　运行与检查结果</a><a href="#sources">资料与延伸阅读</a></nav></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从生物纤维的排列到图像中的力学线索</p>
+<h1>纤维网络的承载机制：取向、拉伸与弯曲</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">拿起一块织物，沿着经线拉与斜着拉，手上的感觉常常不同。同样多的线，换一种排列和连接方式，就能改变变形的难易。身体中的许多支撑结构也与纤维有关：肌腱需要传递拉力，血管壁需要随压力变化，皮肤需要在日常活动中伸展。本节从这些现象出发，认识胶原的层级结构，再把一张纤维图像转成可计算的方向信息。我们将训练一个小型卷积神经网络，让它同时估计排列和指定加载下的响应，并与图像测量及物理近似逐项比较。</p>
 
 <section id="biology"><h2><span class="num">01</span>从三条分子链，到能够传力的纤维</h2>
-<p><a href="/tutorials/polymer-ai/13-networks-and-gels/">《水很多，为什么还能成形：网络与凝胶》</a>用柔性链组成的网络解释含水凝胶，并区分“存在贯通路径”与“能够抵抗指定变形”。换成纤维以后，还要考虑弯曲。一根细竹条沿长轴拉伸很费力，从侧面推却容易弯，这两种受力调用了不同的变形方式。网络中某段纤维会主要伸长还是主要弯曲，与它的方向、周围连接和加载方式有关。因此，从图像走向力学预测时，我们要逐步记录纤维在哪里、朝哪边、与谁相连，再检查模型是否保留了这些信息。</p>
+<p><a href="/tutorials/polymer-ai/13-networks-and-gels/">《高分子网络与凝胶：交联、贯通和弹性》</a>用柔性链组成的网络解释含水凝胶，并区分“存在贯通路径”与“能够抵抗指定变形”。换成纤维以后，还要考虑弯曲。一根细竹条沿长轴拉伸很费力，从侧面推却容易弯，这两种受力调用了不同的变形方式。网络中某段纤维会主要伸长还是主要弯曲，与它的方向、周围连接和加载方式有关。因此，从图像走向力学预测时，我们要逐步记录纤维在哪里、朝哪边、与谁相连，再检查模型是否保留了这些信息。</p>
 <p>胶原提供了一个重要的生物例子。它是细胞外基质中的主要结构蛋白之一，细胞外基质可以想象成细胞周围共同建造和维护的环境，其中有纤维、含水的高分子以及多种结合分子。细胞通过与这个环境连接来感受和施加力，组织的形状也与它的结构有关。这里讨论的胶原纤维属于细胞外的支撑系统；细胞内部另有由肌动蛋白、微管等组成的骨架，两者通过细胞表面的连接共同参与力的传递。</p>
 <p>以能够形成纤维的胶原为例，首先要看三条多肽链怎样组织成三股螺旋。可以借用三股绳的形象：每股都有自己的局部形状，三股之间还存在更高一级的缠绕关系。胶原的具体分子几何由序列、键的构型和链间相互作用共同确定，三股绳帮助我们看清层级，但不会替代这些化学细节。三股螺旋也有别于前面蛋白质章节中的α螺旋，辨认结构时需要保留这个区别。</p>
 <p>20世纪中叶，研究者已经能从衍射图样中获得胶原的结构约束，却还需要提出能够满足这些约束的分子模型。<a href="https://doi.org/10.1038/174269c0">Ramachandran与Kartha在1954年提出胶原结构模型</a>，并在<a href="https://doi.org/10.1038/176593a0">1955年继续修订三链结构</a>。这段历史适合与今天的结构学习放在一起理解：观测提供可以检查的线索，模型把线索组织成空间关系，再回到观测判断哪些关系成立。随着约束增加，结构模型也会细化。</p>
@@ -608,7 +608,7 @@ seed 34 best epoch 78 validation loss 0.024649973958730698
 <p>LeCun等，1998，<a href="https://doi.org/10.1109/5.726791">Gradient-Based Learning Applied to Document Recognition</a>；Arafat等，2025，<a href="https://doi.org/10.1371/journal.pone.0320006">Fibre tracing in biomedical images: An objective comparison between seven algorithms</a>。实验图像来自后者的作者数据仓库；六幅学习结果图来自本页代码的受控梁网络计算，参数、样本与预测可在结果区下载。</p>
 </section>
 </div></div>
-</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/13-networks-and-gels/"><strong>水很多，为什么还能成形：网络与凝胶</strong></a><a href="/tutorials/polymer-ai/15-processing-and-hierarchy/"><strong>从分子到样品：制备、加工与层级结构</strong></a></nav></section></main>
+</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/13-networks-and-gels/"><strong>高分子网络与凝胶：交联、贯通和弹性</strong></a><a href="/tutorials/polymer-ai/15-processing-and-hierarchy/"><strong>从分子到样品：制备、加工与层级结构</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>

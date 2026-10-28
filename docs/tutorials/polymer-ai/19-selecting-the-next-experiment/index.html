@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>下一次应该测什么、做哪个样品 — ML-Biomat</title>
+<title>主动学习：用高斯过程选择下一次实验 — ML-Biomat</title>
 <meta name="description" content="在凝胶溶胀虚拟实验中比较随机、空间覆盖与不确定性选样，用高斯过程和校准区间安排下一轮测量。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/">
@@ -14,12 +14,12 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="下一次应该测什么、做哪个样品">
+<meta property="og:title" content="主动学习：用高斯过程选择下一次实验">
 <meta property="og:description" content="在凝胶溶胀虚拟实验中比较随机、空间覆盖与不确定性选样，用高斯过程和校准区间安排下一轮测量。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "下一次应该测什么、做哪个样品", "description": "在凝胶溶胀虚拟实验中比较随机、空间覆盖与不确定性选样，用高斯过程和校准区间安排下一轮测量。", "url": "https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "主动学习：用高斯过程选择下一次实验", "description": "在凝胶溶胀虚拟实验中比较随机、空间覆盖与不确定性选样，用高斯过程和校准区间安排下一轮测量。", "url": "https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
 <link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-19.css?v=1272b7a1cf05"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -33,14 +33,14 @@
 <span class="lang-switch"><a data-language="en" role="link" aria-disabled="true" tabindex="-1" title="该页暂无英文版">EN</a><a data-language="zh" href="/tutorials/polymer-ai/19-selecting-the-next-experiment/" class="active" aria-current="true">中文</a></span>
 </div></header><main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/machine-learning/">机器学习</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">机器学习</p><nav><a href="#question">01　一次测量能回答什么</a><a href="#laboratory">02　建立可计算的凝胶实验</a><a href="#uncertainty">03　把预测和把握程度一起算</a><a href="#selection">04　选择测量并校准区间</a><a href="#experiment">05　运行完整选样实验</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">让模型参与下一次实验的选择</p>
-<h1>下一次应该测什么、做哪个样品</h1>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">机器学习</p><nav><a href="#question">01　一次测量能回答什么</a><a href="#laboratory">02　建立可计算的凝胶实验</a><a href="#uncertainty">03　把预测和把握程度一起算</a><a href="#selection">04　选择测量并校准区间</a><a href="#experiment">05　运行完整选样实验</a><a href="#sources">资料与延伸阅读</a></nav></details></aside><div class="lesson-main" id="main"><p class="eyebrow">让模型参与下一次实验的选择</p>
+<h1>主动学习：用高斯过程选择下一次实验</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">调一碗面糊时，水多一点、面粉少一点，流动和成形的表现就会改变。研究生物凝胶也会遇到类似选择：改变浓度、连接程度或周围溶液后，材料会吸多少水，又会变得多软？可尝试的组合很多，测量却需要时间与样品。本节把AI放到这个选择发生的位置。模型除了预测性质，还要说明哪些地方了解得较少，并根据已经测得的结果，建议下一次去哪里取数据。我们会亲自运行三种选样策略，比较完整实验的误差、测量成本和预测区间。</p>
 
 <section id="question"><h2><span class="num">01</span>一次测量能回答什么，先于模型怎样选择</h2>
 <p>假设正在研究一种吸水后仍能保持形状的凝胶。桌上已有几种配方：有的吸水多但支撑较弱，有的比较结实却吸水较少。现在只能再做几个样品，很自然会想到两种安排。一种是在已有表现较好的配方附近细调，争取尽快找到合用材料；另一种是补测资料稀少的条件，让我们更清楚整个体系怎样变化。两种安排都有研究价值，适合的选择规则却会有所不同。</p>
-<p>前一种安排更接近优化，关心的是能否找到满足目标的候选；后一种安排更接近主动学习，关心的是新增数据能否改善对性质规律的认识。本节先练习第二种任务：用有限次数的测量，学会预测一片参数范围中的溶胀表现。<a href="/tutorials/polymer-ai/20-designing-a-biogel/">《综合研究：设计一种满足目标的生物凝胶》</a>再把研究目标收紧到材料设计。这样安排以后，读者可以分别判断一个模型是否“学得更清楚”，以及它是否“找到了更合适的样品”。</p>
+<p>前一种安排更接近优化，关心的是能否找到满足目标的候选；后一种安排更接近主动学习，关心的是新增数据能否改善对性质规律的认识。本节先练习第二种任务：用有限次数的测量，学会预测一片参数范围中的溶胀表现。<a href="/tutorials/polymer-ai/20-designing-a-biogel/">《生物凝胶设计：物理反求与贝叶斯优化》</a>再把研究目标收紧到材料设计。这样安排以后，读者可以分别判断一个模型是否“学得更清楚”，以及它是否“找到了更合适的样品”。</p>
 <p>这种区分在生物材料中尤其实际。设想一个供细胞生长的凝胶环境，我们可能同时关心细胞能否附着、材料能否保持结构，以及水和溶质怎样进入其中。某个单一指标数值最高，不一定对应整体最合用的条件。实验设计需要先写清用途，再决定要收集哪些性质，最后才轮到算法计算下一步。用途给测量提供方向，也决定了模型的输入与评价方式。</p>
 <p><a href="https://doi.org/10.1016/j.biomaterials.2010.03.064">Nichol等在2010年的GelMA研究</a>把这些问题联系了起来。GelMA由明胶经过化学改性得到；明胶来自胶原，保留了与细胞相互作用有关的分子结构。研究者改变材料浓度与改性程度，测量力学和溶胀表现，并观察细胞在材料上的附着与形态。这段研究史提供了一个具体起点：可以调节的化学条件，最终要通过测量与生物学表现建立联系。</p>
 <figure class="figure history-figure" id="history-nichol"><div class="history-date-line">2010 · 把凝胶性质与细胞环境放在同一个问题中</div><div class="svg-scroll wide-diagram"><svg viewBox="0 0 720 195" role="img" aria-label="依据Nichol等的GelMA研究绘制。图概括材料组成、力学与溶胀测量和细胞行为之间的研究关系，细胞和网络均为原理示意。"><g transform="translate(0,0)"><path d="M30 30L90 50L170 25M30 100L90 70L170 105M30 30L30 100M90 50L90 70M170 25L170 105M30 30L90 70L170 25M30 100L90 50L170 105" fill="none" stroke="#31866d" stroke-width="2"/><text x="105" y="151" text-anchor="middle" font-size="16" fill="#233c35">调节明胶网络的连接</text><text x="105" y="178" text-anchor="middle" font-size="14" fill="#233c35">浓度与化学改性共同参与</text></g><path d="M215 80h22l-6 -5m6 5l-6 5" fill="none" stroke="#b07951" stroke-width="2"/><g transform="translate(245,0)"><path d="M30 110V25M30 110H180M35 100Q100 70 175 35" fill="none" stroke="#317b73" stroke-width="3"/><text x="105" y="151" text-anchor="middle" font-size="16" fill="#233c35">同时测量力学与溶胀</text><text x="105" y="178" text-anchor="middle" font-size="14" fill="#233c35">每个读数对应明确测试条件</text></g><path d="M460 80h22l-6 -5m6 5l-6 5" fill="none" stroke="#b07951" stroke-width="2"/><g transform="translate(490,0)"><ellipse cx="105" cy="65" rx="67" ry="35" fill="#dde9d9" stroke="#538c73"/><ellipse cx="105" cy="65" rx="16" ry="12" fill="#b68b5b"/><text x="105" y="151" text-anchor="middle" font-size="16" fill="#233c35">观察材料中的细胞行为</text><text x="105" y="178" text-anchor="middle" font-size="14" fill="#233c35">性质设计连接生物学问题</text></g></svg></div><div class="narrow-diagram"><svg viewBox="0 0 340 640" role="img" aria-label="依据Nichol等的GelMA研究绘制。图概括材料组成、力学与溶胀测量和细胞行为之间的研究关系，细胞和网络均为原理示意。"><g transform="translate(60,0)"><path d="M30 30L90 50L170 25M30 100L90 70L170 105M30 30L30 100M90 50L90 70M170 25L170 105M30 30L90 70L170 25M30 100L90 50L170 105" fill="none" stroke="#31866d" stroke-width="2"/><text x="105" y="151" text-anchor="middle" font-size="16" fill="#233c35">调节明胶网络的连接</text><text x="105" y="178" text-anchor="middle" font-size="14" fill="#233c35">浓度与化学改性共同参与</text></g><path d="M170 190v18l-5 -5m5 5l5 -5" fill="none" stroke="#b07951" stroke-width="2"/><g transform="translate(60,215)"><path d="M30 110V25M30 110H180M35 100Q100 70 175 35" fill="none" stroke="#317b73" stroke-width="3"/><text x="105" y="151" text-anchor="middle" font-size="16" fill="#233c35">同时测量力学与溶胀</text><text x="105" y="178" text-anchor="middle" font-size="14" fill="#233c35">每个读数对应明确测试条件</text></g><path d="M170 405v18l-5 -5m5 5l5 -5" fill="none" stroke="#b07951" stroke-width="2"/><g transform="translate(60,430)"><ellipse cx="105" cy="65" rx="67" ry="35" fill="#dde9d9" stroke="#538c73"/><ellipse cx="105" cy="65" rx="16" ry="12" fill="#b68b5b"/><text x="105" y="151" text-anchor="middle" font-size="16" fill="#233c35">观察材料中的细胞行为</text><text x="105" y="178" text-anchor="middle" font-size="14" fill="#233c35">性质设计连接生物学问题</text></g></svg></div><figcaption><b>图1</b>　依据Nichol等的GelMA研究绘制。图概括材料组成、力学与溶胀测量和细胞行为之间的研究关系，细胞和网络均为原理示意。</figcaption></figure>
@@ -121,7 +121,7 @@
 </section>
 
 <section id="experiment"><h2><span class="num">05</span>运行完整实验，再从图里决定下一步</h2>
-<p>下面的Python从平衡方程开始生成数据，随后运行随机、空间覆盖和不确定性三种策略。为了观察起点与噪声带来的变化，每种策略都完成12轮实验；每轮固定36个训练条件，并保留每次新增条件、对应读数、三个核的权重以及独立校准分数。程序只需要NumPy、SciPy和Matplotlib，代码、运行结果和六幅图都放在本页。</p>
+<p>下面的Python从平衡方程开始生成数据，随后运行随机、空间覆盖和不确定性三种策略。为了观察起点与噪声带来的变化，每种策略都完成12轮实验；每轮固定36个训练条件，并保留每次新增条件、对应读数、三个核的权重以及独立校准分数。程序只需要NumPy、SciPy和Matplotlib。</p>
 <p>阅读代码时，可以先寻找三个核心部分。physical负责把条件转换成物理真值，MixtureGP负责根据当前数据计算预测，campaign负责按选样规则逐次增加数据。把这三部分分开以后，便能看见物理知识和学习算法各自承担什么：方程定义本例的材料响应，模型从有限读数逼近这个响应，策略决定哪些读数进入模型。换成真实实验时，主要需要替换取得新读数的接口，并继续保存测量条件。</p>
 <div class="code-section" id="code-detail"><div class="code-bar"><span>完整Python例子 · NumPy · SciPy · Matplotlib</span><a download="L19_example.py" href="/static/tutorials/polymer-ai/assets/c4c83e0fc169b2de9f309238.py">下载代码</a></div><pre id="python-code"><code class="language-python"><span class="sd">"""Sequential measurements in a defined neutral-gel virtual laboratory.</span>
 <span class="sd">Run: python example.py</span>
@@ -359,14 +359,14 @@ Full campaigns, calibration scores and six figures: active_outputs/
 <p>进入新溶剂参数范围后，不确定性策略的平均覆盖率约74.4%，潜在函数RMSE约0.359；空间覆盖策略的覆盖率约72.5%，RMSE约0.365。随机策略在这一区域的覆盖率约91.9%，但它给出的区间也更宽，平均全宽约1.158，另外两种分别约0.909和0.826。较高覆盖率与较准确、较有用的预测需要一起评价，单看一根覆盖率柱子容易漏掉区间实际提供的信息量。</p>
 <p>图F固定链密度，只沿χ方向观察一条截面。训练范围内，预测均值跟随物理曲线；越过χ=0.55以后，两者逐渐分开，区间也开始张开。这时可以提出具体的下一轮实验：在新溶剂范围安排覆盖点，保留重复测量，更新模型，再从同一新使用范围另取独立校准对象。原来的曲线帮助我们找到值得补测的地方，新读数则决定后续如何修正。</p>
 <p>将这种方法用于蛋白质、核酸、多糖或复合凝胶时，可选择的对象不一定排成规则网格。它们可能是序列、分支结构或加工方案，第十八节介绍的图表示便能用于描述结构差异。选样规则仍然需要明确目标、可行候选与评价范围；不确定性的计算则可以结合适合该任务的概率模型或模型集成，再用独立实验检查。一个结构预测分数，只有进入清楚的数据收集安排，才真正开始影响研究的下一步。</p>
-<p>本节已经完成了一次从物理问题到数据选择的全过程：定义溶胀读数，用有限测量建立预测，再用独立数据检查区间，并据结果提出下一轮补测。在<a href="/tutorials/polymer-ai/20-designing-a-biogel/">《综合研究：设计一种满足目标的生物凝胶》</a>，我们会把目标进一步具体化，要求候选凝胶同时满足给定的含水与力学条件。那时，模型除了帮助填补未知，还要参与搜索满足要求的条件，最后交回物理计算与实验计划逐项核对。</p>
+<p>本节已经完成了一次从物理问题到数据选择的全过程：定义溶胀读数，用有限测量建立预测，再用独立数据检查区间，并据结果提出下一轮补测。在<a href="/tutorials/polymer-ai/20-designing-a-biogel/">《生物凝胶设计：物理反求与贝叶斯优化》</a>，我们会把目标进一步具体化，要求候选凝胶同时满足给定的含水与力学条件。那时，模型除了帮助填补未知，还要参与搜索满足要求的条件，最后交回物理计算与实验计划逐项核对。</p>
 </section>
 
 <section class="references" id="sources"><h2>资料与延伸阅读</h2>
 <p><a href="https://doi.org/10.1063/1.1723792">Flory与Rehner，1943，交联网络的溶胀</a>；<a href="https://authors.library.caltech.edu/records/efefp-2j353">MacKay，1992，主动数据选择的信息目标</a>；<a href="https://www.nature.com/articles/nature02236">King等，2004，机器人科学家与实验选择</a>；<a href="https://gaussianprocess.org/gpml/chapters/RW2.pdf">Rasmussen与Williams，2006，高斯过程回归</a>；<a href="https://doi.org/10.1016/j.biomaterials.2010.03.064">Nichol等，2010，GelMA的性质与细胞环境</a>；<a href="https://arxiv.org/abs/2107.07511">Angelopoulos与Bates，共形预测入门</a>。本节计算标签由正文给定的物理模型生成，原始论文用于历史背景、测量定义与方法依据。</p>
 </section>
 </div></div>
-</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/18-learning-molecular-graphs/"><strong>怎样让模型读懂分子的连接与材料结构</strong></a><a href="/tutorials/polymer-ai/20-designing-a-biogel/"><strong>综合研究：设计一种满足目标的生物凝胶</strong></a></nav></section></main>
+</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/18-learning-molecular-graphs/"><strong>图神经网络：分子连接的表示与性质预测</strong></a><a href="/tutorials/polymer-ai/20-designing-a-biogel/"><strong>生物凝胶设计：物理反求与贝叶斯优化</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>

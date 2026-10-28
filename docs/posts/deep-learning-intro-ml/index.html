@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Nature of Deep Learning — ML-Biomat</title>
+<title>Deep Learning: Neural Networks, Backpropagation and Training — ML-Biomat</title>
 <meta name="description" content="Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/deep-learning-intro-ml/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="The Nature of Deep Learning">
+<meta property="og:title" content="Deep Learning: Neural Networks, Backpropagation and Training">
 <meta property="og:description" content="Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/deep-learning-intro-ml/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/deep-learning-intro-ml.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The Nature of Deep Learning", "description": "Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.", "datePublished": "2026-07-03", "dateModified": "2026-10-28", "wordCount": 4487, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/deep-learning-intro-ml/", "image": "https://ml-biomat.com/static/images/og/deep-learning-intro-ml.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/en/"}, {"@type": "ListItem", "position": 3, "name": "The Nature of Deep Learning", "item": "https://ml-biomat.com/posts/deep-learning-intro-ml/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Deep Learning: Neural Networks, Backpropagation and Training", "description": "Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.", "datePublished": "2026-07-03", "dateModified": "2026-10-28", "wordCount": 4487, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/deep-learning-intro-ml/", "image": "https://ml-biomat.com/static/images/og/deep-learning-intro-ml.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/en/"}, {"@type": "ListItem", "position": 3, "name": "Deep Learning: Neural Networks, Backpropagation and Training", "item": "https://ml-biomat.com/posts/deep-learning-intro-ml/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/machine-learning/en/">Machine Learning</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
-<h1>The Nature of Deep Learning</h1>
+<h1>Deep Learning: Neural Networks, Backpropagation and Training</h1>
 <div class="article-meta">
 <span>2026-07-03</span><span>·</span><span>22 min read</span><span>·</span><a href="/categories/machine-learning/en/">Machine Learning</a>
 </div>
@@ -463,7 +463,7 @@ print(f&quot;Trainable / Total: {trainable:,} / {total:,}&quot;)
 <li>Goodfellow, I., Bengio, Y., & Courville, A. (2016). <em>Deep Learning</em>. MIT Press. https://www.deeplearningbook.org/</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/networkx-fundamentals/">← NetworkX Fundamentals with Python</a></span><span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/networkx-fundamentals/">← NetworkX Fundamentals with Python</a></span><span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">Machine Learning Classification: Models, Metrics and Validation</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">Predicting Fiber Mechanics: Features, Regression and Validation</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

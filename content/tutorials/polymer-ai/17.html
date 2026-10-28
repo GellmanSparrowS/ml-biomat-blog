@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#signal">01　信号究竟测到了什么</a><a href="#scattering">02　从散射认识尺寸</a><a href="#records">03　把背景与误差带入记录</a><a href="#learning">04　让AI学习曲线到结构</a><a href="#experiment">05　运行并检查研究结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 17 节 · 从仪器记录走向可以检验的结构判断</p>
-<h1>从实验信号到可用的数据<span>一条曲线怎样告诉我们，分子有多大</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#signal">01　信号究竟测到了什么</a><a href="#scattering">02　从散射认识尺寸</a><a href="#records">03　把背景与误差带入记录</a><a href="#learning">04　让AI学习曲线到结构</a><a href="#experiment">05　运行并检查研究结果</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 17 节 · 从仪器记录走向可以检验的结构判断</p>
+<h1>小角度散射数据分析：回转半径、噪声与预测</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">把一杯蛋白质溶液放在面前，我们很难凭颜色判断里面的分子是舒展开了，还是聚到了一起。实验仪器可以把肉眼看不见的变化变成峰、斑点和曲线，AI又可以从这些记录中学习结构信息。但从“仪器给出一个数”到“知道分子发生了什么”，中间还隔着单位、背景、误差和模型。本节以溶菌酶的小角度X射线散射为线索，走过这段过程：先理解信号为什么携带尺寸信息，再整理真实记录，最后训练预测模型，看看测量条件变化时，哪些判断仍然可靠，哪些地方值得重新采集数据。</p>
 
@@ -90,7 +90,7 @@
 </section>
 
 <section id="experiment"><h2><span class="num">05</span>运行完整例子，沿着误差找到下一步实验</h2>
-<p>下面的程序把本节两条线索连接起来：读取公开溶菌酶记录，完成单位换算、加权拟合与窗口检查；另外生成480个受控对象，训练四类预测方法，校准区间，并改变测试测量条件。首次运行会下载约10千字节的原始数据文件，之后使用校验通过的本地副本。安装代码开头列出的依赖即可运行；完整代码、实际输出和六幅结果图都在本页展开。</p>
+<p>下面的程序把本节两条线索连接起来：读取公开溶菌酶记录，完成单位换算、加权拟合与窗口检查；另外生成480个受控对象，训练四类预测方法，校准区间，并改变测试测量条件。首次运行会下载约10千字节的原始数据文件，之后使用校验通过的本地副本。安装代码开头列出的依赖即可运行。</p>
 <p>读程序时可以先找三个函数。formfactor从几何计算理论曲线，observe把理论强度变成带计数波动的观测，guinier根据低q关系反推尺寸。网络训练和区间校准在它们之后进行。输出目录保存完整观测、对象编号、分组、标准化参数、模型权重和评价结果，因此既能追踪某个点来自哪里，也能检查训练和测试是否使用了不同对象。</p>
 <div class="code-section" id="code-detail"><div class="code-bar"><span>完整Python例子 · NumPy · SciPy · PyTorch · scikit-learn · Matplotlib · requests</span><a download="L17_example.py" href="/static/tutorials/polymer-ai/assets/046d934b2671c0fa42459458.py">下载代码</a></div><pre id="python-code"><code class="language-python"><span class="sd">"""L17: scattering measurements, inverse prediction, and calibrated intervals.</span>
 <span class="sd">Install: numpy scipy scikit-learn torch matplotlib requests</span>

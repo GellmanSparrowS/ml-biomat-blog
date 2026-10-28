@@ -11,7 +11,7 @@ description: "Explore how silk, collagen, bone, nacre and cellulose organize str
 
 Nature's structural materials - from silk to bone, nacre to wood - possess mechanical properties far beyond those of their individual chemical constituents. The core secret is not chemistry but architecture: hierarchical superstructures, where multiple levels of organization from molecular to macroscopic collaborate to produce mechanical responses that vastly exceed the sum of their parts.
 
-This article serves as a navigational guide for the Bio-Materials-Structures category, systematically surveying six archetypal hierarchical systems and the mechanical design principles they embody.
+Six archetypal hierarchical systems illustrate how structural organization across scales shapes mechanical behavior.
 
 ## What Are Hierarchical Superstructures?
 
@@ -142,9 +142,7 @@ Understanding hierarchical structures requires quantitative metrics beyond quali
 
 These metrics provide trainable features for machine learning models and clear optimization targets for biomimetic design.
 
-## Blog Navigation
-
-Articles in the Bio-Materials-Structures category cover this landscape systematically:
+## Related Topics {#blog-navigation}
 
 - **Silk fibroin**: Complete chain from amino acid sequence to beta-sheet mechanics
 - **Stress-strain curves**: Foundational methodology for soft tissue biomechanics
@@ -153,8 +151,6 @@ Articles in the Bio-Materials-Structures category cover this landscape systemati
 - **GROMACS MD tutorial**: Hands-on introduction to molecular dynamics, applicable to silk, collagen, and other systems
 - **LAMMPS introduction**: Alternative MD tool, especially suited for multi-particle and tensile simulations
 - **Multiscale modeling introduction**: Methods for connecting molecular to macroscopic scales
-
-Planned future content includes: collagen tensile MD simulation, cellulose coarse-grained modeling, bone multiscale FEM, and nacre-inspired composite optimization.
 
 ## References
 

@@ -1,5 +1,5 @@
 ---
-title: "Python 科学计算环境完全搭建指南：从零到生产力"
+title: "Python科学计算环境：安装、配置与版本管理"
 date: "2026-07-06"
 updated: "2026-10-28"
 category: "python-tutorials"

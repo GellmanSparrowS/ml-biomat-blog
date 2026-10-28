@@ -280,6 +280,20 @@ def run():
         if pair and pair['category']!=post['category']:primary_errors.append(post['slug'])
     checks.append(check('One primary topic with bilingual agreement',not primary_errors,', '.join(primary_errors) if primary_errors else '44 Chinese and 24 English entries have one primary topic; article pairs agree'))
 
+    # Keep production pages free of the redundant display notes removed by review.
+    clutter=[]
+    forbidden_notes=['代码与运行结果在本页完整展开','图像与公式可以离线阅读','页面中的公式、图像和交互已经嵌入，离线也能阅读','本页已经展示实际运行结果']
+    for page_path in DOCS.rglob('*.html'):
+        text=page_path.read_text(encoding='utf8')
+        if 'class="site-header"' not in text:continue
+        if any(note in text for note in forbidden_notes):clutter.append(str(page_path.relative_to(DOCS)))
+    for route in ['fibernet/index.html','fibernet/en/index.html']:
+        text=(DOCS/route).read_text(encoding='utf8')
+        hero=re.search(r'<header class="fn-hero">(.*?)</header>',text,re.S)
+        if not hero or 'fn-scene-canvas' not in hero[1] or re.search(r'<button|id="(?:nodes|motion|reset|readout)"',hero[1]):clutter.append(route)
+        if not re.search(r'/static/js/fibernet-scene\.js\?v=',text):clutter.append(route+': stale scene URL')
+    checks.append(check('Concise page copy and automatic FiberNet scene',not clutter,', '.join(clutter) if clutter else 'Redundant display notes absent; both project pages have automatic decoration without display controls'))
+
     broken = broken_local_links()
     link_detail = (
         "%d broken references: " % len(broken)

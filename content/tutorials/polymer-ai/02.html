@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#snapshots">01　一张照片告诉我们什么</a><a href="#spread">02　留下变化的幅度</a><a href="#independence">03　记录与独立信息</a><a href="#learning">04　新图与新对象</a><a href="#experiment">05　一次完整计算</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">先改变参数，观察图像，再回到文字解释变化。代码与运行结果在本页完整展开。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 2 节 · 从分子快照到统计与学习</p>
-<h1>为什么同一条链<span>需要许多幅照片</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#snapshots">01　一张照片告诉我们什么</a><a href="#spread">02　留下变化的幅度</a><a href="#independence">03　记录与独立信息</a><a href="#learning">04　新图与新对象</a><a href="#experiment">05　一次完整计算</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 2 节 · 从分子快照到统计与学习</p>
+<h1>高分子构象统计：采样、分布与独立样本</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">用手机拍一团松散的耳机线，你能从这一张照片判断它通常占多大地方吗？把线提起来，抖散，再放回桌面，两个接头之间的距离就变了。分子链也有许多可能的姿态，周围分子的热运动会不断扰动它。研究一条生物大分子，除了知道它由什么连接而成，还需要知道它会怎样变化，以及哪些变化经常发生。</p>
 <p>这个问题直接关系到研究中的几个决定：模拟应该保存多少帧，平均尺寸后面应当写多大的误差条，AI的训练集和测试集又该怎样分开。本节从“拍照”开始，把分布、标准差和独立样本逐一讲清楚，再用一个可以完整运行的例子检查它们。读完以后，面对一张装着许多分子数据的表，你会多问一步：这些行到底来自多少份新信息？</p>

@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#counting">01　数一数链可以怎样摆</a><a href="#force">02　从构象机会算到恢复力</a><a href="#dna">03　DNA与方向的记忆</a><a href="#inverse">04　从测量曲线反推参数</a><a href="#experiment">05　完整反演与真实曲线</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 6 节 · 从回缩的直觉走向分子测量</p>
-<h1>链被拉开以后为什么会回缩<span>构象、熵弹性与AI参数反演</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#counting">01　数一数链可以怎样摆</a><a href="#force">02　从构象机会算到恢复力</a><a href="#dna">03　DNA与方向的记忆</a><a href="#inverse">04　从测量曲线反推参数</a><a href="#experiment">05　完整反演与真实曲线</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 6 节 · 从回缩的直觉走向分子测量</p>
+<h1>高分子链的熵弹性：拉伸模型与参数反演</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">拉开一根橡皮筋再松手，它会缩回来。这个熟悉的动作里藏着一个分子尺度的问题：如果链上的每一段都没有明显变长，只是原来弯弯曲曲的姿势被展开，为什么仍然需要用力？答案与一条链可以摆出的姿势有关。本节从四步长的小链开始计数，把构象机会逐步变成自由能和恢复力，再走到真实DNA的拉伸曲线。</p>
 <p>拉伸实验给出的是一组力和伸长值，我们想知道的却是链的轮廓长度和持久长度。持久长度描述链沿轮廓走多远以后还保留多少原来的方向；它越大，链通常越不容易弯曲。由参数计算曲线叫正向计算，由曲线寻找参数叫<strong>反演</strong>。本节让物理拟合与神经网络都完成这项反演，并保持每条曲线的测量点数相同，只改变拉力覆盖范围。我们由此能比较：算法换了以后答案怎样变化，把测量做到更有辨别力的位置又会带来什么变化。</p>

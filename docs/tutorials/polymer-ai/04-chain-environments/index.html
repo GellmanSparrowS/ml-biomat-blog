@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>长链生活在怎样的环境里：水、温度、电荷与相互作用 — ML-Biomat</title>
+<title>高分子的环境响应：水合、温度与电荷 — ML-Biomat</title>
 <meta name="description" content="从水合、热运动和电离理解环境作用，计算不同 pH 下的平均电荷，比较只看组成与同时读取环境的回归预测。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/tutorials/polymer-ai/04-chain-environments/">
@@ -14,12 +14,12 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="长链生活在怎样的环境里：水、温度、电荷与相互作用">
+<meta property="og:title" content="高分子的环境响应：水合、温度与电荷">
 <meta property="og:description" content="从水合、热运动和电离理解环境作用，计算不同 pH 下的平均电荷，比较只看组成与同时读取环境的回归预测。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ml-biomat.com/tutorials/polymer-ai/04-chain-environments/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "长链生活在怎样的环境里：水、温度、电荷与相互作用", "description": "从水合、热运动和电离理解环境作用，计算不同 pH 下的平均电荷，比较只看组成与同时读取环境的回归预测。", "url": "https://ml-biomat.com/tutorials/polymer-ai/04-chain-environments/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "高分子的环境响应：水合、温度与电荷", "description": "从水合、热运动和电离理解环境作用，计算不同 pH 下的平均电荷，比较只看组成与同时读取环境的回归预测。", "url": "https://ml-biomat.com/tutorials/polymer-ai/04-chain-environments/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
 <link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-04.css?v=c4477e71437d"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -33,8 +33,8 @@
 <span class="lang-switch"><a data-language="en" role="link" aria-disabled="true" tabindex="-1" title="该页暂无英文版">EN</a><a data-language="zh" href="/tutorials/polymer-ai/04-chain-environments/" class="active" aria-current="true">中文</a></span>
 </div></header><main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">材料与结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#water">01　水怎样参与接触</a><a href="#thermal">02　热运动与电荷作用</a><a href="#ionization">03　逐步计算平均电荷</a><a href="#conditional">04　让模型读到环境</a><a href="#experiment">05　完整回归与外推检查</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">把分子放回环境中</p>
-<h1>长链生活在怎样的环境里：水、温度、电荷与相互作用</h1>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#water">01　水怎样参与接触</a><a href="#thermal">02　热运动与电荷作用</a><a href="#ionization">03　逐步计算平均电荷</a><a href="#conditional">04　让模型读到环境</a><a href="#experiment">05　完整回归与外推检查</a><a href="#sources">资料与延伸阅读</a></nav></details></aside><div class="lesson-main" id="main"><p class="eyebrow">把分子放回环境中</p>
+<h1>高分子的环境响应：水合、温度与电荷</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">一杯牛奶加入酸以后，可能出现絮状物；含水凝胶换进另一种盐溶液，体积可能改变；同一份蛋白质样品，加热前后也可能表现不同。这些现象提醒我们，材料的行为与周围环境密切相连。<a href="/tutorials/polymer-ai/03-biological-polymers/">《生命中的三类长链：蛋白质、糖链与核酸》</a>记录了分子的组成、顺序和连接，这一节把水、温度和溶液条件补进来，解释它们如何改变分子之间的接触，再训练一个能读取酸碱度的回归模型。</p>
 <p>本节要解决的是一个很实际的数据问题：如果同一种分子在两次实验里表现不同，研究者怎样判断差别来自哪里？我们会先从分子与水的接触讲起，再用酸性、碱性基团的电离建立一个可以亲手计算的例子。最后，程序将把相同组成放在一系列pH条件下，比较只看组成与同时看到环境的预测。这样，环境不再只是论文方法部分的一段背景，而成为每条数据里可以检查、计算和比较的变量。</p>
@@ -341,7 +341,7 @@ new_composition_new_ph / equilibrium: MAE(平衡值)=0.00000, RMSE(带噪观测)
 训练/测试共有组成组数： 0
 结果与完整样本已保存至 environment_outputs
 </pre>
-<figure class="figure" id="python-results"><p class="figure-title">一次运行 · 六幅结果图</p><div class="result-grid"><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/0d1234b52f5274ccc2ce2040.svg" alt="A · 在各自的pKa处，两类位点各有一半处于指定带电状态。" loading="lazy"><p class="panel-guide">A · 在各自的pKa处，两类位点各有一半处于指定带电状态。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/451457d577397fdf137c316f.svg" alt="B · 留出组成的完整曲线；米色区间的pH未进入训练。" loading="lazy"><p class="panel-guide">B · 留出组成的完整曲线；米色区间的pH未进入训练。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/5ecd68428d751c2ed41ca561.svg" alt="C · 固定碱性位点比例0.2，比较酸性比例和环境；黑线表示平均净电荷为零。" loading="lazy"><p class="panel-guide">C · 固定碱性位点比例0.2，比较酸性比例和环境；黑线表示平均净电荷为零。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/73397cddd6893b2c704645ff.svg" alt="D · 范围内的新组成预测；图上抽稀显示，误差按全部测试例子计算。" loading="lazy"><p class="panel-guide">D · 范围内的新组成预测；图上抽稀显示，误差按全部测试例子计算。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/34c6caa3fd149c05236ebe7e.svg" alt="E · 按新组成与新条件分别报告误差，平衡参照对应本次生成规则。" loading="lazy"><p class="panel-guide">E · 按新组成与新条件分别报告误差，平衡参照对应本次生成规则。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/7c26aaa6e2db6202a3f6101b.svg" alt="F · 按pH查看平均绝对误差，观察范围外的偏离。" loading="lazy"><p class="panel-guide">F · 按pH查看平均绝对误差，观察范围外的偏离。</p></div></div><figcaption><b>图5</b>　在固定pKa与298K的独立位点模型中生成320种不同组成、每种33个pH条件，加入标准差0.01的观测噪声。240种组成的范围内数据用于训练，80种完整组成留作两项测试。图C使用同一个无噪平衡关系；所有图像由本页程序实际生成。</figcaption><div class="plot-downloads"><a download="environment_diagnostics.svg" href="/static/tutorials/polymer-ai/assets/530feedd7b9fe2e2af9ed01c.svg">矢量组图SVG</a><a download="environment_diagnostics.png" href="/static/tutorials/polymer-ai/assets/0cb96a56c7a91f6d965dd442.png">高清组图PNG</a><a download="samples.json" href="/static/tutorials/polymer-ai/assets/76391d0373217a6740e418af.json">完整样本JSON</a><a download="results.json" href="/static/tutorials/polymer-ai/assets/c67a32d4dca3784ff93e0ee5.json">模型与结果JSON</a></div></figure>
+<figure class="figure" id="python-results"><p class="figure-title">一次运行 · 六幅结果图</p><div class="result-grid"><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/0d1234b52f5274ccc2ce2040.svg" alt="A · 在各自的pKa处，两类位点各有一半处于指定带电状态。" loading="lazy"><p class="panel-guide">A · 在各自的pKa处，两类位点各有一半处于指定带电状态。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/451457d577397fdf137c316f.svg" alt="B · 留出组成的完整曲线；米色区间的pH未进入训练。" loading="lazy"><p class="panel-guide">B · 留出组成的完整曲线；米色区间的pH未进入训练。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/5ecd68428d751c2ed41ca561.svg" alt="C · 固定碱性位点比例0.2，比较酸性比例和环境；黑线表示平均净电荷为零。" loading="lazy"><p class="panel-guide">C · 固定碱性位点比例0.2，比较酸性比例和环境；黑线表示平均净电荷为零。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/73397cddd6893b2c704645ff.svg" alt="D · 范围内的新组成预测；图上抽稀显示，误差按全部测试例子计算。" loading="lazy"><p class="panel-guide">D · 范围内的新组成预测；图上抽稀显示，误差按全部测试例子计算。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/34c6caa3fd149c05236ebe7e.svg" alt="E · 按新组成与新条件分别报告误差，平衡参照对应本次生成规则。" loading="lazy"><p class="panel-guide">E · 按新组成与新条件分别报告误差，平衡参照对应本次生成规则。</p></div><div class="result-panel"><img src="/static/tutorials/polymer-ai/assets/7c26aaa6e2db6202a3f6101b.svg" alt="F · 按pH查看平均绝对误差，观察范围外的偏离。" loading="lazy"><p class="panel-guide">F · 按pH查看平均绝对误差，观察范围外的偏离。</p></div></div><figcaption><b>图5</b>　在固定pKa与298K的独立位点模型中生成320种不同组成、每种33个pH条件，加入标准差0.01的观测噪声。240种组成的范围内数据用于训练，80种完整组成留作两项测试。图C使用同一个无噪平衡关系。</figcaption><div class="plot-downloads"><a download="environment_diagnostics.svg" href="/static/tutorials/polymer-ai/assets/530feedd7b9fe2e2af9ed01c.svg">矢量组图SVG</a><a download="environment_diagnostics.png" href="/static/tutorials/polymer-ai/assets/0cb96a56c7a91f6d965dd442.png">高清组图PNG</a><a download="samples.json" href="/static/tutorials/polymer-ai/assets/76391d0373217a6740e418af.json">完整样本JSON</a><a download="results.json" href="/static/tutorials/polymer-ai/assets/c67a32d4dca3784ff93e0ee5.json">模型与结果JSON</a></div></figure>
 <p>先从图A和图B读起。图A画出了酸性位点的负电比例与碱性位点的正电比例，两个pK<sub>a</sub>位置都对应各自的50%。图B选取一个完整留出的组成，展示它的整条响应曲线：只看组成的模型给出一条不随pH改变的水平线；条件模型在训练范围内跟随平衡曲线弯曲，来到米色标出的范围外以后则出现偏离。灰色点是同一次运行生成的带噪观测，绿色曲线是本次数据定义中的无噪平衡值。</p>
 <p>图C把酸性位点比例与pH放在同一张图里，固定碱性位点比例为0.2。颜色表示每单元平均电荷，黑色线标出净电荷为0的位置。沿横向移动，相当于改变同一种组成的环境；沿纵向移动，相当于改变酸性位点的数量比例。即使处在净电荷为0的位置，链上也可能同时存在正、负电位点，只是平均总和相互抵消。局部电荷分布和空间接触仍然可以影响链的行为，因此净电荷与“所有位置都不带电”要分开理解。</p>
 <p>在已覆盖的pH范围内，新组成上的平均绝对误差由组成模型的0.0316降为条件模型的0.0021；到了两端的未见区间，条件模型误差为0.1433。这些数值的单位都是每单元基本电荷数。若以100个单元为例，把0.01乘以100，可理解为平均净电荷约1e的差别。图D用散点显示范围内的预测，图E把两个测试任务并排放置，图F则进一步指出误差集中在哪些pH条件下。</p>
@@ -360,7 +360,7 @@ new_composition_new_ph / equilibrium: MAE(平衡值)=0.00000, RMSE(带噪观测)
 </ol><p>科学史图为本节绘制的概念示意；电荷曲线、模型比较与误差图由页面中的Python程序生成。</p></section>
 
 </div></div>
-</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/03-biological-polymers/"><strong>生命中的三类长链：蛋白质、糖链与核酸</strong></a><a href="/tutorials/polymer-ai/02-conformations-and-statistics/"><strong>为什么同一条链需要许多幅照片</strong></a></nav></section></main>
+</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/03-biological-polymers/"><strong>生命中的三类长链：蛋白质、糖链与核酸</strong></a><a href="/tutorials/polymer-ai/02-conformations-and-statistics/"><strong>高分子构象统计：采样、分布与独立样本</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>

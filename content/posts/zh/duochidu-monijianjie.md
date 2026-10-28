@@ -1,5 +1,5 @@
 ---
-title: "多尺度模拟在纤维生物材料中的应用入门"
+title: "生物材料多尺度模拟：模型选择与参数传递"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "multiscale-modeling"
@@ -124,7 +124,7 @@ A: 原子尺度的热涨落、特定氢键模式、溶剂效应需要额外处�
 
 **Q: 有没有"一条龙"的多尺度软件？**
 
-A: 没有完美的。通常需要自己写 Python 胶水代码把 MD 输出转成 FEA 输入。这也是本文想帮你的地方。
+A: 没有完美的。通常需要自己写 Python 胶水代码把 MD 输出转成 FEA 输入。
 
 ## 参考资料
 - Noid, W.G. (2013). Coarse-grained models for biomolecular systems. *J. Chem. Phys.*

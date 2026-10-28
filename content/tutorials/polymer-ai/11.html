@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#direction">01　读懂方向与互补</a><a href="#structures">02　从发夹到可设计结构</a><a href="#rules">03　计算结构与概率</a><a href="#learning">04　学习序列里的关系</a><a href="#experiment">05　运行并比较模型</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 11 节 · 从遗传信息的载体到可以设计的分子结构</p>
-<h1>DNA与RNA：序列怎样组织成结构<span>读懂方向、配对与结构分布，再让AI学习序列里的联系</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#direction">01　读懂方向与互补</a><a href="#structures">02　从发夹到可设计结构</a><a href="#rules">03　计算结构与概率</a><a href="#learning">04　学习序列里的关系</a><a href="#experiment">05　运行并比较模型</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 11 节 · 从遗传信息的载体到可以设计的分子结构</p>
+<h1>DNA与RNA：序列怎样组织成结构</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">一条拉链能够合上，既要两侧的齿彼此匹配，也要按合适的方向对齐。核酸中的互补配对给分子提供了类似的选择性：一段序列可以识别另一段序列，一条长链也可以折回来，让相隔较远的位置靠在一起。正是这些联系，使DNA与RNA既能参与信息存储和传递，也能形成有特定形状的结构。本节从最容易画清楚的配对开始，讨论一串字母怎样变成分子之间的关系。</p>
 <p>给模型一条RNA序列，可以让它预测每个位置有多大机会参与配对。这个任务需要同时考虑字母身份、所在位置，以及远处有没有合适的伙伴。本节先用一套明确的配对规则计算结构分布，再训练小型神经网络近似由此得到的概率。已知规则提供了可以逐项核对的答案：当预测出错时，我们能追问是模型没读到远处信息、训练例子不够，还是换了长度以后没有延续原来的规律。代码、交互图和误差曲线会始终围绕这同一个任务展开。</p>

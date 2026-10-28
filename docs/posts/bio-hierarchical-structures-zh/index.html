@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/bio-hierarchical-structures-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物材料的层级超结构：从分子到宏观的力学设计", "description": "梳理丝素、胶原、骨、珍珠层与纤维素在不同尺度上的结构组织。通过胶原排列与片晶界面示意解释载荷传递和裂纹偏转，并连接显微表征、力学测试与多尺度建模方法。", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 3381, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/bio-hierarchical-structures-zh/", "image": "https://ml-biomat.com/static/images/og/bio-hierarchical-structures-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "材料与结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "生物材料的层级超结构：从分子到宏观的力学设计", "item": "https://ml-biomat.com/posts/bio-hierarchical-structures-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物材料的层级超结构：从分子到宏观的力学设计", "description": "梳理丝素、胶原、骨、珍珠层与纤维素在不同尺度上的结构组织。通过胶原排列与片晶界面示意解释载荷传递和裂纹偏转，并连接显微表征、力学测试与多尺度建模方法。", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 3300, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/bio-hierarchical-structures-zh/", "image": "https://ml-biomat.com/static/images/og/bio-hierarchical-structures-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "材料与结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "生物材料的层级超结构：从分子到宏观的力学设计", "item": "https://ml-biomat.com/posts/bio-hierarchical-structures-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -43,9 +43,9 @@
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E5%B1%82%E7%BA%A7%E7%BB%93%E6%9E%84/">层级结构</a><a class="tag-pill" href="/tags/%E8%B6%85%E7%BB%93%E6%9E%84/">超结构</a><a class="tag-pill" href="/tags/%E7%94%9F%E7%89%A9%E6%9D%90%E6%96%99/">生物材料</a><a class="tag-pill" href="/tags/%E5%8A%9B%E5%AD%A6%E8%AE%BE%E8%AE%A1/">力学设计</a><a class="tag-pill" href="/tags/%E4%B8%9D%E7%B4%A0/">丝素</a><a class="tag-pill" href="/tags/%E8%83%B6%E5%8E%9F/">胶原</a><a class="tag-pill" href="/tags/%E7%8F%8D%E7%8F%A0%E5%B1%82/">珍珠层</a></div>
 <div class="content">
-<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#什么是层级超结构">什么是层级超结构</a></li><li class="toc-h2"><a href="#生物材料实例-嵌套结构设计">生物材料实例：嵌套结构设计</a></li><li class="toc-h3"><a href="#1-丝素蛋白-beta-折叠结晶与纳米原纤维">1. 丝素蛋白：Beta-折叠结晶与纳米原纤维</a></li><li class="toc-h3"><a href="#2-胶原蛋白-三重螺旋到韧性纤维">2. 胶原蛋白：三重螺旋到韧性纤维</a></li><li class="toc-h3"><a href="#3-骨-有机-无机复合超结构">3. 骨：有机-无机复合超结构</a></li><li class="toc-h3"><a href="#4-珍珠层-nacre-砖泥结构的韧性奇迹">4. 珍珠层(Nacre)：砖泥结构的韧性奇迹</a></li><li class="toc-h3"><a href="#5-蜘蛛丝-结晶-非晶交替网络">5. 蜘蛛丝：结晶/非晶交替网络</a></li><li class="toc-h3"><a href="#6-纤维素-多层纤维壁的精密设计">6. 纤维素：多层纤维壁的精密设计</a></li><li class="toc-h2"><a href="#设计原则与应用启示">设计原则与应用启示</a></li><li class="toc-h3"><a href="#共同设计原则">共同设计原则</a></li><li class="toc-h3"><a href="#对应用的启示">对应用的启示</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#研究方法与导航">研究方法与导航</a></li><li class="toc-h3"><a href="#附录-研究方法与工具">附录：研究方法与工具</a></li><li class="toc-h3"><a href="#本博客相关内容导航">本博客相关内容导航</a></li><li class="toc-h2"><a href="#演化-表征与展望">演化、表征与展望</a></li><li class="toc-h3"><a href="#层级结构的演化与自组装">层级结构的演化与自组装</a></li><li class="toc-h3"><a href="#总结-从自然学习设计">总结：从自然学习设计</a></li><li class="toc-h3"><a href="#层级结构的定量表征">层级结构的定量表征</a></li><li class="toc-h3"><a href="#结语">结语</a></li></ul></details><p>自然界的生物材料——从蚕丝到骨骼，从珍珠到木材——拥有人造材料难以企及的力学性能。这些性能的核心秘密不是化学成分，而是“层级超结构”——多个尺度上的组织层级从分子级到宏观级协同工作，产生远超各组分单独性能之和的整体力学响应。</p>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#什么是层级超结构">什么是层级超结构</a></li><li class="toc-h2"><a href="#生物材料实例-嵌套结构设计">生物材料实例：嵌套结构设计</a></li><li class="toc-h3"><a href="#1-丝素蛋白-beta-折叠结晶与纳米原纤维">1. 丝素蛋白：Beta-折叠结晶与纳米原纤维</a></li><li class="toc-h3"><a href="#2-胶原蛋白-三重螺旋到韧性纤维">2. 胶原蛋白：三重螺旋到韧性纤维</a></li><li class="toc-h3"><a href="#3-骨-有机-无机复合超结构">3. 骨：有机-无机复合超结构</a></li><li class="toc-h3"><a href="#4-珍珠层-nacre-砖泥结构的韧性奇迹">4. 珍珠层(Nacre)：砖泥结构的韧性奇迹</a></li><li class="toc-h3"><a href="#5-蜘蛛丝-结晶-非晶交替网络">5. 蜘蛛丝：结晶/非晶交替网络</a></li><li class="toc-h3"><a href="#6-纤维素-多层纤维壁的精密设计">6. 纤维素：多层纤维壁的精密设计</a></li><li class="toc-h2"><a href="#设计原则与应用启示">设计原则与应用启示</a></li><li class="toc-h3"><a href="#共同设计原则">共同设计原则</a></li><li class="toc-h3"><a href="#对应用的启示">对应用的启示</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#研究方法与导航">研究方法与导航</a></li><li class="toc-h3"><a href="#附录-研究方法与工具">附录：研究方法与工具</a></li><li class="toc-h3"><a href="#本博客相关内容导航">相关主题</a></li><li class="toc-h2"><a href="#演化-表征与展望">演化、表征与展望</a></li><li class="toc-h3"><a href="#层级结构的演化与自组装">层级结构的演化与自组装</a></li><li class="toc-h3"><a href="#总结-从自然学习设计">总结：从自然学习设计</a></li><li class="toc-h3"><a href="#层级结构的定量表征">层级结构的定量表征</a></li><li class="toc-h3"><a href="#结语">结语</a></li></ul></details><p>自然界的生物材料——从蚕丝到骨骼，从珍珠到木材——拥有人造材料难以企及的力学性能。这些性能的核心秘密不是化学成分，而是“层级超结构”——多个尺度上的组织层级从分子级到宏观级协同工作，产生远超各组分单独性能之和的整体力学响应。</p>
 
-<p>本文是“生物·材料·结构”分类的导览，系统梳理自然界中典型的层级超结构及其力学优化策略，为后续深入各类生物材料的研究提供路径图。</p>
+<p>自然界中典型的层级超结构展示了不同尺度的组织方式如何共同影响材料力学性能。</p>
 
 <h2 id="什么是层级超结构">什么是层级超结构</h2>
 
@@ -190,7 +190,7 @@
 
 <p>近年来，机器学习力场(MLFF)如ANI、NequIP、MACE等为MD模拟提供了DFT精度但更高效的力场，使得更大时空尺度的精确模拟成为可能。同时，原位力学测试(in situ SEM/AFM)让我们能够直接观察材料在受力过程中的层级结构演化。</p>
 
-<h3 id="本博客相关内容导航">本博客相关内容导航</h3>
+<h3 id="本博客相关内容导航">相关主题</h3>
 
 <p>“生物·材料·结构”分类下各篇文章的关系：</p>
 
@@ -232,10 +232,10 @@
 <li><strong>缺陷容忍</strong>：多层结构使材料对局部损伤不敏感，研究表明纳米尺度上存在“缺陷不敏感”现象，这是生物材料韧性的重要来源。</li>
 <li><strong>环境响应</strong>：许多生物材料能根据湿度、温度和力学负荷动态调整其层级结构，实现“力学智能”。</li>
 
+
+
+
 </ol>
-<p>未来的生物材料研究将越来越依赖计算和实验的深度耦合。本博客的“生物·材料·结构”分类将持续更新各种生物材料的深度解析、实验方法和计算模拟教程。</p>
-
-
 <h3 id="层级结构的定量表征">层级结构的定量表征</h3>
 
 <p>理解层级结构不仅需要定性描述，还需要定量表征。常用的定量参数包括：</p>
@@ -254,7 +254,7 @@
 
 <p>自然界的层级超结构是经过数亿年进化优化的力学解决方案，它们的设计原则已经被验证在极端环境下有效。作为生物材料研究者，我们的任务是用现代计算和实验工具去“解码”这些设计，并将其原则应用于新一代生物医用材料的开发。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/gromacs-md-tutorial-zh/">← GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></span><span><a href="/posts/engineered-superstructures-zh/">工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures-zh/">工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/fiber-network-mechanics-zh/">纤维网络力学基础：生物材料研究的关键概念</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/gromacs-md-tutorial-zh/">← GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></span><span><a href="/posts/engineered-superstructures-zh/">工程超结构力学：折纸、蜂巢、拉胀与点阵 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures-zh/">工程超结构力学：折纸、蜂巢、拉胀与点阵</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/fiber-network-mechanics-zh/">纤维网络力学基础：生物材料研究的关键概念</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

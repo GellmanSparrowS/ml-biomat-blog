@@ -1,5 +1,5 @@
 ---
-title: "Stress-Strain Curves: A Materials Science Primer"
+title: "Stress–Strain Analysis: Modulus, Strength and Energy Density"
 date: "2026-06-26"
 updated: "2026-10-28"
 category: "wet-lab-data"

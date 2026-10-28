@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Python实战AFM力曲线分析：从原始数据到力学性能 — ML-Biomat</title>
+<title>AFM力曲线分析：信号标定与弹性模量拟合 — ML-Biomat</title>
 <meta name="description" content="从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/afm-force-curve-python-zh/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="Python实战AFM力曲线分析：从原始数据到力学性能">
+<meta property="og:title" content="AFM力曲线分析：信号标定与弹性模量拟合">
 <meta property="og:description" content="从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/afm-force-curve-python-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python实战AFM力曲线分析：从原始数据到力学性能", "description": "从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 1410, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "实验表征与数据分析", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Python实战AFM力曲线分析：从原始数据到力学性能", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AFM力曲线分析：信号标定与弹性模量拟合", "description": "从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 1410, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "实验表征与数据分析", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "AFM力曲线分析：信号标定与弹性模量拟合", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/wet-lab-data/">实验表征与数据分析</a></nav>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
-<h1>Python实战AFM力曲线分析：从原始数据到力学性能</h1>
+<h1>AFM力曲线分析：信号标定与弹性模量拟合</h1>
 <div class="article-meta">
 <span>2026-06-26</span><span>·</span><span>4 分钟阅读</span><span>·</span><a href="/categories/wet-lab-data/">实验表征与数据分析</a>
 </div>
@@ -326,7 +326,7 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 
 <p>数据处理的标准化和自动化是当前的研究热点。不同的基线校正方法、接触点确定算法和拟合模型可能导致同一组数据得到显著不同的模量值。开源数据处理工具如AtomicJ和PyJibe正在推动AFM数据分析的标准化。建立社区共识的数据处理流程对于提高研究的可复现性和可比性至关重要。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/ml-predict-fiber-mechanics-zh/">← 机器学习预测纤维材料力学性能：从数据准备到模型部署</a></span><span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/ml-predict-fiber-mechanics-zh/">← 纤维材料力学预测：特征构造、回归与模型验证</a></span><span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">生物材料多尺度模拟：模型选择与参数传递 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、应变测量与误差</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力—应变分析：弹性模量、强度与能量密度</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM纤维图像分析：分割、直径与取向测量</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

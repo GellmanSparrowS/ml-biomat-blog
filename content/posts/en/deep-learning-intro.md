@@ -1,5 +1,5 @@
 ---
-title: "The Nature of Deep Learning"
+title: "Deep Learning: Neural Networks, Backpropagation and Training"
 date: "2026-07-03"
 updated: "2026-10-28"
 category: "machine-learning"

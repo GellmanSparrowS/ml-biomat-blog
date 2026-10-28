@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>材料科学中的特征工程：从实验数据到机器学习就绪数据 — ML-Biomat</title>
+<title>材料特征工程：描述符构造、编码与特征选择 — ML-Biomat</title>
 <meta name="description" content="从材料描述符与制备条件构造特征矩阵，处理分类变量、物理交互项和缺失信息。结合小样本特征选择与训练集内的缩放方法，说明怎样保留变量含义、避免目标泄漏，并让模型评价保持一致。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/feature-engineering-materials-zh/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="材料科学中的特征工程：从实验数据到机器学习就绪数据">
+<meta property="og:title" content="材料特征工程：描述符构造、编码与特征选择">
 <meta property="og:description" content="从材料描述符与制备条件构造特征矩阵，处理分类变量、物理交互项和缺失信息。结合小样本特征选择与训练集内的缩放方法，说明怎样保留变量含义、避免目标泄漏，并让模型评价保持一致。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/feature-engineering-materials-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "description": "从材料描述符与制备条件构造特征矩阵，处理分类变量、物理交互项和缺失信息。结合小样本特征选择与训练集内的缩放方法，说明怎样保留变量含义、避免目标泄漏，并让模型评价保持一致。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 963, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-zh/", "image": "https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "item": "https://ml-biomat.com/posts/feature-engineering-materials-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "材料特征工程：描述符构造、编码与特征选择", "description": "从材料描述符与制备条件构造特征矩阵，处理分类变量、物理交互项和缺失信息。结合小样本特征选择与训练集内的缩放方法，说明怎样保留变量含义、避免目标泄漏，并让模型评价保持一致。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 963, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-zh/", "image": "https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "材料特征工程：描述符构造、编码与特征选择", "item": "https://ml-biomat.com/posts/feature-engineering-materials-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/machine-learning/">机器学习</a></nav>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
-<h1>材料科学中的特征工程：从实验数据到机器学习就绪数据</h1>
+<h1>材料特征工程：描述符构造、编码与特征选择</h1>
 <div class="article-meta">
 <span>2026-06-26</span><span>·</span><span>3 分钟阅读</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
 </div>
@@ -107,7 +107,7 @@ def engineer_features(df):
 
 <p>特征工程的质量远比模型选择重要。在材料科学的小样本场景中，一两个精心构造的物理特征对模型性能的提升往往超过尝试十种不同算法。花时间理解你的数据，与领域专家讨论，让物理直觉指导特征构造——这是任何自动化工具都无法替代的人类价值。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">← 多尺度模拟在纤维生物材料中的应用入门</a></span><span><a href="/posts/fiber-network-mechanics-zh/">纤维网络力学基础：生物材料研究的关键概念 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">← 生物材料多尺度模拟：模型选择与参数传递</a></span><span><a href="/posts/fiber-network-mechanics-zh/">纤维网络力学基础：生物材料研究的关键概念 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习基础：神经网络、反向传播与模型训练</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

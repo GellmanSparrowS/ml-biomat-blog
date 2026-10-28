@@ -1,5 +1,5 @@
 ---
-title: "ML Classification Models: A Practical Overview"
+title: "Machine Learning Classification: Models, Metrics and Validation"
 date: "2026-06-30"
 updated: "2026-10-28"
 category: "machine-learning"

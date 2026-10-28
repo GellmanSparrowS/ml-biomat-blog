@@ -1,5 +1,5 @@
 ---
-title: "Python科研绘图完全指南：从数据到发表级图表"
+title: "Matplotlib与Seaborn科研绘图：图形选择与排版"
 date: "2026-06-27"
 updated: "2026-10-28"
 category: "python-tutorials"

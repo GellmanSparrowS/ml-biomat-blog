@@ -1,7 +1,7 @@
 <a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#use">01　一次使用包含哪些过程</a><a href="#time">02　材料为什么需要时间</a><a href="#energy">03　循环中的能量与恢复</a><a href="#learning">04　让AI读入加载历史</a><a href="#experiment">05　运行并解释模型结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 16 节 · 从一次拉伸走向完整的使用历史</p>
-<h1>材料怎样响应一次真实的使用过程<span>此刻的受力，还与刚才经历了什么有关</span></h1>
+<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#use">01　一次使用包含哪些过程</a><a href="#time">02　材料为什么需要时间</a><a href="#energy">03　循环中的能量与恢复</a><a href="#learning">04　让AI读入加载历史</a><a href="#experiment">05　运行并解释模型结果</a><a href="#sources">资料与延伸阅读</a></nav></aside><div class="lesson-main" id="main"><p class="eyebrow">第 16 节 · 从一次拉伸走向完整的使用历史</p>
+<h1>凝胶的黏弹响应：松弛、循环加载与历史效应</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">把一块软垫压下去，停住几秒，再抬起手，能够观察到三个不同的过程：刚压下去时的阻力、保持形状时的变化，以及松手后的恢复。快压和慢压的手感还可能不同。凝胶、蛋白质纤维和许多生物组织也会随时间改变受力。本节从一次完整的使用过程出发，认识材料怎样保留加载历史，读懂公开凝胶实验中的循环曲线，再训练能够逐步读取变形过程的AI模型。这样，研究问题便从“材料有多硬”延伸到“按这样的速度使用、停留和反复加载，它会怎样响应”。</p>
 
@@ -82,7 +82,7 @@
 
 <section id="experiment"><h2><span class="num">05</span>运行完整例子，再沿着图解释研究结果</h2>
 <p>下面的代码同时完成两条相互联系的工作。一条是生成可追溯的受控路径，训练四类模型，并画出预测与能量结果；另一条是读取公开工作簿，重绘前面的真实凝胶循环曲线。实验附件约63兆字节，首次运行会下载到当前目录，之后使用本地副本并核对文件校验值。受控模型的参数、训练划分、网络权重、实验曲线和运行结果都写入输出目录，便于继续修改问题或核查某一幅图。</p>
-<p>阅读代码时可以沿着三个函数与变量走：pulse生成一次规定的使用过程，integrate根据应变历史更新内部应力与能量，predictions收集四类模型的预测。实验数据读取保留了工作表、列号和原始点序；绘图仅从这些实际计算或读取的数值出发。安装代码开头列出的依赖后即可运行，完整程序在本页展开，下方的结果图已经由同一份程序生成。</p>
+<p>阅读代码时可以沿着三个函数与变量走：pulse生成一次规定的使用过程，integrate根据应变历史更新内部应力与能量，predictions收集四类模型的预测。实验数据读取保留了工作表、列号和原始点序；绘图仅从这些实际计算或读取的数值出发。安装代码开头列出的依赖后即可运行。</p>
 <div class="code-section" id="code-detail"><div class="code-bar"><span>完整Python例子 · NumPy · SciPy · PyTorch · scikit-learn · Matplotlib · openpyxl · requests</span><a download="L16_example.py" href="/static/tutorials/polymer-ai/assets/d89d8f9441aad688afa65df5.py">下载代码</a></div><pre id="python-code"><code class="language-python"><span class="sd">"""L16: loading history, learned states, and experimental cyclic curves.</span>
 <span class="sd">Run: python example.py</span>
 <span class="sd">Install: numpy scipy scikit-learn torch matplotlib openpyxl requests</span>

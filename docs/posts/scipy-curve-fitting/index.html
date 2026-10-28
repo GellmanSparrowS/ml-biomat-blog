@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Practical Curve Fitting with SciPy: From Basics to Advanced Models — ML-Biomat</title>
+<title>SciPy Curve Fitting: Models, Residuals and Uncertainty — ML-Biomat</title>
 <meta name="description" content="Fit linear trends, stress relaxation, and indentation models with SciPy while tracking parameter units and initial guesses. Interpret residuals, covariance matrices, and confidence intervals to turn a fitted curve into an inspectable physical calculation.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/scipy-curve-fitting/">
@@ -14,14 +14,14 @@
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
-<meta property="og:title" content="Practical Curve Fitting with SciPy: From Basics to Advanced Models">
+<meta property="og:title" content="SciPy Curve Fitting: Models, Residuals and Uncertainty">
 <meta property="og:description" content="Fit linear trends, stress relaxation, and indentation models with SciPy while tracking parameter units and initial guesses. Interpret residuals, covariance matrices, and confidence intervals to turn a fitted curve into an inspectable physical calculation.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/scipy-curve-fitting/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/scipy-curve-fitting.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "description": "Fit linear trends, stress relaxation, and indentation models with SciPy while tracking parameter units and initial guesses. Interpret residuals, covariance matrices, and confidence intervals to turn a fitted curve into an inspectable physical calculation.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 981, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Scientific Computing with Python", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "item": "https://ml-biomat.com/posts/scipy-curve-fitting/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SciPy Curve Fitting: Models, Residuals and Uncertainty", "description": "Fit linear trends, stress relaxation, and indentation models with SciPy while tracking parameter units and initial guesses. Interpret residuals, covariance matrices, and confidence intervals to turn a fitted curve into an inspectable physical calculation.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 981, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Scientific Computing with Python", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "SciPy Curve Fitting: Models, Residuals and Uncertainty", "item": "https://ml-biomat.com/posts/scipy-curve-fitting/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
 <link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
@@ -36,7 +36,7 @@
 </div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/python-tutorials/en/">Scientific Computing with Python</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
-<h1>Practical Curve Fitting with SciPy: From Basics to Advanced Models</h1>
+<h1>SciPy Curve Fitting: Models, Residuals and Uncertainty</h1>
 <div class="article-meta">
 <span>2026-06-26</span><span>·</span><span>5 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Scientific Computing with Python</a>
 </div>
@@ -259,7 +259,7 @@ print(f&quot;Constrained result: {result.x}&quot;)
 
 <p>When reporting fitted parameters in publications, include not just the best-fit values and standard errors but also the correlation matrix between parameters. Highly correlated parameters indicate that the model may be overparameterized—different combinations of parameter values produce nearly identical fits. This is a red flag that should be discussed transparently.</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/scientific-visualization-python/">← Scientific Data Visualization with Python: Publication-Ready Figures</a></span><span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/scientific-visualization-python/">← Scientific Plotting with Matplotlib and Seaborn</a></span><span><a href="/posts/sem-image-analysis/">SEM Fiber Image Analysis: Segmentation, Diameter and Orientation →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Plotting with Matplotlib and Seaborn</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"

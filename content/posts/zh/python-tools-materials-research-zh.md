@@ -1,5 +1,5 @@
 ---
-title: "Python科研工具箱完全指南：材料科学与生物研究必备"
+title: "材料研究的Python工具箱：计算、绘图与数据分析"
 date: "2026-06-27"
 updated: "2026-10-28"
 category: "python-tutorials"
@@ -167,7 +167,7 @@ summary = df.groupby("treatment").agg({
 print(summary)
 ```
 
-### 四、Matplotlib：发表级科研绘图
+### 四、Matplotlib：科研数据绘图 {#四-matplotlib-发表级科研绘图}
 
 一张好的图抵得上千言万语。Matplotlib让你完全控制每一个细节：
 
