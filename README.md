@@ -11,13 +11,16 @@
 | 中文简历 `/cv/` | `content/cv-body.html` |
 | English CV `/cv/en/` | `content/cv-en-body.html` |
 | 分组相册 | `content/profile-albums.json`、`static/images/profile/` |
-| FiberNet 展示 | `content/fibernet-body.html` |
+| FiberNet 中英文展示 | `content/fibernet-body.html`、`content/fibernet-en-body.html`、`static/css/fibernet.css` |
 | 分类与教程 | `content_tools/catalog.py`、`content/tutorials/polymer-ai/`、`content_tools/tutorials.py` |
 | 教程图片、数据与下载 | `static/tutorials/polymer-ai/` |
 | 教程样式 | `static/css/tutorials.css` |
 | 中英文文章 | `content/posts/zh/`、`content/posts/en/` |
 | 样式与交互 | `static/css/style.css`、`static/js/main.js`、`static/js/profile.js` |
-| 导航、页面模板、生成流程 | `build.py` |
+| 公共导航与主题初始化 | `content_tools/chrome.py`、`static/js/main.js` |
+| 中英首页、文章合集 | `content_tools/home.py` |
+| 中英工具、隐私与标签页 | `content_tools/utility_pages.py`、`content_tools/tag_pages.py` |
+| 页面模板与生成流程 | `build.py` |
 | 站点信息与分类 | `config.py` |
 
 `docs/` 是生成后的发布内容，由构建更新；源文件是日常维护入口。
@@ -63,3 +66,12 @@ GitHub 登录由本机凭据管理工具保存。仓库地址使用普通 HTTPS 
 `python manage.py build` 同时验证20篇教程的分类入口、代码与附件、48篇既有文章的双语互链和标题、图文覆盖及全站链接。手机目录默认折叠；正文和间距紧凑呈现，原图保持比例并可放大。
 
 既有文章新增的双语讲解图保存在 `static/images/article-guides/`，可通过 `content_tools/illustrate_mechanics.py` 和 `content_tools/illustrate_computing.py` 复现。教学曲线的生成参数与示意性质在脚本和图注中记录。
+
+
+## 全站语言与主题
+
+中文首页为 `/`，英文首页为 `/en/`；旧 `/zh/` 显示中文首页。完整内容合集独立在 `/articles/` 与 `/articles/en/`，语言开关只切换同一类页面。中文顶栏为“首页、工具库、分类、个人主页”，英文为“Home、Library、Categories、Profile”，所有页面保持同一套按钮结构和栏目高亮。
+
+默认主题在样式加载前设为暗色；访客手动选择亮色后，跨页和刷新保留。语言由明确URL决定，普通导航和Logo保持当前语言。没有英文译文的20篇教程仍保留EN控件的位置，以禁用状态呈现，不跳转到无关列表。
+
+每篇内容只有一个主分类，其余方法与材料信息用标签表达。中文44篇、英文24篇的主分类相互独立计数。`qa_check.py`同时检查各页公共导航、默认主题和首页成对关系；浏览器验收须使用空存储的新会话覆盖系统浅色和深色，实际点击主题及完整导航流程。

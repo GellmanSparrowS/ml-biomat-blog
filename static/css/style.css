@@ -767,8 +767,8 @@ main.container>*,.post-grid>*,.cat-grid>*,.content,.fibernet-page{min-width:0}
   .site-logo{font-size:16px}
   .lang-switch a{font-size:12px;line-height:1.5;min-height:34px;display:inline-flex;align-items:center;padding:5px 9px}
   .theme-toggle{min-width:36px;min-height:36px}
-  .hero{padding:26px 0 15px}
-  .hero h1{font-size:29px;margin-bottom:7px}
+  .hero{padding:20px 0 12px}
+  .hero h1{font-size:24px;margin-bottom:7px}
   .hero .subtitle{font-size:14px;line-height:1.7}
   .hero .subtitle[style]{font-size:13px!important}
   .badge-row{gap:5px;margin-top:12px}
@@ -840,12 +840,12 @@ main.container>*,.post-grid>*,.cat-grid>*,.content,.fibernet-page{min-width:0}
   .about-card h2{font-size:16px}
   .about-card p,.about-card li{font-size:13.5px;line-height:1.8}
   .fibernet-article .fibernet-hero{padding:23px 15px;margin-bottom:24px}
-  .fibernet-article .fibernet-hero h1{font-size:29px!important}
+  .fibernet-article .fibernet-hero h1{font-size:24px!important}
   .fibernet-article .fn-two-column{gap:18px;margin-bottom:24px}
   .fibernet-article .fn-stats-grid{gap:9px}
   .profile-page{padding-top:15px}
   .profile-page .profile-hero{padding:3px 0 19px;column-gap:15px}
-  .profile-page h1{font-size:26px;margin-bottom:10px}
+  .profile-page h1{font-size:24px;margin-bottom:8px}
   .profile-page h1 span{font-size:15px;line-height:1.5;margin-top:4px}
   .profile-page .profile-affiliation{font-size:13px;line-height:1.65}
   .profile-page .profile-advisor{font-size:12px;line-height:1.65}
@@ -894,8 +894,8 @@ main.container>*,.post-grid>*,.cat-grid>*,.content,.fibernet-page{min-width:0}
 @media screen and (max-width:360px){
   .container{padding-left:13px;padding-right:13px}
   .post-card{padding:13px 14px}
-  .article-header h1{font-size:23px}
-  .profile-page h1{font-size:24px}
+  .article-header h1{font-size:22px}
+  .profile-page h1{font-size:22px}
 }
 
 
@@ -973,3 +973,37 @@ main.container>.catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(
 
 /* Long displayed equations keep their typeset size and scroll within the article. */
 .content mjx-container[display="true"]{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:4px 0;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+
+/* Shared controls occupy the same space on paired and Chinese-only pages. */
+.lang-switch a[aria-disabled="true"]{opacity:.45;cursor:not-allowed;pointer-events:none}
+.article-breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-size:12px;color:var(--c-fg-soft);padding-top:20px}
+.catalog-category .catalog-scope{font-size:13px;line-height:1.75;color:var(--c-fg-soft);font-weight:400;margin:9px 0 12px}
+.catalog-header .catalog-meta{margin-top:10px}
+@media(max-width:760px){.article-breadcrumb{font-size:11.5px;padding-top:11px}.catalog-category .catalog-scope{font-size:12.5px;margin:7px 0 9px}}
+
+/* Reading paragraphs use the page language for natural word breaks. */
+:is(.content p,.cv-page .pub-list li,.hero .subtitle,.card-desc,.catalog-card p,.catalog-header>p,.catalog-scope,.tool-intro,.about-card p,
+.profile-page .profile-summary,.profile-page .profile-scale-flow p,.profile-page .profile-work-body>p:not(.profile-work-meta),
+.profile-page .profile-details dd,.profile-page .profile-collaboration dd:not(.profile-date),
+.profile-page .profile-section-head>p:not(.profile-eyebrow),.profile-page .profile-connect p:last-child){
+  text-align:justify;text-align-last:start;text-justify:auto;hyphens:auto;-webkit-hyphens:auto;
+  hyphenate-limit-chars:6 3 3;hyphenate-limit-lines:2;word-break:normal;overflow-wrap:break-word;text-wrap:pretty;
+}
+/* Captions and metadata retain their compact, unexpanded alignment. */
+:is(.content img[src*="/article-guides/"]+p,.content p:has(>img),.content figcaption p,
+.profile-page .profile-work-body>p.profile-work-meta,.profile-page p.profile-detail-source){
+  text-align:start;text-align-last:auto;hyphens:manual;-webkit-hyphens:manual;
+}
+@media screen and (max-width:760px){
+  main h2{font-size:19px;line-height:1.5}
+  main h3{font-size:16px}
+  main>h1[style]{font-size:24px!important;line-height:1.35}
+  .content>h1{font-size:24px;line-height:1.35;margin:12px 0}
+  .hero h1,.profile-page h1,.catalog-header h1,.article-header h1,.tool-page h1{line-height:1.35}
+  .profile-page .profile-hero{padding-top:0;padding-bottom:16px}
+  .profile-page .profile-section-head{margin-bottom:12px}
+}
+@media screen and (max-width:360px){
+  .hero h1,.profile-page h1,.catalog-header h1,.article-header h1,.tool-page h1,.cv-page>.section-title,.content>h1{font-size:22px}
+  main>h1[style]{font-size:22px!important}
+}

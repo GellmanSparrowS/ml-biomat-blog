@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NumPy完全入门：实验室数据处理必备 — ML-Biomat</title>
 <meta name="description" content="把实验测量整理为数组，逐步使用切片、布尔筛选、广播运算和统计聚合。通过应变与应力数据、逐列中心化及简单拟合示例，理解形状和索引如何影响计算，并将处理结果保存为后续分析可用的数据。">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="NumPy完全入门：实验室数据处理必备">
 <meta property="og:description" content="把实验测量整理为数组，逐步使用切片、布尔筛选、广播运算和统计聚合。通过应变与应力数据、逐列中心化及简单拟合示例，理解形状和索引如何影响计算，并将处理结果保存为后续分析可用的数据。">
 <meta property="og:type" content="article">
@@ -21,30 +21,24 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy完全入门：实验室数据处理必备", "description": "把实验测量整理为数组，逐步使用切片、布尔筛选、广播运算和统计聚合。通过应变与应力数据、逐列中心化及简单拟合示例，理解形状和索引如何影响计算，并将处理结果保存为后续分析可用的数据。", "datePublished": "2026-06-27", "dateModified": "2026-10-28", "wordCount": 3124, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course-zh/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NumPy完全入门：实验室数据处理必备", "item": "https://ml-biomat.com/posts/numpy-crash-course-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy完全入门：实验室数据处理必备", "description": "把实验测量整理为数组，逐步使用切片、布尔筛选、广播运算和统计聚合。通过应变与应力数据、逐列中心化及简单拟合示例，理解形状和索引如何影响计算，并将处理结果保存为后续分析可用的数据。", "datePublished": "2026-06-27", "dateModified": "2026-10-28", "wordCount": 3124, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course-zh/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "Python科学计算", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NumPy完全入门：实验室数据处理必备", "item": "https://ml-biomat.com/posts/numpy-crash-course-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="首页" href="/">Home / 首页</a>
-<a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="分类" href="/categories/">Categories / 分类</a>
-<a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/posts/numpy-crash-course/">EN</a><a href="/posts/numpy-crash-course-zh/" class="active">中文</a></span>
-</div></header>
-<main class="container"><article>
+<nav class="nav-links" aria-label="主导航"><a data-nav="home" data-short-label="首页" href="/">首页</a><a data-nav="library" data-short-label="工具库" href="/fibernet/">工具库</a><a data-nav="categories" data-short-label="分类" href="/categories/" class="active" aria-current="page">分类</a><a data-nav="profile" data-short-label="个人主页" href="/about/">个人主页</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="搜索…" aria-label="搜索…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="切换到亮色" title="切换到亮色">☀</button>
+<span class="lang-switch"><a data-language="en" href="/posts/numpy-crash-course/">EN</a><a data-language="zh" href="/posts/numpy-crash-course-zh/" class="active" aria-current="true">中文</a></span>
+</div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/python-tutorials/">Python科学计算</a></nav>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
 <h1>NumPy完全入门：实验室数据处理必备</h1>
 <div class="article-meta">
-<span>2026-06-27</span><span>·</span><span>8 分钟阅读</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
+<span>2026-06-27</span><span>·</span><span>8 分钟阅读</span><span>·</span><a href="/categories/python-tutorials/">Python科学计算</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/numpy/">numpy</a><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/%E6%95%B0%E7%BB%84/">数组</a><a class="tag-pill" href="/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/">科学计算</a><a class="tag-pill" href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a></div>
@@ -230,7 +224,7 @@ np.save(&quot;processed.npy&quot;, data); loaded = np.load(&quot;processed.npy&q
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="bottom"
-    data-theme="preferred_color_scheme"
+    data-theme="dark"
     data-lang="zh-CN"
     crossorigin="anonymous"
     async>
@@ -238,12 +232,10 @@ np.save(&quot;processed.npy&quot;, data); loaded = np.load(&quot;processed.npy&q
 </section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 </body>
 </html>

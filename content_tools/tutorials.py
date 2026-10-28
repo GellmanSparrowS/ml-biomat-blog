@@ -60,7 +60,7 @@ def render(data, make_head, make_footer, write_file, versioned_asset, categories
                        ld='<script type="application/ld+json">'+json.dumps(metadata,ensure_ascii=False)+'</script>')
         head=head.replace('<main class="container container-wide">','<main class="container tutorial-container">')
         # Chinese-only articles have no equivalent translation link.
-        head=re.sub(r'<span class="lang-switch">.*?</span>','',head)
+        # Keep the shared language control; English is unavailable for these articles.
         head=re.sub(r'<(?:script|link)\b[^>]*(?:highlightjs|adsbygoogle)[^>]*>(?:</script>)?','',head)
         shared=f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}">'
         own=f'<link rel="stylesheet" href="{versioned_asset("/static/tutorials/polymer-ai/lesson-%02d.css"%lesson["number"])}">'

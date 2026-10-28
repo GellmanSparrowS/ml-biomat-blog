@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>为什么同一条链需要许多幅照片 — ML-Biomat</title>
 <meta name="description" content="用构象采样理解分布、误差与独立样本，比较按构象和按对象划分数据对模型评价的影响。">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="为什么同一条链需要许多幅照片">
 <meta property="og:description" content="用构象采样理解分布、误差与独立样本，比较按构象和按对象划分数据对模型评价的影响。">
 <meta property="og:type" content="website">
@@ -22,24 +22,18 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "为什么同一条链需要许多幅照片", "description": "用构象采样理解分布、误差与独立样本，比较按构象和按对象划分数据对模型评价的影响。", "url": "https://ml-biomat.com/tutorials/polymer-ai/02-conformations-and-statistics/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-02.css?v=847dd41e3192"><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-02.css?v=847dd41e3192"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="首页" href="/">Home / 首页</a>
-<a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="分类" href="/categories/" class="active">Categories / 分类</a>
-<a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
+<nav class="nav-links" aria-label="主导航"><a data-nav="home" data-short-label="首页" href="/">首页</a><a data-nav="library" data-short-label="工具库" href="/fibernet/">工具库</a><a data-nav="categories" data-short-label="分类" href="/categories/" class="active" aria-current="page">分类</a><a data-nav="profile" data-short-label="个人主页" href="/about/">个人主页</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="搜索…" aria-label="搜索…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="切换到亮色" title="切换到亮色">☀</button>
+<span class="lang-switch"><a data-language="en" role="link" aria-disabled="true" tabindex="-1" title="该页暂无英文版">EN</a><a data-language="zh" href="/tutorials/polymer-ai/02-conformations-and-statistics/" class="active" aria-current="true">中文</a></span>
+</div></header><main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/multiscale-modeling/">物理建模与模拟</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-</div></header>
-<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/multiscale-modeling/">多尺度模拟</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
-
-<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">多尺度模拟</p><nav><a href="#snapshots">01　一张照片告诉我们什么</a><a href="#spread">02　留下变化的幅度</a><a href="#independence">03　记录与独立信息</a><a href="#learning">04　新图与新对象</a><a href="#experiment">05　一次完整计算</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">先改变参数，观察图像，再回到文字解释变化。代码与运行结果在本页完整展开。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从分子快照到统计与学习</p>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">物理建模与模拟</p><nav><a href="#snapshots">01　一张照片告诉我们什么</a><a href="#spread">02　留下变化的幅度</a><a href="#independence">03　记录与独立信息</a><a href="#learning">04　新图与新对象</a><a href="#experiment">05　一次完整计算</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">先改变参数，观察图像，再回到文字解释变化。代码与运行结果在本页完整展开。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从分子快照到统计与学习</p>
 <h1>为什么同一条链需要许多幅照片</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">用手机拍一团松散的耳机线，你能从这一张照片判断它通常占多大地方吗？把线提起来，抖散，再放回桌面，两个接头之间的距离就变了。分子链也有许多可能的姿态，周围分子的热运动会不断扰动它。研究一条生物大分子，除了知道它由什么连接而成，还需要知道它会怎样变化，以及哪些变化经常发生。</p>
@@ -306,13 +300,11 @@ group 准确率: 0.5222 两侧共有样品数: 0
 </div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/01-chains-and-scales/"><strong>高分子就在身边：连接与尺度</strong></a><a href="/tutorials/polymer-ai/03-biological-polymers/"><strong>生命中的三类长链：蛋白质、糖链与核酸</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 <script>
 (function(){
 'use strict';

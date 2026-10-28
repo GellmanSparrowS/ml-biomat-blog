@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>糖链：连接方式怎样改变水合、识别与支撑 — ML-Biomat</title>
 <meta name="description" content="从糖苷键、分支和水合理解糖链，用真实凝集素阵列数据比较组成特征与保留连接类型的图表示。">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="糖链：连接方式怎样改变水合、识别与支撑">
 <meta property="og:description" content="从糖苷键、分支和水合理解糖链，用真实凝集素阵列数据比较组成特征与保留连接类型的图表示。">
 <meta property="og:type" content="website">
@@ -22,24 +22,18 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "糖链：连接方式怎样改变水合、识别与支撑", "description": "从糖苷键、分支和水合理解糖链，用真实凝集素阵列数据比较组成特征与保留连接类型的图表示。", "url": "https://ml-biomat.com/tutorials/polymer-ai/10-glycan-connections/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-10.css?v=58e4f2e7ff93"><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-10.css?v=58e4f2e7ff93"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="首页" href="/">Home / 首页</a>
-<a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="分类" href="/categories/" class="active">Categories / 分类</a>
-<a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
+<nav class="nav-links" aria-label="主导航"><a data-nav="home" data-short-label="首页" href="/">首页</a><a data-nav="library" data-short-label="工具库" href="/fibernet/">工具库</a><a data-nav="categories" data-short-label="分类" href="/categories/" class="active" aria-current="page">分类</a><a data-nav="profile" data-short-label="个人主页" href="/about/">个人主页</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="搜索…" aria-label="搜索…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="切换到亮色" title="切换到亮色">☀</button>
+<span class="lang-switch"><a data-language="en" role="link" aria-disabled="true" tabindex="-1" title="该页暂无英文版">EN</a><a data-language="zh" href="/tutorials/polymer-ai/10-glycan-connections/" class="active" aria-current="true">中文</a></span>
+</div></header><main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">材料与结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-</div></header>
-<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">生物·材料·结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
-
-<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">生物·材料·结构</p><nav><a href="#connections">01　读懂糖链怎样连接</a><a href="#water">02　水合与材料支撑</a><a href="#recognition">03　从识别到实验数据</a><a href="#representation">04　让模型读懂连接</a><a href="#experiment">05　运行代码并解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从一根纤维到细胞表面的识别信号</p>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#connections">01　读懂糖链怎样连接</a><a href="#water">02　水合与材料支撑</a><a href="#recognition">03　从识别到实验数据</a><a href="#representation">04　让模型读懂连接</a><a href="#experiment">05　运行代码并解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从一根纤维到细胞表面的识别信号</p>
 <h1>糖链：连接方式怎样改变水合、识别与支撑</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">米饭里的淀粉和棉布里的纤维素，都以葡萄糖为基本构件，却在生活中承担着很不一样的工作。前者是常见的食物成分，后者形成可以纺成线的纤维。再看人体，细胞表面伸出的糖链参与识别，组织中的一些多糖则与水、离子和蛋白质共同影响材料的柔软程度。要理解这些差别，我们需要看清糖残基之间的连接，把化学结构、周围环境与实际测量接起来。</p>
@@ -429,13 +423,11 @@ Saved six panels, all cohort rows, predictions, selected models and exclusions.
 </div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/09-protein-sequence-and-function/"><strong>蛋白质：从序列、折叠到柔性与功能</strong></a><a href="/tutorials/polymer-ai/11-dna-rna-structures/"><strong>DNA与RNA：序列怎样组织成结构</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 <script>
 (function(){
 (()=>{

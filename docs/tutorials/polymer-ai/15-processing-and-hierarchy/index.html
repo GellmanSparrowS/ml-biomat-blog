@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>从分子到样品：制备、加工与层级结构 — ML-Biomat</title>
 <meta name="description" content="沿丝纤维成形过程理解牵伸、水分与结构演变，用公开实验数据比较工艺和结构信息对强度、断裂应变预测的作用。">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="从分子到样品：制备、加工与层级结构">
 <meta property="og:description" content="沿丝纤维成形过程理解牵伸、水分与结构演变，用公开实验数据比较工艺和结构信息对强度、断裂应变预测的作用。">
 <meta property="og:type" content="website">
@@ -22,24 +22,18 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "从分子到样品：制备、加工与层级结构", "description": "沿丝纤维成形过程理解牵伸、水分与结构演变，用公开实验数据比较工艺和结构信息对强度、断裂应变预测的作用。", "url": "https://ml-biomat.com/tutorials/polymer-ai/15-processing-and-hierarchy/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-15.css?v=9349508b5bbd"><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-15.css?v=9349508b5bbd"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="首页" href="/">Home / 首页</a>
-<a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="分类" href="/categories/" class="active">Categories / 分类</a>
-<a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
+<nav class="nav-links" aria-label="主导航"><a data-nav="home" data-short-label="首页" href="/">首页</a><a data-nav="library" data-short-label="工具库" href="/fibernet/">工具库</a><a data-nav="categories" data-short-label="分类" href="/categories/" class="active" aria-current="page">分类</a><a data-nav="profile" data-short-label="个人主页" href="/about/">个人主页</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="搜索…" aria-label="搜索…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="切换到亮色" title="切换到亮色">☀</button>
+<span class="lang-switch"><a data-language="en" role="link" aria-disabled="true" tabindex="-1" title="该页暂无英文版">EN</a><a data-language="zh" href="/tutorials/polymer-ai/15-processing-and-hierarchy/" class="active" aria-current="true">中文</a></span>
+</div></header><main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">材料与结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-</div></header>
-<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">生物·材料·结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
-
-<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">生物·材料·结构</p><nav><a href="#silk">01　从溶液到丝线</a><a href="#processing">02　把加工过程写清</a><a href="#hierarchy">03　层级与界面怎样传力</a><a href="#learning">04　AI在什么时候得到信息</a><a href="#experiment">05　运行真实数据例子</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">把分子、加工与样品放进同一个研究问题</p>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#silk">01　从溶液到丝线</a><a href="#processing">02　把加工过程写清</a><a href="#hierarchy">03　层级与界面怎样传力</a><a href="#learning">04　AI在什么时候得到信息</a><a href="#experiment">05　运行真实数据例子</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">把分子、加工与样品放进同一个研究问题</p>
 <h1>从分子到样品：制备、加工与层级结构</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">同一团面，揉、擀、拉以后可以变成不同的形状；做好的面条再经过煮制和晾干，手感又会变化。原料给出了可能形成哪些结构的基础，加工决定其中哪些结构得以形成和保留。生物大分子材料也有这样的特点：知道一根丝线由什么蛋白质组成，还需要知道它怎样从含水原液变成纤维。本节沿着这条成形路线，认识牵伸、水分、时间尺度和层级结构，再用公开的丝纤维实验数据训练模型，比较制备前的工艺信息与制备后的结构信息分别能帮助我们预测什么。</p>
@@ -395,13 +389,11 @@ Six panels and complete data/results written to silk_outputs/
 </div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/14-load-bearing-fiber-networks/"><strong>纤维怎样织成能承载的网</strong></a><a href="/tutorials/polymer-ai/16-material-response-and-history/"><strong>材料怎样响应一次真实的使用过程</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 <script>
 (function(){
 (()=>{

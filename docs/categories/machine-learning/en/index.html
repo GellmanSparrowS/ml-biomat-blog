@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Machine Learning — ML-Biomat</title>
 <meta name="description" content="Machine Learning · Explore explanations, calculations and practice by research topic.">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="Machine Learning">
 <meta property="og:description" content="Machine Learning · Explore explanations, calculations and practice by research topic.">
 <meta property="og:type" content="website">
@@ -22,30 +22,22 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
-<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="Home" href="/">Home</a>
-<a data-short-label="Library" href="/fibernet/">Library</a>
-<a data-short-label="Categories" href="/categories/en/" class="active">Categories</a>
-<a data-short-label="Profile" href="/about/en/">Profile</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/categories/machine-learning/en/" class="active">EN</a><a href="/categories/machine-learning/">中文</a></span>
-</div></header>
-<main class="container container-wide"><a class="catalog-breadcrumb" href="/categories/en/">Categories /</a><header class="catalog-header"><h1>Machine Learning</h1><p>5 articles</p></header><div class="catalog-grid"><article class="catalog-card"><h2><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></h2><p>Compare linear regression, regularization, kernel methods, tree ensembles, and boosting through their assumptions and fitting behavior. Use residuals, cross-validation, and suitable error metrics to select a model for numerical prediction.</p></article><article class="catalog-card"><h2><a href="/posts/feature-engineering-materials-ml/">Feature Engineering for Materials Science</a></h2><p>Construct useful material descriptors, encode categorical processing conditions, and handle interactions and missing values. Learn how feature selection and training-only preprocessing keep a small-data model interpretable and its evaluation consistent.</p></article><article class="catalog-card"><h2><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></h2><p>Compare logistic regression, support vector machines, trees, ensembles, nearest neighbors, and naive Bayes. Read class probabilities and confusion matrices, then choose metrics and validation procedures that match the cost of classification errors.</p></article><article class="catalog-card"><h2><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></h2><p>Build a small-data regression workflow for fiber mechanics, from specimen features and preprocessing to model comparison. Examine cross-validation, bootstrap variation, and feature importance to connect numerical predictions with material descriptors.</p></article><article class="catalog-card"><h2><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></h2><p>Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.</p></article></div></main>
+<a href="/en/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links" aria-label="Main navigation"><a data-nav="home" data-short-label="Home" href="/en/">Home</a><a data-nav="library" data-short-label="Library" href="/fibernet/en/">Library</a><a data-nav="categories" data-short-label="Categories" href="/categories/en/" class="active" aria-current="page">Categories</a><a data-nav="profile" data-short-label="Profile" href="/about/en/">Profile</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="Search…" aria-label="Search…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
+<span class="lang-switch"><a data-language="en" href="/categories/machine-learning/en/" class="active" aria-current="true">EN</a><a data-language="zh" href="/categories/machine-learning/">中文</a></span>
+</div></header><main class="container container-wide"><a class="catalog-breadcrumb" href="/categories/en/">Categories /</a><header class="catalog-header"><h1>Machine Learning</h1><p>Regression, classification, representation learning and experiment selection, with materials examples for training, validation and uncertainty analysis.</p><span class="catalog-meta">5 articles</span></header><div class="catalog-grid"><article class="catalog-card"><h2><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></h2><p>Compare linear regression, regularization, kernel methods, tree ensembles, and boosting through their assumptions and fitting behavior. Use residuals, cross-validation, and suitable error metrics to select a model for numerical prediction.</p></article><article class="catalog-card"><h2><a href="/posts/feature-engineering-materials-ml/">Feature Engineering for Materials Science</a></h2><p>Construct useful material descriptors, encode categorical processing conditions, and handle interactions and missing values. Learn how feature selection and training-only preprocessing keep a small-data model interpretable and its evaluation consistent.</p></article><article class="catalog-card"><h2><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></h2><p>Compare logistic regression, support vector machines, trees, ensembles, nearest neighbors, and naive Bayes. Read class probabilities and confusion matrices, then choose metrics and validation procedures that match the cost of classification errors.</p></article><article class="catalog-card"><h2><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></h2><p>Build a small-data regression workflow for fiber mechanics, from specimen features and preprocessing to model comparison. Examine cross-validation, bootstrap variation, and feature importance to connect numerical predictions with material descriptors.</p></article><article class="catalog-card"><h2><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></h2><p>Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.</p></article></div></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/en/">Profile</a><a href="/fibernet/en/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/en/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/en/">Privacy</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 </body>
 </html>

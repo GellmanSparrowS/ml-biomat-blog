@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NetworkX Fundamentals with Python — ML-Biomat</title>
 <meta name="description" content="Represent nodes, edges, directions, and weights in NetworkX, then calculate degree, centrality, clustering, and shortest paths. Compare graph models and community methods while keeping the meaning of each network metric explicit.">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="NetworkX Fundamentals with Python">
 <meta property="og:description" content="Represent nodes, edges, directions, and weights in NetworkX, then calculate degree, centrality, clustering, and shortest paths. Compare graph models and community methods while keeping the meaning of each network metric explicit.">
 <meta property="og:type" content="article">
@@ -21,33 +21,27 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/networkx-fundamentals.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX Fundamentals with Python", "description": "Represent nodes, edges, directions, and weights in NetworkX, then calculate degree, centrality, clustering, and shortest paths. Compare graph models and community methods while keeping the meaning of each network metric explicit.", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 3701, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals/", "image": "https://ml-biomat.com/static/images/og/networkx-fundamentals.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "NetworkX Fundamentals with Python", "item": "https://ml-biomat.com/posts/networkx-fundamentals/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX Fundamentals with Python", "description": "Represent nodes, edges, directions, and weights in NetworkX, then calculate degree, centrality, clustering, and shortest paths. Compare graph models and community methods while keeping the meaning of each network metric explicit.", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 3701, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals/", "image": "https://ml-biomat.com/static/images/og/networkx-fundamentals.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Scientific Computing with Python", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "NetworkX Fundamentals with Python", "item": "https://ml-biomat.com/posts/networkx-fundamentals/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
-<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="Home" href="/">Home</a>
-<a data-short-label="Library" href="/fibernet/">Library</a>
-<a data-short-label="Categories" href="/categories/en/">Categories</a>
-<a data-short-label="Profile" href="/about/en/">Profile</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/posts/networkx-fundamentals/" class="active">EN</a><a href="/posts/networkx-fundamentals-zh/">中文</a></span>
-</div></header>
-<main class="container"><article>
+<a href="/en/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links" aria-label="Main navigation"><a data-nav="home" data-short-label="Home" href="/en/">Home</a><a data-nav="library" data-short-label="Library" href="/fibernet/en/">Library</a><a data-nav="categories" data-short-label="Categories" href="/categories/en/" class="active" aria-current="page">Categories</a><a data-nav="profile" data-short-label="Profile" href="/about/en/">Profile</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="Search…" aria-label="Search…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
+<span class="lang-switch"><a data-language="en" href="/posts/networkx-fundamentals/" class="active" aria-current="true">EN</a><a data-language="zh" href="/posts/networkx-fundamentals-zh/">中文</a></span>
+</div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/python-tutorials/en/">Scientific Computing with Python</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
 <h1>NetworkX Fundamentals with Python</h1>
 <div class="article-meta">
-<span>2026-06-30</span><span>·</span><span>19 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Python Tutorials</a>
+<span>2026-06-30</span><span>·</span><span>19 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Scientific Computing with Python</a>
 </div>
 </header>
-<div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/NetworkX/">NetworkX</a><a class="tag-pill" href="/tags/Python/">Python</a><a class="tag-pill" href="/tags/network%20analysis/">network analysis</a><a class="tag-pill" href="/tags/graph%20theory/">graph theory</a><a class="tag-pill" href="/tags/network%20science/">network science</a><a class="tag-pill" href="/tags/data%20visualization/">data visualization</a></div>
+<div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/NetworkX/en/">NetworkX</a><a class="tag-pill" href="/tags/python/en/">Python</a><a class="tag-pill" href="/tags/network%20analysis/en/">network analysis</a><a class="tag-pill" href="/tags/graph%20theory/en/">graph theory</a><a class="tag-pill" href="/tags/network%20science/en/">network science</a><a class="tag-pill" href="/tags/data%20visualization/en/">data visualization</a></div>
 <div class="content">
 <details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#graph-fundamentals">Graph Fundamentals</a></li><li class="toc-h3"><a href="#1-why-networkx-from-intuition-to-tool">1. Why NetworkX — From Intuition to Tool</a></li><li class="toc-h3"><a href="#2-four-graph-types-which-structure-fits-your-problem">2. Four Graph Types — Which Structure Fits Your Problem?</a></li><li class="toc-h3"><a href="#3-building-graphs-nodes-edges-and-attributes">3. Building Graphs — Nodes, Edges, and Attributes</a></li><li class="toc-h2"><a href="#network-metrics">Network Metrics</a></li><li class="toc-h3"><a href="#4-degree-path-length-and-clustering-three-keys-to-reading-a-network">4. Degree, Path Length, and Clustering — Three Keys to Reading a Network</a></li><li class="toc-h3"><a href="#5-centrality-who-matters-most-in-a-network">5. Centrality — Who Matters Most in a Network?</a></li><li class="toc-h3"><a href="#6-shortest-path-algorithms-from-dijkstra-to-floyd">6. Shortest-Path Algorithms — From Dijkstra to Floyd</a></li><li class="toc-h2"><a href="#advanced-topics">Advanced Topics</a></li><li class="toc-h3"><a href="#7-classic-network-models-random-small-world-and-scale-free">7. Classic Network Models — Random, Small-World, and Scale-Free</a></li><li class="toc-h3"><a href="#8-visualization-making-graphs-speak">8. Visualization — Making Graphs Speak</a></li><li class="toc-h3"><a href="#9-community-detection-and-graph-generators-advanced-tools">9. Community Detection and Graph Generators — Advanced Tools</a></li><li class="toc-h3"><a href="#10-performance-considerations-and-further-resources">10. Performance Considerations and Further Resources</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="graph-fundamentals">Graph Fundamentals</h2>
 <h3 id="1-why-networkx-from-intuition-to-tool">1. Why NetworkX — From Intuition to Tool</h3>
@@ -507,7 +501,7 @@ Learn more:
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="bottom"
-    data-theme="preferred_color_scheme"
+    data-theme="dark"
     data-lang="en"
     crossorigin="anonymous"
     async>
@@ -515,12 +509,10 @@ Learn more:
 </section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/en/">Profile</a><a href="/fibernet/en/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/en/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/en/">Privacy</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 title: "Stress-Strain Curves: A Materials Science Primer"
 date: "2026-06-26"
 updated: "2026-10-28"
-category: "biomaterials"
+category: "wet-lab-data"
 tags: ["stress-strain", "mechanics", "biomaterials", "elasticity", "tutorial"]
 lang: "en"
 slug: "stress-strain-curves"

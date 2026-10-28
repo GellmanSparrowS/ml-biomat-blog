@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
-from content_tools import tutorials, catalog
+from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages
 
 ROOT = Path(__file__).resolve().parent
 INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
@@ -178,7 +178,7 @@ def article_ld(post):
     breadcrumb = {
         "@context": "https://schema.org", "@type": "BreadcrumbList",
         "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE["base_url"]},
+            {"@type": "ListItem", "position": 1, "name": "Home" if post["lang"] == "en" else "首页", "item": SITE["base_url"] + ("/en/" if post["lang"] == "en" else "/")},
             {"@type": "ListItem", "position": 2, "name": cat_name(post["category"], post["lang"]),
              "item": SITE["base_url"] + catalog.category_url(post["category"],post["lang"])},
             {"@type": "ListItem", "position": 3, "name": post["title"], "item": url},
@@ -253,21 +253,9 @@ def find_pair(post, by_lang):
 
 MATHJAX_SCRIPT = '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>'
 
-HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>\n{mathjax}</head>\n<body>\n<canvas id="bg-canvas" aria-hidden="true"></canvas>\n'
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}" data-theme="dark">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>\n{mathjax}</head>\n<body>\n<canvas id="bg-canvas" aria-hidden="true"></canvas>\n'
 
-HEADER = '''<header class="site-header"><div class="header-inner">
-<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="首页" href="/"{home_active}>Home / 首页</a>
-<a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="分类" href="/categories/">Categories / 分类</a>
-<a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="{en_href}"{en_active}>EN</a><a href="{zh_href}"{zh_active}>中文</a></span>
-</div></header>
-<main class="container{wide_class}">'''
+# Shared headers are rendered by content_tools.chrome.
 
 FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
@@ -285,7 +273,7 @@ POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{
 
 POST_ROW = '<li class="post-row"><span class="row-date">{date}</span><a href="/posts/{slug}/">{title}</a></li>'
 
-ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="{cat_url}">{cat_name}</a>\n</div>\n</header>\n<div class="card-tags" style="margin:.3rem 0 .6rem">{tags_html}</div>\n<div class="content">\n{toc}{html}\n</div>\n</article>'
+ARTICLE_HTML = '<article><nav class="article-breadcrumb" aria-label="{breadcrumb_label}"><a href="{categories_url}">{categories_label}</a><span aria-hidden="true">/</span><a href="{cat_url}">{cat_name}</a></nav>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="{cat_url}">{cat_name}</a>\n</div>\n</header>\n<div class="card-tags" style="margin:.3rem 0 .6rem">{tags_html}</div>\n<div class="content">\n{toc}{html}\n</div>\n</article>'
 
 
 GISCUS_SCRIPT = '<section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)"><h2>Comments</h2><script src="https://giscus.app/client.js" data-repo="GellmanSparrowS/ml-biomat-blog" data-repo-id="R_kgDOTEwhsA" data-category="General" data-category-id="DIC_kwDOTEwhsM4CpPbT" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script></section>'
@@ -305,41 +293,26 @@ HERO = '''<section class="hero">
 </section>'''
 
 
-def make_head(title, desc, url, lang="en", og_type="website", ld="",
-              home_active="", en_active="", zh_active="", wide="", title_suffix=" \u2014 ML-Biomat",
-              og_image=None, alternates="", needs_math=False, en_href="/en/", zh_href="/zh/", navigation_language=None):
+def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
+              home_active="", en_active="", zh_active="", wide="", title_suffix=" — ML-Biomat",
+              og_image=None, alternates="", needs_math=False, en_href=None, zh_href=None, navigation_language=None):
+    language = 'en' if lang == 'en' else 'zh-CN'
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
-        url=url, lang=lang, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates, mathjax=(MATHJAX_SCRIPT if needs_math else ""))
-    header = localize_navigation(HEADER, navigation_language or lang).format(
-        home_active=home_active, en_active=en_active, zh_active=zh_active, en_href=en_href, zh_href=zh_href,
-        wide_class=" container-wide" if wide else "")
+        url=url, lang=language, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld,
+        adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates,
+        mathjax=(MATHJAX_SCRIPT if needs_math else ""))
+    head = head.replace('<meta charset="utf-8">','<meta charset="utf-8">'+chrome.THEME_INIT)
     head = head.replace("</head>", f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}"></head>')
-    if lang == "en" and navigation_language != "mixed":
-        for chinese, english in [("首页", "Home"), ("工具库", "Library"), ("分类", "Categories"), ("个人主页", "Profile")]:
-            header = header.replace(f'data-short-label="{chinese}"', f'data-short-label="{english}"')
-    route = urllib.parse.urlsplit(url).path.rstrip('/')
-    if en_href == '/en/' and zh_href == '/zh/' and route not in ('', '/en', '/zh'):
-        header = re.sub(r'<span class="lang-switch">.*?</span>', '', header)
-    if route.startswith('/categories') or route.startswith('/tutorials'):
-        header = re.sub(r'(<a data-short-label="(?:分类|Categories)" href="[^"]+")>', lambda m: m[1]+' class="active">', header)
-    return head + header
+    route = urllib.parse.urlsplit(url).path or '/'
+    return head + chrome.header(language, route, en_href, zh_href, bool(wide))
 
 
-
-def localize_navigation(markup, language):
-    # Localize labels and destinations together for language-specific pages.
-    if language == "en":
-        for chinese, english in [("首页", "Home"), ("工具库", "Library"), ("分类", "Categories"), ("个人主页", "Profile")]:
-            markup = markup.replace(f'data-short-label="{chinese}"', f'data-short-label="{english}"')
-        markup = markup.replace('href="/about/">Profile / 个人简介', 'href="/about/en/">Profile')
-        markup = markup.replace('Home / 首页', 'Home').replace('Library / 库', 'Library').replace('Tools / 工具', 'Tools').replace('Categories / 分类', 'Categories')
-        markup = markup.replace('href="/categories/"', 'href="/categories/en/"')
-    return markup
-
-
-def make_footer(language=None):
-    return localize_navigation(FOOT, language).format(year=datetime.now().year)
+def make_footer(language='zh-CN'):
+    footer=FOOT.format(year=datetime.now().year)
+    footer=re.sub(r'<div class="footer-links">.*?</div>',chrome.footer_links(language),footer,flags=re.S)
+    footer=footer.replace('id="back-to-top"', 'id="back-to-top" aria-label="'+('Back to top' if language=='en' else '返回顶部')+'"')
+    return footer
 
 
 def render_profile_albums(section, language="zh-CN"):
@@ -374,8 +347,8 @@ def render_profile_albums(section, language="zh-CN"):
     return '<div class="profile-albums profile-albums-' + section + '">' + ''.join(cards) + '</div>'
 
 
-def tag_href(tag):
-    return "/tags/" + urllib.parse.quote(tag, safe="") + "/"
+def tag_href(tag, language="zh"):
+    return tag_pages.href(tag, language)
 
 
 def tag_path(tag):
@@ -426,7 +399,7 @@ def post_card(p):
         lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587",
         title=hm.escape(p["title"]), slug=p["slug"], date=p["date"],
         read_min=p["read_min"], desc=hm.escape(p["description"] or ""),
-        tags_html="".join(f'<a class="tag-pill" href="{tag_href(t)}">{t}</a>' for t in p["tags"][:3]))
+        tags_html="".join(f'<a class="tag-pill" href="{tag_href(t,p["lang"])}">{t}</a>' for t in p["tags"][:3]))
 
 
 def section_head(lang, label, href):
@@ -463,6 +436,7 @@ def check_coverage(posts):
 def build():
     # Load Giscus HTML for article pages
     giscus_html = Path("static/giscus.html").read_text(encoding="utf-8") if Path("static/giscus.html").exists() else ""
+    giscus_html = giscus_html.replace('data-theme="preferred_color_scheme"', 'data-theme="dark"')
 
     posts = load_posts()
     curriculum = tutorials.load()
@@ -503,10 +477,11 @@ def build():
             related_html = '<section class="related"><h2>' + ("Related articles" if p["lang"]=="en" else "相关阅读") + '</h2><ul class="post-list-simple">' + "".join(
                 POST_ROW.format(date=q["date"], title=hm.escape(q["title"]), slug=q["slug"]) for q in related
             ) + "</ul></section>"
-        tag_links = "".join(f'<a class="tag-pill" href="{tag_href(t)}">{hm.escape(t)}</a>' for t in p["tags"])
+        tag_links = "".join(f'<a class="tag-pill" href="{tag_href(t,p["lang"])}">{hm.escape(t)}</a>' for t in p["tags"])
         body = ARTICLE_HTML.format(
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
-            cat_url=catalog.category_url(p["category"], p["lang"]), cat_name=cn, html=p["html"], toc=p["toc"].replace("Contents / 目录", "Contents" if p["lang"] == "en" else "目录"), tags_html=tag_links,
+            cat_url=catalog.category_url(p["category"], p["lang"]), cat_name=cn,
+            breadcrumb_label="Breadcrumb" if p["lang"]=="en" else "当前位置", categories_url=catalog.category_url(lang=p["lang"]), categories_label="Categories" if p["lang"]=="en" else "分类", html=p["html"], toc=p["toc"].replace("Contents / 目录", "Contents" if p["lang"] == "en" else "目录"), tags_html=tag_links,
             lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + prev_next + related_html + (giscus_html if p["lang"]=="en" else giscus_html.replace("<h2>Comments</h2>", "<h2>讨论</h2>").replace('data-lang="en"', 'data-lang="zh-CN"'))
         if p["lang"] == "zh":
             body = body.replace(f'{p["read_min"]} min read', f'{p["read_min"]} 分钟阅读')
@@ -522,64 +497,24 @@ def build():
         write_file(f"posts/{p['slug']}/index.html", html)
     print("  Posts done")
 
-    # Homepage (bilingual)
-    hero = HERO.format(desc_en=SITE["description_en"], desc_zh=SITE["description_zh"])
-    cat_cards_html = '<section class="section-head"><h2>📂 Categories / 分类</h2><a href="/categories/" class="view-all">全部 →</a></section>'
-    cat_cards_html += catalog.category_cards(catalog_items, CATEGORIES, bilingual=True)
-    body = hero + cat_cards_html
-    if en:
-        body += section_head("en", "English Articles", "/en/")
-        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in en[:4]) + '</div>'
-    if zh:
-        body += section_head("zh", "\u4e2d\u6587\u6587\u7ae0", "/zh/")
-        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in zh[:4]) + '</div>'
-    body += ENGAGE_BANNER
-    html = make_head(title="ML-Biomat", desc=SITE["description_en"], url=SITE["base_url"],
-                     ld=site_ld(), wide="wide", home_active=' class="active"', title_suffix="", navigation_language="mixed") + body + FOOT.format(year=datetime.now().year)
-    write_file("index.html", html)
-    print("  Homepage done")
-
-    # Language-specific collections use the same article catalog.
-    for lang in ['en', 'zh']:
-        desc = SITE[f"description_{lang}"]
-        label = 'Articles' if lang == 'en' else '文章与教程'
-        selected = [p for p in catalog_items if p['lang'] == lang]
-        body = f'<header class="catalog-header"><h1>{label}</h1><p>{hm.escape(desc)}</p></header>'
-        body += catalog.category_cards(catalog_items, CATEGORIES, lang)
-        body += catalog.grid(selected, CATEGORIES, show_category=True)
-        html = make_head(title=label, desc=desc, url=f'{SITE["base_url"]}/{lang}/', lang=hreflang_code(lang),
-                         ld=site_ld(), wide=True, en_active=' class="active"' if lang=='en' else '',
-                         zh_active=' class="active"' if lang=='zh' else '', navigation_language=lang) + body + make_footer(lang)
-        write_file(f"{lang}/index.html", html)
-    print("  Language pages done")
+    home_routes = home.render(catalog_items, CATEGORIES, SITE, make_head, make_footer, write_file, site_ld)
+    print("  Paired home pages and separate article collections done")
 
     category_routes = catalog.render(catalog_items, CATEGORIES, make_head, make_footer, write_file, SITE['base_url'])
     print("  Categories done")
 
-    # Tag index + individual tag pages
-    from collections import defaultdict
-    tag_posts = defaultdict(list)
-    for p in posts:
-        for tg in p["tags"]:
-            tag_posts[tg].append(p)
-    tags_html_rows = []
-    for tg in sorted(tag_posts, key=lambda k: (-len(tag_posts[k]), k.lower())):
-        tags_html_rows.append(f'<a class="tag-pill" href="{tag_href(tg)}">{hm.escape(tg)} ({len(tag_posts[tg])})</a>')
-    tag_index = '<h1 class="section-title">Tags / 标签</h1><div class="tag-cloud">' + "".join(tags_html_rows) + "</div>"
-    html = make_head(title="Tags", desc=f"Browse {len(tag_posts)} tags across {len(posts)} articles.", url=f'{SITE["base_url"]}/tags/') + tag_index + FOOT.format(year=datetime.now().year)
-    write_file("tags/index.html", html)
-    for tg, tp in tag_posts.items():
-        body = f'<h1 class="section-title"><span class="highlight">{hm.escape(tg)}</span></h1>'
-        body += '<ul class="post-list-simple">' + "".join(POST_ROW.format(date=q["date"], title=hm.escape(q["title"]), slug=q["slug"]) for q in sorted(tp, key=lambda x: x["datetime"], reverse=True)) + "</ul>"
-        html = make_head(title=f"{tg} — Tag", desc=f"Articles tagged with {tg}", url=f'{SITE["base_url"]}{tag_href(tg)}') + body + FOOT.format(year=datetime.now().year)
-        write_file(tag_path(tg), html)
-    clean_legacy_tag_pages(tag_posts)
-    print("  Tags done")
+    tag_routes = tag_pages.render(posts, make_head, make_footer, write_file, SITE['base_url'])
+    clean_legacy_tag_pages({tag for post in posts for tag in post['tags']})
+    print("  Localized tag pages done")
 
-    # FiberNet page
-    fibernet_body = Path("content/fibernet-body.html").read_text(encoding="utf-8")
-    html = make_head(title="FiberNet", desc="FiberNet: A Python toolkit for fiber network generation, simulation, and intelligent optimization. 12 unit types, GPU acceleration, ML and RL integration.", url=SITE["base_url"] + "/fibernet/") + fibernet_body + FOOT.format(year=datetime.now().year)
-    write_file("fibernet/index.html", html)
+    # FiberNet shares the same Chinese/English page contract as profiles and articles.
+    for language, source, route in [('zh-CN','fibernet-body.html','/fibernet/'),('en','fibernet-en-body.html','/fibernet/en/')]:
+        body = (Path('content')/source).read_text(encoding='utf-8')
+        desc='纤维网络生成、建模与分析的 Python 工具包。安装、示例与项目资源。' if language=='zh-CN' else 'A Python toolkit for fiber network generation, modeling and analysis. Installation, examples and project resources.'
+        alts=f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/fibernet/"><link rel="alternate" hreflang="en" href="{SITE["base_url"]}/fibernet/en/">'
+        document=make_head(title='FiberNet',desc=desc,url=SITE['base_url']+route,lang=language,wide=True,en_href='/fibernet/en/',zh_href='/fibernet/',alternates=alts)+body+make_footer(language)
+        document=document.replace('</head>', f'<link rel="stylesheet" href="{versioned_asset("/static/css/fibernet.css")}"></head>')
+        write_file(route.lstrip('/')+'index.html',document)
 
     # Separate Chinese and English personal profiles.
     profile_alternates = (
@@ -602,130 +537,7 @@ def build():
                                  zh_active=' class="active"' if language == "zh-CN" else "")
         write_file(route + "index.html", profile_head + about_body + make_footer(language))
 
-    # Privacy Policy page (required for AdSense)
-    privacy_body = """<article class="content">
-<h1>Privacy Policy</h1>
-<p><em>Last updated: 2026-07-23</em></p>
-
-<h2>1. Who We Are</h2>
-<p>ML-Biomat (ml-biomat.com) is a personal academic blog operated by Yunhao Yang, affiliated with Fudan University.</p>
-
-<h2>2. What Data We Collect</h2>
-<p>This site itself does not directly collect personal data. However, third-party services integrated into this site may collect information:</p>
-<ul>
-<li><strong>Google AdSense</strong>: Uses cookies to serve personalized ads based on your browsing history. Google may collect your IP address, browser type, and browsing behavior on this site.</li>
-<li><strong>Giscus (comments)</strong>: Uses GitHub OAuth for authentication. Your GitHub profile information is processed by GitHub.</li>
-<li><strong>Cloudflare CDN</strong>: May collect anonymized traffic data for performance and security purposes.</li>
-</ul>
-
-<h2>3. Cookies</h2>
-<p>Google AdSense uses cookies (such as the DoubleClick cookie) to serve ads based on your prior visits to this or other websites. You may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
-
-<h2>4. How We Use Data</h2>
-<p>We do not sell, trade, or share your personal data. Any data collected by third-party services is governed by their respective privacy policies.</p>
-
-<h2>5. Your Rights</h2>
-<p>You can disable cookies in your browser settings. You can also opt out of Google Analytics and personalized ads through Google's opt-out tools.</p>
-
-<h2>6. Contact</h2>
-<p>For privacy-related inquiries, contact: <a href="mailto:Gellmansparrow@outlook.com">Gellmansparrow@outlook.com</a></p>
-</article>"""
-    privacy_full = make_head(title="Privacy Policy", desc="Privacy policy for ML-Biomat: how we handle cookies, ads, and data.", url=SITE["base_url"] + "/privacy/") + privacy_body + FOOT.format(year=datetime.now().year)
-    write_file("privacy/index.html", privacy_full)
-
-
-    # Privacy Policy page (required for AdSense)
-    privacy_body = """<article class="content">
-<h1>Privacy Policy</h1>
-<p><em>Last updated: 2026-07-23</em></p>
-
-<h2>1. Who We Are</h2>
-<p>ML-Biomat (ml-biomat.com) is a personal academic blog operated by Yunhao Yang, affiliated with Fudan University.</p>
-
-<h2>2. What Data We Collect</h2>
-<p>This site itself does not directly collect personal data. However, third-party services integrated into this site may collect information:</p>
-<ul>
-<li><strong>Google AdSense</strong>: Uses cookies to serve personalized ads based on your browsing history. Google may collect your IP address, browser type, and browsing behavior on this site.</li>
-<li><strong>Giscus (comments)</strong>: Uses GitHub OAuth for authentication. Your GitHub profile information is processed by GitHub.</li>
-<li><strong>Cloudflare CDN</strong>: May collect anonymized traffic data for performance and security purposes.</li>
-</ul>
-
-<h2>3. Cookies</h2>
-<p>Google AdSense uses cookies (such as the DoubleClick cookie) to serve ads based on your prior visits to this or other websites. You may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
-
-<h2>4. How We Use Data</h2>
-<p>We do not sell, trade, or share your personal data. Any data collected by third-party services is governed by their respective privacy policies.</p>
-
-<h2>5. Your Rights</h2>
-<p>You can disable cookies in your browser settings. You can also opt out of Google Analytics and personalized ads through Google's opt-out tools.</p>
-
-<h2>6. Contact</h2>
-<p>For privacy-related inquiries, contact: <a href="mailto:Gellmansparrow@outlook.com">Gellmansparrow@outlook.com</a></p>
-</article>"""
-    privacy_full = make_head(title="Privacy Policy", desc="Privacy policy for ML-Biomat: how we handle cookies, ads, and data.", url=SITE["base_url"] + "/privacy/") + privacy_body + FOOT.format(year=datetime.now().year)
-    write_file("privacy/index.html", privacy_full)
-    # Interactive tools
-    tools_body = '''<section class="tool-page">
-<h1>Interactive Stress-Strain Explorer / 应力应变交互探索器</h1>
-<p class="tool-intro">Drag the controls to see how the curve, modulus, and toughness change. 拖动参数观察曲线、模量与韧性如何变化。</p>
-<div class="tool-layout">
-  <div class="tool-controls">
-    <label>Toe extent (0-40%) <input id="p-toe" type="range" min="0" max="0.4" step="0.01" value="0.12"></label>
-    <label>Toe curvature <input id="p-xi" type="range" min="0.02" max="0.2" step="0.01" value="0.08"></label>
-    <label>Linear modulus (relative) <input id="p-k" type="range" min="0.2" max="3.0" step="0.05" value="1.0"></label>
-    <label>Failure strain (30-120%) <input id="p-fail" type="range" min="0.3" max="1.2" step="0.01" value="0.8"></label>
-  </div>
-  <div class="tool-output">
-    <canvas id="ss-canvas" width="640" height="420"></canvas>
-    <div class="tool-metrics">
-      <span>Modulus: <strong id="m-mod">1.00</strong></span>
-      <span>Toughness: <strong id="m-tough">0.00</strong></span>
-    </div>
-  </div>
-</div>
-</section>
-<script>
-(function(){
-  var cv=document.getElementById('ss-canvas'), ctx=cv.getContext('2d');
-  var ids=['p-toe','p-xi','p-k','p-fail'];
-  function val(id){return parseFloat(document.getElementById(id).value);}
-  function stress(s){var toe=val('p-toe'),xi=val('p-xi'),k=val('p-k'),fail=val('p-fail');
-    if(s<=0)return 0;
-    var toeEnd=0.2*Math.exp(toe/xi);
-    if(s<=toe){return toeEnd*(Math.exp(s/xi)-1)/(Math.exp(toe/xi)-1);}
-    var lin=toeEnd+k*(s-toe);
-    return s>fail? Math.max(0,lin-0.6*(s-fail)):lin;}
-  function draw(){
-    var W=cv.width,H=cv.height,pad=46;
-    ctx.clearRect(0,0,W,H);
-    ctx.strokeStyle='#e2e8f0';ctx.lineWidth=1;
-    for(var i=0;i<=5;i++){var x=pad+(W-2*pad)*i/5;ctx.beginPath();ctx.moveTo(x,pad);ctx.lineTo(x,H-pad);ctx.stroke();}
-    var fail=val('p-fail');
-    var ss=[];for(var j=0;j<=400;j++){var s=fail*j/400;ss.push([s,stress(s)]);}
-    var maxS=1e-6;for(var q=0;q<ss.length;q++){if(ss[q][1]>maxS)maxS=ss[q][1];}
-    function X(s){return pad+(W-2*pad)*(s/(fail||1));}
-    function Y(y){return H-pad-(H-2*pad)*(y/(maxS*1.15));}
-    ctx.strokeStyle='#dbeafe';ctx.lineWidth=6;
-    ctx.beginPath();ctx.moveTo(X(0),Y(0));for(var q=0;q<ss.length;q++){ctx.lineTo(X(ss[q][0]),Y(ss[q][1]));}ctx.stroke();
-    ctx.strokeStyle='#2563eb';ctx.lineWidth=3;
-    ctx.beginPath();ctx.moveTo(X(0),Y(0));for(var r=0;r<ss.length;r++){ctx.lineTo(X(ss[r][0]),Y(ss[r][1]));}ctx.stroke();
-    ctx.fillStyle='#1e293b';ctx.font='12px sans-serif';
-    ctx.fillText('strain', W/2-20, H-12);
-  }
-  function metrics(){
-    var fail=val('p-fail'), n=2000, area=0, ds=fail/n, prev=0;
-    for(var i=1;i<=n;i++){var y=stress(i*ds);area+=(y+prev)/2*ds;prev=y;}
-    document.getElementById('m-mod').textContent=val('p-k').toFixed(2);
-    document.getElementById('m-tough').textContent=area.toFixed(3);
-  }
-  ids.forEach(function(id){document.getElementById(id).addEventListener('input',function(){draw();metrics();});});
-  draw();metrics();
-})();
-</script>'''
-    tools_full = make_head(title="Interactive Stress-Strain Explorer", desc="Interactive stress-strain curve explorer for biomaterials education.", url=SITE["base_url"] + "/tools/stress-strain/") + tools_body + FOOT.format(year=datetime.now().year)
-    write_file("tools/stress-strain/index.html", tools_full)
-
-
+    utility_routes = utility_pages.render(make_head, make_footer, write_file, SITE['base_url'], versioned_asset)
 
     tutorials.render(curriculum, make_head, make_footer, write_file, versioned_asset, CATEGORIES, posts, SITE["base_url"])
 
@@ -769,7 +581,7 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/categories/</loc><priority>0.7</priority></url>',
     ]
-    for route in category_routes:
+    for route in category_routes + [p for p in home_routes if p not in ('/','/en/')] + ['/fibernet/en/'] + tag_routes + [p for p in utility_routes if p not in ('/privacy/','/tools/stress-strain/')]:
         if route == '/categories/': continue
         urls.append(f'<url><loc>{SITE["base_url"]}{route}</loc><priority>0.7</priority></url>')
     for p in posts:
@@ -786,8 +598,8 @@ def build():
     write_file("robots.txt", f"User-agent: *\nContent-Signal: ai-train=yes, search=yes, ai-input=yes\nAllow: /\nSitemap: {SITE['base_url']}/sitemap.xml\n")
 
     # 404
-    not_found = make_head(title="404 Not Found", desc="Page not found", url=f'{SITE["base_url"]}/404.html')
-    not_found += '<h1 style="font-size:3rem;margin-top:3rem">404</h1><p>Page not found. <a href="/">Go home</a>.</p>' + FOOT.format(year=datetime.now().year)
+    not_found = make_head(title="页面未找到", desc="页面未找到", url=f'{SITE["base_url"]}/404.html')
+    not_found += '<h1 style="font-size:3rem;margin-top:3rem">404</h1><p>页面未找到。<a href="/">返回首页</a></p>' + make_footer()
     write_file("404.html", not_found)
 
     # Copy static files

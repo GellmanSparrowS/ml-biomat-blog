@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>分子怎样聚到一起：自组装、相分离与凝聚体 — ML-Biomat</title>
 <meta name="description" content="区分自组装、相分离与凝聚体，用 Flory–Huggins 模型计算共存边界，并训练分类器学习相图与边界附近的状态。">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="分子怎样聚到一起：自组装、相分离与凝聚体">
 <meta property="og:description" content="区分自组装、相分离与凝聚体，用 Flory–Huggins 模型计算共存边界，并训练分类器学习相图与边界附近的状态。">
 <meta property="og:type" content="website">
@@ -22,24 +22,18 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "分子怎样聚到一起：自组装、相分离与凝聚体", "description": "区分自组装、相分离与凝聚体，用 Flory–Huggins 模型计算共存边界，并训练分类器学习相图与边界附近的状态。", "url": "https://ml-biomat.com/tutorials/polymer-ai/12-assembly-and-phase-separation/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-12.css?v=b28b4536dfe0"><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-12.css?v=b28b4536dfe0"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="首页" href="/">Home / 首页</a>
-<a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="分类" href="/categories/" class="active">Categories / 分类</a>
-<a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
+<nav class="nav-links" aria-label="主导航"><a data-nav="home" data-short-label="首页" href="/">首页</a><a data-nav="library" data-short-label="工具库" href="/fibernet/">工具库</a><a data-nav="categories" data-short-label="分类" href="/categories/" class="active" aria-current="page">分类</a><a data-nav="profile" data-short-label="个人主页" href="/about/">个人主页</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="搜索…" aria-label="搜索…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="切换到亮色" title="切换到亮色">☀</button>
+<span class="lang-switch"><a data-language="en" role="link" aria-disabled="true" tabindex="-1" title="该页暂无英文版">EN</a><a data-language="zh" href="/tutorials/polymer-ai/12-assembly-and-phase-separation/" class="active" aria-current="true">中文</a></span>
+</div></header><main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">材料与结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-</div></header>
-<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">生物·材料·结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
-
-<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">生物·材料·结构</p><nav><a href="#objects">01　分清聚成了什么</a><a href="#mixing">02　混合自由能的来由</a><a href="#coexistence">03　两相与细胞富集</a><a href="#learning">04　让AI学习条件图</a><a href="#experiment">05　运行并检查边界</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从分子间的联系到一张可以检验的相图</p>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">材料与结构</p><nav><a href="#objects">01　分清聚成了什么</a><a href="#mixing">02　混合自由能的来由</a><a href="#coexistence">03　两相与细胞富集</a><a href="#learning">04　让AI学习条件图</a><a href="#experiment">05　运行并检查边界</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从分子间的联系到一张可以检验的相图</p>
 <h1>分子怎样聚到一起：自组装、相分离与凝聚体</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">把糖放进水中搅拌，通常会得到看起来均匀的一杯糖水；把油和水混合，则常会看到小液滴逐渐聚成两层。进入生物大分子的世界，情况更加丰富：蛋白质可以排成纤维，核酸可以组装成设计好的形状，某些分子还会在细胞中形成富集的小区域。它们都涉及分子之间的联系，却需要用不同的测量来回答“形成了什么”。本节从这些看得见的现象出发，学习怎样把一个聚集问题整理成可计算、可学习的科学任务。</p>
@@ -446,13 +440,11 @@ chi=0.90: dilute 0.013079, dense 0.537982, dense volume fraction 0.356105
 </div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/13-networks-and-gels/"><strong>水很多，为什么还能成形：网络与凝胶</strong></a><a href="/tutorials/polymer-ai/14-load-bearing-fiber-networks/"><strong>纤维怎样织成能承载的网</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 <script>
 (function(){
 (function(){

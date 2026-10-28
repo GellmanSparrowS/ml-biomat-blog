@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mechanical Testing of Biomaterials: A Reproducible Protocol Guide — ML-Biomat</title>
 <meta name="description" content="Plan specimen geometry, hydration, gripping and strain measurement for reproducible biomaterial tests. Follow force-to-stress conversion, diameter-error propagation and reporting choices to obtain mechanical properties with clearly defined test conditions.">
@@ -13,39 +13,33 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="Mechanical Testing of Biomaterials: A Reproducible Protocol Guide">
 <meta property="og:description" content="Plan specimen geometry, hydration, gripping and strain measurement for reproducible biomaterial tests. Follow force-to-stress conversion, diameter-error propagation and reporting choices to obtain mechanical properties with clearly defined test conditions.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/biomaterials-mechanical-testing/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Mechanical Testing of Biomaterials: A Reproducible Protocol Guide", "description": "Plan specimen geometry, hydration, gripping and strain measurement for reproducible biomaterial tests. Follow force-to-stress conversion, diameter-error propagation and reporting choices to obtain mechanical properties with clearly defined test conditions.", "datePublished": "2026-09-06", "dateModified": "2026-10-28", "wordCount": 3937, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/biomaterials-mechanical-testing/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Wet-lab Data Processing", "item": "https://ml-biomat.com/categories/wet-lab-data/en/"}, {"@type": "ListItem", "position": 3, "name": "Mechanical Testing of Biomaterials: A Reproducible Protocol Guide", "item": "https://ml-biomat.com/posts/biomaterials-mechanical-testing/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Mechanical Testing of Biomaterials: A Reproducible Protocol Guide", "description": "Plan specimen geometry, hydration, gripping and strain measurement for reproducible biomaterial tests. Follow force-to-stress conversion, diameter-error propagation and reporting choices to obtain mechanical properties with clearly defined test conditions.", "datePublished": "2026-09-06", "dateModified": "2026-10-28", "wordCount": 3937, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/biomaterials-mechanical-testing/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Experimental Characterization & Data Analysis", "item": "https://ml-biomat.com/categories/wet-lab-data/en/"}, {"@type": "ListItem", "position": 3, "name": "Mechanical Testing of Biomaterials: A Reproducible Protocol Guide", "item": "https://ml-biomat.com/posts/biomaterials-mechanical-testing/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
-<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="Home" href="/">Home</a>
-<a data-short-label="Library" href="/fibernet/">Library</a>
-<a data-short-label="Categories" href="/categories/en/">Categories</a>
-<a data-short-label="Profile" href="/about/en/">Profile</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/posts/biomaterials-mechanical-testing/" class="active">EN</a><a href="/posts/biomaterials-mechanical-testing-zh/">中文</a></span>
-</div></header>
-<main class="container"><article>
+<a href="/en/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links" aria-label="Main navigation"><a data-nav="home" data-short-label="Home" href="/en/">Home</a><a data-nav="library" data-short-label="Library" href="/fibernet/en/">Library</a><a data-nav="categories" data-short-label="Categories" href="/categories/en/" class="active" aria-current="page">Categories</a><a data-nav="profile" data-short-label="Profile" href="/about/en/">Profile</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="Search…" aria-label="Search…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
+<span class="lang-switch"><a data-language="en" href="/posts/biomaterials-mechanical-testing/" class="active" aria-current="true">EN</a><a data-language="zh" href="/posts/biomaterials-mechanical-testing-zh/">中文</a></span>
+</div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/wet-lab-data/en/">Experimental Characterization & Data Analysis</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
 <h1>Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</h1>
 <div class="article-meta">
-<span>2026-09-06</span><span>·</span><span>20 min read</span><span>·</span><a href="/categories/wet-lab-data/en/">Wet-lab Data Processing</a>
+<span>2026-09-06</span><span>·</span><span>20 min read</span><span>·</span><a href="/categories/wet-lab-data/en/">Experimental Characterization & Data Analysis</a>
 </div>
 </header>
-<div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/mechanical%20testing/">mechanical testing</a><a class="tag-pill" href="/tags/tensile%20testing/">tensile testing</a><a class="tag-pill" href="/tags/biomaterials/">biomaterials</a><a class="tag-pill" href="/tags/instrumentation/">instrumentation</a><a class="tag-pill" href="/tags/data%20quality/">data quality</a><a class="tag-pill" href="/tags/protocol/">protocol</a></div>
+<div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/mechanical%20testing/en/">mechanical testing</a><a class="tag-pill" href="/tags/tensile%20testing/en/">tensile testing</a><a class="tag-pill" href="/tags/biomaterials/en/">biomaterials</a><a class="tag-pill" href="/tags/instrumentation/en/">instrumentation</a><a class="tag-pill" href="/tags/data%20quality/en/">data quality</a><a class="tag-pill" href="/tags/protocol/en/">protocol</a></div>
 <div class="content">
 <details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-reproducible-mechanical-testing-is-hard">Why Reproducible Mechanical Testing Is Hard</a></li><li class="toc-h2"><a href="#specimen-geometry-and-the-hydration-problem">Specimen Geometry and the Hydration Problem</a></li><li class="toc-h2"><a href="#instrumentation-alignment-and-boundary-conditions">Instrumentation, Alignment, and Boundary Conditions</a></li><li class="toc-h2"><a href="#from-force-displacement-to-stress-strain">From Force-Displacement to Stress-Strain</a></li><li class="toc-h2"><a href="#recognizing-artifacts-before-they-enter-a-paper">Recognizing Artifacts Before They Enter a Paper</a></li><li class="toc-h2"><a href="#a-practical-reporting-checklist">A Practical Reporting Checklist</a></li><li class="toc-h3"><a href="#uncertainty-is-part-of-the-result">Uncertainty is part of the result</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-reproducible-mechanical-testing-is-hard">Why Reproducible Mechanical Testing Is Hard</h2>
 
@@ -143,7 +137,7 @@
 <li>Instron. <a href="https://www.instron.com/en/resources/literature/compliance-correction/">Universal Testing Machine Compliance</a>.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/python-env-setup/">← Setting Up a Python Scientific Computing Environment</a></span><span><a href="/posts/coarse-grained-biomolecular-networks/">Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/python-env-setup/">← Setting Up a Python Scientific Computing Environment</a></span><span><a href="/posts/coarse-grained-biomolecular-networks/">Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -154,7 +148,7 @@
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="bottom"
-    data-theme="preferred_color_scheme"
+    data-theme="dark"
     data-lang="en"
     crossorigin="anonymous"
     async>
@@ -162,12 +156,10 @@
 </section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/en/">Profile</a><a href="/fibernet/en/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/en/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/en/">Privacy</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 </body>
 </html>

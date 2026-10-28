@@ -1,5 +1,6 @@
 // ml-biomat.com — enhanced code copy + search
 (function(){
+var isChinese = document.documentElement.lang !== 'en';
 // === CODE COPY (always visible, icon-style) ===
 document.addEventListener('DOMContentLoaded', function(){
     if(document.querySelector('.tutorial-reader')) return;
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var btn = document.createElement('button');
         btn.className = 'copy-btn';
         btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
-        btn.title = 'Copy code';
+        btn.title = isChinese ? '复制代码' : 'Copy code';
         btn.onclick = function(){
             var code = block.textContent.trim();
             navigator.clipboard.writeText(code).then(function(){
@@ -107,6 +108,7 @@ function doSearchDropdown(q){
                (p.description||'').toLowerCase().indexOf(q) >= 0 ||
                (p.tags||[]).some(function(t){ return t.toLowerCase().indexOf(q) >= 0; });
     });
+    results.sort(function(a,b){var lang=isChinese?'zh':'en';return Number(b.lang===lang)-Number(a.lang===lang);});
     showDropdown(results.slice(0, 8), q);
 }
 
@@ -117,7 +119,7 @@ function showDropdown(results, q){
         document.body.appendChild(dd);
     }
     if(results.length === 0){
-        dd.innerHTML = '<div class="search-item" style="color:var(--c-muted)">No results</div>';
+        dd.innerHTML = '<div class="search-item" style="color:var(--c-muted)">'+(isChinese?'未找到匹配内容':'No results')+'</div>';
     } else {
         dd.innerHTML = results.map(function(p){
             return '<a class="search-item" href="'+(p.url||('/posts/'+p.slug+'/'))+'"><strong>'+p.title+'</strong><span style="font-size:.75rem;color:var(--c-muted);display:block">'+(p.description||'')+'</span></a>';
@@ -162,7 +164,7 @@ document.addEventListener('DOMContentLoaded',function(){
         a.href = '#' + h.id;
         a.className = 'anchor-link';
         a.innerHTML = '#';
-        a.title = 'Link to this section';
+        a.title = document.documentElement.lang === 'en' ? 'Link to this section' : '复制本节链接';
         a.onclick = function(e){
             e.preventDefault();
             history.pushState(null,null,'#'+h.id);
@@ -200,30 +202,40 @@ document.addEventListener('DOMContentLoaded',function(){
     document.head.appendChild(script);
 })();
 
-// ===== THEME TOGGLE =====
+// ===== SHARED THEME STATE =====
 (function(){
     var KEY = 'ml-biomat-theme';
-    function currentTheme(){ return document.documentElement.getAttribute('data-theme'); }
+    var english=document.documentElement.lang==='en';
+    function currentTheme(){return document.documentElement.dataset.theme||'dark';}
+    function commentsTheme(){
+        var frame=document.querySelector('iframe.giscus-frame');
+        if(frame && frame.contentWindow) frame.contentWindow.postMessage({giscus:{setConfig:{theme:currentTheme()}}},'https://giscus.app');
+        document.querySelectorAll('script[src*="giscus.app/client.js"]').forEach(function(node){node.dataset.theme=currentTheme();});
+    }
     function render(){
-        var btn = document.getElementById('theme-toggle');
-        if(btn) btn.textContent = currentTheme() === 'dark' ? '\u2600' : '\u263e';
+        var btn=document.getElementById('theme-toggle');
+        if(btn){
+            var dark=currentTheme()==='dark';
+            var label=english?(dark?'Switch to light mode':'Switch to dark mode'):(dark?'切换到亮色':'切换到暗色');
+            btn.textContent=dark?'☀':'☾';btn.title=label;btn.setAttribute('aria-label',label);
+        }
+        commentsTheme();
     }
-    function apply(){
-        try {
-            var saved = localStorage.getItem(KEY);
-            if(saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
-        } catch(e) {}
-        render();
-    }
-    document.addEventListener('DOMContentLoaded', function(){
-        apply();
-        var btn = document.getElementById('theme-toggle');
-        if(btn) btn.addEventListener('click', function(){
-            var next = currentTheme() === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            try { localStorage.setItem(KEY, next); } catch(e) {}
-            render();
+    document.addEventListener('DOMContentLoaded',function(){
+        var selected='dark';
+        try{var saved=localStorage.getItem(KEY);if(saved==='light'||saved==='dark')selected=saved;}catch(e){}
+        document.documentElement.dataset.theme=selected;render();
+        var btn=document.getElementById('theme-toggle');
+        if(btn) btn.addEventListener('click',function(){
+            var next=currentTheme()==='dark'?'light':'dark';document.documentElement.dataset.theme=next;
+            try{localStorage.setItem(KEY,next);}catch(e){}render();
         });
+        var observer=new MutationObserver(function(){
+            var frame=document.querySelector('iframe.giscus-frame');
+            if(frame){frame.addEventListener('load',commentsTheme);commentsTheme();observer.disconnect();}
+        });
+        observer.observe(document.body,{childList:true,subtree:true});
+        if(!document.querySelector('script[src*="giscus.app/client.js"]'))observer.disconnect();
     });
 })();
 

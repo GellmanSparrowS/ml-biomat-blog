@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>生物材料力学测试：试样制备、仪器设置与无伪影数据 — ML-Biomat</title>
 <meta name="description" content="从试样几何、水合状态、装夹与应变测量出发，建立可重复的生物材料力学测试流程。结合力到应力的换算、直径误差传播和报告要点，明确模量、强度与耗能所对应的测试条件。">
@@ -13,36 +13,30 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="生物材料力学测试：试样制备、仪器设置与无伪影数据">
 <meta property="og:description" content="从试样几何、水合状态、装夹与应变测量出发，建立可重复的生物材料力学测试流程。结合力到应力的换算、直径误差传播和报告要点，明确模量、强度与耗能所对应的测试条件。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物材料力学测试：试样制备、仪器设置与无伪影数据", "description": "从试样几何、水合状态、装夹与应变测量出发，建立可重复的生物材料力学测试流程。结合力到应力的换算、直径误差传播和报告要点，明确模量、强度与耗能所对应的测试条件。", "datePublished": "2026-09-06", "dateModified": "2026-10-28", "wordCount": 5239, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "生物材料力学测试：试样制备、仪器设置与无伪影数据", "item": "https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物材料力学测试：试样制备、仪器设置与无伪影数据", "description": "从试样几何、水合状态、装夹与应变测量出发，建立可重复的生物材料力学测试流程。结合力到应力的换算、直径误差传播和报告要点，明确模量、强度与耗能所对应的测试条件。", "datePublished": "2026-09-06", "dateModified": "2026-10-28", "wordCount": 5239, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "实验表征与数据分析", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "生物材料力学测试：试样制备、仪器设置与无伪影数据", "item": "https://ml-biomat.com/posts/biomaterials-mechanical-testing-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="首页" href="/">Home / 首页</a>
-<a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="分类" href="/categories/">Categories / 分类</a>
-<a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/posts/biomaterials-mechanical-testing/">EN</a><a href="/posts/biomaterials-mechanical-testing-zh/" class="active">中文</a></span>
-</div></header>
-<main class="container"><article>
+<nav class="nav-links" aria-label="主导航"><a data-nav="home" data-short-label="首页" href="/">首页</a><a data-nav="library" data-short-label="工具库" href="/fibernet/">工具库</a><a data-nav="categories" data-short-label="分类" href="/categories/" class="active" aria-current="page">分类</a><a data-nav="profile" data-short-label="个人主页" href="/about/">个人主页</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="搜索…" aria-label="搜索…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="切换到亮色" title="切换到亮色">☀</button>
+<span class="lang-switch"><a data-language="en" href="/posts/biomaterials-mechanical-testing/">EN</a><a data-language="zh" href="/posts/biomaterials-mechanical-testing-zh/" class="active" aria-current="true">中文</a></span>
+</div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/wet-lab-data/">实验表征与数据分析</a></nav>
 <header class="article-header">
 <span class="lang-badge zh">中文</span>
 <h1>生物材料力学测试：试样制备、仪器设置与无伪影数据</h1>
 <div class="article-meta">
-<span>2026-09-06</span><span>·</span><span>14 分钟阅读</span><span>·</span><a href="/categories/wet-lab-data/">湿实验数据处理</a>
+<span>2026-09-06</span><span>·</span><span>14 分钟阅读</span><span>·</span><a href="/categories/wet-lab-data/">实验表征与数据分析</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E5%8A%9B%E5%AD%A6%E6%B5%8B%E8%AF%95/">力学测试</a><a class="tag-pill" href="/tags/%E6%8B%89%E4%BC%B8%E6%B5%8B%E8%AF%95/">拉伸测试</a><a class="tag-pill" href="/tags/%E7%94%9F%E7%89%A9%E6%9D%90%E6%96%99/">生物材料</a><a class="tag-pill" href="/tags/%E4%BB%AA%E5%99%A8/">仪器</a><a class="tag-pill" href="/tags/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/">数据质量</a><a class="tag-pill" href="/tags/%E5%AE%9E%E9%AA%8C%E8%A7%84%E8%8C%83/">实验规范</a></div>
@@ -131,7 +125,7 @@
 <li>Instron. <a href="https://www.instron.com/en/resources/literature/compliance-correction/">Universal Testing Machine Compliance</a>.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/python-env-setup-zh/">← Python 科学计算环境完全搭建指南：从零到生产力</a></span><span><a href="/posts/coarse-grained-biomolecular-networks-zh/">生物分子网络的粗粒化建模：从映射方案到验证方法 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/python-env-setup-zh/">← Python 科学计算环境完全搭建指南：从零到生产力</a></span><span><a href="/posts/coarse-grained-biomolecular-networks-zh/">生物分子网络的粗粒化建模：从映射方案到验证方法 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -142,7 +136,7 @@
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="bottom"
-    data-theme="preferred_color_scheme"
+    data-theme="dark"
     data-lang="zh-CN"
     crossorigin="anonymous"
     async>
@@ -150,12 +144,10 @@
 </section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 title: "应力-应变曲线解读：材料力学入门"
 date: "2026-06-26"
 updated: "2026-10-28"
-category: "biomaterials"
+category: "wet-lab-data"
 tags: ["应力-应变", "力学", "生物材料", "弹性模量", "教程"]
 lang: "zh"
 slug: "stress-strain-curves-zh"

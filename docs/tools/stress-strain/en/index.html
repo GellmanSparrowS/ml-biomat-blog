@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stress–Strain Explorer — ML-Biomat</title>
+<meta name="description" content="Adjust a teaching curve to explore stress–strain behaviour, linear slope and area under the curve.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/tools/stress-strain/en/">
+<link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/tools/stress-strain/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/tools/stress-strain/en/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/tools/stress-strain/"><link rel="api-catalog" href="/.well-known/api-catalog">
+<link rel="describedby" type="text/plain" href="/llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
+<meta name="google-adsense-account" content="ca-pub-7464969092761889">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
+<meta property="og:title" content="Stress–Strain Explorer">
+<meta property="og:description" content="Adjust a teaching curve to explore stress–strain behaviour, linear slope and area under the curve.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ml-biomat.com/tools/stress-strain/en/">
+<meta property="og:site_name" content="ML-Biomat">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
+<body>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<header class="site-header"><div class="header-inner">
+<a href="/en/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links" aria-label="Main navigation"><a data-nav="home" data-short-label="Home" href="/en/">Home</a><a data-nav="library" data-short-label="Library" href="/fibernet/en/" class="active" aria-current="page">Library</a><a data-nav="categories" data-short-label="Categories" href="/categories/en/">Categories</a><a data-nav="profile" data-short-label="Profile" href="/about/en/">Profile</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="Search…" aria-label="Search…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
+<span class="lang-switch"><a data-language="en" href="/tools/stress-strain/en/" class="active" aria-current="true">EN</a><a data-language="zh" href="/tools/stress-strain/">中文</a></span>
+</div></header><main class="container"><style>
+.tool-page .tool-control-heading{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.tool-page .tool-control-heading output{font-variant-numeric:tabular-nums;color:var(--c-fg);font-weight:600;white-space:nowrap}
+.tool-page .tool-controls input[type=range]{width:100%;min-height:30px;margin:0}
+.tool-page .tool-reset{align-self:flex-start;min-height:40px;padding:8px 12px;border:1px solid var(--c-border);border-radius:6px;background:var(--c-surface);color:var(--c-primary);font:600 13px/1.5 var(--font-sans);cursor:pointer}
+.tool-page .tool-reset:hover{border-color:var(--c-primary)}
+.tool-page .tool-reset:focus-visible{outline:2px solid var(--c-primary);outline-offset:3px}
+.tool-page .tool-output{min-width:0}
+.tool-page .tool-metrics{flex-wrap:wrap;line-height:1.7}
+.tool-page .tool-metrics strong{font-variant-numeric:tabular-nums}
+.tool-page #ss-canvas{display:block;max-width:100%;aspect-ratio:32/21}
+</style><section class="tool-page">
+<h1>Stress–Strain Explorer</h1>
+<p class="tool-intro">Adjust the toe region, linear slope and end strain to explore the curve and its integrated area. The teaching function expresses stress and area in relative units.</p>
+<div class="tool-layout">
+<div class="tool-controls"><label for="p-toe"><span class="tool-control-heading"><span>Toe extent (0–40%)</span><output id="p-toe-value" for="p-toe">12%</output></span><input id="p-toe" type="range" min="0" max="0.4" step="0.01" value="0.12"></label><label for="p-xi"><span class="tool-control-heading"><span>Toe curvature parameter</span><output id="p-xi-value" for="p-xi">0.08</output></span><input id="p-xi" type="range" min="0.02" max="0.2" step="0.01" value="0.08"></label><label for="p-k"><span class="tool-control-heading"><span>Linear slope (relative)</span><output id="p-k-value" for="p-k">1.00</output></span><input id="p-k" type="range" min="0.2" max="3.0" step="0.05" value="1.0"></label><label for="p-fail"><span class="tool-control-heading"><span>End strain (30–120%)</span><output id="p-fail-value" for="p-fail">80%</output></span><input id="p-fail" type="range" min="0.3" max="1.2" step="0.01" value="0.8"></label><button id="ss-reset" class="tool-reset" type="button">Reset parameters</button></div>
+<div class="tool-output"><canvas id="ss-canvas" width="640" height="420" role="img" aria-label="Stress–strain teaching curve. The current linear slope and area under the curve appear below.">Stress–strain teaching curve. The current linear slope and area under the curve appear below.</canvas>
+<div class="tool-metrics" aria-live="polite" aria-atomic="true"><span>Linear slope: <strong id="m-mod">1.00</strong></span><span>Area under curve: <strong id="m-tough">0.00</strong></span></div></div>
+</div></section><script>
+(function(){
+  function init(){
+    var cv=document.getElementById('ss-canvas');
+    if(!cv) return;
+    var ctx=cv.getContext('2d');
+    if(!ctx) return;
+    var copy={"x": "Strain", "y": "Relative stress"};
+    var ids=['p-toe','p-xi','p-k','p-fail'];
+    function val(id){return parseFloat(document.getElementById(id).value);}
+    // Keep the original educational curve and numerical integration unchanged.
+    function stress(s){var toe=val('p-toe'),xi=val('p-xi'),k=val('p-k'),fail=val('p-fail');
+      if(s<=0)return 0;
+      var toeEnd=0.2*Math.exp(toe/xi);
+      if(s<=toe){return toeEnd*(Math.exp(s/xi)-1)/(Math.exp(toe/xi)-1);}
+      var lin=toeEnd+k*(s-toe);
+      return s>fail? Math.max(0,lin-0.6*(s-fail)):lin;}
+    function draw(){
+      var W=Math.max(260,cv.clientWidth),H=W*420/640,dpr=Math.min(window.devicePixelRatio||1,3);
+      var pixelW=Math.round(W*dpr),pixelH=Math.round(H*dpr);
+      if(cv.width!==pixelW||cv.height!==pixelH){cv.width=pixelW;cv.height=pixelH;}
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.clearRect(0,0,W,H);
+      var palette=getComputedStyle(document.documentElement);
+      var fg=palette.getPropertyValue('--c-fg-soft').trim()||'#475569';
+      var grid=palette.getPropertyValue('--c-border').trim()||'#dbe2ec';
+      var primary=palette.getPropertyValue('--c-primary').trim()||'#2563eb';
+      var left=58,right=18,top=20,bottom=43;
+      var fail=val('p-fail');
+      var ss=[];for(var j=0;j<=400;j++){var s=fail*j/400;ss.push([s,stress(s)]);}
+      var maxS=1e-6;for(var q=0;q<ss.length;q++){if(ss[q][1]>maxS)maxS=ss[q][1];}
+      function tickLabel(y){return y>=1000?y.toExponential(1):y.toFixed(y>=10?0:1);}
+      ctx.font='12px "Microsoft YaHei",sans-serif';
+      for(var t=0;t<=4;t++){left=Math.max(left,Math.ceil(ctx.measureText(tickLabel(maxS*1.15*t/4)).width)+28);}
+      function X(s){return left+(W-left-right)*(s/(fail||1));}
+      function Y(y){return H-bottom-(H-top-bottom)*(y/(maxS*1.15));}
+      ctx.font='12px "Microsoft YaHei",sans-serif';
+      ctx.lineWidth=1;ctx.strokeStyle=grid;ctx.fillStyle=fg;
+      for(var i=0;i<=4;i++){
+        var sx=fail*i/4,x=X(sx),sy=maxS*1.15*i/4,y=Y(sy);
+        ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,H-bottom);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(W-right,y);ctx.stroke();
+        ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText((sx*100).toFixed(0)+'%',x,H-bottom+8);
+        ctx.textAlign='right';ctx.textBaseline='middle';
+        ctx.fillText(tickLabel(sy),left-8,y);
+      }
+      ctx.strokeStyle=primary;ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.moveTo(X(0),Y(0));for(var r=0;r<ss.length;r++){ctx.lineTo(X(ss[r][0]),Y(ss[r][1]));}ctx.stroke();
+      ctx.fillStyle=fg;ctx.font='13px "Microsoft YaHei",sans-serif';
+      ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText(copy.x,(left+W-right)/2,H-3);
+      ctx.save();ctx.translate(17,(top+H-bottom)/2);ctx.rotate(-Math.PI/2);ctx.textBaseline='bottom';ctx.fillText(copy.y,0,0);ctx.restore();
+    }
+    function metrics(){
+      var fail=val('p-fail'), n=2000, area=0, ds=fail/n, prev=0;
+      for(var i=1;i<=n;i++){var y=stress(i*ds);area+=(y+prev)/2*ds;prev=y;}
+      document.getElementById('m-mod').textContent=val('p-k').toFixed(2);
+      document.getElementById('m-tough').textContent=area.toFixed(3);
+    }
+    function update(){
+      ids.forEach(function(id){
+        var text=(id==='p-toe'||id==='p-fail')?(val(id)*100).toFixed(0)+'%':val(id).toFixed(2);
+        document.getElementById(id+'-value').textContent=text;
+        document.getElementById(id).setAttribute('aria-valuetext',text);
+      });
+      draw();metrics();
+    }
+    ids.forEach(function(id){document.getElementById(id).addEventListener('input',update);});
+    document.getElementById('ss-reset').addEventListener('click',function(){
+      ids.forEach(function(id){var input=document.getElementById(id);input.value=input.defaultValue;});update();
+    });
+    var frame=0;
+    function redraw(){cancelAnimationFrame(frame);frame=requestAnimationFrame(draw);}
+    new MutationObserver(redraw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+    var media=window.matchMedia('(prefers-color-scheme: dark)');
+    if(media.addEventListener)media.addEventListener('change',redraw);
+    if(window.ResizeObserver)new ResizeObserver(redraw).observe(cv);
+    else window.addEventListener('resize',redraw);
+    update();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links"><a href="/about/en/">Profile</a><a href="/fibernet/en/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/en/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/en/">Privacy</a></div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
+</body>
+</html>

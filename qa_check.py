@@ -11,7 +11,7 @@ from email.utils import parsedate_to_datetime
 from datetime import datetime
 from pathlib import Path
 from html.parser import HTMLParser
-from urllib.parse import unquote, urlsplit
+from urllib.parse import quote, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent
 DOCS = ROOT / "docs"
@@ -70,6 +70,65 @@ def broken_local_links():
             except ValueError:
                 broken.add((str(page.relative_to(DOCS)), url))
     return sorted(broken)
+
+
+def tag_integrity_errors(posts):
+    """Check source-tag unions and case-sensitive routes on every platform."""
+    expected = {}
+    for post in posts:
+        for tag in post['tags']:
+            # Independent expected identity for the two known alias pairs.
+            slug = tag.casefold() if tag.casefold() in {'python', 'mamba'} else tag
+            expected.setdefault(slug, set()).add(post['slug'])
+    files = {path.relative_to(DOCS).as_posix(): path for path in DOCS.rglob('*.html')}
+    errors = []
+    for slug, members in expected.items():
+        for language in ['zh', 'en']:
+            suffix = 'en/' if language == 'en' else ''
+            relative = 'tags/' + slug + '/' + suffix + 'index.html'
+            if relative not in files:
+                errors.append(relative + ': missing exact-case path')
+                continue
+            page = files[relative].read_text(encoding='utf-8')
+            actual = re.findall(r'<a[^>]+href="/posts/([^"/]+)/"', page)
+            if set(actual) != members or len(actual) != len(members):
+                errors.append(relative + ': tag union incomplete or duplicated')
+            route = '/tags/' + quote(slug, safe='') + '/' + suffix
+            canonical = re.search(r'<link rel="canonical" href="([^"]+)"', page)
+            if not canonical or urlsplit(html.unescape(canonical[1])).path != route:
+                errors.append(relative + ': incorrect canonical route')
+    for language in ['zh', 'en']:
+        suffix = 'en/' if language == 'en' else ''
+        relative = 'tags/' + suffix + 'index.html'
+        if relative not in files:
+            errors.append(relative + ': missing tag directory')
+            continue
+        page = files[relative].read_text(encoding='utf-8')
+        actual = re.findall(r'<a class="tag-pill" href="([^"]+)">.*?\((\d+)\)</a>', page)
+        expected_cloud = {'/tags/' + quote(slug, safe='') + '/' + suffix: len(members)
+                          for slug, members in expected.items()}
+        actual_cloud = {html.unescape(url): int(count) for url, count in actual}
+        if actual_cloud != expected_cloud or len(actual) != len(expected_cloud):
+            errors.append(relative + ': tag directory counts or routes differ from source')
+    for relative, path in files.items():
+        parser = LocalLinks()
+        parser.feed(path.read_text(encoding='utf-8'))
+        for url in parser.urls:
+            parsed = urlsplit(url)
+            if parsed.netloc and parsed.netloc != 'ml-biomat.com':
+                continue
+            decoded = unquote(parsed.path)
+            if not decoded.startswith('/tags/'):
+                continue
+            target = decoded.lstrip('/')
+            if decoded.endswith('/'):
+                target += 'index.html'
+            if target not in files:
+                errors.append(relative + ': tag URL casing or target missing: ' + url)
+            parts = decoded.strip('/').split('/')
+            if len(parts) >= 2 and parts[1].casefold() in {'python', 'mamba'} and parts[1] != parts[1].casefold():
+                errors.append(relative + ': noncanonical tag alias: ' + url)
+    return sorted(set(errors))
 
 
 def run():
@@ -159,6 +218,9 @@ def run():
     # Translation links are reciprocal and each page has its own localized title.
     import build
     loaded = build.load_posts()
+    tag_errors = tag_integrity_errors(loaded)
+    checks.append(check('Tag unions and case-sensitive URLs', not tag_errors,
+                        '; '.join(tag_errors[:15]) if tag_errors else 'Merged tag aliases retain every article; tag counts, canonical URLs and link casing agree'))
     by_lang = {lang:{p['slug']:p for p in loaded if p['lang']==lang} for lang in ['en','zh']}
     pair_errors=[]; figure_errors=[]
     for post in loaded:
@@ -177,6 +239,46 @@ def run():
     for path in [DOCS/'index.html',DOCS/'zh/index.html',DOCS/'categories/index.html']:
         if '系列教程' in path.read_text(encoding='utf8'): old_blocks.append(str(path.relative_to(DOCS)))
     checks.append(check('Topic-first browsing',not old_blocks, ', '.join(old_blocks) if old_blocks else 'No separate series blocks on home, categories or language collections'))
+
+    # Site-wide UI contract, including untranslated articles.
+    chrome_errors=[]
+    from content_tools import chrome
+    for page_path in DOCS.rglob('*.html'):
+        relative=page_path.relative_to(DOCS).as_posix()
+        if relative.startswith('static/'):continue
+        page=page_path.read_text(encoding='utf8')
+        if 'class="site-header"' not in page:continue  # redirects and ownership verification files
+        locale=re.search(r'<html lang="([^"]+)"',page)[1]
+        english=locale=='en'
+        header=re.search(r'<header class="site-header">(.*?)</header>',page,re.S)[1]
+        nav=re.findall(r'<a data-nav="([^"]+)"[^>]*>([^<]+)</a>',header)
+        expected=[(key,en_label if english else zh_label) for key,zh_label,en_label in chrome.NAV]
+        switch=re.search(r'<span class="lang-switch">(.*?)</span>',header,re.S)
+        if nav!=expected or not switch or len(re.findall(r'data-language=',switch[1]))!=2:
+            chrome_errors.append(relative+': inconsistent header')
+        if 'data-theme="dark"' not in page[:180] or chrome.THEME_INIT not in page:
+            chrome_errors.append(relative+': missing pre-paint default')
+        home='/en/' if english else '/'
+        if f'href="{home}" class="site-brand"' not in header:
+            chrome_errors.append(relative+': home loses locale')
+    checks.append(check('Shared navigation and dark-first shell',not chrome_errors,'; '.join(chrome_errors[:15]) if chrome_errors else 'All generated pages retain both language controls, matching navigation, and dark initialization'))
+    home_errors=[]
+    for path,language in [('index.html','zh-CN'),('en/index.html','en'),('zh/index.html','zh-CN')]:
+        page=(DOCS/path).read_text(encoding='utf8')
+        if '<h1>ML-Biomat</h1>' not in page or '<html lang="'+language+'"' not in page:
+            home_errors.append(path)
+        header=re.search(r'<span class="lang-switch">(.*?)</span>',page,re.S)[1]
+        if 'href="/en/"' not in header or 'href="/"' not in header:home_errors.append(path+': wrong counterpart')
+    for path in ['articles/index.html','articles/en/index.html']:
+        if not (DOCS/path).is_file():home_errors.append(path)
+    checks.append(check('Home language switch preserves page type',not home_errors,', '.join(home_errors) if home_errors else 'Chinese and English homepages remain homepages; article collections have separate routes'))
+    primary_errors=[]
+    for lesson in lessons:
+        if len(lesson['categories'])!=1:primary_errors.append(lesson['slug'])
+    for post in loaded:
+        pair=build.find_pair(post,by_lang)
+        if pair and pair['category']!=post['category']:primary_errors.append(post['slug'])
+    checks.append(check('One primary topic with bilingual agreement',not primary_errors,', '.join(primary_errors) if primary_errors else '44 Chinese and 24 English entries have one primary topic; article pairs agree'))
 
     broken = broken_local_links()
     link_detail = (

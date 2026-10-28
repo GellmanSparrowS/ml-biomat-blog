@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Stress-Strain Curves: A Materials Science Primer — ML-Biomat</title>
 <meta name="description" content="Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation.">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="Stress-Strain Curves: A Materials Science Primer">
 <meta property="og:description" content="Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation.">
 <meta property="og:type" content="article">
@@ -21,33 +21,27 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/stress-strain-curves.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Stress-Strain Curves: A Materials Science Primer", "description": "Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 581, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/stress-strain-curves/", "image": "https://ml-biomat.com/static/images/og/stress-strain-curves.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/en/"}, {"@type": "ListItem", "position": 3, "name": "Stress-Strain Curves: A Materials Science Primer", "item": "https://ml-biomat.com/posts/stress-strain-curves/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Stress-Strain Curves: A Materials Science Primer", "description": "Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 581, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/stress-strain-curves/", "image": "https://ml-biomat.com/static/images/og/stress-strain-curves.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Experimental Characterization & Data Analysis", "item": "https://ml-biomat.com/categories/wet-lab-data/en/"}, {"@type": "ListItem", "position": 3, "name": "Stress-Strain Curves: A Materials Science Primer", "item": "https://ml-biomat.com/posts/stress-strain-curves/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
-<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="Home" href="/">Home</a>
-<a data-short-label="Library" href="/fibernet/">Library</a>
-<a data-short-label="Categories" href="/categories/en/">Categories</a>
-<a data-short-label="Profile" href="/about/en/">Profile</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/posts/stress-strain-curves/" class="active">EN</a><a href="/posts/stress-strain-curves-zh/">中文</a></span>
-</div></header>
-<main class="container"><article>
+<a href="/en/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links" aria-label="Main navigation"><a data-nav="home" data-short-label="Home" href="/en/">Home</a><a data-nav="library" data-short-label="Library" href="/fibernet/en/">Library</a><a data-nav="categories" data-short-label="Categories" href="/categories/en/" class="active" aria-current="page">Categories</a><a data-nav="profile" data-short-label="Profile" href="/about/en/">Profile</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="Search…" aria-label="Search…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
+<span class="lang-switch"><a data-language="en" href="/posts/stress-strain-curves/" class="active" aria-current="true">EN</a><a data-language="zh" href="/posts/stress-strain-curves-zh/">中文</a></span>
+</div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/wet-lab-data/en/">Experimental Characterization & Data Analysis</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
 <h1>Stress-Strain Curves: A Materials Science Primer</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/biomaterials/en/">Bio-Materials-Structures</a>
+<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/wet-lab-data/en/">Experimental Characterization & Data Analysis</a>
 </div>
 </header>
-<div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/stress-strain/">stress-strain</a><a class="tag-pill" href="/tags/mechanics/">mechanics</a><a class="tag-pill" href="/tags/biomaterials/">biomaterials</a><a class="tag-pill" href="/tags/elasticity/">elasticity</a><a class="tag-pill" href="/tags/tutorial/">tutorial</a></div>
+<div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/stress-strain/en/">stress-strain</a><a class="tag-pill" href="/tags/mechanics/en/">mechanics</a><a class="tag-pill" href="/tags/biomaterials/en/">biomaterials</a><a class="tag-pill" href="/tags/elasticity/en/">elasticity</a><a class="tag-pill" href="/tags/tutorial/en/">tutorial</a></div>
 <div class="content">
 <details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-this-matters">Why This Matters</a></li><li class="toc-h2"><a href="#key-regions">Key Regions</a></li><li class="toc-h2"><a href="#computing-mechanical-properties">Computing Mechanical Properties</a></li><li class="toc-h2"><a href="#biomaterials-considerations">Biomaterials Considerations</a></li><li class="toc-h2"><a href="#common-mistakes">Common Mistakes</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#advanced-topics-in-stress-strain-analysis">Advanced Topics in Stress-Strain Analysis</a></li></ul></details><h2 id="why-this-matters">Why This Matters</h2>
 
@@ -135,7 +129,7 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 
 <p>Cyclic loading reveals the Mullins effect in many biomaterials: the stress required to reach a given strain decreases with repeated cycling. This stress softening stabilizes after several cycles and is attributed to the progressive rupture of weaker sacrificial bonds within the network. The stabilized cycle is typically reported as the preconditioned response.</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/silk-fibroin-structure-mechanics/">← Silk Fibroin: From Molecular Structure to Mechanical Function</a></span><span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/silk-fibroin-structure-mechanics/">← Silk Fibroin: From Molecular Structure to Mechanical Function</a></span><span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -146,7 +140,7 @@ def tangent_modulus(strain, stress, at_strain=0.05):
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="bottom"
-    data-theme="preferred_color_scheme"
+    data-theme="dark"
     data-lang="en"
     crossorigin="anonymous"
     async>
@@ -154,12 +148,10 @@ def tangent_modulus(strain, stress, at_strain=0.05):
 </section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/en/">Profile</a><a href="/fibernet/en/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/en/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/en/">Privacy</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 </body>
 </html>

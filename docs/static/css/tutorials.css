@@ -212,7 +212,7 @@ main.tutorial-container{max-width:1240px;width:100%;padding:0 28px;min-width:0}
  .tutorial-neighbors small{font-size:12px}
  .tutorial-hub{padding:25px 0 40px}
  .tutorial-hero{padding:4px 0 24px}
- .tutorial-hero h1{font-size:26px;line-height:1.45;margin-bottom:14px}
+ .tutorial-hero h1{font-size:24px;line-height:1.35;margin-bottom:12px}
  .tutorial-hero>p{font-size:14.5px;line-height:1.9}
  .tutorial-actions{gap:8px;margin-top:18px}
  .tutorial-actions a{font-size:13px;padding:8px 11px}
@@ -221,7 +221,7 @@ main.tutorial-container{max-width:1240px;width:100%;padding:0 28px;min-width:0}
  .tutorial-filter button{font-size:12.5px;padding:7px 10px;min-height:38px}
  #tutorial-count{flex-basis:100%;margin-left:0;font-size:12px}
  .tutorial-group{gap:14px;padding-top:28px}
- .tutorial-group-heading h2{font-size:20px;margin-bottom:8px}
+ .tutorial-group-heading h2{font-size:19px;margin-bottom:8px}
  .tutorial-group-heading p{font-size:14px;line-height:1.85}
  .tutorial-list>li>a{grid-template-columns:23px minmax(0,1fr);gap:10px;padding:17px 3px}
  .tutorial-list h3{font-size:15px;line-height:1.7;margin-bottom:6px}
@@ -292,7 +292,7 @@ main.tutorial-container{max-width:1240px;width:100%;padding:0 28px;min-width:0}
   .tutorial-reader aside .lesson-label{font-size:11.5px;margin-bottom:7px}
   .tutorial-reader aside nav{gap:1px 13px}
   .tutorial-reader aside nav a{font-size:12px;line-height:1.6;padding:5px 0}
-  .tutorial-reader h1{font-size:25px;line-height:1.4;margin-bottom:12px}
+  .tutorial-reader h1{font-size:24px;line-height:1.35;margin-bottom:10px}
   .tutorial-reader h1 span{font-size:.8em;margin-top:4px}
   .tutorial-reader .eyebrow{font-size:11.5px;margin-bottom:8px}
   .tutorial-reader .byline{font-size:11.5px;line-height:1.7;padding-bottom:13px;margin-bottom:16px}
@@ -345,7 +345,7 @@ main.tutorial-container{max-width:1240px;width:100%;padding:0 28px;min-width:0}
 }
 @media screen and (max-width:360px){
   main.tutorial-container{padding-left:13px;padding-right:13px}
-  .tutorial-reader h1{font-size:24px}
+  .tutorial-reader h1{font-size:22px}
   .tutorial-reader{--body:13.5px}
 }
 
@@ -361,3 +361,20 @@ main.tutorial-container{max-width:1240px;width:100%;padding:0 28px;min-width:0}
   .tutorial-reader .lesson-toc nav{padding-left:0}
   .tutorial-reader aside:has(.lesson-toc){margin-bottom:17px;padding-bottom:8px}
 }
+
+/* Explanatory text shares the site's reading alignment; figure labels keep their own layout. */
+.tutorial-reader .layout .lesson-main p{
+  text-align:justify;text-align-last:start;text-justify:auto;hyphens:auto;-webkit-hyphens:auto;
+  hyphenate-limit-chars:6 3 3;hyphenate-limit-lines:2;word-break:normal;overflow-wrap:break-word;text-wrap:pretty;
+}
+.tutorial-reader .layout .lesson-main :is(.eyebrow,.byline,.figure-title,.panel-guide,.small,.history-credit,.history-date-line,.history-name,figcaption p){
+  text-align:start;text-align-last:auto;hyphens:manual;-webkit-hyphens:manual;
+}
+@media screen and (max-width:760px){
+  .tutorial-reader>.layout{padding-top:15px}
+  .tutorial-reader .byline{padding-bottom:11px;margin-bottom:14px}
+  .tutorial-reader h2{margin-bottom:12px}
+}
+@media screen and (max-width:360px){.tutorial-hero h1{font-size:22px}}
+
+.tutorial-reader .layout .lesson-main .formula-note{text-align:center;text-align-last:auto;hyphens:manual;-webkit-hyphens:manual}

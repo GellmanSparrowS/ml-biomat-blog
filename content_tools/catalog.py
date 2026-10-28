@@ -32,8 +32,9 @@ def category_cards(items, categories, lang='zh', bilingual=False):
         if not count: continue
         other=sum(p['lang']!=lang and slug in p['categories'] for p in items)
         name=escape(info['name_'+lang]); hint=escape(info['name_en']) if bilingual else ''
+        description=escape(info.get('description_'+lang,''))
         label=(f'{count} 篇 · {other} English' if bilingual else f'{count} 篇' if lang=='zh' else f'{count} articles')
-        result+=f'<a class="post-card catalog-category" href="{category_url(slug,lang)}">'+(f'<span class="card-meta">{hint}</span>' if hint else '')+f'<h3>{name}</h3><span class="card-meta">{label}</span></a>'
+        result+=f'<a class="post-card catalog-category" href="{category_url(slug,lang)}">'+(f'<span class="card-meta">{hint}</span>' if hint else '')+f'<h3>{name}</h3><p class="catalog-scope">{description}</p><span class="card-meta">{label}</span></a>'
     return result+'</div>'
 
 
@@ -56,7 +57,7 @@ def render(items, categories, make_head, make_footer, write_file, base_url):
             if not selected: continue
             # Interleave sources by topic title, without privileging the imported package.
             selected.sort(key=lambda p:p['title'].casefold())
-            name=info['name_'+lang]; count=f'{len(selected)} 篇' if lang=='zh' else f'{len(selected)} articles'
-            body=f'<a class="catalog-breadcrumb" href="{route}">{title} /</a><header class="catalog-header"><h1>{escape(name)}</h1><p>{count}</p></header>'+grid(selected,categories)
+            name=info['name_'+lang]; scope=escape(info.get('description_'+lang,'')); count=f'{len(selected)} 篇' if lang=='zh' else f'{len(selected)} articles'
+            body=f'<a class="catalog-breadcrumb" href="{route}">{title} /</a><header class="catalog-header"><h1>{escape(name)}</h1><p>{scope}</p><span class="catalog-meta">{count}</span></header>'+grid(selected,categories)
             page(name,name+' · '+desc,category_url(slug,lang),body,slug)
     return routes

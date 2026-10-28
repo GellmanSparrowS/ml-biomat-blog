@@ -1,284 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FiberNet — ML-Biomat</title>
-<meta name="description" content="FiberNet: A Python toolkit for fiber network generation, simulation, and intelligent optimization. 12 unit types, GPU acceleration, ML and RL integration.">
+<meta name="description" content="纤维网络生成、建模与分析的 Python 工具包。安装、示例与项目资源。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/fibernet/">
-<link rel="api-catalog" href="/.well-known/api-catalog">
+<link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/fibernet/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/fibernet/en/"><link rel="api-catalog" href="/.well-known/api-catalog">
 <link rel="describedby" type="text/plain" href="/llms.txt">
 <link rel="alternate" type="application/rss+xml" href="/rss.xml">
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="FiberNet">
-<meta property="og:description" content="FiberNet: A Python toolkit for fiber network generation, simulation, and intelligent optimization. 12 unit types, GPU acceleration, ML and RL integration.">
+<meta property="og:description" content="纤维网络生成、建模与分析的 Python 工具包。安装、示例与项目资源。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ml-biomat.com/fibernet/">
 <meta property="og:site_name" content="ML-Biomat">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/fibernet.css?v=0c7373acdec0"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="Home" href="/">Home</a>
-<a data-short-label="Library" href="/fibernet/">Library</a>
-<a data-short-label="Categories" href="/categories/en/">Categories</a>
-<a data-short-label="Profile" href="/about/en/">Profile</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-
-</div></header>
-<main class="container"><article class="fibernet-article"><style>
-.fibernet-article, .fibernet-page, .fibernet-page section > *, .fibernet-page .about-card { min-width:0; }
-.fibernet-page { max-width:880px; width:100%; margin:0 auto; }
-.fn-two-column { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; margin-bottom:2.5rem; }
-.fn-stats-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; }
-.fibernet-hero { text-align:center; padding:3rem 1.5rem 2rem; margin-bottom:2.5rem; background:linear-gradient(160deg,#1e293b 0%,#1e3a5f 50%,#0f172a 100%); border-radius:12px; border:1px solid #334155; box-shadow:0 4px 24px rgba(0,0,0,.15); position:relative; }
-.pip-copy { position:relative; display:inline-block; max-width:480px; width:100%; margin:.3rem 0; }
-.pip-copy pre { background:#0f172a; color:#e2e8f0; border-radius:8px; padding:.8rem 1.2rem; font-family:var(--font-mono); font-size:.88rem; line-height:1.5; text-align:left; margin:0; overflow-x:auto; white-space:pre-wrap; word-break:break-all; }
-.catalog-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:.5rem; margin-bottom:1.5rem; }
-.catalog-item { text-align:center; padding:.6rem .2rem; background:var(--c-code-bg); border-radius:8px; font-size:.72rem; font-weight:600; color:var(--c-fg-soft); transition:transform .15s; }
-.catalog-item:hover { transform:translateY(-1px); }
-.img-full { width:100%; display:block; border-radius:10px; border:1px solid var(--c-border); background:var(--c-code-bg); }
-.img-container { margin-bottom:2rem; }
-.img-caption { text-align:center; font-size:.72rem; color:var(--c-muted); margin-top:.4rem; line-height:1.5; }
-.fn-code { background:var(--c-code-bg); border-radius:8px; padding:1rem 1.2rem; font-family:var(--font-mono); font-size:.78rem; line-height:1.7; overflow-x:auto; }
-.fn-code-sm { background:var(--c-code-bg); border-radius:8px; padding:.9rem 1.1rem; font-family:var(--font-mono); font-size:.76rem; line-height:1.65; overflow-x:auto; }
-.perf-card { text-align:center; padding:.8rem .3rem; background:var(--c-code-bg); border-radius:8px; }
-.perf-card .label { font-size:.72rem; color:var(--c-muted); margin-top:.2rem; }
-@media (max-width:640px) {
-  .catalog-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
-  .fn-two-column { grid-template-columns:minmax(0,1fr); }
-  .fn-stats-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .fibernet-hero { padding:2rem 1rem; }
-}
-</style>
-
-<div class="fibernet-page">
-
-<div class="fibernet-hero">
-<div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem">
-<span style="background:var(--c-primary);color:#fff;padding:.3rem .85rem;border-radius:20px;font-size:.72rem;font-weight:700;font-family:var(--font-mono);letter-spacing:.03em">PyPI 4.2.0</span>
-<span style="background:rgba(168,85,247,.2);color:#c4b5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">12 Shown Units</span>
-<span style="background:rgba(20,184,166,.2);color:#5eead4;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">GPU Accelerated</span>
-<span style="background:rgba(234,179,8,.2);color:#fde68a;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">FEM Simulation</span>
-<span style="background:rgba(59,130,246,.2);color:#93c5fd;padding:.3rem .85rem;border-radius:20px;font-size:.7rem;font-weight:600;font-family:var(--font-mono)">ML + RL Ready</span>
-</div>
-<h1 style="font-size:2.4rem;font-weight:800;letter-spacing:-.025em;color:#f1f5f9;line-height:1.2;margin:.2rem 0">FiberNet</h1>
-<p style="font-size:1rem;color:#cbd5e1;max-width:600px;margin:.4rem auto 0;line-height:1.6">
-Python Toolkit for Fiber Network Design, Simulation &amp; Intelligent Optimization
-</p>
-<p style="font-size:.82rem;color:#94a3b8;max-width:600px;margin:.2rem auto 0">
-纤维网络结构生成、力学模拟与智能优化 &mdash; Python 3.9+ &middot; MIT &middot; Cross-platform
-</p>
-
-<div class="pip-copy">
-<pre>pip install fibernet</pre>
-</div>
-<div class="pip-copy">
-<pre>pip install "fibernet[full]"</pre>
-</div>
-
-<div style="margin-top:1rem;display:flex;gap:.8rem;justify-content:center">
-<a href="https://github.com/GellmanSparrowS/fibernet" target="_blank" rel="noopener" style="padding:.55rem 1.3rem;background:var(--c-primary);color:#fff;border-radius:6px;font-weight:600;font-size:.85rem;text-decoration:none">GitHub</a>
-<a href="https://pypi.org/project/fibernet/" target="_blank" rel="noopener" style="padding:.55rem 1.3rem;background:var(--c-accent);color:#fff;border-radius:6px;font-weight:600;font-size:.85rem;text-decoration:none">PyPI</a>
-</div>
-</div>
-
-<section class="fn-stats-grid" style="margin-bottom:2.5rem">
-<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-primary)">12</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Shown Units / 展示基元</div></div>
-<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-primary)">94</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">ML Features / ML 特征维度</div></div>
-<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-accent)">368D</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Example Space / 示例参数空间</div></div>
-<div style="text-align:center;padding:1rem .5rem;background:var(--c-surface);border:1px solid var(--c-border);border-radius:10px"><div style="font-size:1.6rem;font-weight:800;color:var(--c-accent)">3</div><div style="font-size:.72rem;color:var(--c-muted);margin-top:.2rem">Platforms / 平台</div></div>
-</section>
-
+<nav class="nav-links" aria-label="主导航"><a data-nav="home" data-short-label="首页" href="/">首页</a><a data-nav="library" data-short-label="工具库" href="/fibernet/" class="active" aria-current="page">工具库</a><a data-nav="categories" data-short-label="分类" href="/categories/">分类</a><a data-nav="profile" data-short-label="个人主页" href="/about/">个人主页</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="搜索…" aria-label="搜索…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="切换到亮色" title="切换到亮色">☀</button>
+<span class="lang-switch"><a data-language="en" href="/fibernet/en/">EN</a><a data-language="zh" href="/fibernet/" class="active" aria-current="true">中文</a></span>
+</div></header><main class="container container-wide"><article class="fibernet-article" lang="zh"><div class="fibernet-page">
+<header class="fn-hero">
+<div class="fn-release">已发布 4.2.0 · Python 3.9+ · MIT</div><h1>FiberNet</h1>
+<p class="fn-lead">纤维网络结构生成、分析与力学建模</p><p class="fn-intro">用 Python 构建纤维网络，分析几何与连接关系，选择力学模型，并保存结构与计算结果。FiberScope 提供同一项目中的桌面交互界面。</p>
+<nav class="fn-actions" aria-label="项目入口"><a href="#fibernet-install">安装与示例</a><a href="https://github.com/GellmanSparrowS/fibernet" target="_blank" rel="noopener">GitHub 源码</a><a href="https://github.com/GellmanSparrowS/fibernet/releases/tag/v4.2.0" target="_blank" rel="noopener">FiberScope 桌面版</a></nav>
+<p class="fn-language"><a href="/fibernet/en/" lang="en" hreflang="en">English version</a></p>
+</header>
 <section class="fn-two-column">
-<div class="about-card">
-<h2>What is FiberNet? / 是什么</h2>
-<p style="font-size:.9rem;line-height:1.85;color:var(--c-fg-soft);text-align:justify">
-A research-grade Python toolkit for <strong>computational design of fiber network metamaterials</strong>. Python APIs support parametric generation, simulation, feature extraction, machine learning prediction, and optimization workflows.
-</p>
-<p style="font-size:.88rem;line-height:1.85;color:var(--c-fg-soft);margin-top:.5rem;text-align:justify">
-面向纤维网络超材料计算设计的 Python 工具包。通过 Python API 开展参数化生成、力学模拟、特征提取、机器学习预测与结构优化。
-</p>
-<p style="font-size:.78rem;color:var(--c-muted);margin-top:.8rem">
-BMG-FDU, Fudan University / 复旦大学 生物大分子课题组
-</p>
-</div>
-<div class="about-card">
-<h2>Why FiberNet? / 为什么选择</h2>
-<ul style="line-height:2.1;font-size:.88rem;list-style:none;padding:0">
-<li><strong>One-line APIs</strong> — generate, simulate, predict, optimize in a single call<br><span style="font-size:.76rem;color:var(--c-muted)">一行代码完成生成、模拟、预测、优化</span></li>
-<li><strong>GPU acceleration</strong> — simulation through the optional Taichi backend<br><span style="font-size:.76rem;color:var(--c-muted)">GPU 加速大规模结构模拟</span></li>
-<li><strong>Parametric design</strong> — continuous parameter space for inverse design and optimization<br><span style="font-size:.76rem;color:var(--c-muted)">连续参数空间支持逆向设计与优化</span></li>
-<li><strong>Rich features</strong> — structural, topological, and mechanical descriptors out of the box<br><span style="font-size:.76rem;color:var(--c-muted)">内置结构、拓扑与力学特征描述符</span></li>
-</ul>
-</div>
+<div class="fn-panel"><h2>Python 工具库</h2><p>FiberNet 以节点和连边组织结构数据，将结构生成、分析、模拟和导出连接到可复用的 Python 工作流。</p><ul><li>二维与三维结构生成，节点、连边及纤维半径管理。</li><li>平面结构快照、孔隙分布与给定轨迹上的拉伸招募分析。</li><li>梁框架 FEM，以及按需安装的其他计算后端。</li><li>原生图与结果保存，配合示例开展后续分析。</li></ul></div>
+<div class="fn-panel"><h2>FiberScope 桌面界面</h2><p>公开的 4.2.0 发行页同时提供 FiberScope 3.1.0 Windows 下载。桌面界面用于几何配置、结构查看、轨迹回放与导出；下载包自带运行环境。</p><p class="fn-note">Python 库与桌面应用各有对应入口。选用具体计算或导出功能时，可从发行版文档查看输入、模型和依赖。</p></div>
 </section>
+<section class="fn-section" id="fibernet-install"><h2>安装 4.2.0</h2><p>核心安装包含 NumPy、SciPy、NetworkX 和 Matplotlib。按工作流添加机器学习、三维显示或几何导出依赖。</p><pre><code class="language-bash">python -m pip install &quot;fibernet==4.2.0&quot;</code></pre>
+<details class="fn-archive"><summary>可选依赖</summary><pre><code class="language-bash">python -m pip install &quot;fibernet[ml]==4.2.0&quot;  # 机器学习
+python -m pip install &quot;fibernet[viz]==4.2.0&quot;  # 三维显示
+python -m pip install &quot;fibernet[manufacturing]==4.2.0&quot;  # 几何与实体导出</code></pre><p class="fn-note">ml 对应机器学习工具；viz 对应 PyVista 三维显示；manufacturing 对应实体几何与导出工具。Taichi 后端可另装 accel 扩展。</p></details></section>
+<section class="fn-section"><h2>生成并查看结构</h2><pre><code class="language-python">import fibernet as fn
 
-<section style="margin-bottom:2.5rem">
-<h2 style="text-align:center;font-size:1.05rem;margin-bottom:1rem">Structure Catalog / 结构目录</h2>
-<div class="catalog-grid">
-<div class="catalog-item">Square<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">正方</span></div><div class="catalog-item">Triangle<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">三角</span></div><div class="catalog-item">Hexagon<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">六边</span></div><div class="catalog-item">Honeycomb<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">蜂窝</span></div><div class="catalog-item">Kagome<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">笼目</span></div><div class="catalog-item">Voronoi<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">泰森多边形</span></div><div class="catalog-item">Chiral<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">手性</span></div><div class="catalog-item">Reentrant<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">凹角</span></div><div class="catalog-item">Star<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">星形</span></div><div class="catalog-item">Cross<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">十字</span></div><div class="catalog-item">Diamond<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">钻石</span></div><div class="catalog-item">Missing Rib<br><span style="font-size:.62rem;color:var(--c-muted);font-weight:400">缺肋</span></div>
-</div>
-<div class="img-container">
-<img src="/static/images/fibernet/01_2d_gallery.webp" width="1600" height="1237" alt="Structure Gallery" class="img-full" loading="lazy" decoding="async">
-<p class="img-caption">12 unit types across 6 architecture families / 12种基元，6大结构家族</p>
-</div>
+# 坐标和半径：米
+graph = fn.pattern_2d(
+    unit=&quot;honeycomb&quot;, box=(0.01, 0.01), grid=(2, 2),
+    radius=0.00005, seed=23,
+)
+fn.show(graph)</code></pre><p class="fn-note">示例采用 SI 单位：坐标与半径为米，下面 FEM 的弹性模量为 Pa。参数用于展示接口衔接。</p></section>
+<section class="fn-section"><h2>小变形计算与保存</h2><p>沿用上面的 graph，显式选择梁框架 FEM 和线性求解，再保存输入图与计算结果。</p><pre><code class="language-python"># 弹性模量：Pa；strain 为目标伸长比
+result = fn.simulate(
+    graph, backend=&quot;fem&quot;, mode=&quot;stretch&quot;, strain=1.01,
+    nonlinear=False, E=1e9, nu=0.3,
+)
+print(result.max_displacement)
+
+graph.save_json(&quot;network.json&quot;)
+result.save(&quot;fem_result.json&quot;)</code></pre><p class="fn-note">4.2.0 接口中的 strain 表示目标伸长比；1.01 对应 1% 伸长。nonlinear=False 选择线性求解，max_displacement 的单位为米。</p></section>
+<section class="fn-section"><h2>继续使用</h2><div class="fn-two-column"><div class="fn-panel"><h2>结构分析与学习</h2><p>SnapshotFeatureExtractor 用于平面结构快照分析；analyze_tensile_recruitment 分析已给定的边应变轨迹。物理标签生成、回归建模和目标曲线搜索分别有独立示例。</p><div class="fn-source-list"><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/examples/snapshot_features_workflow.py" target="_blank" rel="noopener">快照分析示例</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/examples/physical_learning_workflow.py" target="_blank" rel="noopener">物理学习示例</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/examples/curve_inverse_workflow.py" target="_blank" rel="noopener">目标曲线搜索</a></div></div><div class="fn-panel"><h2>几何路径与导出</h2><p>制造几何接口用于构建平面或曲面上的连续路径，并支持自定义基元。实体与路径文件导出接入相应可选依赖；坐标单位和路径顺序随输入一起管理。</p><div class="fn-source-list"><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/examples/manufacturing_workflow.py" target="_blank" rel="noopener">路径生成示例</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/examples/solid_export_workflow.py" target="_blank" rel="noopener">实体导出示例</a></div></div></div></section>
+<section class="fn-section"><h2>结构与历史图例</h2><p>以下保留项目早期版本的结构和计算图例，并链接到 4.2.0 源仓库中的原图。安装与代码示例采用上面的发行版接口。</p>
+<details class="fn-archive" open><summary>二维结构图集</summary><figure class="fn-figure"><img src="/static/images/fibernet/01_2d_gallery.webp" width="1600" height="1237" alt="早期二维图集中的 12 种结构示例。图内的 v3 标记保留原图版本。" loading="lazy" decoding="async"><figcaption>早期二维图集中的 12 种结构示例。图内的 v3 标记保留原图版本。 <a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/images/01_2d_gallery.png" target="_blank" rel="noopener">源图</a></figcaption></figure></details>
+<details class="fn-archive"><summary>力学计算图例</summary><figure class="fn-figure"><img src="/static/images/fibernet/05_trajectory_dark.webp" width="1600" height="775" alt="蜂窝网络的 8 个保存帧；颜色表示边的伸长比。" loading="lazy" decoding="async"><figcaption>蜂窝网络的 8 个保存帧；颜色表示边的伸长比。 <a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/images/05_trajectory_dark.png" target="_blank" rel="noopener">源图</a></figcaption></figure><figure class="fn-figure"><img src="/static/images/fibernet/fem_showcase_dark.webp" width="1200" height="983" alt="旧版梁框架计算示例；颜色对应当时的 sigma_total 输出。" loading="lazy" decoding="async"><figcaption>旧版梁框架计算示例；颜色对应当时的 sigma_total 输出。 <a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/images/fem_showcase_dark.png" target="_blank" rel="noopener">源图</a></figcaption></figure><figure class="fn-figure"><img src="/static/images/fibernet/voronoi_1.5x_auto.webp" width="1600" height="825" alt="旧版 Voronoi 网络在目标伸长比 1.5 下的计算图例。" loading="lazy" decoding="async"><figcaption>旧版 Voronoi 网络在目标伸长比 1.5 下的计算图例。 <a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/images/voronoi_1.5x_auto.png" target="_blank" rel="noopener">源图</a></figcaption></figure></details>
+<details class="fn-archive"><summary>学习与搜索图例</summary><figure class="fn-figure"><img src="/static/images/fibernet/09_ml_analysis_dark.webp" width="1600" height="1398" alt="旧版分类评价面板：混淆矩阵、ROC、特征重要性与学习曲线。" loading="lazy" decoding="async"><figcaption>旧版分类评价面板：混淆矩阵、ROC、特征重要性与学习曲线。 <a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/images/09_ml_analysis_dark.png" target="_blank" rel="noopener">源图</a></figcaption></figure><figure class="fn-figure"><img src="/static/images/fibernet/11_rl_reward_dark.webp" width="1600" height="623" alt="CEM 搜索过程的历史图例，展示每轮目标值和当前最优值。" loading="lazy" decoding="async"><figcaption>CEM 搜索过程的历史图例，展示每轮目标值和当前最优值。 <a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/images/11_rl_reward_dark.png" target="_blank" rel="noopener">源图</a></figcaption></figure></details>
 </section>
-
-<section style="margin-bottom:2.5rem">
-<h2 style="text-align:center;font-size:1.05rem;margin-bottom:1rem">Showcase / 展示</h2>
-
-<div class="img-container">
-<img src="/static/images/fibernet/05_trajectory_dark.webp" width="1600" height="775" alt="Deformation Trajectory" class="img-full" loading="lazy" decoding="async">
-<p class="img-caption">8-frame deformation trajectory: honeycomb under stretch, colored by edge stretch ratio / 蜂窝拉伸8帧形变轨迹</p>
-</div>
-
-<div class="img-container">
-<img src="/static/images/fibernet/fem_showcase_dark.webp" width="1200" height="983" alt="FEM Deformation Showcase" class="img-full" loading="lazy" decoding="async">
-<p class="img-caption">Beam Frame FEM: uniaxial stretch (2x) and compression (0.5x) across topologies and fiber radii. Bright color = high von Mises stress. Welded frames with radius-dependent bending stiffness. / Euler-Bernoulli梁框架FEM：拉伸(2倍)与压缩(0.5倍)模拟，亮色=高von Mises应力</p>
-</div>
-
-<div class="img-container">
-<img src="/static/images/fibernet/voronoi_1.5x_auto.webp" width="1600" height="825" alt="Voronoi Stretch" class="img-full" loading="lazy" decoding="async">
-<p class="img-caption">Voronoi structure under 1.5x uniaxial stretch &mdash; deformation and stress distribution / Voronoi 结构 1.5 倍单轴拉伸</p>
-</div>
-
-<div class="img-container">
-<img src="/static/images/fibernet/09_ml_analysis_dark.webp" width="1600" height="1398" alt="ML Analysis" class="img-full" loading="lazy" decoding="async">
-<p class="img-caption">Machine learning analysis: confusion matrix, ROC curves, and learning curves / 机器学习分析面板</p>
-</div>
-
-<div class="img-container">
-<img src="/static/images/fibernet/11_rl_reward_dark.webp" width="1600" height="623" alt="RL Reward" class="img-full" loading="lazy" decoding="async">
-<p class="img-caption">Reinforcement learning: reward per episode with monotonically increasing best reward / 强化学习训练曲线</p>
-</div>
-</section>
-
-<section style="display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:2.5rem">
-<div class="about-card">
-<h2>One-Line API / 一行代码</h2>
-<pre><code class="language-python">
-import fibernet as fn
-
-g = fn.pattern_2d(unit="honeycomb", grid=(4,4))
-fn.show(g)
-r = fn.simulate(g, mode="stretch", strain=1.5)
-result = fn.predict_from_csv("data.csv", target="max_force")
-best = fn.run_bayesian_optimization(obj, space, n_iter=50)
-</code></pre>
-</div>
-<div class="about-card">
-<h2>FEM Quick Start / FEM 快速开始</h2>
-<pre><code class="language-python">
-import fibernet as fn
-from fibernet.ml import BeamFrameFEM
-
-solver = BeamFrameFEM(E=1e9, nu=0.3)
-g = fn.pattern_2d(unit="honeycomb", box=(10, 10), grid=(4, 4), radius=0.05)
-result = solver.stretch_test(g, target_stretch=2.0)
-
-print(f"Max stress: {result['sigma_total'].max()/1e6:.1f} MPa")
-print(f"Max displacement: {result['max_displacement']:.4f} m")
-</code></pre>
-<p style="font-size:.78rem;color:var(--c-muted);margin-bottom:1.5rem">Euler-Bernoulli beam frame FEM with welded joints. Stretch and compression tests on any topology. / 欧拉-伯努利梁框架FEM，支持任意拓扑的拉伸与压缩测试。</p>
-</div>
-<div class="about-card">
-<h2>Installation / 安装</h2>
-<pre><code class="language-bash">
-pip install fibernet            # Core / 核心
-pip install "fibernet[full]"      # ML + RL + Viz + Accel
-pip install "fibernet[ml]"        # scikit-learn, pandas
-pip install "fibernet[rl]"        # gymnasium, scikit-optimize
-pip install "fibernet[accel]"     # taichi (GPU)
-pip install "fibernet[viz]"       # pyvista (3D)
-</code></pre>
-<h3 style="font-size:.88rem;margin:1rem 0 .4rem">Platforms / 平台</h3>
-<table style="width:100%;font-size:.82rem;border-collapse:collapse">
-<tr><td style="padding:.3rem 0">Ubuntu / macOS / Windows</td><td style="padding:.3rem 0;text-align:right;color:var(--c-accent);font-weight:600">Python 3.9 &ndash; 3.12</td></tr>
-</table>
-</div>
-</section>
-
-<section class="fn-two-column">
-<div class="about-card">
-<h2>Machine Learning / 机器学习</h2>
-<p style="font-size:.85rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem;text-align:justify">
-Built-in feature extraction produces 94-dimensional structural descriptors. <code>predict_from_csv()</code> handles the full pipeline: train/test split, nested cross-validation, model comparison, and visualization — all in one call.
-</p>
-<p style="font-size:.78rem;color:var(--c-muted)">
-内置特征提取生成94维结构描述符，一行完成训练、交叉验证、模型对比与可视化。
-</p>
-</div>
-<div class="about-card">
-<h2>Reinforcement Learning / 强化学习</h2>
-<p style="font-size:.85rem;color:var(--c-fg-soft);line-height:1.8;margin-bottom:.6rem;text-align:justify">
-Built-in optimization engines over a continuous parametric action space of internal node displacements. Automatically closes the loop: generate new structures, simulate their properties, evaluate the objective, and update parameters.
-</p>
-<p style="font-size:.78rem;color:var(--c-muted)">
-内置优化引擎在连续参数空间中自动搜索最优结构，闭环完成生成、模拟、评估、更新。
-</p>
-</div>
-</section>
-
-<section style="margin-bottom:2.5rem">
-<h2 style="text-align:center;font-size:1.05rem;margin-bottom:1rem">Complete Pipeline / 完整流水线</h2>
-<pre><code class="language-python">
-import fibernet as fn
-import numpy as np
-
-# 1. Parametric structure generation
-displacements = [(np.random.uniform(-0.3,0.3), np.random.uniform(-0.3,0.3))
-                 for _ in range(20)]
-g = fn.pattern_2d(unit="square", grid=(3,3), n_pts_per_side=5,
-                  point_displacements=displacements)
-
-# 2. GPU-accelerated simulation with trajectory recording
-engine = fn.TaichiEngine()
-r = engine.stretch_test(g, target_stretch=1.5, stiffness=1e5, num_steps=5000)
-
-# 3. Multi-frame stress visualization
-fig = fn.render_trajectory(g, r.positions_trajectory, r.edge_stretches, n_frames=6)
-
-# 4. Feature extraction (94-dim vector)
-features = fn.GraphFeatureExtractor().extract(g)
-
-# 5. Node manipulation for optimization
-g.displace_node(g.get_internal_nodes()[0], [0.1, 0.2])
-</code></pre>
-
-<div class="fn-stats-grid" style="margin-top:1.5rem">
-<div class="perf-card"><div class="label">Generation<br><span style="font-size:.62rem">生成</span></div></div>
-<div class="perf-card"><div class="label">Simulation<br><span style="font-size:.62rem">模拟</span></div></div>
-<div class="perf-card"><div class="label">Machine Learning<br><span style="font-size:.62rem">机器学习</span></div></div>
-<div class="perf-card"><div class="label">Optimization<br><span style="font-size:.62rem">优化</span></div></div>
-</div>
-</section>
-
-<p style="text-align:center;font-size:.78rem;color:var(--c-muted);margin-top:2rem">
-Under active development. Full tutorial at <a href="https://github.com/GellmanSparrowS/fibernet/tree/main/tutorials/v4_tutorial" target="_blank" rel="noopener">tutorials/v4_tutorial/</a>.
-<span style="display:block;margin-top:.2rem">积极开发中。完整教程见 <a href="https://github.com/GellmanSparrowS/fibernet/tree/main/tutorials/v4_tutorial" target="_blank" rel="noopener">tutorials/v4_tutorial/</a>。</span>
-</p>
-
-</div></article></main>
+<section class="fn-section"><h2>版本资料与示例</h2><div class="fn-source-list"><a href="https://pypi.org/project/fibernet/4.2.0/" target="_blank" rel="noopener">PyPI 4.2.0</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/RELEASE_4_2_0.md" target="_blank" rel="noopener">4.2.0 发行说明</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/quickstart.rst" target="_blank" rel="noopener">快速开始</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/METHODS_BEAM_FEM_CONTRACT.md" target="_blank" rel="noopener">梁 FEM 模型与单位</a><a href="https://github.com/GellmanSparrowS/fibernet/tree/v4.2.0/examples" target="_blank" rel="noopener">示例目录</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/tutorials/complete_tutorial_v4.ipynb" target="_blank" rel="noopener">完整 Notebook 教程</a></div></section>
+</div></article>
+</main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/">个人主页</a><a href="/fibernet/">工具库</a><a href="/categories/">分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">交互工具</a><a href="/sitemap.xml">站点地图</a><a href="/privacy/">隐私政策</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 </body>
 </html>

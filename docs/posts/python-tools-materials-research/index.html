@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Python Tools for Scientific Computing in Materials Research — ML-Biomat</title>
 <meta name="description" content="Connect NumPy, SciPy, pandas, plotting libraries, atomistic tools, and image analysis to common materials-research tasks. Follow examples of force-curve processing, grouped statistics, microscopy segmentation, and predictive modeling.">
@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
 <meta property="og:title" content="Python Tools for Scientific Computing in Materials Research">
 <meta property="og:description" content="Connect NumPy, SciPy, pandas, plotting libraries, atomistic tools, and image analysis to common materials-research tasks. Follow examples of force-curve processing, grouped statistics, microscopy segmentation, and predictive modeling.">
 <meta property="og:type" content="article">
@@ -21,33 +21,27 @@
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/python-tools-materials-research.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python Tools for Scientific Computing in Materials Research", "description": "Connect NumPy, SciPy, pandas, plotting libraries, atomistic tools, and image analysis to common materials-research tasks. Follow examples of force-curve processing, grouped statistics, microscopy segmentation, and predictive modeling.", "datePublished": "2026-06-25", "dateModified": "2026-10-28", "wordCount": 490, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/python-tools-materials-research/", "image": "https://ml-biomat.com/static/images/og/python-tools-materials-research.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "Python Tools for Scientific Computing in Materials Research", "item": "https://ml-biomat.com/posts/python-tools-materials-research/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python Tools for Scientific Computing in Materials Research", "description": "Connect NumPy, SciPy, pandas, plotting libraries, atomistic tools, and image analysis to common materials-research tasks. Follow examples of force-curve processing, grouped statistics, microscopy segmentation, and predictive modeling.", "datePublished": "2026-06-25", "dateModified": "2026-10-28", "wordCount": 490, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/python-tools-materials-research/", "image": "https://ml-biomat.com/static/images/og/python-tools-materials-research.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Scientific Computing with Python", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "Python Tools for Scientific Computing in Materials Research", "item": "https://ml-biomat.com/posts/python-tools-materials-research/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
-<a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
-<nav class="nav-links">
-<a data-short-label="Home" href="/">Home</a>
-<a data-short-label="Library" href="/fibernet/">Library</a>
-<a data-short-label="Categories" href="/categories/en/">Categories</a>
-<a data-short-label="Profile" href="/about/en/">Profile</a>
-</nav>
-<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
-<span class="lang-switch"><a href="/posts/python-tools-materials-research/" class="active">EN</a><a href="/posts/python-tools-materials-research-zh/">中文</a></span>
-</div></header>
-<main class="container"><article>
+<a href="/en/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links" aria-label="Main navigation"><a data-nav="home" data-short-label="Home" href="/en/">Home</a><a data-nav="library" data-short-label="Library" href="/fibernet/en/">Library</a><a data-nav="categories" data-short-label="Categories" href="/categories/en/" class="active" aria-current="page">Categories</a><a data-nav="profile" data-short-label="Profile" href="/about/en/">Profile</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="Search…" aria-label="Search…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
+<span class="lang-switch"><a data-language="en" href="/posts/python-tools-materials-research/" class="active" aria-current="true">EN</a><a data-language="zh" href="/posts/python-tools-materials-research-zh/">中文</a></span>
+</div></header><main class="container"><article><nav class="article-breadcrumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/python-tutorials/en/">Scientific Computing with Python</a></nav>
 <header class="article-header">
 <span class="lang-badge en">EN</span>
 <h1>Python Tools for Scientific Computing in Materials Research</h1>
 <div class="article-meta">
-<span>2026-06-25</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Python Tutorials</a>
+<span>2026-06-25</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Scientific Computing with Python</a>
 </div>
 </header>
-<div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/numpy/">numpy</a><a class="tag-pill" href="/tags/scipy/">scipy</a><a class="tag-pill" href="/tags/materials-science/">materials-science</a><a class="tag-pill" href="/tags/data-analysis/">data-analysis</a><a class="tag-pill" href="/tags/visualization/">visualization</a></div>
+<div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/python/en/">python</a><a class="tag-pill" href="/tags/numpy/en/">numpy</a><a class="tag-pill" href="/tags/scipy/en/">scipy</a><a class="tag-pill" href="/tags/materials-science/en/">materials-science</a><a class="tag-pill" href="/tags/data-analysis/en/">data-analysis</a><a class="tag-pill" href="/tags/visualization/en/">visualization</a></div>
 <div class="content">
 <details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-python-for-materials-science">Why Python for Materials Science</a></li><li class="toc-h2"><a href="#core-scientific-stack">Core Scientific Stack</a></li><li class="toc-h3"><a href="#the-core-stack">The Core Stack</a></li><li class="toc-h3"><a href="#numpy-scipy">NumPy & SciPy</a></li><li class="toc-h3"><a href="#pandas">Pandas</a></li><li class="toc-h3"><a href="#matplotlib-seaborn">Matplotlib & Seaborn</a></li><li class="toc-h3"><a href="#materials-specific-libraries">Materials-Specific Libraries</a></li><li class="toc-h3"><a href="#ase-atomic-simulation-environment">ASE (Atomic Simulation Environment)</a></li><li class="toc-h3"><a href="#pymatgen-python-materials-genomics">pymatgen (Python Materials Genomics)</a></li><li class="toc-h2"><a href="#analysis-and-machine-learning">Analysis and Machine Learning</a></li><li class="toc-h3"><a href="#machine-learning-for-materials">Machine Learning for Materials</a></li><li class="toc-h3"><a href="#scikit-learn-your-first-ml-model">scikit-learn — Your First ML Model</a></li><li class="toc-h3"><a href="#feature-importance-what-drives-performance">Feature Importance — What Drives Performance?</a></li><li class="toc-h3"><a href="#image-analysis-for-microscopy">Image Analysis for Microscopy</a></li><li class="toc-h2"><a href="#workflow-and-setup">Workflow and Setup</a></li><li class="toc-h3"><a href="#putting-it-together-a-research-workflow">Putting It Together: A Research Workflow</a></li><li class="toc-h3"><a href="#quick-setup">Quick Setup</a></li><li class="toc-h2"><a href="#what-s-next">What's Next</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-python-for-materials-science">Why Python for Materials Science</h2>
 
@@ -284,7 +278,7 @@ conda activate matsci
     data-reactions-enabled="1"
     data-emit-metadata="0"
     data-input-position="bottom"
-    data-theme="preferred_color_scheme"
+    data-theme="dark"
     data-lang="en"
     crossorigin="anonymous"
     async>
@@ -292,12 +286,10 @@ conda activate matsci
 </section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
-<div class="footer-links">
-<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
-</div>
+<div class="footer-links"><a href="/about/en/">Profile</a><a href="/fibernet/en/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/en/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/en/">Privacy</a></div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
-<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=ecd090426095" defer></script>
+<button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=710f6dc90a82" defer></script>
 </body>
 </html>
