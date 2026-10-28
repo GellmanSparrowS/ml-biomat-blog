@@ -2,6 +2,7 @@
 (function(){
 // === CODE COPY (always visible, icon-style) ===
 document.addEventListener('DOMContentLoaded', function(){
+    if(document.querySelector('.tutorial-reader')) return;
     if(window.hljs){window.hljs.highlightAll();}
     document.querySelectorAll('pre').forEach(function(block){
         var wrapper = document.createElement('div');
@@ -57,7 +58,7 @@ function doSearch(q){
         } else {
             resultsEl.innerHTML = results.map(function(p){
                 var tags = (p.tags||[]).slice(0,3).map(function(t){ return '<span class="tag-pill">'+t+'</span>'; }).join('');
-                return '<a class="post-card" href="/posts/'+p.slug+'/" style="text-decoration:none;display:block"><span class="card-lang '+p.lang+'">'+(p.lang==='en'?'EN':'\u4e2d\u6587')+'</span><h3>'+p.title+'</h3><p class="card-desc">'+(p.description||'')+'</p><div class="card-tags">'+tags+'</div></a>';
+                return '<a class="post-card" href="'+(p.url||('/posts/'+p.slug+'/'))+'" style="text-decoration:none;display:block"><span class="card-lang '+p.lang+'">'+(p.lang==='en'?'EN':'\u4e2d\u6587')+'</span><h3>'+p.title+'</h3><p class="card-desc">'+(p.description||'')+'</p><div class="card-tags">'+tags+'</div></a>';
             }).join('');
         }
     }
@@ -119,7 +120,7 @@ function showDropdown(results, q){
         dd.innerHTML = '<div class="search-item" style="color:var(--c-muted)">No results</div>';
     } else {
         dd.innerHTML = results.map(function(p){
-            return '<a class="search-item" href="/posts/'+p.slug+'/"><strong>'+p.title+'</strong><span style="font-size:.75rem;color:var(--c-muted);display:block">'+(p.description||'')+'</span></a>';
+            return '<a class="search-item" href="'+(p.url||('/posts/'+p.slug+'/'))+'"><strong>'+p.title+'</strong><span style="font-size:.75rem;color:var(--c-muted);display:block">'+(p.description||'')+'</span></a>';
         }).join('');
     }
     dd.style.display = 'block';
@@ -182,6 +183,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
 // === IMAGE ZOOM (medium-zoom) ===
 (function(){
+    if(document.querySelector('.tutorial-reader')) return;
     var script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js';
     script.onload = function(){

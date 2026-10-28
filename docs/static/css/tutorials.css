@@ -1,0 +1,280 @@
+/* Tutorial catalogue and reading layout; all rules stay within tutorial surfaces. */
+main.tutorial-container{max-width:1240px;width:100%;padding:0 28px;min-width:0}
+.tutorial-toolbar{display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;padding:22px 0;border-bottom:1px solid var(--c-border);font-size:13px;line-height:1.6}
+.tutorial-toolbar .tutorial-crumb{color:var(--c-fg-soft);overflow-wrap:anywhere}
+.tutorial-toolbar .tutorial-crumb:hover{color:var(--c-primary)}
+.tutorial-toolbar #font-toggle{margin-left:auto}
+.tutorial-toolbar button,.tutorial-download,.tutorial-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 13px;border:1px solid var(--c-border);border-radius:5px;background:var(--c-surface);color:var(--c-primary);font:600 13px/1.5 var(--font-sans);text-decoration:none;cursor:pointer}
+.tutorial-toolbar button:hover,.tutorial-download:hover,.tutorial-actions a:hover{border-color:var(--c-primary);background:var(--c-primary-soft)}
+.tutorial-reader{--paper:var(--c-surface);--ink:var(--c-fg);--muted:var(--c-fg-soft);--green:var(--c-primary);--orange:var(--c-accent);--blue:var(--c-primary);--line:var(--c-border);--pale:var(--c-primary-soft);--cream:var(--c-accent-soft);--body:17px;background:transparent;color:var(--ink);font:var(--body)/1.95 var(--font-sans);min-width:0;overflow-wrap:break-word}
+.tutorial-reader.large{--body:19px}
+.tutorial-reader>.layout{display:grid;grid-template-columns:192px minmax(0,860px);gap:44px;max-width:1100px;margin:0 auto;padding:36px 0 56px}
+.tutorial-reader .layout>*{min-width:0}
+.tutorial-reader .lesson-main{min-width:0;max-width:100%;padding:0}
+.tutorial-reader aside{position:sticky;top:90px;align-self:start;max-height:calc(100vh - 112px);max-height:calc(100dvh - 112px);overflow:auto;scrollbar-width:thin;font-size:13px;line-height:1.7}
+.tutorial-reader aside .lesson-label{font-size:12px;line-height:1.7;letter-spacing:.015em;color:var(--muted);margin:0 0 18px;text-align:left}
+.tutorial-reader aside nav{display:grid;gap:5px;border-left:1px solid var(--line);padding-left:14px}
+.tutorial-reader aside nav a{display:block;padding:5px 0;color:var(--muted);font-size:13px;line-height:1.65;text-decoration:none;overflow-wrap:anywhere}
+.tutorial-reader aside nav a:hover,.tutorial-reader aside nav a.active{color:var(--green)}
+.tutorial-reader .side-note{font-size:12px;line-height:1.8;margin-top:22px;color:var(--muted);text-align:left}
+.tutorial-reader .eyebrow{font-size:13px;line-height:1.7;letter-spacing:.03em;margin:0 0 12px}
+.tutorial-reader h1{font:700 36px/1.35 var(--font-sans);letter-spacing:0;margin:0 0 19px;overflow-wrap:anywhere}
+.tutorial-reader h1 span{font-size:.78em;line-height:1.5;margin-top:7px;color:var(--green)}
+.tutorial-reader .byline{font-size:13px;line-height:1.8;color:var(--muted);padding-bottom:20px;margin-bottom:24px}
+.tutorial-reader p{font-size:inherit;line-height:inherit;text-align:left;margin:0 0 20px;overflow-wrap:anywhere}
+.tutorial-reader .lead{font-size:1.06em;line-height:1.95}
+.tutorial-reader section{margin-top:52px;padding-top:8px;scroll-margin-top:92px}
+.tutorial-reader h2{font-size:25px;line-height:1.5;gap:13px;margin:0 0 23px;color:var(--ink)}
+.tutorial-reader h2 .num{font-size:13px;color:var(--green)}
+.tutorial-reader h3{font-size:20px;line-height:1.6;margin:27px 0 14px;color:var(--ink)}
+.tutorial-reader .lesson-main p a{ text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.tutorial-reader .bridge{color:var(--muted);padding-left:20px;margin:24px 0;border-left-color:var(--green)}
+.tutorial-reader .close{font-size:1.06em;color:var(--green)}
+.tutorial-reader .exercise{color:var(--ink);background:var(--cream);padding:22px 24px;border-left-color:var(--orange)}
+.tutorial-reader .references{font-size:14px;line-height:1.85;color:var(--muted);margin-top:42px;padding-top:22px}
+.tutorial-reader .references p,.tutorial-reader .references li{font-size:14px;line-height:1.85}
+.tutorial-reader :is(ul,ol){padding-left:1.5em}
+.tutorial-reader :is(button,input,select){max-width:100%;font-family:var(--font-sans)}
+.tutorial-reader :is(button,select){min-height:40px;font-size:14px;padding:8px 12px;background:var(--paper);color:var(--ink);border-color:var(--line)}
+.tutorial-reader input:not([type=range]):not([type=checkbox]){min-height:38px;padding:5px 8px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:4px}
+.tutorial-reader input[type=range]{min-height:32px;accent-color:var(--green)}
+.tutorial-reader :is(.control-grid,.two-figs,.result-grid,.experimental-grid)>*{min-width:0}
+.tutorial-reader .buttons{gap:8px;flex-wrap:wrap}
+.tutorial-reader .control-grid{gap:16px 22px}
+.tutorial-reader .control-grid label{font-size:14px;line-height:1.8}
+.tutorial-reader .theta-control{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.tutorial-reader .theta-control input{min-width:0;max-width:100%}
+.tutorial-reader .stats{gap:14px 24px;font-size:14px}
+.tutorial-reader .stats :is(output,strong){font-size:21px}
+
+/* Scientific plates keep their original light palette in both site themes. */
+.tutorial-reader :is(.figure,.formula,.history-figure,.result-panel,.chart-panel,.svg-scroll,.experimental-panel){--paper:#ffffff;--ink:#203337;--muted:#52646b;--green:#006b61;--orange:#ad4a24;--blue:#365e9a;--line:#d4dfdd;--pale:#edf3ef;--cream:#f7eddd;color:var(--ink);background:#fff;color-scheme:light}
+.tutorial-reader .figure{margin:30px 0;padding:22px;border-top:2px solid #217d74;border-bottom:1px solid #d4dfdd;border-radius:0}
+.tutorial-reader .history-figure{background:#f6f5f0;border-top-color:#ae784d}
+.tutorial-reader .figure-title{font-size:16px;line-height:1.7;margin-bottom:15px;color:#203337}
+.tutorial-reader .figure :is(h2,h3){color:#203337}
+.tutorial-reader .figure svg text{fill:var(--ink)}
+.tutorial-reader .lesson-main img{max-width:100%;height:auto;object-fit:contain;opacity:1}
+.tutorial-reader :is(.history-photo,.history-diagram,.result-panel img,.experimental-grid img){height:auto;object-fit:contain}
+.tutorial-reader :is(figcaption,.panel-guide,.figure .small){font-size:13px;line-height:1.85;color:var(--muted);text-align:left}
+.tutorial-reader .history-copy p{font-size:15px;line-height:1.85;color:#203337}
+.tutorial-reader .history-credit{font-size:12px;line-height:1.75;color:#52646b;overflow-wrap:anywhere}
+.tutorial-reader .history-date-line{font-size:13px;color:#8e552f}
+.tutorial-reader .history-name{font-size:22px;color:#203337}
+.tutorial-reader .result-grid{margin:22px 0;gap:24px 18px}
+.tutorial-reader .result-panel{padding:9px;border:1px solid #d4dfdd;border-radius:3px}
+.tutorial-reader .panel-guide{margin:9px 3px 2px}
+.tutorial-reader .experimental-grid{gap:20px}
+.tutorial-reader .svg-scroll{max-width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.tutorial-reader .formula{margin:24px 0;padding:22px 18px;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;border-color:#d4dfdd;line-height:1.8}
+.tutorial-reader .math-render{font-size:24px;color:#203b39;max-width:100%}
+.tutorial-reader .formula .math-render svg{max-width:100%;height:auto}
+.tutorial-reader .equation-kicker{font-size:12px;line-height:1.7;color:#52646b;letter-spacing:.05em;margin-bottom:15px}
+.tutorial-reader .symbol-key{font-size:13px;line-height:1.85;color:#52646b;gap:7px 18px;margin-top:16px}
+.tutorial-reader .symbol-key b{color:#006b61}
+.tutorial-reader .table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;margin:24px 0}
+.tutorial-reader table{font-size:14px;line-height:1.8;max-width:100%;color:var(--ink)}
+.tutorial-reader th{background:var(--pale);color:var(--ink)}
+.tutorial-reader :is(th,td){border-color:var(--line);padding:11px 12px}
+.tutorial-reader p code,.tutorial-reader li code{background:var(--pale);color:var(--ink);font-size:.88em;overflow-wrap:anywhere}
+.tutorial-reader pre{max-width:100%;min-width:0;overflow:auto;background:#122b31;color:#edf5f2;font:13px/1.85 var(--font-mono);padding:20px;tab-size:4;white-space:pre;overflow-wrap:normal}
+.tutorial-reader .code-section pre{font-size:13px;line-height:1.85;padding:20px;margin:0}
+.tutorial-reader pre code{font:inherit;color:inherit;background:none;padding:0;white-space:inherit;overflow-wrap:normal}
+.tutorial-reader .code-bar{background:#1a3338;color:#dcebe6;padding:11px 16px;font-size:13px;gap:10px;flex-wrap:wrap}
+.tutorial-reader .code-bar a{color:#b8e0cd}
+.tutorial-reader .code-bar button{background:#23434a;color:#edf5f2;border-color:#6b8b89}
+.tutorial-reader .code-output{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf3ef;color:#234d45;font-size:13px;padding:18px;line-height:1.85;border-left-color:#00796f}
+.tutorial-reader details{border-color:var(--line);border-radius:0;background:transparent;overflow:visible;padding:13px 0}
+.tutorial-reader details summary{background:transparent;color:var(--green);font-size:15px;line-height:1.7;padding:5px 0}
+.tutorial-reader details summary::before{display:none}
+.tutorial-reader .plot-downloads{font-size:13px;gap:12px 18px;line-height:1.8}
+.tutorial-reader .next-reading{font-size:15px;gap:20px;flex-wrap:wrap;border-color:var(--line)}
+.tutorial-neighbors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:1100px;margin:0 auto 48px;padding-top:22px;border-top:1px solid var(--c-border)}
+.tutorial-neighbors a{min-width:0;padding:10px 0;color:var(--c-fg);text-decoration:none}
+.tutorial-neighbors a:last-child{text-align:right}
+.tutorial-neighbors small{display:block;font-size:12px;line-height:1.7;color:var(--c-fg-soft);margin-bottom:6px}
+.tutorial-neighbors strong{display:block;font-size:15px;line-height:1.7;font-weight:600;overflow-wrap:anywhere}
+.tutorial-neighbors a:hover strong{color:var(--c-primary)}
+
+/* Series landing page: five reading stages and a searchable, numbered list. */
+.tutorial-hub{max-width:1080px;margin:0 auto;padding:38px 0 60px;overflow-wrap:anywhere}
+.tutorial-hero{padding:10px 0 30px;border-bottom:1px solid var(--c-border)}
+.tutorial-kicker,.tutorial-feature small,.tutorial-group-heading small{display:block;color:var(--c-primary);font-size:12px;font-weight:600;line-height:1.7;letter-spacing:.04em;margin-bottom:12px}
+.tutorial-hero h1{max-width:860px;font-size:36px;line-height:1.4;letter-spacing:0;font-weight:700;margin:0 0 18px;color:var(--c-fg)}
+.tutorial-hero>p{max-width:780px;font-size:16px;line-height:1.9;color:var(--c-fg-soft);margin:0}
+.tutorial-actions{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:22px}
+.tutorial-filter{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:24px 0;border-bottom:1px solid var(--c-border);margin-bottom:8px}
+.tutorial-filter input{flex:1 1 100%;min-width:0;width:100%;font:15px/1.6 var(--font-sans);padding:11px 14px;border:1px solid var(--c-border);border-radius:5px;background:var(--c-surface);color:var(--c-fg);margin-bottom:3px}
+.tutorial-filter input::placeholder{color:var(--c-fg-soft)}
+.tutorial-filter button{min-height:38px;font:13px/1.5 var(--font-sans);padding:8px 12px;border:1px solid var(--c-border);border-radius:5px;background:transparent;color:var(--c-fg-soft);cursor:pointer}
+.tutorial-filter button:hover{border-color:var(--c-primary);color:var(--c-primary)}
+.tutorial-filter button.active,.tutorial-filter button[aria-pressed="true"]{background:var(--c-primary-soft);color:var(--c-primary);border-color:var(--c-primary);font-weight:600}
+#tutorial-count{margin-left:auto;font-size:13px;color:var(--c-fg-soft);line-height:1.8}
+.tutorial-group{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-top:38px;scroll-margin-top:90px}
+.tutorial-group-heading{min-width:0;padding-top:15px}
+.tutorial-group-heading small{margin-bottom:8px}
+.tutorial-group-heading h2{font-size:21px;line-height:1.55;font-weight:650;color:var(--c-fg);margin-bottom:10px}
+.tutorial-group-heading p{font-size:14px;line-height:1.85;color:var(--c-fg-soft)}
+.tutorial-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--c-border);min-width:0}
+.tutorial-list>li{min-width:0;border-bottom:1px solid var(--c-border)}
+.tutorial-list>li>a{display:grid;grid-template-columns:30px minmax(0,1fr);gap:14px;align-items:start;padding:20px 8px;color:var(--c-fg);text-decoration:none;border-radius:3px;transition:background-color .15s}
+.tutorial-list>li>a:hover{background:color-mix(in srgb,var(--c-primary-soft) 60%,transparent)}
+.tutorial-number{font:13px/1.8 var(--font-mono);color:var(--c-primary);padding-top:3px;font-variant-numeric:tabular-nums}
+.tutorial-list h3{font-size:17px;line-height:1.65;font-weight:650;color:var(--c-fg);margin:0 0 7px}
+.tutorial-list p{font-size:14px;line-height:1.85;color:var(--c-fg-soft);margin:0}
+.tutorial-topics{display:block;font-size:12px;line-height:1.8;color:var(--c-fg-soft);margin-top:9px}
+.tutorial-group[hidden],.tutorial-list>li[hidden]{display:none!important}
+.tutorial-feature{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:center;margin:30px 0;padding:26px 0;border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)}
+.tutorial-feature small{margin-bottom:7px}
+.tutorial-feature h2{font-size:21px;line-height:1.5;margin-bottom:9px;color:var(--c-fg)}
+.tutorial-feature p{font-size:14px;line-height:1.85;color:var(--c-fg-soft);max-width:680px}
+.tutorial-feature>a{font-size:14px;line-height:1.7;color:var(--c-primary);padding:9px 0;white-space:nowrap;font-weight:600}
+.tutorial-category{margin:32px 0;min-width:0}
+.tutorial-category>h2{font-size:21px;line-height:1.6;margin-bottom:8px}
+.tutorial-category>p{font-size:14px;line-height:1.8;color:var(--c-fg-soft);margin-bottom:18px}
+.tutorial-category .tutorial-list>li>a{padding:15px 5px;gap:10px}
+.tutorial-category .tutorial-list h3{font-size:16px}
+.tutorial-related{margin:28px auto 44px;max-width:1100px;border-top:1px solid var(--c-border);padding-top:22px}
+.tutorial-related h2{font-size:19px;line-height:1.6;margin-bottom:14px}
+.tutorial-related a{color:var(--c-primary);font-size:14px;line-height:1.8;overflow-wrap:anywhere}
+.tutorial-related>div,.tutorial-related>ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;list-style:none;padding:0}
+.tutorial-related>div>a,.tutorial-related li{border-top:1px solid var(--c-border);padding-top:12px}
+.tutorial-container :is(a,button,input,select,summary):focus-visible,.tutorial-hub :is(a,button,input):focus-visible,.tutorial-feature a:focus-visible,.tutorial-category a:focus-visible{outline:2px solid var(--c-primary);outline-offset:4px;border-radius:3px}
+
+@media(max-width:1000px){
+ main.tutorial-container{padding:0 24px}
+ .tutorial-reader>.layout{grid-template-columns:160px minmax(0,1fr);gap:28px}
+ .tutorial-group{grid-template-columns:170px minmax(0,1fr);gap:26px}
+}
+@media(max-width:800px){
+ .tutorial-reader>.layout{display:block;padding-top:24px}
+ .tutorial-reader aside{position:static;max-height:none;overflow:visible;margin:0 0 26px;padding:0 0 18px;border-bottom:1px solid var(--line)}
+ .tutorial-reader aside .lesson-label{margin-bottom:9px}
+ .tutorial-reader aside nav{grid-template-columns:repeat(3,minmax(0,1fr));border:0;padding:0;gap:3px 15px}
+ .tutorial-reader aside nav a{font-size:13px;line-height:1.7;padding:5px 0}
+ .tutorial-reader aside .side-note{display:none}
+ .tutorial-reader .lesson-main{max-width:760px;margin:0 auto}
+ .tutorial-group{grid-template-columns:1fr;gap:18px;padding-top:30px}
+ .tutorial-group-heading{padding:0}
+ .tutorial-group-heading p{max-width:620px}
+ .tutorial-related>div,.tutorial-related>ul{grid-template-columns:1fr;gap:12px}
+}
+@media(max-width:600px){
+ main.tutorial-container{padding:0 16px}
+ .tutorial-toolbar{gap:8px 12px;padding:16px 0;font-size:12px}
+ .tutorial-toolbar .tutorial-crumb{flex:1 1 100%}
+ .tutorial-toolbar #font-toggle{margin-left:0}
+ .tutorial-toolbar button,.tutorial-download{font-size:13px;padding:7px 11px}
+ .tutorial-reader{--body:14.5px;line-height:1.95}
+ .tutorial-reader.large{--body:16.5px}
+ .tutorial-reader>.layout{padding:20px 0 36px}
+ .tutorial-reader aside{margin-bottom:23px;padding-bottom:15px}
+ .tutorial-reader aside nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 13px}
+ .tutorial-reader aside .lesson-label{font-size:12px}
+ .tutorial-reader h1{font-size:26px;line-height:1.4;margin-bottom:15px}
+ .tutorial-reader h1 span{font-size:.8em;line-height:1.5;margin-top:5px}
+ .tutorial-reader .eyebrow{font-size:12px;margin-bottom:10px}
+ .tutorial-reader .byline{font-size:12px;padding-bottom:16px;margin-bottom:19px}
+ .tutorial-reader .lead{font-size:1.035em}
+ .tutorial-reader p{margin-bottom:17px}
+ .tutorial-reader section{margin-top:36px;scroll-margin-top:140px}
+ .tutorial-reader h2{font-size:21px;line-height:1.5;gap:9px;margin-bottom:18px}
+ .tutorial-reader h2 .num{font-size:12px}
+ .tutorial-reader h3{font-size:17px;line-height:1.6;margin:24px 0 12px}
+ .tutorial-reader .figure{margin:24px 0;padding:15px 12px}
+ .tutorial-reader .figure-title{font-size:14px;margin-bottom:12px}
+ .tutorial-reader :is(figcaption,.panel-guide,.figure .small){font-size:12.5px;line-height:1.8}
+ .tutorial-reader .history-layout{grid-template-columns:88px minmax(0,1fr);gap:15px}
+ .tutorial-reader .history-layout .history-diagram{display:block;grid-column:1/-1}
+ .tutorial-reader .history-copy p{font-size:14px;line-height:1.85}
+ .tutorial-reader .history-name{font-size:19px}
+ .tutorial-reader .history-credit{font-size:12px}
+ .tutorial-reader .history-date-line{font-size:12px;letter-spacing:0}
+ .tutorial-reader .history-machine .history-copy{margin-top:18px}
+ .tutorial-reader .control-grid{grid-template-columns:1fr;gap:12px}
+ .tutorial-reader :is(.control-grid label,.glycan-readout,.neighborhood-readout){font-size:13px}
+ .tutorial-reader .two-figs,.tutorial-reader .result-grid,.tutorial-reader .experimental-grid{grid-template-columns:1fr;gap:20px}
+ .tutorial-reader .rna-stats,.tutorial-reader .phase-stats,.tutorial-reader .message-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .tutorial-reader .stats{font-size:13px;gap:10px 18px}
+ .tutorial-reader .stats :is(output,strong){font-size:19px}
+ .tutorial-reader .formula{padding:18px 12px;margin:21px 0}
+ .tutorial-reader .math-render{font-size:21px}
+ .tutorial-reader .symbol-key{font-size:12.5px;gap:6px 12px}
+ .tutorial-reader .exercise{padding:18px 16px;margin:24px 0}
+ .tutorial-reader .bridge{padding-left:15px}
+ .tutorial-reader pre,.tutorial-reader .code-section pre{font-size:12.5px;line-height:1.85;padding:15px}
+ .tutorial-reader .code-bar{padding:10px 12px;font-size:12px}
+ .tutorial-reader .code-output{font-size:12.5px;padding:15px}
+ .tutorial-reader .references,.tutorial-reader .references p,.tutorial-reader .references li{font-size:13px;line-height:1.85}
+ .tutorial-reader :is(th,td){font-size:13px;padding:9px 10px}
+ .tutorial-neighbors{gap:18px;margin-bottom:30px;padding-top:15px}
+ .tutorial-neighbors strong{font-size:13px;line-height:1.75}
+ .tutorial-neighbors small{font-size:12px}
+ .tutorial-hub{padding:25px 0 40px}
+ .tutorial-hero{padding:4px 0 24px}
+ .tutorial-hero h1{font-size:26px;line-height:1.45;margin-bottom:14px}
+ .tutorial-hero>p{font-size:14.5px;line-height:1.9}
+ .tutorial-actions{gap:8px;margin-top:18px}
+ .tutorial-actions a{font-size:13px;padding:8px 11px}
+ .tutorial-filter{gap:8px;padding:19px 0}
+ .tutorial-filter input{font-size:14px;padding:10px 12px}
+ .tutorial-filter button{font-size:12.5px;padding:7px 10px;min-height:38px}
+ #tutorial-count{flex-basis:100%;margin-left:0;font-size:12px}
+ .tutorial-group{gap:14px;padding-top:28px}
+ .tutorial-group-heading h2{font-size:20px;margin-bottom:8px}
+ .tutorial-group-heading p{font-size:14px;line-height:1.85}
+ .tutorial-list>li>a{grid-template-columns:23px minmax(0,1fr);gap:10px;padding:17px 3px}
+ .tutorial-list h3{font-size:15px;line-height:1.7;margin-bottom:6px}
+ .tutorial-list p{font-size:14px;line-height:1.85}
+ .tutorial-number{font-size:12px}
+ .tutorial-topics{font-size:12px;margin-top:7px}
+ .tutorial-feature{grid-template-columns:1fr;gap:12px;padding:22px 0;margin:25px 0}
+ .tutorial-feature h2,.tutorial-category>h2{font-size:19px}
+ .tutorial-feature p{font-size:14px}
+ .tutorial-feature>a{justify-self:start;padding:4px 0;font-size:14px}
+ .tutorial-related{margin-bottom:30px}
+ .tutorial-related h2{font-size:18px}
+}
+@media(min-width:601px) and (max-width:760px){
+ .tutorial-reader .history-layout .history-diagram{display:block;grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){
+ .tutorial-reader,.tutorial-hub{scroll-behavior:auto}
+ .tutorial-reader *,.tutorial-hub *,.tutorial-feature *{animation:none!important;transition:none!important}
+}
+@media print{
+ .tutorial-toolbar,.tutorial-reader aside,.tutorial-neighbors,.tutorial-filter,.tutorial-related{display:none!important}
+ main.tutorial-container{max-width:none;padding:0}
+ .tutorial-reader{--ink:#111;--muted:#444;--paper:#fff;color:#111;background:#fff;font-size:11pt}
+ .tutorial-reader>.layout{display:block;padding:0;max-width:none}
+ .tutorial-reader h1{font-size:24pt}
+ .tutorial-reader h2{font-size:18pt}
+ .tutorial-reader :is(.figure,.formula){break-inside:avoid}
+ .tutorial-reader pre{white-space:pre-wrap;color:#111;background:#f3f3f3}
+ .tutorial-group{display:block;break-inside:avoid}
+}
+
+/* Shared toolbar markup and keyboard-only jump link. */
+.tutorial-toolbar{justify-content:space-between}
+.tutorial-toolbar .tutorial-crumb{display:flex;flex-wrap:wrap;align-items:center;gap:6px 9px}
+.tutorial-toolbar>div{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-left:auto}
+.tutorial-reader .skip{position:fixed;top:-100px;left:12px;z-index:10001;padding:8px 12px;background:var(--c-surface);color:var(--c-primary)}
+.tutorial-reader .skip:focus{top:10px}
+.tutorial-filter-buttons{display:flex;flex-wrap:wrap;gap:7px}
+.tutorial-related{display:flex;flex-wrap:wrap;gap:12px 24px}
+.tutorial-related>h2{flex-basis:100%;margin-bottom:0}
+@media(max-width:600px){.tutorial-toolbar>div{margin-left:0}.tutorial-related{gap:10px 20px}}
+
+/* Keep the four shared navigation destinations on one mobile row. */
+@media(max-width:600px){
+ .nav-links{gap:4px;justify-content:center;flex-wrap:nowrap}
+ .nav-links a[data-short-label]{font-size:0;padding:6px 10px;white-space:nowrap}
+ .nav-links a[data-short-label]::before{content:attr(data-short-label);font-size:12px;line-height:1.5}
+}
+
+/* Preserve readable equation size; wide expressions scroll inside their panel. */
+@media(max-width:760px){
+ .tutorial-reader .formula .math-render{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+ .tutorial-reader .formula .math-render mjx-container{display:block;width:max-content;min-width:100%}
+ .tutorial-reader .formula .math-render mjx-container>svg{max-width:none}
+}

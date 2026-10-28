@@ -1,0 +1,19 @@
+{
+  "title": "DNA force-extension numerical data",
+  "creator": "LUMICKS",
+  "publication_year": 2024,
+  "doi": "10.5281/zenodo.12668419",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source_file": "twlc_data.h5",
+  "source_md5": "c69b5c37ee9688f33decc7a6a229d836",
+  "curve": "FD_1_control_forw",
+  "channels": [
+    "Distance/Distance 1",
+    "Force LF/Trap 2"
+  ],
+  "extraction": "Matching timestamps; FD start inclusive stop exclusive; distance um converted to nm; 1267 rows.",
+  "inline_subset": "Every eighth row starting at zero, plus final row; 160 points; fixed 0.2 to 5 pN fitting window.",
+  "thermal_scale": "kBT=4.11 pN nm is an analysis convention, following the official example.",
+  "original_example": "https://lumicks-pylake.readthedocs.io/en/stable/examples/twlc_fitting/twlc_fitting.html"
+}

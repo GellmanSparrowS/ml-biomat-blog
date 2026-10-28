@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent
 ORIGIN = "https://github.com/GellmanSparrowS/ml-biomat-blog.git"
 MANAGED = ("content", "static", "docs", "build.py", "config.py", "qa_check.py", "preview.py",
            "snapshot.py", "article_writer.py", "auto_writer.py", "chart_gen.py", "content_tools",
-           "manage.py", "README.md", "AGENTS.md", ".gitignore", "vercel.json",
+           "manage.py", "README.md", "AGENTS.md", ".gitignore", ".gitattributes", "vercel.json",
            "_files_test.txt", "root_test.txt", "test_write.txt", "repo-payload.json")
 
 

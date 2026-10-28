@@ -78,14 +78,18 @@ def run():
     for lang in ("en", "zh"):
         for p in sorted((CONTENT / lang).glob("*.md")):
             posts.append((lang, p.stem, parse_fm(p)))
+    curriculum = json.loads((CONTENT.parent / "tutorials/polymer-ai/manifest.json").read_text(encoding="utf-8-sig"))
+    lessons = curriculum["lessons"]
+    tutorial_count = len(lessons)
     total = len(posts)
+    indexed_total = total + tutorial_count
     en = sum(1 for x in posts if x[0] == "en")
     zh = total - en
     checks.append(check("EN/ZH articles balanced", en == zh, "en=%d zh=%d" % (en, zh)))
 
     req = ["CNAME", ".nojekyll", "ads.txt", "robots.txt", "sitemap.xml", "rss.xml",
            "search.json", "404.html", "index.html", "llms.txt", "llms-full.txt",
-           "about/index.html", "about/en/index.html", "cv/index.html", "cv/en/index.html"]
+           "about/index.html", "about/en/index.html", "cv/index.html", "cv/en/index.html", "tutorials/index.html", "tutorials/polymer-ai/index.html"]
     missing = [f for f in req if not (DOCS / f).exists()]
     checks.append(check("Required files", not missing,
                         "missing=" + ",".join(missing) if missing else "all present"))
@@ -95,11 +99,11 @@ def run():
 
     rss = (DOCS / "rss.xml").read_text(encoding="utf-8") if (DOCS / "rss.xml").exists() else ""
     rss_n = rss.count("<item>")
-    checks.append(check("RSS items == posts", rss_n == total, "rss=%d posts=%d" % (rss_n, total)))
+    checks.append(check("RSS covers articles and tutorials", rss_n == indexed_total, "rss=%d articles=%d tutorials=%d" % (rss_n, total, tutorial_count)))
 
     try:
         rss_dates = ET.fromstring(rss).findall("./channel/item/pubDate")
-        valid_dates = len(rss_dates) == total and all(parsedate_to_datetime(node.text).tzinfo is not None for node in rss_dates)
+        valid_dates = len(rss_dates) == indexed_total and all(parsedate_to_datetime(node.text).tzinfo is not None for node in rss_dates)
     except (ValueError, TypeError, ET.ParseError):
         valid_dates = False
     checks.append(check("RSS publication dates", valid_dates, "reader-compatible dates" if valid_dates else "invalid or missing dates"))
@@ -127,10 +131,27 @@ def run():
         search_n = len(json.loads((DOCS / "search.json").read_text(encoding="utf-8")))
     except Exception:
         search_n = -1
-    checks.append(check("search.json items == posts", search_n == total, "search=%d posts=%d" % (search_n, total)))
+    checks.append(check("Search covers articles and tutorials", search_n == indexed_total, "search=%d articles=%d tutorials=%d" % (search_n, total, tutorial_count)))
 
     docs_n = len(list((DOCS / "posts").glob("*/index.html")))
     checks.append(check("Generated post pages == posts", docs_n == total, "pages=%d posts=%d" % (docs_n, total)))
+
+    tutorial_errors = []
+    for i, lesson in enumerate(lessons):
+        page = DOCS / "tutorials/polymer-ai" / lesson["slug"] / "index.html"
+        if not page.is_file():
+            tutorial_errors.append(lesson["slug"] + ": missing page")
+            continue
+        body = page.read_text(encoding="utf-8")
+        if 'class="tutorial-reader"' not in body or 'id="python-code"' not in body:
+            tutorial_errors.append(lesson["slug"] + ": reader or code missing")
+        for neighbor in [j for j in (i-1, i+1) if 0 <= j < len(lessons)]:
+            if '/tutorials/polymer-ai/' + lessons[neighbor]["slug"] + '/' not in body:
+                tutorial_errors.append(lesson["slug"] + ": neighbor missing")
+        if re.search(r'(?:src|href)=["\']data:', body) or "正文润色稿" in body or "润色时跳过" in body:
+            tutorial_errors.append(lesson["slug"] + ": import residue")
+    checks.append(check("Tutorial series integrity", len(lessons) == 20 and not tutorial_errors,
+                        "; ".join(tutorial_errors) if tutorial_errors else "20 lessons, code and sequential links present"))
 
     broken = broken_local_links()
     link_detail = (

@@ -1,0 +1,363 @@
+{
+  "title": "高分子与生物大分子的计算与 AI 教程",
+  "description": "从分子的组成、连接与构象讲起，逐步理解网络与凝胶、实验数据和材料响应，通过 Python 计算与机器学习开展结构分析和材料设计。",
+  "groups": [
+    {
+      "id": "chains",
+      "title": "认识生命中的长链",
+      "description": "从身边材料出发，认识分子连接、构象统计和环境条件。"
+    },
+    {
+      "id": "single-chain",
+      "title": "理解一条链的行为",
+      "description": "计算链的尺寸、回缩、舒展与运动，把物理模型和数据预测联系起来。"
+    },
+    {
+      "id": "biomolecules",
+      "title": "理解生物结构怎样产生作用",
+      "description": "从蛋白质、糖链和核酸出发，学习序列、连接与结构的表示和预测。"
+    },
+    {
+      "id": "materials",
+      "title": "理解许多条链怎样组成材料",
+      "description": "把单链放入组装体、凝胶和纤维网络，理解加工、结构与加载历史如何影响性能。"
+    },
+    {
+      "id": "ai-design",
+      "title": "用 AI 开展一次完整研究",
+      "description": "从实验信号和结构表示走向实验选择，把物理模型与机器学习用于凝胶设计。"
+    }
+  ],
+  "lessons": [
+    {
+      "number": 1,
+      "slug": "01-chains-and-scales",
+      "title": "高分子就在身边：连接与尺度",
+      "description": "从日常材料认识分子连接、链的尺度与分子量平均值，用薄片弯曲实例比较不同数据表示对预测的影响。",
+      "group": "chains",
+      "categories": [
+        "biomaterials"
+      ],
+      "tags": [
+        "高分子",
+        "分子结构",
+        "特征工程"
+      ]
+    },
+    {
+      "number": 2,
+      "slug": "02-conformations-and-statistics",
+      "title": "为什么同一条链需要许多幅照片",
+      "description": "用构象采样理解分布、误差与独立样本，比较按构象和按对象划分数据对模型评价的影响。",
+      "group": "chains",
+      "categories": [
+        "multiscale-modeling",
+        "python-tutorials"
+      ],
+      "tags": [
+        "构象采样",
+        "统计分析",
+        "数据划分"
+      ]
+    },
+    {
+      "number": 3,
+      "slug": "03-biological-polymers",
+      "title": "生命中的三类长链：蛋白质、糖链与核酸",
+      "description": "认识三类生物大分子的单元、顺序与连接，用学习实验检查分子表示是否保留影响预测的排列信息。",
+      "group": "chains",
+      "categories": [
+        "biomaterials"
+      ],
+      "tags": [
+        "蛋白质",
+        "糖链",
+        "核酸",
+        "分子表示"
+      ]
+    },
+    {
+      "number": 4,
+      "slug": "04-chain-environments",
+      "title": "长链生活在怎样的环境里：水、温度、电荷与相互作用",
+      "description": "从水合、热运动和电离理解环境作用，计算不同 pH 下的平均电荷，比较只看组成与同时读取环境的回归预测。",
+      "group": "chains",
+      "categories": [
+        "biomaterials"
+      ],
+      "tags": [
+        "水合",
+        "电离",
+        "聚电解质",
+        "回归"
+      ]
+    },
+    {
+      "number": 5,
+      "slug": "05-chain-dimensions",
+      "title": "长链蜷起来以后有多大",
+      "description": "计算末端距、回转半径和自由连接链的尺寸规律，检验模型对训练范围之外更长链的预测。",
+      "group": "single-chain",
+      "categories": [
+        "multiscale-modeling",
+        "python-tutorials"
+      ],
+      "tags": [
+        "自由连接链",
+        "回转半径",
+        "随机采样",
+        "外推"
+      ]
+    },
+    {
+      "number": 6,
+      "slug": "06-entropic-elasticity",
+      "title": "链被拉开以后为什么会回缩",
+      "description": "从构象计数推导熵弹性，用 DNA 拉伸曲线比较物理拟合与神经网络反演，并考察测量范围对参数识别的影响。",
+      "group": "single-chain",
+      "categories": [
+        "multiscale-modeling"
+      ],
+      "tags": [
+        "熵弹性",
+        "虫状链",
+        "DNA",
+        "参数反演"
+      ]
+    },
+    {
+      "number": 7,
+      "slug": "07-chain-expansion-and-collapse",
+      "title": "同一条链为什么有时舒展、有时收缩",
+      "description": "用短链格点模型枚举构象、计算吸引作用下的尺寸变化，并训练同时读取链长与环境的预测模型。",
+      "group": "single-chain",
+      "categories": [
+        "multiscale-modeling"
+      ],
+      "tags": [
+        "链构象",
+        "溶剂效应",
+        "格点模型",
+        "条件预测"
+      ]
+    },
+    {
+      "number": 8,
+      "slug": "08-chain-dynamics",
+      "title": "链怎样运动，又需要多久才能改变状态",
+      "description": "运行 Rouse 链轨迹，理解扩散、松弛和时间相关性，用历史观测预测不同时间间隔后的状态。",
+      "group": "single-chain",
+      "categories": [
+        "multiscale-modeling"
+      ],
+      "tags": [
+        "Rouse模型",
+        "扩散",
+        "松弛",
+        "时间序列"
+      ]
+    },
+    {
+      "number": 9,
+      "slug": "09-protein-sequence-and-function",
+      "title": "蛋白质：从序列、折叠到柔性与功能",
+      "description": "以公开蛋白质无序区标注为例，比较组成、局部卷积和 ESM-2 表示，学习序列预测与按相似性分组评价。",
+      "group": "biomolecules",
+      "categories": [
+        "biomaterials",
+        "machine-learning"
+      ],
+      "tags": [
+        "蛋白质",
+        "无序区",
+        "ESM-2",
+        "序列模型"
+      ]
+    },
+    {
+      "number": 10,
+      "slug": "10-glycan-connections",
+      "title": "糖链：连接方式怎样改变水合、识别与支撑",
+      "description": "从糖苷键、分支和水合理解糖链，用真实凝集素阵列数据比较组成特征与保留连接类型的图表示。",
+      "group": "biomolecules",
+      "categories": [
+        "biomaterials",
+        "machine-learning"
+      ],
+      "tags": [
+        "糖链",
+        "糖链阵列",
+        "图表示",
+        "分子识别"
+      ]
+    },
+    {
+      "number": 11,
+      "slug": "11-dna-rna-structures",
+      "title": "DNA与RNA：序列怎样组织成结构",
+      "description": "从核酸方向、互补配对和发夹结构出发，用动态规划计算受控 RNA 结构分布，再训练注意力网络预测逐位置配对概率。",
+      "group": "biomolecules",
+      "categories": [
+        "biomaterials",
+        "machine-learning"
+      ],
+      "tags": [
+        "DNA",
+        "RNA",
+        "动态规划",
+        "注意力机制"
+      ]
+    },
+    {
+      "number": 12,
+      "slug": "12-assembly-and-phase-separation",
+      "title": "分子怎样聚到一起：自组装、相分离与凝聚体",
+      "description": "区分自组装、相分离与凝聚体，用 Flory–Huggins 模型计算共存边界，并训练分类器学习相图与边界附近的状态。",
+      "group": "materials",
+      "categories": [
+        "biomaterials",
+        "multiscale-modeling"
+      ],
+      "tags": [
+        "自组装",
+        "相分离",
+        "凝聚体",
+        "相图"
+      ]
+    },
+    {
+      "number": 13,
+      "slug": "13-networks-and-gels",
+      "title": "水很多，为什么还能成形：网络与凝胶",
+      "description": "理解交联、贯通与凝胶弹性，在受控弹簧网络上分别学习贯通判断和指定加载下的刚度预测。",
+      "group": "materials",
+      "categories": [
+        "biomaterials",
+        "multiscale-modeling"
+      ],
+      "tags": [
+        "凝胶",
+        "网络结构",
+        "贯通",
+        "图神经网络"
+      ]
+    },
+    {
+      "number": 14,
+      "slug": "14-load-bearing-fiber-networks",
+      "title": "纤维怎样织成能承载的网",
+      "description": "从胶原层级结构与纤维图像出发，理解取向、拉伸和弯曲，并用受控梁网络训练卷积模型预测排列与加载响应。",
+      "group": "materials",
+      "categories": [
+        "multiscale-modeling",
+        "machine-learning"
+      ],
+      "tags": [
+        "纤维网络",
+        "有限元",
+        "结构张量",
+        "卷积网络"
+      ]
+    },
+    {
+      "number": 15,
+      "slug": "15-processing-and-hierarchy",
+      "title": "从分子到样品：制备、加工与层级结构",
+      "description": "沿丝纤维成形过程理解牵伸、水分与结构演变，用公开实验数据比较工艺和结构信息对强度、断裂应变预测的作用。",
+      "group": "materials",
+      "categories": [
+        "biomaterials",
+        "wet-lab-data"
+      ],
+      "tags": [
+        "丝纤维",
+        "加工",
+        "层级结构",
+        "实验数据"
+      ]
+    },
+    {
+      "number": 16,
+      "slug": "16-material-response-and-history",
+      "title": "材料怎样响应一次真实的使用过程",
+      "description": "结合凝胶循环实验与受控黏弹模型理解松弛、恢复和加载历史，比较 GRU 与物理约束模型的时序响应预测。",
+      "group": "materials",
+      "categories": [
+        "multiscale-modeling",
+        "machine-learning"
+      ],
+      "tags": [
+        "黏弹性",
+        "循环加载",
+        "GRU",
+        "物理约束"
+      ]
+    },
+    {
+      "number": 17,
+      "slug": "17-experimental-signals-to-data",
+      "title": "从实验信号到可用的数据",
+      "description": "从真实溶菌酶小角度 X 射线散射记录估计回转半径，再用受控散射数据比较预测模型对噪声、背景和缺失观测的响应。",
+      "group": "ai-design",
+      "categories": [
+        "wet-lab-data",
+        "python-tutorials"
+      ],
+      "tags": [
+        "SAXS",
+        "实验数据",
+        "回转半径",
+        "不确定性"
+      ]
+    },
+    {
+      "number": 18,
+      "slug": "18-learning-molecular-graphs",
+      "title": "怎样让模型读懂分子的连接与材料结构",
+      "description": "把糖链连接编码为图，在真实糖链阵列数据上训练消息传递网络，并检查节点重编号、几何信息和独立数据划分的作用。",
+      "group": "ai-design",
+      "categories": [
+        "machine-learning"
+      ],
+      "tags": [
+        "图神经网络",
+        "消息传递",
+        "几何表示",
+        "数据划分"
+      ]
+    },
+    {
+      "number": 19,
+      "slug": "19-selecting-the-next-experiment",
+      "title": "下一次应该测什么、做哪个样品",
+      "description": "在凝胶溶胀虚拟实验中比较随机、空间覆盖与不确定性选样，用高斯过程和校准区间安排下一轮测量。",
+      "group": "ai-design",
+      "categories": [
+        "machine-learning"
+      ],
+      "tags": [
+        "主动学习",
+        "高斯过程",
+        "实验设计",
+        "不确定性"
+      ]
+    },
+    {
+      "number": 20,
+      "slug": "20-designing-a-biogel",
+      "title": "综合研究：设计一种满足目标的生物凝胶",
+      "description": "以溶胀比和剪切模量为共同目标，结合物理反求、代理模型和候选搜索完成凝胶设计的数值实践，并安排新增确认测量。",
+      "group": "ai-design",
+      "categories": [
+        "biomaterials",
+        "machine-learning"
+      ],
+      "tags": [
+        "凝胶设计",
+        "逆向设计",
+        "代理模型",
+        "多目标设计"
+      ]
+    }
+  ]
+}

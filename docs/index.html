@@ -22,15 +22,16 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "ML-Biomat", "url": "https://ml-biomat.com", "description": "Research notes, tutorials, and practical tools for the rational design of biomaterial systems and structures across scales, combining machine learning and multiscale modeling. Home of FiberNet for fiber network research."}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-</head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a href="/" class="active">Home / 首页</a>
-<a href="/fibernet/">Library / 库</a>
-<a href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/" class="active">Home / 首页</a>
+<a data-short-label="Library" href="/fibernet/">Library / 库</a>
+<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -45,7 +46,7 @@
 <span class="badge">🔬 Multiscale Methods</span>
 <span class="badge">🦪 Fiber Biomaterials</span>
 </div>
-</section><section class="section-head"><h2>📂 Categories / 分类</h2><a href="/categories/" class="view-all">All →</a></section><div class="post-grid"><a href="/categories/machine-learning/" class="post-card" style="text-decoration:none"><span class="card-lang en">Machine Learning</span><h3 style="font-size:1rem;margin-top:.3rem">机器学习</h3><div class="card-meta">10 post(s)</div></a><a href="/categories/multiscale-modeling/" class="post-card" style="text-decoration:none"><span class="card-lang en">Multiscale Modeling</span><h3 style="font-size:1rem;margin-top:.3rem">多尺度模拟</h3><div class="card-meta">8 post(s)</div></a><a href="/categories/biomaterials/" class="post-card" style="text-decoration:none"><span class="card-lang en">Bio-Materials-Structures</span><h3 style="font-size:1rem;margin-top:.3rem">生物·材料·结构</h3><div class="card-meta">10 post(s)</div></a><a href="/categories/python-tutorials/" class="post-card" style="text-decoration:none"><span class="card-lang en">Python Tutorials</span><h3 style="font-size:1rem;margin-top:.3rem">Python教程</h3><div class="card-meta">14 post(s)</div></a><a href="/categories/wet-lab-data/" class="post-card" style="text-decoration:none"><span class="card-lang en">Wet-lab Data Processing</span><h3 style="font-size:1rem;margin-top:.3rem">湿实验数据处理</h3><div class="card-meta">6 post(s)</div></a></div><section class="section-head"><h2><span class="lang-dot en"></span>English Articles</h2><a href="/en/" class="view-all">View all →</a></section><div class="post-grid"><article class="post-card">
+</section><section class="tutorial-feature"><div><small>系列教程 · 20 节</small><h2><a href="/tutorials/polymer-ai/">高分子与生物大分子的计算与 AI 教程</a></h2><p>从分子与构象到网络、实验数据和 AI 设计，结合交互图解与 Python 计算逐步学习。</p></div><a class="tutorial-feature-link" href="/tutorials/polymer-ai/">查看教程 <span aria-hidden="true">→</span></a></section><section class="section-head"><h2>📂 Categories / 分类</h2><a href="/categories/" class="view-all">All →</a></section><div class="post-grid"><a href="/categories/machine-learning/" class="post-card" style="text-decoration:none"><span class="card-lang en">Machine Learning</span><h3 style="font-size:1rem;margin-top:.3rem">机器学习</h3><div class="card-meta">10 篇文章 · 8 节教程</div></a><a href="/categories/multiscale-modeling/" class="post-card" style="text-decoration:none"><span class="card-lang en">Multiscale Modeling</span><h3 style="font-size:1rem;margin-top:.3rem">多尺度模拟</h3><div class="card-meta">8 篇文章 · 9 节教程</div></a><a href="/categories/biomaterials/" class="post-card" style="text-decoration:none"><span class="card-lang en">Bio-Materials-Structures</span><h3 style="font-size:1rem;margin-top:.3rem">生物·材料·结构</h3><div class="card-meta">10 篇文章 · 10 节教程</div></a><a href="/categories/python-tutorials/" class="post-card" style="text-decoration:none"><span class="card-lang en">Python Tutorials</span><h3 style="font-size:1rem;margin-top:.3rem">Python教程</h3><div class="card-meta">14 篇文章 · 3 节教程</div></a><a href="/categories/wet-lab-data/" class="post-card" style="text-decoration:none"><span class="card-lang en">Wet-lab Data Processing</span><h3 style="font-size:1rem;margin-top:.3rem">湿实验数据处理</h3><div class="card-meta">6 篇文章 · 2 节教程</div></a></div><section class="section-head"><h2><span class="lang-dot en"></span>English Articles</h2><a href="/en/" class="view-all">View all →</a></section><div class="post-grid"><article class="post-card">
 <span class="card-lang en">EN</span>
 <h3><a href="/posts/coarse-grained-biomolecular-networks/">Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide</a></h3>
 <div class="card-meta"><span>2026-09-07</span><span>·</span><span>16 min read</span></div>
@@ -107,11 +108,11 @@
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=760d037dc3ac" defer></script>
+<script src="/static/js/main.js?v=96318595db01" defer></script>
 </body>
 </html>

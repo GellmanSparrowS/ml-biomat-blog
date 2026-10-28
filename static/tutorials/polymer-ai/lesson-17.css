@@ -1,0 +1,220 @@
+.tutorial-reader{--paper: #fcfaf5; --ink: #202d32; --muted: #53676e; --green: #006b61; --orange: #ad4a24; --blue: #365e9a; --line: #d5ded7; --pale: #edf3ef; --cream: #f7eddd; --body: 19px;}
+.tutorial-reader *{box-sizing: border-box;}
+.tutorial-reader{scroll-behavior: smooth; scroll-padding-top: 92px;}
+.tutorial-reader{margin: 0px; background: var(--paper); color: var(--ink); font-family: "Microsoft YaHei", "PingFang SC", sans-serif; line-height: 1.95; font-size: var(--body);}
+.tutorial-reader a{color: var(--green); text-decoration-thickness: 1px; text-underline-offset: 4px;}
+.tutorial-reader a:hover{color: var(--orange);}
+.tutorial-reader button,.tutorial-reader input,.tutorial-reader select{font: inherit;}
+.tutorial-reader button,.tutorial-reader select{border: 1px solid rgb(129, 157, 148); border-radius: 6px; background: white; color: var(--ink); padding: 8px 15px; cursor: pointer; font-size: 15px;}
+.tutorial-reader button:hover{border-color: var(--green); background: var(--pale);}
+.tutorial-reader button:focus-visible,.tutorial-reader a:focus-visible,.tutorial-reader input:focus-visible,.tutorial-reader select:focus-visible,.tutorial-reader summary:focus-visible{outline: rgb(191, 109, 55) solid 3px; outline-offset: 4px;}
+.tutorial-reader input[type="range"]{accent-color: var(--green); width: 100%; min-height: 30px;}
+.tutorial-reader header{background: var(--paper); border-bottom: 1px solid var(--line); position: sticky; top: 0px; z-index: 20;}
+.tutorial-reader header .bar{max-width: 1330px; margin: auto; padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 14px;}
+.tutorial-reader .brand{font-weight: 750; letter-spacing: 0.025em; text-decoration: none; color: var(--ink); font-size: 19px;}
+.tutorial-reader .bar-right{display: flex; align-items: center; gap: 22px;}
+.tutorial-reader .skip{position: absolute; left: 8px; top: -80px;}
+.tutorial-reader .skip:focus{top: 5px; background: rgb(255, 255, 255); padding: 10px; z-index: 40;}
+.tutorial-reader .layout{display: grid; grid-template-columns: 215px minmax(0px, 860px); gap: 58px; max-width: 1220px; margin: 0px auto; padding: 55px 30px 80px;}
+.tutorial-reader aside{font-size: 14px; align-self: start; position: sticky; top: 110px;}
+.tutorial-reader aside .lesson-label{font-size: 12px; letter-spacing: 0.1em; color: var(--muted); margin: 0px 0px 22px;}
+.tutorial-reader aside nav{border-left: 1px solid var(--line); display: grid; gap: 15px; padding-left: 17px;}
+.tutorial-reader aside nav a{text-decoration: none; color: var(--muted); line-height: 1.65;}
+.tutorial-reader aside nav a.active{color: var(--green); font-weight: 700;}
+.tutorial-reader .side-note{font-size: 12px; color: var(--muted); line-height: 1.8; margin-top: 28px;}
+.tutorial-reader .lesson-main{min-width: 0px;}
+.tutorial-reader .eyebrow{font-size: 13px; color: var(--green); letter-spacing: 0.08em; margin: 0px 0px 18px;}
+.tutorial-reader h1{font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", SimSun, serif; font-size: 47px; line-height: 1.35; letter-spacing: 0.015em; margin: 0px 0px 23px; font-weight: 700;}
+.tutorial-reader h1 span{display: block; color: var(--green);}
+.tutorial-reader .byline{font-size: 14px; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 25px; margin-bottom: 28px;}
+.tutorial-reader .lead{font-size: 21px; line-height: 1.95;}
+.tutorial-reader p{margin: 0px 0px 22px; text-align: justify; overflow-wrap: break-word;}
+.tutorial-reader strong{font-weight: 750;}
+.tutorial-reader section{margin-top: 70px; padding-top: 12px; scroll-margin-top: 92px;}
+.tutorial-reader h2{font-size: 28px; line-height: 1.5; margin: 0px 0px 29px; display: flex; gap: 17px; align-items: baseline;}
+.tutorial-reader h2 .num{color: var(--orange); font-size: 15px; font-weight: 500; letter-spacing: 0.1em; flex: 0 0 auto;}
+.tutorial-reader h3{font-size: 21px; margin: 32px 0px 16px;}
+.tutorial-reader .bridge{border-left: 3px solid var(--green); padding: 5px 0px 5px 24px; margin: 27px 0px 32px; color: rgb(52, 83, 78);}
+.tutorial-reader .history-date{color: var(--orange); font-weight: 700;}
+.tutorial-reader .figure{margin: 35px 0px; background: white; border-top: 2px solid var(--green); padding: 24px; border-bottom: 1px solid var(--line);}
+.tutorial-reader .figure-title{font-size: 17px; font-weight: 700; margin: 0px 0px 17px;}
+.tutorial-reader .figure svg{display: block; width: 100%; height: auto; overflow: visible;}
+.tutorial-reader .figure svg text{font-family: "Microsoft YaHei", "PingFang SC", sans-serif; fill: var(--ink);}
+.tutorial-reader figcaption{font-size: 14px; color: var(--muted); line-height: 1.85; margin-top: 17px;}
+.tutorial-reader figcaption b{color: var(--green);}
+.tutorial-reader .figure .small{font-size: 13px; color: var(--muted); line-height: 1.75;}
+.tutorial-reader .control-grid{display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 15px;}
+.tutorial-reader .control-grid label{font-size: 14px; display: block;}
+.tutorial-reader .control-grid output{font-weight: 700; color: var(--green);}
+.tutorial-reader .buttons{display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 16px 0px;}
+.tutorial-reader .stats{display: flex; gap: 30px; flex-wrap: wrap; padding: 14px 0px; border-top: 1px solid var(--line); font-size: 15px;}
+.tutorial-reader .stats output,.tutorial-reader .stats strong{font-size: 23px; color: var(--green); font-variant-numeric: tabular-nums;}
+.tutorial-reader .formula{padding: 20px 14px; background: var(--pale); margin: 26px 0px; text-align: center; font-family: "Cambria Math", Cambria, "Times New Roman", serif; font-size: 24px; line-height: 1.8; overflow-x: auto;}
+.tutorial-reader .formula math{font-size: 25px; max-width: 100%;}
+.tutorial-reader .formula .formula-note{font-family: "Microsoft YaHei", sans-serif; font-size: 13px; color: var(--muted); margin: 10px 0px 0px; text-align: center;}
+.tutorial-reader .eq-stack{display: grid; gap: 12px;}
+.tutorial-reader .table-wrap{overflow: auto; margin: 27px 0px;}
+.tutorial-reader table{width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.85; text-align: left;}
+.tutorial-reader th{font-weight: 700; background: var(--pale);}
+.tutorial-reader th,.tutorial-reader td{padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: top;}
+.tutorial-reader .highlight td{color: var(--green); font-weight: 700;}
+.tutorial-reader details{margin: 27px 0px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 15px 0px;}
+.tutorial-reader summary{cursor: pointer; font-size: 16px; color: var(--green); font-weight: 700;}
+.tutorial-reader details[open] summary{margin-bottom: 20px;}
+.tutorial-reader pre{overflow: auto; background: rgb(19, 45, 50); color: rgb(232, 244, 239); padding: 25px; border-radius: 6px; font: 13px / 1.8 Consolas, monospace; tab-size: 4;}
+.tutorial-reader code{font-family: Consolas, monospace; font-size: 0.89em;}
+.tutorial-reader p code{background: rgb(234, 240, 235); padding: 2px 5px; border-radius: 3px;}
+.tutorial-reader .exercise{background: var(--cream); padding: 25px 28px; margin: 30px 0px; border-left: 3px solid var(--orange);}
+.tutorial-reader .exercise p:last-child{margin-bottom: 0px;}
+.tutorial-reader .references{font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); margin-top: 55px; padding-top: 24px;}
+.tutorial-reader .references ol{padding-left: 24px;}
+.tutorial-reader .references li{margin-bottom: 12px; line-height: 1.8;}
+.tutorial-reader .references a{overflow-wrap: anywhere;}
+.tutorial-reader .source-call{font-size: 0.78em; vertical-align: super; text-decoration: none; padding: 0px 2px;}
+.tutorial-reader .close{font-size: 21px; color: var(--green); margin-top: 40px;}
+.tutorial-reader .mini-link{font-size: 14px;}
+.tutorial-reader footer{font-size: 13px; color: var(--muted); padding: 25px 0px; border-top: 1px solid var(--line); margin-top: 35px;}
+.tutorial-reader .two-figs{display: grid; grid-template-columns: 1fr 1fr; gap: 24px;}
+.tutorial-reader .chart-panel{min-width: 0px;}
+.tutorial-reader .chart-panel .panel-label{font-size: 14px; font-weight: 700; margin: 0px 0px 12px;}
+.tutorial-reader .live-line{font-size: 14px; background: var(--pale); padding: 12px 16px; line-height: 1.8;}
+.tutorial-reader .key{display: inline-block; width: 18px; height: 4px; vertical-align: middle; margin: 0px 5px 3px;}
+.tutorial-reader .green{background: var(--green);}
+.tutorial-reader .orange{background: var(--orange);}
+.tutorial-reader .blue{background: var(--blue);}
+.tutorial-reader .noscript{padding: 20px; background: var(--cream);}
+.tutorial-reader .read-progress{position: absolute; bottom: -1px; left: 0px; height: 2px; background: var(--orange); width: 0px;}
+.tutorial-reader ul{padding-left: 24px;}
+.tutorial-reader .sr-only{position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border: 0px;}
+.tutorial-reader.large{--body: 21px;}
+@media (max-width: 1050px){.tutorial-reader .layout{grid-template-columns: 165px minmax(0px, 1fr); gap: 30px; padding: 38px 24px;}
+.tutorial-reader h1{font-size: 40px;}
+.tutorial-reader aside{font-size: 13px;}}
+@media (max-width: 760px){.tutorial-reader .layout{display: block; padding: 28px 22px 45px;}
+.tutorial-reader aside{position: static; margin-bottom: 35px; border-bottom: 1px solid var(--line); padding-bottom: 22px;}
+.tutorial-reader aside nav{display: flex; flex-wrap: wrap; gap: 10px 18px; border: 0px; padding: 0px; font-size: 13px;}
+.tutorial-reader aside .lesson-label{margin-bottom: 14px;}
+.tutorial-reader .side-note{display: none;}
+.tutorial-reader header .bar{padding: 11px 18px;}
+.tutorial-reader .bar-right a{display: none;}
+.tutorial-reader .brand{font-size: 17px;}
+.tutorial-reader h1{font-size: 36px;}
+.tutorial-reader h2{font-size: 25px; gap: 10px;}
+.tutorial-reader .lead{font-size: 20px;}
+.tutorial-reader{--body: 18px;}
+.tutorial-reader .figure{margin: 29px -5px; padding: 18px 15px;}
+.tutorial-reader .control-grid{grid-template-columns: 1fr; gap: 12px;}
+.tutorial-reader .two-figs{grid-template-columns: 1fr; gap: 25px;}
+.tutorial-reader .stats{gap: 12px 22px;}
+.tutorial-reader .stats output{font-size: 21px;}
+.tutorial-reader section{margin-top: 50px;}
+.tutorial-reader .formula{font-size: 21px; padding: 15px 8px;}
+.tutorial-reader .formula math{font-size: 22px;}
+.tutorial-reader th,.tutorial-reader td{padding: 10px; font-size: 14px;}
+.tutorial-reader .exercise{padding: 21px;}
+.tutorial-reader pre{font-size: 12px; padding: 17px;}
+.tutorial-reader .byline{font-size: 13px;}
+.tutorial-reader .structure-wide{min-width: 570px;}
+.tutorial-reader .svg-scroll{overflow-x: auto; padding-bottom: 5px;}
+.tutorial-reader .history-date{white-space: nowrap;}}
+@media (prefers-reduced-motion: reduce){.tutorial-reader{scroll-behavior: auto;}
+.tutorial-reader *{animation: auto ease 0s 1 normal none running none !important; transition: none !important;}}
+@media print{.tutorial-reader header,.tutorial-reader aside,.tutorial-reader .buttons,.tutorial-reader .control-grid,.tutorial-reader .no-print{display: none !important;}
+.tutorial-reader .layout{display: block; padding: 0px; max-width: none;}
+.tutorial-reader{background: white; font-size: 12pt; line-height: 1.8;}
+.tutorial-reader h1{font-size: 27pt;}
+.tutorial-reader h2{font-size: 20pt;}
+.tutorial-reader .figure{break-inside: avoid;}
+.tutorial-reader .formula{break-inside: avoid;}
+.tutorial-reader section{margin-top: 30px;}
+.tutorial-reader a{color: inherit;}
+.tutorial-reader pre{white-space: pre-wrap; color: rgb(17, 17, 17); background: rgb(243, 243, 243);}
+.tutorial-reader details{display: block;}
+.tutorial-reader footer{margin-top: 20px;}}
+.tutorial-reader .formula{background: rgb(255, 255, 255); border-top: 1px solid rgb(201, 217, 210); border-bottom: 1px solid rgb(201, 217, 210); padding: 25px 20px; overflow: visible; color: rgb(32, 59, 57);}
+.tutorial-reader .equation-kicker{font: 12px / 1.7 "Microsoft YaHei", sans-serif; color: rgb(99, 119, 115); text-align: left; letter-spacing: 0.09em; margin-bottom: 18px;}
+.tutorial-reader .math-render{display: block; font-size: 25px; line-height: 1.2; text-align: center; max-width: 100%; min-width: 0px;}
+.tutorial-reader .math-render mjx-container{display: block; max-width: 100%; margin: 0px auto !important;}
+.tutorial-reader .math-render svg{max-width: 100%; height: auto; overflow: visible; vertical-align: middle !important;}
+.tutorial-reader .symbol-key{display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 22px; font: 14px / 1.8 "Microsoft YaHei", sans-serif; color: rgb(83, 103, 110); margin-top: 20px;}
+.tutorial-reader .symbol-key b{color: rgb(0, 107, 97); font-family: Cambria, serif; font-size: 19px; padding-right: 5px;}
+.tutorial-reader .history-figure{background: rgb(243, 240, 232); border-top-color: rgb(174, 120, 77);}
+.tutorial-reader .history-layout{display: grid; grid-template-columns: 160px minmax(0px, 1fr); gap: 28px; align-items: center;}
+.tutorial-reader .history-photo{width: 100%; height: auto; display: block;}
+.tutorial-reader .history-copy{min-width: 0px;}
+.tutorial-reader .history-copy p{font-size: 16px; line-height: 1.9; margin: 12px 0px 0px;}
+.tutorial-reader .history-date-line{font-size: 13px; color: rgb(142, 85, 47); letter-spacing: 0.07em; margin: 0px 0px 8px;}
+.tutorial-reader .history-name{font-family: Georgia, serif; font-size: 23px; line-height: 1.4; margin-bottom: 15px;}
+.tutorial-reader .history-credit{display: block; font-size: 11px; line-height: 1.8; color: rgb(105, 117, 113); margin-top: 9px;}
+.tutorial-reader .history-machine{display: grid; grid-template-columns: minmax(0px, 1.35fr) minmax(0px, 1fr); gap: 24px; align-items: center;}
+.tutorial-reader .history-machine img{width: 100%; height: auto;}
+.tutorial-reader .history-diagram{width: 100%; height: auto; display: block;}
+.tutorial-reader .code-section{margin: 36px 0px; padding-top: 10px; border-top: 1px solid var(--line);}
+.tutorial-reader .code-section h3{margin: 18px 0px 14px;}
+.tutorial-reader .code-bar{display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: rgb(26, 51, 56); color: rgb(198, 222, 213); padding: 12px 19px; font-size: 13px; border-radius: 7px 7px 0px 0px;}
+.tutorial-reader .code-bar .buttons{margin: 0px;}
+.tutorial-reader .code-section pre{margin: 0px; border-radius: 0px 0px 7px 7px; font-size: 13px; line-height: 1.9; padding: 22px; tab-size: 4;}
+.tutorial-reader .code-section pre code{font-size: inherit;}
+.tutorial-reader .code-output{background: rgb(237, 243, 239); color: rgb(35, 77, 69); border-left: 3px solid rgb(0, 121, 111); margin: 22px 0px; padding: 20px; white-space: pre-wrap; font-size: 13px; line-height: 1.8;}
+.tutorial-reader .result-grid{display: grid; grid-template-columns: repeat(2, minmax(0px, 1fr)); gap: 26px 20px; margin: 20px -5px;}
+.tutorial-reader .result-panel{min-width: 0px; margin: 0px;}
+.tutorial-reader .result-panel img{display: block; width: 100%; height: auto;}
+.tutorial-reader .panel-guide{font-size: 13px; line-height: 1.9; margin: 7px 10px 0px; color: rgb(83, 103, 110); text-align: left;}
+.tutorial-reader .plot-downloads{font-size: 14px; display: flex; flex-wrap: wrap; gap: 18px; margin-top: 20px;}
+.tutorial-reader .next-reading{border-top: 2px solid var(--green); margin-top: 42px; padding: 22px 0px; display: flex; gap: 24px; justify-content: space-between; font-size: 16px;}
+.tutorial-reader .code-section .c1,.tutorial-reader .code-section .c{color: rgb(154, 184, 169);}
+.tutorial-reader .code-section .k,.tutorial-reader .code-section .kn{color: rgb(240, 198, 116);}
+.tutorial-reader .code-section .s,.tutorial-reader .code-section .s1,.tutorial-reader .code-section .s2,.tutorial-reader .code-section .sa{color: rgb(195, 223, 172);}
+.tutorial-reader .code-section .mi,.tutorial-reader .code-section .mf{color: rgb(173, 204, 234);}
+.tutorial-reader .code-section .nb,.tutorial-reader .code-section .nf{color: rgb(142, 212, 212);}
+.tutorial-reader .code-section .o{color: rgb(230, 186, 172);}
+@media (max-width: 760px){.tutorial-reader .formula{padding: 21px 12px;}
+.tutorial-reader .math-render{font-size: 23px;}
+.tutorial-reader .equation-kicker{font-size: 11px; margin-bottom: 15px;}
+.tutorial-reader .symbol-key{font-size: 13px; gap: 5px 14px;}
+.tutorial-reader .history-layout{grid-template-columns: 110px minmax(0px, 1fr); gap: 18px; align-items: start;}
+.tutorial-reader .history-name{font-size: 20px;}
+.tutorial-reader .history-copy p{font-size: 15px;}
+.tutorial-reader .history-layout .history-diagram{display: none;}
+.tutorial-reader .history-machine{display: block;}
+.tutorial-reader .history-machine .history-copy{margin-top: 22px;}
+.tutorial-reader .history-machine .history-diagram{max-width: 400px; margin: auto;}
+.tutorial-reader .history-credit{font-size: 11px;}
+.tutorial-reader .result-grid{grid-template-columns: 1fr; gap: 28px;}
+.tutorial-reader .code-bar{padding: 12px;}
+.tutorial-reader .code-section pre{padding: 17px; font-size: 12px;}
+.tutorial-reader .next-reading{display: block;}
+.tutorial-reader .next-reading a{display: block; margin: 8px 0px;}}
+@media print{.tutorial-reader .history-figure{break-inside: avoid;}
+.tutorial-reader .code-section pre{white-space: pre-wrap;}
+.tutorial-reader .result-grid{grid-template-columns: 1fr 1fr;}
+.tutorial-reader .math-render{font-size: 19px;}
+.tutorial-reader .code-bar,.tutorial-reader .plot-downloads{display: none;}}
+.tutorial-reader .result-panel img{width: 100%; height: auto;}
+.tutorial-reader .history-figure svg{max-height: 320px;}
+.tutorial-reader .svg-scroll{overflow-x: auto;}
+.tutorial-reader .svg-scroll > svg{min-width: 560px;}
+.tutorial-reader #sequence-svg{min-width: 480px;}
+.tutorial-reader .code-bar a{color: rgb(184, 224, 205);}
+.tutorial-reader .code-section pre{max-height: none;}
+.tutorial-reader .plot-downloads{flex-wrap: wrap;}
+.tutorial-reader .history-figure .wide-diagram svg{max-height: none;}
+.tutorial-reader .narrow-diagram{display: none;}
+.tutorial-reader .scatter-controls{display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0px; align-items: center;}
+.tutorial-reader .scatter-controls label{display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 15px;}
+.tutorial-reader .scatter-controls input{width: 125px; accent-color: rgb(38, 123, 105);}
+.tutorial-reader .scatter-controls output{min-width: 60px;}
+.tutorial-reader .scatter-controls button{font: inherit; color: rgb(35, 89, 67); border: 1px solid rgb(157, 183, 167); background: rgb(255, 254, 249); border-radius: 5px; padding: 9px 12px; cursor: pointer;}
+.tutorial-reader .scatter-controls button[aria-pressed="true"]{background: rgb(38, 123, 105); color: white;}
+.tutorial-reader .scatter-stats{display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 18px 0px;}
+.tutorial-reader .scatter-stats span{border-top: 2px solid rgb(165, 187, 170); padding-top: 10px; font-size: 13px;}
+.tutorial-reader .scatter-stats b{display: block; font-size: 21px; font-weight: 500;}
+.tutorial-reader #scatter-plot{display: block; width: 100%; height: auto; background: rgb(251, 252, 245); max-height: 430px;}
+.tutorial-reader #scatter-readout{font-size: 15px; line-height: 1.8;}
+@media (max-width: 760px){.tutorial-reader .wide-diagram{display: none;}
+.tutorial-reader .narrow-diagram{display: block;}
+.tutorial-reader .history-figure .narrow-diagram svg{width: 100%; max-height: none;}
+.tutorial-reader .scatter-stats{grid-template-columns: 1fr 1fr;}
+.tutorial-reader .scatter-controls label{width: 100%;}
+.tutorial-reader .scatter-controls input{width: 120px;}}
+@media (max-width: 760px){.tutorial-reader .layout .lesson-main p{text-align: left;}}

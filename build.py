@@ -5,6 +5,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
+from content_tools import tutorials
 
 ROOT = Path(__file__).resolve().parent
 INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
@@ -254,9 +255,10 @@ HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}">\n<head>\n<meta charset="utf-8"
 HEADER = '''<header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a href="/"{home_active}>Home / 首页</a>
-<a href="/fibernet/">Library / 库</a>
-<a href="/about/">Profile / 个人简介</a>
+<a data-short-label="首页" href="/"{home_active}>Home / 首页</a>
+<a data-short-label="工具库" href="/fibernet/">Library / 库</a>
+<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -264,7 +266,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 
 def versioned_asset(url):
@@ -309,6 +311,10 @@ def make_head(title, desc, url, lang="en", og_type="website", ld="",
     header = localize_navigation(HEADER, navigation_language).format(
         home_active=home_active, en_active=en_active, zh_active=zh_active, en_href=en_href, zh_href=zh_href,
         wide_class=" container-wide" if wide else "")
+    head = head.replace("</head>", f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}"></head>')
+    if lang == "en":
+        for chinese, english in [("首页", "Home"), ("工具库", "Library"), ("教程", "Tutorials"), ("个人主页", "Profile")]:
+            header = header.replace(f'data-short-label="{chinese}"', f'data-short-label="{english}"')
     return head + header
 
 
@@ -316,8 +322,10 @@ def make_head(title, desc, url, lang="en", og_type="website", ld="",
 def localize_navigation(markup, language):
     # Keep the existing navigation elsewhere; profile and CV opt into English.
     if language == "en":
+        for chinese, english in [("首页", "Home"), ("工具库", "Library"), ("教程", "Tutorials"), ("个人主页", "Profile")]:
+            markup = markup.replace(f'data-short-label="{chinese}"', f'data-short-label="{english}"')
         markup = markup.replace('href="/about/">Profile / 个人简介', 'href="/about/en/">Profile')
-        markup = markup.replace('Home / 首页', 'Home').replace('Library / 库', 'Library').replace('Tools / 工具', 'Tools')
+        markup = markup.replace('Home / 首页', 'Home').replace('Library / 库', 'Library').replace('Tools / 工具', 'Tools').replace('Tutorials / 教程', 'Tutorials')
     return markup
 
 
@@ -445,6 +453,7 @@ def build():
     giscus_html = Path("static/giscus.html").read_text(encoding="utf-8") if Path("static/giscus.html").exists() else ""
 
     posts = load_posts()
+    curriculum = tutorials.load()
     check_coverage(posts)
     en = [p for p in posts if p["lang"] == "en"]
     zh = [p for p in posts if p["lang"] == "zh"]
@@ -505,10 +514,12 @@ def build():
     cat_cards_html += '<div class="post-grid">'
     for s, info in CATEGORIES.items():
         cnt = sum(1 for p in posts if p["category"] == s)
+        tutorial_count = sum(s in lesson["categories"] for lesson in curriculum["lessons"])
         if cnt:
-            cat_cards_html += f'<a href="/categories/{s}/" class="post-card" style="text-decoration:none"><span class="card-lang en">{info["name_en"]}</span><h3 style="font-size:1rem;margin-top:.3rem">{info["name_zh"]}</h3><div class="card-meta">{cnt} post(s)</div></a>'
+            cat_cards_html += f'<a href="/categories/{s}/" class="post-card" style="text-decoration:none"><span class="card-lang en">{info["name_en"]}</span><h3 style="font-size:1rem;margin-top:.3rem">{info["name_zh"]}</h3><div class="card-meta">{cnt} 篇文章 · {tutorial_count} 节教程</div></a>'
     cat_cards_html += '</div>'
     body = hero
+    body += tutorials.feature(curriculum)
     body += cat_cards_html
     if en:
         body += section_head("en", "English Articles", "/en/")
@@ -527,6 +538,8 @@ def build():
         desc = SITE[f"description_{lang}"]
         hero_lang = f'<section class="hero"><h1>ML-Biomat</h1><p class="subtitle">{hm.escape(desc)}</p></section>'
         body = hero_lang
+        if lang == "zh":
+            body += tutorials.feature(curriculum)
         body += f'<section class="section-head"><h2><span class="lang-dot {lang}"></span>{label} Articles</h2></section>'
         body += '<div class="post-grid">' + "\n".join(post_card(p) for p in lp) + '</div>'
         body += ENGAGE_BANNER
@@ -542,9 +555,10 @@ def build():
     ci = '<h1 class="section-title">Categories</h1><ul class="post-list-simple">'
     for s, info in CATEGORIES.items():
         cnt = sum(1 for p in posts if p["category"] == s)
+        tutorial_count = sum(s in lesson["categories"] for lesson in curriculum["lessons"])
         if cnt:
-            ci += f'<li class="post-row"><a href="/categories/{s}/"><strong>{info["name_en"]}</strong> ({info["name_zh"]})</a><span style="margin-left:auto;color:var(--c-muted);font-size:.85rem">{cnt} posts</span></li>'
-    ci += "</ul>"
+            ci += f'<li class="post-row"><a href="/categories/{s}/"><strong>{info["name_en"]}</strong> ({info["name_zh"]})</a><span style="margin-left:auto;color:var(--c-muted);font-size:.85rem">{cnt} 篇文章 · {tutorial_count} 节教程</span></li>'
+    ci += "</ul>" + tutorials.feature(curriculum)
     active_cats = [info["name_en"] for s, info in CATEGORIES.items() if any(p["category"] == s for p in posts)]
     cat_desc = f"Browse all {len(posts)} articles across {len(active_cats)} categories: " + ", ".join(active_cats)
     html = make_head(title="Categories", desc=cat_desc, url=f'{SITE["base_url"]}/categories/') + ci + FOOT.format(year=datetime.now().year)
@@ -557,6 +571,7 @@ def build():
         en_cp = [p for p in cp if p["lang"] == "en"]
         zh_cp = [p for p in cp if p["lang"] == "zh"]
         body = f'<h1 class="section-title"><span class="highlight">{info["name_en"]}</span> / {info["name_zh"]}</h1>'
+        body += tutorials.category_section(curriculum, s, CATEGORIES)
         body += '<div class="cat-grid">'
         if en_cp:
             body += '<div class="cat-col"><h3><span class="lang-dot en"></span>English</h3><ul class="post-list-simple">'
@@ -741,6 +756,8 @@ def build():
 
 
 
+    tutorials.render(curriculum, make_head, make_footer, write_file, versioned_asset, CATEGORIES, posts, SITE["base_url"])
+
     # RSS
     rss_items = []
     for p in posts:
@@ -751,6 +768,9 @@ def build():
       <description>{hm.escape(p['description'] or '')}</description>
       <pubDate>{format_datetime(p['datetime'].replace(tzinfo=timezone(timedelta(hours=8))))}</pubDate>
     </item>""")
+    for lesson in curriculum["lessons"]:
+        address = SITE["base_url"] + lesson["url"]
+        rss_items.insert(lesson["number"] - 1, f'<item><title>{hm.escape(lesson["title"])}</title><link>{address}</link><guid>{address}</guid><description>{hm.escape(lesson["description"])}</description><pubDate>Wed, 28 Oct 2026 00:00:00 +0800</pubDate></item>')
     rss = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -784,6 +804,8 @@ def build():
         urls.append(f'  <url><loc>{SITE["base_url"]}/categories/{s}/</loc><priority>0.6</priority></url>')
     for p in posts:
         urls.append(f'  <url><loc>{SITE["base_url"]}/posts/{p["slug"]}/</loc><priority>0.8</priority><lastmod>{p["date"]}</lastmod></url>')
+    for route in ["/tutorials/", tutorials.BASE] + [p["url"] for p in curriculum["lessons"]]:
+        urls.append(f'<url><loc>{SITE["base_url"]}{route}</loc><priority>0.8</priority><lastmod>{tutorials.DATE}</lastmod></url>')
     write_file("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{chr(10).join(urls)}\n</urlset>')
 
 
@@ -800,13 +822,20 @@ def build():
 
     # Copy static files
     static_out = Path(BUILD_DIR) / "static"
-    if static_out.exists(): shutil.rmtree(static_out)
+    if static_out.exists():
+        output_root = (ROOT / BUILD_DIR).resolve()
+        if static_out.resolve().parent != output_root or not output_root.is_relative_to(ROOT) or static_out.is_symlink():
+            raise ValueError("Static output must stay inside the project build directory")
+        shutil.rmtree(static_out)
 
     # --- Search index for header search ---
     import json as json_mod
     search_data = []
     for p in posts:
         search_data.append({"title": p["title"], "slug": p["slug"], "date": p["date"], "category": p["category"], "tags": p["tags"], "lang": p["lang"], "description": p["description"] or ""})
+    for lesson in curriculum["lessons"]:
+        search_data.append({"title":lesson["title"], "slug":lesson["slug"], "url":lesson["url"], "date":tutorials.DATE,
+                            "category":lesson["categories"][0], "tags":lesson["tags"]+["系列教程"], "lang":"zh", "description":lesson["description"], "type":"tutorial"})
     write_file("search.json", json_mod.dumps(search_data, ensure_ascii=False))
     shutil.copytree("static", static_out)
     # Google verification
