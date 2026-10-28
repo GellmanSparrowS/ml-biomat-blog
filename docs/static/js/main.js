@@ -184,10 +184,14 @@ document.addEventListener('DOMContentLoaded',function(){
 // === IMAGE ZOOM (medium-zoom) ===
 (function(){
     if(document.querySelector('.tutorial-reader')) return;
+    var zoomTargets = Array.from(document.querySelectorAll('article img:not(.profile-gallery-image), .img-full, .about-card img')).filter(function(img){
+        return !(img.getAttribute('src') || '').includes('/article-guides/');
+    });
+    if(!zoomTargets.length) return;
     var script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js';
     script.onload = function(){
-        mediumZoom('article img:not(.profile-gallery-image), .img-full, .about-card img', {
+        mediumZoom(zoomTargets, {
             margin: 24,
             background: 'rgba(0,0,0,.9)',
             scrollOffset: 0,
@@ -523,3 +527,169 @@ document.addEventListener('DOMContentLoaded',function(){
     if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initFiberBackground);
     else initFiberBackground();
 })();
+
+// Keep the first mobile screen focused on the article; contents remain one tap away.
+document.addEventListener('DOMContentLoaded', function(){
+    var mobileContents = window.matchMedia('(max-width:760px)');
+    if(mobileContents.matches){
+        document.querySelectorAll('details.toc, details.lesson-toc').forEach(function(toc){toc.open=false;});
+    }
+    function revealDesktopContents(event){
+        if(!event.matches) document.querySelectorAll('details.lesson-toc').forEach(function(toc){toc.open=true;});
+    }
+    if(mobileContents.addEventListener) mobileContents.addEventListener('change', revealDesktopContents);
+    else if(mobileContents.addListener) mobileContents.addListener(revealDesktopContents);
+});
+
+
+// Local, keyboard-accessible figure viewer: fit, original size, and scrollable zoom.
+document.addEventListener('DOMContentLoaded', function(){
+    var figures = Array.from(document.querySelectorAll('.content img[src*="/article-guides/"]'));
+    if(!figures.length) return;
+    var chinese = /^zh/i.test(document.documentElement.lang);
+    var text = chinese ? {
+        view:'查看图解', close:'关闭', fit:'适应窗口', original:'原始大小',
+        out:'缩小', inside:'放大', source:'打开原图', region:'图解，可滚动查看',
+        loading:'正在载入图解…', error:'图解载入失败，请打开原图查看。', title:'图解'
+    } : {
+        view:'View figure', close:'Close', fit:'Fit', original:'Original size',
+        out:'Zoom out', inside:'Zoom in', source:'Open original', region:'Figure; scroll to explore',
+        loading:'Loading figure…', error:'The figure could not be loaded. Open the original to view it.', title:'Figure'
+    };
+    var dialog, stage, canvas, picture, heading, message, percentage, sourceLink;
+    var fitButton, originalButton, plusButton, minusButton, closeButton;
+    var trigger = null, zoom = 1, fitMode = true, naturalWidth = 1, naturalHeight = 1;
+    var loaded = false, bodyOverflow = '', loadVersion = 0;
+
+    function element(tag, className, value){
+        var node = document.createElement(tag);
+        if(className) node.className = className;
+        if(value !== undefined) node.textContent = value;
+        return node;
+    }
+    function button(label, className, callback){
+        var node = element('button', className, label);
+        node.type = 'button'; node.addEventListener('click', callback);
+        return node;
+    }
+    function fitScale(){
+        return Math.min(1, Math.max(1, stage.clientWidth - 28)/naturalWidth,
+            Math.max(1, stage.clientHeight - 28)/naturalHeight);
+    }
+    function draw(scale, preserveCenter){
+        if(!loaded) return;
+        var x = .5, y = .5;
+        if(preserveCenter && picture.offsetWidth){
+            x = (stage.scrollLeft + stage.clientWidth/2 - picture.offsetLeft)/picture.offsetWidth;
+            y = (stage.scrollTop + stage.clientHeight/2 - picture.offsetTop)/picture.offsetHeight;
+            x = Math.max(0, Math.min(1, x)); y = Math.max(0, Math.min(1, y));
+        }
+        zoom = Math.max(.05, Math.min(4, scale));
+        picture.style.width = (naturalWidth*zoom)+'px';
+        picture.style.height = (naturalHeight*zoom)+'px';
+        percentage.textContent = Math.round(zoom*100)+'%';
+        fitButton.setAttribute('aria-pressed', String(fitMode));
+        originalButton.setAttribute('aria-pressed', String(!fitMode && Math.abs(zoom-1)<.001));
+        minusButton.disabled = zoom <= .0501;
+        plusButton.disabled = zoom >= 3.999;
+        stage.scrollLeft = picture.offsetLeft + x*picture.offsetWidth - stage.clientWidth/2;
+        stage.scrollTop = picture.offsetTop + y*picture.offsetHeight - stage.clientHeight/2;
+    }
+    function fit(){fitMode=true;draw(fitScale(),false);}
+    function original(){fitMode=false;draw(1,true);}
+    function changeZoom(factor){fitMode=false;draw(zoom*factor,true);}
+    function controlsEnabled(enabled){
+        [fitButton,originalButton,plusButton,minusButton].forEach(function(node){node.disabled=!enabled;});
+    }
+    function close(){if(dialog.open) dialog.close();}
+    function createViewer(){
+        dialog = element('dialog','figure-viewer'); dialog.id='article-figure-viewer';
+        dialog.setAttribute('aria-labelledby','figure-viewer-title');
+        var header = element('header','figure-viewer-header');
+        heading = element('h2','',text.title); heading.id='figure-viewer-title';
+        closeButton=button(text.close,'figure-viewer-close',close);
+        header.append(heading,closeButton);
+        var toolbar=element('div','figure-viewer-toolbar');
+        toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label',text.view);
+        fitButton=button(text.fit,'',fit);
+        originalButton=button(text.original,'',original);
+        minusButton=button('−','figure-viewer-step',function(){changeZoom(1/1.25);});
+        plusButton=button('+','figure-viewer-step',function(){changeZoom(1.25);});
+        minusButton.setAttribute('aria-label',text.out);minusButton.title=text.out;
+        plusButton.setAttribute('aria-label',text.inside);plusButton.title=text.inside;
+        percentage=element('output','figure-viewer-percent','');
+        percentage.setAttribute('aria-live','polite');percentage.setAttribute('aria-atomic','true');
+        sourceLink=element('a','figure-viewer-source',text.source);
+        sourceLink.target='_blank';sourceLink.rel='noopener';
+        toolbar.append(fitButton,originalButton,minusButton,percentage,plusButton,sourceLink);
+        stage=element('div','figure-viewer-stage');stage.tabIndex=0;
+        stage.setAttribute('role','region');stage.setAttribute('aria-label',text.region);
+        canvas=element('div','figure-viewer-canvas');
+        picture=element('img','figure-viewer-image');picture.draggable=false;
+        message=element('p','figure-viewer-message',text.loading);message.setAttribute('role','status');
+        canvas.append(picture,message);stage.append(canvas);
+        dialog.append(header,toolbar,stage);document.body.append(dialog);
+        dialog.addEventListener('close',function(){
+            loadVersion++;loaded=false;
+            document.body.style.overflow=bodyOverflow;
+            if(trigger && trigger.isConnected) trigger.focus({preventScroll:true});
+        });
+        dialog.addEventListener('click',function(event){
+            if(event.target!==dialog) return;
+            var r=dialog.getBoundingClientRect();
+            if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom) close();
+        });
+        dialog.addEventListener('keydown',function(event){
+            if(!loaded) return;
+            if(event.key==='+'||event.key==='='){event.preventDefault();changeZoom(1.25);}
+            else if(event.key==='-'){event.preventDefault();changeZoom(1/1.25);}
+            else if(event.key==='0'){event.preventDefault();fit();}
+            else if(event.key==='1'){event.preventDefault();original();}
+        });
+        window.addEventListener('resize',function(){if(dialog.open&&loaded) draw(fitMode?fitScale():zoom,true);},{passive:true});
+    }
+    function openFigure(image){
+        if(!dialog) createViewer();
+        var url=image.currentSrc||image.src;
+        if(typeof dialog.showModal!=='function'){window.open(url,'_blank','noopener');return;}
+        trigger=image;heading.textContent=image.alt||text.title;picture.alt=image.alt||text.title;
+        sourceLink.href=url;loaded=false;fitMode=true;percentage.textContent='';
+        controlsEnabled(false);picture.hidden=true;message.hidden=false;message.textContent=text.loading;
+        stage.setAttribute('aria-busy','true');
+        bodyOverflow=document.body.style.overflow;document.body.style.overflow='hidden';
+        dialog.showModal();closeButton.focus({preventScroll:true});
+        var version=++loadVersion;
+        picture.onload=function(){
+            if(version!==loadVersion||!dialog.open) return;
+            naturalWidth=picture.naturalWidth;naturalHeight=picture.naturalHeight;
+            if(!naturalWidth||!naturalHeight){picture.onerror();return;}
+            loaded=true;picture.hidden=false;message.hidden=true;stage.removeAttribute('aria-busy');
+            controlsEnabled(true);fit();
+        };
+        picture.onerror=function(){
+            if(version!==loadVersion||!dialog.open) return;
+            loaded=false;picture.hidden=true;message.hidden=false;message.textContent=text.error;
+            stage.removeAttribute('aria-busy');controlsEnabled(false);
+        };
+        picture.src=url;
+    }
+    figures.forEach(function(image){
+        image.tabIndex=0;image.setAttribute('role','button');image.setAttribute('aria-haspopup','dialog');
+        image.setAttribute('aria-label',(image.alt?image.alt+' — ':'')+text.view);
+        image.classList.add('article-figure-trigger');
+        image.addEventListener('click',function(event){event.preventDefault();openFigure(image);});
+        image.addEventListener('keydown',function(event){
+            if(event.key==='Enter'||event.key===' '){event.preventDefault();openFigure(image);}
+        });
+    });
+});
+
+// Lesson scripts already toggle the size; keep the button wording in sync.
+document.addEventListener('DOMContentLoaded',function(){
+    var toggle=document.getElementById('font-toggle');
+    var reader=document.querySelector('.tutorial-reader');
+    if(!toggle||!reader) return;
+    function label(){toggle.textContent=reader.classList.contains('large')?'恢复字号':'放大正文';}
+    toggle.addEventListener('click',function(){queueMicrotask(label);});
+    label();
+});

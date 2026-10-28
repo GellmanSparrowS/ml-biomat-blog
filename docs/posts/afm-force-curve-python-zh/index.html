@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Python实战AFM力曲线分析：从原始数据到力学性能 — ML-Biomat</title>
-<meta name="description" content="手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。">
+<meta name="description" content="从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/afm-force-curve-python-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/afm-force-curve-python-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/afm-force-curve-python/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/afm-force-curve-python/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Python实战AFM力曲线分析：从原始数据到力学性能">
-<meta property="og:description" content="手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。">
+<meta property="og:description" content="从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/afm-force-curve-python-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python实战AFM力曲线分析：从原始数据到力学性能", "description": "手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 748, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Python实战AFM力曲线分析：从原始数据到力学性能", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Python实战AFM力曲线分析：从原始数据到力学性能", "description": "从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 1410, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Python实战AFM力曲线分析：从原始数据到力学性能", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>Python实战AFM力曲线分析：从原始数据到力学性能</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/wet-lab-data/">湿实验数据处理</a>
+<span>2026-06-26</span><span>·</span><span>4 分钟阅读</span><span>·</span><a href="/categories/wet-lab-data/">湿实验数据处理</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/AFM/">AFM</a><a class="tag-pill" href="/tags/%E5%8A%9B%E6%9B%B2%E7%BA%BF/">力曲线</a><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a><a class="tag-pill" href="/tags/%E7%94%9F%E7%89%A9%E6%9D%90%E6%96%99/">生物材料</a><a class="tag-pill" href="/tags/%E5%8A%9B%E5%AD%A6%E6%80%A7%E8%83%BD/">力学性能</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么写这个教程">为什么写这个教程</a></li><li class="toc-h2"><a href="#核心分析流程">核心分析流程</a></li><li class="toc-h3"><a href="#1-afm力曲线数据结构">1. AFM力曲线数据结构</a></li><li class="toc-h3"><a href="#2-加载典型数据">2. 加载典型数据</a></li><li class="toc-h3"><a href="#3-偏转-力转换">3. 偏转-力转换</a></li><li class="toc-h3"><a href="#4-基线校正">4. 基线校正</a></li><li class="toc-h3"><a href="#5-接触点检测">5. 接触点检测</a></li><li class="toc-h3"><a href="#6-粘附力提取">6. 粘附力提取</a></li><li class="toc-h3"><a href="#7-hertz模型拟合杨氏模量">7. Hertz模型拟合杨氏模量</a></li><li class="toc-h2"><a href="#批量处理与进阶主题">批量处理与进阶主题</a></li><li class="toc-h3"><a href="#8-批量处理">8. 批量处理</a></li><li class="toc-h3"><a href="#9-常见坑">9. 常见坑</a></li><li class="toc-h3"><a href="#10-替代模型">10. 替代模型</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#讨论-afm力谱学在生物材料定量分析中的进展">讨论：AFM力谱学在生物材料定量分析中的进展</a></li></ul></details><h2 id="为什么写这个教程">为什么写这个教程</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#为什么写这个教程">为什么写这个教程</a></li><li class="toc-h2"><a href="#核心分析流程">核心分析流程</a></li><li class="toc-h3"><a href="#1-afm力曲线数据结构">1. AFM力曲线数据结构</a></li><li class="toc-h3"><a href="#2-加载典型数据">2. 加载典型数据</a></li><li class="toc-h3"><a href="#3-偏转-力转换">3. 偏转-力转换</a></li><li class="toc-h3"><a href="#4-基线校正">4. 基线校正</a></li><li class="toc-h3"><a href="#5-接触点检测">5. 接触点检测</a></li><li class="toc-h3"><a href="#6-粘附力提取">6. 粘附力提取</a></li><li class="toc-h3"><a href="#7-hertz模型拟合杨氏模量">7. Hertz模型拟合杨氏模量</a></li><li class="toc-h2"><a href="#批量处理与进阶主题">批量处理与进阶主题</a></li><li class="toc-h3"><a href="#8-批量处理">8. 批量处理</a></li><li class="toc-h3"><a href="#9-常见坑">9. 常见坑</a></li><li class="toc-h3"><a href="#10-替代模型">10. 替代模型</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#讨论-afm力谱学在生物材料定量分析中的进展">讨论：AFM力谱学在生物材料定量分析中的进展</a></li></ul></details><h2 id="为什么写这个教程">为什么写这个教程</h2>
 
 <p>做AFM力谱实验的朋友都知道：仪器导出一堆txt文件，在商业软件里手动处理几个小时。这个教程给你<strong>一套完整的Python流程</strong>，从读数据到出杨氏模量，不依赖任何商业软件。只用numpy、scipy、matplotlib。</p>
 
@@ -126,6 +126,10 @@ sensitivity = 45.0  # nm/V，偏转灵敏度
 force = deflection_to_force(deflection, k, sensitivity)
 </code></pre>
 
+<img src="/static/images/article-guides/mech-afm-calibration-zh.svg" alt="区分悬臂偏转与样品压入" loading="lazy">
+
+<p>标定后由偏转 d = SV 得到力 F = kd。取压向样品为压电位移正方向并扣除偏移后，压入深度为 δ = Δz − d；几何关系明确了压电位移与样品压入的区别。</p>
+
 <h3 id="4-基线校正">4. 基线校正</h3>
 
 <p>非接触区的力曲线应该是平坦的（零力），但实际中存在热漂移和激光干涉造成的微小斜率：</p>
@@ -163,6 +167,7 @@ def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
     for i in range(len(above_threshold) - window):
         if np.all(above_threshold[i:i + window]):
             return i + window // 2
+    raise ValueError(&quot;未找到接触点，请检查逼近段&quot;)
 
 contact_idx = find_contact_point(z_piezo, force)
 contact_z = z_piezo[contact_idx]
@@ -192,43 +197,57 @@ def extract_adhesion(z_piezo, force, contact_idx):
 
 <p>其中 E* = E / (1 - nu^2)。</p>
 
+<p>拟合函数接收逼近段，z 采用 nm、力采用 nN，返回的 E 为 Pa。应显式传入实测弹簧常数（N/m）和针尖半径。默认逼近时 z 减小；若仪器记录相反，使用 +1。拟合压入深度应远小于球形针尖半径，样品厚度应明显大于接触半径 a = sqrt(Rδ)。下方参数与教学曲线一致。</p>
+
 <pre><code class="language-python">
 def hertz_sphere(indentation, E_star, R):
-    &quot;&quot;&quot;Hertz球压头模型&quot;&quot;&quot;
+    &quot;&quot;&quot;SI units: indentation and R in m, E_star in Pa, force in N.&quot;&quot;&quot;
     return (4/3) * E_star * np.sqrt(R) * np.power(
         np.maximum(indentation, 0), 1.5
     )
 
 def fit_youngs_modulus(z_piezo, force, contact_idx,
-                        tip_radius_nm=20.0, poisson=0.5,
-                        fit_range_nm=50.0):
-    &quot;&quot;&quot;拟合Hertz模型提取杨氏模量&quot;&quot;&quot;
-    indent = z_piezo[contact_idx] - z_piezo
-    contact_force = force - force[contact_idx]
-    
+                        tip_radius_nm=5000.0, poisson=0.5,
+                        fit_range_nm=200.0, spring_constant=0.06,
+                        approach_direction=-1):
+    &quot;&quot;&quot;拟合逼近段：z 用 nm，力用 nN；返回 Pa 单位的模量与拟合误差。&quot;&quot;&quot;
+    if spring_constant &lt;= 0 or tip_radius_nm &lt;= 0:
+        raise ValueError(&quot;Spring constant and tip radius must be positive&quot;)
+    if approach_direction not in (-1, 1):
+        raise ValueError(&quot;approach_direction must be -1 or +1&quot;)
+    z_nm = np.asarray(z_piezo, dtype=float)
+    force_nN = np.asarray(force, dtype=float)
+    contact_force_nN = force_nN - force_nN[contact_idx]
+    advance_nm = approach_direction * (z_nm - z_nm[contact_idx])
+    deflection_nm = contact_force_nN / spring_constant
+    indentation_nm = advance_nm - deflection_nm
     fit_mask = (
-        (indent &gt; 0) &amp; (indent &lt; fit_range_nm) &amp; (contact_force &gt; 0)
+        (np.arange(len(z_nm)) &gt;= contact_idx)
+        &amp; (indentation_nm &gt; 0) &amp; (indentation_nm &lt; fit_range_nm)
+        &amp; (contact_force_nN &gt; 0)
+        &amp; np.isfinite(indentation_nm) &amp; np.isfinite(contact_force_nN)
     )
-    indent_fit = indent[fit_mask]
-    force_fit = contact_force[fit_mask]
-    
-    if len(indent_fit) &lt; 50:
-        print(&quot;警告: 拟合区数据点太少&quot;)
+    if np.count_nonzero(fit_mask) &lt; 50:
         return np.nan, np.nan
-    
-    def model(delta, E_star):
-        return hertz_sphere(delta, E_star, tip_radius_nm)
-    
+    indentation_m = indentation_nm[fit_mask] * 1e-9
+    radius_m = tip_radius_nm * 1e-9
+    force_fit_nN = contact_force_nN[fit_mask]
+
+    def model(delta_m, E_star_Pa):
+        return hertz_sphere(delta_m, E_star_Pa, radius_m) * 1e9
+
     popt, pcov = optimize.curve_fit(
-        model, indent_fit, force_fit,
-        p0=[1000], bounds=(1, 1e9)
+        model, indentation_m, force_fit_nN,
+        p0=[1e4], bounds=(1, 1e9)
     )
-    E_star = popt[0]
-    E = E_star * (1 - poisson**2)
+    E = popt[0] * (1 - poisson**2)
     E_std = np.sqrt(pcov[0, 0]) * (1 - poisson**2)
-    
     return E, E_std
 </code></pre>
+
+<img src="/static/images/article-guides/mech-afm-hertz-zh.svg" alt="由明确参数计算 Hertz 曲线" loading="lazy">
+
+<p>取 R = 5 μm、ν = 0.5、E = 10 或 30 kPa 计算 Hertz 曲线，可比较相同压入深度下模量对力的影响。模型采用刚性球形压头、均匀弹性半空间与可忽略黏附的假设，图中为解析教学曲线。</p>
 
 <h2 id="批量处理与进阶主题">批量处理与进阶主题</h2>
 <h3 id="8-批量处理">8. 批量处理</h3>
@@ -239,19 +258,23 @@ def fit_youngs_modulus(z_piezo, force, contact_idx,
 import glob
 from pathlib import Path
 
-def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
+def batch_process_curves(data_dir, k=0.06, sensitivity=45.0, approach_direction=-1):
     &quot;&quot;&quot;批量处理AFM力曲线，提取力学性能&quot;&quot;&quot;
     results = []
     for filepath in sorted(glob.glob(f&quot;{data_dir}/*.txt&quot;)):
         try:
             z, deflection = load_afm_curve(filepath, skip_rows=320)
             force = deflection_to_force(deflection, k, sensitivity)
-            cidx = find_contact_point(z, force)
+            turn_idx = int(np.argmax(approach_direction * z))
+            z_approach = z[:turn_idx + 1]
+            cidx = find_contact_point(z_approach, force[:turn_idx + 1])
             force_corr = baseline_correct(z, force, cidx)
-            adhesion = extract_adhesion(z, force_corr, cidx)
+            adhesion = (extract_adhesion(z, force_corr, turn_idx)
+                        if turn_idx + 1 &lt; len(z) else np.nan)
             E, E_std = fit_youngs_modulus(
-                z, force_corr, cidx,
-                tip_radius_nm=20.0, poisson=0.5
+                z_approach, force_corr[:turn_idx + 1], cidx,
+                tip_radius_nm=5000.0, poisson=0.5,
+                spring_constant=k, approach_direction=approach_direction
             )
             results.append({
                 &quot;file&quot;: Path(filepath).name,
@@ -309,12 +332,8 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 
 <p>数据处理的标准化和自动化是当前的研究热点。不同的基线校正方法、接触点确定算法和拟合模型可能导致同一组数据得到显著不同的模量值。开源数据处理工具如AtomicJ和PyJibe正在推动AFM数据分析的标准化。建立社区共识的数据处理流程对于提高研究的可复现性和可比性至关重要。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/ml-predict-fiber-mechanics-zh/">← 机器学习预测纤维材料力学性能：从数据准备到模型部署</a></span><span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/ml-predict-fiber-mechanics-zh/">← 机器学习预测纤维材料力学性能：从数据准备到模型部署</a></span><span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -325,7 +344,7 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -333,11 +352,11 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

@@ -1,11 +1,12 @@
 ---
 title: "Practical SEM Image Analysis for Biomaterials Research"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "wet-lab-data"
 tags: ["SEM", "image-analysis", "fiber-morphology", "python", "skimage"]
 lang: "en"
 slug: "sem-image-analysis"
-description: "How to analyze SEM images of fiber networks with Python: thresholding, fiber measurement, orientation analysis, and batch processing using scikit-image."
+description: "Turn fiber micrographs into calibrated measurements with preprocessing, thresholding, mask cleanup and skeleton analysis. Synthetic geometry explains local diameter and orientation extraction, while Python examples support repeatable batch processing."
 ---
 
 ## Why Automate SEM Analysis?
@@ -67,6 +68,10 @@ closed = morphology.binary_closing(cleaned, selem)
 skeleton = morphology.skeletonize(closed)
 ```
 
+![One geometry, three image representations](/static/images/article-guides/mech-sem-masks-en.svg)
+
+The same synthetic fiber geometry is shown as an intensity image, a foreground mask and a centerline overlay. Threshold selection changes the mask; skeletonization supplies the locations where a local distance-transform width can be sampled.
+
 ### Step 4: Measure Fiber Properties
 
 ```python
@@ -80,15 +85,30 @@ props = measure.regionprops_table(labels, properties=[
 import pandas as pd
 df_fibers = pd.DataFrame(props)
 
-# Fiber diameter = minor_axis_length (approximate)
-df_fibers["diameter_px"] = df_fibers["minor_axis_length"]
+# Equivalent-ellipse shape descriptor from second moments
+df_fibers["ellipse_minor_axis_px"] = df_fibers["minor_axis_length"]
 df_fibers["aspect_ratio"] = (df_fibers["major_axis_length"] /
                                df_fibers["minor_axis_length"])
 
 print(f"Found {len(df_fibers)} fiber segments")
-print(f"Mean diameter: {df_fibers['diameter_px'].mean():.1f} +/- {df_fibers['diameter_px'].std():.1f} px")
+print(f"Mean ellipse minor axis: {df_fibers['ellipse_minor_axis_px'].mean():.1f} +/- {df_fibers['ellipse_minor_axis_px'].std():.1f} px")
 print(f"Mean aspect ratio: {df_fibers['aspect_ratio'].mean():.2f}")
 ```
+
+The `minor_axis_length` returned by `regionprops` is the minor axis of an ellipse with the same normalized second moments as the connected region. It describes the whole object; local widths along an isolated fiber can instead be estimated from the distance transform sampled on its skeleton. The pixel grid and segmentation boundary set the resolution of that estimate. [scikit-image region properties](https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops), [SciPy distance transform](https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.distance_transform_edt.html).
+
+```python
+from scipy.ndimage import distance_transform_edt
+
+# Example calibration: replace with the SEM scale-bar value
+scale_nm_per_px = 2.5
+radius_nm = distance_transform_edt(closed, sampling=scale_nm_per_px)
+local_width_nm = 2 * radius_nm[skeleton]
+```
+
+![Convert pixels into a local fiber width](/static/images/article-guides/mech-sem-width-en.svg)
+
+For an isolated straight strip, the local width is d = 2rpxs, with rpx the distance from a skeleton point to the nearest background and s the physical length per pixel. Crossings, branches and edge-truncated objects require separate review.
 
 ### Step 5: Orientation Analysis
 
@@ -130,7 +150,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
         results.append({
             "file": Path(filepath).name,
             "n_fibers": len(df),
-            "mean_diameter_nm": df["minor_axis_length"].mean() * scale_nm_per_px,
+            "mean_ellipse_minor_axis_nm": df["minor_axis_length"].mean() * scale_nm_per_px,
             "coverage_pct": cleaned.mean() * 100,
         })
     return pd.DataFrame(results)

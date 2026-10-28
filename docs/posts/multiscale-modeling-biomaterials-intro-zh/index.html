@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>多尺度模拟在纤维生物材料中的应用入门 — ML-Biomat</title>
-<meta name="description" content="多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="根据生物材料研究问题选择分子、介观与连续介质模型。沿构象统计和有效刚度的传递关系，结合代表性体积平均与 Python 示例，理解尺度之间如何交换参数、单位和适用条件。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="多尺度模拟在纤维生物材料中的应用入门">
-<meta property="og:description" content="多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="根据生物材料研究问题选择分子、介观与连续介质模型。沿构象统计和有效刚度的传递关系，结合代表性体积平均与 Python 示例，理解尺度之间如何交换参数、单位和适用条件。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "多尺度模拟在纤维生物材料中的应用入门", "description": "多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 326, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/", "image": "https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "多尺度模拟在纤维生物材料中的应用入门", "item": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "多尺度模拟在纤维生物材料中的应用入门", "description": "根据生物材料研究问题选择分子、介观与连续介质模型。沿构象统计和有效刚度的传递关系，结合代表性体积平均与 Python 示例，理解尺度之间如何交换参数、单位和适用条件。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 1526, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/", "image": "https://ml-biomat.com/static/images/og/multiscale-modeling-biomaterials-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "多尺度模拟在纤维生物材料中的应用入门", "item": "https://ml-biomat.com/posts/multiscale-modeling-biomaterials-intro-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>多尺度模拟在纤维生物材料中的应用入门</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/multiscale-modeling/">多尺度模拟</a>
+<span>2026-06-26</span><span>·</span><span>4 分钟阅读</span><span>·</span><a href="/categories/multiscale-modeling/">多尺度模拟</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%A8%A1%E6%8B%9F/">多尺度模拟</a><a class="tag-pill" href="/tags/%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6/">分子动力学</a><a class="tag-pill" href="/tags/%E6%9C%89%E9%99%90%E5%85%83/">有限元</a><a class="tag-pill" href="/tags/%E7%BA%A4%E7%BB%B4%E6%9D%90%E6%96%99/">纤维材料</a><a class="tag-pill" href="/tags/%E7%94%9F%E7%89%A9%E6%9D%90%E6%96%99/">生物材料</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么要做多尺度模拟">为什么要做多尺度模拟</a></li><li class="toc-h2"><a href="#三个尺度的工具箱">三个尺度的工具箱</a></li><li class="toc-h3"><a href="#分子尺度-埃-纳米">分子尺度（埃～纳米）</a></li><li class="toc-h3"><a href="#介观尺度-纳米-微米">介观尺度（纳米～微米）</a></li><li class="toc-h3"><a href="#连续介质尺度-微米-毫米">连续介质尺度（微米～毫米）</a></li><li class="toc-h2"><a href="#用-python-串联多尺度">用 Python 串联多尺度</a></li><li class="toc-h2"><a href="#实操建议">实操建议</a></li><li class="toc-h2"><a href="#常见问题">常见问题</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#讨论-多尺度模拟的未来方向">讨论：多尺度模拟的未来方向</a></li></ul></details><h2 id="为什么要做多尺度模拟">为什么要做多尺度模拟</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#为什么要做多尺度模拟">为什么要做多尺度模拟</a></li><li class="toc-h2"><a href="#三个尺度的工具箱">三个尺度的工具箱</a></li><li class="toc-h3"><a href="#分子尺度-埃-纳米">分子尺度（埃～纳米）</a></li><li class="toc-h3"><a href="#介观尺度-纳米-微米">介观尺度（纳米～微米）</a></li><li class="toc-h3"><a href="#连续介质尺度-微米-毫米">连续介质尺度（微米～毫米）</a></li><li class="toc-h2"><a href="#用-python-串联多尺度">用 Python 串联多尺度</a></li><li class="toc-h2"><a href="#实操建议">实操建议</a></li><li class="toc-h2"><a href="#常见问题">常见问题</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#讨论-多尺度模拟的未来方向">讨论：多尺度模拟的未来方向</a></li></ul></details><h2 id="为什么要做多尺度模拟">为什么要做多尺度模拟</h2>
 
 <p>纤维类生物材料——胶原蛋白网络、丝素蛋白、纤维素、工程蛋白支架——其力学行为横跨 <strong>六个数量级</strong> 的长度尺度：从埃级的氢键到毫米级的组织架构。要理解纳米尺度的相互作用如何决定宏观力学性能，多尺度模拟是不可或缺的工具。</p>
 
@@ -114,6 +114,10 @@ for rate in strain_rates:
 </ul>
 <p>关键问题：从分子模拟中得到的刚度如何映射到 FEA 的材料卡片？</p>
 
+<img src="/static/images/article-guides/mech-multiscale-transfer-zh.svg" alt="跨尺度传递的是物理量" loading="lazy">
+
+<p>分子模型可向介观链或网络模型提供构象统计，介观模型再向连续介质模型提供有效响应。每次传递都应保留参数单位、状态点和标定范围。</p>
+
 <h2 id="用-python-串联多尺度">用 Python 串联多尺度</h2>
 
 <p>多尺度模拟的真正威力在于打通上下游。以下是一个最简示例，展示如何将 MD 算出的杨氏模量传递给 FEA：</p>
@@ -138,6 +142,10 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
     }
     return fea_params
 </code></pre>
+
+<img src="/static/images/article-guides/mech-multiscale-rve-zh.svg" alt="从代表性体积得到有效刚度" loading="lazy">
+
+<p>在侧面自由的小应变单轴加载下，对代表性体积的局部轴向应力求体积平均可得到宏观应力。Eeff = ⟨σxx⟩/εxx 描述这一加载条件；各向异性和不同约束需采用相应的刚度分量。</p>
 
 <h2 id="实操建议">实操建议</h2>
 
@@ -180,12 +188,8 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 
 <p>不确定度量化应该成为多尺度模拟的标准组成部分。目前大多数多尺度模拟研究只报告单一的"确定性"结果，忽略了各尺度模型的累积误差。贝叶斯框架和蒙特卡洛方法可以量化从分子参数到宏观性能的误差传播。在向实验科学家提供计算指导时，报告预测区间比报告单一数值更有价值。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/afm-force-curve-python-zh/">← Python实战AFM力曲线分析：从原始数据到力学性能</a></span><span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-07</span><a href="/posts/coarse-grained-biomolecular-networks-zh/">生物分子网络的粗粒化建模：从映射方案到验证方法</a></li><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation-zh/">分子动力学入门：你的第一个LAMMPS模拟</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/afm-force-curve-python-zh/">← Python实战AFM力曲线分析：从原始数据到力学性能</a></span><span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-07</span><a href="/posts/coarse-grained-biomolecular-networks-zh/">生物分子网络的粗粒化建模：从映射方案到验证方法</a></li><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation-zh/">分子动力学入门：你的第一个LAMMPS模拟</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -196,7 +200,7 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -204,11 +208,11 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

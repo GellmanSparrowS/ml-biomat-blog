@@ -1,11 +1,12 @@
 ---
 title: "Pandas实验数据处理实战：从原始数据到统计分析"
 date: "2026-06-27"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["pandas", "数据处理", "统计分析", "实验数据", "python"]
 lang: "zh"
 slug: "pandas-materials-data-zh"
-description: "Pandas实验数据处理实战：从原始数据到统计分析。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "用 DataFrame 整理实验记录，处理缺失值、列名与异常数据，再按实验条件汇总重复测量。结合样品编号合并、数据透视和结果导出，保留样品与测量之间的对应关系，方便继续绘图和建模。"
 ---
 
 Pandas是Python中最强大的表格数据处理库。对于材料科学和生物学研究生来说，它是连接原始实验数据和统计分析的桥梁。无论你需要处理拉伸测试的多组数据、对比不同处理条件下的纤维形态参数、还是整合多个仪器导出的测量结果，Pandas都能让这些任务从数小时的Excel手动操作变成几行代码的自动化流程。
@@ -46,6 +47,11 @@ for col in ["modulus_GPa"]:
 
 ## 三、分组统计：多条件实验的核心分析
 
+![将四条教学测量按条件分组，A 组均值为 3 GPa，B 组为 7 GPa，各有两个样本](/static/images/article-guides/comp-guide-groupby-zh.svg)
+
+将四条教学测量按条件分组，A 组均值为 3 GPa，B 组为 7 GPa，各有两个样本。把样本数与均值一起保留，可以让汇总结果更容易解释。
+
+
 按处理条件分组计算统计量是实验数据分析中最常见的需求。groupby加agg的组合可以一次性计算所有需要的统计指标：
 
 ```python
@@ -56,6 +62,11 @@ summary = df.groupby("treatment").agg({
 ```
 
 ## 四、数据合并与导出
+
+![按样品编号进行内连接，把力学表和形貌表对应起来](/static/images/article-guides/comp-guide-merge-zh.svg)
+
+按样品编号进行内连接，把力学表和形貌表对应起来。两张教学表只有 A2 共同出现，合并后得到它的模量 3 GPa 与直径 50 nm。
+
 
 多个实验的合并和格式化导出是完成分析的最后步骤。Pandas支持将处理结果导出为多种格式：
 

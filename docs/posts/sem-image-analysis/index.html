@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Practical SEM Image Analysis for Biomaterials Research — ML-Biomat</title>
-<meta name="description" content="How to analyze SEM images of fiber networks with Python: thresholding, fiber measurement, orientation analysis, and batch processing using scikit-image.">
+<meta name="description" content="Turn fiber micrographs into calibrated measurements with preprocessing, thresholding, mask cleanup and skeleton analysis. Synthetic geometry explains local diameter and orientation extraction, while Python examples support repeatable batch processing.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/sem-image-analysis/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/sem-image-analysis/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/sem-image-analysis-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/sem-image-analysis/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Practical SEM Image Analysis for Biomaterials Research">
-<meta property="og:description" content="How to analyze SEM images of fiber networks with Python: thresholding, fiber measurement, orientation analysis, and batch processing using scikit-image.">
+<meta property="og:description" content="Turn fiber micrographs into calibrated measurements with preprocessing, thresholding, mask cleanup and skeleton analysis. Synthetic geometry explains local diameter and orientation extraction, while Python examples support repeatable batch processing.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/sem-image-analysis/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/sem-image-analysis.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical SEM Image Analysis for Biomaterials Research", "description": "How to analyze SEM images of fiber networks with Python: thresholding, fiber measurement, orientation analysis, and batch processing using scikit-image.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 512, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/sem-image-analysis/", "image": "https://ml-biomat.com/static/images/og/sem-image-analysis.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Wet-lab Data Processing", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Practical SEM Image Analysis for Biomaterials Research", "item": "https://ml-biomat.com/posts/sem-image-analysis/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical SEM Image Analysis for Biomaterials Research", "description": "Turn fiber micrographs into calibrated measurements with preprocessing, thresholding, mask cleanup and skeleton analysis. Synthetic geometry explains local diameter and orientation extraction, while Python examples support repeatable batch processing.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 363, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/sem-image-analysis/", "image": "https://ml-biomat.com/static/images/og/sem-image-analysis.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Wet-lab Data Processing", "item": "https://ml-biomat.com/categories/wet-lab-data/en/"}, {"@type": "ListItem", "position": 3, "name": "Practical SEM Image Analysis for Biomaterials Research", "item": "https://ml-biomat.com/posts/sem-image-analysis/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Practical SEM Image Analysis for Biomaterials Research</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/wet-lab-data/">Wet-lab Data Processing</a>
+<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/wet-lab-data/en/">Wet-lab Data Processing</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/SEM/">SEM</a><a class="tag-pill" href="/tags/image-analysis/">image-analysis</a><a class="tag-pill" href="/tags/fiber-morphology/">fiber-morphology</a><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/skimage/">skimage</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-automate-sem-analysis">Why Automate SEM Analysis?</a></li><li class="toc-h2"><a href="#the-analysis-pipeline">The Analysis Pipeline</a></li><li class="toc-h3"><a href="#step-1-load-and-preprocess">Step 1: Load and Preprocess</a></li><li class="toc-h3"><a href="#step-2-thresholding">Step 2: Thresholding</a></li><li class="toc-h3"><a href="#step-3-clean-the-binary-mask">Step 3: Clean the Binary Mask</a></li><li class="toc-h3"><a href="#step-4-measure-fiber-properties">Step 4: Measure Fiber Properties</a></li><li class="toc-h3"><a href="#step-5-orientation-analysis">Step 5: Orientation Analysis</a></li><li class="toc-h3"><a href="#step-6-batch-processing">Step 6: Batch Processing</a></li><li class="toc-h2"><a href="#common-pitfalls">Common Pitfalls</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-automate-sem-analysis">Why Automate SEM Analysis?</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-automate-sem-analysis">Why Automate SEM Analysis?</a></li><li class="toc-h2"><a href="#the-analysis-pipeline">The Analysis Pipeline</a></li><li class="toc-h3"><a href="#step-1-load-and-preprocess">Step 1: Load and Preprocess</a></li><li class="toc-h3"><a href="#step-2-thresholding">Step 2: Thresholding</a></li><li class="toc-h3"><a href="#step-3-clean-the-binary-mask">Step 3: Clean the Binary Mask</a></li><li class="toc-h3"><a href="#step-4-measure-fiber-properties">Step 4: Measure Fiber Properties</a></li><li class="toc-h3"><a href="#step-5-orientation-analysis">Step 5: Orientation Analysis</a></li><li class="toc-h3"><a href="#step-6-batch-processing">Step 6: Batch Processing</a></li><li class="toc-h2"><a href="#common-pitfalls">Common Pitfalls</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-automate-sem-analysis">Why Automate SEM Analysis?</h2>
 
 <p>Manual measurement of fiber diameters and orientations from SEM images is tedious, subjective, and irreproducible. A Python script does it consistently in seconds per image. This guide uses scikit-image, a library purpose-built for scientific image analysis.</p>
 
@@ -108,6 +108,10 @@ closed = morphology.binary_closing(cleaned, selem)
 skeleton = morphology.skeletonize(closed)
 </code></pre>
 
+<img src="/static/images/article-guides/mech-sem-masks-en.svg" alt="One geometry, three image representations" loading="lazy">
+
+<p>The same synthetic fiber geometry is shown as an intensity image, a foreground mask and a centerline overlay. Threshold selection changes the mask; skeletonization supplies the locations where a local distance-transform width can be sampled.</p>
+
 <h3 id="step-4-measure-fiber-properties">Step 4: Measure Fiber Properties</h3>
 
 <pre><code class="language-python">
@@ -121,15 +125,30 @@ props = measure.regionprops_table(labels, properties=[
 import pandas as pd
 df_fibers = pd.DataFrame(props)
 
-# Fiber diameter = minor_axis_length (approximate)
-df_fibers[&quot;diameter_px&quot;] = df_fibers[&quot;minor_axis_length&quot;]
+# Equivalent-ellipse shape descriptor from second moments
+df_fibers[&quot;ellipse_minor_axis_px&quot;] = df_fibers[&quot;minor_axis_length&quot;]
 df_fibers[&quot;aspect_ratio&quot;] = (df_fibers[&quot;major_axis_length&quot;] /
                                df_fibers[&quot;minor_axis_length&quot;])
 
 print(f&quot;Found {len(df_fibers)} fiber segments&quot;)
-print(f&quot;Mean diameter: {df_fibers[&#x27;diameter_px&#x27;].mean():.1f} +/- {df_fibers[&#x27;diameter_px&#x27;].std():.1f} px&quot;)
+print(f&quot;Mean ellipse minor axis: {df_fibers[&#x27;ellipse_minor_axis_px&#x27;].mean():.1f} +/- {df_fibers[&#x27;ellipse_minor_axis_px&#x27;].std():.1f} px&quot;)
 print(f&quot;Mean aspect ratio: {df_fibers[&#x27;aspect_ratio&#x27;].mean():.2f}&quot;)
 </code></pre>
+
+<p>The <code>minor_axis_length</code> returned by <code>regionprops</code> is the minor axis of an ellipse with the same normalized second moments as the connected region. It describes the whole object; local widths along an isolated fiber can instead be estimated from the distance transform sampled on its skeleton. The pixel grid and segmentation boundary set the resolution of that estimate. <a href="https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops">scikit-image region properties</a>, <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.distance_transform_edt.html">SciPy distance transform</a>.</p>
+
+<pre><code class="language-python">
+from scipy.ndimage import distance_transform_edt
+
+# Example calibration: replace with the SEM scale-bar value
+scale_nm_per_px = 2.5
+radius_nm = distance_transform_edt(closed, sampling=scale_nm_per_px)
+local_width_nm = 2 * radius_nm[skeleton]
+</code></pre>
+
+<img src="/static/images/article-guides/mech-sem-width-en.svg" alt="Convert pixels into a local fiber width" loading="lazy">
+
+<p>For an isolated straight strip, the local width is d = 2rpxs, with rpx the distance from a skeleton point to the nearest background and s the physical length per pixel. Crossings, branches and edge-truncated objects require separate review.</p>
 
 <h3 id="step-5-orientation-analysis">Step 5: Orientation Analysis</h3>
 
@@ -171,7 +190,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
         results.append({
             &quot;file&quot;: Path(filepath).name,
             &quot;n_fibers&quot;: len(df),
-            &quot;mean_diameter_nm&quot;: df[&quot;minor_axis_length&quot;].mean() * scale_nm_per_px,
+            &quot;mean_ellipse_minor_axis_nm&quot;: df[&quot;minor_axis_length&quot;].mean() * scale_nm_per_px,
             &quot;coverage_pct&quot;: cleaned.mean() * 100,
         })
     return pd.DataFrame(results)
@@ -192,11 +211,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 <li>GitHub: <a href="https://github.com/scikit-image/scikit-image">scikit-image/scikit-image</a></li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/scipy-curve-fitting/">← Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></span><span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/scipy-curve-fitting/">← Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></span><span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python/">Practical AFM Force Curve Analysis with Python</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -216,11 +231,11 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

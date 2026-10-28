@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Setting Up a Python Scientific Computing Environment — ML-Biomat</title>
-<meta name="description" content="A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students.">
+<meta name="description" content="Set up isolated Python environments, install the scientific stack, and connect the right interpreter to JupyterLab and VS Code. Learn how to diagnose package conflicts and reproduce a working setup.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/python-env-setup/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/python-env-setup/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/python-env-setup-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/python-env-setup/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Setting Up a Python Scientific Computing Environment">
-<meta property="og:description" content="A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students.">
+<meta property="og:description" content="Set up isolated Python environments, install the scientific stack, and connect the right interpreter to JupyterLab and VS Code. Learn how to diagnose package conflicts and reproduce a working setup.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/python-env-setup/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/python-env-setup.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Setting Up a Python Scientific Computing Environment", "description": "A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students.", "datePublished": "2026-07-06", "dateModified": "2026-07-06", "wordCount": 4571, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/python-env-setup/", "image": "https://ml-biomat.com/static/images/og/python-env-setup.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Setting Up a Python Scientific Computing Environment", "item": "https://ml-biomat.com/posts/python-env-setup/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Setting Up a Python Scientific Computing Environment", "description": "Set up isolated Python environments, install the scientific stack, and connect the right interpreter to JupyterLab and VS Code. Learn how to diagnose package conflicts and reproduce a working setup.", "datePublished": "2026-07-06", "dateModified": "2026-10-28", "wordCount": 4402, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/python-env-setup/", "image": "https://ml-biomat.com/static/images/og/python-env-setup.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "Setting Up a Python Scientific Computing Environment", "item": "https://ml-biomat.com/posts/python-env-setup/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Setting Up a Python Scientific Computing Environment</h1>
 <div class="article-meta">
-<span>2026-07-06</span><span>·</span><span>22 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+<span>2026-07-06</span><span>·</span><span>22 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Python Tutorials</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/conda/">conda</a><a class="tag-pill" href="/tags/jupyter/">jupyter</a><a class="tag-pill" href="/tags/mamba/">mamba</a><a class="tag-pill" href="/tags/scientific-computing/">scientific-computing</a><a class="tag-pill" href="/tags/environment-setup/">environment-setup</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#getting-started">Getting Started</a></li><li class="toc-h3"><a href="#1-why-environment-management-matters-the-version-conflict-problem">1. Why Environment Management Matters — The Version Conflict Problem</a></li><li class="toc-h3"><a href="#2-anaconda-or-miniconda-choose-what-fits-don-t-overthink-it">2. Anaconda or Miniconda — Choose What Fits, Don't Overthink It</a></li><li class="toc-h3"><a href="#3-platform-specific-installation-windows-macos-and-linux">3. Platform-Specific Installation: Windows, macOS, and Linux</a></li><li class="toc-h2"><a href="#daily-workflow">Daily Workflow</a></li><li class="toc-h3"><a href="#4-creating-and-managing-virtual-environments-core-isolation-operations">4. Creating and Managing Virtual Environments — Core Isolation Operations</a></li><li class="toc-h3"><a href="#5-installing-core-scientific-computing-packages-understanding-what-each-tool-does">5. Installing Core Scientific Computing Packages — Understanding What Each Tool Does</a></li><li class="toc-h3"><a href="#6-jupyterlab-the-core-interactive-scientific-computing-environment">6. JupyterLab — The Core Interactive Scientific Computing Environment</a></li><li class="toc-h3"><a href="#7-vs-code-integration-from-exploratory-analysis-to-engineering-grade-development">7. VS Code Integration — From Exploratory Analysis to Engineering-Grade Development</a></li><li class="toc-h2"><a href="#maintenance-and-troubleshooting">Maintenance and Troubleshooting</a></li><li class="toc-h3"><a href="#8-the-conda-pip-relationship-and-best-practices">8. The conda–pip Relationship and Best Practices</a></li><li class="toc-h3"><a href="#9-network-acceleration-for-users-in-china">9. Network Acceleration for Users in China</a></li><li class="toc-h3"><a href="#10-troubleshooting-reference">10. Troubleshooting Reference</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="getting-started">Getting Started</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#getting-started">Getting Started</a></li><li class="toc-h3"><a href="#1-why-environment-management-matters-the-version-conflict-problem">1. Why Environment Management Matters — The Version Conflict Problem</a></li><li class="toc-h3"><a href="#2-anaconda-or-miniconda-choose-what-fits-don-t-overthink-it">2. Anaconda or Miniconda — Choose What Fits, Don't Overthink It</a></li><li class="toc-h3"><a href="#3-platform-specific-installation-windows-macos-and-linux">3. Platform-Specific Installation: Windows, macOS, and Linux</a></li><li class="toc-h2"><a href="#daily-workflow">Daily Workflow</a></li><li class="toc-h3"><a href="#4-creating-and-managing-virtual-environments-core-isolation-operations">4. Creating and Managing Virtual Environments — Core Isolation Operations</a></li><li class="toc-h3"><a href="#5-installing-core-scientific-computing-packages-understanding-what-each-tool-does">5. Installing Core Scientific Computing Packages — Understanding What Each Tool Does</a></li><li class="toc-h3"><a href="#6-jupyterlab-the-core-interactive-scientific-computing-environment">6. JupyterLab — The Core Interactive Scientific Computing Environment</a></li><li class="toc-h3"><a href="#7-vs-code-integration-from-exploratory-analysis-to-engineering-grade-development">7. VS Code Integration — From Exploratory Analysis to Engineering-Grade Development</a></li><li class="toc-h2"><a href="#maintenance-and-troubleshooting">Maintenance and Troubleshooting</a></li><li class="toc-h3"><a href="#8-the-conda-pip-relationship-and-best-practices">8. The conda–pip Relationship and Best Practices</a></li><li class="toc-h3"><a href="#9-network-acceleration-for-users-in-china">9. Network Acceleration for Users in China</a></li><li class="toc-h3"><a href="#10-troubleshooting-reference">10. Troubleshooting Reference</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="getting-started">Getting Started</h2>
 <h3 id="1-why-environment-management-matters-the-version-conflict-problem">1. Why Environment Management Matters — The Version Conflict Problem</h3>
 
 <p>Many graduate students have a frustrating first encounter with Python. You find a script online for processing AFM data or XRD diffraction patterns, install the required libraries following a tutorial, and it works. A few weeks later, your supervisor sends a machine learning analysis script. After installing its dependencies, the original script suddenly crashes with a version incompatibility error — and you haven't changed a thing. This experience is almost universal among graduate students, and the root cause is straightforward: when every package is installed into the same global Python environment, conflicting version requirements between projects inevitably cause breakage.</p>
@@ -130,6 +130,11 @@ conda --version
 
 <h2 id="daily-workflow">Daily Workflow</h2>
 <h3 id="4-creating-and-managing-virtual-environments-core-isolation-operations">4. Creating and Managing Virtual Environments — Core Isolation Operations</h3>
+
+<img src="/static/images/article-guides/comp-guide-environment-isolation-en.svg" alt="Each project keeps its own Python interpreter and package versions" loading="lazy">
+
+<p>Each project keeps its own Python interpreter and package versions. The version labels are schematic; activating an environment chooses which installation a command will use.</p>
+
 
 <p>With the motivation for virtual environments established, the actual creation and management commands are quite intuitive. This section covers the full lifecycle of an environment, including the critically important reproducibility workflow.</p>
 
@@ -215,6 +220,11 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvi
 <hr>
 
 <h3 id="6-jupyterlab-the-core-interactive-scientific-computing-environment">6. JupyterLab — The Core Interactive Scientific Computing Environment</h3>
+
+<img src="/static/images/article-guides/comp-guide-jupyter-kernel-en.svg" alt="The browser displays the notebook, while the selected kernel executes its cells" loading="lazy">
+
+<p>The browser displays the notebook, while the selected kernel executes its cells. Check sys.executable inside a cell to identify the Python installation and locate packages in the correct environment.</p>
+
 
 <p>JupyterLab is the most widely used interactive computing environment in modern scientific research. Running in a browser, it integrates in a single interface: code editing and execution, inline figure display, Markdown text with LaTeX mathematical formula rendering, file system browsing, and an embedded terminal. For scientific work that must simultaneously present experimental data, computational logic, visualization results, and scientific interpretation, the Notebook format — a "computational document" — has irreplaceable value. A Notebook is not merely a programming tool; it is a medium for recording the scientific exploration process, making "code as experimental record" a practical reality.</p>
 
@@ -380,11 +390,7 @@ trusted-host = mirrors.tuna.tsinghua.edu.cn
 <li>McKinney, W. (2010). Data structures for statistical computing in Python. <em>Proceedings of the 9th Python in Science Conference (SciPy 2010)</em>, 56–61. https://doi.org/10.25080/Majora-92bf1922-00a</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/regression-models-ml/">← Common Regression Models in Machine Learning</a></span><span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/regression-models-ml/">← Common Regression Models in Machine Learning</a></span><span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -404,11 +410,11 @@ trusted-host = mirrors.tuna.tsinghua.edu.cn
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

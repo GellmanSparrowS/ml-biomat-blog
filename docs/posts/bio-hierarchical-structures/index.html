@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hierarchical Superstructures in Biomaterials — ML-Biomat</title>
-<meta name="description" content="A navigational guide to hierarchical superstructures in biomaterials: silk fibroin, collagen, bone, nacre, spider silk, and cellulose analyzed through their structure-mechanics relationships.">
+<meta name="description" content="Explore how silk, collagen, bone, nacre and cellulose organize structural units across scales. Collagen packing and platelet-interface diagrams explain load transfer and crack deflection, with links to characterization and modeling methods.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/bio-hierarchical-structures/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/bio-hierarchical-structures/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/bio-hierarchical-structures-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/bio-hierarchical-structures/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Hierarchical Superstructures in Biomaterials">
-<meta property="og:description" content="A navigational guide to hierarchical superstructures in biomaterials: silk fibroin, collagen, bone, nacre, spider silk, and cellulose analyzed through their structure-mechanics relationships.">
+<meta property="og:description" content="Explore how silk, collagen, bone, nacre and cellulose organize structural units across scales. Collagen packing and platelet-interface diagrams explain load transfer and crack deflection, with links to characterization and modeling methods.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/bio-hierarchical-structures/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/bio-hierarchical-structures.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Hierarchical Superstructures in Biomaterials", "description": "A navigational guide to hierarchical superstructures in biomaterials: silk fibroin, collagen, bone, nacre, spider silk, and cellulose analyzed through their structure-mechanics relationships.", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 1436, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/bio-hierarchical-structures/", "image": "https://ml-biomat.com/static/images/og/bio-hierarchical-structures.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "Hierarchical Superstructures in Biomaterials", "item": "https://ml-biomat.com/posts/bio-hierarchical-structures/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Hierarchical Superstructures in Biomaterials", "description": "Explore how silk, collagen, bone, nacre and cellulose organize structural units across scales. Collagen packing and platelet-interface diagrams explain load transfer and crack deflection, with links to characterization and modeling methods.", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 1425, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/bio-hierarchical-structures/", "image": "https://ml-biomat.com/static/images/og/bio-hierarchical-structures.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/en/"}, {"@type": "ListItem", "position": 3, "name": "Hierarchical Superstructures in Biomaterials", "item": "https://ml-biomat.com/posts/bio-hierarchical-structures/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Hierarchical Superstructures in Biomaterials</h1>
 <div class="article-meta">
-<span>2026-06-30</span><span>·</span><span>7 min read</span><span>·</span><a href="/categories/biomaterials/">Bio-Materials-Structures</a>
+<span>2026-06-30</span><span>·</span><span>7 min read</span><span>·</span><a href="/categories/biomaterials/en/">Bio-Materials-Structures</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/hierarchical%20structures/">hierarchical structures</a><a class="tag-pill" href="/tags/superstructures/">superstructures</a><a class="tag-pill" href="/tags/biomaterials/">biomaterials</a><a class="tag-pill" href="/tags/mechanical%20design/">mechanical design</a><a class="tag-pill" href="/tags/silk/">silk</a><a class="tag-pill" href="/tags/collagen/">collagen</a><a class="tag-pill" href="/tags/nacre/">nacre</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#what-are-hierarchical-superstructures">What Are Hierarchical Superstructures?</a></li><li class="toc-h2"><a href="#biological-examples-nature-s-nested-designs">Biological Examples: Nature's Nested Designs</a></li><li class="toc-h3"><a href="#1-silk-fibroin-beta-sheet-crystals-and-nanofibrils">1. Silk Fibroin: Beta-Sheet Crystals and Nanofibrils</a></li><li class="toc-h3"><a href="#2-collagen-triple-helix-to-tough-fibers">2. Collagen: Triple Helix to Tough Fibers</a></li><li class="toc-h3"><a href="#3-bone-organic-inorganic-composite-hierarchy">3. Bone: Organic-Inorganic Composite Hierarchy</a></li><li class="toc-h3"><a href="#4-nacre-mother-of-pearl-brick-and-mortar-toughness">4. Nacre (Mother-of-Pearl): Brick-and-Mortar Toughness</a></li><li class="toc-h3"><a href="#5-spider-silk-crystalline-amorphous-networks">5. Spider Silk: Crystalline/Amorphous Networks</a></li><li class="toc-h3"><a href="#6-cellulose-multi-layered-cell-wall-design">6. Cellulose: Multi-Layered Cell Wall Design</a></li><li class="toc-h2"><a href="#design-principles-and-synthesis">Design Principles and Synthesis</a></li><li class="toc-h3"><a href="#common-design-principles">Common Design Principles</a></li><li class="toc-h3"><a href="#hierarchical-self-assembly">Hierarchical Self-Assembly</a></li><li class="toc-h2"><a href="#experimental-and-analysis-methods">Experimental and Analysis Methods</a></li><li class="toc-h3"><a href="#research-methods">Research Methods</a></li><li class="toc-h3"><a href="#quantitative-characterization">Quantitative Characterization</a></li><li class="toc-h2"><a href="#blog-navigation">Blog Navigation</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><p>Nature's structural materials - from silk to bone, nacre to wood - possess mechanical properties far beyond those of their individual chemical constituents. The core secret is not chemistry but architecture: hierarchical superstructures, where multiple levels of organization from molecular to macroscopic collaborate to produce mechanical responses that vastly exceed the sum of their parts.</p>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#what-are-hierarchical-superstructures">What Are Hierarchical Superstructures?</a></li><li class="toc-h2"><a href="#biological-examples-nature-s-nested-designs">Biological Examples: Nature's Nested Designs</a></li><li class="toc-h3"><a href="#1-silk-fibroin-beta-sheet-crystals-and-nanofibrils">1. Silk Fibroin: Beta-Sheet Crystals and Nanofibrils</a></li><li class="toc-h3"><a href="#2-collagen-triple-helix-to-tough-fibers">2. Collagen: Triple Helix to Tough Fibers</a></li><li class="toc-h3"><a href="#3-bone-organic-inorganic-composite-hierarchy">3. Bone: Organic-Inorganic Composite Hierarchy</a></li><li class="toc-h3"><a href="#4-nacre-mother-of-pearl-brick-and-mortar-toughness">4. Nacre (Mother-of-Pearl): Brick-and-Mortar Toughness</a></li><li class="toc-h3"><a href="#5-spider-silk-crystalline-amorphous-networks">5. Spider Silk: Crystalline/Amorphous Networks</a></li><li class="toc-h3"><a href="#6-cellulose-multi-layered-cell-wall-design">6. Cellulose: Multi-Layered Cell Wall Design</a></li><li class="toc-h2"><a href="#design-principles-and-synthesis">Design Principles and Synthesis</a></li><li class="toc-h3"><a href="#common-design-principles">Common Design Principles</a></li><li class="toc-h3"><a href="#hierarchical-self-assembly">Hierarchical Self-Assembly</a></li><li class="toc-h2"><a href="#experimental-and-analysis-methods">Experimental and Analysis Methods</a></li><li class="toc-h3"><a href="#research-methods">Research Methods</a></li><li class="toc-h3"><a href="#quantitative-characterization">Quantitative Characterization</a></li><li class="toc-h2"><a href="#blog-navigation">Blog Navigation</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><p>Nature's structural materials - from silk to bone, nacre to wood - possess mechanical properties far beyond those of their individual chemical constituents. The core secret is not chemistry but architecture: hierarchical superstructures, where multiple levels of organization from molecular to macroscopic collaborate to produce mechanical responses that vastly exceed the sum of their parts.</p>
 
 <p>This article serves as a navigational guide for the Bio-Materials-Structures category, systematically surveying six archetypal hierarchical systems and the mechanical design principles they embody.</p>
 
@@ -90,6 +90,10 @@
 
 <p>Related: <a href="/posts/stress-strain-curves/">Stress-Strain Curve Biomechanics</a></p>
 
+<img src="/static/images/article-guides/mech-collagen-hierarchy-en.svg" alt="Collagen: organization across scales" loading="lazy">
+
+<p>Collagen’s triple-helical conformation, staggered molecular packing and fibril bundles belong to distinct structural levels. The diagram emphasizes how organization changes across levels rather than using one common geometric scale.</p>
+
 <h3 id="3-bone-organic-inorganic-composite-hierarchy">3. Bone: Organic-Inorganic Composite Hierarchy</h3>
 
 <p>Bone represents the most complex biological composite, organized across seven hierarchical levels:</p>
@@ -114,6 +118,10 @@
 
 </ul>
 <p>The brick-and-mortar architecture achieves <strong>3000x the toughness of pure aragonite</strong>. Under load, platelets slide and the organic layers stretch, providing massive energy dissipation. Nanoscale asperities on platelet surfaces create mechanical interlocking that prevents complete pullout at low stress. This strategy has been widely mimicked in ceramic composites and body armor.</p>
+
+<img src="/static/images/article-guides/mech-nacre-crack-en.svg" alt="Nacre: interfaces redirect a crack" loading="lazy">
+
+<p>Stiff platelets and compliant interlayers create opportunities for relative sliding and crack deflection. The constructed crack path illustrates how interfaces change the direction of propagation.</p>
 
 <h3 id="5-spider-silk-crystalline-amorphous-networks">5. Spider Silk: Crystalline/Amorphous Networks</h3>
 
@@ -205,11 +213,7 @@
 <li>Ritchie, R.O. (2011). The conflicts between strength and toughness. <em>Nature Materials</em>, 10, 817-822.</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/gromacs-md-tutorial/">← GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</a></span><span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/gromacs-md-tutorial/">← GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</a></span><span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -229,11 +233,11 @@
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

@@ -1,11 +1,12 @@
 ---
 title: "Molecular Dynamics Basics: Your First LAMMPS Simulation"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "multiscale-modeling"
 tags: ["molecular-dynamics", "LAMMPS", "simulation", "tutorial", "force-fields"]
 lang: "en"
 slug: "lammps-first-simulation"
-description: "A hands-on guide to running your first molecular dynamics simulation with LAMMPS: installation, input script structure, force fields, water box simulation, and trajectory analysis."
+description: "Read the structure of a LAMMPS input, set up a first molecular dynamics calculation and inspect basic trajectory outputs. Periodic-distance and Lennard-Jones diagrams explain boundary conditions and interactions before force-field and timestep choices."
 ---
 
 ## What is Molecular Dynamics?
@@ -106,6 +107,10 @@ fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
 run             100000
 ```
 
+![Periodic distance crosses the boundary](/static/images/article-guides/mech-lammps-periodic-en.svg)
+
+For the constructed one-dimensional example, particles separated by 0.8L in the displayed box are only 0.2L apart through a periodic boundary. Orthorhombic minimum-image distances can be calculated componentwise as Δxmin = Δx − L round(Δx/L).
+
 ### Key Parameters Explained
 
 | Parameter | Meaning | Typical Value |
@@ -126,6 +131,10 @@ run             100000
 | AMBER ff19SB | Proteins | Tian et al. (2020) |
 | ReaxFF | Reactive systems, bond breaking | van Duin et al. (2001) |
 | Martini | Coarse-grained biomolecular | Marrink et al. (2007) |
+
+![Read the Lennard–Jones pair term](/static/images/article-guides/mech-lammps-lj-en.svg)
+
+The Lennard–Jones term has its minimum U = −ε at r = 2^(1/6)σ, and its force is −dU/dr. This analytic reduced-unit curve explains one pair interaction; the water force field in a real simulation also requires its specified bonded and electrostatic terms.
 
 ### Trajectory Analysis with Python
 

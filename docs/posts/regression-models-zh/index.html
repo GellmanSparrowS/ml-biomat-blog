@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>常用的机器学习回归模型：从线性基准到梯度提升 — ML-Biomat</title>
-<meta name="description" content="常用的机器学习回归模型：从线性基准到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="沿着线性回归、正则化、核方法、树集成与梯度提升，理解各类回归模型如何表达输入和数值目标之间的关系。结合残差、交叉验证与误差指标，判断模型复杂度并选择适合数据的方案。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/regression-models-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/regression-models-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/regression-models-ml/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/regression-models-ml/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="常用的机器学习回归模型：从线性基准到梯度提升">
-<meta property="og:description" content="常用的机器学习回归模型：从线性基准到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="沿着线性回归、正则化、核方法、树集成与梯度提升，理解各类回归模型如何表达输入和数值目标之间的关系。结合残差、交叉验证与误差指标，判断模型复杂度并选择适合数据的方案。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/regression-models-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/regression-models-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "常用的机器学习回归模型：从线性基准到梯度提升", "description": "常用的机器学习回归模型：从线性基准到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-07-03", "dateModified": "2026-07-03", "wordCount": 2105, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/regression-models-zh/", "image": "https://ml-biomat.com/static/images/og/regression-models-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "常用的机器学习回归模型：从线性基准到梯度提升", "item": "https://ml-biomat.com/posts/regression-models-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "常用的机器学习回归模型：从线性基准到梯度提升", "description": "沿着线性回归、正则化、核方法、树集成与梯度提升，理解各类回归模型如何表达输入和数值目标之间的关系。结合残差、交叉验证与误差指标，判断模型复杂度并选择适合数据的方案。", "datePublished": "2026-07-03", "dateModified": "2026-10-28", "wordCount": 7978, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/regression-models-zh/", "image": "https://ml-biomat.com/static/images/og/regression-models-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "常用的机器学习回归模型：从线性基准到梯度提升", "item": "https://ml-biomat.com/posts/regression-models-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>常用的机器学习回归模型：从线性基准到梯度提升</h1>
 <div class="article-meta">
-<span>2026-07-03</span><span>·</span><span>10 min read</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
+<span>2026-07-03</span><span>·</span><span>23 分钟阅读</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E5%9B%9E%E5%BD%92/">回归</a><a class="tag-pill" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="tag-pill" href="/tags/scikit-learn/">scikit-learn</a><a class="tag-pill" href="/tags/%E6%A2%AF%E5%BA%A6%E6%8F%90%E5%8D%87/">梯度提升</a><a class="tag-pill" href="/tags/%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/">模型评估</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#回归基础">回归基础</a></li><li class="toc-h3"><a href="#一-回归问题的本质-从数值预测到函数逼近">一、回归问题的本质——从数值预测到函数逼近</a></li><li class="toc-h3"><a href="#二-线性回归-最简洁的基准">二、线性回归——最简洁的基准</a></li><li class="toc-h2"><a href="#正则化与非线性模型">正则化与非线性模型</a></li><li class="toc-h3"><a href="#三-岭回归与-lasso-正则化的艺术">三、岭回归与 Lasso——正则化的艺术</a></li><li class="toc-h3"><a href="#四-多项式回归与特征工程-突破线性枷锁">四、多项式回归与特征工程——突破线性枷锁</a></li><li class="toc-h3"><a href="#五-支持向量回归-容忍误差的-管道">五、支持向量回归——容忍误差的ε管道</a></li><li class="toc-h2"><a href="#树模型与梯度提升">树模型与梯度提升</a></li><li class="toc-h3"><a href="#六-决策树回归与随机森林-分段逼近与集成平均">六、决策树回归与随机森林——分段逼近与集成平均</a></li><li class="toc-h3"><a href="#七-梯度提升回归-xgboost-与-lightgbm">七、梯度提升回归——XGBoost 与 LightGBM</a></li><li class="toc-h2"><a href="#评估与模型选择">评估与模型选择</a></li><li class="toc-h3"><a href="#八-回归评估指标-mse-mae-r-的选择与局限">八、回归评估指标——MSE、MAE、R² 的选择与局限</a></li><li class="toc-h3"><a href="#九-模型选择实用指南-从问题结构到算法">九、模型选择实用指南——从问题结构到算法</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="回归基础">回归基础</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#回归基础">回归基础</a></li><li class="toc-h3"><a href="#一-回归问题的本质-从数值预测到函数逼近">一、回归问题的本质——从数值预测到函数逼近</a></li><li class="toc-h3"><a href="#二-线性回归-最简洁的基准">二、线性回归——最简洁的基准</a></li><li class="toc-h2"><a href="#正则化与非线性模型">正则化与非线性模型</a></li><li class="toc-h3"><a href="#三-岭回归与-lasso-正则化的艺术">三、岭回归与 Lasso——正则化的艺术</a></li><li class="toc-h3"><a href="#四-多项式回归与特征工程-突破线性枷锁">四、多项式回归与特征工程——突破线性枷锁</a></li><li class="toc-h3"><a href="#五-支持向量回归-容忍误差的-管道">五、支持向量回归——容忍误差的ε管道</a></li><li class="toc-h2"><a href="#树模型与梯度提升">树模型与梯度提升</a></li><li class="toc-h3"><a href="#六-决策树回归与随机森林-分段逼近与集成平均">六、决策树回归与随机森林——分段逼近与集成平均</a></li><li class="toc-h3"><a href="#七-梯度提升回归-xgboost-与-lightgbm">七、梯度提升回归——XGBoost 与 LightGBM</a></li><li class="toc-h2"><a href="#评估与模型选择">评估与模型选择</a></li><li class="toc-h3"><a href="#八-回归评估指标-mse-mae-r-的选择与局限">八、回归评估指标——MSE、MAE、R² 的选择与局限</a></li><li class="toc-h3"><a href="#九-模型选择实用指南-从问题结构到算法">九、模型选择实用指南——从问题结构到算法</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="回归基础">回归基础</h2>
 <h3 id="一-回归问题的本质-从数值预测到函数逼近">一、回归问题的本质——从数值预测到函数逼近</h3>
 
 <p>回归（Regression）与分类的最根本区别在于输出的性质：分类预测离散的类别标签，回归预测连续的数值。这个区别看似微小，却深刻影响了模型的设计方式、损失函数的选取和评估指标的含义。在生物、材料与结构力学领域，回归问题几乎无处不在：根据材料成分和加工参数预测弹性模量，根据蛋白质序列特征预测结合自由能，根据有限元仿真结果的子集预测全场应力分布，根据传感器时序数据预测剩余疲劳寿命。能否建立一个准确、可泛化的回归模型，在很大程度上决定了"用数据代替实验"这一科学计算思路的实际可信度。</p>
@@ -147,6 +147,11 @@ plt.show()
 
 <h2 id="正则化与非线性模型">正则化与非线性模型</h2>
 <h3 id="三-岭回归与-lasso-正则化的艺术">三、岭回归与 Lasso——正则化的艺术</h3>
+
+<img src="/static/images/article-guides/comp-guide-regularization-zh.svg" alt="图中为单位尺度下的 L1 与 L2 约束区域" loading="lazy">
+
+<p>图中为单位尺度下的 L1 与 L2 约束区域。L1 边界在坐标轴上有尖角，有助于理解为什么它容易得到部分系数恰好为零的解。</p>
+
 
 <p>普通线性回归在特征数接近或超过样本数时（\(d \approx N\) 或 \(d > N\)），以及特征之间高度相关时，会遭遇严重的数值问题：\(\mathbf{X}^T\mathbf{X}\) 接近奇异，系数估计方差极大，预测极不稳定。这是过拟合的经典场景。正则化（Regularization）通过在损失函数中加入对系数大小的惩罚项，强迫模型"不要太贪婪"，从而在偏差略微增加的代价下大幅降低方差。从贝叶斯视角看，正则化等价于对参数施加先验分布：L2 正则化对应高斯先验，L1 正则化对应拉普拉斯先验。理解这两种正则化方式，实际上是理解偏差-方差权衡在线性模型中的具体体现。</p>
 
@@ -265,9 +270,14 @@ evaluate(&quot;Poly(3) + Ridge&quot;, y_test, best_pipe.predict(X_test))
 
 <h3 id="五-支持向量回归-容忍误差的-管道">五、支持向量回归——容忍误差的ε管道</h3>
 
-<p>支持向量回归（Support Vector Regression, SVR）是将 SVM 的间隔最大化思想迁移到回归任务的产物，其核心理念与分类 SVM 截然不同：分类 SVM 寻找使类别间隔最大的超平面，而 SVR 寻找能把大多数训练数据"包住"的最宽管道（tube），同时只对落在管道之外的点施加惩罚。这个设计引入了一个在普通回归中没有的概念：<strong>ε-不敏感损失（ε-Insensitive Loss）</strong>。</p>
+<img src="/static/images/article-guides/comp-guide-svr-tube-zh.svg" alt="教学示例取 f(x) = x、固定 ε = 0.6" loading="lazy">
 
-<p>直觉如下：假设你在拟合一条曲线穿过散点，但你相信数据中有一定的测量误差，对于偏差在 ε 范围内的预测，你认为是"足够好"的，不施加任何惩罚；只有当预测值与真实值的偏差超过 ε 时，才开始线性累积损失。这就像给回归曲线设置了一条宽度为 \(2\varepsilon\) 的"容忍带"，落在容忍带内的样本对模型参数的更新没有任何贡献，只有落在外部的"困难样本"（对应分类 SVM 中的支持向量）才起作用。</p>
+<p>教学示例取 f(x) = x、固定 ε = 0.6。容忍带内的点不产生 ε 不敏感损失；橙色线段只表示误差超过 ε 的部分。</p>
+
+
+<p>支持向量回归（Support Vector Regression, SVR）是将 SVM 的间隔最大化思想迁移到回归任务的产物，其核心理念与分类 SVM 截然不同：分类 SVM 寻找使类别间隔最大的超平面，而 ε-SVR 预先设定半宽为 ε 的容忍管道（tube），在函数平坦程度与管道外的误差之间折中。ε 是控制容忍误差的超参数，单次拟合并不会不断扩大管道。这个设计引入了一个在普通回归中没有的概念：<strong>ε-不敏感损失（ε-Insensitive Loss）</strong>。</p>
+
+<p>直觉如下：假设你在拟合一条曲线穿过散点，但你相信数据中有一定的测量误差，对于偏差在 ε 范围内的预测，你认为是"足够好"的，不施加任何惩罚；只有当预测值与真实值的偏差超过 ε 时，才开始线性累积损失。这就像给回归曲线设置了一条宽度为 \(2\varepsilon\) 的"容忍带"，落在容忍带内的样本对模型参数的更新没有任何贡献，支持向量可以位于边界上或管道外，而严格位于内部的点具有零 ε 不敏感损失。</p>
 
 <p>数学形式化为：</p>
 
@@ -597,12 +607,8 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
 <li>Ke, G., Meng, Q., Finley, T., et al. (2017). LightGBM: A highly efficient gradient boosting decision tree. <em>Advances in Neural Information Processing Systems</em>, 30, 3146–3154.</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/deep-learning-intro-zh/">← 深度学习的本质：从特征工程到表示学习</a></span><span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/deep-learning-intro-zh/">← 深度学习的本质：从特征工程到表示学习</a></span><span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -613,7 +619,7 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -621,11 +627,11 @@ def regression_diagnostics(y_true, y_pred, title=&quot;&quot;):
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

@@ -145,13 +145,38 @@ def run():
         body = page.read_text(encoding="utf-8")
         if 'class="tutorial-reader"' not in body or 'id="python-code"' not in body:
             tutorial_errors.append(lesson["slug"] + ": reader or code missing")
-        for neighbor in [j for j in (i-1, i+1) if 0 <= j < len(lessons)]:
-            if '/tutorials/polymer-ai/' + lessons[neighbor]["slug"] + '/' not in body:
-                tutorial_errors.append(lesson["slug"] + ": neighbor missing")
+        for category in lesson['categories'][:1]:
+            if '/categories/' + category + '/' not in body:
+                tutorial_errors.append(lesson['slug'] + ': category missing')
+        category_page = DOCS / 'categories' / lesson['categories'][0] / 'index.html'
+        if lesson['slug'] not in category_page.read_text(encoding='utf8'):
+            tutorial_errors.append(lesson['slug'] + ': absent from category')
         if re.search(r'(?:src|href)=["\']data:', body) or "正文润色稿" in body or "润色时跳过" in body:
             tutorial_errors.append(lesson["slug"] + ": import residue")
-    checks.append(check("Tutorial series integrity", len(lessons) == 20 and not tutorial_errors,
-                        "; ".join(tutorial_errors) if tutorial_errors else "20 lessons, code and sequential links present"))
+    checks.append(check("Tutorial category integration", len(lessons) == 20 and not tutorial_errors,
+                        "; ".join(tutorial_errors) if tutorial_errors else "20 articles, code and category links present"))
+
+    # Translation links are reciprocal and each page has its own localized title.
+    import build
+    loaded = build.load_posts()
+    by_lang = {lang:{p['slug']:p for p in loaded if p['lang']==lang} for lang in ['en','zh']}
+    pair_errors=[]; figure_errors=[]
+    for post in loaded:
+        pair=build.find_pair(post,by_lang)
+        page=(DOCS/'posts'/post['slug']/'index.html').read_text(encoding='utf8')
+        expected_title='<title>'+html.escape(post['title'])+' — ML-Biomat</title>'
+        switch=re.search(r'<span class="lang-switch">(.*?)</span>',page,re.S)
+        if not pair or not switch or '/posts/'+pair['slug']+'/' not in switch[1] or expected_title not in page:
+            pair_errors.append(post['slug'])
+        figure_paths=re.findall(r'<img[^>]+src="(/static/images/article-guides/[^"]+)"',page)
+        if len(figure_paths)<2 or any(not src.endswith('-'+post['lang']+'.svg') for src in figure_paths):
+            figure_errors.append(post['slug'])
+    checks.append(check('Reciprocal localized article navigation',not pair_errors, ', '.join(pair_errors) if pair_errors else '48 pages, 24 reciprocal pairs and localized titles'))
+    checks.append(check('Bilingual illustrated articles',not figure_errors, ', '.join(figure_errors) if figure_errors else 'At least two explanatory figures in each of 48 articles'))
+    old_blocks=[]
+    for path in [DOCS/'index.html',DOCS/'zh/index.html',DOCS/'categories/index.html']:
+        if '系列教程' in path.read_text(encoding='utf8'): old_blocks.append(str(path.relative_to(DOCS)))
+    checks.append(check('Topic-first browsing',not old_blocks, ', '.join(old_blocks) if old_blocks else 'No separate series blocks on home, categories or language collections'))
 
     broken = broken_local_links()
     link_detail = (

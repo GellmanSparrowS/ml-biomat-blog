@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img"><title>从二值掩码到连通区域面积</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#526678"/></marker></defs><rect width="760" height="460" rx="16" fill="#f7fafc"/>
+<text x="30" y="42" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="26" fill="#203348" text-anchor="start" font-weight="600">从二值掩码到连通区域面积</text>
+<text x="30" y="76" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="18" fill="#526678" text-anchor="start" font-weight="400">教学像素网格；每个像素对应实际尺寸 s × s。</text>
+<text x="138" y="125" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#203348" text-anchor="middle" font-weight="400">二值掩码</text>
+<rect x="30" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="60" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="90" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="120" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="150" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="180" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="210" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="30" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="60" y="175" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="90" y="175" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="120" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="150" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="180" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="210" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="30" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="60" y="205" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="90" y="205" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="120" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="150" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="180" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="210" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="30" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="60" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="90" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="120" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="150" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="180" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="210" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="30" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="60" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="90" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="120" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="150" y="265" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="180" y="265" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="210" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="30" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="60" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="90" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="120" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="150" y="295" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="180" y="295" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="210" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="30" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="60" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="90" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="120" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="150" y="325" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="180" y="325" width="30" height="30" rx="0" fill="#203348" stroke="#d6e1ec"/>
+<rect x="210" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<text x="403" y="125" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#203348" text-anchor="middle" font-weight="400">区域标记</text>
+<rect x="295" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="325" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="355" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="385" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="415" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="445" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="475" y="145" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="295" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="325" y="175" width="30" height="30" rx="0" fill="#386fd1" stroke="#d6e1ec"/>
+<rect x="355" y="175" width="30" height="30" rx="0" fill="#386fd1" stroke="#d6e1ec"/>
+<rect x="385" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="415" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="445" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="475" y="175" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="295" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="325" y="205" width="30" height="30" rx="0" fill="#386fd1" stroke="#d6e1ec"/>
+<rect x="355" y="205" width="30" height="30" rx="0" fill="#386fd1" stroke="#d6e1ec"/>
+<rect x="385" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="415" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="445" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="475" y="205" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="295" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="325" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="355" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="385" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="415" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="445" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="475" y="235" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="295" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="325" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="355" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="385" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="415" y="265" width="30" height="30" rx="0" fill="#13887f" stroke="#d6e1ec"/>
+<rect x="445" y="265" width="30" height="30" rx="0" fill="#13887f" stroke="#d6e1ec"/>
+<rect x="475" y="265" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="295" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="325" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="355" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="385" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="415" y="295" width="30" height="30" rx="0" fill="#13887f" stroke="#d6e1ec"/>
+<rect x="445" y="295" width="30" height="30" rx="0" fill="#13887f" stroke="#d6e1ec"/>
+<rect x="475" y="295" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="295" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="325" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="355" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="385" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<rect x="415" y="325" width="30" height="30" rx="0" fill="#13887f" stroke="#d6e1ec"/>
+<rect x="445" y="325" width="30" height="30" rx="0" fill="#13887f" stroke="#d6e1ec"/>
+<rect x="475" y="325" width="30" height="30" rx="0" fill="white" stroke="#d6e1ec"/>
+<line x1="249" y1="250" x2="283" y2="250" stroke="#526678" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="555" y="202" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="23" fill="#386fd1" text-anchor="start" font-weight="600">区域 A</text>
+<text x="555" y="238" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="start" font-weight="400">4 像素 → 4s²</text>
+<text x="555" y="297" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="23" fill="#13887f" text-anchor="start" font-weight="600">区域 B</text>
+<text x="555" y="333" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="start" font-weight="400">6 像素 → 6s²</text>
+<text x="30" y="437" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="18" fill="#526678" text-anchor="start" font-weight="400">标尺校准把像素数转换为实际面积。</text></svg>

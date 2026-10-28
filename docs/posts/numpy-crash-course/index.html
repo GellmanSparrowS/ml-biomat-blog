@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NumPy for Materials Research: From Zero to Productive — ML-Biomat</title>
-<meta name="description" content="Learn NumPy from scratch with real materials science examples: loading experimental data, array operations, statistics, curve fitting, and batch processing.">
+<meta name="description" content="Load experimental measurements into arrays and work with slicing, Boolean masks, broadcasting, and summary statistics. Use these operations to align observations, center columns, fit simple relationships, and save processed numerical results.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/numpy-crash-course/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/numpy-crash-course/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/numpy-crash-course-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/numpy-crash-course/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="NumPy for Materials Research: From Zero to Productive">
-<meta property="og:description" content="Learn NumPy from scratch with real materials science examples: loading experimental data, array operations, statistics, curve fitting, and batch processing.">
+<meta property="og:description" content="Load experimental measurements into arrays and work with slicing, Boolean masks, broadcasting, and summary statistics. Use these operations to align observations, center columns, fit simple relationships, and save processed numerical results.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/numpy-crash-course/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/numpy-crash-course.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy for Materials Research: From Zero to Productive", "description": "Learn NumPy from scratch with real materials science examples: loading experimental data, array operations, statistics, curve fitting, and batch processing.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 1052, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NumPy for Materials Research: From Zero to Productive", "item": "https://ml-biomat.com/posts/numpy-crash-course/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy for Materials Research: From Zero to Productive", "description": "Load experimental measurements into arrays and work with slicing, Boolean masks, broadcasting, and summary statistics. Use these operations to align observations, center columns, fit simple relationships, and save processed numerical results.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 482, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "NumPy for Materials Research: From Zero to Productive", "item": "https://ml-biomat.com/posts/numpy-crash-course/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>NumPy for Materials Research: From Zero to Productive</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>5 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Python Tutorials</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/numpy/">numpy</a><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/arrays/">arrays</a><a class="tag-pill" href="/tags/scientific-computing/">scientific-computing</a><a class="tag-pill" href="/tags/data-analysis/">data-analysis</a><a class="tag-pill" href="/tags/tutorial/">tutorial</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-every-materials-scientist-needs-numpy">Why Every Materials Scientist Needs NumPy</a></li><li class="toc-h2"><a href="#core-array-operations">Core Array Operations</a></li><li class="toc-h3"><a href="#1-the-numpy-array-your-data-container">1. The NumPy Array: Your Data Container</a></li><li class="toc-h3"><a href="#array-properties">Array Properties</a></li><li class="toc-h3"><a href="#2-loading-experimental-data">2. Loading Experimental Data</a></li><li class="toc-h3"><a href="#3-element-wise-operations-no-loops">3. Element-Wise Operations (No Loops)</a></li><li class="toc-h3"><a href="#4-statistics-and-aggregation">4. Statistics and Aggregation</a></li><li class="toc-h2"><a href="#data-manipulation">Data Manipulation</a></li><li class="toc-h3"><a href="#5-boolean-indexing-filter-data">5. Boolean Indexing (Filter Data)</a></li><li class="toc-h3"><a href="#6-reshaping-and-combining-arrays">6. Reshaping and Combining Arrays</a></li><li class="toc-h3"><a href="#7-saving-results">7. Saving Results</a></li><li class="toc-h2"><a href="#putting-it-together">Putting It Together</a></li><li class="toc-h3"><a href="#8-end-to-end-example-afm-force-curve-processing">8. End-to-End Example: AFM Force Curve Processing</a></li><li class="toc-h3"><a href="#9-common-pitfalls">9. Common Pitfalls</a></li><li class="toc-h3"><a href="#10-when-to-use-what">10. When to Use What</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-every-materials-scientist-needs-numpy">Why Every Materials Scientist Needs NumPy</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-every-materials-scientist-needs-numpy">Why Every Materials Scientist Needs NumPy</a></li><li class="toc-h2"><a href="#core-array-operations">Core Array Operations</a></li><li class="toc-h3"><a href="#1-the-numpy-array-your-data-container">1. The NumPy Array: Your Data Container</a></li><li class="toc-h3"><a href="#array-properties">Array Properties</a></li><li class="toc-h3"><a href="#2-loading-experimental-data">2. Loading Experimental Data</a></li><li class="toc-h3"><a href="#3-element-wise-operations-no-loops">3. Element-Wise Operations (No Loops)</a></li><li class="toc-h3"><a href="#4-statistics-and-aggregation">4. Statistics and Aggregation</a></li><li class="toc-h2"><a href="#data-manipulation">Data Manipulation</a></li><li class="toc-h3"><a href="#5-boolean-indexing-filter-data">5. Boolean Indexing (Filter Data)</a></li><li class="toc-h3"><a href="#6-reshaping-and-combining-arrays">6. Reshaping and Combining Arrays</a></li><li class="toc-h3"><a href="#7-saving-results">7. Saving Results</a></li><li class="toc-h2"><a href="#putting-it-together">Putting It Together</a></li><li class="toc-h3"><a href="#8-end-to-end-example-afm-force-curve-processing">8. End-to-End Example: AFM Force Curve Processing</a></li><li class="toc-h3"><a href="#9-common-pitfalls">9. Common Pitfalls</a></li><li class="toc-h3"><a href="#10-when-to-use-what">10. When to Use What</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-every-materials-scientist-needs-numpy">Why Every Materials Scientist Needs NumPy</h2>
 
 <p>If you process experimental data, NumPy is non-negotiable. It turns raw <code>.txt</code> files from your tensile tester, AFM, or XRD into Python arrays you can analyze, plot, and export. This guide assumes you have Python installed and takes you from zero to productive with real lab data.</p>
 
@@ -145,7 +145,7 @@ min_stress = np.min(stresses)
 max_stress = np.max(stresses)
 
 # Cumulative
-total_energy = np.sum(force)            # Sum
+force_sum = np.sum(force)              # Sum of force values; not work or energy
 cumulative = np.cumsum(stresses)        # Running total
 
 # Percentiles
@@ -158,6 +158,11 @@ row_stds = data.std(axis=1)             # Std of each row
 
 <h2 id="data-manipulation">Data Manipulation</h2>
 <h3 id="5-boolean-indexing-filter-data">5. Boolean Indexing (Filter Data)</h3>
+
+<img src="/static/images/article-guides/comp-guide-boolean-mask-en.svg" alt="The same Boolean mask selects matching entries from the strain and stress arrays" loading="lazy">
+
+<p>The same Boolean mask selects matching entries from the strain and stress arrays. In this teaching subset, strain < 0.02 retains the first three observations and excludes the entry exactly equal to 0.02.</p>
+
 
 <p>This is probably the NumPy feature you will use most:</p>
 
@@ -183,6 +188,11 @@ idx_where = np.where(stresses &gt; 30)[0]  # Indices where condition is True
 </code></pre>
 
 <h3 id="6-reshaping-and-combining-arrays">6. Reshaping and Combining Arrays</h3>
+
+<img src="/static/images/article-guides/comp-guide-broadcasting-en.svg" alt="Subtracting mean(axis=0) centers each column of this teaching array" loading="lazy">
+
+<p>Subtracting mean(axis=0) centers each column of this teaching array. NumPy broadcasts the three column means across both rows, producing zero column means without writing a loop.</p>
+
 
 <pre><code class="language-python">
 # Reshape
@@ -220,7 +230,7 @@ print(archive[&quot;strain&quot;])
 <h2 id="putting-it-together">Putting It Together</h2>
 <h3 id="8-end-to-end-example-afm-force-curve-processing">8. End-to-End Example: AFM Force Curve Processing</h3>
 
-<p>Here is a complete pipeline from raw data to mechanical properties:</p>
+<p>This example processes an approach curve into force, indentation, and a local contact stiffness. The first column is assumed to be piezo displacement in nm, increasing toward the sample; match this convention to your instrument export. A force–indentation slope has units of force per length. To obtain Young's modulus, combine the curve with a calibrated probe geometry and a contact model, such as the <a href="/posts/scipy-curve-fitting/">Hertz fit</a>.</p>
 
 <pre><code class="language-python">
 import numpy as np
@@ -244,15 +254,16 @@ force_derivative = np.gradient(force_corrected)
 noise = np.std(force_derivative[:50])
 contact_idx = np.argmax(force_derivative &gt; 5 * noise)
 
-# Indentation
-indentation = z_piezo[contact_idx] - z_piezo
+# Indentation: z_piezo is in nm and increases toward the sample
+# Subtract the cantilever deflection change after contact
+indentation = (z_piezo - z_piezo[contact_idx]) - (deflection_nm - deflection_nm[contact_idx])
 contact_force = force_corrected - force_corrected[contact_idx]
 
-# Fit elastic region
+# Fit a local force-indentation slope
 fit_mask = (indentation &gt; 0) &amp; (indentation &lt; 50)
-E, _ = np.polyfit(indentation[fit_mask], contact_force[fit_mask], 1)
+contact_stiffness, _ = np.polyfit(indentation[fit_mask], contact_force[fit_mask], 1)
 
-print(f&quot;Young&#x27;s modulus: {E:.1f} nN/nm (relative)&quot;)
+print(f&quot;Contact stiffness: {contact_stiffness:.3f} nN/nm&quot;)
 </code></pre>
 
 <h3 id="9-common-pitfalls">9. Common Pitfalls</h3>
@@ -273,11 +284,7 @@ print(f&quot;Young&#x27;s modulus: {E:.1f} nN/nm (relative)&quot;)
 <li>VanderPlas, J. (2016). <em>Python Data Science Handbook</em>. O'Reilly Media.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/multiscale-modeling-biomaterials-intro/">← A Practical Introduction to Multiscale Modeling for Biomaterials</a></span><span><a href="/posts/pandas-materials-data/">Pandas for Materials Data Processing →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/multiscale-modeling-biomaterials-intro/">← A Practical Introduction to Multiscale Modeling for Biomaterials</a></span><span><a href="/posts/pandas-materials-data/">Pandas for Materials Data Processing →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -297,11 +304,11 @@ print(f&quot;Young&#x27;s modulus: {E:.1f} nN/nm (relative)&quot;)
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

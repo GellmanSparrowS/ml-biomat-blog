@@ -1,11 +1,12 @@
 ---
 title: "Python实战AFM力曲线分析：从原始数据到力学性能"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "wet-lab-data"
 tags: ["AFM", "力曲线", "python", "数据处理", "生物材料", "力学性能"]
 lang: "zh"
 slug: "afm-force-curve-python-zh"
-description: "手把手教你用Python处理AFM力曲线数据：从基线校正、接触点检测、粘附力提取到Hertz与Sneddon模型拟合杨氏模量，涵盖完整代码实现、常见陷阱和批量处理策略，面向生物材料研究生的实战指南。"
+description: "从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。"
 ---
 
 ## 为什么写这个教程
@@ -87,6 +88,10 @@ sensitivity = 45.0  # nm/V，偏转灵敏度
 force = deflection_to_force(deflection, k, sensitivity)
 ```
 
+![区分悬臂偏转与样品压入](/static/images/article-guides/mech-afm-calibration-zh.svg)
+
+标定后由偏转 d = SV 得到力 F = kd。取压向样品为压电位移正方向并扣除偏移后，压入深度为 δ = Δz − d；几何关系明确了压电位移与样品压入的区别。
+
 ### 4. 基线校正
 
 非接触区的力曲线应该是平坦的（零力），但实际中存在热漂移和激光干涉造成的微小斜率：
@@ -124,6 +129,7 @@ def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
     for i in range(len(above_threshold) - window):
         if np.all(above_threshold[i:i + window]):
             return i + window // 2
+    raise ValueError("未找到接触点，请检查逼近段")
 
 contact_idx = find_contact_point(z_piezo, force)
 contact_z = z_piezo[contact_idx]
@@ -153,43 +159,57 @@ F = (4/3) E* sqrt(R) delta^(3/2)
 
 其中 E* = E / (1 - nu^2)。
 
+拟合函数接收逼近段，z 采用 nm、力采用 nN，返回的 E 为 Pa。应显式传入实测弹簧常数（N/m）和针尖半径。默认逼近时 z 减小；若仪器记录相反，使用 +1。拟合压入深度应远小于球形针尖半径，样品厚度应明显大于接触半径 a = sqrt(Rδ)。下方参数与教学曲线一致。
+
 ```python
 def hertz_sphere(indentation, E_star, R):
-    """Hertz球压头模型"""
+    """SI units: indentation and R in m, E_star in Pa, force in N."""
     return (4/3) * E_star * np.sqrt(R) * np.power(
         np.maximum(indentation, 0), 1.5
     )
 
 def fit_youngs_modulus(z_piezo, force, contact_idx,
-                        tip_radius_nm=20.0, poisson=0.5,
-                        fit_range_nm=50.0):
-    """拟合Hertz模型提取杨氏模量"""
-    indent = z_piezo[contact_idx] - z_piezo
-    contact_force = force - force[contact_idx]
-    
+                        tip_radius_nm=5000.0, poisson=0.5,
+                        fit_range_nm=200.0, spring_constant=0.06,
+                        approach_direction=-1):
+    """拟合逼近段：z 用 nm，力用 nN；返回 Pa 单位的模量与拟合误差。"""
+    if spring_constant <= 0 or tip_radius_nm <= 0:
+        raise ValueError("Spring constant and tip radius must be positive")
+    if approach_direction not in (-1, 1):
+        raise ValueError("approach_direction must be -1 or +1")
+    z_nm = np.asarray(z_piezo, dtype=float)
+    force_nN = np.asarray(force, dtype=float)
+    contact_force_nN = force_nN - force_nN[contact_idx]
+    advance_nm = approach_direction * (z_nm - z_nm[contact_idx])
+    deflection_nm = contact_force_nN / spring_constant
+    indentation_nm = advance_nm - deflection_nm
     fit_mask = (
-        (indent > 0) & (indent < fit_range_nm) & (contact_force > 0)
+        (np.arange(len(z_nm)) >= contact_idx)
+        & (indentation_nm > 0) & (indentation_nm < fit_range_nm)
+        & (contact_force_nN > 0)
+        & np.isfinite(indentation_nm) & np.isfinite(contact_force_nN)
     )
-    indent_fit = indent[fit_mask]
-    force_fit = contact_force[fit_mask]
-    
-    if len(indent_fit) < 50:
-        print("警告: 拟合区数据点太少")
+    if np.count_nonzero(fit_mask) < 50:
         return np.nan, np.nan
-    
-    def model(delta, E_star):
-        return hertz_sphere(delta, E_star, tip_radius_nm)
-    
+    indentation_m = indentation_nm[fit_mask] * 1e-9
+    radius_m = tip_radius_nm * 1e-9
+    force_fit_nN = contact_force_nN[fit_mask]
+
+    def model(delta_m, E_star_Pa):
+        return hertz_sphere(delta_m, E_star_Pa, radius_m) * 1e9
+
     popt, pcov = optimize.curve_fit(
-        model, indent_fit, force_fit,
-        p0=[1000], bounds=(1, 1e9)
+        model, indentation_m, force_fit_nN,
+        p0=[1e4], bounds=(1, 1e9)
     )
-    E_star = popt[0]
-    E = E_star * (1 - poisson**2)
+    E = popt[0] * (1 - poisson**2)
     E_std = np.sqrt(pcov[0, 0]) * (1 - poisson**2)
-    
     return E, E_std
 ```
+
+![由明确参数计算 Hertz 曲线](/static/images/article-guides/mech-afm-hertz-zh.svg)
+
+取 R = 5 μm、ν = 0.5、E = 10 或 30 kPa 计算 Hertz 曲线，可比较相同压入深度下模量对力的影响。模型采用刚性球形压头、均匀弹性半空间与可忽略黏附的假设，图中为解析教学曲线。
 
 ## 批量处理与进阶主题
 ### 8. 批量处理
@@ -200,19 +220,23 @@ def fit_youngs_modulus(z_piezo, force, contact_idx,
 import glob
 from pathlib import Path
 
-def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
+def batch_process_curves(data_dir, k=0.06, sensitivity=45.0, approach_direction=-1):
     """批量处理AFM力曲线，提取力学性能"""
     results = []
     for filepath in sorted(glob.glob(f"{data_dir}/*.txt")):
         try:
             z, deflection = load_afm_curve(filepath, skip_rows=320)
             force = deflection_to_force(deflection, k, sensitivity)
-            cidx = find_contact_point(z, force)
+            turn_idx = int(np.argmax(approach_direction * z))
+            z_approach = z[:turn_idx + 1]
+            cidx = find_contact_point(z_approach, force[:turn_idx + 1])
             force_corr = baseline_correct(z, force, cidx)
-            adhesion = extract_adhesion(z, force_corr, cidx)
+            adhesion = (extract_adhesion(z, force_corr, turn_idx)
+                        if turn_idx + 1 < len(z) else np.nan)
             E, E_std = fit_youngs_modulus(
-                z, force_corr, cidx,
-                tip_radius_nm=20.0, poisson=0.5
+                z_approach, force_corr[:turn_idx + 1], cidx,
+                tip_radius_nm=5000.0, poisson=0.5,
+                spring_constant=k, approach_direction=approach_direction
             )
             results.append({
                 "file": Path(filepath).name,

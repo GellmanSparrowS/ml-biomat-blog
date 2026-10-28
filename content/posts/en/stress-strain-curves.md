@@ -1,11 +1,12 @@
 ---
 title: "Stress-Strain Curves: A Materials Science Primer"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "biomaterials"
 tags: ["stress-strain", "mechanics", "biomaterials", "elasticity", "tutorial"]
 lang: "en"
 slug: "stress-strain-curves"
-description: "A beginner-friendly guide to interpreting stress-strain curves: elastic modulus, yield strength, ultimate strength, toughness, and how these concepts apply to soft biomaterials."
+description: "Distinguish engineering and true stress, identify curve regions and calculate elastic modulus, strength and energy density in Python. Geometry and analytic hysteresis diagrams clarify reference-area choices and the meaning of cyclic dissipation."
 ---
 
 ## Why This Matters
@@ -18,6 +19,10 @@ The stress-strain curve is the single most important graph in materials science.
 Stress = F / A0
 Strain = (L - L0) / L0
 ```
+
+![Choose the reference geometry](/static/images/article-guides/mech-stress-definitions-en.svg)
+
+Engineering stress and strain use the initial geometry A₀ and L₀, whereas true stress uses the instantaneous area A. The sketch separates these definitions before curve fitting or property extraction.
 
 ## Key Regions
 
@@ -70,6 +75,10 @@ def tangent_modulus(strain, stress, at_strain=0.05):
     w = max(5, idx // 10)
     return np.polyfit(strain[idx-w:idx+w], stress[idx-w:idx+w], 1)[0]
 ```
+
+![Hysteresis is an area, not a slope](/static/images/article-guides/mech-stress-hysteresis-en.svg)
+
+The teaching loop uses σ*load = 2e + e² and σ*unload = e + 2e², where e = ε/εmax. Its enclosed normalized area is 1/6; dimensional energy density additionally requires the stress and strain scales. It illustrates cyclic dissipation rather than work to fracture.
 
 ## Common Mistakes
 

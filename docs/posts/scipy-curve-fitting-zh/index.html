@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SciPy曲线拟合完全指南：从线性回归到非线性建模 — ML-Biomat</title>
-<meta name="description" content="SciPy曲线拟合完全指南：从线性回归到非线性建模。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="从线性趋势、应力松弛到压痕模型，演示 SciPy 曲线拟合中的函数定义、初值、单位与参数边界。通过残差、协方差矩阵和置信区间，理解拟合参数的含义，并检查模型与测量数据是否匹配。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/scipy-curve-fitting-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/scipy-curve-fitting-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/scipy-curve-fitting/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/scipy-curve-fitting/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="SciPy曲线拟合完全指南：从线性回归到非线性建模">
-<meta property="og:description" content="SciPy曲线拟合完全指南：从线性回归到非线性建模。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="从线性趋势、应力松弛到压痕模型，演示 SciPy 曲线拟合中的函数定义、初值、单位与参数边界。通过残差、协方差矩阵和置信区间，理解拟合参数的含义，并检查模型与测量数据是否匹配。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/scipy-curve-fitting-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/scipy-curve-fitting-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SciPy曲线拟合完全指南：从线性回归到非线性建模", "description": "SciPy曲线拟合完全指南：从线性回归到非线性建模。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-27", "dateModified": "2026-06-27", "wordCount": 392, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting-zh/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "SciPy曲线拟合完全指南：从线性回归到非线性建模", "item": "https://ml-biomat.com/posts/scipy-curve-fitting-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SciPy曲线拟合完全指南：从线性回归到非线性建模", "description": "从线性趋势、应力松弛到压痕模型，演示 SciPy 曲线拟合中的函数定义、初值、单位与参数边界。通过残差、协方差矩阵和置信区间，理解拟合参数的含义，并检查模型与测量数据是否匹配。", "datePublished": "2026-06-27", "dateModified": "2026-10-28", "wordCount": 1151, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting-zh/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "SciPy曲线拟合完全指南：从线性回归到非线性建模", "item": "https://ml-biomat.com/posts/scipy-curve-fitting-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>SciPy曲线拟合完全指南：从线性回归到非线性建模</h1>
 <div class="article-meta">
-<span>2026-06-27</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
+<span>2026-06-27</span><span>·</span><span>3 分钟阅读</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/scipy/">scipy</a><a class="tag-pill" href="/tags/%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88/">曲线拟合</a><a class="tag-pill" href="/tags/%E4%BC%98%E5%8C%96/">优化</a><a class="tag-pill" href="/tags/%E5%9B%9E%E5%BD%92/">回归</a><a class="tag-pill" href="/tags/Hertz%E6%A8%A1%E5%9E%8B/">Hertz模型</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#一-曲线拟合的基本原理">一、曲线拟合的基本原理</a></li><li class="toc-h2"><a href="#二-线性回归-力学测试中最常用的方法">二、线性回归：力学测试中最常用的方法</a></li><li class="toc-h2"><a href="#三-指数衰减模型-应力松弛实验">三、指数衰减模型：应力松弛实验</a></li><li class="toc-h2"><a href="#四-hertz模型-afm纳米压痕分析">四、Hertz模型：AFM纳米压痕分析</a></li><li class="toc-h2"><a href="#五-置信区间-不要只报一个数字">五、置信区间：不要只报一个数字</a></li><li class="toc-h2"><a href="#六-常见问题和调试技巧">六、常见问题和调试技巧</a></li><li class="toc-h3"><a href="#七-延伸工具">七、延伸工具</a></li><li class="toc-h3"><a href="#参考文献">参考文献</a></li></ul></details><p>在材料科学和生物学实验中，我们经常需要从离散的数据点中提取连续的物理参数。比如从应力-应变曲线中提取杨氏模量、从松弛实验中提取松弛时间、从AFM压痕曲线中提取样品刚度。曲线拟合是连接实验数据和物理模型的桥梁，而SciPy的curve_fit是完成这一任务的利器。</p>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#一-曲线拟合的基本原理">一、曲线拟合的基本原理</a></li><li class="toc-h2"><a href="#二-线性回归-力学测试中最常用的方法">二、线性回归：力学测试中最常用的方法</a></li><li class="toc-h2"><a href="#三-指数衰减模型-应力松弛实验">三、指数衰减模型：应力松弛实验</a></li><li class="toc-h2"><a href="#四-hertz模型-afm纳米压痕分析">四、Hertz模型：AFM纳米压痕分析</a></li><li class="toc-h2"><a href="#五-置信区间-不要只报一个数字">五、置信区间：不要只报一个数字</a></li><li class="toc-h2"><a href="#六-常见问题和调试技巧">六、常见问题和调试技巧</a></li><li class="toc-h3"><a href="#七-延伸工具">七、延伸工具</a></li><li class="toc-h3"><a href="#参考文献">参考文献</a></li></ul></details><p>在材料科学和生物学实验中，我们经常需要从离散的数据点中提取连续的物理参数。比如从应力-应变曲线中提取杨氏模量、从松弛实验中提取松弛时间、从AFM压痕曲线中提取样品刚度。曲线拟合是连接实验数据和物理模型的桥梁，而SciPy的curve_fit是完成这一任务的利器。</p>
 
 <pre><code class="language-python">
 import numpy as np
@@ -65,6 +65,11 @@ from scipy.optimize import curve_fit
 <p>SciPy的curve_fit不仅给出最优参数，还提供协方差矩阵，用来估计每个参数的不确定度。这对于科研论文中的误差报告非常重要。</p>
 
 <h2 id="二-线性回归-力学测试中最常用的方法">二、线性回归：力学测试中最常用的方法</h2>
+
+<img src="/static/images/article-guides/comp-guide-residuals-zh.svg" alt="五个教学数据点拟合得到 y = 1.97x + 1.06" loading="lazy">
+
+<p>五个教学数据点拟合得到 y = 1.97x + 1.06。下图将观测值减去拟合值，使剩余误差脱离整体趋势，便于比较残差的正负与大小。</p>
+
 
 <pre><code class="language-python">
 strain = np.array([0.000, 0.005, 0.010, 0.015, 0.020])
@@ -84,7 +89,9 @@ print(f&quot;杨氏模量: {E:.1f} +/- {E_std:.1f} MPa, R2={r2:.4f}&quot;)
 
 <h2 id="三-指数衰减模型-应力松弛实验">三、指数衰减模型：应力松弛实验</h2>
 
-<img src="/static/images/posts/scipy-curve-fitting/relaxation-zh.webp" alt="测量应力松驰数据与指数表减拟合及平衡应力水平" loading="lazy">
+<p>保持应变不变时，标准线性固体模型的松弛模量可写为 E(t) = E_eq + E_branch·exp(−t/τ)，其中 τ = η/E_branch。乘以施加的应变，就得到应力随时间的衰减；下面代码拟合的 A 和 y0 分别是应力衰减幅值与平衡应力，单位为 kPa。这个关系对应 <a href="https://doc.comsol.com/6.4/doc/com.comsol.help.sme/sme_ug_theory.06.029.html">COMSOL 线性黏弹性模型中的单 Maxwell 支路</a>。</p>
+
+<img src="/static/images/posts/scipy-curve-fitting/relaxation-zh.webp" alt="应力松弛数据与指数衰减拟合及平衡应力水平" loading="lazy">
 
 <pre><code class="language-python">
 time_min = np.array([0, 1, 2, 5, 10, 20, 40, 80])
@@ -103,30 +110,43 @@ print(f&quot;松弛时间: {tau:.1f} min&quot;)
 
 <h2 id="四-hertz模型-afm纳米压痕分析">四、Hertz模型：AFM纳米压痕分析</h2>
 
+<p>力–压痕曲线的局部斜率是接触刚度。要提取杨氏模量，还需结合探针几何和接触模型：对比样品刚得多的球形探针，Hertz 关系为 F = (4/3)E<em>√R·δ^(3/2)，E</em> = E/(1−ν²)。下面的教学计算取球半径 1000 nm，使 0–60 nm 的压痕范围相对半径较小，并在函数内部统一为 SI 单位。</p>
+
 <pre><code class="language-python">
+# 教学压痕数值；球形探针半径为 1000 nm
 indentation_nm = np.array([0, 10, 20, 30, 40, 50, 60])
 force_nN = np.array([0, 1.5, 4.8, 9.2, 14.5, 20.3, 26.8])
 
-def hertz_model(delta, E_star, R=20.0):
-    return (4/3) * E_star * np.sqrt(R) * np.power(np.maximum(delta, 0), 1.5)
+def hertz_model(delta_nm, E_star_MPa, R_nm=1000.0):
+    delta_m = np.maximum(delta_nm, 0) * 1e-9
+    E_star_Pa = E_star_MPa * 1e6
+    force_N = (4/3) * E_star_Pa * np.sqrt(R_nm * 1e-9) * delta_m**1.5
+    return force_N * 1e9  # 返回 nN，与观测数据单位一致
 
 popt, pcov = curve_fit(hertz_model, indentation_nm, force_nN,
-    p0=[1000], bounds=(1, 1e9))
-E_modulus = popt[0] * (1 - 0.5**2)  # 转换为杨氏模量
-print(f&quot;杨氏模量: {E_modulus/1000:.1f} kPa&quot;)
+    p0=[1.0], bounds=(0, np.inf))
+E_modulus_MPa = popt[0] * (1 - 0.5**2)  # 刚性探针，样品泊松比取 0.5
+print(f&quot;杨氏模量: {E_modulus_MPa * 1000:.1f} kPa&quot;)
 </code></pre>
 
 <p>Hertz模型假设材料是各向同性线弹性的、压痕深度远小于样品厚度、针尖与样品之间无粘附作用。对于生物材料，这些假设不总是成立，因此得到的模量应视为表观模量而非绝对的本征材料参数。</p>
 
 <h2 id="五-置信区间-不要只报一个数字">五、置信区间：不要只报一个数字</h2>
 
+<p><code>curve_fit</code> 返回的 <code>pcov</code> 在模型的局部线性近似下估计参数协方差；对角元开平方得到参数标准误。其数值还受观测误差设置及 <code>absolute_sigma</code> 影响，可结合 <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html">SciPy 文档</a> 选择误差定义。</p>
+
+<img src="/static/images/article-guides/comp-guide-covariance-zh.svg" alt="该教学协方差矩阵给出斜率标准误 0.2、截距标准误 0.1，以及参数相关系数 −0.75" loading="lazy">
+
+<p>该教学协方差矩阵给出斜率标准误 0.2、截距标准误 0.1，以及参数相关系数 −0.75。计算置信区间还需指定置信水平，并结合模型选取相应的分位数。</p>
+
+
 <pre><code class="language-python">
 from scipy import stats
 alpha = 0.05; n = len(indentation_nm); p = len(popt)
 t_val = stats.t.ppf(1 - alpha/2, max(0, n - p))
-for i, (param, name) in enumerate(zip(popt, [&#x27;E_star&#x27;])):
+for i, (param, name) in enumerate(zip(popt, [&#x27;E_star (MPa)&#x27;])):
     std = np.sqrt(pcov[i, i])
-    print(f&quot;{name}: {param:.1f} +/- {t_val*std:.1f} (95% CI)&quot;)
+    print(f&quot;{name}: {param:.3f} +/- {t_val*std:.3f} (95% CI)&quot;)
 </code></pre>
 
 <h2 id="六-常见问题和调试技巧">六、常见问题和调试技巧</h2>
@@ -137,7 +157,11 @@ for i, (param, name) in enumerate(zip(popt, [&#x27;E_star&#x27;])):
 
 <pre><code class="language-python">
 from scipy.optimize import minimize
-result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, y), bounds=[(0, None)]*2)
+result = minimize(
+    lambda p, x, y: np.sum((y - hertz_model(x, *p))**2),
+    [1.0], args=(indentation_nm, force_nN), bounds=[(0, None)]
+)
+print(f&quot;约束优化得到的约化模量: {result.x[0]:.3f} MPa&quot;)
 </code></pre>
 
 <h3 id="参考文献">参考文献</h3>
@@ -148,12 +172,8 @@ result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, 
 <li>Hertz, H. (1882). Ueber die Beruehrung fester elastischer Koerper. <em>J. Reine Angew. Math.</em>, 92, 156-171.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/scientific-visualization-python-zh/">← Python科研绘图完全指南：从数据到发表级图表</a></span><span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scientific-visualization-python-zh/">Python科研绘图完全指南：从数据到发表级图表</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/scientific-visualization-python-zh/">← Python科研绘图完全指南：从数据到发表级图表</a></span><span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scientific-visualization-python-zh/">Python科研绘图完全指南：从数据到发表级图表</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -164,7 +184,7 @@ result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, 
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -172,11 +192,11 @@ result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, 
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

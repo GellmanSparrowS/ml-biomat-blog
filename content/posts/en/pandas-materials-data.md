@@ -1,11 +1,12 @@
 ---
 title: "Pandas for Materials Data Processing"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["pandas", "python", "data-processing", "experimental-data"]
 lang: "en"
 slug: "pandas-materials-data"
-description: "A practical guide to Pandas for materials research data: load heterogeneous lab files, clean and merge measurements, run grouped statistics, and create publication-ready summaries and plots."
+description: "Organize experimental records with DataFrames, clean missing or inconsistent values, and summarize repeated measurements by condition. Merge related tables by sample identity and export results while retaining the labels needed for later analysis."
 ---
 
 ## Why Pandas
@@ -45,6 +46,11 @@ for col in ["modulus", "diameter"]:
 ```
 
 ### Group Statistics
+
+![Grouping the four teaching measurements by condition gives means of 3 GPa for A and 7 GPa for B, with two samples in each group](/static/images/article-guides/comp-guide-groupby-en.svg)
+
+Grouping the four teaching measurements by condition gives means of 3 GPa for A and 7 GPa for B, with two samples in each group. Keeping the sample count beside the mean helps readers interpret each summary.
+
 
 ```python
 summary = df.groupby("treatment").agg({
@@ -88,6 +94,11 @@ with pd.ExcelWriter("results.xlsx") as writer:
 - McKinney, W. (2012). *Python for Data Analysis*. O'Reilly Media.
 
 ## Advanced Data Operations
+
+![An inner join on sample ID connects the mechanics and morphology tables](/static/images/article-guides/comp-guide-merge-en.svg)
+
+An inner join on sample ID connects the mechanics and morphology tables. Only A2 appears in both teaching tables, so the resulting row contains its modulus of 3 GPa and diameter of 50 nm.
+
 
 Merging data from multiple sources is a common task in materials research. Suppose you have mechanical test results in one CSV file and fiber morphology measurements from SEM analysis in another. Pandas merge function allows you to combine these datasets on a common key such as sample ID:
 

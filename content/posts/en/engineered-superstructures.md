@@ -1,11 +1,12 @@
 ---
 title: "Engineered Superstructures: Origami, Lattices, and Beyond"
 date: "2026-06-30"
+updated: "2026-10-28"
 category: "biomaterials"
 tags: ["superstructures", "mechanical metamaterials", "origami", "honeycomb", "auxetic", "twisted structures", "lattice"]
 lang: "en"
 slug: "engineered-superstructures"
-description: "A comprehensive review of engineered superstructures: origami, honeycomb, auxetic, helical, and lattice designs in 2D and 3D, covering geometry, mechanisms, parameters, and design rules."
+description: "Compare folding, rotating-unit auxetics, honeycombs, lattices and multistable structures through their deformation mechanisms. Geometry diagrams and density-scaling curves connect architectural choices to stiffness, lateral response and energy absorption."
 ---
 
 ## Bending and Folding Dominated Designs
@@ -48,7 +49,7 @@ Hierarchical honeycomb design adds sub-millimeter corrugations or ribs to the wa
 
 ### Section 3: Auxetic Metamaterials — Mechanics and Fabrication of Negative Poisson's Ratio Structures
 
-Auxetics — materials with negative Poisson's ratio — are the most counterintuitive members of the metamaterial family. Stretching them transversely makes them wider rather than narrower; compressing them causes lateral expansion. This behavior is not a physical anomaly but an inevitable mechanical consequence of specific unit-cell geometry, precisely engineerable by design.
+Auxetics — materials with negative Poisson's ratio — are the most counterintuitive members of the metamaterial family. Under uniaxial tension they expand laterally; under uniaxial compression they contract laterally. This behavior is not a physical anomaly but an inevitable mechanical consequence of specific unit-cell geometry, precisely engineerable by design.
 
 The clearest physical picture of auxetic behavior comes from the re-entrant honeycomb. Reversing the inclination angle of the slanted walls in a regular hexagonal honeycomb creates re-entrant (concave) vertices. Under vertical tension, the re-entrant walls rotate outward, forcing the horizontal walls to expand laterally. In the idealized rigid-joint model, ν* ≈ -tan²θ, where θ is the re-entrant angle, giving a Poisson's ratio continuously tunable from 0 toward −1. Lakes reported the first experimental negative Poisson's ratio foam in Science in 1987, fabricating it by compressing open-cell polyurethane triaxially under heat to permanently buckle the cell walls inward into a re-entrant topology.
 
@@ -59,6 +60,10 @@ Three engineering benefits follow from negative Poisson's ratio. Indentation har
 Fabrication of three-dimensional auxetic structures relies primarily on additive manufacturing. Stereolithography and DLP printing achieve 50–100 μm resolution suitable for sub-millimeter re-entrant and chiral cells; selective laser sintering processes engineering-grade polymers and metals for structural-scale parts; two-photon polymerization resolves features down to 200 nm for fundamental research at optical length scales. Outstanding challenges include residual stress effects on unit-cell geometric accuracy, boundary effects when unit-cell counts are finite, and preserving negative Poisson's ratio characteristics under high-rate dynamic loading — the resolution of these issues will determine the pace at which auxetic metamaterials transition from laboratory demonstrations to engineering deployments.
 
 ---
+
+![Rotation can expand both directions](/static/images/article-guides/mech-auxetic-squares-en.svg)
+
+An ideal array of corner-hinged rigid squares expands in both directions as the alternating rotation angle increases from 5° to 30°. Equal axial and transverse strains give ν = −1 for this mechanism; compliant hinges and panel deformation modify a fabricated specimen’s response.
 
 ### Section 4: Chiral Twisting and Compliant Metamaterials
 
@@ -115,6 +120,10 @@ Two dimensionless parameters capture most of the essential physics across the en
 Core design rules crystallize from this framework. For maximum specific strength in load-bearing structural applications, choose stretch-dominated lattices, maximize nodal connectivity toward the Maxwell critical value (Z = 12 in 3D), and use precision additive manufacturing to eliminate strut eccentricity defects. For maximum energy absorption in impact-protection applications, choose bending-dominated structures with long stress plateaus, enhanced by auxetic geometry to improve local densification efficiency. For applications requiring large shape tunability (deployable antennas, morphing wing surfaces), rigidly foldable origami structures are practically the only viable choice. For functional surfaces (anti-fouling, drag reduction, optical patterning), Kirigami and buckling-induced thin-film metamaterials provide the simplest manufacturing platform.
 
 ---
+
+![Density and deformation mode](/static/images/article-guides/mech-lattice-scaling-en.svg)
+
+With C = 1, E*/Es = (ρ*/ρs)ⁿ separates the effect of the scaling exponent: n = 1 retains more stiffness at low density than n = 2. The curves illustrate the scaling relation; actual coefficients depend on geometry and loading direction.
 
 ### Section 9: Machine-Learning-Assisted Design and Fabrication
 

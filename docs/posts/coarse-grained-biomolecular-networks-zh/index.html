@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>生物分子网络的粗粒化建模：从映射方案到验证方法 — ML-Biomat</title>
-<meta name="description" content="面向材料研究的生物分子网络粗粒化建模指南，系统讲解珠子映射原则、有效相互作用势、体系构建与平衡、以及如何用独立参考数据验证模型，帮助研究者避免常见的粗粒化陷阱。">
+<meta name="description" content="围绕生物分子网络选择珠子映射、有效相互作用与平衡策略，并规划独立验证。通过原子分组、参考分布与有效势的示意，说明粗粒化模型需要保留哪些结构信息和力学观测量。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,16 +13,16 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="生物分子网络的粗粒化建模：从映射方案到验证方法">
-<meta property="og:description" content="面向材料研究的生物分子网络粗粒化建模指南，系统讲解珠子映射原则、有效相互作用势、体系构建与平衡、以及如何用独立参考数据验证模型，帮助研究者避免常见的粗粒化陷阱。">
+<meta property="og:description" content="围绕生物分子网络选择珠子映射、有效相互作用与平衡策略，并规划独立验证。通过原子分组、参考分布与有效势的示意，说明粗粒化模型需要保留哪些结构信息和力学观测量。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物分子网络的粗粒化建模：从映射方案到验证方法", "description": "面向材料研究的生物分子网络粗粒化建模指南，系统讲解珠子映射原则、有效相互作用势、体系构建与平衡、以及如何用独立参考数据验证模型，帮助研究者避免常见的粗粒化陷阱。", "datePublished": "2026-09-07", "dateModified": "2026-09-07", "wordCount": 193, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "生物分子网络的粗粒化建模：从映射方案到验证方法", "item": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物分子网络的粗粒化建模：从映射方案到验证方法", "description": "围绕生物分子网络选择珠子映射、有效相互作用与平衡策略，并规划独立验证。通过原子分组、参考分布与有效势的示意，说明粗粒化模型需要保留哪些结构信息和力学观测量。", "datePublished": "2026-09-07", "dateModified": "2026-10-28", "wordCount": 4611, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "生物分子网络的粗粒化建模：从映射方案到验证方法", "item": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -30,7 +30,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -42,12 +42,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>生物分子网络的粗粒化建模：从映射方案到验证方法</h1>
 <div class="article-meta">
-<span>2026-09-07</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/multiscale-modeling/">多尺度模拟</a>
+<span>2026-09-07</span><span>·</span><span>12 分钟阅读</span><span>·</span><a href="/categories/multiscale-modeling/">多尺度模拟</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E7%B2%97%E7%B2%92%E5%8C%96/">粗粒化</a><a class="tag-pill" href="/tags/%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6/">分子动力学</a><a class="tag-pill" href="/tags/%E7%94%9F%E7%89%A9%E6%9D%90%E6%96%99/">生物材料</a><a class="tag-pill" href="/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6/">多尺度</a><a class="tag-pill" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a><a class="tag-pill" href="/tags/%E9%AA%8C%E8%AF%81/">验证</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么生物材料需要粗粒化">为什么生物材料需要粗粒化</a></li><li class="toc-h2"><a href="#从原子到珠子-如何设计映射">从原子到珠子：如何设计映射</a></li><li class="toc-h2"><a href="#有效相互作用势及其局限">有效相互作用势及其局限</a></li><li class="toc-h2"><a href="#体系构建与平衡">体系构建与平衡</a></li><li class="toc-h2"><a href="#先验证-再预测">先验证，再预测</a></li><li class="toc-h2"><a href="#常见失效模式与报告标准">常见失效模式与报告标准</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="为什么生物材料需要粗粒化">为什么生物材料需要粗粒化</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#为什么生物材料需要粗粒化">为什么生物材料需要粗粒化</a></li><li class="toc-h2"><a href="#从原子到珠子-如何设计映射">从原子到珠子：如何设计映射</a></li><li class="toc-h2"><a href="#有效相互作用势及其局限">有效相互作用势及其局限</a></li><li class="toc-h2"><a href="#体系构建与平衡">体系构建与平衡</a></li><li class="toc-h2"><a href="#先验证-再预测">先验证，再预测</a></li><li class="toc-h2"><a href="#常见失效模式与报告标准">常见失效模式与报告标准</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="为什么生物材料需要粗粒化">为什么生物材料需要粗粒化</h2>
 
 <p>如果要对一根丝素蛋白纤维、一张胶原网络或一个含水纤维素束做全原子分子动力学，就需要模拟数百万个原子并推进微秒级的轨迹，即便如此，大多数真正影响力学行为的慢松弛过程仍然遥不可及。粗粒化模型的价值就在于主动丢弃一部分化学细节，从而把生物材料力学真正关心的尺度拿回来：链的持久长度、网络拓扑、交联密度、吸附水，以及决定韧性和粘弹性的缓慢结构重排。</p>
 
@@ -73,6 +73,10 @@
 
 <table><tr><th>映射层次</th><th>代表性单元</th><th>保留的信息</th><th>通常会丢失的信息</th></tr><tr><td>全原子</td><td>每个原子</td><td>电荷、化学键、精细构象</td><td>可达的时间与长度尺度</td></tr><tr><td>MARTINI 类</td><td>数个重原子对应一个珠子</td><td>极性与氢键倾向</td><td>扭转化学细节</td></tr><tr><td>残基 / 单体</td><td>每个残基或单体一个珠子</td><td>链连接性与天然接触</td><td>侧链堆积</td></tr><tr><td>网络</td><td>每个 Kuhn 链段一个位点</td><td>拓扑与交联密度</td><td>局部结构信息</td></tr></table>
 
+<img src="/static/images/article-guides/mech-coarse-centers-zh.svg" alt="从原子分组到珠子质心" loading="lazy">
+
+<p>将等质量原子分组并映射到质心，同时保留链连接关系。质量不同时采用 R = Σ(mᵢrᵢ)/Σmᵢ；珠子类型编码需要保留的化学差异。</p>
+
 <h2 id="有效相互作用势及其局限">有效相互作用势及其局限</h2>
 
 <p>粗粒化势的具体函数形式远不如一个认知重要：任何粗粒化力场都是统计构造。软排斥、键弹簧、角势和成对吸引并不是对某条共价键或某个氢键的直接测量，而是一组有效相互作用，被用来让粗粒化分辨率下的系综平均重现某个选定的参考。这意味着参数永远不存在“放之四海而皆准”的可迁移性。为一套磷脂膜拟合的 MARTINI 参数，不会不经过重新标定就自动适用于蚕丝 beta-折叠结晶区。</p>
@@ -85,6 +89,10 @@
 <p>构建力场可以走自下而上、自上而下或混合路线，三者与“真实”的关系并不相同。自下而上以全原子模拟为参考：先对同一化学体系跑一段短的全原子轨迹，把珠心之间的对距、键长与键角分布投影出来，再用玻尔兹曼反演或迭代玻尔兹曼反演把分布反推出有效势。这样得到的模型对参考点很忠实，但只在参考生成的那个状态点成立；温度、密度或组分变化太大，势就不得不重建。</p>
 
 <p>自上而下则直接拿宏观实验标定：弹簧刚度、非键排斥和交联密度都被调到一个能重现模量、网孔尺寸或转变温度的程度。这条路不继承任何短程化学，却常常是做出工程可用模型的最快方式，前提是那个目标实验不能同时是唯一的验证。混合路线越来越常见：先自上而下匹配整体力学，再在化学真正起作用的局部，用全原子分布自下而上精修势函数。无论哪条路，工作流都应当脚本化，把参考分布、拟合出的势和验证观测量与最终轨迹一起保存；缺少这份来源记录的粗粒化论文，几乎无法审计。</p>
+<img src="/static/images/article-guides/mech-coarse-potential-zh.svg" alt="由分布理解有效势" loading="lazy">
+
+<p>对无量纲笛卡尔坐标 q，高斯分布对应 U/kBT = q²/2 的谐和有效势，允许相差一个加法常数。若反演键长或键角分布，还须处理相应坐标测度的修正。</p>
+
 <h2 id="体系构建与平衡">体系构建与平衡</h2>
 
 <p>粗粒化模拟虽然比全原子快，但体系仍然足够大，因此构建必须规范。周期性盒子的边长应当大于两倍的最长相关长度，否则网络会在各个方向上感知到自己的人为镜像。珠子的质量要保证在更大时间步下仍能稳定积分，但不能为了跑得更快而随意减小质量，因为质量分布会改变体系在刚性与柔性自由度之间分配动能的方式。</p>
@@ -118,12 +126,8 @@
 <li>Saunders, M. G., and Voth, G. A. <em>Coarse-graining methods for computational biology.</em> Annu. Rev. Biophys., 2013.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/biomaterials-mechanical-testing-zh/">← 生物材料力学测试：试样制备、仪器设置与无伪影数据</a></span><span><span></span></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation-zh/">分子动力学入门：你的第一个LAMMPS模拟</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/biomaterials-mechanical-testing-zh/">← 生物材料力学测试：试样制备、仪器设置与无伪影数据</a></span><span><span></span></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation-zh/">分子动力学入门：你的第一个LAMMPS模拟</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -134,7 +138,7 @@
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -142,11 +146,11 @@
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

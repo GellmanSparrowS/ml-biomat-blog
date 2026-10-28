@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GROMACS MD Tutorial: Structure Prep to Trajectory Analysis — ML-Biomat</title>
-<meta name="description" content="A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.">
+<meta name="description" content="Build a lysozyme-in-water simulation from coordinates and topology through minimization, equilibration and production. Track the files exchanged by grompp and mdrun, then distinguish what RMSD, RMSF, radius of gyration and hydrogen-bond analysis measure.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/gromacs-md-tutorial/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/gromacs-md-tutorial/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/gromacs-md-tutorial-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/gromacs-md-tutorial/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="GROMACS MD Tutorial: Structure Prep to Trajectory Analysis">
-<meta property="og:description" content="A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.">
+<meta property="og:description" content="Build a lysozyme-in-water simulation from coordinates and topology through minimization, equilibration and production. Track the files exchanged by grompp and mdrun, then distinguish what RMSD, RMSF, radius of gyration and hydrogen-bond analysis measure.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/gromacs-md-tutorial/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/gromacs-md-tutorial.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis", "description": "A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example.", "datePublished": "2026-06-29", "dateModified": "2026-06-29", "wordCount": 1715, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial/", "image": "https://ml-biomat.com/static/images/og/gromacs-md-tutorial.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis", "item": "https://ml-biomat.com/posts/gromacs-md-tutorial/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis", "description": "Build a lysozyme-in-water simulation from coordinates and topology through minimization, equilibration and production. Track the files exchanged by grompp and mdrun, then distinguish what RMSD, RMSF, radius of gyration and hydrogen-bond analysis measure.", "datePublished": "2026-06-29", "dateModified": "2026-10-28", "wordCount": 1232, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/gromacs-md-tutorial/", "image": "https://ml-biomat.com/static/images/og/gromacs-md-tutorial.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/en/"}, {"@type": "ListItem", "position": 3, "name": "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis", "item": "https://ml-biomat.com/posts/gromacs-md-tutorial/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</h1>
 <div class="article-meta">
-<span>2026-06-29</span><span>·</span><span>8 min read</span><span>·</span><a href="/categories/multiscale-modeling/">Multiscale Modeling</a>
+<span>2026-06-29</span><span>·</span><span>6 min read</span><span>·</span><a href="/categories/multiscale-modeling/en/">Multiscale Modeling</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/GROMACS/">GROMACS</a><a class="tag-pill" href="/tags/molecular%20dynamics/">molecular dynamics</a><a class="tag-pill" href="/tags/MD%20simulation/">MD simulation</a><a class="tag-pill" href="/tags/protein%20simulation/">protein simulation</a><a class="tag-pill" href="/tags/trajectory%20analysis/">trajectory analysis</a><a class="tag-pill" href="/tags/lysozyme/">lysozyme</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-gromacs">Why GROMACS</a></li><li class="toc-h2"><a href="#setup-and-core-workflow">Setup and Core Workflow</a></li><li class="toc-h3"><a href="#installation">Installation</a></li><li class="toc-h3"><a href="#md-simulation-workflow">MD Simulation Workflow</a></li><li class="toc-h3"><a href="#worked-example-lysozyme-in-water">Worked Example: Lysozyme in Water</a></li><li class="toc-h3"><a href="#step-1-acquire-the-structure">Step 1: Acquire the Structure</a></li><li class="toc-h3"><a href="#step-2-generate-topology">Step 2: Generate Topology</a></li><li class="toc-h3"><a href="#step-3-define-the-simulation-box">Step 3: Define the Simulation Box</a></li><li class="toc-h3"><a href="#step-4-solvate-the-system">Step 4: Solvate the System</a></li><li class="toc-h3"><a href="#step-5-add-counter-ions">Step 5: Add Counter-Ions</a></li><li class="toc-h3"><a href="#step-6-energy-minimization-em">Step 6: Energy Minimization (EM)</a></li><li class="toc-h3"><a href="#step-7-nvt-equilibration">Step 7: NVT Equilibration</a></li><li class="toc-h3"><a href="#step-8-npt-equilibration">Step 8: NPT Equilibration</a></li><li class="toc-h3"><a href="#step-9-production-md">Step 9: Production MD</a></li><li class="toc-h2"><a href="#analysis-and-optimization">Analysis and Optimization</a></li><li class="toc-h3"><a href="#trajectory-analysis">Trajectory Analysis</a></li><li class="toc-h3"><a href="#rmsd">RMSD</a></li><li class="toc-h3"><a href="#rmsf">RMSF</a></li><li class="toc-h3"><a href="#radius-of-gyration-rg">Radius of Gyration (Rg)</a></li><li class="toc-h3"><a href="#hydrogen-bond-analysis">Hydrogen Bond Analysis</a></li><li class="toc-h3"><a href="#python-analysis-code">Python Analysis Code</a></li><li class="toc-h3"><a href="#performance-optimization">Performance Optimization</a></li><li class="toc-h3"><a href="#common-issues-and-troubleshooting">Common Issues and Troubleshooting</a></li><li class="toc-h3"><a href="#gromacs-in-multiscale-biomaterials-research">GROMACS in Multiscale Biomaterials Research</a></li><li class="toc-h2"><a href="#summary">Summary</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><p>Biomaterials research increasingly relies on molecular dynamics (MD) simulation to understand the atomic-scale behavior of proteins, fibers, and polysaccharides. Among the many MD packages available, GROMACS (GROningen MAchine for Chemical Simulations) stands out for its open-source nature, exceptional computational efficiency, and active community. This tutorial walks through a complete GROMACS MD workflow using hen egg-white lysozyme (PDB: 1AKI) as a concrete example.</p>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-gromacs">Why GROMACS</a></li><li class="toc-h2"><a href="#setup-and-core-workflow">Setup and Core Workflow</a></li><li class="toc-h3"><a href="#installation">Installation</a></li><li class="toc-h3"><a href="#md-simulation-workflow">MD Simulation Workflow</a></li><li class="toc-h3"><a href="#worked-example-lysozyme-in-water">Worked Example: Lysozyme in Water</a></li><li class="toc-h3"><a href="#step-1-acquire-the-structure">Step 1: Acquire the Structure</a></li><li class="toc-h3"><a href="#step-2-generate-topology">Step 2: Generate Topology</a></li><li class="toc-h3"><a href="#step-3-define-the-simulation-box">Step 3: Define the Simulation Box</a></li><li class="toc-h3"><a href="#step-4-solvate-the-system">Step 4: Solvate the System</a></li><li class="toc-h3"><a href="#step-5-add-counter-ions">Step 5: Add Counter-Ions</a></li><li class="toc-h3"><a href="#step-6-energy-minimization-em">Step 6: Energy Minimization (EM)</a></li><li class="toc-h3"><a href="#step-7-nvt-equilibration">Step 7: NVT Equilibration</a></li><li class="toc-h3"><a href="#step-8-npt-equilibration">Step 8: NPT Equilibration</a></li><li class="toc-h3"><a href="#step-9-production-md">Step 9: Production MD</a></li><li class="toc-h2"><a href="#analysis-and-optimization">Analysis and Optimization</a></li><li class="toc-h3"><a href="#trajectory-analysis">Trajectory Analysis</a></li><li class="toc-h3"><a href="#rmsd">RMSD</a></li><li class="toc-h3"><a href="#rmsf">RMSF</a></li><li class="toc-h3"><a href="#radius-of-gyration-rg">Radius of Gyration (Rg)</a></li><li class="toc-h3"><a href="#hydrogen-bond-analysis">Hydrogen Bond Analysis</a></li><li class="toc-h3"><a href="#python-analysis-code">Python Analysis Code</a></li><li class="toc-h3"><a href="#performance-optimization">Performance Optimization</a></li><li class="toc-h3"><a href="#common-issues-and-troubleshooting">Common Issues and Troubleshooting</a></li><li class="toc-h3"><a href="#gromacs-in-multiscale-biomaterials-research">GROMACS in Multiscale Biomaterials Research</a></li><li class="toc-h2"><a href="#summary">Summary</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><p>Biomaterials research increasingly relies on molecular dynamics (MD) simulation to understand the atomic-scale behavior of proteins, fibers, and polysaccharides. Among the many MD packages available, GROMACS (GROningen MAchine for Chemical Simulations) stands out for its open-source nature, exceptional computational efficiency, and active community. This tutorial walks through a complete GROMACS MD workflow using hen egg-white lysozyme (PDB: 1AKI) as a concrete example.</p>
 
 <h2 id="why-gromacs">Why GROMACS</h2>
 
@@ -89,6 +89,10 @@ conda install -c conda-forge -c bioconda gromacs=&quot;2024.*=*cuda*&quot;
 <p>A complete MD simulation proceeds through the following stages:</p>
 
 <table><tr><th>Step</th><th>Command</th><th>Purpose</th><th>Typical Time</th></tr><tr><td>1. Structure</td><td>wget PDB</td><td>Acquire initial coordinates</td><td>manual</td></tr><tr><td>2. Topology</td><td>gmx pdb2gmx</td><td>Generate topology and force field</td><td>< 1 s</td></tr><tr><td>3. Box</td><td>gmx editconf</td><td>Define simulation box</td><td>< 1 s</td></tr><tr><td>4. Solvate</td><td>gmx solvate</td><td>Fill with water molecules</td><td>seconds</td></tr><tr><td>5. Ions</td><td>gmx genion</td><td>Neutralize system charge</td><td>seconds</td></tr><tr><td>6. EM</td><td>gmx grompp + mdrun</td><td>Eliminate atomic clashes</td><td>minutes</td></tr><tr><td>7. NVT</td><td>gmx grompp + mdrun</td><td>Stabilize temperature</td><td>hours</td></tr><tr><td>8. NPT</td><td>gmx grompp + mdrun</td><td>Stabilize pressure/density</td><td>hours</td></tr><tr><td>9. Production</td><td>gmx grompp + mdrun</td><td>Collect trajectory data</td><td>hours-days</td></tr><tr><td>10. Analysis</td><td>gmx rms/rmsf/...</td><td>Extract observables</td><td>minutes</td></tr></table>
+
+<img src="/static/images/article-guides/mech-gromacs-files-en.svg" alt="What grompp and mdrun exchange" loading="lazy">
+
+<p>grompp combines coordinates, topology and run settings into a .tpr input; mdrun uses that input to produce the trajectory, energy record, log and checkpoint. File provenance should follow each minimization, equilibration and production stage.</p>
 
 <h3 id="worked-example-lysozyme-in-water">Worked Example: Lysozyme in Water</h3>
 
@@ -294,6 +298,10 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_num.xvg
 gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 </code></pre>
 
+<img src="/static/images/article-guides/mech-trajectory-observables-en.svg" alt="Three different questions for a trajectory" loading="lazy">
+
+<p>RMSD compares each aligned frame with a reference; RMSF measures time fluctuations around each selected atom’s mean position; Rg measures mass-weighted spread around the center of mass. The constructed configurations make these different definitions visible.</p>
+
 <h3 id="python-analysis-code">Python Analysis Code</h3>
 
 <p>Below is a self-contained Python script for visualizing key trajectory observables:</p>
@@ -384,11 +392,7 @@ plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <li>Berman, H.M., Westbrook, J., Feng, Z., Gilliland, G., Bhat, T.N., Weissig, H., Shindyalov, I.N., & Bourne, P.E. (2000). The Protein Data Bank. <em>Nucleic Acids Research</em>, 28(1), 235-242.</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/stress-strain-curves/">← Stress-Strain Curves: A Materials Science Primer</a></span><span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-07</span><a href="/posts/coarse-grained-biomolecular-networks/">Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro/">A Practical Introduction to Multiscale Modeling for Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation/">Molecular Dynamics Basics: Your First LAMMPS Simulation</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/stress-strain-curves/">← Stress-Strain Curves: A Materials Science Primer</a></span><span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-07</span><a href="/posts/coarse-grained-biomolecular-networks/">Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro/">A Practical Introduction to Multiscale Modeling for Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation/">Molecular Dynamics Basics: Your First LAMMPS Simulation</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -408,11 +412,11 @@ plt.savefig(&#x27;analysis_summary.png&#x27;, dpi=150)
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

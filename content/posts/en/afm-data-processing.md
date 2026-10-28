@@ -1,11 +1,12 @@
 ---
 title: "Practical AFM Force Curve Analysis with Python"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "wet-lab-data"
 tags: ["AFM", "force-spectroscopy", "python", "numpy", "data-processing", "biomaterials"]
 lang: "en"
 slug: "afm-force-curve-python"
-description: "A step-by-step guide to processing AFM force curves in Python: baseline correction, contact point detection, adhesion force, and Young's modulus fitting with Hertz/Sneddon models."
+description: "Convert AFM deflection into force, correct the baseline and identify contact before fitting indentation data. Calibration geometry, analytic Hertz curves and Python functions connect measured channels to adhesion and elastic modulus with explicit units."
 ---
 
 ## Why This Guide Exists
@@ -78,6 +79,10 @@ sensitivity = 45.0  # nm/V
 force = deflection_to_force(deflection, k, sensitivity)
 ```
 
+![Separate cantilever bending from indentation](/static/images/article-guides/mech-afm-calibration-en.svg)
+
+After calibration, deflection d = SV gives force F = kd. With piezo advance defined positive into contact and offsets removed, indentation is δ = Δz − d. This geometry prevents piezo motion from being mistaken for sample indentation.
+
 ### 4. Baseline Correction
 
 ```python
@@ -103,7 +108,7 @@ def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
     for i in range(len(above_threshold) - window):
         if np.all(above_threshold[i:i + window]):
             return i + window // 2
-    return len(force) // 2
+    raise ValueError("No contact point found; review the approach segment")
 ```
 
 ### 6. Extracting Adhesion Force
@@ -124,28 +129,57 @@ F = (4/3) E* sqrt(R) delta^(3/2)
 
 where E* = E / (1 - nu^2).
 
+The fitting function uses an approach segment with z in nm and force in nN, and returns E in Pa. Set the measured spring constant in N/m and tip radius explicitly. The default direction assumes z decreases during approach; use +1 when it increases. Choose indentation small compared with the spherical tip radius, and a sample thickness large compared with the contact radius a = sqrt(Rδ). The parameter values below match the teaching curves.
+
 ```python
 def hertz_sphere(indentation, E_star, R):
-    return (4/3) * E_star * np.sqrt(R) * np.power(np.maximum(indentation, 0), 1.5)
+    """SI units: indentation and R in m, E_star in Pa, force in N."""
+    return (4/3) * E_star * np.sqrt(R) * np.power(
+        np.maximum(indentation, 0), 1.5
+    )
 
-def fit_youngs_modulus(z_piezo, force, contact_idx, tip_radius_nm=20.0,
-                        poisson=0.5, fit_range_nm=50.0):
-    indent = z_piezo[contact_idx] - z_piezo
-    contact_force = force - force[contact_idx]
-    fit_mask = (indent > 0) & (indent < fit_range_nm) & (contact_force > 0)
-    indent_fit = indent[fit_mask]
-    force_fit = contact_force[fit_mask]
-    if len(indent_fit) < 50:
+def fit_youngs_modulus(z_piezo, force, contact_idx,
+                        tip_radius_nm=5000.0, poisson=0.5,
+                        fit_range_nm=200.0, spring_constant=0.06,
+                        approach_direction=-1):
+    """Fit an approach branch: z in nm, force in nN; return E and its fit error in Pa."""
+    if spring_constant <= 0 or tip_radius_nm <= 0:
+        raise ValueError("Spring constant and tip radius must be positive")
+    if approach_direction not in (-1, 1):
+        raise ValueError("approach_direction must be -1 or +1")
+    z_nm = np.asarray(z_piezo, dtype=float)
+    force_nN = np.asarray(force, dtype=float)
+    contact_force_nN = force_nN - force_nN[contact_idx]
+    advance_nm = approach_direction * (z_nm - z_nm[contact_idx])
+    deflection_nm = contact_force_nN / spring_constant
+    indentation_nm = advance_nm - deflection_nm
+    fit_mask = (
+        (np.arange(len(z_nm)) >= contact_idx)
+        & (indentation_nm > 0) & (indentation_nm < fit_range_nm)
+        & (contact_force_nN > 0)
+        & np.isfinite(indentation_nm) & np.isfinite(contact_force_nN)
+    )
+    if np.count_nonzero(fit_mask) < 50:
         return np.nan, np.nan
-    def model(delta, E_star):
-        return hertz_sphere(delta, E_star, tip_radius_nm)
-    popt, pcov = optimize.curve_fit(model, indent_fit, force_fit,
-        p0=[1000], bounds=(1, 1e9))
-    E_star = popt[0]
-    E = E_star * (1 - poisson**2)
+    indentation_m = indentation_nm[fit_mask] * 1e-9
+    radius_m = tip_radius_nm * 1e-9
+    force_fit_nN = contact_force_nN[fit_mask]
+
+    def model(delta_m, E_star_Pa):
+        return hertz_sphere(delta_m, E_star_Pa, radius_m) * 1e9
+
+    popt, pcov = optimize.curve_fit(
+        model, indentation_m, force_fit_nN,
+        p0=[1e4], bounds=(1, 1e9)
+    )
+    E = popt[0] * (1 - poisson**2)
     E_std = np.sqrt(pcov[0, 0]) * (1 - poisson**2)
     return E, E_std
 ```
+
+![Hertz curves from stated model parameters](/static/images/article-guides/mech-afm-hertz-en.svg)
+
+Hertz curves calculated with R = 5 μm, ν = 0.5 and E = 10 or 30 kPa show how modulus changes force at the same indentation. The model assumes a rigid spherical tip, a homogeneous elastic half-space and negligible adhesion; the curves are calculated analytic examples.
 
 ## Scaling and Advanced Topics
 ### 8. Batch Processing
@@ -154,16 +188,22 @@ def fit_youngs_modulus(z_piezo, force, contact_idx, tip_radius_nm=20.0,
 import glob
 from pathlib import Path
 
-def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
+def batch_process_curves(data_dir, k=0.06, sensitivity=45.0, approach_direction=-1):
     results = []
     for filepath in sorted(glob.glob(f"{data_dir}/*.txt")):
         try:
             z, deflection = load_afm_curve(filepath, skip_rows=320)
             force = deflection_to_force(deflection, k, sensitivity)
-            cidx = find_contact_point(z, force)
+            turn_idx = int(np.argmax(approach_direction * z))
+            z_approach = z[:turn_idx + 1]
+            cidx = find_contact_point(z_approach, force[:turn_idx + 1])
             force_corr = baseline_correct(z, force, cidx)
-            adhesion = extract_adhesion(z, force_corr, cidx)
-            E, _ = fit_youngs_modulus(z, force_corr, cidx)
+            adhesion = (extract_adhesion(z, force_corr, turn_idx)
+                        if turn_idx + 1 < len(z) else np.nan)
+            E, _ = fit_youngs_modulus(
+                z_approach, force_corr[:turn_idx + 1], cidx,
+                spring_constant=k, approach_direction=approach_direction
+            )
             results.append({"file": Path(filepath).name,
                 "adhesion_nN": adhesion, "E_Pa": E})
         except Exception as e:

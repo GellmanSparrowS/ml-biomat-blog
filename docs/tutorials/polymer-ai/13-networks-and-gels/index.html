@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="水很多，为什么还能成形：网络与凝胶">
 <meta property="og:description" content="理解交联、贯通与凝胶弹性，在受控弹簧网络上分别学习贯通判断和指定加载下的刚度预测。">
 <meta property="og:type" content="website">
@@ -22,7 +22,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "水很多，为什么还能成形：网络与凝胶", "description": "理解交联、贯通与凝胶弹性，在受控弹簧网络上分别学习贯通判断和指定加载下的刚度预测。", "url": "https://ml-biomat.com/tutorials/polymer-ai/13-networks-and-gels/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-13.css?v=5c0bf9209cf1"><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-13.css?v=5c0bf9209cf1"><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -30,20 +30,20 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/" class="active">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/" class="active">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 
 </div></header>
-<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/tutorials/">教程</a><span aria-hidden="true">/</span><a href="/tutorials/polymer-ai/">高分子与生物大分子</a><span aria-hidden="true">/</span><span>第 13 节</span></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>配套代码 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
+<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">生物·材料·结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#water">01　水与长链怎样成胶</a><a href="#connections">02　从连接到贯通</a><a href="#mechanics">03　怎样承受一次变形</a><a href="#learning">04　让AI读懂网络</a><a href="#experiment">05　运行与解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 13 节 · 从含水长链到可以学习的力学网络</p>
-<h1>水很多，为什么还能成形：网络与凝胶<span>看清谁与谁连接，再问这些连接怎样传递一次变形</span></h1>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">生物·材料·结构</p><nav><a href="#water">01　水与长链怎样成胶</a><a href="#connections">02　从连接到贯通</a><a href="#mechanics">03　怎样承受一次变形</a><a href="#learning">04　让AI读懂网络</a><a href="#experiment">05　运行与解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从含水长链到可以学习的力学网络</p>
+<h1>水很多，为什么还能成形：网络与凝胶</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">一碗水会随容器改变形状，一块含有很多水的果冻却可以被切开、拿起，还会在轻碰后晃动。水没有突然变成硬材料，变化发生在水中的长链之间：一些连接把它们组织成能够共同响应变形的网络。研究这种结构，可以帮助我们理解食品的口感、软组织的支撑，以及怎样设计含水又有一定承载能力的生物材料。本节把这个问题交给物理计算和AI共同处理：先分清网络是否贯通，再预测它受到指定变形时需要多大的力。</p>
-<p>前一节讨论了分子在空间中怎样富集。现在把目光移到富集区域内部：即使有同样多的长链、同样多的连接，连接的位置也可能让样品表现完全不同。可以想象两张用相同数量绳子编成的网，一张把上下两端连在一起，另一张的绳子集中在两个互不相连的半边。计数相同，力却找不到相同的传递路线。这样的差别，正适合用图来表示，也为图神经网络提供了具体的科学任务。</p>
+<p><a href="/tutorials/polymer-ai/12-assembly-and-phase-separation/">《分子怎样聚到一起：自组装、相分离与凝聚体》</a>讨论了分子在空间中怎样富集。现在把目光移到富集区域内部：即使有同样多的长链、同样多的连接，连接的位置也可能让样品表现完全不同。可以想象两张用相同数量绳子编成的网，一张把上下两端连在一起，另一张的绳子集中在两个互不相连的半边。计数相同，力却找不到相同的传递路线。这样的差别，正适合用图来表示，也为图神经网络提供了具体的科学任务。</p>
 
 <section id="water"><h2><span class="num">01</span>水留在网络里，长链开始共同响应</h2>
 <p>凝胶可以从两个相互穿插的部分理解：一部分是保持连接的网络，另一部分是充满其中的流体。水凝胶里的流体主要是水，网络则可以由柔性高分子链、蛋白质纤维或其他构件形成。水分子仍然能够运动，许多小分子也能在其中扩散；网络让整个样品在一定观察时间内具有弹性响应。于是，“能保住形状”与“内部存在流动和交换”可以同时发生，这也是含水软材料很有用的原因。</p>
@@ -510,7 +510,7 @@ response message_passing RMSE test 0.122820; new family 0.115361
 <p>常规测试的RMSE依次为0.2131、0.1385和0.1228k₀；新族测试依次为0.1800、0.1351和0.1154k₀。这次消息传递在两套测试中都有较小的平方误差。新族测试的MAE则由丰富图特征得到0.0676k₀，消息传递为0.0746k₀，说明两种误差指标关注的预测分布有所不同。研究者可以结合允许的最大偏差、典型精度与后续筛选用途，决定怎样评价候选模型。</p>
 <p>还可以做两项有明确预期的检查。给节点重新编号，同时更新边表、坐标和边界身份，物理响应与图模型输出都应保持一致；只改变同一网络的加载方向，贯通标签应不变，而刚度通常会变。前者检验模型是否依赖任意编号，后者检验它是否区分拓扑与力学。这样的检查直接来自问题定义，能够帮助发现输入遗漏或数据组织错误，也比单纯再看一遍训练分数更有针对性。</p>
 <p>若把这项研究接到真实凝胶上，下一步可以从可观测结构入手：用成像或其他表征估计连接与方向，用力学实验记录尺寸、加载和响应，再将这些信息整理为带来源的图样本。连接寿命、弯曲刚度与溶胀状态也可以逐项加入模型。每增加一项机制，就安排对应测量或计算来确定参数，让AI学习的输出继续与明确的实验对象相连。</p>
-<p>本节把含水材料中的三个层次接了起来：局部结合形成连接，连接构成网络，网络在边界加载下产生响应。AI沿着同样的层次读取结构，而评价始终回到路径与刚度这两个具体问题。下一节将把边从柔性链段换成具有方向和弯曲能力的纤维，进一步观察生物大分子怎样织成能够承载的网，以及为什么纤维的排列和弯曲也值得进入模型。</p>
+<p>本节把含水材料中的三个层次接了起来：局部结合形成连接，连接构成网络，网络在边界加载下产生响应。AI沿着同样的层次读取结构，而评价始终回到路径与刚度这两个具体问题。<a href="/tutorials/polymer-ai/14-load-bearing-fiber-networks/">《纤维怎样织成能承载的网》</a>将把边从柔性链段换成具有方向和弯曲能力的纤维，进一步观察生物大分子怎样织成能够承载的网，以及为什么纤维的排列和弯曲也值得进入模型。</p>
 </section>
 
 <section id="sources"><h2>资料与延伸阅读</h2>
@@ -519,16 +519,16 @@ response message_passing RMSE test 0.122820; new family 0.115361
 <p>Scarselli等，2009，<a href="https://doi.org/10.1109/TNN.2008.2005605">The Graph Neural Network Model</a>。本节实现为三层门控消息传递，使用受控轴向弹簧网络训练两个独立任务；六幅结果图来自同页代码运行。科学史插图按研究对象与概念关系原创绘制，计算样本、模型权重与预测均可在结果区下载。</p>
 </section>
 </div></div>
-</div><nav class="tutorial-neighbors" aria-label="教程顺序"><a href="/tutorials/polymer-ai/12-assembly-and-phase-separation/" rel="prev"><small>← 上一节</small><strong>分子怎样聚到一起：自组装、相分离与凝聚体</strong></a><a href="/tutorials/polymer-ai/14-load-bearing-fiber-networks/" rel="next"><small>下一节 →</small><strong>纤维怎样织成能承载的网</strong></a></nav></main>
+</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/12-assembly-and-phase-separation/"><strong>分子怎样聚到一起：自组装、相分离与凝聚体</strong></a><a href="/tutorials/polymer-ai/14-load-bearing-fiber-networks/"><strong>纤维怎样织成能承载的网</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 <script>
 (function(){
 (()=>{

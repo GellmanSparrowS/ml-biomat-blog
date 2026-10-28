@@ -1,11 +1,12 @@
 ---
 title: "Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide"
 date: "2026-09-07"
+updated: "2026-10-28"
 category: "multiscale-modeling"
 tags: ["coarse-grained", "molecular dynamics", "biomaterials", "multiscale", "simulation", "validation"]
 lang: "en"
 slug: "coarse-grained-biomolecular-networks"
-description: "A practical guide to coarse-grained modeling of biomolecular networks: bead mapping, interaction potentials, system equilibration, and validation against reference data."
+description: "Choose bead mappings and effective interactions for biomolecular networks, then plan equilibration and independent validation. Worked diagrams connect atomic groups, reference distributions and the mechanical quantities a coarse-grained model should preserve."
 ---
 
 ## Why Coarse-Graining Makes Sense for Biomaterials
@@ -39,6 +40,10 @@ The table below summarizes how the same material can be mapped at progressively 
 | Residue/monomer | one bead per residue or monomer | chain connectivity and native contacts | side-chain packing |
 | Network | one site per Kuhn segment | topology and crosslink density | local structure entirely |
 
+![From atom groups to bead centers](/static/images/article-guides/mech-coarse-centers-en.svg)
+
+Mapping groups of equal-mass atoms to their centers preserves chain connectivity. For unequal masses, use the mass-weighted center R = Σ(mᵢrᵢ)/Σmᵢ; bead types retain the selected chemical distinctions.
+
 ## Interaction Potentials and Their Limits
 
 The functional form of a coarse-grained potential matters less than the recognition that every coarse-grained force field is a statistical construct. The soft repulsion, bond springs, angular potentials, and pair attractions are not measurements of individual covalent or hydrogen bonds; they are effective interactions chosen so that an ensemble average at the coarse-grained resolution reproduces a chosen reference. This means a parameter set is never universally transferable. A MARTINI parameterization built for membrane bilayers will not automatically describe a crystalline silk-beta-sheet interface without recalibration.
@@ -51,6 +56,10 @@ A concrete water example makes the limitation tangible. A popular four-to-one wa
 Building the force field can follow a bottom-up, top-down, or mixed route, and each has a different relationship to the truth. Bottom-up methods take atomistic simulation as the reference: run a short all-atom trajectory of the same chemistry, project the pair distance distributions, bond and angle distributions onto the bead centers, and invert those distributions with an iteration such as Boltzmann inversion or iterative Boltzmann inversion to obtain effective potentials. The resulting model is faithful to the reference but only at the state point where the reference was generated; change temperature, density, or composition too much and the potentials have to be rebuilt.
 
 Top-down methods instead parameterize against macroscopic experiments, choosing the stiffness of springs, the nonbonded repulsion, and the crosslink density so that the model reproduces a modulus, a mesh size, or a transition temperature. This route does not inherit any short-range chemistry, but it is often the fastest way to make a model that is useful for engineering, provided the target experiment is not also the only validation. Mixed or hybrid approaches are increasingly common: start top-down to match the global mechanics, then locally refine the potentials bottom-up from atomistic distributions in the regions where chemistry matters. In every case, the workflow should be scripted so that the reference distributions, the fitted potentials, and the verification observables are saved alongside the final trajectory; a coarse-grained paper without this provenance is nearly impossible to audit.
+![A distribution defines an effective potential](/static/images/article-guides/mech-coarse-potential-en.svg)
+
+A Gaussian distribution in a dimensionless Cartesian coordinate q gives the harmonic effective potential U/kBT = q²/2, up to an additive constant. Bond-distance and angle distributions require their corresponding coordinate-measure corrections before inversion.
+
 ## Simulation Setup and Equilibration
 
 Coarse-grained simulations are faster than their atomistic parents, but they are still large enough to require a disciplined setup. Build the system with a periodic box larger than twice the longest relevant correlation length, otherwise the network will feel artificial images of itself. Choose bead masses that keep stable integration with a larger timestep, but do not invent smaller masses merely to run faster; the mass distribution changes how the system distributes kinetic energy between stiff and soft degrees of freedom.

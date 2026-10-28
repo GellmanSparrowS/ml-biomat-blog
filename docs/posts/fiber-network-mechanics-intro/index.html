@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fiber Network Mechanics: Key Concepts for Biomaterials Research — ML-Biomat</title>
-<meta name="description" content="An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships.">
+<meta name="description" content="Understand how fiber waviness, orientation, connectivity and crosslinks shape network mechanics. A straightening sketch and the article’s analytic polynomial illustrate strain stiffening, with experimental and computational routes for studying architecture.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/fiber-network-mechanics-intro/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/fiber-network-mechanics-intro/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/fiber-network-mechanics-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/fiber-network-mechanics-intro/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Fiber Network Mechanics: Key Concepts for Biomaterials Research">
-<meta property="og:description" content="An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships.">
+<meta property="og:description" content="Understand how fiber waviness, orientation, connectivity and crosslinks shape network mechanics. A straightening sketch and the article’s analytic polynomial illustrate strain stiffening, with experimental and computational routes for studying architecture.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/fiber-network-mechanics-intro/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/fiber-network-mechanics-intro.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Fiber Network Mechanics: Key Concepts for Biomaterials Research", "description": "An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 622, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/fiber-network-mechanics-intro/", "image": "https://ml-biomat.com/static/images/og/fiber-network-mechanics-intro.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "Fiber Network Mechanics: Key Concepts for Biomaterials Research", "item": "https://ml-biomat.com/posts/fiber-network-mechanics-intro/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Fiber Network Mechanics: Key Concepts for Biomaterials Research", "description": "Understand how fiber waviness, orientation, connectivity and crosslinks shape network mechanics. A straightening sketch and the article’s analytic polynomial illustrate strain stiffening, with experimental and computational routes for studying architecture.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 625, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/fiber-network-mechanics-intro/", "image": "https://ml-biomat.com/static/images/og/fiber-network-mechanics-intro.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/en/"}, {"@type": "ListItem", "position": 3, "name": "Fiber Network Mechanics: Key Concepts for Biomaterials Research", "item": "https://ml-biomat.com/posts/fiber-network-mechanics-intro/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Fiber Network Mechanics: Key Concepts for Biomaterials Research</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/biomaterials/">Bio-Materials-Structures</a>
+<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/biomaterials/en/">Bio-Materials-Structures</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/biomaterials/">biomaterials</a><a class="tag-pill" href="/tags/fiber-networks/">fiber-networks</a><a class="tag-pill" href="/tags/mechanics/">mechanics</a><a class="tag-pill" href="/tags/silk/">silk</a><a class="tag-pill" href="/tags/collagen/">collagen</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-fiber-networks-matter">Why Fiber Networks Matter</a></li><li class="toc-h2"><a href="#key-mechanical-behaviors">Key Mechanical Behaviors</a></li><li class="toc-h3"><a href="#1-strain-stiffening">1. Strain-Stiffening</a></li><li class="toc-h3"><a href="#2-architecture-property-relationships">2. Architecture-Property Relationships</a></li><li class="toc-h3"><a href="#3-percolation-threshold">3. Percolation Threshold</a></li><li class="toc-h2"><a href="#methods-and-materials">Methods and Materials</a></li><li class="toc-h3"><a href="#experimental-characterization">Experimental Characterization</a></li><li class="toc-h3"><a href="#computational-modeling">Computational Modeling</a></li><li class="toc-h3"><a href="#common-biomaterial-fiber-systems">Common Biomaterial Fiber Systems</a></li><li class="toc-h2"><a href="#key-references">Key References</a></li><li class="toc-h2"><a href="#computational-modeling-of-fiber-networks">Computational Modeling of Fiber Networks</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-fiber-networks-matter">Why Fiber Networks Matter</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-fiber-networks-matter">Why Fiber Networks Matter</a></li><li class="toc-h2"><a href="#key-mechanical-behaviors">Key Mechanical Behaviors</a></li><li class="toc-h3"><a href="#1-strain-stiffening">1. Strain-Stiffening</a></li><li class="toc-h3"><a href="#2-architecture-property-relationships">2. Architecture-Property Relationships</a></li><li class="toc-h3"><a href="#3-percolation-threshold">3. Percolation Threshold</a></li><li class="toc-h2"><a href="#methods-and-materials">Methods and Materials</a></li><li class="toc-h3"><a href="#experimental-characterization">Experimental Characterization</a></li><li class="toc-h3"><a href="#computational-modeling">Computational Modeling</a></li><li class="toc-h3"><a href="#common-biomaterial-fiber-systems">Common Biomaterial Fiber Systems</a></li><li class="toc-h2"><a href="#key-references">Key References</a></li><li class="toc-h2"><a href="#computational-modeling-of-fiber-networks">Computational Modeling of Fiber Networks</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-fiber-networks-matter">Why Fiber Networks Matter</h2>
 
 <img src="/static/images/posts/fiber-network-mechanics/network-en.webp" alt="Schematic disordered fiber network with fibers, cross-links, and pores" loading="lazy">
 
@@ -58,6 +58,10 @@
 <p>Understanding fiber network mechanics is essential for designing better biomaterials.</p>
 
 <h2 id="key-mechanical-behaviors">Key Mechanical Behaviors</h2>
+
+<img src="/static/images/article-guides/mech-fiber-recruitment-en.svg" alt="Straightening changes the load path" loading="lazy">
+
+<p>A wavy fiber initially accommodates extension through bending and reorientation; further alignment increases axial load transfer. This mechanism sketch connects fiber geometry with a nonlinear network response.</p>
 
 <h3 id="1-strain-stiffening">1. Strain-Stiffening</h3>
 
@@ -71,6 +75,10 @@ strain = np.linspace(0, 0.5, 100)
 # High strain: stretching-dominated (stiff)
 stress = 0.1 * strain + 5.0 * strain**3  # simplified
 </code></pre>
+
+<img src="/static/images/article-guides/mech-fiber-stiffening-en.svg" alt="Strain stiffening in a teaching model" loading="lazy">
+
+<p>The article’s illustrative polynomial σ<em> = 0.1ε + 5ε³ has tangent stiffness dσ</em>/dε = 0.1 + 15ε², which rises with strain. The ordinate is in arbitrary units; the curve is generated from the stated formula.</p>
 
 <h3 id="2-architecture-property-relationships">2. Architecture-Property Relationships</h3>
 
@@ -137,11 +145,7 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <li>Zagar, G. et al. (2015). From mechanical micromodeling to continuum modeling of fibrous networks. <em>International Journal of Solids and Structures</em>, 57, 78-88.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/feature-engineering-materials-ml/">← Feature Engineering for Materials Science</a></span><span><a href="/posts/lammps-first-simulation/">Molecular Dynamics Basics: Your First LAMMPS Simulation →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/feature-engineering-materials-ml/">← Feature Engineering for Materials Science</a></span><span><a href="/posts/lammps-first-simulation/">Molecular Dynamics Basics: Your First LAMMPS Simulation →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures/">Engineered Superstructures: Origami, Lattices, and Beyond</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -161,11 +165,11 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

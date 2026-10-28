@@ -12,9 +12,9 @@
 | English CV `/cv/en/` | `content/cv-en-body.html` |
 | 分组相册 | `content/profile-albums.json`、`static/images/profile/` |
 | FiberNet 展示 | `content/fibernet-body.html` |
-| 系列教程与目录 `/tutorials/` | `content/tutorials/polymer-ai/`、`content_tools/tutorials.py` |
+| 分类与教程 | `content_tools/catalog.py`、`content/tutorials/polymer-ai/`、`content_tools/tutorials.py` |
 | 教程图片、数据与下载 | `static/tutorials/polymer-ai/` |
-| 教程样式与筛选 | `static/css/tutorials.css`、`static/js/tutorials.js` |
+| 教程样式 | `static/css/tutorials.css` |
 | 中英文文章 | `content/posts/zh/`、`content/posts/en/` |
 | 样式与交互 | `static/css/style.css`、`static/js/main.js`、`static/js/profile.js` |
 | 导航、页面模板、生成流程 | `build.py` |
@@ -54,10 +54,12 @@ GitHub 登录由本机凭据管理工具保存。仓库地址使用普通 HTTPS 
 
 相册默认折叠；照片与论文图保持原比例、完整显示，使用统一相框与留白适配尺寸。图片内容变更后构建会更新资源版本。
 
-## 系列教程维护
+## 分类与图文教程维护
 
-高分子与生物大分子教程共20节，中文独立页面位于 `/tutorials/polymer-ai/`。`manifest.json` 维护课名、介绍、阅读分组、主题分类和稳定链接；01–20.html 保留完整讲解、代码、预渲染公式和交互。五组阅读路线同时连接到现有主题分类、站内搜索、RSS与站点地图。当前教程为中文，既有中英文文章继续分别维护。
+20篇高分子与生物大分子图文教程按主题融入 `/categories/`，与既有文章使用同一分类列表，不再展示独立系列。中文分类位于 `/categories/` 和 `/categories/{topic}/`，英文对应 `/categories/en/` 和 `/categories/{topic}/en/`。旧教程正文地址保持有效，旧目录 `/tutorials/` 与 `/tutorials/polymer-ai/` 自动进入分类。`manifest.json` 维护标题、介绍、主题及稳定地址；01–20.html 保留完整讲解、代码、预渲染公式和交互。
 
 原始审阅包保持原位。需要重新导入其更新版本时，在装有 Playwright/Chromium 的维护环境运行 `python content_tools/import_polymer_tutorials.py "压缩包路径"`，随后构建与浏览器检查。导入器只转换展示用语、站点路径和样式作用域，不运行科研计算。公式、数据、代码和图片保留原始内容；下载附件分离为独立资源，图片按需加载。
 
-`python manage.py build` 同时验证20节页面、前后节链接、代码入口、站内链接及文章/教程索引完整性。
+`python manage.py build` 同时验证20篇教程的分类入口、代码与附件、48篇既有文章的双语互链和标题、图文覆盖及全站链接。手机目录默认折叠；正文和间距紧凑呈现，原图保持比例并可放大。
+
+既有文章新增的双语讲解图保存在 `static/images/article-guides/`，可通过 `content_tools/illustrate_mechanics.py` 和 `content_tools/illustrate_computing.py` 复现。教学曲线的生成参数与示意性质在脚本和图注中记录。

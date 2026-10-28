@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>应力-应变曲线解读：材料力学入门 — ML-Biomat</title>
-<meta name="description" content="应力-应变曲线解读：材料力学入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="区分工程应力与真应力，识别曲线的不同变形阶段，并用 Python 计算弹性模量、强度和能量密度。通过参考几何与解析滞回环示意，明确面积定义、切线刚度与循环耗能的含义。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/stress-strain-curves-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/stress-strain-curves-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/stress-strain-curves/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/stress-strain-curves/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="应力-应变曲线解读：材料力学入门">
-<meta property="og:description" content="应力-应变曲线解读：材料力学入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="区分工程应力与真应力，识别曲线的不同变形阶段，并用 Python 计算弹性模量、强度和能量密度。通过参考几何与解析滞回环示意，明确面积定义、切线刚度与循环耗能的含义。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/stress-strain-curves-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/stress-strain-curves-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "应力-应变曲线解读：材料力学入门", "description": "应力-应变曲线解读：材料力学入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 210, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/stress-strain-curves-zh/", "image": "https://ml-biomat.com/static/images/og/stress-strain-curves-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "生物·材料·结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "应力-应变曲线解读：材料力学入门", "item": "https://ml-biomat.com/posts/stress-strain-curves-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "应力-应变曲线解读：材料力学入门", "description": "区分工程应力与真应力，识别曲线的不同变形阶段，并用 Python 计算弹性模量、强度和能量密度。通过参考几何与解析滞回环示意，明确面积定义、切线刚度与循环耗能的含义。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 979, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/stress-strain-curves-zh/", "image": "https://ml-biomat.com/static/images/og/stress-strain-curves-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "生物·材料·结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "应力-应变曲线解读：材料力学入门", "item": "https://ml-biomat.com/posts/stress-strain-curves-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,16 +44,20 @@
 <span class="lang-badge zh">中文</span>
 <h1>应力-应变曲线解读：材料力学入门</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/biomaterials/">生物·材料·结构</a>
+<span>2026-06-26</span><span>·</span><span>3 分钟阅读</span><span>·</span><a href="/categories/biomaterials/">生物·材料·结构</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E5%BA%94%E5%8A%9B-%E5%BA%94%E5%8F%98/">应力-应变</a><a class="tag-pill" href="/tags/%E5%8A%9B%E5%AD%A6/">力学</a><a class="tag-pill" href="/tags/%E7%94%9F%E7%89%A9%E6%9D%90%E6%96%99/">生物材料</a><a class="tag-pill" href="/tags/%E5%BC%B9%E6%80%A7%E6%A8%A1%E9%87%8F/">弹性模量</a><a class="tag-pill" href="/tags/%E6%95%99%E7%A8%8B/">教程</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么每个材料人都要懂这个">为什么每个材料人都要懂这个</a></li><li class="toc-h2"><a href="#曲线的五个关键区域">曲线的五个关键区域</a></li><li class="toc-h2"><a href="#python计算力学参数">Python计算力学参数</a></li><li class="toc-h2"><a href="#生物材料的特殊性">生物材料的特殊性</a></li><li class="toc-h2"><a href="#常见错误">常见错误</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#生物材料的特殊力学行为">生物材料的特殊力学行为</a></li></ul></details><h2 id="为什么每个材料人都要懂这个">为什么每个材料人都要懂这个</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#为什么每个材料人都要懂这个">为什么每个材料人都要懂这个</a></li><li class="toc-h2"><a href="#曲线的五个关键区域">曲线的五个关键区域</a></li><li class="toc-h2"><a href="#python计算力学参数">Python计算力学参数</a></li><li class="toc-h2"><a href="#生物材料的特殊性">生物材料的特殊性</a></li><li class="toc-h2"><a href="#常见错误">常见错误</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#生物材料的特殊力学行为">生物材料的特殊力学行为</a></li></ul></details><h2 id="为什么每个材料人都要懂这个">为什么每个材料人都要懂这个</h2>
 
 <p>应力-应变曲线是材料科学最重要的图。它告诉你材料有多硬、能拉多长、吸收多少能量。无论你研究丝素蛋白、水凝胶还是骨头，这都是基础。</p>
 
 <p><strong>应力 = 力 / 截面积。应变 = 长度变化量 / 原始长度。</strong></p>
+
+<img src="/static/images/article-guides/mech-stress-definitions-zh.svg" alt="明确应力与应变的参考几何" loading="lazy">
+
+<p>工程应力和工程应变使用初始几何 A₀、L₀，真应力使用瞬时截面积 A。拟合曲线和提取性能之前，应先统一这些定义。</p>
 
 <h2 id="曲线的五个关键区域">曲线的五个关键区域</h2>
 
@@ -81,6 +85,10 @@ def compute_properties(strain, stress):
 
 <p>软生物材料与金属行为不同：没有明显屈服点（用0.2%偏移法）、应变率依赖（报告速率）、含水量影响巨大（始终在水合态下测试）、J形曲线常见（趾区+线性区）、滞回是能量耗散而非塑性。</p>
 
+<img src="/static/images/article-guides/mech-stress-hysteresis-zh.svg" alt="滞回耗能对应闭环面积" loading="lazy">
+
+<p>教学滞回环取 σ<em>加载 = 2e + e²、σ</em>卸载 = e + 2e²，其中 e = ε/εmax。归一化闭环面积为 1/6，换算为有量纲能量密度还需应力与应变标度。这里解释的是循环耗能。</p>
+
 <h2 id="常见错误">常见错误</h2>
 
 <p>混淆工程应力与真实应力（大应变>10%时差异显著）、不报告样品尺寸、夹具滑移被误认为额外应变。</p>
@@ -100,12 +108,8 @@ def compute_properties(strain, stress):
 
 <p>滞后和能量耗散是另一个关键特征。生物材料的加载和卸载曲线通常形成滞回环，环的面积代表每个变形周期中耗散的能量。这种能量耗散机制对材料韧性至关重要：通过在微观尺度上牺牲弱键，材料在宏观尺度上保持完整。丝素蛋白的优异韧性很大程度上归功于其纳米尺度上beta折叠结晶与非晶域之间的能量耗散机制。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/silk-fibroin-structure-mechanics-zh/">← 丝素蛋白：从分子结构到力学功能</a></span><span><a href="/posts/numpy-crash-course-zh/">NumPy完全入门：实验室数据处理必备 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures-zh/">工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures-zh/">生物材料的层级超结构：从分子到宏观的力学设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/silk-fibroin-structure-mechanics-zh/">← 丝素蛋白：从分子结构到力学功能</a></span><span><a href="/posts/numpy-crash-course-zh/">NumPy完全入门：实验室数据处理必备 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures-zh/">工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures-zh/">生物材料的层级超结构：从分子到宏观的力学设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -116,7 +120,7 @@ def compute_properties(strain, stress):
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -124,11 +128,11 @@ def compute_properties(strain, stress):
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

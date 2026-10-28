@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Practical AFM Force Curve Analysis with Python — ML-Biomat</title>
-<meta name="description" content="A step-by-step guide to processing AFM force curves in Python: baseline correction, contact point detection, adhesion force, and Young&#x27;s modulus fitting with Hertz/Sneddon models.">
+<meta name="description" content="Convert AFM deflection into force, correct the baseline and identify contact before fitting indentation data. Calibration geometry, analytic Hertz curves and Python functions connect measured channels to adhesion and elastic modulus with explicit units.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/afm-force-curve-python/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/afm-force-curve-python/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/afm-force-curve-python-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/afm-force-curve-python/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Practical AFM Force Curve Analysis with Python">
-<meta property="og:description" content="A step-by-step guide to processing AFM force curves in Python: baseline correction, contact point detection, adhesion force, and Young&#x27;s modulus fitting with Hertz/Sneddon models.">
+<meta property="og:description" content="Convert AFM deflection into force, correct the baseline and identify contact before fitting indentation data. Calibration geometry, analytic Hertz curves and Python functions connect measured channels to adhesion and elastic modulus with explicit units.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/afm-force-curve-python/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/afm-force-curve-python.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical AFM Force Curve Analysis with Python", "description": "A step-by-step guide to processing AFM force curves in Python: baseline correction, contact point detection, adhesion force, and Young's modulus fitting with Hertz/Sneddon models.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 851, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Wet-lab Data Processing", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "Practical AFM Force Curve Analysis with Python", "item": "https://ml-biomat.com/posts/afm-force-curve-python/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical AFM Force Curve Analysis with Python", "description": "Convert AFM deflection into force, correct the baseline and identify contact before fitting indentation data. Calibration geometry, analytic Hertz curves and Python functions connect measured channels to adhesion and elastic modulus with explicit units.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 569, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Wet-lab Data Processing", "item": "https://ml-biomat.com/categories/wet-lab-data/en/"}, {"@type": "ListItem", "position": 3, "name": "Practical AFM Force Curve Analysis with Python", "item": "https://ml-biomat.com/posts/afm-force-curve-python/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Practical AFM Force Curve Analysis with Python</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>4 min read</span><span>·</span><a href="/categories/wet-lab-data/">Wet-lab Data Processing</a>
+<span>2026-06-26</span><span>·</span><span>3 min read</span><span>·</span><a href="/categories/wet-lab-data/en/">Wet-lab Data Processing</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/AFM/">AFM</a><a class="tag-pill" href="/tags/force-spectroscopy/">force-spectroscopy</a><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/numpy/">numpy</a><a class="tag-pill" href="/tags/data-processing/">data-processing</a><a class="tag-pill" href="/tags/biomaterials/">biomaterials</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-this-guide-exists">Why This Guide Exists</a></li><li class="toc-h2"><a href="#the-core-analysis-pipeline">The Core Analysis Pipeline</a></li><li class="toc-h3"><a href="#1-understanding-afm-force-curve-data">1. Understanding AFM Force Curve Data</a></li><li class="toc-h3"><a href="#2-loading-typical-afm-data-files">2. Loading Typical AFM Data Files</a></li><li class="toc-h3"><a href="#3-converting-deflection-to-force">3. Converting Deflection to Force</a></li><li class="toc-h3"><a href="#4-baseline-correction">4. Baseline Correction</a></li><li class="toc-h3"><a href="#5-finding-the-contact-point">5. Finding the Contact Point</a></li><li class="toc-h3"><a href="#6-extracting-adhesion-force">6. Extracting Adhesion Force</a></li><li class="toc-h3"><a href="#7-hertz-model-fitting-for-young-s-modulus">7. Hertz Model Fitting for Young's Modulus</a></li><li class="toc-h2"><a href="#scaling-and-advanced-topics">Scaling and Advanced Topics</a></li><li class="toc-h3"><a href="#8-batch-processing">8. Batch Processing</a></li><li class="toc-h3"><a href="#9-common-pitfalls">9. Common Pitfalls</a></li><li class="toc-h3"><a href="#10-alternative-models">10. Alternative Models</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-this-guide-exists">Why This Guide Exists</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-this-guide-exists">Why This Guide Exists</a></li><li class="toc-h2"><a href="#the-core-analysis-pipeline">The Core Analysis Pipeline</a></li><li class="toc-h3"><a href="#1-understanding-afm-force-curve-data">1. Understanding AFM Force Curve Data</a></li><li class="toc-h3"><a href="#2-loading-typical-afm-data-files">2. Loading Typical AFM Data Files</a></li><li class="toc-h3"><a href="#3-converting-deflection-to-force">3. Converting Deflection to Force</a></li><li class="toc-h3"><a href="#4-baseline-correction">4. Baseline Correction</a></li><li class="toc-h3"><a href="#5-finding-the-contact-point">5. Finding the Contact Point</a></li><li class="toc-h3"><a href="#6-extracting-adhesion-force">6. Extracting Adhesion Force</a></li><li class="toc-h3"><a href="#7-hertz-model-fitting-for-young-s-modulus">7. Hertz Model Fitting for Young's Modulus</a></li><li class="toc-h2"><a href="#scaling-and-advanced-topics">Scaling and Advanced Topics</a></li><li class="toc-h3"><a href="#8-batch-processing">8. Batch Processing</a></li><li class="toc-h3"><a href="#9-common-pitfalls">9. Common Pitfalls</a></li><li class="toc-h3"><a href="#10-alternative-models">10. Alternative Models</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-this-guide-exists">Why This Guide Exists</h2>
 
 <p>If you work with AFM force spectroscopy on soft biomaterials (collagen fibers, silk, hydrogels, cells), you have probably faced the same frustration: your instrument exports a pile of <code>.txt</code> or <code>.csv</code> files, and you spend hours manually processing them in proprietary software or Excel.</p>
 
@@ -117,6 +117,10 @@ sensitivity = 45.0  # nm/V
 force = deflection_to_force(deflection, k, sensitivity)
 </code></pre>
 
+<img src="/static/images/article-guides/mech-afm-calibration-en.svg" alt="Separate cantilever bending from indentation" loading="lazy">
+
+<p>After calibration, deflection d = SV gives force F = kd. With piezo advance defined positive into contact and offsets removed, indentation is δ = Δz − d. This geometry prevents piezo motion from being mistaken for sample indentation.</p>
+
 <h3 id="4-baseline-correction">4. Baseline Correction</h3>
 
 <pre><code class="language-python">
@@ -142,7 +146,7 @@ def find_contact_point(z_piezo, force, window=50, threshold_factor=5):
     for i in range(len(above_threshold) - window):
         if np.all(above_threshold[i:i + window]):
             return i + window // 2
-    return len(force) // 2
+    raise ValueError(&quot;No contact point found; review the approach segment&quot;)
 </code></pre>
 
 <h3 id="6-extracting-adhesion-force">6. Extracting Adhesion Force</h3>
@@ -163,28 +167,57 @@ def extract_adhesion(z_piezo, force, contact_idx):
 
 <p>where E* = E / (1 - nu^2).</p>
 
+<p>The fitting function uses an approach segment with z in nm and force in nN, and returns E in Pa. Set the measured spring constant in N/m and tip radius explicitly. The default direction assumes z decreases during approach; use +1 when it increases. Choose indentation small compared with the spherical tip radius, and a sample thickness large compared with the contact radius a = sqrt(Rδ). The parameter values below match the teaching curves.</p>
+
 <pre><code class="language-python">
 def hertz_sphere(indentation, E_star, R):
-    return (4/3) * E_star * np.sqrt(R) * np.power(np.maximum(indentation, 0), 1.5)
+    &quot;&quot;&quot;SI units: indentation and R in m, E_star in Pa, force in N.&quot;&quot;&quot;
+    return (4/3) * E_star * np.sqrt(R) * np.power(
+        np.maximum(indentation, 0), 1.5
+    )
 
-def fit_youngs_modulus(z_piezo, force, contact_idx, tip_radius_nm=20.0,
-                        poisson=0.5, fit_range_nm=50.0):
-    indent = z_piezo[contact_idx] - z_piezo
-    contact_force = force - force[contact_idx]
-    fit_mask = (indent &gt; 0) &amp; (indent &lt; fit_range_nm) &amp; (contact_force &gt; 0)
-    indent_fit = indent[fit_mask]
-    force_fit = contact_force[fit_mask]
-    if len(indent_fit) &lt; 50:
+def fit_youngs_modulus(z_piezo, force, contact_idx,
+                        tip_radius_nm=5000.0, poisson=0.5,
+                        fit_range_nm=200.0, spring_constant=0.06,
+                        approach_direction=-1):
+    &quot;&quot;&quot;Fit an approach branch: z in nm, force in nN; return E and its fit error in Pa.&quot;&quot;&quot;
+    if spring_constant &lt;= 0 or tip_radius_nm &lt;= 0:
+        raise ValueError(&quot;Spring constant and tip radius must be positive&quot;)
+    if approach_direction not in (-1, 1):
+        raise ValueError(&quot;approach_direction must be -1 or +1&quot;)
+    z_nm = np.asarray(z_piezo, dtype=float)
+    force_nN = np.asarray(force, dtype=float)
+    contact_force_nN = force_nN - force_nN[contact_idx]
+    advance_nm = approach_direction * (z_nm - z_nm[contact_idx])
+    deflection_nm = contact_force_nN / spring_constant
+    indentation_nm = advance_nm - deflection_nm
+    fit_mask = (
+        (np.arange(len(z_nm)) &gt;= contact_idx)
+        &amp; (indentation_nm &gt; 0) &amp; (indentation_nm &lt; fit_range_nm)
+        &amp; (contact_force_nN &gt; 0)
+        &amp; np.isfinite(indentation_nm) &amp; np.isfinite(contact_force_nN)
+    )
+    if np.count_nonzero(fit_mask) &lt; 50:
         return np.nan, np.nan
-    def model(delta, E_star):
-        return hertz_sphere(delta, E_star, tip_radius_nm)
-    popt, pcov = optimize.curve_fit(model, indent_fit, force_fit,
-        p0=[1000], bounds=(1, 1e9))
-    E_star = popt[0]
-    E = E_star * (1 - poisson**2)
+    indentation_m = indentation_nm[fit_mask] * 1e-9
+    radius_m = tip_radius_nm * 1e-9
+    force_fit_nN = contact_force_nN[fit_mask]
+
+    def model(delta_m, E_star_Pa):
+        return hertz_sphere(delta_m, E_star_Pa, radius_m) * 1e9
+
+    popt, pcov = optimize.curve_fit(
+        model, indentation_m, force_fit_nN,
+        p0=[1e4], bounds=(1, 1e9)
+    )
+    E = popt[0] * (1 - poisson**2)
     E_std = np.sqrt(pcov[0, 0]) * (1 - poisson**2)
     return E, E_std
 </code></pre>
+
+<img src="/static/images/article-guides/mech-afm-hertz-en.svg" alt="Hertz curves from stated model parameters" loading="lazy">
+
+<p>Hertz curves calculated with R = 5 μm, ν = 0.5 and E = 10 or 30 kPa show how modulus changes force at the same indentation. The model assumes a rigid spherical tip, a homogeneous elastic half-space and negligible adhesion; the curves are calculated analytic examples.</p>
 
 <h2 id="scaling-and-advanced-topics">Scaling and Advanced Topics</h2>
 <h3 id="8-batch-processing">8. Batch Processing</h3>
@@ -193,16 +226,22 @@ def fit_youngs_modulus(z_piezo, force, contact_idx, tip_radius_nm=20.0,
 import glob
 from pathlib import Path
 
-def batch_process_curves(data_dir, k=0.06, sensitivity=45.0):
+def batch_process_curves(data_dir, k=0.06, sensitivity=45.0, approach_direction=-1):
     results = []
     for filepath in sorted(glob.glob(f&quot;{data_dir}/*.txt&quot;)):
         try:
             z, deflection = load_afm_curve(filepath, skip_rows=320)
             force = deflection_to_force(deflection, k, sensitivity)
-            cidx = find_contact_point(z, force)
+            turn_idx = int(np.argmax(approach_direction * z))
+            z_approach = z[:turn_idx + 1]
+            cidx = find_contact_point(z_approach, force[:turn_idx + 1])
             force_corr = baseline_correct(z, force, cidx)
-            adhesion = extract_adhesion(z, force_corr, cidx)
-            E, _ = fit_youngs_modulus(z, force_corr, cidx)
+            adhesion = (extract_adhesion(z, force_corr, turn_idx)
+                        if turn_idx + 1 &lt; len(z) else np.nan)
+            E, _ = fit_youngs_modulus(
+                z_approach, force_corr[:turn_idx + 1], cidx,
+                spring_constant=k, approach_direction=approach_direction
+            )
             results.append({&quot;file&quot;: Path(filepath).name,
                 &quot;adhesion_nN&quot;: adhesion, &quot;E_Pa&quot;: E})
         except Exception as e:
@@ -236,11 +275,7 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 <li>JPK Instruments. <em>A Practical Guide to AFM Force Spectroscopy</em>.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/python-tools-materials-research/">← Python Tools for Scientific Computing in Materials Research</a></span><span><a href="/posts/feature-engineering-materials-ml/">Feature Engineering for Materials Science →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/python-tools-materials-research/">← Python Tools for Scientific Computing in Materials Research</a></span><span><a href="/posts/feature-engineering-materials-ml/">Feature Engineering for Materials Science →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -260,11 +295,11 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

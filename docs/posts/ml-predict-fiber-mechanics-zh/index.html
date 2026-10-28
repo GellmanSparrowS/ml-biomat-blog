@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>机器学习预测纤维材料力学性能：从数据准备到模型部署 — ML-Biomat</title>
-<meta name="description" content="机器学习预测纤维材料力学性能：从数据准备到模型部署。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="从纤维样品的结构与制备特征出发，组织小样本回归的数据准备、预处理、模型比较与评价。结合交叉验证、Bootstrap 波动和特征重要性，理解数值预测如何与材料描述对应，并安排后续验证。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/ml-predict-fiber-mechanics/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/ml-predict-fiber-mechanics/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="机器学习预测纤维材料力学性能：从数据准备到模型部署">
-<meta property="og:description" content="机器学习预测纤维材料力学性能：从数据准备到模型部署。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="从纤维样品的结构与制备特征出发，组织小样本回归的数据准备、预处理、模型比较与评价。结合交叉验证、Bootstrap 波动和特征重要性，理解数值预测如何与材料描述对应，并安排后续验证。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "机器学习预测纤维材料力学性能：从数据准备到模型部署", "description": "机器学习预测纤维材料力学性能：从数据准备到模型部署。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-25", "dateModified": "2026-06-25", "wordCount": 474, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/", "image": "https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "机器学习预测纤维材料力学性能：从数据准备到模型部署", "item": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "机器学习预测纤维材料力学性能：从数据准备到模型部署", "description": "从纤维样品的结构与制备特征出发，组织小样本回归的数据准备、预处理、模型比较与评价。结合交叉验证、Bootstrap 波动和特征重要性，理解数值预测如何与材料描述对应，并安排后续验证。", "datePublished": "2026-06-25", "dateModified": "2026-10-28", "wordCount": 1366, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/", "image": "https://ml-biomat.com/static/images/og/ml-predict-fiber-mechanics-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "机器学习预测纤维材料力学性能：从数据准备到模型部署", "item": "https://ml-biomat.com/posts/ml-predict-fiber-mechanics-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>机器学习预测纤维材料力学性能：从数据准备到模型部署</h1>
 <div class="article-meta">
-<span>2026-06-25</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
+<span>2026-06-25</span><span>·</span><span>4 分钟阅读</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="tag-pill" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/">随机森林</a><a class="tag-pill" href="/tags/XGBoost/">XGBoost</a><a class="tag-pill" href="/tags/%E7%BA%A4%E7%BB%B4%E6%9D%90%E6%96%99/">纤维材料</a><a class="tag-pill" href="/tags/%E5%8A%9B%E5%AD%A6%E6%80%A7%E8%83%BD/">力学性能</a><a class="tag-pill" href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">特征工程</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#问题的本质">问题的本质</a></li><li class="toc-h2"><a href="#核心流程">核心流程</a></li><li class="toc-h3"><a href="#第一步-数据准备">第一步：数据准备</a></li><li class="toc-h3"><a href="#典型的数据长什么样">典型的数据长什么样</a></li><li class="toc-h3"><a href="#关键预处理步骤">关键预处理步骤</a></li><li class="toc-h3"><a href="#第二步-特征工程">第二步：特征工程</a></li><li class="toc-h3"><a href="#利用领域知识构造交互特征">利用领域知识构造交互特征</a></li><li class="toc-h3"><a href="#第三步-模型选择与评估">第三步：模型选择与评估</a></li><li class="toc-h3"><a href="#为什么选这些模型">为什么选这些模型</a></li><li class="toc-h3"><a href="#第四步-不确定性很重要">第四步：不确定性很重要</a></li><li class="toc-h3"><a href="#第五步-特征重要性-告诉老板为什么">第五步：特征重要性——告诉老板为什么</a></li><li class="toc-h2"><a href="#进阶方向">进阶方向</a></li><li class="toc-h2"><a href="#要点总结">要点总结</a></li><li class="toc-h2"><a href="#代码获取">代码获取</a></li><li class="toc-h2"><a href="#探讨-机器学习在纤维材料领域的独特挑战">探讨：机器学习在纤维材料领域的独特挑战</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="问题的本质">问题的本质</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#问题的本质">问题的本质</a></li><li class="toc-h2"><a href="#核心流程">核心流程</a></li><li class="toc-h3"><a href="#第一步-数据准备">第一步：数据准备</a></li><li class="toc-h3"><a href="#典型的数据长什么样">典型的数据长什么样</a></li><li class="toc-h3"><a href="#关键预处理步骤">关键预处理步骤</a></li><li class="toc-h3"><a href="#第二步-特征工程">第二步：特征工程</a></li><li class="toc-h3"><a href="#利用领域知识构造交互特征">利用领域知识构造交互特征</a></li><li class="toc-h3"><a href="#第三步-模型选择与评估">第三步：模型选择与评估</a></li><li class="toc-h3"><a href="#为什么选这些模型">为什么选这些模型</a></li><li class="toc-h3"><a href="#第四步-不确定性很重要">第四步：不确定性很重要</a></li><li class="toc-h3"><a href="#第五步-特征重要性-告诉老板为什么">第五步：特征重要性——告诉老板为什么</a></li><li class="toc-h2"><a href="#进阶方向">进阶方向</a></li><li class="toc-h2"><a href="#要点总结">要点总结</a></li><li class="toc-h2"><a href="#代码获取">代码获取</a></li><li class="toc-h2"><a href="#探讨-机器学习在纤维材料领域的独特挑战">探讨：机器学习在纤维材料领域的独特挑战</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="问题的本质">问题的本质</h2>
 
 <p>纤维生物材料的力学性能（杨氏模量、极限强度、断裂韧性）取决于大量因素：纤维直径、取向分布、交联密度、含水量、温度、应变率……传统的单变量回归只能处理线性关系，而纤维网络的高度非线性行为需要机器学习来捕捉。</p>
 
@@ -61,6 +61,11 @@
 <h3 id="第一步-数据准备">第一步：数据准备</h3>
 
 <h3 id="典型的数据长什么样">典型的数据长什么样</h3>
+
+<img src="/static/images/article-guides/comp-guide-fiber-features-zh.svg" alt="示意图把一个纤维样品对应到一行描述特征，以及单独测量的预测目标" loading="lazy">
+
+<p>示意图把一个纤维样品对应到一行描述特征，以及单独测量的预测目标。图中为教学数值；直径、取向离散程度和交联含量共同作为输入，用于学习与模量之间的关系。</p>
+
 
 <pre><code class="language-python">
 import pandas as pd
@@ -164,6 +169,11 @@ for name, model in models.items():
 
 <h3 id="第四步-不确定性很重要">第四步：不确定性很重要</h3>
 
+<img src="/static/images/article-guides/comp-guide-bootstrap-zh.svg" alt="每个 Bootstrap 样本都从训练观测中有放回抽样，再拟合一个模型" loading="lazy">
+
+<p>每个 Bootstrap 样本都从训练观测中有放回抽样，再拟合一个模型。三次教学预测的均值为 2.8、标准差约为 0.245，概括了这组模型之间的预测波动；预测区间的覆盖率可进一步通过独立数据评估。</p>
+
+
 <p>材料科学中，只说"预测模量 2.8 GPa"不够，你需要给出置信区间：</p>
 
 <pre><code class="language-python">
@@ -248,12 +258,8 @@ plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight
 <li>Raissi, M. et al. (2019). Physics-informed neural networks: A deep learning framework for solving forward and inverse problems. <em>Science</em>, 367(6473), 1021-1026.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><span></span></span><span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><span></span></span><span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -264,7 +270,7 @@ plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -272,11 +278,11 @@ plt.savefig(&quot;feature_importance.pdf&quot;, dpi=150, bbox_inches=&quot;tight
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

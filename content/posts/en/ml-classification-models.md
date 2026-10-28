@@ -1,11 +1,12 @@
 ---
 title: "ML Classification Models: A Practical Overview"
 date: "2026-06-30"
+updated: "2026-10-28"
 category: "machine-learning"
 tags: ["machine learning", "classification", "logistic regression", "SVM", "random forest", "XGBoost", "scikit-learn"]
 lang: "en"
 slug: "ml-classification-models"
-description: "A practical guide to major classification models in machine learning - logistic regression, decision trees, SVMs, and gradient boosting - covering intuition, tradeoffs, and reusable Python code."
+description: "Compare logistic regression, support vector machines, trees, ensembles, nearest neighbors, and naive Bayes. Read class probabilities and confusion matrices, then choose metrics and validation procedures that match the cost of classification errors."
 ---
 
 ## 1. What Is Classification — From Labels to Decision Boundaries
@@ -47,6 +48,11 @@ The `stratify=y` argument ensures that class proportions are preserved in both t
 
 ## Core Algorithms
 ### 2. Logistic Regression — Linear Classification Through a Probabilistic Lens
+
+![Logistic regression maps the linear score z to a probability through the sigmoid function](/static/images/article-guides/comp-guide-sigmoid-en.svg)
+
+Logistic regression maps the linear score z to a probability through the sigmoid function. A threshold of 0.5 corresponds to z = 0; changing the threshold changes the class decision without changing the fitted probabilities.
+
 
 Despite its name, logistic regression is a classification model through and through. It is the first classifier most practitioners learn and one of the most frequently used baselines in both academic research and industry, precisely because it not only outputs a predicted class but also a calibrated probability estimate. Understanding logistic regression amounts to understanding the probabilistic foundations shared by nearly all parametric classifiers.
 
@@ -331,6 +337,11 @@ Naive Bayes' strengths are training speed (\(O(Nd)\)), well-calibrated probabili
 
 ## Evaluation and Model Selection
 ### 8. Evaluation Metrics — Accuracy Is Just the Beginning
+
+![The 20 teaching predictions contain eight true positives, nine true negatives, two false positives, and one false negative](/static/images/article-guides/comp-guide-confusion-matrix-en.svg)
+
+The 20 teaching predictions contain eight true positives, nine true negatives, two false positives, and one false negative. Precision, recall, and accuracy use different denominators and therefore answer different questions.
+
 
 Once a classifier is trained, how should its performance be measured? Many beginners default to **accuracy** — the fraction of correctly classified samples. But accuracy is a dangerous oversimplification, especially under class imbalance. If 99% of a medical dataset consists of healthy subjects, a classifier that always predicts "healthy" achieves 99% accuracy while being completely useless for disease detection. Choosing the right evaluation metric is, fundamentally, an act of encoding what it means to be wrong in the specific context of your problem.
 

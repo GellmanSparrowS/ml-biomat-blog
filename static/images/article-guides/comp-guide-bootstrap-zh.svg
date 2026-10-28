@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img"><title>Bootstrap：重采样、拟合、比较</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#526678"/></marker></defs><rect width="760" height="460" rx="16" fill="#f7fafc"/>
+<text x="30" y="42" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="26" fill="#203348" text-anchor="start" font-weight="600">Bootstrap：重采样、拟合、比较</text>
+<text x="30" y="76" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="18" fill="#526678" text-anchor="start" font-weight="400">教学示例：同一次重采样可以重复抽到同一个样品。</text>
+<text x="130" y="147" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#386fd1" text-anchor="middle" font-weight="400">原样品编号</text>
+<rect x="30" y="176" width="200" height="60" rx="9" fill="white" stroke="#d6e1ec"/>
+<text x="130" y="214" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="23" fill="#203348" text-anchor="middle" font-weight="400">A  B  C  D</text>
+<line x1="238" y1="207" x2="291" y2="207" stroke="#526678" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="305" y="117" width="225" height="53" rx="0" fill="#eaf1fa" stroke="#d6e1ec"/>
+<text x="417.5" y="150.5" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="middle" font-weight="600">重采样</text>
+<rect x="530" y="117" width="190" height="53" rx="0" fill="#eaf1fa" stroke="#d6e1ec"/>
+<text x="625.0" y="150.5" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="middle" font-weight="600">预测值</text>
+<rect x="305" y="170" width="225" height="53" rx="0" fill="white" stroke="#d6e1ec"/>
+<text x="417.5" y="203.5" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="middle" font-weight="400">A  A  C  D</text>
+<rect x="530" y="170" width="190" height="53" rx="0" fill="white" stroke="#d6e1ec"/>
+<text x="625.0" y="203.5" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="middle" font-weight="400">2.5</text>
+<rect x="305" y="223" width="225" height="53" rx="0" fill="white" stroke="#d6e1ec"/>
+<text x="417.5" y="256.5" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="middle" font-weight="400">B  C  C  D</text>
+<rect x="530" y="223" width="190" height="53" rx="0" fill="white" stroke="#d6e1ec"/>
+<text x="625.0" y="256.5" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="middle" font-weight="400">2.8</text>
+<rect x="305" y="276" width="225" height="53" rx="0" fill="white" stroke="#d6e1ec"/>
+<text x="417.5" y="309.5" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="middle" font-weight="400">A  B  D  D</text>
+<rect x="530" y="276" width="190" height="53" rx="0" fill="white" stroke="#d6e1ec"/>
+<text x="625.0" y="309.5" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="20" fill="#203348" text-anchor="middle" font-weight="400">3.1</text>
+<text x="380" y="377" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="22" fill="#203348" text-anchor="middle" font-weight="400">均值 = 2.8；这组模型的预测标准差 ≈ 0.245</text>
+<text x="30" y="437" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="18" fill="#526678" text-anchor="start" font-weight="400">标准差采用 np.std(..., ddof=0)，预测值为任意单位。</text></svg>

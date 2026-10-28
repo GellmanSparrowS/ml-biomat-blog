@@ -1,11 +1,12 @@
 ---
 title: "SEM图像分析实战：纤维形态的自动化测量"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "wet-lab-data"
 tags: ["SEM", "图像分析", "纤维形态", "python", "skimage"]
 lang: "zh"
 slug: "sem-image-analysis-zh"
-description: "SEM图像分析实战：纤维形态的自动化测量。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "通过预处理、阈值分割、掩膜清理和骨架分析，将纤维显微图像转化为经过标尺校准的测量结果。构造几何解释局部直径和取向提取，Python 示例支持重复执行与批量处理。"
 ---
 
 ## 为什么自动化SEM分析
@@ -48,6 +49,10 @@ closed = morphology.binary_closing(cleaned, morphology.disk(2))
 skeleton = morphology.skeletonize(closed)  # 用于取向分析
 ```
 
+![同一几何的三种图像表示](/static/images/article-guides/mech-sem-masks-zh.svg)
+
+同一构造纤维几何分别显示为灰度图、前景掩膜和中心线叠加图。阈值选择决定掩膜，骨架则提供采样局部距离变换宽度的位置。
+
 ### 第四步：测量纤维属性
 
 ```python
@@ -58,11 +63,26 @@ props = measure.regionprops_table(labels, properties=[
 ])
 import pandas as pd
 df_fibers = pd.DataFrame(props)
-df_fibers["直径_px"] = df_fibers["minor_axis_length"]
+df_fibers["等效椭圆短轴_px"] = df_fibers["minor_axis_length"]
 df_fibers["长径比"] = df_fibers["major_axis_length"] / df_fibers["minor_axis_length"]
 print(f"发现 {len(df_fibers)} 个纤维片段")
-print(f"平均直径: {df_fibers['直径_px'].mean():.1f} +/- {df_fibers['直径_px'].std():.1f} px")
+print(f"平均等效椭圆短轴: {df_fibers['等效椭圆短轴_px'].mean():.1f} +/- {df_fibers['等效椭圆短轴_px'].std():.1f} px")
 ```
+
+`regionprops` 返回的 `minor_axis_length` 是与连通区域具有相同归一化二阶矩的等效椭圆短轴，描述整个对象的形状。若要估计孤立纤维沿中心线的局部宽度，可在骨架上读取距离变换；像素网格与分割边界决定了这一估计的分辨率。[scikit-image 区域属性](https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops)、[SciPy 距离变换](https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.distance_transform_edt.html)。
+
+```python
+from scipy.ndimage import distance_transform_edt
+
+# 示例标尺：替换为当前 SEM 图像的标尺值
+scale_nm_per_px = 2.5
+radius_nm = distance_transform_edt(closed, sampling=scale_nm_per_px)
+local_width_nm = 2 * radius_nm[skeleton]
+```
+
+![把像素距离转换为局部纤维宽度](/static/images/article-guides/mech-sem-width-zh.svg)
+
+对孤立直条带，局部宽度为 d = 2rpxs，其中 rpx 是骨架点到最近背景的像素距离，s 是每像素对应的物理长度。交叉、分叉和被图像边缘截断的对象需单独检查。
 
 ### 第五步：取向分析
 
@@ -90,7 +110,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
             properties=["minor_axis_length", "area"])
         df = pd.DataFrame(props)
         results.append({"file": filepath, "n_fibers": len(df),
-            "mean_diameter_nm": df["minor_axis_length"].mean()*scale_nm_per_px})
+            "mean_ellipse_minor_axis_nm": df["minor_axis_length"].mean()*scale_nm_per_px})
     return pd.DataFrame(results)
 ```
 

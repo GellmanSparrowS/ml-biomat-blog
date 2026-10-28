@@ -1,11 +1,12 @@
 ---
 title: "Fiber Network Mechanics: Key Concepts for Biomaterials Research"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "biomaterials"
 tags: ["biomaterials", "fiber-networks", "mechanics", "silk", "collagen"]
 lang: "en"
 slug: "fiber-network-mechanics-intro"
-description: "An introduction to the mechanical behavior of fiber-based biomaterials: network architecture, strain-stiffening, and structure-property relationships."
+description: "Understand how fiber waviness, orientation, connectivity and crosslinks shape network mechanics. A straightening sketch and the article’s analytic polynomial illustrate strain stiffening, with experimental and computational routes for studying architecture."
 ---
 
 ## Why Fiber Networks Matter
@@ -17,6 +18,10 @@ Nature builds structural materials from fibers: collagen in tendons, silk in coc
 Understanding fiber network mechanics is essential for designing better biomaterials.
 
 ## Key Mechanical Behaviors
+
+![Straightening changes the load path](/static/images/article-guides/mech-fiber-recruitment-en.svg)
+
+A wavy fiber initially accommodates extension through bending and reorientation; further alignment increases axial load transfer. This mechanism sketch connects fiber geometry with a nonlinear network response.
 
 ### 1. Strain-Stiffening
 
@@ -30,6 +35,10 @@ strain = np.linspace(0, 0.5, 100)
 # High strain: stretching-dominated (stiff)
 stress = 0.1 * strain + 5.0 * strain**3  # simplified
 ```
+
+![Strain stiffening in a teaching model](/static/images/article-guides/mech-fiber-stiffening-en.svg)
+
+The article’s illustrative polynomial σ* = 0.1ε + 5ε³ has tangent stiffness dσ*/dε = 0.1 + 15ε², which rises with strain. The ordinate is in arbitrary units; the curve is generated from the stated formula.
 
 ### 2. Architecture-Property Relationships
 

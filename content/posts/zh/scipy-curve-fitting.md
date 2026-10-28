@@ -1,11 +1,12 @@
 ---
 title: "SciPy曲线拟合完全指南：从线性回归到非线性建模"
 date: "2026-06-27"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["scipy", "曲线拟合", "优化", "回归", "Hertz模型"]
 lang: "zh"
 slug: "scipy-curve-fitting-zh"
-description: "SciPy曲线拟合完全指南：从线性回归到非线性建模。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "从线性趋势、应力松弛到压痕模型，演示 SciPy 曲线拟合中的函数定义、初值、单位与参数边界。通过残差、协方差矩阵和置信区间，理解拟合参数的含义，并检查模型与测量数据是否匹配。"
 ---
 
 
@@ -32,6 +33,11 @@ SciPy的curve_fit不仅给出最优参数，还提供协方差矩阵，用来估
 
 ## 二、线性回归：力学测试中最常用的方法
 
+![五个教学数据点拟合得到 y = 1.97x + 1.06](/static/images/article-guides/comp-guide-residuals-zh.svg)
+
+五个教学数据点拟合得到 y = 1.97x + 1.06。下图将观测值减去拟合值，使剩余误差脱离整体趋势，便于比较残差的正负与大小。
+
+
 ```python
 strain = np.array([0.000, 0.005, 0.010, 0.015, 0.020])
 stress = np.array([0.0, 8.2, 15.8, 23.5, 31.2])
@@ -50,7 +56,9 @@ print(f"杨氏模量: {E:.1f} +/- {E_std:.1f} MPa, R2={r2:.4f}")
 
 ## 三、指数衰减模型：应力松弛实验
 
-![测量应力松驰数据与指数表减拟合及平衡应力水平](/static/images/posts/scipy-curve-fitting/relaxation-zh.webp)
+保持应变不变时，标准线性固体模型的松弛模量可写为 E(t) = E_eq + E_branch·exp(−t/τ)，其中 τ = η/E_branch。乘以施加的应变，就得到应力随时间的衰减；下面代码拟合的 A 和 y0 分别是应力衰减幅值与平衡应力，单位为 kPa。这个关系对应 [COMSOL 线性黏弹性模型中的单 Maxwell 支路](https://doc.comsol.com/6.4/doc/com.comsol.help.sme/sme_ug_theory.06.029.html)。
+
+![应力松弛数据与指数衰减拟合及平衡应力水平](/static/images/posts/scipy-curve-fitting/relaxation-zh.webp)
 
 ```python
 time_min = np.array([0, 1, 2, 5, 10, 20, 40, 80])
@@ -69,30 +77,43 @@ print(f"松弛时间: {tau:.1f} min")
 
 ## 四、Hertz模型：AFM纳米压痕分析
 
+力–压痕曲线的局部斜率是接触刚度。要提取杨氏模量，还需结合探针几何和接触模型：对比样品刚得多的球形探针，Hertz 关系为 F = (4/3)E*√R·δ^(3/2)，E* = E/(1−ν²)。下面的教学计算取球半径 1000 nm，使 0–60 nm 的压痕范围相对半径较小，并在函数内部统一为 SI 单位。
+
 ```python
+# 教学压痕数值；球形探针半径为 1000 nm
 indentation_nm = np.array([0, 10, 20, 30, 40, 50, 60])
 force_nN = np.array([0, 1.5, 4.8, 9.2, 14.5, 20.3, 26.8])
 
-def hertz_model(delta, E_star, R=20.0):
-    return (4/3) * E_star * np.sqrt(R) * np.power(np.maximum(delta, 0), 1.5)
+def hertz_model(delta_nm, E_star_MPa, R_nm=1000.0):
+    delta_m = np.maximum(delta_nm, 0) * 1e-9
+    E_star_Pa = E_star_MPa * 1e6
+    force_N = (4/3) * E_star_Pa * np.sqrt(R_nm * 1e-9) * delta_m**1.5
+    return force_N * 1e9  # 返回 nN，与观测数据单位一致
 
 popt, pcov = curve_fit(hertz_model, indentation_nm, force_nN,
-    p0=[1000], bounds=(1, 1e9))
-E_modulus = popt[0] * (1 - 0.5**2)  # 转换为杨氏模量
-print(f"杨氏模量: {E_modulus/1000:.1f} kPa")
+    p0=[1.0], bounds=(0, np.inf))
+E_modulus_MPa = popt[0] * (1 - 0.5**2)  # 刚性探针，样品泊松比取 0.5
+print(f"杨氏模量: {E_modulus_MPa * 1000:.1f} kPa")
 ```
 
 Hertz模型假设材料是各向同性线弹性的、压痕深度远小于样品厚度、针尖与样品之间无粘附作用。对于生物材料，这些假设不总是成立，因此得到的模量应视为表观模量而非绝对的本征材料参数。
 
 ## 五、置信区间：不要只报一个数字
 
+`curve_fit` 返回的 `pcov` 在模型的局部线性近似下估计参数协方差；对角元开平方得到参数标准误。其数值还受观测误差设置及 `absolute_sigma` 影响，可结合 [SciPy 文档](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html) 选择误差定义。
+
+![该教学协方差矩阵给出斜率标准误 0.2、截距标准误 0.1，以及参数相关系数 −0.75](/static/images/article-guides/comp-guide-covariance-zh.svg)
+
+该教学协方差矩阵给出斜率标准误 0.2、截距标准误 0.1，以及参数相关系数 −0.75。计算置信区间还需指定置信水平，并结合模型选取相应的分位数。
+
+
 ```python
 from scipy import stats
 alpha = 0.05; n = len(indentation_nm); p = len(popt)
 t_val = stats.t.ppf(1 - alpha/2, max(0, n - p))
-for i, (param, name) in enumerate(zip(popt, ['E_star'])):
+for i, (param, name) in enumerate(zip(popt, ['E_star (MPa)'])):
     std = np.sqrt(pcov[i, i])
-    print(f"{name}: {param:.1f} +/- {t_val*std:.1f} (95% CI)")
+    print(f"{name}: {param:.3f} +/- {t_val*std:.3f} (95% CI)")
 ```
 
 ## 六、常见问题和调试技巧
@@ -103,7 +124,11 @@ for i, (param, name) in enumerate(zip(popt, ['E_star'])):
 
 ```python
 from scipy.optimize import minimize
-result = minimize(lambda p: np.sum((y - model(x, *p))**2), [1.0, 0.0], args=(x, y), bounds=[(0, None)]*2)
+result = minimize(
+    lambda p, x, y: np.sum((y - hertz_model(x, *p))**2),
+    [1.0], args=(indentation_nm, force_nN), bounds=[(0, None)]
+)
+print(f"约束优化得到的约化模量: {result.x[0]:.3f} MPa")
 ```
 
 ### 参考文献

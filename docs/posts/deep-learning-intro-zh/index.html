@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>深度学习的本质：从特征工程到表示学习 — ML-Biomat</title>
-<meta name="description" content="从神经元、激活函数、反向传播到正则化与迁移学习，系统讲解深度学习的核心概念与训练技巧，帮助材料科学和生物学研究生判断何时该用深度学习、何时传统机器学习方法更合适。">
+<meta name="description" content="从神经元的加权求和与激活函数出发，逐步理解前向传播、损失函数、反向传播和梯度更新。再联系卷积、序列与注意力模型，讨论正则化、迁移学习及小样本研究中的选用方法。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/deep-learning-intro-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/deep-learning-intro-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/deep-learning-intro-ml/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/deep-learning-intro-ml/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="深度学习的本质：从特征工程到表示学习">
-<meta property="og:description" content="从神经元、激活函数、反向传播到正则化与迁移学习，系统讲解深度学习的核心概念与训练技巧，帮助材料科学和生物学研究生判断何时该用深度学习、何时传统机器学习方法更合适。">
+<meta property="og:description" content="从神经元的加权求和与激活函数出发，逐步理解前向传播、损失函数、反向传播和梯度更新。再联系卷积、序列与注意力模型，讨论正则化、迁移学习及小样本研究中的选用方法。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/deep-learning-intro-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/deep-learning-intro-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "深度学习的本质：从特征工程到表示学习", "description": "从神经元、激活函数、反向传播到正则化与迁移学习，系统讲解深度学习的核心概念与训练技巧，帮助材料科学和生物学研究生判断何时该用深度学习、何时传统机器学习方法更合适。", "datePublished": "2026-07-03", "dateModified": "2026-07-03", "wordCount": 1685, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/deep-learning-intro-zh/", "image": "https://ml-biomat.com/static/images/og/deep-learning-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "深度学习的本质：从特征工程到表示学习", "item": "https://ml-biomat.com/posts/deep-learning-intro-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "深度学习的本质：从特征工程到表示学习", "description": "从神经元的加权求和与激活函数出发，逐步理解前向传播、损失函数、反向传播和梯度更新。再联系卷积、序列与注意力模型，讨论正则化、迁移学习及小样本研究中的选用方法。", "datePublished": "2026-07-03", "dateModified": "2026-10-28", "wordCount": 7258, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/deep-learning-intro-zh/", "image": "https://ml-biomat.com/static/images/og/deep-learning-intro-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "深度学习的本质：从特征工程到表示学习", "item": "https://ml-biomat.com/posts/deep-learning-intro-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>深度学习的本质：从特征工程到表示学习</h1>
 <div class="article-meta">
-<span>2026-07-03</span><span>·</span><span>8 min read</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
+<span>2026-07-03</span><span>·</span><span>20 分钟阅读</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="tag-pill" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">神经网络</a><a class="tag-pill" href="/tags/%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/">反向传播</a><a class="tag-pill" href="/tags/PyTorch/">PyTorch</a><a class="tag-pill" href="/tags/%E8%A1%A8%E7%A4%BA%E5%AD%A6%E4%B9%A0/">表示学习</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#神经网络基础">神经网络基础</a></li><li class="toc-h3"><a href="#一-深度学习的本质-从特征工程到表示学习">一、深度学习的本质——从特征工程到表示学习</a></li><li class="toc-h3"><a href="#二-神经网络的基本构件-神经元-层与激活函数">二、神经网络的基本构件——神经元、层与激活函数</a></li><li class="toc-h2"><a href="#网络如何学习">网络如何学习</a></li><li class="toc-h3"><a href="#三-前向传播与损失函数-从输入到预测的旅程">三、前向传播与损失函数——从输入到预测的旅程</a></li><li class="toc-h3"><a href="#四-反向传播与梯度下降-网络如何从错误中学习">四、反向传播与梯度下降——网络如何从错误中学习</a></li><li class="toc-h2"><a href="#网络架构">网络架构</a></li><li class="toc-h3"><a href="#五-卷积神经网络-空间结构的特征提取">五、卷积神经网络——空间结构的特征提取</a></li><li class="toc-h3"><a href="#六-序列模型与注意力机制-lstm-与-transformer">六、序列模型与注意力机制——LSTM 与 Transformer</a></li><li class="toc-h2"><a href="#训练方法与适用边界">训练方法与适用边界</a></li><li class="toc-h3"><a href="#七-正则化与训练技巧-从过拟合到泛化">七、正则化与训练技巧——从过拟合到泛化</a></li><li class="toc-h3"><a href="#八-深度学习的适用边界-与传统机器学习的关系">八、深度学习的适用边界——与传统机器学习的关系</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="神经网络基础">神经网络基础</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#神经网络基础">神经网络基础</a></li><li class="toc-h3"><a href="#一-深度学习的本质-从特征工程到表示学习">一、深度学习的本质——从特征工程到表示学习</a></li><li class="toc-h3"><a href="#二-神经网络的基本构件-神经元-层与激活函数">二、神经网络的基本构件——神经元、层与激活函数</a></li><li class="toc-h2"><a href="#网络如何学习">网络如何学习</a></li><li class="toc-h3"><a href="#三-前向传播与损失函数-从输入到预测的旅程">三、前向传播与损失函数——从输入到预测的旅程</a></li><li class="toc-h3"><a href="#四-反向传播与梯度下降-网络如何从错误中学习">四、反向传播与梯度下降——网络如何从错误中学习</a></li><li class="toc-h2"><a href="#网络架构">网络架构</a></li><li class="toc-h3"><a href="#五-卷积神经网络-空间结构的特征提取">五、卷积神经网络——空间结构的特征提取</a></li><li class="toc-h3"><a href="#六-序列模型与注意力机制-lstm-与-transformer">六、序列模型与注意力机制——LSTM 与 Transformer</a></li><li class="toc-h2"><a href="#训练方法与适用边界">训练方法与适用边界</a></li><li class="toc-h3"><a href="#七-正则化与训练技巧-从过拟合到泛化">七、正则化与训练技巧——从过拟合到泛化</a></li><li class="toc-h3"><a href="#八-深度学习的适用边界-与传统机器学习的关系">八、深度学习的适用边界——与传统机器学习的关系</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="神经网络基础">神经网络基础</h2>
 <h3 id="一-深度学习的本质-从特征工程到表示学习">一、深度学习的本质——从特征工程到表示学习</h3>
 
 <p>在回归模型一章中，我们反复强调了特征工程的重要性：将材料的成分、晶粒尺寸、热处理温度等原始数据，通过对数变换、幂律、交叉项等方式，变换成对模型更友好的形式。这种人工设计特征的思路在样本量有限、领域知识丰富时表现极好。然而，当数据的维度极高、内在结构极复杂——一张细胞显微图像包含数百万像素，一段蛋白质序列蕴含多层次的折叠信息，一个有限元网格数据包含数十万节点的位移场——人工设计特征便面临根本性的瓶颈：不是研究者不努力，而是问题的复杂性超过了人类单凭先验知识提取有用信息的能力上限。</p>
@@ -65,6 +65,11 @@
 <hr>
 
 <h3 id="二-神经网络的基本构件-神经元-层与激活函数">二、神经网络的基本构件——神经元、层与激活函数</h3>
+
+<img src="/static/images/article-guides/comp-guide-neuron-zh.svg" alt="一个神经元先将输入乘以权重，加上偏置，再通过激活函数" loading="lazy">
+
+<p>一个神经元先将输入乘以权重，加上偏置，再通过激活函数。这个数值示例得到 z = 0.2、ReLU(z) = 0.2，可以逐项核对每一步运算。</p>
+
 
 <p>神经网络这个名字来自对生物神经系统的粗糙类比：大脑神经元接收来自树突的化学信号，在细胞体中积累，当超过阈值时通过轴突发放电信号给下一个神经元。数学上，一个人工神经元接收来自前一层的输出向量 \(\mathbf{x} \in \mathbb{R}^d\)，计算加权和，加上偏置项，再通过一个非线性函数（激活函数）后输出：</p>
 
@@ -148,6 +153,11 @@ plt.tight_layout(); plt.show()
 <hr>
 
 <h3 id="四-反向传播与梯度下降-网络如何从错误中学习">四、反向传播与梯度下降——网络如何从错误中学习</h3>
+
+<img src="/static/images/article-guides/comp-guide-gradient-step-zh.svg" alt="这个单参数教学模型展示误差如何产生梯度并更新权重" loading="lazy">
+
+<p>这个单参数教学模型展示误差如何产生梯度并更新权重。学习率取 0.1 时，w 从 0.25 变为 0.35，平方误差损失由 0.125 降至 0.045。</p>
+
 
 <p>前向传播给出预测，损失函数给出误差的度量，接下来的问题是：如何调整网络中数以百万计的参数，使损失函数尽可能小？这个问题的答案是<strong>反向传播（Backpropagation）</strong>算法——它是深度学习整个工程体系得以运转的核心引擎，由 Rumelhart、Hinton 和 Williams 在 1986 年发表于 Nature 的工作正式奠定了其地位。</p>
 
@@ -503,12 +513,8 @@ print(f&quot;Trainable / Total params: {trainable:,} / {total:,}&quot;)
 <li>Goodfellow, I., Bengio, Y., & Courville, A. (2016). <em>Deep Learning</em>. MIT Press. https://www.deeplearningbook.org/</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/networkx-fundamentals-zh/">← NetworkX 基础：用 Python 理解、构建与分析网络</a></span><span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/networkx-fundamentals-zh/">← NetworkX 基础：用 Python 理解、构建与分析网络</a></span><span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -519,7 +525,7 @@ print(f&quot;Trainable / Total params: {trainable:,} / {total:,}&quot;)
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -527,11 +533,11 @@ print(f&quot;Trainable / Total params: {trainable:,} / {total:,}&quot;)
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

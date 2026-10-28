@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NetworkX 基础：用 Python 理解、构建与分析网络 — ML-Biomat</title>
-<meta name="description" content="NetworkX 基础：用 Python 理解、构建与分析网络。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="用 NetworkX 表达节点、连边、方向与权重，再计算度数、中心性、聚类和最短路径。结合邻接矩阵、经典网络模型与社区发现，说明不同指标回答什么问题，以及如何把结构数据转成可分析的图。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/networkx-fundamentals-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/networkx-fundamentals-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/networkx-fundamentals/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/networkx-fundamentals/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="NetworkX 基础：用 Python 理解、构建与分析网络">
-<meta property="og:description" content="NetworkX 基础：用 Python 理解、构建与分析网络。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="用 NetworkX 表达节点、连边、方向与权重，再计算度数、中心性、聚类和最短路径。结合邻接矩阵、经典网络模型与社区发现，说明不同指标回答什么问题，以及如何把结构数据转成可分析的图。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/networkx-fundamentals-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/networkx-fundamentals-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX 基础：用 Python 理解、构建与分析网络", "description": "NetworkX 基础：用 Python 理解、构建与分析网络。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 1568, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals-zh/", "image": "https://ml-biomat.com/static/images/og/networkx-fundamentals-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NetworkX 基础：用 Python 理解、构建与分析网络", "item": "https://ml-biomat.com/posts/networkx-fundamentals-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NetworkX 基础：用 Python 理解、构建与分析网络", "description": "用 NetworkX 表达节点、连边、方向与权重，再计算度数、中心性、聚类和最短路径。结合邻接矩阵、经典网络模型与社区发现，说明不同指标回答什么问题，以及如何把结构数据转成可分析的图。", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 5930, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/networkx-fundamentals-zh/", "image": "https://ml-biomat.com/static/images/og/networkx-fundamentals-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NetworkX 基础：用 Python 理解、构建与分析网络", "item": "https://ml-biomat.com/posts/networkx-fundamentals-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>NetworkX 基础：用 Python 理解、构建与分析网络</h1>
 <div class="article-meta">
-<span>2026-06-30</span><span>·</span><span>7 min read</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
+<span>2026-06-30</span><span>·</span><span>17 分钟阅读</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/NetworkX/">NetworkX</a><a class="tag-pill" href="/tags/Python/">Python</a><a class="tag-pill" href="/tags/%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90/">网络分析</a><a class="tag-pill" href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a><a class="tag-pill" href="/tags/%E7%BD%91%E7%BB%9C%E7%A7%91%E5%AD%A6/">网络科学</a><a class="tag-pill" href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">数据可视化</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#图论基础">图论基础</a></li><li class="toc-h3"><a href="#一-为什么需要-networkx-从直觉到工具">一、为什么需要 NetworkX——从直觉到工具</a></li><li class="toc-h3"><a href="#二-图的四种类型-你的问题是哪种图">二、图的四种类型——你的问题是哪种图？</a></li><li class="toc-h3"><a href="#三-构建图-节点-边与属性的核心操作">三、构建图——节点、边与属性的核心操作</a></li><li class="toc-h2"><a href="#网络指标">网络指标</a></li><li class="toc-h3"><a href="#四-度-路径与聚类-读懂一张图的三把钥匙">四、度、路径与聚类——读懂一张图的三把钥匙</a></li><li class="toc-h3"><a href="#五-中心性-谁在网络中-最重要">五、中心性——谁在网络中"最重要"？</a></li><li class="toc-h3"><a href="#六-最短路径算法-从-dijkstra-到-floyd">六、最短路径算法——从 Dijkstra 到 Floyd</a></li><li class="toc-h3"><a href="#七-经典网络模型-随机图-小世界与无标度">七、经典网络模型——随机图、小世界与无标度</a></li><li class="toc-h2"><a href="#进阶主题">进阶主题</a></li><li class="toc-h3"><a href="#八-可视化-让图说话">八、可视化——让图说话</a></li><li class="toc-h3"><a href="#九-社区检测与图生成器-进阶工具">九、社区检测与图生成器——进阶工具</a></li><li class="toc-h3"><a href="#十-性能考量与进阶资源">十、性能考量与进阶资源</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="图论基础">图论基础</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#图论基础">图论基础</a></li><li class="toc-h3"><a href="#一-为什么需要-networkx-从直觉到工具">一、为什么需要 NetworkX——从直觉到工具</a></li><li class="toc-h3"><a href="#二-图的四种类型-你的问题是哪种图">二、图的四种类型——你的问题是哪种图？</a></li><li class="toc-h3"><a href="#三-构建图-节点-边与属性的核心操作">三、构建图——节点、边与属性的核心操作</a></li><li class="toc-h2"><a href="#网络指标">网络指标</a></li><li class="toc-h3"><a href="#四-度-路径与聚类-读懂一张图的三把钥匙">四、度、路径与聚类——读懂一张图的三把钥匙</a></li><li class="toc-h3"><a href="#五-中心性-谁在网络中-最重要">五、中心性——谁在网络中"最重要"？</a></li><li class="toc-h3"><a href="#六-最短路径算法-从-dijkstra-到-floyd">六、最短路径算法——从 Dijkstra 到 Floyd</a></li><li class="toc-h3"><a href="#七-经典网络模型-随机图-小世界与无标度">七、经典网络模型——随机图、小世界与无标度</a></li><li class="toc-h2"><a href="#进阶主题">进阶主题</a></li><li class="toc-h3"><a href="#八-可视化-让图说话">八、可视化——让图说话</a></li><li class="toc-h3"><a href="#九-社区检测与图生成器-进阶工具">九、社区检测与图生成器——进阶工具</a></li><li class="toc-h3"><a href="#十-性能考量与进阶资源">十、性能考量与进阶资源</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="图论基础">图论基础</h2>
 <h3 id="一-为什么需要-networkx-从直觉到工具">一、为什么需要 NetworkX——从直觉到工具</h3>
 
 <p>在理解 NetworkX 之前，先退一步，想想"关系"本身。你的蛋白质组里，一个蛋白质激活另一个蛋白质；一根骨小梁和另一根通过接触点传递应力；一个神经元向下游神经元发放脉冲；一个城市的公路把它和若干相邻城市连通。这些现象在形式上都是一样的：一堆<strong>实体</strong>，以及实体之间的<strong>连接关系</strong>。数学把这种形式抽象为图（Graph），由节点集合 \(V\)（Vertex）和边集合 \(E\)（Edge）构成，记作 \(G = (V, E)\)。</p>
@@ -90,6 +90,11 @@ import matplotlib.pyplot as plt
 <hr>
 
 <h3 id="三-构建图-节点-边与属性的核心操作">三、构建图——节点、边与属性的核心操作</h3>
+
+<img src="/static/images/article-guides/comp-guide-adjacency-zh.svg" alt="四节点图和矩阵按 A、B、C、D 的顺序记录同一组连边" loading="lazy">
+
+<p>四节点图和矩阵按 A、B、C、D 的顺序记录同一组连边。无向图的邻接矩阵对称，C 行元素之和为 3，对应节点 C 的度数。</p>
+
 
 <p>理解了图的类型之后，下一步是把数据"装入"图对象。NetworkX 的增删节点与边的接口设计非常 Pythonic，允许你从各种来源构建图：逐条添加、批量导入、从字典或矩阵转换。</p>
 
@@ -274,6 +279,11 @@ print(&quot;Top by Eigenvector: &quot;, top_node(eigenvector))
 <hr>
 
 <h3 id="六-最短路径算法-从-dijkstra-到-floyd">六、最短路径算法——从 Dijkstra 到 Floyd</h3>
+
+<img src="/static/images/article-guides/comp-guide-weighted-path-zh.svg" alt="最短路径取决于要最小化的量" loading="lazy">
+
+<p>最短路径取决于要最小化的量。在这个教学网络中，直接走 A–D 只需一跳；按边权求和时，A–B–D 的总权重为 1 + 2 = 3，更小。</p>
+
 
 <p>最短路径是图论中被研究最深的问题之一，也是实际应用中出现频率最高的计算任务。NetworkX 内置了多种算法，理解它们的适用条件，才能选对工具避免计算浪费。</p>
 
@@ -528,12 +538,8 @@ print(nx.info(G_hex))
 <li>NetworkX Developers. (2024). NetworkX 3.x Documentation. https://networkx.org/documentation/stable/</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/ml-classification-models-zh/">← 常用的机器学习分类模型：从逻辑回归到梯度提升</a></span><span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合完全指南：从线性回归到非线性建模</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scientific-visualization-python-zh/">Python科研绘图完全指南：从数据到发表级图表</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/ml-classification-models-zh/">← 常用的机器学习分类模型：从逻辑回归到梯度提升</a></span><span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合完全指南：从线性回归到非线性建模</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scientific-visualization-python-zh/">Python科研绘图完全指南：从数据到发表级图表</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -544,7 +550,7 @@ print(nx.info(G_hex))
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -552,11 +558,11 @@ print(nx.info(G_hex))
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

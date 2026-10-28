@@ -1,11 +1,12 @@
 ---
 title: "Python 科学计算环境完全搭建指南：从零到生产力"
 date: "2026-07-06"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["python", "conda", "jupyter", "环境配置", "科学计算", "Mamba"]
 lang: "zh"
 slug: "python-env-setup-zh"
-description: "从虚拟环境原理到Conda/Mamba实战再到Jupyter与VS Code配置，三平台全覆盖的Python科学计算环境搭建指南，面向生物与材料科学研究生的从零到生产力完整教程。"
+description: "从独立环境、工具包安装到 JupyterLab 内核与 VS Code 解释器，逐步建立可复用的科研计算环境。结合版本冲突、安装路径与环境导出示例，说明常见故障该从哪里排查。"
 ---
 ## 入门与安装
 ### 一、为什么需要管理 Python 环境——从版本冲突说起
@@ -98,6 +99,11 @@ conda --version
 
 ## 日常工作流
 ### 四、创建与管理虚拟环境——项目隔离的核心操作
+
+![每个项目分别保存自己的 Python 解释器与依赖版本](/static/images/article-guides/comp-guide-environment-isolation-zh.svg)
+
+每个项目分别保存自己的 Python 解释器与依赖版本。图中的版本代号用于说明隔离关系；激活环境决定命令调用哪一套安装。
+
 
 理解了虚拟环境的必要性之后，具体的创建和管理操作其实非常直观。这一节完整介绍环境的全生命周期操作，以及最重要的"环境复现"（Reproducibility）工作流。
 
@@ -193,6 +199,11 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvi
 ---
 
 ### 六、JupyterLab：交互式科研计算的核心工作环境
+
+![浏览器负责显示 Notebook，选中的内核负责执行代码](/static/images/article-guides/comp-guide-jupyter-kernel-zh.svg)
+
+浏览器负责显示 Notebook，选中的内核负责执行代码。在单元格中查看 sys.executable，可以确认实际使用的 Python，再到对应环境安装工具包。
+
 
 JupyterLab 是当代科学计算中最广泛使用的交互式编程环境。它在浏览器中运行，在同一个界面里集成了代码编辑与执行、图表内嵌显示、Markdown 格式文字记录、LaTeX 数学公式渲染、文件系统浏览，以及嵌入式终端。对于需要同时展示实验数据、计算逻辑、可视化结果和科学解释的科研工作，Notebook 这种"可计算文档"形式具有无可替代的价值——它不仅是一个编程工具，更是一种记录科学探索过程的媒介，使得"代码即是实验记录"成为可能。
 

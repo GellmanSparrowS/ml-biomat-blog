@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
-from content_tools import tutorials
+from content_tools import tutorials, catalog
 
 ROOT = Path(__file__).resolve().parent
 INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
@@ -107,8 +107,8 @@ def md_to_html(text):
                 tag = "th" if ri == 0 else "td"
                 rows.append("<tr>" + "".join(f"<{tag}>{c}</{tag}>" for c in cells) + "</tr>")
             out.append(f"<table>{''.join(rows)}</table>"); continue
-        m = re.match(r'^!\[([^\]]*)\]\(([^)]+)\)$', line.strip())
-        if m: out.append(f'<img src="{m.group(2)}" alt="{m.group(1)}" loading="lazy">'); i += 1; continue
+        m = re.match(r'^!\[(.*)\]\(([^)]+)\)$', line.strip())
+        if m: out.append(f'<img src="{hm.escape(m.group(2), quote=True)}" alt="{hm.escape(m.group(1), quote=True)}" loading="lazy">'); i += 1; continue
         if not line.strip(): out.append(""); i += 1; continue
         out.append(f"<p>{inline_md(line)}</p>"); i += 1
     if in_list: out.append(f"</{list_tag}>")
@@ -129,10 +129,13 @@ def load_posts():
                 except ValueError: posted = datetime(2025, 1, 1)
                 html_content = md_to_html(body)
                 toc = build_toc(html_content)
-                wc = len(body.split()); read_min = max(1, wc // 200)
+                reading_text = re.sub(r'```.*?```', '', body, flags=re.S)
+                chinese = len(re.findall(r'[\u4e00-\u9fff]', reading_text))
+                words = len(re.findall(r"[A-Za-z0-9]+(?:[’'-][A-Za-z0-9]+)*", reading_text))
+                wc = chinese + words; read_min = max(1, round(chinese / 400 + words / 200))
                 posts.append({
                     "title": meta.get("title", slug.replace("-", " ").title()),
-                    "slug": slug, "date": posted.strftime("%Y-%m-%d"),
+                    "slug": slug, "date": posted.strftime("%Y-%m-%d"), "modified": meta.get("updated", posted.strftime("%Y-%m-%d")),
                     "datetime": posted, "category": meta.get("category", "uncategorized"),
                     "tags": meta.get("tags", []), "lang": meta.get("lang", "en"),
                     "description": meta.get("description", ""),
@@ -162,7 +165,7 @@ def article_ld(post):
     article = {
         "@context": "https://schema.org", "@type": "BlogPosting",
         "headline": post["title"], "description": post["description"],
-        "datePublished": post["date"], "dateModified": post["date"],
+        "datePublished": post["date"], "dateModified": post.get("modified",post["date"]),
         "wordCount": post.get("word_count", 0),
         "inLanguage": "en" if post["lang"] == "en" else "zh-CN",
         "author": {"@type": "Person", "name": SITE["author"], "url": "https://github.com/GellmanSparrowS"},
@@ -177,7 +180,7 @@ def article_ld(post):
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE["base_url"]},
             {"@type": "ListItem", "position": 2, "name": cat_name(post["category"], post["lang"]),
-             "item": f'{SITE["base_url"]}/categories/{post["category"]}/'},
+             "item": SITE["base_url"] + catalog.category_url(post["category"],post["lang"])},
             {"@type": "ListItem", "position": 3, "name": post["title"], "item": url},
         ],
     }
@@ -257,7 +260,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 <nav class="nav-links">
 <a data-short-label="首页" href="/"{home_active}>Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -266,7 +269,7 @@ HEADER = '''<header class="site-header"><div class="header-inner">
 </div></header>
 <main class="container{wide_class}">'''
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 
 def versioned_asset(url):
@@ -282,7 +285,7 @@ POST_CARD = '<article class="post-card">\n<span class="card-lang {lang_class}">{
 
 POST_ROW = '<li class="post-row"><span class="row-date">{date}</span><a href="/posts/{slug}/">{title}</a></li>'
 
-ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="/categories/{cat_slug}/">{cat_name}</a>\n</div>\n</header>\n<div class="card-tags" style="margin:.3rem 0 .6rem">{tags_html}</div>\n<div class="content">\n{toc}{html}\n</div>\n</article>'
+ARTICLE_HTML = '<article>\n<header class="article-header">\n<span class="lang-badge {lang_class}">{lang_label}</span>\n<h1>{title}</h1>\n<div class="article-meta">\n<span>{date}</span><span>\u00b7</span><span>{read_min} min read</span><span>\u00b7</span><a href="{cat_url}">{cat_name}</a>\n</div>\n</header>\n<div class="card-tags" style="margin:.3rem 0 .6rem">{tags_html}</div>\n<div class="content">\n{toc}{html}\n</div>\n</article>'
 
 
 GISCUS_SCRIPT = '<section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)"><h2>Comments</h2><script src="https://giscus.app/client.js" data-repo="GellmanSparrowS/ml-biomat-blog" data-repo-id="R_kgDOTEwhsA" data-category="General" data-category-id="DIC_kwDOTEwhsM4CpPbT" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script></section>'
@@ -308,24 +311,30 @@ def make_head(title, desc, url, lang="en", og_type="website", ld="",
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
         url=url, lang=lang, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld, adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates, mathjax=(MATHJAX_SCRIPT if needs_math else ""))
-    header = localize_navigation(HEADER, navigation_language).format(
+    header = localize_navigation(HEADER, navigation_language or lang).format(
         home_active=home_active, en_active=en_active, zh_active=zh_active, en_href=en_href, zh_href=zh_href,
         wide_class=" container-wide" if wide else "")
     head = head.replace("</head>", f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}"></head>')
-    if lang == "en":
-        for chinese, english in [("首页", "Home"), ("工具库", "Library"), ("教程", "Tutorials"), ("个人主页", "Profile")]:
+    if lang == "en" and navigation_language != "mixed":
+        for chinese, english in [("首页", "Home"), ("工具库", "Library"), ("分类", "Categories"), ("个人主页", "Profile")]:
             header = header.replace(f'data-short-label="{chinese}"', f'data-short-label="{english}"')
+    route = urllib.parse.urlsplit(url).path.rstrip('/')
+    if en_href == '/en/' and zh_href == '/zh/' and route not in ('', '/en', '/zh'):
+        header = re.sub(r'<span class="lang-switch">.*?</span>', '', header)
+    if route.startswith('/categories') or route.startswith('/tutorials'):
+        header = re.sub(r'(<a data-short-label="(?:分类|Categories)" href="[^"]+")>', lambda m: m[1]+' class="active">', header)
     return head + header
 
 
 
 def localize_navigation(markup, language):
-    # Keep the existing navigation elsewhere; profile and CV opt into English.
+    # Localize labels and destinations together for language-specific pages.
     if language == "en":
-        for chinese, english in [("首页", "Home"), ("工具库", "Library"), ("教程", "Tutorials"), ("个人主页", "Profile")]:
+        for chinese, english in [("首页", "Home"), ("工具库", "Library"), ("分类", "Categories"), ("个人主页", "Profile")]:
             markup = markup.replace(f'data-short-label="{chinese}"', f'data-short-label="{english}"')
         markup = markup.replace('href="/about/">Profile / 个人简介', 'href="/about/en/">Profile')
-        markup = markup.replace('Home / 首页', 'Home').replace('Library / 库', 'Library').replace('Tools / 工具', 'Tools').replace('Tutorials / 教程', 'Tutorials')
+        markup = markup.replace('Home / 首页', 'Home').replace('Library / 库', 'Library').replace('Tools / 工具', 'Tools').replace('Categories / 分类', 'Categories')
+        markup = markup.replace('href="/categories/"', 'href="/categories/en/"')
     return markup
 
 
@@ -445,8 +454,11 @@ def check_coverage(posts):
         status = "OK" if stats["EN"] > 0 and stats["ZH"] > 0 else "MISSING"
         print(f"  {cat:<25} {stats['EN']:>4} {stats['ZH']:>4} {status}")
 
-    # Slug-based pair check disabled - use category-level coverage above
-    # New articles should follow slug convention: EN {topic}, ZH {topic}-zh
+    by_lang = {'en': en_posts, 'zh': zh_posts}
+    for post in posts:
+        pair = find_pair(post, by_lang)
+        if not pair or find_pair(pair, by_lang)['slug'] != post['slug']:
+            raise ValueError('Missing reciprocal translation: '+post['slug'])
 
 def build():
     # Load Giscus HTML for article pages
@@ -454,6 +466,7 @@ def build():
 
     posts = load_posts()
     curriculum = tutorials.load()
+    catalog_items = catalog.entries(posts, curriculum)
     check_coverage(posts)
     en = [p for p in posts if p["lang"] == "en"]
     zh = [p for p in posts if p["lang"] == "zh"]
@@ -487,14 +500,16 @@ def build():
             prev_next = f'<nav class="prev-next-nav"><span>{prev_link}</span><span>{next_link}</span></nav>'
         related_html = ""
         if related:
-            related_html = '<section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple">' + "".join(
+            related_html = '<section class="related"><h2>' + ("Related articles" if p["lang"]=="en" else "相关阅读") + '</h2><ul class="post-list-simple">' + "".join(
                 POST_ROW.format(date=q["date"], title=hm.escape(q["title"]), slug=q["slug"]) for q in related
             ) + "</ul></section>"
         tag_links = "".join(f'<a class="tag-pill" href="{tag_href(t)}">{hm.escape(t)}</a>' for t in p["tags"])
         body = ARTICLE_HTML.format(
             title=hm.escape(p["title"]), date=p["date"], read_min=p["read_min"],
-            cat_slug=p["category"], cat_name=cn, html=p["html"], toc=p["toc"], tags_html=tag_links,
-            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + prev_next + ENGAGE_BANNER + related_html + giscus_html
+            cat_url=catalog.category_url(p["category"], p["lang"]), cat_name=cn, html=p["html"], toc=p["toc"].replace("Contents / 目录", "Contents" if p["lang"] == "en" else "目录"), tags_html=tag_links,
+            lang_class=p["lang"], lang_label="EN" if p["lang"] == "en" else "\u4e2d\u6587") + prev_next + related_html + (giscus_html if p["lang"]=="en" else giscus_html.replace("<h2>Comments</h2>", "<h2>讨论</h2>").replace('data-lang="en"', 'data-lang="zh-CN"'))
+        if p["lang"] == "zh":
+            body = body.replace(f'{p["read_min"]} min read', f'{p["read_min"]} 分钟阅读')
         en_post = p if p["lang"] == "en" else pair
         zh_post = p if p["lang"] == "zh" else pair
         html = make_head(title=p["title"], desc=p["description"] or p["title"],
@@ -503,24 +518,15 @@ def build():
                          en_href=f'/posts/{en_post["slug"]}/' if en_post else "/en/",
                          zh_href=f'/posts/{zh_post["slug"]}/' if zh_post else "/zh/",
                          en_active=' class="active"' if p["lang"] == "en" else "",
-                         zh_active=' class="active"' if p["lang"] == "zh" else "") + body + FOOT.format(year=datetime.now().year)
+                         zh_active=' class="active"' if p["lang"] == "zh" else "", navigation_language=p["lang"]) + body + make_footer(p["lang"])
         write_file(f"posts/{p['slug']}/index.html", html)
     print("  Posts done")
 
     # Homepage (bilingual)
     hero = HERO.format(desc_en=SITE["description_en"], desc_zh=SITE["description_zh"])
-    # Category cards for homepage
-    cat_cards_html = '<section class="section-head"><h2>\U0001f4c2 Categories / \u5206\u7c7b</h2><a href="/categories/" class="view-all">All \u2192</a></section>'
-    cat_cards_html += '<div class="post-grid">'
-    for s, info in CATEGORIES.items():
-        cnt = sum(1 for p in posts if p["category"] == s)
-        tutorial_count = sum(s in lesson["categories"] for lesson in curriculum["lessons"])
-        if cnt:
-            cat_cards_html += f'<a href="/categories/{s}/" class="post-card" style="text-decoration:none"><span class="card-lang en">{info["name_en"]}</span><h3 style="font-size:1rem;margin-top:.3rem">{info["name_zh"]}</h3><div class="card-meta">{cnt} 篇文章 · {tutorial_count} 节教程</div></a>'
-    cat_cards_html += '</div>'
-    body = hero
-    body += tutorials.feature(curriculum)
-    body += cat_cards_html
+    cat_cards_html = '<section class="section-head"><h2>📂 Categories / 分类</h2><a href="/categories/" class="view-all">全部 →</a></section>'
+    cat_cards_html += catalog.category_cards(catalog_items, CATEGORIES, bilingual=True)
+    body = hero + cat_cards_html
     if en:
         body += section_head("en", "English Articles", "/en/")
         body += '<div class="post-grid">' + "\n".join(post_card(p) for p in en[:4]) + '</div>'
@@ -529,60 +535,25 @@ def build():
         body += '<div class="post-grid">' + "\n".join(post_card(p) for p in zh[:4]) + '</div>'
     body += ENGAGE_BANNER
     html = make_head(title="ML-Biomat", desc=SITE["description_en"], url=SITE["base_url"],
-                     ld=site_ld(), wide="wide", home_active=' class="active"', title_suffix="") + body + FOOT.format(year=datetime.now().year)
+                     ld=site_ld(), wide="wide", home_active=' class="active"', title_suffix="", navigation_language="mixed") + body + FOOT.format(year=datetime.now().year)
     write_file("index.html", html)
     print("  Homepage done")
 
-    # Language-specific pages
-    for lang, lp, label in [("en", en, "English"), ("zh", zh, "\u4e2d\u6587")]:
+    # Language-specific collections use the same article catalog.
+    for lang in ['en', 'zh']:
         desc = SITE[f"description_{lang}"]
-        hero_lang = f'<section class="hero"><h1>ML-Biomat</h1><p class="subtitle">{hm.escape(desc)}</p></section>'
-        body = hero_lang
-        if lang == "zh":
-            body += tutorials.feature(curriculum)
-        body += f'<section class="section-head"><h2><span class="lang-dot {lang}"></span>{label} Articles</h2></section>'
-        body += '<div class="post-grid">' + "\n".join(post_card(p) for p in lp) + '</div>'
-        body += ENGAGE_BANNER
-        ha = ' class="active"' if lang == "en" else ""
-        za = ' class="active"' if lang == "zh" else ""
-        html = make_head(title=f"{label} Articles", desc=desc,
-                         url=f'{SITE["base_url"]}/{lang}/', lang=lang, ld=site_ld(),
-                         wide="wide", en_active=ha, zh_active=za) + body + FOOT.format(year=datetime.now().year)
+        label = 'Articles' if lang == 'en' else '文章与教程'
+        selected = [p for p in catalog_items if p['lang'] == lang]
+        body = f'<header class="catalog-header"><h1>{label}</h1><p>{hm.escape(desc)}</p></header>'
+        body += catalog.category_cards(catalog_items, CATEGORIES, lang)
+        body += catalog.grid(selected, CATEGORIES, show_category=True)
+        html = make_head(title=label, desc=desc, url=f'{SITE["base_url"]}/{lang}/', lang=hreflang_code(lang),
+                         ld=site_ld(), wide=True, en_active=' class="active"' if lang=='en' else '',
+                         zh_active=' class="active"' if lang=='zh' else '', navigation_language=lang) + body + make_footer(lang)
         write_file(f"{lang}/index.html", html)
     print("  Language pages done")
 
-    # Categories index
-    ci = '<h1 class="section-title">Categories</h1><ul class="post-list-simple">'
-    for s, info in CATEGORIES.items():
-        cnt = sum(1 for p in posts if p["category"] == s)
-        tutorial_count = sum(s in lesson["categories"] for lesson in curriculum["lessons"])
-        if cnt:
-            ci += f'<li class="post-row"><a href="/categories/{s}/"><strong>{info["name_en"]}</strong> ({info["name_zh"]})</a><span style="margin-left:auto;color:var(--c-muted);font-size:.85rem">{cnt} 篇文章 · {tutorial_count} 节教程</span></li>'
-    ci += "</ul>" + tutorials.feature(curriculum)
-    active_cats = [info["name_en"] for s, info in CATEGORIES.items() if any(p["category"] == s for p in posts)]
-    cat_desc = f"Browse all {len(posts)} articles across {len(active_cats)} categories: " + ", ".join(active_cats)
-    html = make_head(title="Categories", desc=cat_desc, url=f'{SITE["base_url"]}/categories/') + ci + FOOT.format(year=datetime.now().year)
-    write_file("categories/index.html", html)
-
-    # Individual category pages
-    for s, info in CATEGORIES.items():
-        cp = [p for p in posts if p["category"] == s]
-        if not cp: continue
-        en_cp = [p for p in cp if p["lang"] == "en"]
-        zh_cp = [p for p in cp if p["lang"] == "zh"]
-        body = f'<h1 class="section-title"><span class="highlight">{info["name_en"]}</span> / {info["name_zh"]}</h1>'
-        body += tutorials.category_section(curriculum, s, CATEGORIES)
-        body += '<div class="cat-grid">'
-        if en_cp:
-            body += '<div class="cat-col"><h3><span class="lang-dot en"></span>English</h3><ul class="post-list-simple">'
-            body += "".join(POST_ROW.format(date=p["date"], title=hm.escape(p["title"]), slug=p["slug"]) for p in en_cp) + '</ul></div>'
-        if zh_cp:
-            body += '<div class="cat-col"><h3><span class="lang-dot zh"></span>中文</h3><ul class="post-list-simple">'
-            body += "".join(POST_ROW.format(date=p["date"], title=hm.escape(p["title"]), slug=p["slug"]) for p in zh_cp) + '</ul></div>'
-        body += "</div>"
-        html = make_head(title=f'{info["name_en"]} Posts', desc=f'{info["name_en"]} articles',
-                         url=f'{SITE["base_url"]}/categories/{s}/') + body + FOOT.format(year=datetime.now().year)
-        write_file(f"categories/{s}/index.html", html)
+    category_routes = catalog.render(catalog_items, CATEGORIES, make_head, make_footer, write_file, SITE['base_url'])
     print("  Categories done")
 
     # Tag index + individual tag pages
@@ -798,13 +769,12 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/categories/</loc><priority>0.7</priority></url>',
     ]
-    for s in CATEGORIES:
-        if not any(p["category"] == s for p in posts):
-            continue
-        urls.append(f'  <url><loc>{SITE["base_url"]}/categories/{s}/</loc><priority>0.6</priority></url>')
+    for route in category_routes:
+        if route == '/categories/': continue
+        urls.append(f'<url><loc>{SITE["base_url"]}{route}</loc><priority>0.7</priority></url>')
     for p in posts:
-        urls.append(f'  <url><loc>{SITE["base_url"]}/posts/{p["slug"]}/</loc><priority>0.8</priority><lastmod>{p["date"]}</lastmod></url>')
-    for route in ["/tutorials/", tutorials.BASE] + [p["url"] for p in curriculum["lessons"]]:
+        urls.append(f'  <url><loc>{SITE["base_url"]}/posts/{p["slug"]}/</loc><priority>0.8</priority><lastmod>{p["modified"]}</lastmod></url>')
+    for route in [p["url"] for p in curriculum["lessons"]]:
         urls.append(f'<url><loc>{SITE["base_url"]}{route}</loc><priority>0.8</priority><lastmod>{tutorials.DATE}</lastmod></url>')
     write_file("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{chr(10).join(urls)}\n</urlset>')
 
@@ -835,7 +805,7 @@ def build():
         search_data.append({"title": p["title"], "slug": p["slug"], "date": p["date"], "category": p["category"], "tags": p["tags"], "lang": p["lang"], "description": p["description"] or ""})
     for lesson in curriculum["lessons"]:
         search_data.append({"title":lesson["title"], "slug":lesson["slug"], "url":lesson["url"], "date":tutorials.DATE,
-                            "category":lesson["categories"][0], "tags":lesson["tags"]+["系列教程"], "lang":"zh", "description":lesson["description"], "type":"tutorial"})
+                            "category":lesson["categories"][0], "tags":lesson["tags"], "lang":"zh", "description":lesson["description"], "type":"tutorial"})
     write_file("search.json", json_mod.dumps(search_data, ensure_ascii=False))
     shutil.copytree("static", static_out)
     # Google verification

@@ -1,11 +1,12 @@
 ---
 title: "NetworkX Fundamentals with Python"
 date: "2026-06-30"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["NetworkX", "Python", "network analysis", "graph theory", "network science", "data visualization"]
 lang: "en"
 slug: "networkx-fundamentals"
-description: "A hands-on introduction to NetworkX for Python: build graphs from real data, compute centrality and connectivity metrics, and visualize networks for materials and biology research."
+description: "Represent nodes, edges, directions, and weights in NetworkX, then calculate degree, centrality, clustering, and shortest paths. Compare graph models and community methods while keeping the meaning of each network metric explicit."
 ---
 
 ## Graph Fundamentals
@@ -53,6 +54,11 @@ All four classes share nearly identical APIs, so switching between them carries 
 ---
 
 ### 3. Building Graphs — Nodes, Edges, and Attributes
+
+![The four-node graph and matrix encode the same edges in the order A, B, C, D](/static/images/article-guides/comp-guide-adjacency-en.svg)
+
+The four-node graph and matrix encode the same edges in the order A, B, C, D. In this undirected graph the matrix is symmetric, and the sum of row C gives its degree of three.
+
 
 Once you have chosen a graph type, the next step is loading data into the graph object. NetworkX's add/remove API is highly Pythonic, allowing you to build graphs from many sources: one-by-one additions, batch imports, or conversion from dictionaries and matrices.
 
@@ -207,6 +213,11 @@ A practical recommendation: in network analysis papers, always report multiple c
 ---
 
 ### 6. Shortest-Path Algorithms — From Dijkstra to Floyd
+
+![A shortest path depends on the quantity being minimized](/static/images/article-guides/comp-guide-weighted-path-en.svg)
+
+A shortest path depends on the quantity being minimized. In this teaching graph, the direct A–D edge uses one hop, while A–B–D has the lowest total weight, 1 + 2 = 3.
+
 
 Shortest-path computation is one of the most deeply studied problems in graph theory and one of the most frequently needed operations in practice. NetworkX includes several algorithms; understanding their applicability conditions is essential for choosing the right one.
 

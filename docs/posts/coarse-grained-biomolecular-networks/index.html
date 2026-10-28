@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide — ML-Biomat</title>
-<meta name="description" content="A practical guide to coarse-grained modeling of biomolecular networks: bead mapping, interaction potentials, system equilibration, and validation against reference data.">
+<meta name="description" content="Choose bead mappings and effective interactions for biomolecular networks, then plan equilibration and independent validation. Worked diagrams connect atomic groups, reference distributions and the mechanical quantities a coarse-grained model should preserve.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,25 +13,25 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide">
-<meta property="og:description" content="A practical guide to coarse-grained modeling of biomolecular networks: bead mapping, interaction potentials, system equilibration, and validation against reference data.">
+<meta property="og:description" content="Choose bead mappings and effective interactions for biomolecular networks, then plan equilibration and independent validation. Worked diagrams connect atomic groups, reference distributions and the mechanical quantities a coarse-grained model should preserve.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/">
 <meta property="og:site_name" content="ML-Biomat">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide", "description": "A practical guide to coarse-grained modeling of biomolecular networks: bead mapping, interaction potentials, system equilibration, and validation against reference data.", "datePublished": "2026-09-07", "dateModified": "2026-09-07", "wordCount": 3368, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide", "item": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide", "description": "Choose bead mappings and effective interactions for biomolecular networks, then plan equilibration and independent validation. Worked diagrams connect atomic groups, reference distributions and the mechanical quantities a coarse-grained model should preserve.", "datePublished": "2026-09-07", "dateModified": "2026-10-28", "wordCount": 3427, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Multiscale Modeling", "item": "https://ml-biomat.com/categories/multiscale-modeling/en/"}, {"@type": "ListItem", "position": 3, "name": "Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide", "item": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -42,12 +42,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide</h1>
 <div class="article-meta">
-<span>2026-09-07</span><span>·</span><span>16 min read</span><span>·</span><a href="/categories/multiscale-modeling/">Multiscale Modeling</a>
+<span>2026-09-07</span><span>·</span><span>17 min read</span><span>·</span><a href="/categories/multiscale-modeling/en/">Multiscale Modeling</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/coarse-grained/">coarse-grained</a><a class="tag-pill" href="/tags/molecular%20dynamics/">molecular dynamics</a><a class="tag-pill" href="/tags/biomaterials/">biomaterials</a><a class="tag-pill" href="/tags/multiscale/">multiscale</a><a class="tag-pill" href="/tags/simulation/">simulation</a><a class="tag-pill" href="/tags/validation/">validation</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-coarse-graining-makes-sense-for-biomaterials">Why Coarse-Graining Makes Sense for Biomaterials</a></li><li class="toc-h2"><a href="#building-a-mapping-from-atoms-to-beads">Building a Mapping: From Atoms to Beads</a></li><li class="toc-h2"><a href="#interaction-potentials-and-their-limits">Interaction Potentials and Their Limits</a></li><li class="toc-h2"><a href="#simulation-setup-and-equilibration">Simulation Setup and Equilibration</a></li><li class="toc-h2"><a href="#validation-before-prediction">Validation Before Prediction</a></li><li class="toc-h2"><a href="#common-failure-modes-and-reporting-standards">Common Failure Modes and Reporting Standards</a></li><li class="toc-h3"><a href="#a-thirty-minute-audit-for-a-coarse-grained-study">A thirty-minute audit for a coarse-grained study</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-coarse-graining-makes-sense-for-biomaterials">Why Coarse-Graining Makes Sense for Biomaterials</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-coarse-graining-makes-sense-for-biomaterials">Why Coarse-Graining Makes Sense for Biomaterials</a></li><li class="toc-h2"><a href="#building-a-mapping-from-atoms-to-beads">Building a Mapping: From Atoms to Beads</a></li><li class="toc-h2"><a href="#interaction-potentials-and-their-limits">Interaction Potentials and Their Limits</a></li><li class="toc-h2"><a href="#simulation-setup-and-equilibration">Simulation Setup and Equilibration</a></li><li class="toc-h2"><a href="#validation-before-prediction">Validation Before Prediction</a></li><li class="toc-h2"><a href="#common-failure-modes-and-reporting-standards">Common Failure Modes and Reporting Standards</a></li><li class="toc-h3"><a href="#a-thirty-minute-audit-for-a-coarse-grained-study">A thirty-minute audit for a coarse-grained study</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-coarse-graining-makes-sense-for-biomaterials">Why Coarse-Graining Makes Sense for Biomaterials</h2>
 
 <p>Atomistic molecular dynamics of a silk fibroin fiber, a collagen network, or a hydrated cellulose bundle would require simulating millions of atoms for microseconds, and even then most of the interesting mechanical relaxation would lie beyond reach. Coarse-grained models deliberately discard part of the chemical detail to recover exactly the scales that matter for biomaterial mechanics: chain persistence, network topology, crosslink density, adsorbed water, and the slow structural rearrangements that control toughness and viscoelasticity.</p>
 
@@ -73,6 +73,10 @@
 
 <table><tr><th>Mapping level</th><th>Representative unit</th><th>What it preserves</th><th>What it usually loses</th></tr><tr><td>Atomistic</td><td>each atom</td><td>charges, bonds, detailed conformations</td><td>accessible time and length</td></tr><tr><td>MARTINI-like</td><td>several heavy atoms per bead</td><td>polarity and hydrogen-bond character</td><td>torsional chemistry details</td></tr><tr><td>Residue/monomer</td><td>one bead per residue or monomer</td><td>chain connectivity and native contacts</td><td>side-chain packing</td></tr><tr><td>Network</td><td>one site per Kuhn segment</td><td>topology and crosslink density</td><td>local structure entirely</td></tr></table>
 
+<img src="/static/images/article-guides/mech-coarse-centers-en.svg" alt="From atom groups to bead centers" loading="lazy">
+
+<p>Mapping groups of equal-mass atoms to their centers preserves chain connectivity. For unequal masses, use the mass-weighted center R = Σ(mᵢrᵢ)/Σmᵢ; bead types retain the selected chemical distinctions.</p>
+
 <h2 id="interaction-potentials-and-their-limits">Interaction Potentials and Their Limits</h2>
 
 <p>The functional form of a coarse-grained potential matters less than the recognition that every coarse-grained force field is a statistical construct. The soft repulsion, bond springs, angular potentials, and pair attractions are not measurements of individual covalent or hydrogen bonds; they are effective interactions chosen so that an ensemble average at the coarse-grained resolution reproduces a chosen reference. This means a parameter set is never universally transferable. A MARTINI parameterization built for membrane bilayers will not automatically describe a crystalline silk-beta-sheet interface without recalibration.</p>
@@ -85,6 +89,10 @@
 <p>Building the force field can follow a bottom-up, top-down, or mixed route, and each has a different relationship to the truth. Bottom-up methods take atomistic simulation as the reference: run a short all-atom trajectory of the same chemistry, project the pair distance distributions, bond and angle distributions onto the bead centers, and invert those distributions with an iteration such as Boltzmann inversion or iterative Boltzmann inversion to obtain effective potentials. The resulting model is faithful to the reference but only at the state point where the reference was generated; change temperature, density, or composition too much and the potentials have to be rebuilt.</p>
 
 <p>Top-down methods instead parameterize against macroscopic experiments, choosing the stiffness of springs, the nonbonded repulsion, and the crosslink density so that the model reproduces a modulus, a mesh size, or a transition temperature. This route does not inherit any short-range chemistry, but it is often the fastest way to make a model that is useful for engineering, provided the target experiment is not also the only validation. Mixed or hybrid approaches are increasingly common: start top-down to match the global mechanics, then locally refine the potentials bottom-up from atomistic distributions in the regions where chemistry matters. In every case, the workflow should be scripted so that the reference distributions, the fitted potentials, and the verification observables are saved alongside the final trajectory; a coarse-grained paper without this provenance is nearly impossible to audit.</p>
+<img src="/static/images/article-guides/mech-coarse-potential-en.svg" alt="A distribution defines an effective potential" loading="lazy">
+
+<p>A Gaussian distribution in a dimensionless Cartesian coordinate q gives the harmonic effective potential U/kBT = q²/2, up to an additive constant. Bond-distance and angle distributions require their corresponding coordinate-measure corrections before inversion.</p>
+
 <h2 id="simulation-setup-and-equilibration">Simulation Setup and Equilibration</h2>
 
 <p>Coarse-grained simulations are faster than their atomistic parents, but they are still large enough to require a disciplined setup. Build the system with a periodic box larger than twice the longest relevant correlation length, otherwise the network will feel artificial images of itself. Choose bead masses that keep stable integration with a larger timestep, but do not invent smaller masses merely to run faster; the mass distribution changes how the system distributes kinetic energy between stiff and soft degrees of freedom.</p>
@@ -128,11 +136,7 @@
 <li>Saunders, M. G., and Voth, G. A. <em>Coarse-graining methods for computational biology.</em> Annu. Rev. Biophys., 2013.</li>
 </ul>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/biomaterials-mechanical-testing/">← Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></span><span><span></span></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro/">A Practical Introduction to Multiscale Modeling for Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation/">Molecular Dynamics Basics: Your First LAMMPS Simulation</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/biomaterials-mechanical-testing/">← Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></span><span><span></span></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial/">GROMACS MD Tutorial: Structure Prep to Trajectory Analysis</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro/">A Practical Introduction to Multiscale Modeling for Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/lammps-first-simulation/">Molecular Dynamics Basics: Your First LAMMPS Simulation</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -152,11 +156,11 @@
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

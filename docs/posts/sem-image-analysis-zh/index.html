@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SEM图像分析实战：纤维形态的自动化测量 — ML-Biomat</title>
-<meta name="description" content="SEM图像分析实战：纤维形态的自动化测量。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="通过预处理、阈值分割、掩膜清理和骨架分析，将纤维显微图像转化为经过标尺校准的测量结果。构造几何解释局部直径和取向提取，Python 示例支持重复执行与批量处理。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/sem-image-analysis-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/sem-image-analysis-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/sem-image-analysis/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/sem-image-analysis/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="SEM图像分析实战：纤维形态的自动化测量">
-<meta property="og:description" content="SEM图像分析实战：纤维形态的自动化测量。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="通过预处理、阈值分割、掩膜清理和骨架分析，将纤维显微图像转化为经过标尺校准的测量结果。构造几何解释局部直径和取向提取，Python 示例支持重复执行与批量处理。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/sem-image-analysis-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/sem-image-analysis-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SEM图像分析实战：纤维形态的自动化测量", "description": "SEM图像分析实战：纤维形态的自动化测量。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 263, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/sem-image-analysis-zh/", "image": "https://ml-biomat.com/static/images/og/sem-image-analysis-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "SEM图像分析实战：纤维形态的自动化测量", "item": "https://ml-biomat.com/posts/sem-image-analysis-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SEM图像分析实战：纤维形态的自动化测量", "description": "通过预处理、阈值分割、掩膜清理和骨架分析，将纤维显微图像转化为经过标尺校准的测量结果。构造几何解释局部直径和取向提取，Python 示例支持重复执行与批量处理。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 878, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/sem-image-analysis-zh/", "image": "https://ml-biomat.com/static/images/og/sem-image-analysis-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "湿实验数据处理", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "SEM图像分析实战：纤维形态的自动化测量", "item": "https://ml-biomat.com/posts/sem-image-analysis-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>SEM图像分析实战：纤维形态的自动化测量</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/wet-lab-data/">湿实验数据处理</a>
+<span>2026-06-26</span><span>·</span><span>2 分钟阅读</span><span>·</span><a href="/categories/wet-lab-data/">湿实验数据处理</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/SEM/">SEM</a><a class="tag-pill" href="/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E6%9E%90/">图像分析</a><a class="tag-pill" href="/tags/%E7%BA%A4%E7%BB%B4%E5%BD%A2%E6%80%81/">纤维形态</a><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/skimage/">skimage</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#为什么自动化sem分析">为什么自动化SEM分析</a></li><li class="toc-h2"><a href="#分析流程">分析流程</a></li><li class="toc-h3"><a href="#第一步-加载和预处理">第一步：加载和预处理</a></li><li class="toc-h3"><a href="#第二步-阈值分割">第二步：阈值分割</a></li><li class="toc-h3"><a href="#第三步-清理二值掩膜">第三步：清理二值掩膜</a></li><li class="toc-h3"><a href="#第四步-测量纤维属性">第四步：测量纤维属性</a></li><li class="toc-h3"><a href="#第五步-取向分析">第五步：取向分析</a></li><li class="toc-h3"><a href="#第六步-批量处理">第六步：批量处理</a></li><li class="toc-h2"><a href="#常见坑">常见坑</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#深入探讨-图像分割算法的选择">深入探讨：图像分割算法的选择</a></li></ul></details><h2 id="为什么自动化sem分析">为什么自动化SEM分析</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#为什么自动化sem分析">为什么自动化SEM分析</a></li><li class="toc-h2"><a href="#分析流程">分析流程</a></li><li class="toc-h3"><a href="#第一步-加载和预处理">第一步：加载和预处理</a></li><li class="toc-h3"><a href="#第二步-阈值分割">第二步：阈值分割</a></li><li class="toc-h3"><a href="#第三步-清理二值掩膜">第三步：清理二值掩膜</a></li><li class="toc-h3"><a href="#第四步-测量纤维属性">第四步：测量纤维属性</a></li><li class="toc-h3"><a href="#第五步-取向分析">第五步：取向分析</a></li><li class="toc-h3"><a href="#第六步-批量处理">第六步：批量处理</a></li><li class="toc-h2"><a href="#常见坑">常见坑</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#深入探讨-图像分割算法的选择">深入探讨：图像分割算法的选择</a></li></ul></details><h2 id="为什么自动化sem分析">为什么自动化SEM分析</h2>
 
 <p>手动从SEM图像测量纤维直径和取向费时、主观、不可重复。Python脚本能在几秒内一致地处理每张图像。本指南使用scikit-image，专为科学图像分析设计的库。</p>
 
@@ -89,6 +89,10 @@ closed = morphology.binary_closing(cleaned, morphology.disk(2))
 skeleton = morphology.skeletonize(closed)  # 用于取向分析
 </code></pre>
 
+<img src="/static/images/article-guides/mech-sem-masks-zh.svg" alt="同一几何的三种图像表示" loading="lazy">
+
+<p>同一构造纤维几何分别显示为灰度图、前景掩膜和中心线叠加图。阈值选择决定掩膜，骨架则提供采样局部距离变换宽度的位置。</p>
+
 <h3 id="第四步-测量纤维属性">第四步：测量纤维属性</h3>
 
 <pre><code class="language-python">
@@ -99,11 +103,26 @@ props = measure.regionprops_table(labels, properties=[
 ])
 import pandas as pd
 df_fibers = pd.DataFrame(props)
-df_fibers[&quot;直径_px&quot;] = df_fibers[&quot;minor_axis_length&quot;]
+df_fibers[&quot;等效椭圆短轴_px&quot;] = df_fibers[&quot;minor_axis_length&quot;]
 df_fibers[&quot;长径比&quot;] = df_fibers[&quot;major_axis_length&quot;] / df_fibers[&quot;minor_axis_length&quot;]
 print(f&quot;发现 {len(df_fibers)} 个纤维片段&quot;)
-print(f&quot;平均直径: {df_fibers[&#x27;直径_px&#x27;].mean():.1f} +/- {df_fibers[&#x27;直径_px&#x27;].std():.1f} px&quot;)
+print(f&quot;平均等效椭圆短轴: {df_fibers[&#x27;等效椭圆短轴_px&#x27;].mean():.1f} +/- {df_fibers[&#x27;等效椭圆短轴_px&#x27;].std():.1f} px&quot;)
 </code></pre>
+
+<p><code>regionprops</code> 返回的 <code>minor_axis_length</code> 是与连通区域具有相同归一化二阶矩的等效椭圆短轴，描述整个对象的形状。若要估计孤立纤维沿中心线的局部宽度，可在骨架上读取距离变换；像素网格与分割边界决定了这一估计的分辨率。<a href="https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops">scikit-image 区域属性</a>、<a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.distance_transform_edt.html">SciPy 距离变换</a>。</p>
+
+<pre><code class="language-python">
+from scipy.ndimage import distance_transform_edt
+
+# 示例标尺：替换为当前 SEM 图像的标尺值
+scale_nm_per_px = 2.5
+radius_nm = distance_transform_edt(closed, sampling=scale_nm_per_px)
+local_width_nm = 2 * radius_nm[skeleton]
+</code></pre>
+
+<img src="/static/images/article-guides/mech-sem-width-zh.svg" alt="把像素距离转换为局部纤维宽度" loading="lazy">
+
+<p>对孤立直条带，局部宽度为 d = 2rpxs，其中 rpx 是骨架点到最近背景的像素距离，s 是每像素对应的物理长度。交叉、分叉和被图像边缘截断的对象需单独检查。</p>
 
 <h3 id="第五步-取向分析">第五步：取向分析</h3>
 
@@ -131,7 +150,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
             properties=[&quot;minor_axis_length&quot;, &quot;area&quot;])
         df = pd.DataFrame(props)
         results.append({&quot;file&quot;: filepath, &quot;n_fibers&quot;: len(df),
-            &quot;mean_diameter_nm&quot;: df[&quot;minor_axis_length&quot;].mean()*scale_nm_per_px})
+            &quot;mean_ellipse_minor_axis_nm&quot;: df[&quot;minor_axis_length&quot;].mean()*scale_nm_per_px})
     return pd.DataFrame(results)
 </code></pre>
 
@@ -154,12 +173,8 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 
 <p>机器学习方法正在改变SEM图像分析的范式。传统的滤波与阈值方法需要手动调整参数，而训练好的深度学习模型可以在各种成像条件下自动识别纤维特征。U-Net是图像分割的常用架构，仅需少量标注图像就能取得很好的效果。对于有大量重复性SEM分析需求的研究组，考虑训练一个专门的纤维分割模型是值得的投资。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/lammps-first-simulation-zh/">← 分子动力学入门：你的第一个LAMMPS模拟</a></span><span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/lammps-first-simulation-zh/">← 分子动力学入门：你的第一个LAMMPS模拟</a></span><span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing-zh/">生物材料力学测试：试样制备、仪器设置与无伪影数据</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/afm-force-curve-python-zh/">Python实战AFM力曲线分析：从原始数据到力学性能</a></li><li class="post-row"><span class="row-date">2026-09-06</span><a href="/posts/biomaterials-mechanical-testing/">Mechanical Testing of Biomaterials: A Reproducible Protocol Guide</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -170,7 +185,7 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -178,11 +193,11 @@ def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

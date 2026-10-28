@@ -1,11 +1,12 @@
 ---
 title: "Scientific Data Visualization with Python: Publication-Ready Figures"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["matplotlib", "visualization", "python", "publication", "figures"]
 lang: "en"
 slug: "scientific-visualization-python"
-description: "How to create publication-quality figures with Matplotlib and Seaborn: multi-panel layouts, color schemes, high-res export, and common chart types for materials research."
+description: "Build readable line plots, distributions, heatmaps, and multi-panel figures with Matplotlib and Seaborn. Match visual encodings to the data, keep units and uncertainty visible, and export figures at the dimensions needed for a manuscript."
 ---
 
 ## Why This Matters
@@ -29,6 +30,11 @@ plt.rcParams.update({
 
 ## Figure Building Blocks
 ### 1. Multi-Panel Figure Template
+
+![Both teaching groups have a mean of three, yet their observations have very different spreads](/static/images/article-guides/comp-guide-distribution-en.svg)
+
+Both teaching groups have a mean of three, yet their observations have very different spreads. Showing the five points in each group makes this difference visible; a bar chart of means alone would hide it.
+
 
 The workhorse of any paper: 2x2 subplots comparing different conditions.
 
@@ -76,6 +82,11 @@ cmap = sns.color_palette("rocket_r", as_cmap=True)
 ```
 
 ### 3. Heatmaps for Matrix Data
+
+![This teaching correlation matrix uses a diverging scale centered at zero and fixed to the full −1 to +1 range](/static/images/article-guides/comp-guide-heatmap-en.svg)
+
+This teaching correlation matrix uses a diverging scale centered at zero and fixed to the full −1 to +1 range. Numeric labels allow exact comparisons without relying on color alone.
+
 
 ```python
 fig, ax = plt.subplots(figsize=(6, 5))

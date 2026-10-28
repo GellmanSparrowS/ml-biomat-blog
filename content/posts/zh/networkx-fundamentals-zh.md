@@ -1,11 +1,12 @@
 ---
 title: "NetworkX 基础：用 Python 理解、构建与分析网络"
 date: "2026-06-30"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["NetworkX", "Python", "网络分析", "图论", "网络科学", "数据可视化"]
 lang: "zh"
 slug: "networkx-fundamentals-zh"
-description: "NetworkX 基础：用 Python 理解、构建与分析网络。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "用 NetworkX 表达节点、连边、方向与权重，再计算度数、中心性、聚类和最短路径。结合邻接矩阵、经典网络模型与社区发现，说明不同指标回答什么问题，以及如何把结构数据转成可分析的图。"
 ---
 
 ## 图论基础
@@ -54,6 +55,11 @@ import matplotlib.pyplot as plt
 ---
 
 ### 三、构建图——节点、边与属性的核心操作
+
+![四节点图和矩阵按 A、B、C、D 的顺序记录同一组连边](/static/images/article-guides/comp-guide-adjacency-zh.svg)
+
+四节点图和矩阵按 A、B、C、D 的顺序记录同一组连边。无向图的邻接矩阵对称，C 行元素之和为 3，对应节点 C 的度数。
+
 
 理解了图的类型之后，下一步是把数据"装入"图对象。NetworkX 的增删节点与边的接口设计非常 Pythonic，允许你从各种来源构建图：逐条添加、批量导入、从字典或矩阵转换。
 
@@ -238,6 +244,11 @@ print("Top by Eigenvector: ", top_node(eigenvector))
 ---
 
 ### 六、最短路径算法——从 Dijkstra 到 Floyd
+
+![最短路径取决于要最小化的量](/static/images/article-guides/comp-guide-weighted-path-zh.svg)
+
+最短路径取决于要最小化的量。在这个教学网络中，直接走 A–D 只需一跳；按边权求和时，A–B–D 的总权重为 1 + 2 = 3，更小。
+
 
 最短路径是图论中被研究最深的问题之一，也是实际应用中出现频率最高的计算任务。NetworkX 内置了多种算法，理解它们的适用条件，才能选对工具避免计算浪费。
 

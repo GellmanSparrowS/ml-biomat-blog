@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计 — ML-Biomat</title>
-<meta name="description" content="工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="从变形机制比较折纸、旋转单元拉胀结构、蜂巢、点阵与多稳态结构。借助几何示意和密度标度曲线，建立结构选择与刚度、横向响应、吸能之间的联系，并讨论建模与制备方法。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/engineered-superstructures-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/engineered-superstructures-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/engineered-superstructures/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/engineered-superstructures/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计">
-<meta property="og:description" content="工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="从变形机制比较折纸、旋转单元拉胀结构、蜂巢、点阵与多稳态结构。借助几何示意和密度标度曲线，建立结构选择与刚度、横向响应、吸能之间的联系，并讨论建模与制备方法。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/engineered-superstructures-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/engineered-superstructures-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计", "description": "工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 803, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/engineered-superstructures-zh/", "image": "https://ml-biomat.com/static/images/og/engineered-superstructures-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "生物·材料·结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计", "item": "https://ml-biomat.com/posts/engineered-superstructures-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计", "description": "从变形机制比较折纸、旋转单元拉胀结构、蜂巢、点阵与多稳态结构。借助几何示意和密度标度曲线，建立结构选择与刚度、横向响应、吸能之间的联系，并讨论建模与制备方法。", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 9915, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/engineered-superstructures-zh/", "image": "https://ml-biomat.com/static/images/og/engineered-superstructures-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "生物·材料·结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计", "item": "https://ml-biomat.com/posts/engineered-superstructures-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</h1>
 <div class="article-meta">
-<span>2026-06-30</span><span>·</span><span>4 min read</span><span>·</span><a href="/categories/biomaterials/">生物·材料·结构</a>
+<span>2026-06-30</span><span>·</span><span>26 分钟阅读</span><span>·</span><a href="/categories/biomaterials/">生物·材料·结构</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E8%B6%85%E7%BB%93%E6%9E%84/">超结构</a><a class="tag-pill" href="/tags/%E5%8A%9B%E5%AD%A6%E8%B6%85%E6%9D%90%E6%96%99/">力学超材料</a><a class="tag-pill" href="/tags/%E6%8A%98%E7%BA%B8/">折纸</a><a class="tag-pill" href="/tags/%E8%9C%82%E5%B7%A2/">蜂巢</a><a class="tag-pill" href="/tags/%E6%8B%89%E8%83%80/">拉胀</a><a class="tag-pill" href="/tags/%E6%89%AD%E8%BD%AC/">扭转</a><a class="tag-pill" href="/tags/%E7%82%B9%E9%98%B5/">点阵</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#弯曲与折叠主导设计">弯曲与折叠主导设计</a></li><li class="toc-h3"><a href="#第-1-节-折纸与剪纸-从二维到三维的变形编程">第 1 节：折纸与剪纸——从二维到三维的变形编程</a></li><li class="toc-h3"><a href="#第-2-节-锯齿-蜂巢与开孔-弯曲主导型超结构的三种形态">第 2 节：锯齿、蜂巢与开孔——弯曲主导型超结构的三种形态</a></li><li class="toc-h3"><a href="#第-3-节-拉胀超结构-负泊松比的力学原理与制造">第 3 节：拉胀超结构——负泊松比的力学原理与制造</a></li><li class="toc-h3"><a href="#第-4-节-手性扭转与柔体超结构">第 4 节：手性扭转与柔体超结构</a></li><li class="toc-h2"><a href="#点阵-屈曲与装配">点阵、屈曲与装配</a></li><li class="toc-h3"><a href="#第-5-节-张拉整体-编织与互锁">第 5 节：张拉整体、编织与互锁</a></li><li class="toc-h3"><a href="#第-6-节-三维点阵与极小曲面">第 6 节：三维点阵与极小曲面</a></li><li class="toc-h3"><a href="#第-7-节-屈曲诱导与多稳态结构">第 7 节：屈曲诱导与多稳态结构</a></li><li class="toc-h2"><a href="#设计原则与展望">设计原则与展望</a></li><li class="toc-h3"><a href="#第-8-节-比较力学-尺度定律与设计地图">第 8 节：比较力学——尺度定律与设计地图</a></li><li class="toc-h3"><a href="#第-9-节-ml-辅助设计与制备技术">第 9 节：ML 辅助设计与制备技术</a></li><li class="toc-h3"><a href="#第-10-节-实验验证-可持续性与展望">第 10 节：实验验证、可持续性与展望</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="弯曲与折叠主导设计">弯曲与折叠主导设计</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#弯曲与折叠主导设计">弯曲与折叠主导设计</a></li><li class="toc-h3"><a href="#第-1-节-折纸与剪纸-从二维到三维的变形编程">第 1 节：折纸与剪纸——从二维到三维的变形编程</a></li><li class="toc-h3"><a href="#第-2-节-锯齿-蜂巢与开孔-弯曲主导型超结构的三种形态">第 2 节：锯齿、蜂巢与开孔——弯曲主导型超结构的三种形态</a></li><li class="toc-h3"><a href="#第-3-节-拉胀超结构-负泊松比的力学原理与制造">第 3 节：拉胀超结构——负泊松比的力学原理与制造</a></li><li class="toc-h3"><a href="#第-4-节-手性扭转与柔体超结构">第 4 节：手性扭转与柔体超结构</a></li><li class="toc-h2"><a href="#点阵-屈曲与装配">点阵、屈曲与装配</a></li><li class="toc-h3"><a href="#第-5-节-张拉整体-编织与互锁">第 5 节：张拉整体、编织与互锁</a></li><li class="toc-h3"><a href="#第-6-节-三维点阵与极小曲面">第 6 节：三维点阵与极小曲面</a></li><li class="toc-h3"><a href="#第-7-节-屈曲诱导与多稳态结构">第 7 节：屈曲诱导与多稳态结构</a></li><li class="toc-h2"><a href="#设计原则与展望">设计原则与展望</a></li><li class="toc-h3"><a href="#第-8-节-比较力学-尺度定律与设计地图">第 8 节：比较力学——尺度定律与设计地图</a></li><li class="toc-h3"><a href="#第-9-节-ml-辅助设计与制备技术">第 9 节：ML 辅助设计与制备技术</a></li><li class="toc-h3"><a href="#第-10-节-实验验证-可持续性与展望">第 10 节：实验验证、可持续性与展望</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="弯曲与折叠主导设计">弯曲与折叠主导设计</h2>
 <h3 id="第-1-节-折纸与剪纸-从二维到三维的变形编程">第 1 节：折纸与剪纸——从二维到三维的变形编程</h3>
 
 <p>工程超结构的核心哲学，在于用几何取代成分。传统材料工程师的工作语言是"选什么材料"，而超结构工程师的核心问题是"如何排列材料"。折纸超结构将这一思路发挥到极致：把三维变形图案预编码在二维薄膜上，通过局部弯曲而非全局拉伸实现宏观形状变化。这是一种根本性的力学策略，其物理基础清晰而深刻——薄膜弯曲所需能量密度远低于面内拉伸，两者可相差 2 至 3 个数量级。因此，在不更换基底材料的前提下，单纯改变折痕几何就能将结构的有效模量在极宽范围内连续调节。</p>
@@ -89,6 +89,10 @@
 <p>制造方面，三维拉胀结构主要依赖增材制造。光固化（SLA/DLP）可达 50～100 μm 分辨率，适合亚毫米级凹角和手性单元；激光烧结（SLS）适合工程级大尺寸晶格拉胀结构；双光子聚合可将特征尺寸压缩至 200 nm，适合光学尺度拉胀超材料研究。尚待解决的关键挑战包括：打印残余应力对单元几何精度的影响、有限单元数量时的边界效应、以及从准静态到动态冲击加载条件下负泊松比特性的保持程度——这些问题的解决将直接决定拉胀超结构从实验室走向工程应用的速度。</p>
 
 <hr>
+
+<img src="/static/images/article-guides/mech-auxetic-squares-zh.svg" alt="转动使两个方向同时展开" loading="lazy">
+
+<p>角点铰接的理想刚性方块阵列从 5° 转到 30° 时，纵横两个方向同步展开。该机构的纵横应变相等，对应 ν = −1；实际试样还受铰链柔度和面板变形影响。</p>
 
 <h3 id="第-4-节-手性扭转与柔体超结构">第 4 节：手性扭转与柔体超结构</h3>
 
@@ -154,6 +158,10 @@
 
 <hr>
 
+<img src="/static/images/article-guides/mech-lattice-scaling-zh.svg" alt="密度与变形模式共同决定刚度" loading="lazy">
+
+<p>令 C = 1，用 E<em>/Es = (ρ</em>/ρs)ⁿ 单独比较标度指数：在低相对密度下，n = 1 比 n = 2 保留更多刚度。图中为教学曲线；实际系数还取决于几何与加载方向。</p>
+
 <h3 id="第-9-节-ml-辅助设计与制备技术">第 9 节：ML 辅助设计与制备技术</h3>
 
 <p>传统超结构设计的工作流程是：提出几何假设→建立解析或有限元模型→参数化研究→在有限参数空间内优化。这一流程的瓶颈在于对解析模型的依赖：几何一旦复杂到无法手动建模，或目标性能需要同时优化多个相互竞争的参数，效率急剧下降。机器学习（ML）打破了这一瓶颈，将超结构设计带入数据驱动的新阶段。</p>
@@ -206,12 +214,8 @@
 <li>Zadpoor, A.A. (2016). Mechanical meta-materials. Materials Horizons, 3, 371–381.</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/bio-hierarchical-structures-zh/">← 生物材料的层级超结构：从分子到宏观的力学设计</a></span><span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures-zh/">生物材料的层级超结构：从分子到宏观的力学设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/bio-hierarchical-structures-zh/">← 生物材料的层级超结构：从分子到宏观的力学设计</a></span><span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures-zh/">生物材料的层级超结构：从分子到宏观的力学设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics-zh/">丝素蛋白：从分子结构到力学功能</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -222,7 +226,7 @@
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -230,11 +234,11 @@
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

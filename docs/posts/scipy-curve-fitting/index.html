@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Practical Curve Fitting with SciPy: From Basics to Advanced Models — ML-Biomat</title>
-<meta name="description" content="A comprehensive guide to curve fitting with SciPy for materials and biology researchers. Linear regression, exponential decay, Hertz indentation, viscoelastic models, with complete code and real examples.">
+<meta name="description" content="Fit linear trends, stress relaxation, and indentation models with SciPy while tracking parameter units and initial guesses. Interpret residuals, covariance matrices, and confidence intervals to turn a fitted curve into an inspectable physical calculation.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/scipy-curve-fitting/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/scipy-curve-fitting/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/scipy-curve-fitting-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/scipy-curve-fitting/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Practical Curve Fitting with SciPy: From Basics to Advanced Models">
-<meta property="og:description" content="A comprehensive guide to curve fitting with SciPy for materials and biology researchers. Linear regression, exponential decay, Hertz indentation, viscoelastic models, with complete code and real examples.">
+<meta property="og:description" content="Fit linear trends, stress relaxation, and indentation models with SciPy while tracking parameter units and initial guesses. Interpret residuals, covariance matrices, and confidence intervals to turn a fitted curve into an inspectable physical calculation.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/scipy-curve-fitting/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/scipy-curve-fitting.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "description": "A comprehensive guide to curve fitting with SciPy for materials and biology researchers. Linear regression, exponential decay, Hertz indentation, viscoelastic models, with complete code and real examples.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 1268, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "item": "https://ml-biomat.com/posts/scipy-curve-fitting/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "description": "Fit linear trends, stress relaxation, and indentation models with SciPy while tracking parameter units and initial guesses. Interpret residuals, covariance matrices, and confidence intervals to turn a fitted curve into an inspectable physical calculation.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 981, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "Practical Curve Fitting with SciPy: From Basics to Advanced Models", "item": "https://ml-biomat.com/posts/scipy-curve-fitting/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Practical Curve Fitting with SciPy: From Basics to Advanced Models</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>6 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+<span>2026-06-26</span><span>·</span><span>5 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Python Tutorials</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/scipy/">scipy</a><a class="tag-pill" href="/tags/curve-fitting/">curve-fitting</a><a class="tag-pill" href="/tags/optimization/">optimization</a><a class="tag-pill" href="/tags/regression/">regression</a><a class="tag-pill" href="/tags/data-analysis/">data-analysis</a><a class="tag-pill" href="/tags/biomaterials/">biomaterials</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#foundations">Foundations</a></li><li class="toc-h3"><a href="#1-what-is-curve-fitting">1. What Is Curve Fitting?</a></li><li class="toc-h3"><a href="#2-linear-regression-the-foundation">2. Linear Regression: The Foundation</a></li><li class="toc-h2"><a href="#fitting-physical-models">Fitting Physical Models</a></li><li class="toc-h3"><a href="#3-exponential-decay-stress-relaxation">3. Exponential Decay: Stress Relaxation</a></li><li class="toc-h3"><a href="#4-hertz-model-afm-nanoindentation">4. Hertz Model: AFM Nanoindentation</a></li><li class="toc-h3"><a href="#5-viscoelastic-models">5. Viscoelastic Models</a></li><li class="toc-h2"><a href="#uncertainty-and-beyond">Uncertainty and Beyond</a></li><li class="toc-h3"><a href="#6-confidence-intervals">6. Confidence Intervals</a></li><li class="toc-h3"><a href="#7-common-pitfalls">7. Common Pitfalls</a></li><li class="toc-h3"><a href="#8-when-curve-fit-is-not-enough">8. When curve_fit Is Not Enough</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#model-selection-and-goodness-of-fit">Model Selection and Goodness of Fit</a></li></ul></details><p>When you run an experiment, you get data points. To extract meaningful physical parameters from those points, you need to fit a model. SciPy's <code>optimize.curve_fit</code> is the workhorse for this task. This guide covers everything from a simple straight-line fit to complex nonlinear models, with every example grounded in real materials or biology data.</p>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#foundations">Foundations</a></li><li class="toc-h3"><a href="#1-what-is-curve-fitting">1. What Is Curve Fitting?</a></li><li class="toc-h3"><a href="#2-linear-regression-the-foundation">2. Linear Regression: The Foundation</a></li><li class="toc-h2"><a href="#fitting-physical-models">Fitting Physical Models</a></li><li class="toc-h3"><a href="#3-exponential-decay-stress-relaxation">3. Exponential Decay: Stress Relaxation</a></li><li class="toc-h3"><a href="#4-hertz-model-afm-nanoindentation">4. Hertz Model: AFM Nanoindentation</a></li><li class="toc-h3"><a href="#5-viscoelastic-models">5. Viscoelastic Models</a></li><li class="toc-h2"><a href="#uncertainty-and-beyond">Uncertainty and Beyond</a></li><li class="toc-h3"><a href="#6-confidence-intervals">6. Confidence Intervals</a></li><li class="toc-h3"><a href="#7-common-pitfalls">7. Common Pitfalls</a></li><li class="toc-h3"><a href="#8-when-curve-fit-is-not-enough">8. When curve_fit Is Not Enough</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#model-selection-and-goodness-of-fit">Model Selection and Goodness of Fit</a></li></ul></details><p>When you run an experiment, you get data points. To extract meaningful physical parameters from those points, you need to fit a model. SciPy's <code>optimize.curve_fit</code> is the workhorse for this task. This guide covers everything from a simple straight-line fit to complex nonlinear models, with worked examples for materials and biology data analysis.</p>
 
 <pre><code class="language-python">
 import numpy as np
@@ -70,6 +70,11 @@ import matplotlib.pyplot as plt
 
 </ol>
 <h3 id="2-linear-regression-the-foundation">2. Linear Regression: The Foundation</h3>
+
+<img src="/static/images/article-guides/comp-guide-residuals-en.svg" alt="The five teaching points are fitted by y = 1.97x + 1.06" loading="lazy">
+
+<p>The five teaching points are fitted by y = 1.97x + 1.06. The lower panel shows observed minus fitted values, separating the remaining errors from the trend so that their signs and magnitudes are easy to compare.</p>
+
 
 <p>Most materials characterization starts with linear fitting. Young's modulus from a stress-strain curve, calibration curves, and many standard analyses use linear regression.</p>
 
@@ -149,59 +154,67 @@ plt.legend(); plt.tight_layout()
 
 <p>F = (4/3) <em> E</em> <em> sqrt(R) </em> delta^(3/2)</p>
 
-<p>where E* = E / (1 - nu^2) is the reduced modulus, R is tip radius, and delta is indentation depth.</p>
+<p>For a probe much stiffer than the sample, E* = E / (1 - nu^2) is the reduced modulus, R is tip radius, and delta is indentation depth. The force–indentation slope is contact stiffness; extracting a modulus also requires the contact geometry. In the teaching calculation below, a 1000 nm spherical radius keeps the 0–40 nm indentation range small relative to the probe radius.</p>
 
 <pre><code class="language-python">
-# AFM indentation on a silk fibroin film
+# Teaching indentation values; spherical probe radius = 1000 nm
 indentation = np.array([0, 5, 10, 15, 20, 25, 30, 35, 40])  # nm
 force = np.array([0, 0.3, 1.1, 2.5, 4.3, 6.8, 9.9, 13.6, 18.0])  # nN
 
-def hertz(delta, E_star, R=20.0):
-    return (4/3) * E_star * np.sqrt(R) * np.power(np.maximum(delta, 0), 1.5)
+def hertz(delta_nm, E_star_MPa, R_nm=1000.0):
+    delta_m = np.maximum(delta_nm, 0) * 1e-9
+    E_star_Pa = E_star_MPa * 1e6
+    force_N = (4/3) * E_star_Pa * np.sqrt(R_nm * 1e-9) * delta_m**1.5
+    return force_N * 1e9  # nN, matching the observations
 
-# Fit with bounds to prevent non-physical values
-popt, pcov = curve_fit(hertz, indentation, force, p0=[1000], bounds=(1, 1e9))
-E_star = popt[0]
-E = E_star * (1 - 0.5**2)  # Convert reduced modulus to Young&#x27;s (nu=0.5 for incompressible)
-print(f&quot;Young&#x27;s modulus: {E/1000:.1f} kPa&quot;)
+# Fit in MPa to keep the numerical parameter scale convenient
+popt, pcov = curve_fit(hertz, indentation, force, p0=[1.0], bounds=(0, np.inf))
+E_star_MPa = popt[0]
+E_MPa = E_star_MPa * (1 - 0.5**2)  # Rigid probe, sample Poisson ratio = 0.5
+print(f&quot;Young&#x27;s modulus: {E_MPa * 1000:.1f} kPa&quot;)
 </code></pre>
 
 <p><strong>Important</strong>: The Hertz model assumes linear elasticity, small strains, and a homogeneous material. For biomaterials, validate these assumptions by checking:</p>
 <ul>
-<li>Indentation depth < 10% of sample thickness (avoid substrate effects)</li>
+<li>Indentation small relative to both probe radius and sample thickness (check geometry and substrate effects)</li>
 <li>Multiple locations show consistent results</li>
 <li>Loading rate independence (or report the rate)</li>
 
 </ul>
 <h3 id="5-viscoelastic-models">5. Viscoelastic Models</h3>
 
-<p>Many biomaterials show both elastic and viscous behavior. The Standard Linear Solid (SLS) model captures this:</p>
+<p>The Standard Linear Solid (SLS) model combines an equilibrium spring with one Maxwell branch. Under a fixed strain, its relaxation modulus is E(t) = E_eq + E_branch exp(−t/τ), with τ = η / E_branch. Multiplying E(t) by the imposed strain gives the stress history. This is a stress-relaxation calculation.</p>
 
 <pre><code class="language-python">
-def sls_model(t, E_instant, E_equilibrium, eta):
-    tau = eta / (E_instant - E_equilibrium)
-    return E_equilibrium + (E_instant - E_equilibrium) * np.exp(-t / tau)
+def sls_relaxation(t, E_eq, E_branch, tau):
+    return E_eq + E_branch * np.exp(-t / tau)
 
-# Creep test: constant stress, measure strain over time
-time = np.array([0, 1, 2, 5, 10, 20, 50, 100, 200])  # s
-strain = np.array([0.010, 0.012, 0.013, 0.015, 0.017, 0.018, 0.020, 0.021, 0.022])
-
-# Initial guesses from data
-E_inst_guess = 1 / strain[0] * 1000  # kPa (from instantaneous response)
-E_eq_guess = 1 / strain[-1] * 1000
-eta_guess = 100  # kPa*s
-
-popt, pcov = curve_fit(sls_model, time, strain, p0=[E_inst_guess, E_eq_guess, eta_guess],
-                       bounds=([0,0,0], [np.inf, np.inf, np.inf]))
-print(f&quot;Instantaneous modulus: {popt[0]:.1f} kPa&quot;)
-print(f&quot;Equilibrium modulus: {popt[1]:.1f} kPa&quot;)
-print(f&quot;Viscosity: {popt[2]:.1f} kPa*s&quot;)
+# Synthetic relaxation-modulus data in kPa; time in seconds
+sls_time = np.array([0, 1, 2, 5, 10, 20, 50, 100, 200])
+sls_noise = np.array([0.05, -0.03, 0.02, -0.04, 0.03, -0.02, 0.01, -0.01, 0.02])
+sls_modulus = sls_relaxation(sls_time, 3.0, 9.0, 40.0) + sls_noise
+sls_popt, sls_pcov = curve_fit(
+    sls_relaxation, sls_time, sls_modulus,
+    p0=[2.5, 8.0, 30.0], bounds=([0, 0, 1e-9], [np.inf, np.inf, np.inf])
+)
+E_eq, E_branch, tau_sls = sls_popt
+print(f&quot;Instantaneous modulus: {E_eq + E_branch:.2f} kPa&quot;)
+print(f&quot;Equilibrium modulus: {E_eq:.2f} kPa&quot;)
+print(f&quot;Relaxation time: {tau_sls:.2f} s&quot;)
+print(f&quot;Branch viscosity: {E_branch * tau_sls:.2f} kPa*s&quot;)
 </code></pre>
+
+<p>The separate <code>sls_popt</code> and <code>sls_pcov</code> variables retain the Hertz-fit results in <code>popt</code> and <code>pcov</code> for the confidence-interval calculation below. The model relation follows the <a href="https://doc.comsol.com/6.4/doc/com.comsol.help.sme/sme_ug_theory.06.029.html">COMSOL linear-viscoelasticity formulation</a>.</p>
 
 <h2 id="uncertainty-and-beyond">Uncertainty and Beyond</h2>
 <h3 id="6-confidence-intervals">6. Confidence Intervals</h3>
 
-<p>Never report fitted parameters without uncertainties. The covariance matrix from curve_fit gives standard errors:</p>
+<img src="/static/images/article-guides/comp-guide-covariance-en.svg" alt="This illustrative covariance matrix gives standard errors of 0.2 for the slope and 0.1 for the intercept, with correlation −0.75" loading="lazy">
+
+<p>This illustrative covariance matrix gives standard errors of 0.2 for the slope and 0.1 for the intercept, with correlation −0.75. Converting these standard errors into confidence intervals also requires a confidence level and an appropriate model-based multiplier.</p>
+
+
+<p>Never report fitted parameters without uncertainties. The covariance matrix from <code>curve_fit</code> gives approximate parameter variances under the local linearization of the model. Square roots of its diagonal give standard errors; the <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html">SciPy documentation</a> explains how measurement uncertainties and <code>absolute_sigma</code> affect their scale:</p>
 
 <pre><code class="language-python">
 from scipy import stats
@@ -212,15 +225,15 @@ p = len(popt)
 dof = max(0, n - p)
 t_val = stats.t.ppf(1 - alpha/2, dof)
 
-for i, (param, name) in enumerate(zip(popt, [&#x27;E_star&#x27;])):
+for i, (param, name) in enumerate(zip(popt, [&#x27;E_star (MPa)&#x27;])):
     std = np.sqrt(pcov[i, i])
     ci = t_val * std
-    print(f&quot;{name}: {param:.1f} +/- {ci:.1f} (95% CI)&quot;)
+    print(f&quot;{name}: {param:.3f} +/- {ci:.3f} (95% CI)&quot;)
 </code></pre>
 
 <h3 id="7-common-pitfalls">7. Common Pitfalls</h3>
 
-<table><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr><tr><td>"Optimal parameters not found"</td><td>Bad initial guess</td><td>Visualize data, try different p0</td></tr><tr><td>Negative modulus</td><td>No bounds</td><td>Add <code>bounds=(0, None)</code></td></tr><tr><td>Huge uncertainties</td><td>Too few data points</td><td>Collect more data in the region of interest</td></tr><tr><td>Fit looks wrong at edges</td><td>Model doesn't fit extremes</td><td>Check if model is appropriate</td></tr><tr><td>NaN in covariance</td><td>Over-parameterized</td><td>Simplify model or fix some parameters</td></tr></table>
+<table><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr><tr><td>"Optimal parameters not found"</td><td>Bad initial guess</td><td>Visualize data, try different p0</td></tr><tr><td>Negative modulus</td><td>No bounds</td><td>Add <code>bounds=(0, np.inf)</code></td></tr><tr><td>Huge uncertainties</td><td>Too few data points</td><td>Collect more data in the region of interest</td></tr><tr><td>Fit looks wrong at edges</td><td>Model doesn't fit extremes</td><td>Check if model is appropriate</td></tr><tr><td>NaN in covariance</td><td>Over-parameterized</td><td>Simplify model or fix some parameters</td></tr></table>
 
 <h3 id="8-when-curve-fit-is-not-enough">8. When curve_fit Is Not Enough</h3>
 
@@ -230,7 +243,7 @@ from scipy.optimize import minimize
 def objective(params, x, y, model):
     return np.sum((y - model(x, *params))**2)
 
-result = minimize(objective, [1.0, 0.1], args=(x, y, linear), bounds=[(0, None)]*2)
+result = minimize(objective, [1.0], args=(indentation, force, hertz), bounds=[(0, None)])
 print(f&quot;Constrained result: {result.x}&quot;)
 </code></pre>
 
@@ -252,11 +265,7 @@ print(f&quot;Constrained result: {result.x}&quot;)
 
 <p>When reporting fitted parameters in publications, include not just the best-fit values and standard errors but also the correlation matrix between parameters. Highly correlated parameters indicate that the model may be overparameterized—different combinations of parameter values produce nearly identical fits. This is a red flag that should be discussed transparently.</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/scientific-visualization-python/">← Scientific Data Visualization with Python: Publication-Ready Figures</a></span><span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/scientific-visualization-python/">← Scientific Data Visualization with Python: Publication-Ready Figures</a></span><span><a href="/posts/sem-image-analysis/">Practical SEM Image Analysis for Biomaterials Research →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -276,11 +285,11 @@ print(f&quot;Constrained result: {result.x}&quot;)
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

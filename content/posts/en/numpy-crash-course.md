@@ -1,11 +1,12 @@
 ---
 title: "NumPy for Materials Research: From Zero to Productive"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["numpy", "python", "arrays", "scientific-computing", "data-analysis", "tutorial"]
 lang: "en"
 slug: "numpy-crash-course"
-description: "Learn NumPy from scratch with real materials science examples: loading experimental data, array operations, statistics, curve fitting, and batch processing."
+description: "Load experimental measurements into arrays and work with slicing, Boolean masks, broadcasting, and summary statistics. Use these operations to align observations, center columns, fit simple relationships, and save processed numerical results."
 ---
 
 ## Why Every Materials Scientist Needs NumPy
@@ -104,7 +105,7 @@ min_stress = np.min(stresses)
 max_stress = np.max(stresses)
 
 # Cumulative
-total_energy = np.sum(force)            # Sum
+force_sum = np.sum(force)              # Sum of force values; not work or energy
 cumulative = np.cumsum(stresses)        # Running total
 
 # Percentiles
@@ -117,6 +118,11 @@ row_stds = data.std(axis=1)             # Std of each row
 
 ## Data Manipulation
 ### 5. Boolean Indexing (Filter Data)
+
+![The same Boolean mask selects matching entries from the strain and stress arrays](/static/images/article-guides/comp-guide-boolean-mask-en.svg)
+
+The same Boolean mask selects matching entries from the strain and stress arrays. In this teaching subset, strain < 0.02 retains the first three observations and excludes the entry exactly equal to 0.02.
+
 
 This is probably the NumPy feature you will use most:
 
@@ -142,6 +148,11 @@ idx_where = np.where(stresses > 30)[0]  # Indices where condition is True
 ```
 
 ### 6. Reshaping and Combining Arrays
+
+![Subtracting mean(axis=0) centers each column of this teaching array](/static/images/article-guides/comp-guide-broadcasting-en.svg)
+
+Subtracting mean(axis=0) centers each column of this teaching array. NumPy broadcasts the three column means across both rows, producing zero column means without writing a loop.
+
 
 ```python
 # Reshape
@@ -179,7 +190,7 @@ print(archive["strain"])
 ## Putting It Together
 ### 8. End-to-End Example: AFM Force Curve Processing
 
-Here is a complete pipeline from raw data to mechanical properties:
+This example processes an approach curve into force, indentation, and a local contact stiffness. The first column is assumed to be piezo displacement in nm, increasing toward the sample; match this convention to your instrument export. A force–indentation slope has units of force per length. To obtain Young's modulus, combine the curve with a calibrated probe geometry and a contact model, such as the [Hertz fit](/posts/scipy-curve-fitting/).
 
 ```python
 import numpy as np
@@ -203,15 +214,16 @@ force_derivative = np.gradient(force_corrected)
 noise = np.std(force_derivative[:50])
 contact_idx = np.argmax(force_derivative > 5 * noise)
 
-# Indentation
-indentation = z_piezo[contact_idx] - z_piezo
+# Indentation: z_piezo is in nm and increases toward the sample
+# Subtract the cantilever deflection change after contact
+indentation = (z_piezo - z_piezo[contact_idx]) - (deflection_nm - deflection_nm[contact_idx])
 contact_force = force_corrected - force_corrected[contact_idx]
 
-# Fit elastic region
+# Fit a local force-indentation slope
 fit_mask = (indentation > 0) & (indentation < 50)
-E, _ = np.polyfit(indentation[fit_mask], contact_force[fit_mask], 1)
+contact_stiffness, _ = np.polyfit(indentation[fit_mask], contact_force[fit_mask], 1)
 
-print(f"Young's modulus: {E:.1f} nN/nm (relative)")
+print(f"Contact stiffness: {contact_stiffness:.3f} nN/nm")
 ```
 
 ### 9. Common Pitfalls

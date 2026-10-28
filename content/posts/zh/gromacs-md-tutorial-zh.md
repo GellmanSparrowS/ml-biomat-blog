@@ -1,11 +1,12 @@
 ---
 title: "GROMACS分子动力学模拟实战：从结构准备到轨迹分析"
 date: "2026-06-29"
+updated: "2026-10-28"
 category: "multiscale-modeling"
 tags: ["GROMACS", "分子动力学", "MD模拟", "蛋白质模拟", "轨迹分析", "溶菌酶"]
 lang: "zh"
 slug: "gromacs-md-tutorial-zh"
-description: "GROMACS分子动力学模拟完整实战教程：以溶菌酶为实例，手把手演示从结构准备、能量最小化、平衡态到生产运行的全流程，含RMSD、RMSF、Rg和氢键轨迹分析。"
+description: "以水溶液中的溶菌酶为例，从坐标和拓扑构建推进到最小化、平衡与生产模拟。说明 grompp、mdrun 的文件关系，并区分 RMSD、RMSF、回转半径和氢键分析各自回答的问题。"
 ---
 
 生物材料研究越来越依赖分子动力学( Molecular Dynamics, MD)模拟来理解蛋白质、纤维和多糖在原子尺度的行为。在众多MD软件中，GROMACS(GROningen MAchine for Chemical Simulations)因其开源、高效和活跃的社区而成为最广泛使用的工具之一。本文以溶菌酶(lysozyme)为例，完整演示GROMACS MD模拟的全流程，涵盖从结构获取到轨迹分析的所有步骤。
@@ -57,6 +58,10 @@ conda install -c conda-forge -c bioconda gromacs="2024.*=*cuda*"
 | 10. 轨迹分析 | gmx rms/rmsf/... | 提取物理量 | 数分钟 |
 
 下面以PDB ID 1AKI(溶菌酶)为例逐步演示。
+
+![grompp 与 mdrun 交换什么](/static/images/article-guides/mech-gromacs-files-zh.svg)
+
+grompp 将坐标、拓扑与运行设置组合成 .tpr 输入，mdrun 再输出轨迹、能量记录、日志和检查点。最小化、平衡与生产阶段都应保留对应的文件组合。
 
 ### 实战案例：溶菌酶在水溶液中的模拟
 
@@ -261,6 +266,10 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_num.xvg
 # 所有氢键(含蛋白-水)
 gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 ```
+
+![用三个观测量区分三类变化](/static/images/article-guides/mech-trajectory-observables-zh.svg)
+
+RMSD 比较对齐后的当前帧与参考帧；RMSF 衡量各选定原子围绕时间平均位置的涨落；Rg 衡量原子相对质心的质量加权空间分散程度。构造的点阵构型直观区分了这三个定义。
 
 ### 性能优化与多尺度衔接
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>材料科学中的特征工程：从实验数据到机器学习就绪数据 — ML-Biomat</title>
-<meta name="description" content="材料科学中的特征工程：从实验数据到机器学习就绪数据。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="从材料描述符与制备条件构造特征矩阵，处理分类变量、物理交互项和缺失信息。结合小样本特征选择与训练集内的缩放方法，说明怎样保留变量含义、避免目标泄漏，并让模型评价保持一致。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/feature-engineering-materials-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/feature-engineering-materials-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/feature-engineering-materials-ml/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/feature-engineering-materials-ml/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="材料科学中的特征工程：从实验数据到机器学习就绪数据">
-<meta property="og:description" content="材料科学中的特征工程：从实验数据到机器学习就绪数据。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="从材料描述符与制备条件构造特征矩阵，处理分类变量、物理交互项和缺失信息。结合小样本特征选择与训练集内的缩放方法，说明怎样保留变量含义、避免目标泄漏，并让模型评价保持一致。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/feature-engineering-materials-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "description": "材料科学中的特征工程：从实验数据到机器学习就绪数据。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 169, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-zh/", "image": "https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "item": "https://ml-biomat.com/posts/feature-engineering-materials-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "description": "从材料描述符与制备条件构造特征矩阵，处理分类变量、物理交互项和缺失信息。结合小样本特征选择与训练集内的缩放方法，说明怎样保留变量含义、避免目标泄漏，并让模型评价保持一致。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 963, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/feature-engineering-materials-zh/", "image": "https://ml-biomat.com/static/images/og/feature-engineering-materials-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "材料科学中的特征工程：从实验数据到机器学习就绪数据", "item": "https://ml-biomat.com/posts/feature-engineering-materials-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>材料科学中的特征工程：从实验数据到机器学习就绪数据</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
+<span>2026-06-26</span><span>·</span><span>3 分钟阅读</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">特征工程</a><a class="tag-pill" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="tag-pill" href="/tags/%E6%9D%90%E6%96%99%E7%A7%91%E5%AD%A6/">材料科学</a><a class="tag-pill" href="/tags/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/">数据预处理</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#真正的瓶颈">真正的瓶颈</a></li><li class="toc-h2"><a href="#分类变量编码">分类变量编码</a></li><li class="toc-h2"><a href="#域知识驱动的交互特征">域知识驱动的交互特征</a></li><li class="toc-h2"><a href="#小样本特征选择">小样本特征选择</a></li><li class="toc-h2"><a href="#检查清单">检查清单</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#深入探讨-特征缩放与标准化">深入探讨：特征缩放与标准化</a></li></ul></details><h2 id="真正的瓶颈">真正的瓶颈</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#真正的瓶颈">真正的瓶颈</a></li><li class="toc-h2"><a href="#分类变量编码">分类变量编码</a></li><li class="toc-h2"><a href="#域知识驱动的交互特征">域知识驱动的交互特征</a></li><li class="toc-h2"><a href="#小样本特征选择">小样本特征选择</a></li><li class="toc-h2"><a href="#检查清单">检查清单</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#深入探讨-特征缩放与标准化">深入探讨：特征缩放与标准化</a></li></ul></details><h2 id="真正的瓶颈">真正的瓶颈</h2>
 
 <table><tr><th>特征工程手段</th><th>作用</th><th>材料研究示例</th></tr><tr><td>分类变量编码</td><td>把类别文本转成数值特征</td><td>溶剂类型、晶体结构、处理分组</td></tr><tr><td>数值变换</td><td>缩放、标准化或取对数</td><td>浓度、晶粒尺寸、模量</td></tr><tr><td>交互特征</td><td>组合两个或多个原始特征</td><td>密度×模量、氢键密度×结晶度</td></tr><tr><td>缺失值处理</td><td>填补或显式标记缺失</td><td>传感器缺失行、批次差异</td></tr><tr><td>小样本特征选择</td><td>去除冗余维度、保留关键信息</td><td>正则化、K-best、域先验</td></tr></table>
 
@@ -61,6 +61,11 @@ df = pd.DataFrame({&quot;纤维直径_nm&quot;: [45,52,48], &quot;交联密度_p
 </code></pre>
 
 <h2 id="分类变量编码">分类变量编码</h2>
+
+<img src="/static/images/article-guides/comp-guide-one-hot-zh.svg" alt="以乙醇为参照类别时，两列指示变量即可区分三种溶剂" loading="lazy">
+
+<p>以乙醇为参照类别时，两列指示变量即可区分三种溶剂。全零行是有效的类别表示，并不意味着该样品的信息缺失。</p>
+
 
 <pre><code class="language-python">
 from sklearn.preprocessing import OneHotEncoder
@@ -95,6 +100,11 @@ def engineer_features(df):
 </ul>
 <h2 id="深入探讨-特征缩放与标准化">深入探讨：特征缩放与标准化</h2>
 
+<img src="/static/images/article-guides/comp-guide-train-scaling-zh.svg" alt="这个教学缩放器从训练值 (2, 4, 6) 得到均值 4 和标准差 √(8/3)" loading="lazy">
+
+<p>这个教学缩放器从训练值 [2, 4, 6] 得到均值 4 和标准差 √(8/3)。将同一组参数用于测试值 8，结果约为 2.449，从而让训练与测试数据处于一致的坐标基准。</p>
+
+
 <p>特征缩放是机器学习预处理中容易被忽视但至关重要的步骤。不同物理量通常具有截然不同的量级——纤维直径可能只有几十纳米，而杨氏模量可能有几个吉帕。如果不进行缩放，依赖距离的模型会将量级大的特征视为更重要，即使它们物理上并不更关键。</p>
 
 <p>StandardScaler将每个特征转换为均值为零标准差为一的分布。这对于线性回归、支持向量机和神经网络等模型至关重要。对于树模型如随机森林，特征缩放不是必需的，因为决策树基于特征值的排序而非距离。了解这一点可以避免不必要的预处理步骤。</p>
@@ -103,12 +113,8 @@ def engineer_features(df):
 
 <p>特征工程的质量远比模型选择重要。在材料科学的小样本场景中，一两个精心构造的物理特征对模型性能的提升往往超过尝试十种不同算法。花时间理解你的数据，与领域专家讨论，让物理直觉指导特征构造——这是任何自动化工具都无法替代的人类价值。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">← 多尺度模拟在纤维生物材料中的应用入门</a></span><span><a href="/posts/fiber-network-mechanics-zh/">纤维网络力学基础：生物材料研究的关键概念 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">← 多尺度模拟在纤维生物材料中的应用入门</a></span><span><a href="/posts/fiber-network-mechanics-zh/">纤维网络力学基础：生物材料研究的关键概念 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models-zh/">常用的机器学习分类模型：从逻辑回归到梯度提升</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -119,7 +125,7 @@ def engineer_features(df):
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -127,11 +133,11 @@ def engineer_features(df):
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

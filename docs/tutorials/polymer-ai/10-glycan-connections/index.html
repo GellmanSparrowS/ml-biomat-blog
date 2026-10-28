@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="糖链：连接方式怎样改变水合、识别与支撑">
 <meta property="og:description" content="从糖苷键、分支和水合理解糖链，用真实凝集素阵列数据比较组成特征与保留连接类型的图表示。">
 <meta property="og:type" content="website">
@@ -22,7 +22,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "糖链：连接方式怎样改变水合、识别与支撑", "description": "从糖苷键、分支和水合理解糖链，用真实凝集素阵列数据比较组成特征与保留连接类型的图表示。", "url": "https://ml-biomat.com/tutorials/polymer-ai/10-glycan-connections/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-10.css?v=58e4f2e7ff93"><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-10.css?v=58e4f2e7ff93"><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -30,17 +30,17 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/" class="active">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/" class="active">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 
 </div></header>
-<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/tutorials/">教程</a><span aria-hidden="true">/</span><a href="/tutorials/polymer-ai/">高分子与生物大分子</a><span aria-hidden="true">/</span><span>第 10 节</span></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>配套代码 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
+<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">生物·材料·结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#connections">01　读懂糖链怎样连接</a><a href="#water">02　水合与材料支撑</a><a href="#recognition">03　从识别到实验数据</a><a href="#representation">04　让模型读懂连接</a><a href="#experiment">05　运行代码并解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 10 节 · 从一根纤维到细胞表面的识别信号</p>
-<h1>糖链：连接方式怎样改变水合、识别与支撑<span>把“有哪些糖”推进到“这些糖怎样连在一起”</span></h1>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">生物·材料·结构</p><nav><a href="#connections">01　读懂糖链怎样连接</a><a href="#water">02　水合与材料支撑</a><a href="#recognition">03　从识别到实验数据</a><a href="#representation">04　让模型读懂连接</a><a href="#experiment">05　运行代码并解释结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从一根纤维到细胞表面的识别信号</p>
+<h1>糖链：连接方式怎样改变水合、识别与支撑</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">米饭里的淀粉和棉布里的纤维素，都以葡萄糖为基本构件，却在生活中承担着很不一样的工作。前者是常见的食物成分，后者形成可以纺成线的纤维。再看人体，细胞表面伸出的糖链参与识别，组织中的一些多糖则与水、离子和蛋白质共同影响材料的柔软程度。要理解这些差别，我们需要看清糖残基之间的连接，把化学结构、周围环境与实际测量接起来。</p>
 <p>本节让AI学习一项具体的实验读数：给出糖链结构，预测它在使用指定凝集素的糖链阵列实验中的荧光信号。凝集素是能够识别糖结构的蛋白质；阵列把许多糖链放在可区分的位置，通过信号强弱比较它们与凝集素的结合表现。我们先给模型一张组成清单，记录各类糖有几个，再补上各残基之间怎样连接。两种输入用同一批数据检验，就能观察连接信息是否改善预测，也能回到分子图上寻找差别。后面的代码将完成数据读取、结构表示、训练和画图，让这场比较可以逐步重现。</p>
@@ -417,7 +417,7 @@ Saved six panels, all cohort rows, predictions, selected models and exclusions.
 <p>F图正好补上一个可以完全控制输入的检查。四个指定的二糖都由Gal和GlcNAc构成，分别采用α1→3、β1→3、α1→4和β1→4连接。它们的组成相同，去掉边标签后图结构也相同，因此前两种表示的相似性全为1；带键类型的两轮描述则使不同连接的相似性降至约0.33。这里比较的是表示本身的计算结果，读者可以逐项数出共同和不同的模式，再理解热图中的数字。</p>
 <p>把E图与F图放在一起，研究逻辑就连起来了。E图提供真实测量中的结构差别，帮助确定输入必须保留什么；F图检查程序是否确实保留了这些信息；B、C图再检查用这种表示训练的模型在整组留出的样本上表现怎样。科学问题、表示检查与预测评价各自承担一个明确任务，避免只用一张漂亮的热图就推断模型已经学会了所有结合规律。</p>
 <p>若要继续开展研究，可以从当前误差较大的测试结构中提出实验问题，但新的模型选择需要安排新的独立评价对象。一个可执行的方案是固定同一种凝集素与检测流程，补充一组组成相同、只改变某条连接的探针，记录展示方式和重复测量，再研究哪个局部模式对应稳定的信号变化。想扩展到其他凝集素时，可以加入蛋白质身份或序列表示，并把整个新凝集素作为留出对象，检验模型能否跨受体使用信息。</p>
-<p>糖链让我们看到，生物大分子的数据并不总是一串字母。残基种类、连接碳位、立体构型、分支与实验展示都可能影响标签含义。沿着这条思路，AI的作用可以落到具体研究步骤上：整理结构、比较局部模式、预测同一测量条件下的候选读数，再据此安排新的对照实验。下一节转向DNA与RNA时，我们仍会追问同样的问题：输入保留了什么结构信息，模型输出又对应哪一种可以检验的分子行为？</p>
+<p>糖链让我们看到，生物大分子的数据并不总是一串字母。残基种类、连接碳位、立体构型、分支与实验展示都可能影响标签含义。沿着这条思路，AI的作用可以落到具体研究步骤上：整理结构、比较局部模式、预测同一测量条件下的候选读数，再据此安排新的对照实验。<a href="/tutorials/polymer-ai/11-dna-rna-structures/">《DNA与RNA：序列怎样组织成结构》</a>转向DNA与RNA时，我们仍会追问同样的问题：输入保留了什么结构信息，模型输出又对应哪一种可以检验的分子行为？</p>
 </section>
 
 <section id="sources"><h2>资料与延伸阅读</h2>
@@ -426,16 +426,16 @@ Saved six panels, all cohort rows, predictions, selected models and exclusions.
 <p>Shervashidze等，2011，<a href="https://www.jmlr.org/papers/v12/shervashidze11a.html">Weisfeiler–Lehman Graph Kernels</a>。本节将逐轮邻域标签与模式计数用于糖残基树，并显式保留连接朝向、α/β及碳位。四幅科学史图为原创概念重绘，六幅数值图由本页Python程序生成；交互中的两个探针读数来自原始工作簿。</p>
 </section>
 </div></div>
-</div><nav class="tutorial-neighbors" aria-label="教程顺序"><a href="/tutorials/polymer-ai/09-protein-sequence-and-function/" rel="prev"><small>← 上一节</small><strong>蛋白质：从序列、折叠到柔性与功能</strong></a><a href="/tutorials/polymer-ai/11-dna-rna-structures/" rel="next"><small>下一节 →</small><strong>DNA与RNA：序列怎样组织成结构</strong></a></nav></main>
+</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/09-protein-sequence-and-function/"><strong>蛋白质：从序列、折叠到柔性与功能</strong></a><a href="/tutorials/polymer-ai/11-dna-rna-structures/"><strong>DNA与RNA：序列怎样组织成结构</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 <script>
 (function(){
 (()=>{

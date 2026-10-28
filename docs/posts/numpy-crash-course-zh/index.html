@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NumPy完全入门：实验室数据处理必备 — ML-Biomat</title>
-<meta name="description" content="NumPy完全入门：实验室数据处理必备。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="把实验测量整理为数组，逐步使用切片、布尔筛选、广播运算和统计聚合。通过应变与应力数据、逐列中心化及简单拟合示例，理解形状和索引如何影响计算，并将处理结果保存为后续分析可用的数据。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/numpy-crash-course-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/numpy-crash-course-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/numpy-crash-course/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/numpy-crash-course/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="NumPy完全入门：实验室数据处理必备">
-<meta property="og:description" content="NumPy完全入门：实验室数据处理必备。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="把实验测量整理为数组，逐步使用切片、布尔筛选、广播运算和统计聚合。通过应变与应力数据、逐列中心化及简单拟合示例，理解形状和索引如何影响计算，并将处理结果保存为后续分析可用的数据。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/numpy-crash-course-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy完全入门：实验室数据处理必备", "description": "NumPy完全入门：实验室数据处理必备。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-27", "dateModified": "2026-06-27", "wordCount": 363, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course-zh/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NumPy完全入门：实验室数据处理必备", "item": "https://ml-biomat.com/posts/numpy-crash-course-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "NumPy完全入门：实验室数据处理必备", "description": "把实验测量整理为数组，逐步使用切片、布尔筛选、广播运算和统计聚合。通过应变与应力数据、逐列中心化及简单拟合示例，理解形状和索引如何影响计算，并将处理结果保存为后续分析可用的数据。", "datePublished": "2026-06-27", "dateModified": "2026-10-28", "wordCount": 3124, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/numpy-crash-course-zh/", "image": "https://ml-biomat.com/static/images/og/numpy-crash-course-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python教程", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "NumPy完全入门：实验室数据处理必备", "item": "https://ml-biomat.com/posts/numpy-crash-course-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>NumPy完全入门：实验室数据处理必备</h1>
 <div class="article-meta">
-<span>2026-06-27</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
+<span>2026-06-27</span><span>·</span><span>8 分钟阅读</span><span>·</span><a href="/categories/python-tutorials/">Python教程</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/numpy/">numpy</a><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/%E6%95%B0%E7%BB%84/">数组</a><a class="tag-pill" href="/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/">科学计算</a><a class="tag-pill" href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">数据处理</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#一-什么是numpy数组">一、什么是NumPy数组</a></li><li class="toc-h2"><a href="#二-创建数组">二、创建数组</a></li><li class="toc-h2"><a href="#三-加载实验数据">三、加载实验数据</a></li><li class="toc-h2"><a href="#四-向量化运算">四、向量化运算</a></li><li class="toc-h2"><a href="#五-统计分析">五、统计分析</a></li><li class="toc-h2"><a href="#六-布尔索引">六、布尔索引</a></li><li class="toc-h3"><a href="#七-线性拟合-提取杨氏模量">七、线性拟合：提取杨氏模量</a></li><li class="toc-h3"><a href="#八-保存结果">八、保存结果</a></li><li class="toc-h3"><a href="#九-常见陷阱">九、常见陷阱</a></li><li class="toc-h3"><a href="#参考文献">参考文献</a></li><li class="toc-h3"><a href="#十-numpy在材料科学研究中的典型应用场景">十、NumPy在材料科学研究中的典型应用场景</a></li><li class="toc-h3"><a href="#十一-进阶学习路径">十一、进阶学习路径</a></li><li class="toc-h3"><a href="#十二-总结">十二、总结</a></li><li class="toc-h3"><a href="#参考文献补充">参考文献补充</a></li><li class="toc-h3"><a href="#十三-从excel到numpy-思维方式的转变">十三、从Excel到NumPy：思维方式的转变</a></li><li class="toc-h3"><a href="#十四-扩展阅读和在线资源">十四、扩展阅读和在线资源</a></li><li class="toc-h3"><a href="#十五-调试技巧与最佳实践">十五、调试技巧与最佳实践</a></li></ul></details><p>NumPy是Python科学计算生态的基石。无论是处理拉伸试验的应力-应变数据、分析AFM力曲线的特征参数、统计SEM图像中数百根纤维的直径分布，还是从分子动力学轨迹中提取结构信息，NumPy数组都是最基础的数据结构。</p>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#一-什么是numpy数组">一、什么是NumPy数组</a></li><li class="toc-h2"><a href="#二-创建数组">二、创建数组</a></li><li class="toc-h2"><a href="#三-加载实验数据">三、加载实验数据</a></li><li class="toc-h2"><a href="#四-向量化运算">四、向量化运算</a></li><li class="toc-h2"><a href="#五-统计分析">五、统计分析</a></li><li class="toc-h2"><a href="#六-布尔索引">六、布尔索引</a></li><li class="toc-h3"><a href="#七-线性拟合-提取杨氏模量">七、线性拟合：提取杨氏模量</a></li><li class="toc-h3"><a href="#八-保存结果">八、保存结果</a></li><li class="toc-h3"><a href="#九-常见陷阱">九、常见陷阱</a></li><li class="toc-h3"><a href="#参考文献">参考文献</a></li><li class="toc-h3"><a href="#十-numpy在材料科学研究中的典型应用场景">十、NumPy在材料科学研究中的典型应用场景</a></li><li class="toc-h3"><a href="#十一-进阶学习路径">十一、进阶学习路径</a></li><li class="toc-h3"><a href="#十二-总结">十二、总结</a></li><li class="toc-h3"><a href="#参考文献补充">参考文献补充</a></li><li class="toc-h3"><a href="#十三-从excel到numpy-思维方式的转变">十三、从Excel到NumPy：思维方式的转变</a></li><li class="toc-h3"><a href="#十四-扩展阅读和在线资源">十四、扩展阅读和在线资源</a></li><li class="toc-h3"><a href="#十五-调试技巧与最佳实践">十五、调试技巧与最佳实践</a></li></ul></details><p>NumPy是Python科学计算生态的基石。无论是处理拉伸试验的应力-应变数据、分析AFM力曲线的特征参数、统计SEM图像中数百根纤维的直径分布，还是从分子动力学轨迹中提取结构信息，NumPy数组都是最基础的数据结构。</p>
 
 <p>本文面向编程基础薄弱的研究生，不假设任何NumPy先验知识。每个示例都来源于真实的材料科学场景，代码可以直接复制到Jupyter中使用。</p>
 
@@ -93,6 +93,11 @@ z_piezo = raw[:, 0]; deflection_V = raw[:, 1]
 
 <h2 id="四-向量化运算">四、向量化运算</h2>
 
+<img src="/static/images/article-guides/comp-guide-broadcasting-zh.svg" alt="对这个教学数组减去 mean(axis=0)，即可逐列中心化" loading="lazy">
+
+<p>对这个教学数组减去 mean(axis=0)，即可逐列中心化。NumPy 将三个列均值广播到两行，得到列均值为零的新数组，无需逐行编写循环。</p>
+
+
 <p>NumPy的核心优势是向量化运算——对整个数组逐元素操作无需for循环。这让代码更简洁且执行速度快得多：</p>
 
 <pre><code class="language-python">
@@ -114,6 +119,11 @@ percentile_95 = np.percentile(stresses, 95)
 
 <h2 id="六-布尔索引">六、布尔索引</h2>
 
+<img src="/static/images/article-guides/comp-guide-boolean-mask-zh.svg" alt="同一个布尔掩码用于应变和应力数组时，会保留彼此对应的观测值" loading="lazy">
+
+<p>同一个布尔掩码用于应变和应力数组时，会保留彼此对应的观测值。这个教学子集中，strain < 0.02 保留前三项，排除恰好等于 0.02 的一项。</p>
+
+
 <p>布尔索引允许通过条件筛选数据子集。在材料力学中，精确筛选弹性区数据是提取杨氏模量的关键步骤：</p>
 
 <pre><code class="language-python">
@@ -124,6 +134,8 @@ stresses[stresses &lt; 0] = 0
 </code></pre>
 
 <h3 id="七-线性拟合-提取杨氏模量">七、线性拟合：提取杨氏模量</h3>
+
+<p>应力–应变曲线弹性段的斜率对应杨氏模量；AFM 力–压痕曲线的斜率则对应接触刚度，单位为力除以长度。对 AFM 数据，应先根据仪器坐标方向扣除悬臂挠曲，再结合探针几何与 <a href="/posts/scipy-curve-fitting-zh/">Hertz 等接触模型</a> 提取模量。</p>
 
 <p>polyfit使用最小二乘法完成多项式拟合。一阶多项式拟合弹性段数据即可得到模量值。R方评估拟合质量：</p>
 
@@ -207,12 +219,8 @@ np.save(&quot;processed.npy&quot;, data); loaded = np.load(&quot;processed.npy&q
 
 <p>祝你学习顺利，数据处理高效。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/stress-strain-curves-zh/">← 应力-应变曲线解读：材料力学入门</a></span><span><a href="/posts/pandas-materials-data-zh/">Pandas实验数据处理实战：从原始数据到统计分析 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合完全指南：从线性回归到非线性建模</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/stress-strain-curves-zh/">← 应力-应变曲线解读：材料力学入门</a></span><span><a href="/posts/pandas-materials-data-zh/">Pandas实验数据处理实战：从原始数据到统计分析 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup-zh/">Python 科学计算环境完全搭建指南：从零到生产力</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络</a></li><li class="post-row"><span class="row-date">2026-06-27</span><a href="/posts/scipy-curve-fitting-zh/">SciPy曲线拟合完全指南：从线性回归到非线性建模</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -223,7 +231,7 @@ np.save(&quot;processed.npy&quot;, data); loaded = np.load(&quot;processed.npy&q
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -231,11 +239,11 @@ np.save(&quot;processed.npy&quot;, data); loaded = np.load(&quot;processed.npy&q
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

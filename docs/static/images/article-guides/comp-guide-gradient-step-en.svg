@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img"><title>A gradient step, worked through</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#526678"/></marker></defs><rect width="760" height="460" rx="16" fill="#f7fafc"/>
+<text x="30" y="42" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="26" fill="#203348" text-anchor="start" font-weight="600">A gradient step, worked through</text>
+<text x="30" y="76" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="18" fill="#526678" text-anchor="start" font-weight="400">Teaching example: prediction = w × x; x = 2, target = 1</text>
+<rect x="30" y="117" width="320" height="182" rx="9" fill="white" stroke="#d6e1ec"/>
+<text x="190" y="151" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="23" fill="#386fd1" text-anchor="middle" font-weight="600">Before the step</text>
+<text x="190" y="192" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#203348" text-anchor="middle" font-weight="400">w = 0.25</text>
+<text x="190" y="228" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#203348" text-anchor="middle" font-weight="400">Prediction = 0.50</text>
+<text x="190" y="264" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#203348" text-anchor="middle" font-weight="400">L = 0.125</text>
+<rect x="410" y="117" width="320" height="182" rx="9" fill="white" stroke="#d6e1ec"/>
+<text x="570" y="151" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="23" fill="#13887f" text-anchor="middle" font-weight="600">After the step</text>
+<text x="570" y="192" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#203348" text-anchor="middle" font-weight="400">w = 0.35</text>
+<text x="570" y="228" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#203348" text-anchor="middle" font-weight="400">Prediction = 0.70</text>
+<text x="570" y="264" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="21" fill="#203348" text-anchor="middle" font-weight="400">L = 0.045</text>
+<line x1="355" y1="211" x2="401" y2="211" stroke="#526678" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="380" y="344" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="22" fill="#203348" text-anchor="middle" font-weight="400">L = 0.5 × (w × x − y)²</text>
+<text x="380" y="380" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="22" fill="#203348" text-anchor="middle" font-weight="400">dL/dw = (0.50 − 1) × 2 = −1</text>
+<text x="30" y="437" font-family="&quot;Microsoft YaHei&quot;,&quot;Noto Sans SC&quot;,Arial,sans-serif" font-size="18" fill="#526678" text-anchor="start" font-weight="400">Learning rate 0.1:  w ← 0.25 − 0.1 × (−1) = 0.35</text></svg>

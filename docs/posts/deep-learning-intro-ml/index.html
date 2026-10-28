@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Nature of Deep Learning — ML-Biomat</title>
-<meta name="description" content="A systematic introduction to deep learning: neurons, activation functions, backpropagation, regularization, and transfer learning, with practical guidance on when deep learning is the right tool in materials science.">
+<meta name="description" content="Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/deep-learning-intro-ml/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/deep-learning-intro-ml/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/deep-learning-intro-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/deep-learning-intro-ml/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="The Nature of Deep Learning">
-<meta property="og:description" content="A systematic introduction to deep learning: neurons, activation functions, backpropagation, regularization, and transfer learning, with practical guidance on when deep learning is the right tool in materials science.">
+<meta property="og:description" content="Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/deep-learning-intro-ml/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/deep-learning-intro-ml.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The Nature of Deep Learning", "description": "A systematic introduction to deep learning: neurons, activation functions, backpropagation, regularization, and transfer learning, with practical guidance on when deep learning is the right tool in materials science.", "datePublished": "2026-07-03", "dateModified": "2026-07-03", "wordCount": 5009, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/deep-learning-intro-ml/", "image": "https://ml-biomat.com/static/images/og/deep-learning-intro-ml.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "The Nature of Deep Learning", "item": "https://ml-biomat.com/posts/deep-learning-intro-ml/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The Nature of Deep Learning", "description": "Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets.", "datePublished": "2026-07-03", "dateModified": "2026-10-28", "wordCount": 4487, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/deep-learning-intro-ml/", "image": "https://ml-biomat.com/static/images/og/deep-learning-intro-ml.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/en/"}, {"@type": "ListItem", "position": 3, "name": "The Nature of Deep Learning", "item": "https://ml-biomat.com/posts/deep-learning-intro-ml/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>The Nature of Deep Learning</h1>
 <div class="article-meta">
-<span>2026-07-03</span><span>·</span><span>25 min read</span><span>·</span><a href="/categories/machine-learning/">Machine Learning</a>
+<span>2026-07-03</span><span>·</span><span>22 min read</span><span>·</span><a href="/categories/machine-learning/en/">Machine Learning</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/deep-learning/">deep-learning</a><a class="tag-pill" href="/tags/neural-networks/">neural-networks</a><a class="tag-pill" href="/tags/backpropagation/">backpropagation</a><a class="tag-pill" href="/tags/PyTorch/">PyTorch</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#neural-network-foundations">Neural Network Foundations</a></li><li class="toc-h3"><a href="#1-the-nature-of-deep-learning-from-feature-engineering-to-representation-learning">1. The Nature of Deep Learning — From Feature Engineering to Representation Learning</a></li><li class="toc-h3"><a href="#2-the-basic-components-neurons-layers-and-activation-functions">2. The Basic Components — Neurons, Layers, and Activation Functions</a></li><li class="toc-h2"><a href="#how-networks-learn">How Networks Learn</a></li><li class="toc-h3"><a href="#3-forward-propagation-and-loss-functions-from-input-to-prediction">3. Forward Propagation and Loss Functions — From Input to Prediction</a></li><li class="toc-h3"><a href="#4-backpropagation-and-gradient-descent-how-networks-learn-from-errors">4. Backpropagation and Gradient Descent — How Networks Learn from Errors</a></li><li class="toc-h2"><a href="#architectures">Architectures</a></li><li class="toc-h3"><a href="#5-convolutional-neural-networks-spatial-feature-extraction">5. Convolutional Neural Networks — Spatial Feature Extraction</a></li><li class="toc-h3"><a href="#6-sequence-models-and-attention-lstm-and-transformer">6. Sequence Models and Attention — LSTM and Transformer</a></li><li class="toc-h2"><a href="#practical-training-and-scope">Practical Training and Scope</a></li><li class="toc-h3"><a href="#7-regularization-and-training-techniques-from-overfitting-to-generalization">7. Regularization and Training Techniques — From Overfitting to Generalization</a></li><li class="toc-h3"><a href="#8-when-to-use-deep-learning-its-scope-and-relationship-to-classical-ml">8. When to Use Deep Learning — Its Scope and Relationship to Classical ML</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="neural-network-foundations">Neural Network Foundations</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#neural-network-foundations">Neural Network Foundations</a></li><li class="toc-h3"><a href="#1-the-nature-of-deep-learning-from-feature-engineering-to-representation-learning">1. The Nature of Deep Learning — From Feature Engineering to Representation Learning</a></li><li class="toc-h3"><a href="#2-the-basic-components-neurons-layers-and-activation-functions">2. The Basic Components — Neurons, Layers, and Activation Functions</a></li><li class="toc-h2"><a href="#how-networks-learn">How Networks Learn</a></li><li class="toc-h3"><a href="#3-forward-propagation-and-loss-functions-from-input-to-prediction">3. Forward Propagation and Loss Functions — From Input to Prediction</a></li><li class="toc-h3"><a href="#4-backpropagation-and-gradient-descent-how-networks-learn-from-errors">4. Backpropagation and Gradient Descent — How Networks Learn from Errors</a></li><li class="toc-h2"><a href="#architectures">Architectures</a></li><li class="toc-h3"><a href="#5-convolutional-neural-networks-spatial-feature-extraction">5. Convolutional Neural Networks — Spatial Feature Extraction</a></li><li class="toc-h3"><a href="#6-sequence-models-and-attention-lstm-and-transformer">6. Sequence Models and Attention — LSTM and Transformer</a></li><li class="toc-h2"><a href="#practical-training-and-scope">Practical Training and Scope</a></li><li class="toc-h3"><a href="#7-regularization-and-training-techniques-from-overfitting-to-generalization">7. Regularization and Training Techniques — From Overfitting to Generalization</a></li><li class="toc-h3"><a href="#8-when-to-use-deep-learning-its-scope-and-relationship-to-classical-ml">8. When to Use Deep Learning — Its Scope and Relationship to Classical ML</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="neural-network-foundations">Neural Network Foundations</h2>
 <h3 id="1-the-nature-of-deep-learning-from-feature-engineering-to-representation-learning">1. The Nature of Deep Learning — From Feature Engineering to Representation Learning</h3>
 
 <p>In the chapter on regression models, we emphasized feature engineering at every turn: transforming raw data — material composition, grain size, heat-treatment temperature — through logarithms, power laws, and interaction terms into forms that models can handle efficiently. This approach works extremely well when sample sizes are limited and domain knowledge is rich. When data dimensionality is extremely high and internal structure is extremely complex, however — a single cell micrograph contains millions of pixels, a protein sequence encodes folding information across multiple length scales, a finite-element mesh holds displacement fields at hundreds of thousands of nodes — hand-designed features face a fundamental bottleneck. It is not a question of effort; the complexity of the problem simply exceeds what human intuition can extract from raw data.</p>
@@ -65,6 +65,11 @@
 <hr>
 
 <h3 id="2-the-basic-components-neurons-layers-and-activation-functions">2. The Basic Components — Neurons, Layers, and Activation Functions</h3>
+
+<img src="/static/images/article-guides/comp-guide-neuron-en.svg" alt="A neuron multiplies each input by its weight, adds the bias, and applies an activation" loading="lazy">
+
+<p>A neuron multiplies each input by its weight, adds the bias, and applies an activation. This numerical example gives z = 0.2 and ReLU(z) = 0.2, making each operation visible.</p>
+
 
 <p>The term "neural network" originates from a rough analogy to biological neural systems: biological neurons receive chemical signals through dendrites, accumulate them in the cell body, and fire an electrical signal along the axon when the threshold is exceeded. Mathematically, an artificial neuron receives an output vector \(\mathbf{x} \in \mathbb{R}^d\) from the previous layer, computes a weighted sum plus a bias, and passes the result through a nonlinear function (the activation function):</p>
 
@@ -145,6 +150,11 @@ plt.tight_layout(); plt.show()
 <hr>
 
 <h3 id="4-backpropagation-and-gradient-descent-how-networks-learn-from-errors">4. Backpropagation and Gradient Descent — How Networks Learn from Errors</h3>
+
+<img src="/static/images/article-guides/comp-guide-gradient-step-en.svg" alt="This one-parameter teaching model shows how an error produces a gradient and a weight update" loading="lazy">
+
+<p>This one-parameter teaching model shows how an error produces a gradient and a weight update. With learning rate 0.1, the update changes w from 0.25 to 0.35 and reduces the squared-error loss from 0.125 to 0.045.</p>
+
 
 <p>Forward propagation produces predictions; the loss function quantifies the errors. The central remaining question is: how should the millions of model parameters be adjusted to minimize the loss? The answer is the <strong>Backpropagation</strong> algorithm — the core engine that makes the entire deep learning engineering stack possible, formalized in Rumelhart, Hinton, and Williams' landmark 1986 Nature paper.</p>
 
@@ -459,11 +469,7 @@ print(f&quot;Trainable / Total: {trainable:,} / {total:,}&quot;)
 <li>Goodfellow, I., Bengio, Y., & Courville, A. (2016). <em>Deep Learning</em>. MIT Press. https://www.deeplearningbook.org/</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/networkx-fundamentals/">← NetworkX Fundamentals with Python</a></span><span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/networkx-fundamentals/">← NetworkX Fundamentals with Python</a></span><span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -483,11 +489,11 @@ print(f&quot;Trainable / Total: {trainable:,} / {total:,}&quot;)
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

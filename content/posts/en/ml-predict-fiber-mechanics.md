@@ -1,11 +1,12 @@
 ---
 title: "ML for Fiber Mechanics: Data Prep to Model Deployment"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "machine-learning"
 tags: ["machine-learning", "random-forest", "XGBoost", "fiber-materials", "mechanics"]
 lang: "en"
 slug: "ml-predict-fiber-mechanics"
-description: "Step-by-step guide to predicting fiber biomaterial mechanical properties with ML: data cleaning, feature engineering, model selection, and uncertainty quantification."
+description: "Build a small-data regression workflow for fiber mechanics, from specimen features and preprocessing to model comparison. Examine cross-validation, bootstrap variation, and feature importance to connect numerical predictions with material descriptors."
 ---
 
 ## The Problem
@@ -24,6 +25,11 @@ from sklearn.model_selection import cross_val_score
 
 ## From Data to Model
 ### Data Preparation
+
+![The schematic links a fiber specimen to one row of descriptive features and a separately measured target](/static/images/article-guides/comp-guide-fiber-features-en.svg)
+
+The schematic links a fiber specimen to one row of descriptive features and a separately measured target. The numbers are teaching values; diameter, orientation spread, and crosslink content do not by themselves determine a unique modulus.
+
 
 ```python
 data = pd.DataFrame({
@@ -53,6 +59,11 @@ for name, model in models.items():
 ```
 
 ### Uncertainty Quantification
+
+![Each bootstrap sample draws training observations with replacement and fits a new model](/static/images/article-guides/comp-guide-bootstrap-en.svg)
+
+Each bootstrap sample draws training observations with replacement and fits a new model. The three teaching predictions have mean 2.8 and standard deviation about 0.245; this summarizes variation across the fitted models, while prediction-interval calibration is a separate evaluation step.
+
 
 ```python
 def predict_with_uncertainty(model, X, n_iter=100):

@@ -1,14 +1,15 @@
 ---
 title: "Practical Curve Fitting with SciPy: From Basics to Advanced Models"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["scipy", "curve-fitting", "optimization", "regression", "data-analysis", "biomaterials"]
 lang: "en"
 slug: "scipy-curve-fitting"
-description: "A comprehensive guide to curve fitting with SciPy for materials and biology researchers. Linear regression, exponential decay, Hertz indentation, viscoelastic models, with complete code and real examples."
+description: "Fit linear trends, stress relaxation, and indentation models with SciPy while tracking parameter units and initial guesses. Interpret residuals, covariance matrices, and confidence intervals to turn a fitted curve into an inspectable physical calculation."
 ---
 
-When you run an experiment, you get data points. To extract meaningful physical parameters from those points, you need to fit a model. SciPy's `optimize.curve_fit` is the workhorse for this task. This guide covers everything from a simple straight-line fit to complex nonlinear models, with every example grounded in real materials or biology data.
+When you run an experiment, you get data points. To extract meaningful physical parameters from those points, you need to fit a model. SciPy's `optimize.curve_fit` is the workhorse for this task. This guide covers everything from a simple straight-line fit to complex nonlinear models, with worked examples for materials and biology data analysis.
 
 ```python
 import numpy as np
@@ -27,6 +28,11 @@ The general workflow:
 3. Extract parameters and uncertainties from the results
 
 ### 2. Linear Regression: The Foundation
+
+![The five teaching points are fitted by y = 1.97x + 1.06](/static/images/article-guides/comp-guide-residuals-en.svg)
+
+The five teaching points are fitted by y = 1.97x + 1.06. The lower panel shows observed minus fitted values, separating the remaining errors from the trend so that their signs and magnitudes are easy to compare.
+
 
 Most materials characterization starts with linear fitting. Young's modulus from a stress-strain curve, calibration curves, and many standard analyses use linear regression.
 
@@ -106,57 +112,65 @@ Atomic Force Microscopy (AFM) nanoindentation measures the stiffness of tiny sam
 
 F = (4/3) * E* * sqrt(R) * delta^(3/2)
 
-where E* = E / (1 - nu^2) is the reduced modulus, R is tip radius, and delta is indentation depth.
+For a probe much stiffer than the sample, E* = E / (1 - nu^2) is the reduced modulus, R is tip radius, and delta is indentation depth. The force–indentation slope is contact stiffness; extracting a modulus also requires the contact geometry. In the teaching calculation below, a 1000 nm spherical radius keeps the 0–40 nm indentation range small relative to the probe radius.
 
 ```python
-# AFM indentation on a silk fibroin film
+# Teaching indentation values; spherical probe radius = 1000 nm
 indentation = np.array([0, 5, 10, 15, 20, 25, 30, 35, 40])  # nm
 force = np.array([0, 0.3, 1.1, 2.5, 4.3, 6.8, 9.9, 13.6, 18.0])  # nN
 
-def hertz(delta, E_star, R=20.0):
-    return (4/3) * E_star * np.sqrt(R) * np.power(np.maximum(delta, 0), 1.5)
+def hertz(delta_nm, E_star_MPa, R_nm=1000.0):
+    delta_m = np.maximum(delta_nm, 0) * 1e-9
+    E_star_Pa = E_star_MPa * 1e6
+    force_N = (4/3) * E_star_Pa * np.sqrt(R_nm * 1e-9) * delta_m**1.5
+    return force_N * 1e9  # nN, matching the observations
 
-# Fit with bounds to prevent non-physical values
-popt, pcov = curve_fit(hertz, indentation, force, p0=[1000], bounds=(1, 1e9))
-E_star = popt[0]
-E = E_star * (1 - 0.5**2)  # Convert reduced modulus to Young's (nu=0.5 for incompressible)
-print(f"Young's modulus: {E/1000:.1f} kPa")
+# Fit in MPa to keep the numerical parameter scale convenient
+popt, pcov = curve_fit(hertz, indentation, force, p0=[1.0], bounds=(0, np.inf))
+E_star_MPa = popt[0]
+E_MPa = E_star_MPa * (1 - 0.5**2)  # Rigid probe, sample Poisson ratio = 0.5
+print(f"Young's modulus: {E_MPa * 1000:.1f} kPa")
 ```
 
 **Important**: The Hertz model assumes linear elasticity, small strains, and a homogeneous material. For biomaterials, validate these assumptions by checking:
-- Indentation depth < 10% of sample thickness (avoid substrate effects)
+- Indentation small relative to both probe radius and sample thickness (check geometry and substrate effects)
 - Multiple locations show consistent results
 - Loading rate independence (or report the rate)
 
 ### 5. Viscoelastic Models
 
-Many biomaterials show both elastic and viscous behavior. The Standard Linear Solid (SLS) model captures this:
+The Standard Linear Solid (SLS) model combines an equilibrium spring with one Maxwell branch. Under a fixed strain, its relaxation modulus is E(t) = E_eq + E_branch exp(−t/τ), with τ = η / E_branch. Multiplying E(t) by the imposed strain gives the stress history. This is a stress-relaxation calculation.
 
 ```python
-def sls_model(t, E_instant, E_equilibrium, eta):
-    tau = eta / (E_instant - E_equilibrium)
-    return E_equilibrium + (E_instant - E_equilibrium) * np.exp(-t / tau)
+def sls_relaxation(t, E_eq, E_branch, tau):
+    return E_eq + E_branch * np.exp(-t / tau)
 
-# Creep test: constant stress, measure strain over time
-time = np.array([0, 1, 2, 5, 10, 20, 50, 100, 200])  # s
-strain = np.array([0.010, 0.012, 0.013, 0.015, 0.017, 0.018, 0.020, 0.021, 0.022])
-
-# Initial guesses from data
-E_inst_guess = 1 / strain[0] * 1000  # kPa (from instantaneous response)
-E_eq_guess = 1 / strain[-1] * 1000
-eta_guess = 100  # kPa*s
-
-popt, pcov = curve_fit(sls_model, time, strain, p0=[E_inst_guess, E_eq_guess, eta_guess],
-                       bounds=([0,0,0], [np.inf, np.inf, np.inf]))
-print(f"Instantaneous modulus: {popt[0]:.1f} kPa")
-print(f"Equilibrium modulus: {popt[1]:.1f} kPa")
-print(f"Viscosity: {popt[2]:.1f} kPa*s")
+# Synthetic relaxation-modulus data in kPa; time in seconds
+sls_time = np.array([0, 1, 2, 5, 10, 20, 50, 100, 200])
+sls_noise = np.array([0.05, -0.03, 0.02, -0.04, 0.03, -0.02, 0.01, -0.01, 0.02])
+sls_modulus = sls_relaxation(sls_time, 3.0, 9.0, 40.0) + sls_noise
+sls_popt, sls_pcov = curve_fit(
+    sls_relaxation, sls_time, sls_modulus,
+    p0=[2.5, 8.0, 30.0], bounds=([0, 0, 1e-9], [np.inf, np.inf, np.inf])
+)
+E_eq, E_branch, tau_sls = sls_popt
+print(f"Instantaneous modulus: {E_eq + E_branch:.2f} kPa")
+print(f"Equilibrium modulus: {E_eq:.2f} kPa")
+print(f"Relaxation time: {tau_sls:.2f} s")
+print(f"Branch viscosity: {E_branch * tau_sls:.2f} kPa*s")
 ```
+
+The separate `sls_popt` and `sls_pcov` variables retain the Hertz-fit results in `popt` and `pcov` for the confidence-interval calculation below. The model relation follows the [COMSOL linear-viscoelasticity formulation](https://doc.comsol.com/6.4/doc/com.comsol.help.sme/sme_ug_theory.06.029.html).
 
 ## Uncertainty and Beyond
 ### 6. Confidence Intervals
 
-Never report fitted parameters without uncertainties. The covariance matrix from curve_fit gives standard errors:
+![This illustrative covariance matrix gives standard errors of 0.2 for the slope and 0.1 for the intercept, with correlation −0.75](/static/images/article-guides/comp-guide-covariance-en.svg)
+
+This illustrative covariance matrix gives standard errors of 0.2 for the slope and 0.1 for the intercept, with correlation −0.75. Converting these standard errors into confidence intervals also requires a confidence level and an appropriate model-based multiplier.
+
+
+Never report fitted parameters without uncertainties. The covariance matrix from `curve_fit` gives approximate parameter variances under the local linearization of the model. Square roots of its diagonal give standard errors; the [SciPy documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html) explains how measurement uncertainties and `absolute_sigma` affect their scale:
 
 ```python
 from scipy import stats
@@ -167,10 +181,10 @@ p = len(popt)
 dof = max(0, n - p)
 t_val = stats.t.ppf(1 - alpha/2, dof)
 
-for i, (param, name) in enumerate(zip(popt, ['E_star'])):
+for i, (param, name) in enumerate(zip(popt, ['E_star (MPa)'])):
     std = np.sqrt(pcov[i, i])
     ci = t_val * std
-    print(f"{name}: {param:.1f} +/- {ci:.1f} (95% CI)")
+    print(f"{name}: {param:.3f} +/- {ci:.3f} (95% CI)")
 ```
 
 ### 7. Common Pitfalls
@@ -178,7 +192,7 @@ for i, (param, name) in enumerate(zip(popt, ['E_star'])):
 | Problem | Cause | Fix |
 |---------|-------|-----|
 | "Optimal parameters not found" | Bad initial guess | Visualize data, try different p0 |
-| Negative modulus | No bounds | Add `bounds=(0, None)` |
+| Negative modulus | No bounds | Add `bounds=(0, np.inf)` |
 | Huge uncertainties | Too few data points | Collect more data in the region of interest |
 | Fit looks wrong at edges | Model doesn't fit extremes | Check if model is appropriate |
 | NaN in covariance | Over-parameterized | Simplify model or fix some parameters |
@@ -191,7 +205,7 @@ from scipy.optimize import minimize
 def objective(params, x, y, model):
     return np.sum((y - model(x, *params))**2)
 
-result = minimize(objective, [1.0, 0.1], args=(x, y, linear), bounds=[(0, None)]*2)
+result = minimize(objective, [1.0], args=(indentation, force, hertz), bounds=[(0, None)])
 print(f"Constrained result: {result.x}")
 ```
 

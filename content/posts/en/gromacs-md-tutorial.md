@@ -1,11 +1,12 @@
 ---
 title: "GROMACS MD Tutorial: Structure Prep to Trajectory Analysis"
 date: "2026-06-29"
+updated: "2026-10-28"
 category: "multiscale-modeling"
 tags: ["GROMACS", "molecular dynamics", "MD simulation", "protein simulation", "trajectory analysis", "lysozyme"]
 lang: "en"
 slug: "gromacs-md-tutorial"
-description: "A complete hands-on tutorial for GROMACS molecular dynamics simulation, covering installation, system preparation, energy minimization, equilibration, production MD, and trajectory analysis (RMSD/RMSF/Rg/H-bonds) using lysozyme as a worked example."
+description: "Build a lysozyme-in-water simulation from coordinates and topology through minimization, equilibration and production. Track the files exchanged by grompp and mdrun, then distinguish what RMSD, RMSF, radius of gyration and hydrogen-bond analysis measure."
 ---
 
 Biomaterials research increasingly relies on molecular dynamics (MD) simulation to understand the atomic-scale behavior of proteins, fibers, and polysaccharides. Among the many MD packages available, GROMACS (GROningen MAchine for Chemical Simulations) stands out for its open-source nature, exceptional computational efficiency, and active community. This tutorial walks through a complete GROMACS MD workflow using hen egg-white lysozyme (PDB: 1AKI) as a concrete example.
@@ -57,6 +58,10 @@ A complete MD simulation proceeds through the following stages:
 | 8. NPT | gmx grompp + mdrun | Stabilize pressure/density | hours |
 | 9. Production | gmx grompp + mdrun | Collect trajectory data | hours-days |
 | 10. Analysis | gmx rms/rmsf/... | Extract observables | minutes |
+
+![What grompp and mdrun exchange](/static/images/article-guides/mech-gromacs-files-en.svg)
+
+grompp combines coordinates, topology and run settings into a .tpr input; mdrun uses that input to produce the trajectory, energy record, log and checkpoint. File provenance should follow each minimization, equilibration and production stage.
 
 ### Worked Example: Lysozyme in Water
 
@@ -261,6 +266,10 @@ gmx hbond -s md.tpr -f md.xtc -num hbond_num.xvg
 # All H-bonds (including protein-water)
 gmx hbond -s md.tpr -f md.xtc -num hbond_all.xvg
 ```
+
+![Three different questions for a trajectory](/static/images/article-guides/mech-trajectory-observables-en.svg)
+
+RMSD compares each aligned frame with a reference; RMSF measures time fluctuations around each selected atom’s mean position; Rg measures mass-weighted spread around the center of mass. The constructed configurations make these different definitions visible.
 
 ### Python Analysis Code
 

@@ -1,11 +1,12 @@
 ---
 title: "Setting Up a Python Scientific Computing Environment"
 date: "2026-07-06"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["python", "conda", "jupyter", "mamba", "scientific-computing", "environment-setup"]
 lang: "en"
 slug: "python-env-setup"
-description: "A comprehensive three-platform guide covering virtual environments, Conda and Mamba, JupyterLab, and VS Code integration for materials science and biology graduate students."
+description: "Set up isolated Python environments, install the scientific stack, and connect the right interpreter to JupyterLab and VS Code. Learn how to diagnose package conflicts and reproduce a working setup."
 ---
 ## Getting Started
 ### 1. Why Environment Management Matters — The Version Conflict Problem
@@ -88,6 +89,11 @@ If you work on a university or institute HPC cluster, first check whether Conda 
 
 ## Daily Workflow
 ### 4. Creating and Managing Virtual Environments — Core Isolation Operations
+
+![Each project keeps its own Python interpreter and package versions](/static/images/article-guides/comp-guide-environment-isolation-en.svg)
+
+Each project keeps its own Python interpreter and package versions. The version labels are schematic; activating an environment chooses which installation a command will use.
+
 
 With the motivation for virtual environments established, the actual creation and management commands are quite intuitive. This section covers the full lifecycle of an environment, including the critically important reproducibility workflow.
 
@@ -183,6 +189,11 @@ Domain-specific libraries worth knowing: for bioinformatics, `conda install -c c
 ---
 
 ### 6. JupyterLab — The Core Interactive Scientific Computing Environment
+
+![The browser displays the notebook, while the selected kernel executes its cells](/static/images/article-guides/comp-guide-jupyter-kernel-en.svg)
+
+The browser displays the notebook, while the selected kernel executes its cells. Check sys.executable inside a cell to identify the Python installation and locate packages in the correct environment.
+
 
 JupyterLab is the most widely used interactive computing environment in modern scientific research. Running in a browser, it integrates in a single interface: code editing and execution, inline figure display, Markdown text with LaTeX mathematical formula rendering, file system browsing, and an embedded terminal. For scientific work that must simultaneously present experimental data, computational logic, visualization results, and scientific interpretation, the Notebook format — a "computational document" — has irreplaceable value. A Notebook is not merely a programming tool; it is a medium for recording the scientific exploration process, making "code as experimental record" a practical reality.
 

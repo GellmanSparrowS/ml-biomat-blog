@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ML Classification Models: A Practical Overview — ML-Biomat</title>
-<meta name="description" content="A practical guide to major classification models in machine learning - logistic regression, decision trees, SVMs, and gradient boosting - covering intuition, tradeoffs, and reusable Python code.">
+<meta name="description" content="Compare logistic regression, support vector machines, trees, ensembles, nearest neighbors, and naive Bayes. Read class probabilities and confusion matrices, then choose metrics and validation procedures that match the cost of classification errors.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/ml-classification-models/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/ml-classification-models/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/ml-classification-models-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/ml-classification-models/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="ML Classification Models: A Practical Overview">
-<meta property="og:description" content="A practical guide to major classification models in machine learning - logistic regression, decision trees, SVMs, and gradient boosting - covering intuition, tradeoffs, and reusable Python code.">
+<meta property="og:description" content="Compare logistic regression, support vector machines, trees, ensembles, nearest neighbors, and naive Bayes. Read class probabilities and confusion matrices, then choose metrics and validation procedures that match the cost of classification errors.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/ml-classification-models/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/ml-classification-models.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ML Classification Models: A Practical Overview", "description": "A practical guide to major classification models in machine learning - logistic regression, decision trees, SVMs, and gradient boosting - covering intuition, tradeoffs, and reusable Python code.", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 4688, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-classification-models/", "image": "https://ml-biomat.com/static/images/og/ml-classification-models.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "ML Classification Models: A Practical Overview", "item": "https://ml-biomat.com/posts/ml-classification-models/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "ML Classification Models: A Practical Overview", "description": "Compare logistic regression, support vector machines, trees, ensembles, nearest neighbors, and naive Bayes. Read class probabilities and confusion matrices, then choose metrics and validation procedures that match the cost of classification errors.", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 4344, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-classification-models/", "image": "https://ml-biomat.com/static/images/og/ml-classification-models.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Machine Learning", "item": "https://ml-biomat.com/categories/machine-learning/en/"}, {"@type": "ListItem", "position": 3, "name": "ML Classification Models: A Practical Overview", "item": "https://ml-biomat.com/posts/ml-classification-models/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>ML Classification Models: A Practical Overview</h1>
 <div class="article-meta">
-<span>2026-06-30</span><span>·</span><span>23 min read</span><span>·</span><a href="/categories/machine-learning/">Machine Learning</a>
+<span>2026-06-30</span><span>·</span><span>22 min read</span><span>·</span><a href="/categories/machine-learning/en/">Machine Learning</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/machine%20learning/">machine learning</a><a class="tag-pill" href="/tags/classification/">classification</a><a class="tag-pill" href="/tags/logistic%20regression/">logistic regression</a><a class="tag-pill" href="/tags/SVM/">SVM</a><a class="tag-pill" href="/tags/random%20forest/">random forest</a><a class="tag-pill" href="/tags/XGBoost/">XGBoost</a><a class="tag-pill" href="/tags/scikit-learn/">scikit-learn</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#1-what-is-classification-from-labels-to-decision-boundaries">1. What Is Classification — From Labels to Decision Boundaries</a></li><li class="toc-h2"><a href="#core-algorithms">Core Algorithms</a></li><li class="toc-h3"><a href="#2-logistic-regression-linear-classification-through-a-probabilistic-lens">2. Logistic Regression — Linear Classification Through a Probabilistic Lens</a></li><li class="toc-h3"><a href="#3-support-vector-machines-the-widest-possible-margin">3. Support Vector Machines — The Widest Possible Margin</a></li><li class="toc-h3"><a href="#4-decision-trees-transparent-rule-based-classification">4. Decision Trees — Transparent, Rule-Based Classification</a></li><li class="toc-h3"><a href="#5-random-forests-and-ensemble-learning-the-wisdom-of-crowds">5. Random Forests and Ensemble Learning — The Wisdom of Crowds</a></li><li class="toc-h3"><a href="#6-k-nearest-neighbors-the-laziest-learner">6. k-Nearest Neighbors — The Laziest Learner</a></li><li class="toc-h3"><a href="#7-naive-bayes-the-minimalist-philosophy-of-probabilistic-inference">7. Naive Bayes — The Minimalist Philosophy of Probabilistic Inference</a></li><li class="toc-h2"><a href="#evaluation-and-model-selection">Evaluation and Model Selection</a></li><li class="toc-h3"><a href="#8-evaluation-metrics-accuracy-is-just-the-beginning">8. Evaluation Metrics — Accuracy Is Just the Beginning</a></li><li class="toc-h3"><a href="#9-a-practical-model-selection-guide-no-free-lunch">9. A Practical Model-Selection Guide — No Free Lunch</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="1-what-is-classification-from-labels-to-decision-boundaries">1. What Is Classification — From Labels to Decision Boundaries</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#1-what-is-classification-from-labels-to-decision-boundaries">1. What Is Classification — From Labels to Decision Boundaries</a></li><li class="toc-h2"><a href="#core-algorithms">Core Algorithms</a></li><li class="toc-h3"><a href="#2-logistic-regression-linear-classification-through-a-probabilistic-lens">2. Logistic Regression — Linear Classification Through a Probabilistic Lens</a></li><li class="toc-h3"><a href="#3-support-vector-machines-the-widest-possible-margin">3. Support Vector Machines — The Widest Possible Margin</a></li><li class="toc-h3"><a href="#4-decision-trees-transparent-rule-based-classification">4. Decision Trees — Transparent, Rule-Based Classification</a></li><li class="toc-h3"><a href="#5-random-forests-and-ensemble-learning-the-wisdom-of-crowds">5. Random Forests and Ensemble Learning — The Wisdom of Crowds</a></li><li class="toc-h3"><a href="#6-k-nearest-neighbors-the-laziest-learner">6. k-Nearest Neighbors — The Laziest Learner</a></li><li class="toc-h3"><a href="#7-naive-bayes-the-minimalist-philosophy-of-probabilistic-inference">7. Naive Bayes — The Minimalist Philosophy of Probabilistic Inference</a></li><li class="toc-h2"><a href="#evaluation-and-model-selection">Evaluation and Model Selection</a></li><li class="toc-h3"><a href="#8-evaluation-metrics-accuracy-is-just-the-beginning">8. Evaluation Metrics — Accuracy Is Just the Beginning</a></li><li class="toc-h3"><a href="#9-a-practical-model-selection-guide-no-free-lunch">9. A Practical Model-Selection Guide — No Free Lunch</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="1-what-is-classification-from-labels-to-decision-boundaries">1. What Is Classification — From Labels to Decision Boundaries</h2>
 
 <img src="/static/images/posts/ml-classification-models/boundary-en.webp" alt="Two-class points separated by a decision boundary in a 2D feature space" loading="lazy">
 
@@ -88,6 +88,11 @@ X_test  = scaler.transform(X_test)   # Apply training statistics only
 
 <h2 id="core-algorithms">Core Algorithms</h2>
 <h3 id="2-logistic-regression-linear-classification-through-a-probabilistic-lens">2. Logistic Regression — Linear Classification Through a Probabilistic Lens</h3>
+
+<img src="/static/images/article-guides/comp-guide-sigmoid-en.svg" alt="Logistic regression maps the linear score z to a probability through the sigmoid function" loading="lazy">
+
+<p>Logistic regression maps the linear score z to a probability through the sigmoid function. A threshold of 0.5 corresponds to z = 0; changing the threshold changes the class decision without changing the fitted probabilities.</p>
+
 
 <p>Despite its name, logistic regression is a classification model through and through. It is the first classifier most practitioners learn and one of the most frequently used baselines in both academic research and industry, precisely because it not only outputs a predicted class but also a calibrated probability estimate. Understanding logistic regression amounts to understanding the probabilistic foundations shared by nearly all parametric classifiers.</p>
 
@@ -373,6 +378,11 @@ print(&quot;Feature means per class:\n&quot;, gnb.theta_)
 <h2 id="evaluation-and-model-selection">Evaluation and Model Selection</h2>
 <h3 id="8-evaluation-metrics-accuracy-is-just-the-beginning">8. Evaluation Metrics — Accuracy Is Just the Beginning</h3>
 
+<img src="/static/images/article-guides/comp-guide-confusion-matrix-en.svg" alt="The 20 teaching predictions contain eight true positives, nine true negatives, two false positives, and one false negative" loading="lazy">
+
+<p>The 20 teaching predictions contain eight true positives, nine true negatives, two false positives, and one false negative. Precision, recall, and accuracy use different denominators and therefore answer different questions.</p>
+
+
 <p>Once a classifier is trained, how should its performance be measured? Many beginners default to <strong>accuracy</strong> — the fraction of correctly classified samples. But accuracy is a dangerous oversimplification, especially under class imbalance. If 99% of a medical dataset consists of healthy subjects, a classifier that always predicts "healthy" achieves 99% accuracy while being completely useless for disease detection. Choosing the right evaluation metric is, fundamentally, an act of encoding what it means to be wrong in the specific context of your problem.</p>
 
 <p>The foundation of all evaluation metrics is the <strong>confusion matrix</strong>. For binary classification:</p>
@@ -487,11 +497,7 @@ plt.show()
 <li>Wolpert, D. H. (1996). The lack of a priori distinctions between learning algorithms. <em>Neural Computation</em>, 8(7), 1341–1390. https://doi.org/10.1162/neco.1996.8.7.1341</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/engineered-superstructures/">← Engineered Superstructures: Origami, Lattices, and Beyond</a></span><span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/engineered-superstructures/">← Engineered Superstructures: Origami, Lattices, and Beyond</a></span><span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-ml/">Common Regression Models in Machine Learning</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-ml/">The Nature of Deep Learning</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/ml-predict-fiber-mechanics/">ML for Fiber Mechanics: Data Prep to Model Deployment</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -511,11 +517,11 @@ plt.show()
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

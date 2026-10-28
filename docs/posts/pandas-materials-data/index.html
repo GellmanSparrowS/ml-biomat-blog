@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pandas for Materials Data Processing — ML-Biomat</title>
-<meta name="description" content="A practical guide to Pandas for materials research data: load heterogeneous lab files, clean and merge measurements, run grouped statistics, and create publication-ready summaries and plots.">
+<meta name="description" content="Organize experimental records with DataFrames, clean missing or inconsistent values, and summarize repeated measurements by condition. Merge related tables by sample identity and export results while retaining the labels needed for later analysis.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/pandas-materials-data/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/pandas-materials-data/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/pandas-materials-data-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/pandas-materials-data/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Pandas for Materials Data Processing">
-<meta property="og:description" content="A practical guide to Pandas for materials research data: load heterogeneous lab files, clean and merge measurements, run grouped statistics, and create publication-ready summaries and plots.">
+<meta property="og:description" content="Organize experimental records with DataFrames, clean missing or inconsistent values, and summarize repeated measurements by condition. Merge related tables by sample identity and export results while retaining the labels needed for later analysis.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/pandas-materials-data/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/pandas-materials-data.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Pandas for Materials Data Processing", "description": "A practical guide to Pandas for materials research data: load heterogeneous lab files, clean and merge measurements, run grouped statistics, and create publication-ready summaries and plots.", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 388, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/pandas-materials-data/", "image": "https://ml-biomat.com/static/images/og/pandas-materials-data.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "Pandas for Materials Data Processing", "item": "https://ml-biomat.com/posts/pandas-materials-data/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Pandas for Materials Data Processing", "description": "Organize experimental records with DataFrames, clean missing or inconsistent values, and summarize repeated measurements by condition. Merge related tables by sample identity and export results while retaining the labels needed for later analysis.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 327, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/pandas-materials-data/", "image": "https://ml-biomat.com/static/images/og/pandas-materials-data.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Python Tutorials", "item": "https://ml-biomat.com/categories/python-tutorials/en/"}, {"@type": "ListItem", "position": 3, "name": "Pandas for Materials Data Processing", "item": "https://ml-biomat.com/posts/pandas-materials-data/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Pandas for Materials Data Processing</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/python-tutorials/">Python Tutorials</a>
+<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/python-tutorials/en/">Python Tutorials</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/pandas/">pandas</a><a class="tag-pill" href="/tags/python/">python</a><a class="tag-pill" href="/tags/data-processing/">data-processing</a><a class="tag-pill" href="/tags/experimental-data/">experimental-data</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#why-pandas">Why Pandas</a></li><li class="toc-h2"><a href="#the-pandas-workflow">The Pandas Workflow</a></li><li class="toc-h3"><a href="#reading-experimental-data">Reading Experimental Data</a></li><li class="toc-h3"><a href="#data-cleaning">Data Cleaning</a></li><li class="toc-h3"><a href="#group-statistics">Group Statistics</a></li><li class="toc-h3"><a href="#visualization">Visualization</a></li><li class="toc-h3"><a href="#export-results">Export Results</a></li><li class="toc-h2"><a href="#quick-troubleshooting">Quick Troubleshooting</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#advanced-data-operations">Advanced Data Operations</a></li></ul></details><h2 id="why-pandas">Why Pandas</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-pandas">Why Pandas</a></li><li class="toc-h2"><a href="#the-pandas-workflow">The Pandas Workflow</a></li><li class="toc-h3"><a href="#reading-experimental-data">Reading Experimental Data</a></li><li class="toc-h3"><a href="#data-cleaning">Data Cleaning</a></li><li class="toc-h3"><a href="#group-statistics">Group Statistics</a></li><li class="toc-h3"><a href="#visualization">Visualization</a></li><li class="toc-h3"><a href="#export-results">Export Results</a></li><li class="toc-h2"><a href="#quick-troubleshooting">Quick Troubleshooting</a></li><li class="toc-h2"><a href="#references">References</a></li><li class="toc-h2"><a href="#advanced-data-operations">Advanced Data Operations</a></li></ul></details><h2 id="why-pandas">Why Pandas</h2>
 
 <p>Most researchers manually merge, filter, and plot experimental data in Excel -- error-prone and time-consuming. Pandas handles all of this with a few lines of code.</p>
 
@@ -86,6 +86,11 @@ for col in [&quot;modulus&quot;, &quot;diameter&quot;]:
 </code></pre>
 
 <h3 id="group-statistics">Group Statistics</h3>
+
+<img src="/static/images/article-guides/comp-guide-groupby-en.svg" alt="Grouping the four teaching measurements by condition gives means of 3 GPa for A and 7 GPa for B, with two samples in each group" loading="lazy">
+
+<p>Grouping the four teaching measurements by condition gives means of 3 GPa for A and 7 GPa for B, with two samples in each group. Keeping the sample count beside the mean helps readers interpret each summary.</p>
+
 
 <pre><code class="language-python">
 summary = df.groupby(&quot;treatment&quot;).agg({
@@ -128,6 +133,11 @@ with pd.ExcelWriter(&quot;results.xlsx&quot;) as writer:
 </ul>
 <h2 id="advanced-data-operations">Advanced Data Operations</h2>
 
+<img src="/static/images/article-guides/comp-guide-merge-en.svg" alt="An inner join on sample ID connects the mechanics and morphology tables" loading="lazy">
+
+<p>An inner join on sample ID connects the mechanics and morphology tables. Only A2 appears in both teaching tables, so the resulting row contains its modulus of 3 GPa and diameter of 50 nm.</p>
+
+
 <p>Merging data from multiple sources is a common task in materials research. Suppose you have mechanical test results in one CSV file and fiber morphology measurements from SEM analysis in another. Pandas merge function allows you to combine these datasets on a common key such as sample ID:</p>
 
 <pre><code class="language-python">
@@ -148,11 +158,7 @@ df[&quot;stress_smooth&quot;] = df[&quot;stress&quot;].rolling(window=5, center=
 df[&quot;normalized_modulus&quot;] = df.groupby(&quot;treatment&quot;)[&quot;modulus_GPa&quot;].transform(lambda x: x / x.mean())
 </code></pre>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/numpy-crash-course/">← NumPy for Materials Research: From Zero to Productive</a></span><span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/numpy-crash-course/">← NumPy for Materials Research: From Zero to Productive</a></span><span><a href="/posts/scientific-visualization-python/">Scientific Data Visualization with Python: Publication-Ready Figures →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-06</span><a href="/posts/python-env-setup/">Setting Up a Python Scientific Computing Environment</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/networkx-fundamentals/">NetworkX Fundamentals with Python</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/scipy-curve-fitting/">Practical Curve Fitting with SciPy: From Basics to Advanced Models</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -172,11 +178,11 @@ df[&quot;normalized_modulus&quot;] = df.groupby(&quot;treatment&quot;)[&quot;mod
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

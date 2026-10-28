@@ -1,11 +1,12 @@
 ---
 title: "材料科学中的特征工程：从实验数据到机器学习就绪数据"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "machine-learning"
 tags: ["特征工程", "机器学习", "材料科学", "数据预处理"]
 lang: "zh"
 slug: "feature-engineering-materials-zh"
-description: "材料科学中的特征工程：从实验数据到机器学习就绪数据。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "从材料描述符与制备条件构造特征矩阵，处理分类变量、物理交互项和缺失信息。结合小样本特征选择与训练集内的缩放方法，说明怎样保留变量含义、避免目标泄漏，并让模型评价保持一致。"
 ---
 
 ## 真正的瓶颈
@@ -26,6 +27,11 @@ df = pd.DataFrame({"纤维直径_nm": [45,52,48], "交联密度_pct": [2.5,1.8,3
 ```
 
 ## 分类变量编码
+
+![以乙醇为参照类别时，两列指示变量即可区分三种溶剂](/static/images/article-guides/comp-guide-one-hot-zh.svg)
+
+以乙醇为参照类别时，两列指示变量即可区分三种溶剂。全零行是有效的类别表示，并不意味着该样品的信息缺失。
+
 
 ```python
 from sklearn.preprocessing import OneHotEncoder
@@ -57,6 +63,11 @@ def engineer_features(df):
 - Guyon, I. & Elisseeff, A. (2003). An introduction to variable and feature selection. *Journal of Machine Learning Research*, 3, 1157-1182.
 
 ## 深入探讨：特征缩放与标准化
+
+![这个教学缩放器从训练值 (2, 4, 6) 得到均值 4 和标准差 √(8/3)](/static/images/article-guides/comp-guide-train-scaling-zh.svg)
+
+这个教学缩放器从训练值 [2, 4, 6] 得到均值 4 和标准差 √(8/3)。将同一组参数用于测试值 8，结果约为 2.449，从而让训练与测试数据处于一致的坐标基准。
+
 
 特征缩放是机器学习预处理中容易被忽视但至关重要的步骤。不同物理量通常具有截然不同的量级——纤维直径可能只有几十纳米，而杨氏模量可能有几个吉帕。如果不进行缩放，依赖距离的模型会将量级大的特征视为更重要，即使它们物理上并不更关键。
 

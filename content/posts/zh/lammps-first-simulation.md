@@ -1,11 +1,12 @@
 ---
 title: "分子动力学入门：你的第一个LAMMPS模拟"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "multiscale-modeling"
 tags: ["分子动力学", "LAMMPS", "模拟", "教程", "力场"]
 lang: "zh"
 slug: "lammps-first-simulation-zh"
-description: "分子动力学入门：你的第一个LAMMPS模拟。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "读懂 LAMMPS 输入脚本的组成，准备首个分子动力学计算并查看基本轨迹输出。通过周期距离和 Lennard-Jones 势图理解边界条件与相互作用，再讨论力场、时间步长和常见运行问题。"
 ---
 
 ## 什么是分子动力学
@@ -88,6 +89,10 @@ fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
 run             100000                    # NPT生产
 ```
 
+![周期距离可以跨越盒子边界](/static/images/article-guides/mech-lammps-periodic-zh.svg)
+
+在构造的一维示例中，盒内坐标相差 0.8L 的粒子通过周期边界只相距 0.2L。正交盒子的最小镜像位移可逐分量计算为 Δxmin = Δx − L round(Δx/L)。
+
 ### 关键参数
 
 | 参数 | 含义 | 典型值 |
@@ -108,6 +113,10 @@ run             100000                    # NPT生产
 | AMBER ff19SB | 蛋白质 | Tian (2020) |
 | ReaxFF | 反应体系、断键 | van Duin (2001) |
 | Martini | 粗粒化生物分子 | Marrink (2007) |
+
+![读懂 Lennard–Jones 成对势](/static/images/article-guides/mech-lammps-lj-zh.svg)
+
+Lennard–Jones 势在 r = 2^(1/6)σ 处取最小值 U = −ε，力由 −dU/dr 给出。约化单位解析曲线解释一项成对相互作用；实际水模型还需采用其规定的键合与静电项。
 
 ### 轨迹分析
 

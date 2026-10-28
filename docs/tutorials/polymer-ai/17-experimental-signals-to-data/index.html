@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="从实验信号到可用的数据">
 <meta property="og:description" content="从真实溶菌酶小角度 X 射线散射记录估计回转半径，再用受控散射数据比较预测模型对噪声、背景和缺失观测的响应。">
 <meta property="og:type" content="website">
@@ -22,7 +22,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "从实验信号到可用的数据", "description": "从真实溶菌酶小角度 X 射线散射记录估计回转半径，再用受控散射数据比较预测模型对噪声、背景和缺失观测的响应。", "url": "https://ml-biomat.com/tutorials/polymer-ai/17-experimental-signals-to-data/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-17.css?v=b422f9f164fb"><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-17.css?v=b422f9f164fb"><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -30,17 +30,17 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/" class="active">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/" class="active">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 
 </div></header>
-<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/tutorials/">教程</a><span aria-hidden="true">/</span><a href="/tutorials/polymer-ai/">高分子与生物大分子</a><span aria-hidden="true">/</span><span>第 17 节</span></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>配套代码 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
+<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/wet-lab-data/">湿实验数据处理</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#signal">01　信号究竟测到了什么</a><a href="#scattering">02　从散射认识尺寸</a><a href="#records">03　把背景与误差带入记录</a><a href="#learning">04　让AI学习曲线到结构</a><a href="#experiment">05　运行并检查研究结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 17 节 · 从仪器记录走向可以检验的结构判断</p>
-<h1>从实验信号到可用的数据<span>一条曲线怎样告诉我们，分子有多大</span></h1>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">湿实验数据处理</p><nav><a href="#signal">01　信号究竟测到了什么</a><a href="#scattering">02　从散射认识尺寸</a><a href="#records">03　把背景与误差带入记录</a><a href="#learning">04　让AI学习曲线到结构</a><a href="#experiment">05　运行并检查研究结果</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从仪器记录走向可以检验的结构判断</p>
+<h1>从实验信号到可用的数据</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">把一杯蛋白质溶液放在面前，我们很难凭颜色判断里面的分子是舒展开了，还是聚到了一起。实验仪器可以把肉眼看不见的变化变成峰、斑点和曲线，AI又可以从这些记录中学习结构信息。但从“仪器给出一个数”到“知道分子发生了什么”，中间还隔着单位、背景、误差和模型。本节以溶菌酶的小角度X射线散射为线索，走过这段过程：先理解信号为什么携带尺寸信息，再整理真实记录，最后训练预测模型，看看测量条件变化时，哪些判断仍然可靠，哪些地方值得重新采集数据。</p>
 
@@ -389,7 +389,7 @@ Six figures, full generated observations and model weights: scattering_outputs/
 <p>这一条件下Guinier也遇到了问题：160条记录中，有1条拟合出正斜率，无法得到实数回转半径。程序把它保留为失败记录，剩余159条有效预测的RMSE约0.2848纳米；覆盖率统计中，这个失败仍计作未覆盖。若只报一个平均误差，却省略有效结果数量，就会掩盖方法在弱信号或窄窗口下可能无法输出答案的情形。把失败位置保留下来，才能回到相应曲线寻找原因。</p>
 <p>图F进一步检查预测区间。校准后固定的总宽度，Guinier约0.1554纳米，岭回归约0.1050纳米，神经网络约0.0821纳米。在常规80个测试对象上，要求同一对象两次观测都被覆盖时，比例分别为90%、93.75%和95%。神经网络在这次试验中同时给出较窄区间和较高覆盖；实际比例来自有限的80个对象，会随新抽样波动。</p>
 <p>保持区间宽度不变，改为约3倍噪声后，神经网络的共同覆盖率降到25%；加入背景时为17.5%，缺少低q时为0。这里改变了校准数据原先代表的测量条件，预测误差增大而区间没有随之加宽。研究上可以据此增加按测量条件分层的校准数据，把计数与背景信息纳入预测，或者先检测新曲线是否落在已经验证的范围。区间是否有用，需要和它所覆盖的样品与采集条件一起判断。</p>
-<p>回到最初的蛋白质研究，数据工作的终点是一条可以重走的推断路径：样品身份与环境对应原始文件，文件对应处理与单位，曲线对应拟合条件，模型对应训练对象与留出评价。发现误差后，沿这条路径能够判断应该补充空白、增加曝光、恢复低角度信息，还是扩展结构模型。下一节将进一步讨论怎样把分子的连接和材料结构直接交给AI，让实验曲线、化学连接与空间关系共同参与研究。</p>
+<p>回到最初的蛋白质研究，数据工作的终点是一条可以重走的推断路径：样品身份与环境对应原始文件，文件对应处理与单位，曲线对应拟合条件，模型对应训练对象与留出评价。发现误差后，沿这条路径能够判断应该补充空白、增加曝光、恢复低角度信息，还是扩展结构模型。<a href="/tutorials/polymer-ai/18-learning-molecular-graphs/">《怎样让模型读懂分子的连接与材料结构》</a>将进一步讨论怎样把分子的连接和材料结构直接交给AI，让实验曲线、化学连接与空间关系共同参与研究。</p>
 </section>
 
 <section id="sources" class="sources"><h2>资料与延伸阅读</h2>
@@ -398,16 +398,16 @@ Six figures, full generated observations and model weights: scattering_outputs/
 <p>Rumelhart、Hinton与Williams，1986：<a href="https://doi.org/10.1038/323533a0">Learning representations by back-propagating errors</a>。预测区间的校准思路参见Angelopoulos与Bates：<a href="https://arxiv.org/abs/2107.07511">A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification</a>。本节四组科学史图为根据相关问题绘制的原创原理示意，实验图与模型图分别由注明的数据和完整代码生成。</p>
 </section>
 </div></div>
-</div><nav class="tutorial-neighbors" aria-label="教程顺序"><a href="/tutorials/polymer-ai/16-material-response-and-history/" rel="prev"><small>← 上一节</small><strong>材料怎样响应一次真实的使用过程</strong></a><a href="/tutorials/polymer-ai/18-learning-molecular-graphs/" rel="next"><small>下一节 →</small><strong>怎样让模型读懂分子的连接与材料结构</strong></a></nav></main>
+</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/18-learning-molecular-graphs/"><strong>怎样让模型读懂分子的连接与材料结构</strong></a><a href="/tutorials/polymer-ai/19-selecting-the-next-experiment/"><strong>下一次应该测什么、做哪个样品</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 <script>
 (function(){
 (()=>{

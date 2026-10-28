@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>丝素蛋白：从分子结构到力学功能 — ML-Biomat</title>
-<meta name="description" content="丝素蛋白：从分子结构到力学功能。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="从丝素蛋白的组成与 β-折叠组织理解两相力学响应。结构示意展示结晶连接和可伸展非晶链段的不同作用，再将脱胶、溶解、后处理和牵伸等工艺与取向、结晶度联系起来。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/silk-fibroin-structure-mechanics/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="丝素蛋白：从分子结构到力学功能">
-<meta property="og:description" content="丝素蛋白：从分子结构到力学功能。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="从丝素蛋白的组成与 β-折叠组织理解两相力学响应。结构示意展示结晶连接和可伸展非晶链段的不同作用，再将脱胶、溶解、后处理和牵伸等工艺与取向、结晶度联系起来。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/silk-fibroin-structure-mechanics-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "丝素蛋白：从分子结构到力学功能", "description": "丝素蛋白：从分子结构到力学功能。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 190, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/", "image": "https://ml-biomat.com/static/images/og/silk-fibroin-structure-mechanics-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "生物·材料·结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "丝素蛋白：从分子结构到力学功能", "item": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "丝素蛋白：从分子结构到力学功能", "description": "从丝素蛋白的组成与 β-折叠组织理解两相力学响应。结构示意展示结晶连接和可伸展非晶链段的不同作用，再将脱胶、溶解、后处理和牵伸等工艺与取向、结晶度联系起来。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 1072, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/", "image": "https://ml-biomat.com/static/images/og/silk-fibroin-structure-mechanics-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "生物·材料·结构", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "丝素蛋白：从分子结构到力学功能", "item": "https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>丝素蛋白：从分子结构到力学功能</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>1 min read</span><span>·</span><a href="/categories/biomaterials/">生物·材料·结构</a>
+<span>2026-06-26</span><span>·</span><span>3 分钟阅读</span><span>·</span><a href="/categories/biomaterials/">生物·材料·结构</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E4%B8%9D%E7%B4%A0/">丝素</a><a class="tag-pill" href="/tags/%E7%94%9F%E7%89%A9%E6%9D%90%E6%96%99/">生物材料</a><a class="tag-pill" href="/tags/%E8%9B%8B%E7%99%BD%E8%B4%A8%E7%BB%93%E6%9E%84/">蛋白质结构</a><a class="tag-pill" href="/tags/%E5%8A%9B%E5%AD%A6/">力学</a><a class="tag-pill" href="/tags/beta-%E6%8A%98%E5%8F%A0/">beta-折叠</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#层级结构">层级结构</a></li><li class="toc-h2"><a href="#分子组成">分子组成</a></li><li class="toc-h2"><a href="#beta-折叠结晶">beta-折叠结晶</a></li><li class="toc-h2"><a href="#工艺-结构-性能关系">工艺-结构-性能关系</a></li><li class="toc-h2"><a href="#实验建议">实验建议</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#丝素蛋白力学性能的微观起源">丝素蛋白力学性能的微观起源</a></li></ul></details><p>丝素蛋白是自然界最优异的结构蛋白之一。单根蚕茧纤维同时具备高强度（约500 MPa）、高延伸性（约20%应变）和超越Kevlar的韧性。理解这种性能如何从分子架构中产生，是设计更好的蛋白质基材料的基础。</p>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#层级结构">层级结构</a></li><li class="toc-h2"><a href="#分子组成">分子组成</a></li><li class="toc-h2"><a href="#beta-折叠结晶">beta-折叠结晶</a></li><li class="toc-h2"><a href="#工艺-结构-性能关系">工艺-结构-性能关系</a></li><li class="toc-h2"><a href="#实验建议">实验建议</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li><li class="toc-h2"><a href="#丝素蛋白力学性能的微观起源">丝素蛋白力学性能的微观起源</a></li></ul></details><p>丝素蛋白是自然界最优异的结构蛋白之一。单根蚕茧纤维同时具备高强度（约500 MPa）、高延伸性（约20%应变）和超越Kevlar的韧性。理解这种性能如何从分子架构中产生，是设计更好的蛋白质基材料的基础。</p>
 
 <h2 id="层级结构">层级结构</h2>
 
@@ -68,9 +68,17 @@
 
 <p>(GAGAGS)n重复序列组装成反平行beta-折叠，作为非晶基质中的物理交联点。关键参数：结晶尺寸2-6 nm (XRD)，结晶度指数10-50%，片层间距0.35 nm（氢键），链间距0.95 nm（范德华力）。</p>
 
+<img src="/static/images/article-guides/mech-silk-sheets-zh.svg" alt="丝素：结晶区中的有序链段" loading="lazy">
+
+<p>反平行 β-折叠中，相邻链段方向相反，并通过链间氢键连接。示意图区分了单个折叠片层与堆积的结晶区，距离采用示意比例。</p>
+
 <h2 id="工艺-结构-性能关系">工艺-结构-性能关系</h2>
 
 <table><tr><th>处理步骤</th><th>结构变化</th><th>性能变化</th></tr><tr><td>脱胶（煮沸）</td><td>去除丝胶包衣</td><td>纤维分离，微刚度下降</td></tr><tr><td>LiBr溶解</td><td>蛋白质变性，断氢键</td><td>失去结晶性</td></tr><tr><td>甲醇/乙醇处理</td><td>诱导beta-折叠</td><td>增加刚度，降低溶解性</td></tr><tr><td>牵伸</td><td>分子链取向</td><td>增加强度和各向异性</td></tr></table>
+
+<img src="/static/images/article-guides/mech-silk-composite-zh.svg" alt="结晶节点与可伸展链段" loading="lazy">
+
+<p>结晶区提供物理连接，连接其间的非晶链段在伸展中改变构象。前后两图保留相同连接关系，用于解释两相机制。</p>
 
 <h2 id="实验建议">实验建议</h2>
 
@@ -97,12 +105,8 @@
 
 <p>丝素的力学性能还表现出显著的各向异性——沿着纤维轴向的模量和强度远高于横向方向。这种各向异性是beta-折叠晶体和分子链沿纤维轴择优取向的直接结果。在再生丝素材料的制备中，通过控制加工条件诱导分子取向是获得优异力学性能的关键策略。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/sem-image-analysis-zh/">← SEM图像分析实战：纤维形态的自动化测量</a></span><span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures-zh/">工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures-zh/">生物材料的层级超结构：从分子到宏观的力学设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/sem-image-analysis-zh/">← SEM图像分析实战：纤维形态的自动化测量</a></span><span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/engineered-superstructures-zh/">工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></li><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures-zh/">生物材料的层级超结构：从分子到宏观的力学设计</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves-zh/">应力-应变曲线解读：材料力学入门</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -113,7 +117,7 @@
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -121,11 +125,11 @@
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

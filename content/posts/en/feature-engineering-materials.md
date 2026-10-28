@@ -1,11 +1,12 @@
 ---
 title: "Feature Engineering for Materials Science"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "machine-learning"
 tags: ["feature-engineering", "machine-learning", "materials-science", "data-preprocessing"]
 lang: "en"
 slug: "feature-engineering-materials-ml"
-description: "Feature Engineering for Materials Science: From Experimental Logs to ML-Ready Data. A practical guide for biology and materials science graduate students, with complete runnable code examples and detailed explanations."
+description: "Construct useful material descriptors, encode categorical processing conditions, and handle interactions and missing values. Learn how feature selection and training-only preprocessing keep a small-data model interpretable and its evaluation consistent."
 ---
 
 ## The Real Bottleneck
@@ -39,6 +40,11 @@ df = pd.DataFrame({
 ```
 
 ### Encoding Categorical Variables
+
+![With ethanol as the reference level, the two indicator columns distinguish three solvents](/static/images/article-guides/comp-guide-one-hot-en.svg)
+
+With ethanol as the reference level, the two indicator columns distinguish three solvents. The all-zero row is a valid category representation; it does not mean the sample has missing information.
+
 
 ```python
 encoder = OneHotEncoder(sparse_output=False, drop="first")
@@ -109,6 +115,11 @@ to_drop = [col for col in upper_tri.columns
 ```
 
 ## Checklist
+
+![This teaching scaler learns mean 4 and standard deviation √(8/3) from training values (2, 4, 6)](/static/images/article-guides/comp-guide-train-scaling-en.svg)
+
+This teaching scaler learns mean 4 and standard deviation √(8/3) from training values [2, 4, 6]. Applying those same parameters transforms the test value 8 to approximately 2.449, preserving one shared coordinate system.
+
 
 - All features numeric
 - No target leakage

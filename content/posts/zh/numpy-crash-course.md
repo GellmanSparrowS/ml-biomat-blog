@@ -1,11 +1,12 @@
 ---
 title: "NumPy完全入门：实验室数据处理必备"
 date: "2026-06-27"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["numpy", "python", "数组", "科学计算", "数据处理"]
 lang: "zh"
 slug: "numpy-crash-course-zh"
-description: "NumPy完全入门：实验室数据处理必备。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "把实验测量整理为数组，逐步使用切片、布尔筛选、广播运算和统计聚合。通过应变与应力数据、逐列中心化及简单拟合示例，理解形状和索引如何影响计算，并将处理结果保存为后续分析可用的数据。"
 ---
 
 NumPy是Python科学计算生态的基石。无论是处理拉伸试验的应力-应变数据、分析AFM力曲线的特征参数、统计SEM图像中数百根纤维的直径分布，还是从分子动力学轨迹中提取结构信息，NumPy数组都是最基础的数据结构。
@@ -58,6 +59,11 @@ z_piezo = raw[:, 0]; deflection_V = raw[:, 1]
 
 ## 四、向量化运算
 
+![对这个教学数组减去 mean(axis=0)，即可逐列中心化](/static/images/article-guides/comp-guide-broadcasting-zh.svg)
+
+对这个教学数组减去 mean(axis=0)，即可逐列中心化。NumPy 将三个列均值广播到两行，得到列均值为零的新数组，无需逐行编写循环。
+
+
 NumPy的核心优势是向量化运算——对整个数组逐元素操作无需for循环。这让代码更简洁且执行速度快得多：
 
 ```python
@@ -79,6 +85,11 @@ percentile_95 = np.percentile(stresses, 95)
 
 ## 六、布尔索引
 
+![同一个布尔掩码用于应变和应力数组时，会保留彼此对应的观测值](/static/images/article-guides/comp-guide-boolean-mask-zh.svg)
+
+同一个布尔掩码用于应变和应力数组时，会保留彼此对应的观测值。这个教学子集中，strain < 0.02 保留前三项，排除恰好等于 0.02 的一项。
+
+
 布尔索引允许通过条件筛选数据子集。在材料力学中，精确筛选弹性区数据是提取杨氏模量的关键步骤：
 
 ```python
@@ -89,6 +100,8 @@ stresses[stresses < 0] = 0
 ```
 
 ### 七、线性拟合：提取杨氏模量
+
+应力–应变曲线弹性段的斜率对应杨氏模量；AFM 力–压痕曲线的斜率则对应接触刚度，单位为力除以长度。对 AFM 数据，应先根据仪器坐标方向扣除悬臂挠曲，再结合探针几何与 [Hertz 等接触模型](/posts/scipy-curve-fitting-zh/) 提取模量。
 
 polyfit使用最小二乘法完成多项式拟合。一阶多项式拟合弹性段数据即可得到模量值。R方评估拟合质量：
 

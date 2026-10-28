@@ -1,11 +1,12 @@
 ---
 title: "The Nature of Deep Learning"
 date: "2026-07-03"
+updated: "2026-10-28"
 category: "machine-learning"
 tags: ["deep-learning","neural-networks","backpropagation","PyTorch"]
 lang: "en"
 slug: "deep-learning-intro-ml"
-description: "A systematic introduction to deep learning: neurons, activation functions, backpropagation, regularization, and transfer learning, with practical guidance on when deep learning is the right tool in materials science."
+description: "Follow a neural network from weighted inputs and activations to loss functions, backpropagation, and optimization. Connect these operations to convolutional, recurrent, and attention models, with practical guidance on training and small datasets."
 ---
 ## Neural Network Foundations
 ### 1. The Nature of Deep Learning — From Feature Engineering to Representation Learning
@@ -23,6 +24,11 @@ One critically important point must be stated clearly at the outset, however: **
 ---
 
 ### 2. The Basic Components — Neurons, Layers, and Activation Functions
+
+![A neuron multiplies each input by its weight, adds the bias, and applies an activation](/static/images/article-guides/comp-guide-neuron-en.svg)
+
+A neuron multiplies each input by its weight, adds the bias, and applies an activation. This numerical example gives z = 0.2 and ReLU(z) = 0.2, making each operation visible.
+
 
 The term "neural network" originates from a rough analogy to biological neural systems: biological neurons receive chemical signals through dendrites, accumulate them in the cell body, and fire an electrical signal along the axon when the threshold is exceeded. Mathematically, an artificial neuron receives an output vector \(\mathbf{x} \in \mathbb{R}^d\) from the previous layer, computes a weighted sum plus a bias, and passes the result through a nonlinear function (the activation function):
 
@@ -103,6 +109,11 @@ One subtlety worth stating explicitly: training minimizes the **empirical risk**
 ---
 
 ### 4. Backpropagation and Gradient Descent — How Networks Learn from Errors
+
+![This one-parameter teaching model shows how an error produces a gradient and a weight update](/static/images/article-guides/comp-guide-gradient-step-en.svg)
+
+This one-parameter teaching model shows how an error produces a gradient and a weight update. With learning rate 0.1, the update changes w from 0.25 to 0.35 and reduces the squared-error loss from 0.125 to 0.045.
+
 
 Forward propagation produces predictions; the loss function quantifies the errors. The central remaining question is: how should the millions of model parameters be adjusted to minimize the loss? The answer is the **Backpropagation** algorithm — the core engine that makes the entire deep learning engineering stack possible, formalized in Rumelhart, Hinton, and Williams' landmark 1986 Nature paper.
 

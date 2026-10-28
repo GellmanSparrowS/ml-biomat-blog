@@ -1,11 +1,12 @@
 ---
 title: "A Practical Introduction to Multiscale Modeling for Biomaterials"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "multiscale-modeling"
 tags: ["multiscale", "biomaterials", "molecular-dynamics", "finite-element", "coarse-graining"]
 lang: "en"
 slug: "multiscale-modeling-biomaterials-intro"
-description: "A practical overview of multiscale modeling approaches for fiber-based biomaterials: from molecular dynamics to continuum mechanics, with Python code examples."
+description: "Choose molecular, mesoscopic and continuum representations for biomaterial questions. Follow the transfer of conformational statistics and effective stiffness between models, using representative-volume averaging and Python examples to connect scales."
 ---
 
 ## Why Multiscale Modeling Matters
@@ -74,6 +75,10 @@ FEA treats the material as a continuous medium with homogenized properties. For 
 
 The challenge: how do you get the constitutive parameters from molecular simulations?
 
+![Transfer quantities, not just pictures](/static/images/article-guides/mech-multiscale-transfer-en.svg)
+
+A molecular model can supply conformational statistics for a mesoscopic chain or network, which in turn supplies an effective response to a continuum model. Each transfer must retain its units, state point and calibration range.
+
 ## Bridging Scales with Python
 
 The real power comes from linking these scales. Here's a minimal example of how to pass MD-derived stiffness to an FEA material model:
@@ -93,6 +98,10 @@ def youngs_modulus_from_md(stress, strain):
 # mesh = create_fiber_network_mesh(fiber_positions_from_cg)
 # results = solve_fe(mesh, material, boundary_conditions)
 ```
+
+![From a representative volume to stiffness](/static/images/article-guides/mech-multiscale-rve-en.svg)
+
+For a representative volume in small uniaxial loading with traction-free lateral faces, averaging local axial stress gives the macroscopic stress. Eeff = ⟨σxx⟩/εxx describes this loading condition; anisotropy and different boundary constraints require the appropriate stiffness components.
 
 ## Key Challenges &amp; Practical Tips
 

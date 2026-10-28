@@ -1,11 +1,12 @@
 ---
 title: "Python科研工具箱完全指南：材料科学与生物研究必备"
 date: "2026-06-27"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["python", "numpy", "scipy", "pandas", "matplotlib", "教程"]
 lang: "zh"
 slug: "python-tools-materials-research-zh"
-description: "面向生物与材料研究者的Python科学工具全指南：从NumPy数据处理、Matplotlib出版级绘图到ASE原子模拟和skimage图像分析，覆盖科研全流程的实用工具链。"
+description: "围绕材料研究中的数据对象，连接 NumPy、SciPy、pandas、绘图、原子结构和图像分析工具。通过力曲线处理、分组统计、显微图像分割与机器学习示例，说明各工具在实际分析中的分工与衔接。"
 ---
 
 材料科学研究每天产生海量数据：拉伸机的力-位移曲线、AFM的力谱图、SEM的电镜照片、XRD的衍射图谱、MD模拟的轨迹文件。手动在Excel里处理这些数据不仅效率低下，而且极易出错、不可复现。Python凭借其免费、开源、生态丰富的优势，已成为材料科学数据处理的事实标准。
@@ -29,6 +30,11 @@ import matplotlib.pyplot as plt
 | 图像分析 | scikit-image | 显微图像分割与测量 |
 
 ## 核心科学计算栈
+
+![数组适合保存数值测量，DataFrame 为观测值附上列名和样品标签，原子结构则同时保存种类、坐标与晶胞](/static/images/article-guides/comp-guide-data-structures-zh.svg)
+
+数组适合保存数值测量，DataFrame 为观测值附上列名和样品标签，原子结构则同时保存种类、坐标与晶胞。先确定数据表示，再选择相应工具与计算方法。
+
 ### 一、NumPy：科学计算的基石
 
 NumPy的核心是多维数组对象ndarray。与Python原生的列表相比，NumPy数组存储连续、运算向量化，处理十万级数据点时快几十倍。
@@ -208,6 +214,11 @@ supercell.write("supercell.pdb")
 ```
 
 ### 六、scikit-image：电镜图像分析
+
+![这个教学二值掩码包含分别由 4 个和 6 个像素构成的独立区域](/static/images/article-guides/comp-guide-segmentation-zh.svg)
+
+这个教学二值掩码包含分别由 4 个和 6 个像素构成的独立区域。连通区域标记将它们区分开，标定后的像素长度 s 则把面积转换为 4s² 与 6s²。网格为示意图。
+
 
 处理SEM/TEM图像以量化纤维形态：
 

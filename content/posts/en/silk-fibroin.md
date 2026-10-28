@@ -1,11 +1,12 @@
 ---
 title: "Silk Fibroin: From Molecular Structure to Mechanical Function"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "biomaterials"
 tags: ["silk", "biomaterials", "protein-structure", "mechanics", "beta-sheet"]
 lang: "en"
 slug: "silk-fibroin-structure-mechanics"
-description: "How silk fibroin's hierarchical structure—from amino acid sequence to beta-sheet crystallites—dictates its remarkable mechanical properties and guides biomaterials design."
+description: "Connect silk fibroin composition and beta-sheet organization to its two-phase mechanical response. Structural diagrams show crystalline connections and extensible amorphous chains, then relate processing choices to orientation and crystallinity."
 ---
 
 ## Why Silk?
@@ -54,6 +55,10 @@ The (Gly-Ala-Gly-Ala-Gly-Ser)n repeats assemble into antiparallel beta-sheets. T
 - Inter-sheet distance: 0.35 nm (hydrogen bonding)
 - Inter-strand distance: 0.95 nm (van der Waals)
 
+![Silk: ordered strands inside a crystal](/static/images/article-guides/mech-silk-sheets-en.svg)
+
+In the antiparallel β-sheet motif, neighboring chain segments run in opposite directions and form hydrogen bonds between strands. The drawing distinguishes a sheet from a packed crystalline domain; distances are schematic.
+
 ## Mechanics and Processing
 ### Mechanical Model: Two-Phase Composite
 
@@ -71,6 +76,10 @@ def silk_modulus(Vc, Ec=20, Ea=0.5):
 for Vc in [0.1, 0.2, 0.3, 0.4, 0.5]:
     print(f"Vc={Vc:.1f}: E={silk_modulus(Vc):.1f} GPa")
 ```
+
+![Crystalline nodes and extensible chains](/static/images/article-guides/mech-silk-composite-en.svg)
+
+Crystalline domains provide physical connections while intervening amorphous chains change conformation during extension. The paired drawings retain the same connections and illustrate the two-phase mechanism.
 
 ### Processing-Structure-Property Relationships
 

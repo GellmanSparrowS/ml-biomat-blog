@@ -1,11 +1,12 @@
 ---
 title: "Common Regression Models in Machine Learning"
 date: "2026-07-03"
+updated: "2026-10-28"
 category: "machine-learning"
 tags: ["regression","machine-learning","scikit-learn","gradient-boosting"]
 lang: "en"
 slug: "regression-models-ml"
-description: "A systematic guide to linear regression, Ridge, Lasso, polynomial regression, SVR, decision trees, random forests, and gradient boosting for scientific and engineering applications, with complete code examples."
+description: "Compare linear regression, regularization, kernel methods, tree ensembles, and boosting through their assumptions and fitting behavior. Use residuals, cross-validation, and suitable error metrics to select a model for numerical prediction."
 ---
 
 
@@ -107,6 +108,11 @@ plt.show()
 
 ## Regularization and Nonlinear Models
 ### 3. Ridge and Lasso — The Art of Regularization
+
+![These unit-radius constraint regions show the geometry behind L1 and L2 regularization](/static/images/article-guides/comp-guide-regularization-en.svg)
+
+These unit-radius constraint regions show the geometry behind L1 and L2 regularization. L1 has corners on the coordinate axes, which helps explain why its solutions can contain exactly zero coefficients.
+
 
 When the number of features approaches or exceeds the sample count (\(d \approx N\) or \(d > N\)), or when features are highly correlated, ordinary linear regression encounters a severe numerical problem: \(\mathbf{X}^T\mathbf{X}\) becomes nearly singular, coefficient estimate variances explode, and predictions become wildly unstable. This is the classic recipe for overfitting. Regularization addresses this by adding a penalty term on coefficient magnitude to the loss function, forcing the model to "not be too greedy" — accepting a slight increase in bias in exchange for a substantial reduction in variance. From a Bayesian perspective, regularization is equivalent to imposing a prior distribution on the parameters: L2 regularization corresponds to a Gaussian prior, and L1 regularization corresponds to a Laplacian prior. Understanding these two forms of regularization is equivalent to understanding the bias-variance tradeoff in the context of linear models.
 
@@ -218,9 +224,14 @@ Using a `Pipeline` to encapsulate the entire preprocessing-modeling chain has tw
 
 ### 5. Support Vector Regression — The ε-Insensitive Tube
 
-Support Vector Regression (SVR) transfers the margin-maximization philosophy of SVMs to regression tasks, but with a fundamentally different objective: rather than finding the hyperplane that maximally separates classes, SVR seeks the widest possible **tube** (ε-tube) that encloses as many training points as possible, penalizing only those that fall outside it. This design introduces a concept absent from ordinary regression: the **ε-insensitive loss**.
+![For the teaching function f(x) = x and a fixed epsilon of 0.6, points inside the shaded tube incur no epsilon-insensitive loss](/static/images/article-guides/comp-guide-svr-tube-en.svg)
 
-The intuition is as follows. Suppose you are fitting a curve through scattered points and you believe the data contains a certain level of measurement noise. For predictions that deviate from the true value by less than ε, you consider the fit "good enough" and apply no penalty. Only when the deviation exceeds ε does the loss begin to accumulate, and it does so linearly — not quadratically as in least squares. This is like drawing a tolerance band of width \(2\varepsilon\) around the regression curve: training points inside the band are structurally irrelevant (analogous to non-support-vectors in classification); only the points outside the band — the "hard" examples — determine the model parameters.
+For the teaching function f(x) = x and a fixed epsilon of 0.6, points inside the shaded tube incur no epsilon-insensitive loss. Orange segments show only the portion of an error that exceeds epsilon.
+
+
+Support Vector Regression (SVR) transfers the margin-maximization philosophy of SVMs to regression tasks, but with a fundamentally different objective: rather than finding the hyperplane that maximally separates classes, epsilon-SVR uses a **tube** of fixed half-width ε and balances a flat regression function against errors outside that tube. The hyperparameter ε sets the tolerated error; it is not widened during an individual fit. This design introduces a concept absent from ordinary regression: the **ε-insensitive loss**.
+
+The intuition is as follows. Suppose you are fitting a curve through scattered points and you believe the data contains a certain level of measurement noise. For predictions that deviate from the true value by less than ε, you consider the fit "good enough" and apply no penalty. Only when the deviation exceeds ε does the loss begin to accumulate, and it does so linearly — not quadratically as in least squares. This is like drawing a tolerance band of width \(2\varepsilon\) around the regression curve: training points inside the band are structurally irrelevant (analogous to non-support-vectors in classification); support vectors can lie on the boundary or outside the band, whereas points strictly inside it have zero epsilon-insensitive loss.
 
 Formally:
 

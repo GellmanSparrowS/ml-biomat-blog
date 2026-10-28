@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>分子动力学入门：你的第一个LAMMPS模拟 — ML-Biomat</title>
-<meta name="description" content="分子动力学入门：你的第一个LAMMPS模拟。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="读懂 LAMMPS 输入脚本的组成，准备首个分子动力学计算并查看基本轨迹输出。通过周期距离和 Lennard-Jones 势图理解边界条件与相互作用，再讨论力场、时间步长和常见运行问题。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/lammps-first-simulation-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/lammps-first-simulation-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/lammps-first-simulation/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/lammps-first-simulation/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="分子动力学入门：你的第一个LAMMPS模拟">
-<meta property="og:description" content="分子动力学入门：你的第一个LAMMPS模拟。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="读懂 LAMMPS 输入脚本的组成，准备首个分子动力学计算并查看基本轨迹输出。通过周期距离和 Lennard-Jones 势图理解边界条件与相互作用，再讨论力场、时间步长和常见运行问题。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/lammps-first-simulation-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/lammps-first-simulation-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "分子动力学入门：你的第一个LAMMPS模拟", "description": "分子动力学入门：你的第一个LAMMPS模拟。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-26", "dateModified": "2026-06-26", "wordCount": 413, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/lammps-first-simulation-zh/", "image": "https://ml-biomat.com/static/images/og/lammps-first-simulation-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "分子动力学入门：你的第一个LAMMPS模拟", "item": "https://ml-biomat.com/posts/lammps-first-simulation-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "分子动力学入门：你的第一个LAMMPS模拟", "description": "读懂 LAMMPS 输入脚本的组成，准备首个分子动力学计算并查看基本轨迹输出。通过周期距离和 Lennard-Jones 势图理解边界条件与相互作用，再讨论力场、时间步长和常见运行问题。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 968, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/lammps-first-simulation-zh/", "image": "https://ml-biomat.com/static/images/og/lammps-first-simulation-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "多尺度模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "分子动力学入门：你的第一个LAMMPS模拟", "item": "https://ml-biomat.com/posts/lammps-first-simulation-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>分子动力学入门：你的第一个LAMMPS模拟</h1>
 <div class="article-meta">
-<span>2026-06-26</span><span>·</span><span>2 min read</span><span>·</span><a href="/categories/multiscale-modeling/">多尺度模拟</a>
+<span>2026-06-26</span><span>·</span><span>3 分钟阅读</span><span>·</span><a href="/categories/multiscale-modeling/">多尺度模拟</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6/">分子动力学</a><a class="tag-pill" href="/tags/LAMMPS/">LAMMPS</a><a class="tag-pill" href="/tags/%E6%A8%A1%E6%8B%9F/">模拟</a><a class="tag-pill" href="/tags/%E6%95%99%E7%A8%8B/">教程</a><a class="tag-pill" href="/tags/%E5%8A%9B%E5%9C%BA/">力场</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#什么是分子动力学">什么是分子动力学</a></li><li class="toc-h2"><a href="#入门基础">入门基础</a></li><li class="toc-h3"><a href="#安装lammps">安装LAMMPS</a></li><li class="toc-h3"><a href="#lammps输入脚本结构">LAMMPS输入脚本结构</a></li><li class="toc-h3"><a href="#第一个模拟-水盒子">第一个模拟：水盒子</a></li><li class="toc-h3"><a href="#关键参数">关键参数</a></li><li class="toc-h2"><a href="#力场与分析">力场与分析</a></li><li class="toc-h3"><a href="#常用力场">常用力场</a></li><li class="toc-h3"><a href="#轨迹分析">轨迹分析</a></li><li class="toc-h3"><a href="#常见问题">常见问题</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#深入探讨-力场选择与验证">深入探讨：力场选择与验证</a></li></ul></details><h2 id="什么是分子动力学">什么是分子动力学</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#什么是分子动力学">什么是分子动力学</a></li><li class="toc-h2"><a href="#入门基础">入门基础</a></li><li class="toc-h3"><a href="#安装lammps">安装LAMMPS</a></li><li class="toc-h3"><a href="#lammps输入脚本结构">LAMMPS输入脚本结构</a></li><li class="toc-h3"><a href="#第一个模拟-水盒子">第一个模拟：水盒子</a></li><li class="toc-h3"><a href="#关键参数">关键参数</a></li><li class="toc-h2"><a href="#力场与分析">力场与分析</a></li><li class="toc-h3"><a href="#常用力场">常用力场</a></li><li class="toc-h3"><a href="#轨迹分析">轨迹分析</a></li><li class="toc-h3"><a href="#常见问题">常见问题</a></li><li class="toc-h2"><a href="#参考资料">参考资料</a></li><li class="toc-h2"><a href="#深入探讨-力场选择与验证">深入探讨：力场选择与验证</a></li></ul></details><h2 id="什么是分子动力学">什么是分子动力学</h2>
 
 <p>MD通过在每个时间步求解牛顿运动方程(F=ma)来模拟原子运动。给定了初始位置、速度和力场(势能函数)，MD预测系统如何随时间演化。</p>
 
@@ -131,6 +131,10 @@ fix             npt all npt temp 300.0 300.0 100.0 iso 1.0 1.0 1000.0
 run             100000                    # NPT生产
 </code></pre>
 
+<img src="/static/images/article-guides/mech-lammps-periodic-zh.svg" alt="周期距离可以跨越盒子边界" loading="lazy">
+
+<p>在构造的一维示例中，盒内坐标相差 0.8L 的粒子通过周期边界只相距 0.2L。正交盒子的最小镜像位移可逐分量计算为 Δxmin = Δx − L round(Δx/L)。</p>
+
 <h3 id="关键参数">关键参数</h3>
 
 <table><tr><th>参数</th><th>含义</th><th>典型值</th></tr><tr><td>timestep</td><td>积分步长</td><td>1.0-2.0 fs</td></tr><tr><td>cutoff</td><td>非键作用截断距离</td><td>10-12 埃</td></tr><tr><td>temperature</td><td>系统温度</td><td>300 K(室温)</td></tr><tr><td>NVT</td><td>恒粒子数/体积/温度</td><td>平衡阶段</td></tr><tr><td>NPT</td><td>恒粒子数/压力/温度</td><td>生产阶段</td></tr></table>
@@ -139,6 +143,10 @@ run             100000                    # NPT生产
 <h3 id="常用力场">常用力场</h3>
 
 <table><tr><th>力场</th><th>适用</th><th>参考文献</th></tr><tr><td>OPLS-AA</td><td>蛋白质、有机分子</td><td>Jorgensen (1996)</td></tr><tr><td>CHARMM36</td><td>蛋白质、核酸</td><td>Best (2012)</td></tr><tr><td>AMBER ff19SB</td><td>蛋白质</td><td>Tian (2020)</td></tr><tr><td>ReaxFF</td><td>反应体系、断键</td><td>van Duin (2001)</td></tr><tr><td>Martini</td><td>粗粒化生物分子</td><td>Marrink (2007)</td></tr></table>
+
+<img src="/static/images/article-guides/mech-lammps-lj-zh.svg" alt="读懂 Lennard–Jones 成对势" loading="lazy">
+
+<p>Lennard–Jones 势在 r = 2^(1/6)σ 处取最小值 U = −ε，力由 −dU/dr 给出。约化单位解析曲线解释一项成对相互作用；实际水模型还需采用其规定的键合与静电项。</p>
 
 <h3 id="轨迹分析">轨迹分析</h3>
 
@@ -173,12 +181,8 @@ rdf_oo.run()
 
 <p>力场验证是经常被忽视但至关重要的步骤。在进行大规模生产模拟之前，用你知道正确结果的简单系统验证力场——例如计算水的密度和扩散系数，或者计算已知实验值的短肽构象分布。如果力场无法重现这些基本性质，那么对复杂系统的模拟结果就需要谨慎解释。这是一个非常重要的科学原则——永远在你可控的范围内验证你的方法。</p>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/fiber-network-mechanics-zh/">← 纤维网络力学基础：生物材料研究的关键概念</a></span><span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-07</span><a href="/posts/coarse-grained-biomolecular-networks-zh/">生物分子网络的粗粒化建模：从映射方案到验证方法</a></li><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/fiber-network-mechanics-zh/">← 纤维网络力学基础：生物材料研究的关键概念</a></span><span><a href="/posts/sem-image-analysis-zh/">SEM图像分析实战：纤维形态的自动化测量 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-09-07</span><a href="/posts/coarse-grained-biomolecular-networks-zh/">生物分子网络的粗粒化建模：从映射方案到验证方法</a></li><li class="post-row"><span class="row-date">2026-06-29</span><a href="/posts/gromacs-md-tutorial-zh/">GROMACS分子动力学模拟实战：从结构准备到轨迹分析</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/multiscale-modeling-biomaterials-intro-zh/">多尺度模拟在纤维生物材料中的应用入门</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -189,7 +193,7 @@ rdf_oo.run()
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -197,11 +201,11 @@ rdf_oo.run()
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

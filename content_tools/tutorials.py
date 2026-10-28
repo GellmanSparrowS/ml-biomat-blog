@@ -1,4 +1,4 @@
-"""Render the polymer tutorial series within the shared ML-Biomat site shell."""
+"""Render topic-based tutorial articles while retaining their published URLs."""
 from __future__ import annotations
 import html
 import json
@@ -21,87 +21,68 @@ def load():
     return data
 
 
-def listing(lessons, categories, filtered=False):
-    result = '<ol class="tutorial-list">'
-    for item in lessons:
-        title=html.escape(item['title']);desc=html.escape(item['description'])
-        topics=' · '.join(categories[c]['name_zh'] for c in item['categories'])
-        search=' '.join([item['title'],item['description'],*item['tags'],topics])
-        attrs=f' data-tutorial-item data-search="{html.escape(search,quote=True)}" data-categories="{" ".join(item["categories"])}"' if filtered else ''
-        result += f'<li{attrs}><a href="{item["url"]}"><span class="tutorial-number">{item["number"]:02d}</span><div><h3>{title}</h3><p>{desc}</p><span class="tutorial-topics">{html.escape(topics)}</span></div></a></li>'
-    return result+'</ol>'
-
-
-def feature(data):
-    return f'''<section class="tutorial-feature"><div><small>系列教程 · 20 节</small><h2><a href="{BASE}">{html.escape(data['title'])}</a></h2><p>从分子与构象到网络、实验数据和 AI 设计，结合交互图解与 Python 计算逐步学习。</p></div><a class="tutorial-feature-link" href="{BASE}">查看教程 <span aria-hidden="true">→</span></a></section>'''
-
-
-def category_section(data, category, categories):
-    lessons=[p for p in data['lessons'] if category in p['categories']]
-    if not lessons: return ''
-    return '<section class="tutorial-category"><h2>系列教程</h2><p><a href="'+BASE+'">高分子与生物大分子 · 完整阅读路线 →</a></p>'+listing(lessons,categories)+'</section>'
+def contextual_links(body, lesson, lessons):
+    """Replace sequence-only prose references with article names; keep code and data exact."""
+    chunks = re.split(r'(<script\b.*?</script>|<pre\b.*?</pre>|<style\b.*?</style>|<svg\b.*?</svg>|<code\b.*?</code>)', body, flags=re.S)
+    by_number={p['number']:p for p in lessons}
+    def ref(number):
+        item=by_number.get(number)
+        return f'<a href="{item["url"]}">《{html.escape(item["title"])}》</a>' if item else None
+    for index in range(0,len(chunks),2):
+        segments=re.split(r'(<[^>]+>)',chunks[index])
+        in_link=False
+        for j,segment in enumerate(segments):
+            if segment.startswith('<a '): in_link=True
+            elif segment.startswith('</a'): in_link=False
+            if segment.startswith('<') or in_link: continue
+            segment=re.sub(r'第\s*(\d{1,2})\s*节',lambda m:ref(int(m[1])) or m[0],segment)
+            for text,number in [('下一节',lesson['number']+1),('上一节',lesson['number']-1),('前一节',lesson['number']-1)]:
+                if ref(number): segment=segment.replace(text,ref(number))
+            segments[j]=segment
+        chunks[index]=''.join(segments)
+    return ''.join(chunks)
 
 
 def render(data, make_head, make_footer, write_file, versioned_asset, categories, posts, base_url):
-    def head(title, description, route, lesson=None):
-        metadata={'@context':'https://schema.org','@type':'LearningResource','name':title,
-                  'description':description,'url':base_url+route,'inLanguage':'zh-CN',
+    # Existing bookmarks enter the topic catalog; there is no separate course directory.
+    for route in ['/tutorials/',BASE]:
+        alias='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>分类 — ML-Biomat</title><link rel="canonical" href="'+base_url+'/categories/"><meta http-equiv="refresh" content="0; url=/categories/"></head><body><a href="/categories/">浏览分类</a></body></html>'
+        write_file(route.lstrip('/')+'index.html',alias)
+
+    for lesson in data['lessons']:
+        primary=lesson['categories'][0]
+        category_name=html.escape(categories[primary]['name_zh'])
+        category_url='/categories/'+primary+'/'
+        metadata={'@context':'https://schema.org','@type':'LearningResource','name':lesson['title'],
+                  'description':lesson['description'],'url':base_url+lesson['url'],'inLanguage':'zh-CN',
                   'learningResourceType':'Tutorial','author':{'@type':'Person','name':'Yunhao Yang'}}
-        value=make_head(title=title,desc=description,url=base_url+route,lang='zh-CN',wide=True,
-                        ld='<script type="application/ld+json">'+json.dumps(metadata,ensure_ascii=False)+'</script>')
-        value=value.replace('<main class="container container-wide">','<main class="container tutorial-container">')
-        value=value.replace('href="/tutorials/">Tutorials / 教程','href="/tutorials/" class="active">Tutorials / 教程')
-        # This series currently has Chinese lessons; do not imply paired translations.
-        value=re.sub(r'<span class="lang-switch">.*?</span>','',value)
-        value=re.sub(r'<(?:script|link)\b[^>]*(?:highlightjs|adsbygoogle)[^>]*>(?:</script>)?','',value)
-        styles=''
-        if lesson:
-            styles+=f'<link rel="stylesheet" href="{versioned_asset("/static/tutorials/polymer-ai/lesson-%02d.css"%lesson["number"])}">'
+        head=make_head(title=lesson['title'],desc=lesson['description'],url=base_url+lesson['url'],lang='zh-CN',wide=True,
+                       ld='<script type="application/ld+json">'+json.dumps(metadata,ensure_ascii=False)+'</script>')
+        head=head.replace('<main class="container container-wide">','<main class="container tutorial-container">')
+        # Chinese-only articles have no equivalent translation link.
+        head=re.sub(r'<span class="lang-switch">.*?</span>','',head)
+        head=re.sub(r'<(?:script|link)\b[^>]*(?:highlightjs|adsbygoogle)[^>]*>(?:</script>)?','',head)
         shared=f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}">'
-        return value.replace(shared,styles+shared)
-
-    filters='<div class="tutorial-filter"><label class="tutorial-search-label" for="tutorial-search">查找教程</label><input id="tutorial-search" type="search" placeholder="搜索内容、材料或方法" autocomplete="off"><div class="tutorial-filter-buttons" aria-label="按主题筛选"><button type="button" data-tutorial-filter="all" aria-pressed="true" class="active">全部</button>'
-    for key, value in categories.items():
-        if any(key in p['categories'] for p in data['lessons']):
-            filters+=f'<button type="button" data-tutorial-filter="{key}" aria-pressed="false">{html.escape(value["name_zh"])}</button>'
-    filters+='</div><p id="tutorial-count" role="status" aria-live="polite">20 节教程</p></div>'
-    hub=f'''<div class="tutorial-hub"><header class="tutorial-hero"><p class="tutorial-kicker">ML-BIOMAT · 系列教程</p><h1>高分子与生物大分子<br><span>计算与 AI 实践</span></h1><p>{html.escape(data['description'])}</p><div class="tutorial-actions"><a href="{data['lessons'][0]['url']}">从第 1 节开始 →</a><a href="{DOWNLOAD}" download>下载 Notebook 与代码 ↓</a></div></header>{filters}'''
-    for i,group in enumerate(data['groups'],1):
-        lessons=[p for p in data['lessons'] if p['group']==group['id']]
-        hub+=f'<section class="tutorial-group" data-tutorial-group="{group["id"]}" id="{group["id"]}"><div class="tutorial-group-heading"><small>{i:02d} / 第 {lessons[0]["number"]}–{lessons[-1]["number"]} 节</small><h2>{html.escape(group["title"])}</h2><p>{html.escape(group["description"])}</p></div>'+listing(lessons,categories,True)+'</section>'
-    hub+='<p class="tutorial-empty" id="tutorial-empty" hidden>没有找到匹配的教程，试试其他关键词或分类。</p><section class="tutorial-related"><h2>继续阅读</h2><a href="/zh/">全部中文研究笔记 →</a><a href="/categories/">按主题浏览文章 →</a><a href="/fibernet/">FiberNet 研究工具 →</a></section></div>'
-    hub+=f'<script src="{versioned_asset("/static/js/tutorials.js")}" defer></script>'
-    write_file('tutorials/polymer-ai/index.html',head(data['title'],data['description'],BASE)+hub+make_footer())
-    # The main tutorial directory also presents existing topic collections.
-    intro='<div class="tutorial-hub"><header class="tutorial-hero"><p class="tutorial-kicker">ML-BIOMAT · TUTORIALS</p><h1>教程与计算实践</h1><p>从科学问题出发，结合图解、模型和代码，理解生物材料的结构与行为。</p></header>'+feature(data)
-    intro+='<section class="tutorial-related"><h2>按主题学习</h2>'
-    for key,value in categories.items():
-        if any(p['category']==key for p in posts):
-            intro+=f'<a href="/categories/{key}/">{html.escape(value["name_zh"])} →</a>'
-    intro+='</section></div>'
-    write_file('tutorials/index.html',head('教程与计算实践','ML-Biomat 系列教程：高分子与生物大分子、机器学习、多尺度模拟、Python 与实验数据处理。','/tutorials/')+intro+make_footer())
-
-    for i,lesson in enumerate(data['lessons']):
+        own=f'<link rel="stylesheet" href="{versioned_asset("/static/tutorials/polymer-ai/lesson-%02d.css"%lesson["number"])}">'
+        head=head.replace(shared,own+shared)
         body=(CONTENT/f'{lesson["number"]:02d}.html').read_text(encoding='utf-8')
-        toolbar=f'''<div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/tutorials/">教程</a><span aria-hidden="true">/</span><a href="{BASE}">高分子与生物大分子</a><span aria-hidden="true">/</span><span>第 {lesson['number']:02d} 节</span></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="{DOWNLOAD}" download>配套代码 ↓</a></div></div>'''
-        links=[]
-        if i:
-            prev=data['lessons'][i-1]
-            links.append(f'<a href="{prev["url"]}" rel="prev"><small>← 上一节</small><strong>{html.escape(prev["title"])}</strong></a>')
-        else: links.append(f'<a href="{BASE}"><small>阅读路线</small><strong>全部 20 节教程</strong></a>')
-        if i+1<len(data['lessons']):
-            following=data['lessons'][i+1]
-            links.append(f'<a href="{following["url"]}" rel="next"><small>下一节 →</small><strong>{html.escape(following["title"])}</strong></a>')
-        else: links.append(f'<a href="{BASE}"><small>回到目录</small><strong>全部 20 节教程</strong></a>')
-        neighbors='<nav class="tutorial-neighbors" aria-label="教程顺序">'+''.join(links)+'</nav>'
-        # Footer progress control is available before the lesson scripts execute.
+        body=re.sub(r'<p class="eyebrow">第\s*\d+\s*节\s*·\s*(.*?)</p>',r'<p class="eyebrow">\1</p>',body,count=1)
+        body=re.sub(r'<h1>.*?</h1>','<h1>'+html.escape(lesson['title'])+'</h1>',body,count=1,flags=re.S)
+        body=re.sub(r'<p class="lesson-label">.*?</p>',f'<p class="lesson-label">{category_name}</p>',body,count=1,flags=re.S)
+        body=re.sub(r'(<aside\b[^>]*>)(.*?)(</aside>)',r'\1<details class="lesson-toc" open><summary>本页目录</summary>\2</details>\3',body,count=1,flags=re.S)
+        body=body.replace('aria-label="本节阅读路线"','aria-label="本页目录"')
+        body=contextual_links(body,lesson,data['lessons'])
+        toolbar=f'<div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="{category_url}">{category_name}</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="{DOWNLOAD}" download>下载代码合集 ↓</a></div></div>'
+        related=sorted([p for p in data['lessons'] if p['number']!=lesson['number'] and p['group']==lesson['group']],key=lambda p:abs(p['number']-lesson['number']))[:2]
+        links=''.join(f'<a href="{p["url"]}"><strong>{html.escape(p["title"])}</strong></a>' for p in related)
+        neighbors='<section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读">'+links+'</nav></section>'
         scripts=[]
         def collect(match):
             attrs,content=match.group(1,2)
             if 'application/json' in attrs: return match.group()
             scripts.append(match.group());return ''
         body=re.sub(r'<script\b([^>]*)>(.*?)</script>',collect,body,flags=re.S)
-        document=head(lesson['title'],lesson['description'],lesson['url'],lesson)+toolbar+'<div class="tutorial-reader">'+body+'</div>'+neighbors+make_footer()
+        document=head+toolbar+'<div class="tutorial-reader">'+body+'</div>'+neighbors+make_footer()
         document=document.replace('</body>',''.join(scripts)+'</body>')
         write_file(lesson['url'].lstrip('/')+'index.html',document)
-    print('  Tutorials: 20 lessons, 5 reading groups, shared site navigation')
+    print('  Tutorials: 20 complete articles integrated into topic categories')

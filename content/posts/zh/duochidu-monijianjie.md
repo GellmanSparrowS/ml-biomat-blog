@@ -1,11 +1,12 @@
 ---
 title: "多尺度模拟在纤维生物材料中的应用入门"
 date: "2026-06-26"
+updated: "2026-10-28"
 category: "multiscale-modeling"
 tags: ["多尺度模拟", "分子动力学", "有限元", "纤维材料", "生物材料"]
 lang: "zh"
 slug: "multiscale-modeling-biomaterials-intro-zh"
-description: "多尺度模拟在纤维生物材料中的应用入门。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "根据生物材料研究问题选择分子、介观与连续介质模型。沿构象统计和有效刚度的传递关系，结合代表性体积平均与 Python 示例，理解尺度之间如何交换参数、单位和适用条件。"
 ---
 
 ## 为什么要做多尺度模拟
@@ -71,6 +72,10 @@ FEA 将材料视为连续介质，使用均质化的材料参数。常用工具�
 
 关键问题：从分子模拟中得到的刚度如何映射到 FEA 的材料卡片？
 
+![跨尺度传递的是物理量](/static/images/article-guides/mech-multiscale-transfer-zh.svg)
+
+分子模型可向介观链或网络模型提供构象统计，介观模型再向连续介质模型提供有效响应。每次传递都应保留参数单位、状态点和标定范围。
+
 ## 用 Python 串联多尺度
 
 多尺度模拟的真正威力在于打通上下游。以下是一个最简示例，展示如何将 MD 算出的杨氏模量传递给 FEA：
@@ -95,6 +100,10 @@ def md_to_fea_pipeline(md_trajectory, fe_mesh_path):
     }
     return fea_params
 ```
+
+![从代表性体积得到有效刚度](/static/images/article-guides/mech-multiscale-rve-zh.svg)
+
+在侧面自由的小应变单轴加载下，对代表性体积的局部轴向应力求体积平均可得到宏观应力。Eeff = ⟨σxx⟩/εxx 描述这一加载条件；各向异性和不同约束需采用相应的刚度分量。
 
 ## 实操建议
 

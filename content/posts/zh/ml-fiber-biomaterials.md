@@ -1,11 +1,12 @@
 ---
 title: "机器学习预测纤维材料力学性能：从数据准备到模型部署"
 date: "2026-06-25"
+updated: "2026-10-28"
 category: "machine-learning"
 tags: ["机器学习", "随机森林", "XGBoost", "纤维材料", "力学性能", "特征工程"]
 lang: "zh"
 slug: "ml-predict-fiber-mechanics-zh"
-description: "机器学习预测纤维材料力学性能：从数据准备到模型部署。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。"
+description: "从纤维样品的结构与制备特征出发，组织小样本回归的数据准备、预处理、模型比较与评价。结合交叉验证、Bootstrap 波动和特征重要性，理解数值预测如何与材料描述对应，并安排后续验证。"
 ---
 
 ## 问题的本质
@@ -20,6 +21,11 @@ description: "机器学习预测纤维材料力学性能：从数据准备到模
 ### 第一步：数据准备
 
 ### 典型的数据长什么样
+
+![示意图把一个纤维样品对应到一行描述特征，以及单独测量的预测目标](/static/images/article-guides/comp-guide-fiber-features-zh.svg)
+
+示意图把一个纤维样品对应到一行描述特征，以及单独测量的预测目标。图中为教学数值；直径、取向离散程度和交联含量共同作为输入，用于学习与模量之间的关系。
+
 
 ```python
 import pandas as pd
@@ -126,6 +132,11 @@ for name, model in models.items():
 | **Gaussian Process** | 自带不确定性估计，适合小样本 | 计算量 O(n³)，n>1000 慎用 |
 
 ### 第四步：不确定性很重要
+
+![每个 Bootstrap 样本都从训练观测中有放回抽样，再拟合一个模型](/static/images/article-guides/comp-guide-bootstrap-zh.svg)
+
+每个 Bootstrap 样本都从训练观测中有放回抽样，再拟合一个模型。三次教学预测的均值为 2.8、标准差约为 0.245，概括了这组模型之间的预测波动；预测区间的覆盖率可进一步通过独立数据评估。
+
 
 材料科学中，只说"预测模量 2.8 GPa"不够，你需要给出置信区间：
 

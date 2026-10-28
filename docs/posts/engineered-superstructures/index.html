@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Engineered Superstructures: Origami, Lattices, and Beyond — ML-Biomat</title>
-<meta name="description" content="A comprehensive review of engineered superstructures: origami, honeycomb, auxetic, helical, and lattice designs in 2D and 3D, covering geometry, mechanisms, parameters, and design rules.">
+<meta name="description" content="Compare folding, rotating-unit auxetics, honeycombs, lattices and multistable structures through their deformation mechanisms. Geometry diagrams and density-scaling curves connect architectural choices to stiffness, lateral response and energy absorption.">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/engineered-superstructures/">
 <link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/engineered-superstructures/"><link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/engineered-superstructures-zh/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/engineered-superstructures/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,27 +13,27 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="Engineered Superstructures: Origami, Lattices, and Beyond">
-<meta property="og:description" content="A comprehensive review of engineered superstructures: origami, honeycomb, auxetic, helical, and lattice designs in 2D and 3D, covering geometry, mechanisms, parameters, and design rules.">
+<meta property="og:description" content="Compare folding, rotating-unit auxetics, honeycombs, lattices and multistable structures through their deformation mechanisms. Geometry diagrams and density-scaling curves connect architectural choices to stiffness, lateral response and energy absorption.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/engineered-superstructures/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/engineered-superstructures.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Engineered Superstructures: Origami, Lattices, and Beyond", "description": "A comprehensive review of engineered superstructures: origami, honeycomb, auxetic, helical, and lattice designs in 2D and 3D, covering geometry, mechanisms, parameters, and design rules.", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 4571, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/engineered-superstructures/", "image": "https://ml-biomat.com/static/images/og/engineered-superstructures.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/"}, {"@type": "ListItem", "position": 3, "name": "Engineered Superstructures: Origami, Lattices, and Beyond", "item": "https://ml-biomat.com/posts/engineered-superstructures/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Engineered Superstructures: Origami, Lattices, and Beyond", "description": "Compare folding, rotating-unit auxetics, honeycombs, lattices and multistable structures through their deformation mechanisms. Geometry diagrams and density-scaling curves connect architectural choices to stiffness, lateral response and energy absorption.", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 4560, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/engineered-superstructures/", "image": "https://ml-biomat.com/static/images/og/engineered-superstructures.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "Bio-Materials-Structures", "item": "https://ml-biomat.com/categories/biomaterials/en/"}, {"@type": "ListItem", "position": 3, "name": "Engineered Superstructures: Origami, Lattices, and Beyond", "item": "https://ml-biomat.com/posts/engineered-superstructures/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
 <a href="/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
 <nav class="nav-links">
-<a data-short-label="Home" href="/">Home / 首页</a>
-<a data-short-label="Library" href="/fibernet/">Library / 库</a>
-<a data-short-label="Tutorials" href="/tutorials/">Tutorials / 教程</a>
-<a data-short-label="Profile" href="/about/">Profile / 个人简介</a>
+<a data-short-label="Home" href="/">Home</a>
+<a data-short-label="Library" href="/fibernet/">Library</a>
+<a data-short-label="Categories" href="/categories/en/">Categories</a>
+<a data-short-label="Profile" href="/about/en/">Profile</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
@@ -44,12 +44,12 @@
 <span class="lang-badge en">EN</span>
 <h1>Engineered Superstructures: Origami, Lattices, and Beyond</h1>
 <div class="article-meta">
-<span>2026-06-30</span><span>·</span><span>22 min read</span><span>·</span><a href="/categories/biomaterials/">Bio-Materials-Structures</a>
+<span>2026-06-30</span><span>·</span><span>23 min read</span><span>·</span><a href="/categories/biomaterials/en/">Bio-Materials-Structures</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/superstructures/">superstructures</a><a class="tag-pill" href="/tags/mechanical%20metamaterials/">mechanical metamaterials</a><a class="tag-pill" href="/tags/origami/">origami</a><a class="tag-pill" href="/tags/honeycomb/">honeycomb</a><a class="tag-pill" href="/tags/auxetic/">auxetic</a><a class="tag-pill" href="/tags/twisted%20structures/">twisted structures</a><a class="tag-pill" href="/tags/lattice/">lattice</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#bending-and-folding-dominated-designs">Bending and Folding Dominated Designs</a></li><li class="toc-h2"><a href="#section-1-origami-and-kirigami-programming-three-dimensional-deformation-from-two-dimensional-sheets">Section 1: Origami and Kirigami — Programming Three-Dimensional Deformation from Two-Dimensional Sheets</a></li><li class="toc-h3"><a href="#section-2-honeycombs-corrugations-and-perforated-sheets-three-forms-of-bending-dominated-metamaterials">Section 2: Honeycombs, Corrugations, and Perforated Sheets — Three Forms of Bending-Dominated Metamaterials</a></li><li class="toc-h3"><a href="#section-3-auxetic-metamaterials-mechanics-and-fabrication-of-negative-poisson-s-ratio-structures">Section 3: Auxetic Metamaterials — Mechanics and Fabrication of Negative Poisson's Ratio Structures</a></li><li class="toc-h3"><a href="#section-4-chiral-twisting-and-compliant-metamaterials">Section 4: Chiral Twisting and Compliant Metamaterials</a></li><li class="toc-h2"><a href="#lattices-buckling-and-assembly">Lattices, Buckling, and Assembly</a></li><li class="toc-h3"><a href="#section-5-tensegrity-braided-structures-and-interlocking-assemblies">Section 5: Tensegrity, Braided Structures, and Interlocking Assemblies</a></li><li class="toc-h3"><a href="#section-6-three-dimensional-lattices-and-triply-periodic-minimal-surfaces">Section 6: Three-Dimensional Lattices and Triply Periodic Minimal Surfaces</a></li><li class="toc-h3"><a href="#section-7-buckling-induced-patterns-and-multistable-structures">Section 7: Buckling-Induced Patterns and Multistable Structures</a></li><li class="toc-h2"><a href="#design-principles-and-outlook">Design Principles and Outlook</a></li><li class="toc-h3"><a href="#section-8-comparative-mechanics-scaling-laws-and-design-maps">Section 8: Comparative Mechanics — Scaling Laws and Design Maps</a></li><li class="toc-h3"><a href="#section-9-machine-learning-assisted-design-and-fabrication">Section 9: Machine-Learning-Assisted Design and Fabrication</a></li><li class="toc-h3"><a href="#section-10-experimental-characterization-sustainability-and-outlook">Section 10: Experimental Characterization, Sustainability, and Outlook</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="bending-and-folding-dominated-designs">Bending and Folding Dominated Designs</h2>
+<details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#bending-and-folding-dominated-designs">Bending and Folding Dominated Designs</a></li><li class="toc-h2"><a href="#section-1-origami-and-kirigami-programming-three-dimensional-deformation-from-two-dimensional-sheets">Section 1: Origami and Kirigami — Programming Three-Dimensional Deformation from Two-Dimensional Sheets</a></li><li class="toc-h3"><a href="#section-2-honeycombs-corrugations-and-perforated-sheets-three-forms-of-bending-dominated-metamaterials">Section 2: Honeycombs, Corrugations, and Perforated Sheets — Three Forms of Bending-Dominated Metamaterials</a></li><li class="toc-h3"><a href="#section-3-auxetic-metamaterials-mechanics-and-fabrication-of-negative-poisson-s-ratio-structures">Section 3: Auxetic Metamaterials — Mechanics and Fabrication of Negative Poisson's Ratio Structures</a></li><li class="toc-h3"><a href="#section-4-chiral-twisting-and-compliant-metamaterials">Section 4: Chiral Twisting and Compliant Metamaterials</a></li><li class="toc-h2"><a href="#lattices-buckling-and-assembly">Lattices, Buckling, and Assembly</a></li><li class="toc-h3"><a href="#section-5-tensegrity-braided-structures-and-interlocking-assemblies">Section 5: Tensegrity, Braided Structures, and Interlocking Assemblies</a></li><li class="toc-h3"><a href="#section-6-three-dimensional-lattices-and-triply-periodic-minimal-surfaces">Section 6: Three-Dimensional Lattices and Triply Periodic Minimal Surfaces</a></li><li class="toc-h3"><a href="#section-7-buckling-induced-patterns-and-multistable-structures">Section 7: Buckling-Induced Patterns and Multistable Structures</a></li><li class="toc-h2"><a href="#design-principles-and-outlook">Design Principles and Outlook</a></li><li class="toc-h3"><a href="#section-8-comparative-mechanics-scaling-laws-and-design-maps">Section 8: Comparative Mechanics — Scaling Laws and Design Maps</a></li><li class="toc-h3"><a href="#section-9-machine-learning-assisted-design-and-fabrication">Section 9: Machine-Learning-Assisted Design and Fabrication</a></li><li class="toc-h3"><a href="#section-10-experimental-characterization-sustainability-and-outlook">Section 10: Experimental Characterization, Sustainability, and Outlook</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="bending-and-folding-dominated-designs">Bending and Folding Dominated Designs</h2>
 <p>#| Section | Design family | What it addresses |</p>
 <table><tr><th>---</th><th>---</th><th>---</th></tr><tr><td>1</td><td>Origami / Kirigami</td><td>folding-programmed 3D deformation from 2D sheets</td></tr><tr><td>2</td><td>Honeycombs / corrugations / perforated sheets</td><td>bending-dominated stiffness and energy absorption</td></tr><tr><td>3</td><td>Auxetic metamaterials</td><td>negative Poisson's ratio mechanics and fabrication</td></tr><tr><td>4</td><td>Chiral twisting / compliant structures</td><td>rotation-coupled deformation and flexibility</td></tr><tr><td>5</td><td>Tensegrity / braided / interlocking assemblies</td><td>self-equilibrated and modular architectures</td></tr><tr><td>6</td><td>3D lattices / TPMS</td><td>architected stiffness, porosity, and surface design</td></tr><tr><td>7</td><td>Buckling-induced / multistable structures</td><td>pattern switching and energy barriers</td></tr><tr><td>8</td><td>Comparative mechanics</td><td>scaling laws and design maps</td></tr><tr><td>9</td><td>ML-assisted design</td><td>inverse design, optimization, and fabrication</td></tr><tr><td>10</td><td>Characterization / sustainability / outlook</td><td>validation, applications, and future trends</td></tr></table>
 
@@ -79,7 +79,7 @@
 
 <h3 id="section-3-auxetic-metamaterials-mechanics-and-fabrication-of-negative-poisson-s-ratio-structures">Section 3: Auxetic Metamaterials — Mechanics and Fabrication of Negative Poisson's Ratio Structures</h3>
 
-<p>Auxetics — materials with negative Poisson's ratio — are the most counterintuitive members of the metamaterial family. Stretching them transversely makes them wider rather than narrower; compressing them causes lateral expansion. This behavior is not a physical anomaly but an inevitable mechanical consequence of specific unit-cell geometry, precisely engineerable by design.</p>
+<p>Auxetics — materials with negative Poisson's ratio — are the most counterintuitive members of the metamaterial family. Under uniaxial tension they expand laterally; under uniaxial compression they contract laterally. This behavior is not a physical anomaly but an inevitable mechanical consequence of specific unit-cell geometry, precisely engineerable by design.</p>
 
 <p>The clearest physical picture of auxetic behavior comes from the re-entrant honeycomb. Reversing the inclination angle of the slanted walls in a regular hexagonal honeycomb creates re-entrant (concave) vertices. Under vertical tension, the re-entrant walls rotate outward, forcing the horizontal walls to expand laterally. In the idealized rigid-joint model, ν* ≈ -tan²θ, where θ is the re-entrant angle, giving a Poisson's ratio continuously tunable from 0 toward −1. Lakes reported the first experimental negative Poisson's ratio foam in Science in 1987, fabricating it by compressing open-cell polyurethane triaxially under heat to permanently buckle the cell walls inward into a re-entrant topology.</p>
 
@@ -90,6 +90,10 @@
 <p>Fabrication of three-dimensional auxetic structures relies primarily on additive manufacturing. Stereolithography and DLP printing achieve 50–100 μm resolution suitable for sub-millimeter re-entrant and chiral cells; selective laser sintering processes engineering-grade polymers and metals for structural-scale parts; two-photon polymerization resolves features down to 200 nm for fundamental research at optical length scales. Outstanding challenges include residual stress effects on unit-cell geometric accuracy, boundary effects when unit-cell counts are finite, and preserving negative Poisson's ratio characteristics under high-rate dynamic loading — the resolution of these issues will determine the pace at which auxetic metamaterials transition from laboratory demonstrations to engineering deployments.</p>
 
 <hr>
+
+<img src="/static/images/article-guides/mech-auxetic-squares-en.svg" alt="Rotation can expand both directions" loading="lazy">
+
+<p>An ideal array of corner-hinged rigid squares expands in both directions as the alternating rotation angle increases from 5° to 30°. Equal axial and transverse strains give ν = −1 for this mechanism; compliant hinges and panel deformation modify a fabricated specimen’s response.</p>
 
 <h3 id="section-4-chiral-twisting-and-compliant-metamaterials">Section 4: Chiral Twisting and Compliant Metamaterials</h3>
 
@@ -147,6 +151,10 @@
 
 <hr>
 
+<img src="/static/images/article-guides/mech-lattice-scaling-en.svg" alt="Density and deformation mode" loading="lazy">
+
+<p>With C = 1, E<em>/Es = (ρ</em>/ρs)ⁿ separates the effect of the scaling exponent: n = 1 retains more stiffness at low density than n = 2. The curves illustrate the scaling relation; actual coefficients depend on geometry and loading direction.</p>
+
 <h3 id="section-9-machine-learning-assisted-design-and-fabrication">Section 9: Machine-Learning-Assisted Design and Fabrication</h3>
 
 <p>The traditional metamaterial design workflow — propose geometry, build analytical or finite-element model, conduct parametric study, optimize over limited parameter space — becomes a bottleneck as geometric complexity grows and performance objectives multiply. Machine learning removes this bottleneck by enabling data-driven exploration of design spaces that are far too large for exhaustive physics-based analysis.</p>
@@ -197,11 +205,7 @@
 <li>Zadpoor, A.A. (2016). Mechanical meta-materials. Materials Horizons, 3, 371–381.</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/bio-hierarchical-structures/">← Hierarchical Superstructures in Biomaterials</a></span><span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+</article><nav class="prev-next-nav"><span><a href="/posts/bio-hierarchical-structures/">← Hierarchical Superstructures in Biomaterials</a></span><span><a href="/posts/ml-classification-models/">ML Classification Models: A Practical Overview →</a></span></nav><section class="related"><h2>Related articles</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-06-30</span><a href="/posts/bio-hierarchical-structures/">Hierarchical Superstructures in Biomaterials</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/stress-strain-curves/">Stress-Strain Curves: A Materials Science Primer</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/silk-fibroin-structure-mechanics/">Silk Fibroin: From Molecular Structure to Mechanical Function</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
 <h2>Comments</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
@@ -221,11 +225,11 @@
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/en/">Profile</a><a href="/fibernet/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

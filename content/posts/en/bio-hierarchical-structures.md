@@ -1,11 +1,12 @@
 ---
 title: "Hierarchical Superstructures in Biomaterials"
 date: "2026-06-30"
+updated: "2026-10-28"
 category: "biomaterials"
 tags: ["hierarchical structures", "superstructures", "biomaterials", "mechanical design", "silk", "collagen", "nacre"]
 lang: "en"
 slug: "bio-hierarchical-structures"
-description: "A navigational guide to hierarchical superstructures in biomaterials: silk fibroin, collagen, bone, nacre, spider silk, and cellulose analyzed through their structure-mechanics relationships."
+description: "Explore how silk, collagen, bone, nacre and cellulose organize structural units across scales. Collagen packing and platelet-interface diagrams explain load transfer and crack deflection, with links to characterization and modeling methods."
 ---
 
 Nature's structural materials - from silk to bone, nacre to wood - possess mechanical properties far beyond those of their individual chemical constituents. The core secret is not chemistry but architecture: hierarchical superstructures, where multiple levels of organization from molecular to macroscopic collaborate to produce mechanical responses that vastly exceed the sum of their parts.
@@ -50,6 +51,10 @@ The characteristic J-shaped stress-strain curve results from hierarchical uncrim
 
 Related: [Stress-Strain Curve Biomechanics](/posts/stress-strain-curves/)
 
+![Collagen: organization across scales](/static/images/article-guides/mech-collagen-hierarchy-en.svg)
+
+Collagen’s triple-helical conformation, staggered molecular packing and fibril bundles belong to distinct structural levels. The diagram emphasizes how organization changes across levels rather than using one common geometric scale.
+
 ### 3. Bone: Organic-Inorganic Composite Hierarchy
 
 Bone represents the most complex biological composite, organized across seven hierarchical levels:
@@ -70,6 +75,10 @@ Nacre's celebrated structure:
 - Thousands of these bilayers stack to form the nacreous layer
 
 The brick-and-mortar architecture achieves **3000x the toughness of pure aragonite**. Under load, platelets slide and the organic layers stretch, providing massive energy dissipation. Nanoscale asperities on platelet surfaces create mechanical interlocking that prevents complete pullout at low stress. This strategy has been widely mimicked in ceramic composites and body armor.
+
+![Nacre: interfaces redirect a crack](/static/images/article-guides/mech-nacre-crack-en.svg)
+
+Stiff platelets and compliant interlayers create opportunities for relative sliding and crack deflection. The constructed crack path illustrates how interfaces change the direction of propagation.
 
 ### 5. Spider Silk: Crystalline/Amorphous Networks
 

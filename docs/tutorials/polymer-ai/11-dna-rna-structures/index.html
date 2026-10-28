@@ -13,7 +13,7 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="DNA与RNA：序列怎样组织成结构">
 <meta property="og:description" content="从核酸方向、互补配对和发夹结构出发，用动态规划计算受控 RNA 结构分布，再训练注意力网络预测逐位置配对概率。">
 <meta property="og:type" content="website">
@@ -22,7 +22,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "DNA与RNA：序列怎样组织成结构", "description": "从核酸方向、互补配对和发夹结构出发，用动态规划计算受控 RNA 结构分布，再训练注意力网络预测逐位置配对概率。", "url": "https://ml-biomat.com/tutorials/polymer-ai/11-dna-rna-structures/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
 
 
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-11.css?v=75abb24f8838"><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-11.css?v=75abb24f8838"><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -30,17 +30,17 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/" class="active">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/" class="active">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle dark mode">☾</button>
 
 </div></header>
-<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/tutorials/">教程</a><span aria-hidden="true">/</span><a href="/tutorials/polymer-ai/">高分子与生物大分子</a><span aria-hidden="true">/</span><span>第 11 节</span></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>配套代码 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
+<main class="container tutorial-container"><div class="tutorial-toolbar"><nav class="tutorial-crumb" aria-label="当前位置"><a href="/categories/">分类</a><span aria-hidden="true">/</span><a href="/categories/biomaterials/">生物·材料·结构</a></nav><div><button type="button" id="font-toggle" aria-pressed="false">放大正文</button><a class="tutorial-download" href="/static/tutorials/polymer-ai/polymer-ai-notebooks.zip" download>下载代码合集 ↓</a></div></div><div class="tutorial-reader"><a class="skip" href="#main">跳到正文</a>
 
-<div class="layout"><aside aria-label="本节阅读路线"><p class="lesson-label">材料科学 / 高分子与生物大分子</p><nav><a href="#direction">01　读懂方向与互补</a><a href="#structures">02　从发夹到可设计结构</a><a href="#rules">03　计算结构与概率</a><a href="#learning">04　学习序列里的关系</a><a href="#experiment">05　运行并比较模型</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></aside><div class="lesson-main" id="main"><p class="eyebrow">第 11 节 · 从遗传信息的载体到可以设计的分子结构</p>
-<h1>DNA与RNA：序列怎样组织成结构<span>读懂方向、配对与结构分布，再让AI学习序列里的联系</span></h1>
+<div class="layout"><aside aria-label="本页目录"><details class="lesson-toc" open><summary>本页目录</summary><p class="lesson-label">生物·材料·结构</p><nav><a href="#direction">01　读懂方向与互补</a><a href="#structures">02　从发夹到可设计结构</a><a href="#rules">03　计算结构与概率</a><a href="#learning">04　学习序列里的关系</a><a href="#experiment">05　运行并比较模型</a><a href="#sources">资料与延伸阅读</a></nav><p class="side-note">代码与运行结果在本页完整展开；图像与公式可以离线阅读。</p></details></aside><div class="lesson-main" id="main"><p class="eyebrow">从遗传信息的载体到可以设计的分子结构</p>
+<h1>DNA与RNA：序列怎样组织成结构</h1>
 <div class="byline">杨云浩 · 复旦大学 · 高分子与生物大分子教程</div>
 <p class="lead">一条拉链能够合上，既要两侧的齿彼此匹配，也要按合适的方向对齐。核酸中的互补配对给分子提供了类似的选择性：一段序列可以识别另一段序列，一条长链也可以折回来，让相隔较远的位置靠在一起。正是这些联系，使DNA与RNA既能参与信息存储和传递，也能形成有特定形状的结构。本节从最容易画清楚的配对开始，讨论一串字母怎样变成分子之间的关系。</p>
 <p>给模型一条RNA序列，可以让它预测每个位置有多大机会参与配对。这个任务需要同时考虑字母身份、所在位置，以及远处有没有合适的伙伴。本节先用一套明确的配对规则计算结构分布，再训练小型神经网络近似由此得到的概率。已知规则提供了可以逐项核对的答案：当预测出错时，我们能追问是模型没读到远处信息、训练例子不够，还是换了长度以后没有延续原来的规律。代码、交互图和误差曲线会始终围绕这同一个任务展开。</p>
@@ -105,7 +105,7 @@
 </section>
 
 <section id="learning"><h2><span class="num">04</span>让神经网络读取序列中的远近关系</h2>
-<p>规则模型给定后，可以为许多序列生成明确的监督信息。我们先生成不同长度、不同碱基比例以及不同连续重复程度的序列，再为每条序列制作一个保持组成不变的打乱版本。这样得到的成对样本拥有相同的A、C、G、U数量，却可能因排列不同而改变结构分布。这个设计承接上一节的思想：如果要研究组织方式，数据里就要安排能够把组成与排列区分开的对象。</p>
+<p>规则模型给定后，可以为许多序列生成明确的监督信息。我们先生成不同长度、不同碱基比例以及不同连续重复程度的序列，再为每条序列制作一个保持组成不变的打乱版本。这样得到的成对样本拥有相同的A、C、G、U数量，却可能因排列不同而改变结构分布。这个设计承接<a href="/tutorials/polymer-ai/10-glycan-connections/">《糖链：连接方式怎样改变水合、识别与支撑》</a>的思想：如果要研究组织方式，数据里就要安排能够把组成与排列区分开的对象。</p>
 <p>程序生成576条序列。其中480条长度为24、32或40，另外96条长度为56或64。原始序列与其打乱版本始终留在同一组；组成完全相同的记录，以及相同长度下逐位一致率达到80%的记录，也按连接关系合并成组。这个相似性规则适用于当前人工生成的数据，定义清楚了哪些对象要共同划分。较长序列全部留到最后评价，从一开始就不用于训练或选择模型。</p>
 <p>短序列按组打乱后，得到288条训练、96条验证和96条测试记录，分别来自144、48和48个组；较长测试集另有48个组。训练集负责更新参数，验证集负责挑选保存的训练轮次，两个测试集在最终模型确定后评价。对于每条序列，规则算法计算所有位置的配对概率。数据生成、结构规则与组划分均固定随机种子，读者重新运行代码即可得到同一批输入和目标。</p>
 <p>第一个参照只输出训练序列的平均配对比例。它不读取序列差别，因而在任何位置都给出同一个数。第二个模型更具体：每个位置输入自己的碱基类型、整条链的四种碱基比例、位置与边界信息，以及链长，再经过一个小型前馈网络预测配对概率。这样既给了模型基本化学身份，也给了它链的整体组成和端点线索，但没有让它逐个读取其他位置的碱基。</p>
@@ -433,16 +433,16 @@ Example: short-019-0 ; six panels and all targets/predictions saved.
 <p>Do、Woods与Batzoglou，2006，<a href="https://doi.org/10.1093/bioinformatics/btl246">CONTRAfold</a>；Vaswani等，2017，<a href="https://papers.nips.cc/paper/7181-attention-is-all-you-need">Attention Is All You Need</a>。本节的注意力网络从头训练，用于近似逐位置配对概率；完整结构规则、训练设置和各次训练结果均在代码与可下载数据中保留。</p>
 </section>
 </div></div>
-</div><nav class="tutorial-neighbors" aria-label="教程顺序"><a href="/tutorials/polymer-ai/10-glycan-connections/" rel="prev"><small>← 上一节</small><strong>糖链：连接方式怎样改变水合、识别与支撑</strong></a><a href="/tutorials/polymer-ai/12-assembly-and-phase-separation/" rel="next"><small>下一节 →</small><strong>分子怎样聚到一起：自组装、相分离与凝聚体</strong></a></nav></main>
+</div><section class="tutorial-related"><h2>相关阅读</h2><nav class="tutorial-neighbors" aria-label="相关阅读"><a href="/tutorials/polymer-ai/10-glycan-connections/"><strong>糖链：连接方式怎样改变水合、识别与支撑</strong></a><a href="/tutorials/polymer-ai/09-protein-sequence-and-function/"><strong>蛋白质：从序列、折叠到柔性与功能</strong></a></nav></section></main>
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 <script>
 (function(){
 (()=>{

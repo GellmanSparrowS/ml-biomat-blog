@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>常用的机器学习分类模型：从逻辑回归到梯度提升 — ML-Biomat</title>
-<meta name="description" content="常用的机器学习分类模型：从逻辑回归到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta name="description" content="比较逻辑回归、支持向量机、决策树、集成模型、近邻与朴素贝叶斯的判断方式。结合概率阈值、混淆矩阵和交叉验证，理解分类错误的类型，并按实际问题选择评价指标与模型。">
 <meta name="author" content="Yunhao Yang">
 <link rel="canonical" href="https://ml-biomat.com/posts/ml-classification-models-zh/">
 <link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/posts/ml-classification-models-zh/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/posts/ml-classification-models/"><link rel="alternate" hreflang="x-default" href="https://ml-biomat.com/posts/ml-classification-models/"><link rel="api-catalog" href="/.well-known/api-catalog">
@@ -13,18 +13,18 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=36a5074d5047">
+<link rel="stylesheet" href="/static/css/style.css?v=61d8359ecb08">
 <meta property="og:title" content="常用的机器学习分类模型：从逻辑回归到梯度提升">
-<meta property="og:description" content="常用的机器学习分类模型：从逻辑回归到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。">
+<meta property="og:description" content="比较逻辑回归、支持向量机、决策树、集成模型、近邻与朴素贝叶斯的判断方式。结合概率阈值、混淆矩阵和交叉验证，理解分类错误的类型，并按实际问题选择评价指标与模型。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ml-biomat.com/posts/ml-classification-models-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/ml-classification-models-zh.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "常用的机器学习分类模型：从逻辑回归到梯度提升", "description": "常用的机器学习分类模型：从逻辑回归到梯度提升。面向生物与材料科学研究生的实用教程，含完整可运行代码示例与详细原理解析，适合零基础入门与进阶参考。", "datePublished": "2026-06-30", "dateModified": "2026-06-30", "wordCount": 1558, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-classification-models-zh/", "image": "https://ml-biomat.com/static/images/og/ml-classification-models-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "常用的机器学习分类模型：从逻辑回归到梯度提升", "item": "https://ml-biomat.com/posts/ml-classification-models-zh/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "常用的机器学习分类模型：从逻辑回归到梯度提升", "description": "比较逻辑回归、支持向量机、决策树、集成模型、近邻与朴素贝叶斯的判断方式。结合概率阈值、混淆矩阵和交叉验证，理解分类错误的类型，并按实际问题选择评价指标与模型。", "datePublished": "2026-06-30", "dateModified": "2026-10-28", "wordCount": 7252, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/ml-classification-models-zh/", "image": "https://ml-biomat.com/static/images/og/ml-classification-models-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com"}, {"@type": "ListItem", "position": 2, "name": "机器学习", "item": "https://ml-biomat.com/categories/machine-learning/"}, {"@type": "ListItem", "position": 3, "name": "常用的机器学习分类模型：从逻辑回归到梯度提升", "item": "https://ml-biomat.com/posts/ml-classification-models-zh/"}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=40264efc49b2"></head>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script><link rel="stylesheet" href="/static/css/tutorials.css?v=0e95d39e4b6e"></head>
 <body>
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -32,7 +32,7 @@
 <nav class="nav-links">
 <a data-short-label="首页" href="/">Home / 首页</a>
 <a data-short-label="工具库" href="/fibernet/">Library / 库</a>
-<a data-short-label="教程" href="/tutorials/">Tutorials / 教程</a>
+<a data-short-label="分类" href="/categories/">Categories / 分类</a>
 <a data-short-label="个人主页" href="/about/">Profile / 个人简介</a>
 </nav>
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off">
@@ -44,12 +44,12 @@
 <span class="lang-badge zh">中文</span>
 <h1>常用的机器学习分类模型：从逻辑回归到梯度提升</h1>
 <div class="article-meta">
-<span>2026-06-30</span><span>·</span><span>7 min read</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
+<span>2026-06-30</span><span>·</span><span>21 分钟阅读</span><span>·</span><a href="/categories/machine-learning/">机器学习</a>
 </div>
 </header>
 <div class="card-tags" style="margin:.3rem 0 .6rem"><a class="tag-pill" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="tag-pill" href="/tags/%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/">分类模型</a><a class="tag-pill" href="/tags/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/">逻辑回归</a><a class="tag-pill" href="/tags/SVM/">SVM</a><a class="tag-pill" href="/tags/%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97/">随机森林</a><a class="tag-pill" href="/tags/XGBoost/">XGBoost</a><a class="tag-pill" href="/tags/scikit-learn/">scikit-learn</a></div>
 <div class="content">
-<details class="toc" open><summary>Contents / 目录</summary><ul><li class="toc-h2"><a href="#一-分类问题的本质-从标签到决策边界">一、分类问题的本质——从标签到决策边界</a></li><li class="toc-h2"><a href="#核心算法">核心算法</a></li><li class="toc-h3"><a href="#二-逻辑回归-概率视角下的线性分类">二、逻辑回归——概率视角下的线性分类</a></li><li class="toc-h3"><a href="#三-支持向量机-最宽的-隔离带">三、支持向量机——最宽的"隔离带"</a></li><li class="toc-h3"><a href="#四-决策树-透明可解释的树形判断">四、决策树——透明可解释的树形判断</a></li><li class="toc-h3"><a href="#五-随机森林与集成学习-群体智慧">五、随机森林与集成学习——群体智慧</a></li><li class="toc-h3"><a href="#六-k-近邻-最懒惰的学习者">六、k 近邻——最懒惰的学习者</a></li><li class="toc-h3"><a href="#七-朴素贝叶斯-概率推断的极简哲学">七、朴素贝叶斯——概率推断的极简哲学</a></li><li class="toc-h2"><a href="#评估与模型选择">评估与模型选择</a></li><li class="toc-h3"><a href="#八-评估指标-准确率只是起点">八、评估指标——准确率只是起点</a></li><li class="toc-h3"><a href="#九-模型选择指南-没有免费的午餐">九、模型选择指南——没有免费的午餐</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="一-分类问题的本质-从标签到决策边界">一、分类问题的本质——从标签到决策边界</h2>
+<details class="toc" open><summary>目录</summary><ul><li class="toc-h2"><a href="#一-分类问题的本质-从标签到决策边界">一、分类问题的本质——从标签到决策边界</a></li><li class="toc-h2"><a href="#核心算法">核心算法</a></li><li class="toc-h3"><a href="#二-逻辑回归-概率视角下的线性分类">二、逻辑回归——概率视角下的线性分类</a></li><li class="toc-h3"><a href="#三-支持向量机-最宽的-隔离带">三、支持向量机——最宽的"隔离带"</a></li><li class="toc-h3"><a href="#四-决策树-透明可解释的树形判断">四、决策树——透明可解释的树形判断</a></li><li class="toc-h3"><a href="#五-随机森林与集成学习-群体智慧">五、随机森林与集成学习——群体智慧</a></li><li class="toc-h3"><a href="#六-k-近邻-最懒惰的学习者">六、k 近邻——最懒惰的学习者</a></li><li class="toc-h3"><a href="#七-朴素贝叶斯-概率推断的极简哲学">七、朴素贝叶斯——概率推断的极简哲学</a></li><li class="toc-h2"><a href="#评估与模型选择">评估与模型选择</a></li><li class="toc-h3"><a href="#八-评估指标-准确率只是起点">八、评估指标——准确率只是起点</a></li><li class="toc-h3"><a href="#九-模型选择指南-没有免费的午餐">九、模型选择指南——没有免费的午餐</a></li><li class="toc-h2"><a href="#参考文献">参考文献</a></li></ul></details><h2 id="一-分类问题的本质-从标签到决策边界">一、分类问题的本质——从标签到决策边界</h2>
 
 <img src="/static/images/posts/ml-classification-models/boundary-zh.webp" alt="二维特征空间中两类样本与决策边界示意" loading="lazy">
 
@@ -88,6 +88,11 @@ X_test  = scaler.transform(X_test)   # Use training statistics only
 
 <h2 id="核心算法">核心算法</h2>
 <h3 id="二-逻辑回归-概率视角下的线性分类">二、逻辑回归——概率视角下的线性分类</h3>
+
+<img src="/static/images/article-guides/comp-guide-sigmoid-zh.svg" alt="逻辑回归通过 sigmoid 函数，把线性得分 z 映射为概率" loading="lazy">
+
+<p>逻辑回归通过 sigmoid 函数，把线性得分 z 映射为概率。概率阈值 0.5 对应 z = 0；改变阈值会改变分类结果，但不会改变模型给出的概率。</p>
+
 
 <p>尽管名字里有"回归"二字，逻辑回归（Logistic Regression）是一个彻头彻尾的分类模型。它是初学者学习的第一个分类器，也是工业界最常用的基线模型之一，原因在于它不仅给出"这属于哪类"的判断，还给出"有多大把握"的概率估计。理解逻辑回归，实际上是理解所有参数化分类模型的共同基础。</p>
 
@@ -380,6 +385,11 @@ print(&quot;Per-class feature means:\n&quot;, gnb.theta_)
 <h2 id="评估与模型选择">评估与模型选择</h2>
 <h3 id="八-评估指标-准确率只是起点">八、评估指标——准确率只是起点</h3>
 
+<img src="/static/images/article-guides/comp-guide-confusion-matrix-zh.svg" alt="这组教学数据包含 8 个真阳性、9 个真阴性、2 个假阳性和 1 个假阴性" loading="lazy">
+
+<p>这组教学数据包含 8 个真阳性、9 个真阴性、2 个假阳性和 1 个假阴性。精确率、召回率与准确率采用不同分母，分别回答不同的评价问题。</p>
+
+
 <p>训练好一个分类器之后，用什么指标评估它的好坏？很多初学者默认用<strong>准确率（Accuracy）</strong>：正确分类的样本占总样本的比例。但准确率在类别不平衡时是一个危险的简化——如果一个疾病数据集中 99% 是健康样本，一个永远预测"健康"的分类器准确率高达 99%，但它对疾病检测毫无用处。理解评估指标，本质上是理解"在我的问题里，什么叫做犯了错误，这个错误有多严重"。</p>
 
 <p>理解评估指标的基础是<strong>混淆矩阵（Confusion Matrix）</strong>。对二分类问题，混淆矩阵有四个格子：</p>
@@ -491,12 +501,8 @@ plt.show()
 <li>Wolpert, D. H. (1996). The lack of a priori distinctions between learning algorithms. <em>Neural Computation</em>, 8(7), 1341–1390. https://doi.org/10.1162/neco.1996.8.7.1341</li>
 </ol>
 </div>
-</article><nav class="prev-next-nav"><span><a href="/posts/engineered-superstructures-zh/">← 工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></span><span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络 →</a></span></nav><section class="cta-banner">
-<h3>💬 Questions or Feedback?</h3>
-<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>
-<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>
-</section><section class="related"><h2>Related Articles / 相关文章</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
-<h2>Comments</h2>
+</article><nav class="prev-next-nav"><span><a href="/posts/engineered-superstructures-zh/">← 工程超结构力学综述：折纸、蜂巢、拉胀、扭转与点阵的二维三维设计</a></span><span><a href="/posts/networkx-fundamentals-zh/">NetworkX 基础：用 Python 理解、构建与分析网络 →</a></span></nav><section class="related"><h2>相关阅读</h2><ul class="post-list-simple"><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/regression-models-zh/">常用的机器学习回归模型：从线性基准到梯度提升</a></li><li class="post-row"><span class="row-date">2026-07-03</span><a href="/posts/deep-learning-intro-zh/">深度学习的本质：从特征工程到表示学习</a></li><li class="post-row"><span class="row-date">2026-06-26</span><a href="/posts/feature-engineering-materials-zh/">材料科学中的特征工程：从实验数据到机器学习就绪数据</a></li></ul></section><section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)">
+<h2>讨论</h2>
 <script src="https://giscus.app/client.js"
     data-repo="GellmanSparrowS/ml-biomat-blog"
     data-repo-id="R_kgDOTEwhsA"
@@ -507,7 +513,7 @@ plt.show()
     data-emit-metadata="0"
     data-input-position="bottom"
     data-theme="preferred_color_scheme"
-    data-lang="en"
+    data-lang="zh-CN"
     crossorigin="anonymous"
     async>
 </script>
@@ -515,11 +521,11 @@ plt.show()
 <footer class="site-footer"><div class="footer-inner">
 <span>© 2026 ML-Biomat · by Yunhao Yang</span>
 <div class="footer-links">
-<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/tutorials/">Tutorials / 教程</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
+<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>
 </div>
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=96318595db01" defer></script>
+<script src="/static/js/main.js?v=ecd090426095" defer></script>
 </body>
 </html>

@@ -1,11 +1,12 @@
 ---
 title: "Python Tools for Scientific Computing in Materials Research"
 date: "2026-06-25"
+updated: "2026-10-28"
 category: "python-tutorials"
 tags: ["python", "numpy", "scipy", "materials-science", "data-analysis", "visualization"]
 lang: "en"
 slug: "python-tools-materials-research"
-description: "A curated guide to Python libraries for materials science: from data loading with ASE/pymatgen to ML with scikit-learn, plus practical AFM/SEM data analysis scripts."
+description: "Connect NumPy, SciPy, pandas, plotting libraries, atomistic tools, and image analysis to common materials-research tasks. Follow examples of force-curve processing, grouped statistics, microscopy segmentation, and predictive modeling."
 ---
 
 ## Why Python for Materials Science
@@ -16,6 +17,11 @@ This post covers the essential Python stack for a materials researcher, with con
 
 ## Core Scientific Stack
 ### The Core Stack
+
+![Arrays hold numerical measurements, DataFrames attach labels to observations, and atomic structures combine species, positions, and a simulation cell](/static/images/article-guides/comp-guide-data-structures-en.svg)
+
+Arrays hold numerical measurements, DataFrames attach labels to observations, and atomic structures combine species, positions, and a simulation cell. Choosing the representation first makes it easier to select the appropriate library and calculation.
+
 
 | Category | Libraries | Typical use |
 |---|---|---|
@@ -167,6 +173,11 @@ for i in range(min(10, len(feature_names))):
 ```
 
 ### Image Analysis for Microscopy
+
+![The binary teaching mask contains separate regions of four and six pixels](/static/images/article-guides/comp-guide-segmentation-en.svg)
+
+The binary teaching mask contains separate regions of four and six pixels. Connected-component labeling identifies them; a calibrated pixel length s converts their areas to 4s² and 6s². The grid is a schematic, not a microscope image.
+
 
 Processing SEM/TEM images to quantify fiber morphology:
 
