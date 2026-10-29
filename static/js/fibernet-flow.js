@@ -39,12 +39,17 @@
       const yaw=-.42+Math.sin(clock*.085)*.33,pitch=-.27+Math.cos(clock*.09)*.06,roll=-.055;
       const cy=Math.cos(yaw),sy=Math.sin(yaw),cx=Math.cos(pitch),sx=Math.sin(pitch),cr=Math.cos(roll),sr=Math.sin(roll);
       const scale=Math.min(width*.295,height*.44);
+      let extentX=0,extentY=0;
       for(let k=0;k<nodes.length;k++){
         const p=nodes[k],x=p[0]*cy+p[2]*sy,z0=-p[0]*sy+p[2]*cy,y=p[1]*cx-z0*sx,z=p[1]*sx+z0*cx;
         const perspective=5.8/(5.8-z),out=projected[k];
-        out.x=width*.5+(x*cr-y*sr)*scale*perspective;
-        out.y=height*.5-(x*sr+y*cr)*scale*perspective;out.z=z;
+        out.x=(x*cr-y*sr)*perspective;
+        out.y=-(x*sr+y*cr)*perspective;out.z=z;
+        extentX=Math.max(extentX,Math.abs(out.x));extentY=Math.max(extentY,Math.abs(out.y));
       }
+      // Keep every node inside the canvas throughout the full turning cycle.
+      const fittedScale=Math.min(scale,(width/2-12)/extentX,(height/2-12)/extentY);
+      for(const point of projected){point.x=width/2+point.x*fittedScale;point.y=height/2+point.y*fittedScale;}
       ctx.clearRect(0,0,width,height);ctx.lineCap='round';
       order.sort((p,q)=>(projected[p.a].z+projected[p.b].z)-(projected[q.a].z+projected[q.b].z));
       const energies=new Float32Array(nodes.length);
@@ -111,11 +116,12 @@
     window.addEventListener('resize',resize,{passive:true});
     window.addEventListener('scroll',()=>{const before=inView;measureVisibility();if(inView&&!before)resume();else if(!inView)stop();},{passive:true});
     document.addEventListener('visibilitychange',()=>document.hidden?stop():resume());
-    window.addEventListener('pagehide',stop,{passive:true});window.addEventListener('pageshow',resume,{passive:true});
+    window.addEventListener('pagehide',stop,{passive:true});window.addEventListener('pageshow',resume,{passive:true});window.addEventListener('focus',resume,{passive:true});
     reduced.addEventListener('change',()=>{stop();draw();resume();});coarse.addEventListener('change',resize);
     new MutationObserver(palette).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
     canvas.fibernetFlow={snapshot:()=>({nodes:nodes.length,edges:edges.length,frames,clock,occupancy,spanning,loadEdges:drawn,
-      inView,running:!!raf,reduced:reduced.matches,width,height,pixelRatio:dpr,backingWidth:canvas.width,backingHeight:canvas.height}),
+      inView,running:!!raf,reduced:reduced.matches,width,height,pixelRatio:dpr,backingWidth:canvas.width,backingHeight:canvas.height,
+      bounds:{left:Math.min(...projected.map(p=>p.x)),right:Math.max(...projected.map(p=>p.x)),top:Math.min(...projected.map(p=>p.y)),bottom:Math.max(...projected.map(p=>p.y))}}),
       finite:()=>projected.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.z))};
     canvas.dataset.ready='true';resize();palette();
   });
