@@ -42,7 +42,7 @@ def homepage(items,categories,en=False):
     for key,info,count in active_topics(items,categories,lang):
         body+=f'<a href="{catalog.category_url(key,lang)}" data-color="{key}">{icon(key)}<span>{e(info["name_"+lang])}</span><small>{count}</small><span class="topic-arrow" aria-hidden="true">↗</span></a>'
     body+='</nav><div class="home-lesson-picks">'
-    pick_slugs=['fiber-network-mechanics-intro','ml-predict-fiber-mechanics','python-env-setup'] if en else ['fiber-network-mechanics-zh','19-selecting-the-next-experiment','python-env-setup-zh']
+    pick_slugs=['biomaterials-cp09-en','ml-predict-fiber-mechanics','python-env-setup'] if en else ['biomaterials-cp09','19-selecting-the-next-experiment','python-env-setup-zh']
     selected=[]
     for slug in pick_slugs:
         match=next((i for i in items if i['lang']==lang and i['slug']==slug),None)

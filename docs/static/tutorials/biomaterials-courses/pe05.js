@@ -1,0 +1,19 @@
+document.querySelectorAll('[data-lab="PE05-I1"]').forEach(root=>{
+ const zh=root.closest('[data-lang]').dataset.lang==='zh',f=k=>root.querySelector('[data-field="'+k+'"]');
+ const text=(x,y,s,size=20,color='#627780',anchor='start')=>'<text x="'+x+'" y="'+y+'" font-size="'+size+'" fill="'+color+'" text-anchor="'+anchor+'">'+s+'</text>';
+ function draw(){const S=Number(f('scale').value),mode=f('criterion').value,a=mode==='re'?S**-2:mode==='pv'?S**(-2/3):mode==='tip'?S**-1:1;
+  const ratios={speed:a,volume:S**3,power:a**3*S**5,powerDensity:a**3*S**2,tip:a*S,pumping:a*S**3,circulation:1/a,reynolds:a*S**2,areaDensity:1/S};
+  f('scale-value').textContent=S.toFixed(1);const labels=zh?['转速','物料体积','总机械功率','单位体积功率','桨尖速度','泵送量','循环时间','雷诺数','面积 / 体积']:['Frequency','Material volume','Total power','Power / volume','Tip speed','Pumping flow','Circulation time','Reynolds number','Area / volume'];
+  const format=v=>v>=10000?v.toExponential(1):v>=100?v.toFixed(1):v>=.1?v.toFixed(3):v.toPrecision(3);
+  const x=v=>220+370*(Math.log10(v)+4)/9,base=x(1);
+  let svg='<rect width="700" height="770" fill="#faf9f5"/>'+text(25,35,zh?'相对小设备的倍数':'Ratio to the original equipment',23,'#19383f')+text(25,70,zh?'横轴等距表示十倍变化；1 表示不变':'Equal horizontal steps are tenfold; 1 is unchanged',20);
+  for(const exp of [-4,-2,0,2,4,5]){const xx=x(10**exp);svg+='<line x1="'+xx+'" x2="'+xx+'" y1="110" y2="717" stroke="'+(exp===0?'#63757b':'#d7dfdb')+'" stroke-dasharray="4 4"/>'+text(xx,100,exp===0?'1':('10'+({'-4':'⁻⁴','-2':'⁻²','2':'²','4':'⁴','5':'⁵'}[exp])),18,'#627780','middle');}
+  Object.values(ratios).forEach((value,i)=>{const y=144+66*i,end=x(value),color=value>=1?'#087b83':'#bc592c';svg+=text(25,y+5,labels[i],19,'#19383f');if(Math.abs(value-1)<1e-10)svg+='<circle cx="'+base+'" cy="'+y+'" r="5" fill="#087b83"/>';else svg+='<rect x="'+Math.min(base,end)+'" y="'+(y-9)+'" width="'+Math.abs(base-end)+'" height="18" rx="3" fill="'+color+'"/>';svg+=text(678,y+6,format(value)+'×',18,color,'end');});
+  svg+=text(25,753,zh?'同色只表示位于原值的同一侧，不代表优劣':'Colour groups ratios above or below the original',19);f('plot').innerHTML=svg;
+  const V0=Math.PI*.3**3/4,n=5*a,d=.1*S,V=V0*S**3,P=6.25*ratios.power,flow=.0035*ratios.pumping,tip=Math.PI*n*d,re=50000*ratios.reynolds,circ=V/flow;
+  const explanations={re:zh?'保持雷诺数使转速明显降低，单位体积功率随尺寸扩大而降低，循环所需时间增加。':'Constant Reynolds number reduces frequency sharply, lowers power per volume and lengthens the circulation time.',pv:zh?'保持单位体积功率并未保持桨尖速度或循环时间；总功率随体积一起增加。':'Constant power per volume changes tip speed and circulation time; total power rises with volume.',tip:zh?'保持桨尖速度要求转速降低，单位体积功率也会下降。':'Constant tip speed requires lower frequency and also reduces power per volume.',speed:zh?'保持转速会使桨尖速度和单位体积功率随尺寸增加，循环时间尺度在此模型中保持相同。':'Constant frequency increases tip speed and power per volume, while the circulation time scale remains unchanged in this model.'};
+  f('result').textContent=(zh?'放大后桨径 '+d.toFixed(3)+' m，转速 '+(60*n).toFixed(2)+' r/min，物料体积 '+V.toFixed(3)+' m³。总液体机械功率 '+P.toFixed(2)+' W，单位体积功率 '+(P/V).toFixed(2)+' W/m³，桨尖速度 '+tip.toFixed(3)+' m/s，循环时间尺度 '+circ.toFixed(2)+' s。搅拌雷诺数约 '+re.toFixed(0)+'。':'The enlarged impeller diameter is '+d.toFixed(3)+' m at '+(60*n).toFixed(2)+' r/min, with material volume '+V.toFixed(3)+' m³. Fluid power is '+P.toFixed(2)+' W, power density '+(P/V).toFixed(2)+' W/m³, tip speed '+tip.toFixed(3)+' m/s and circulation scale '+circ.toFixed(2)+' s. Impeller Reynolds number is approximately '+re.toFixed(0)+'.')+' '+explanations[mode];
+  root.dataset.ratios=JSON.stringify(ratios);root.dataset.power=String(P);root.dataset.volume=String(V);root.dataset.circulation=String(circ);root.dataset.reynolds=String(re);
+ }
+ root.querySelectorAll('input,select').forEach(e=>{e.addEventListener('input',draw);e.addEventListener('change',draw)});root.querySelector('[data-reset]').addEventListener('click',()=>{f('scale').value=5;f('criterion').value='pv';draw();});draw();
+});

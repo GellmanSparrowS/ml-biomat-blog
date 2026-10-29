@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded',function(){
         var width = 0, height = 0, dpr = 1, columns = 0, rows = 0;
         var nodes = [], rowFibers = [], columnFibers = [], diagonalFibers = [];
         var mask = null, palette = null, mobile = false, lowPower = false;
-        var animation = 0, resizeFrame = 0, elapsed = 0, previousTime = 0, lastPaint = 0;
+        var animation = 0, resizeFrame = 0, elapsed = 0, previousTime = 0, lastPaint = 0, paintedFrames = 0;
         var slowFrames = 0, performanceLimited = false, pendingResize = false;
         var frameInterval = 1000 / 28;
         var pointer = {x:0, y:0, targetX:0, targetY:0, amount:0, targetAmount:0, updated:0, positioned:false};
@@ -319,7 +319,11 @@ document.addEventListener('DOMContentLoaded',function(){
                 : {fiber:'71,103,143', accent:'40,125,128', line:.37, highlight:.49, joint:.53};
         }
         function staticMode(){
-            return motionQuery.matches || mobile || lowPower || performanceLimited;
+            return motionQuery.matches;
+        }
+        function updateFrameInterval(){
+            // Small screens and slower devices retain motion at a lower drawing rate.
+            frameInterval = 1000 / (performanceLimited ? 10 : lowPower ? 12 : mobile ? 18 : 28);
         }
         function pixelRatio(){
             return Math.min(window.devicePixelRatio || 1, (mobile || lowPower) ? 1.5 : 2);
@@ -462,6 +466,7 @@ document.addEventListener('DOMContentLoaded',function(){
             ctx.globalCompositeOperation = 'destination-in';
             ctx.fillStyle = mask; ctx.fillRect(0, 0, width, height);
             ctx.globalCompositeOperation = 'source-over';
+            paintedFrames++;
         }
         function frame(timestamp){
             animation = 0;
@@ -477,9 +482,8 @@ document.addEventListener('DOMContentLoaded',function(){
                 slowFrames = performance.now()-started > 12 ? slowFrames+1 : Math.max(0,slowFrames-1);
                 if(slowFrames >= 18){
                     performanceLimited = true;
-                    canvas.dataset.motion = 'static';
-                    previousTime = 0;
-                    return;
+                    updateFrameInterval();
+                    slowFrames = 0;
                 }
             }
             animation = requestAnimationFrame(frame);
@@ -501,6 +505,7 @@ document.addEventListener('DOMContentLoaded',function(){
             lowPower = !!((connection && connection.saveData) ||
                 (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
                 (navigator.deviceMemory && navigator.deviceMemory < 4));
+            updateFrameInterval();
             dpr = pixelRatio();
             canvas.width = Math.round(width*dpr); canvas.height = Math.round(height*dpr);
             canvas.style.width = width+'px'; canvas.style.height = height+'px';
@@ -527,6 +532,7 @@ document.addEventListener('DOMContentLoaded',function(){
             canvas.dataset.motion = 'paused';
         });
         window.addEventListener('pageshow', scheduleResize);
+        window.addEventListener('focus', function(){ if(!document.hidden) synchronize(); });
         window.addEventListener('resize', scheduleResize, {passive:true});
         listen(motionQuery, synchronize); listen(darkQuery, synchronize);
         listen(coarseQuery, scheduleResize); listen(printQuery, synchronize);
@@ -534,6 +540,13 @@ document.addEventListener('DOMContentLoaded',function(){
         if(connection && connection.addEventListener) connection.addEventListener('change', scheduleResize);
         new MutationObserver(synchronize).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
         if(main && window.ResizeObserver) new ResizeObserver(scheduleResize).observe(main);
+        // Read-only animation state for release checks; no extra visible controls.
+        canvas.fiberBackground = {snapshot:function(){
+            return {elapsed:elapsed, frames:paintedFrames, running:!!animation,
+                reduced:motionQuery.matches, mobile:mobile, lowPower:lowPower,
+                performanceLimited:performanceLimited, fps:1000/frameInterval,
+                width:width, height:height, pixelRatio:dpr, nodes:nodes.length};
+        }};
         resize();
     }
     if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initFiberBackground);

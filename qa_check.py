@@ -2,6 +2,7 @@
 """Post-build health checks -> _qa/site_report.html (open in browser)."""
 import argparse
 import html
+import hashlib
 import os
 import json
 import re
@@ -401,6 +402,100 @@ def gallery_errors():
     return errors
 
 
+
+def course_integrity_errors(data, entries, categories):
+    """Check every imported language against its sealed source, not template totals."""
+    from content_tools import biomaterials_courses
+    pairs, content = [], []
+    totals = dict(sections=0, equations=0, figures=0, labs=0)
+    expected_ids = {lesson['id'] for lesson in data['lessons']}
+    expected_urls = {biomaterials_courses.route(identifier, lang)
+                     for identifier in expected_ids for lang in ['zh', 'en']}
+    if len(expected_ids) != 48 or len(entries) != len(expected_urls) or {item['url'] for item in entries} != expected_urls:
+        pairs.append('Imported course IDs or bilingual catalog entries are incomplete or duplicated')
+    indexed = {item['url']: item for item in entries}
+
+    def semantic(node):
+        if isinstance(node, str):
+            return re.sub(r'\s+', ' ', node).strip()
+        return [node.tag, sorted(node.attrs.items()), [value for child in node.children if (value := semantic(child))]]
+
+    forbidden = ['请作者核实', '补写中', '本次更新', '根据你提供的资料', '来自某课件',
+                 '本节贡献者', '正文润色稿', '润色时跳过', '仅供参考']
+    for lesson in data['lessons']:
+        identifier = lesson['id'].lower()
+        category = lesson['category']
+        if category not in categories:
+            pairs.append(identifier + ': unknown category')
+        addresses = {lang: biomaterials_courses.route(identifier, lang) for lang in ['zh', 'en']}
+        for lang, address in addresses.items():
+            dom = generated_dom(address, pairs)
+            if dom is None:
+                continue
+            pairs.extend(localized_switch_errors(dom, address, addresses['zh'], addresses['en']))
+            h1, locale = dom.find('h1'), dom.find('html')
+            heads = dom.find('head')
+            titles = heads[0].find('title') if len(heads) == 1 else []
+            if (len(h1) != 1 or h1[0].text().strip() != lesson['title'][lang]
+                    or len(titles) != 1 or titles[0].text().strip() != lesson['title'][lang] + ' — ML-Biomat'
+                    or len(locale) != 1 or locale[0].attrs.get('lang') != ('en' if lang == 'en' else 'zh-CN')):
+                pairs.append(address + ': localized title or document language does not match source')
+            canonical = [n.attrs.get('href') for n in dom.find('link') if n.attrs.get('rel') == 'canonical']
+            alternates = {n.attrs.get('hreflang'): urlsplit(n.attrs.get('href', '')).path
+                          for n in dom.find('link') if n.attrs.get('rel') == 'alternate' and n.attrs.get('hreflang') in ['en', 'zh-CN']}
+            if (len(canonical) != 1 or urlsplit(canonical[0]).path != address
+                    or alternates != {'zh-CN': addresses['zh'], 'en': addresses['en']}):
+                pairs.append(address + ': canonical or reciprocal alternate URLs incorrect')
+            entry = indexed.get(address, {})
+            if (entry.get('lang') != lang or entry.get('title') != lesson['title'][lang]
+                    or entry.get('categories') != [category] or entry.get('category') != category):
+                pairs.append(address + ': catalog title, language or primary category mismatch')
+            crumbs = dom.find('nav', cls='bc-crumb')
+            topic = '/categories/' + category + '/' + ('en/' if lang == 'en' else '')
+            if len(crumbs) != 1 or topic not in {a.attrs.get('href') for a in crumbs[0].find('a')}:
+                pairs.append(address + ': localized category breadcrumb missing')
+            panes = dom.find('article', cls='language-pane')
+            if len(panes) != 1 or panes[0].attrs.get('data-lang') != lang or 'hidden' in panes[0].attrs:
+                content.append(address + ': expected one visible language article')
+                continue
+            pane = panes[0]
+            source = ROOT / 'content/tutorials/biomaterials-courses' / (identifier + '-' + lang + '.html')
+            original = source.read_text(encoding='utf-8')
+            expected = lesson['counts'][lang]
+            if hashlib.sha256(original.encode('utf-8')).hexdigest() != expected['sha256']:
+                content.append(address + ': imported fragment no longer matches its source receipt')
+            actual = {'sections':len(pane.find('section')), 'equations':len(pane.find(cls='equation')),
+                      'figures':len(pane.find('figure', cls='science-figure')), 'labs':len(pane.find(attr='data-lab'))}
+            for key, count in actual.items():
+                totals[key] += count
+                if count != expected[key]:
+                    content.append(address + ': ' + key + ' differ from imported source')
+            parsed_source = PageParser(original).root
+            if [semantic(child) for child in pane.children if semantic(child)] != [semantic(child) for child in parsed_source.children if semantic(child)]:
+                content.append(address + ': article text, formula geometry, figures or lab markup changed during rendering')
+            sections = [node.attrs.get('id') for node in pane.find('section')]
+            if sections != [lang + '-' + section['id'] for section in lesson['sections']]:
+                content.append(address + ': section order or language anchors differ from source')
+            ids = [node.attrs['id'] for node in dom.find(attr='id')]
+            if len(ids) != len(set(ids)):
+                content.append(address + ': duplicate DOM IDs')
+            for node in dom.find('a'):
+                href = node.attrs.get('href', '')
+                if href.startswith('#') and unquote(href[1:]) not in ids:
+                    content.append(address + ': missing same-page anchor ' + href)
+            script_paths = {urlsplit(n.attrs.get('src', '')).path for n in dom.find('script')}
+            lab_script = '/static/tutorials/biomaterials-courses/' + identifier + '.js'
+            if not {lab_script, '/static/js/biomaterials-courses.js'} <= script_paths:
+                content.append(address + ': interactive lesson or shared reader script missing')
+            built_script, source_script = DOCS / lab_script.lstrip('/'), ROOT / lab_script.lstrip('/')
+            if not built_script.is_file() or built_script.read_text(encoding='utf-8') != source_script.read_text(encoding='utf-8'):
+                content.append(address + ': published lab script differs from source')
+            public_text = pane.text()
+            if any(note in public_text for note in forbidden) or re.search(r'file://|(?:^|[\s"\'>])[A-Za-z]:[\\/]|127\.0\.0\.1|localhost', original):
+                content.append(address + ': editorial note or private local address in public article')
+    return pairs, content, totals
+
+
 def run():
     checks = []
     posts = []
@@ -411,7 +506,10 @@ def run():
     lessons = curriculum["lessons"]
     tutorial_count = len(lessons)
     total = len(posts)
-    indexed_total = total + tutorial_count
+    from content_tools import biomaterials_courses
+    courses = biomaterials_courses.load()
+    course_entries = biomaterials_courses.entries(courses)
+    indexed_total = total + tutorial_count + len(course_entries)
     en = sum(1 for x in posts if x[0] == "en")
     zh = total - en
     checks.append(check("EN/ZH articles balanced", en == zh, "en=%d zh=%d" % (en, zh)))
@@ -428,7 +526,7 @@ def run():
 
     rss = (DOCS / "rss.xml").read_text(encoding="utf-8") if (DOCS / "rss.xml").exists() else ""
     rss_n = rss.count("<item>")
-    checks.append(check("RSS covers articles and tutorials", rss_n == indexed_total, "rss=%d articles=%d tutorials=%d" % (rss_n, total, tutorial_count)))
+    checks.append(check("RSS covers articles and tutorials", rss_n == indexed_total, "rss=%d articles=%d tutorials=%d bilingual course pages=%d" % (rss_n, total, tutorial_count, len(course_entries))))
 
     try:
         rss_dates = ET.fromstring(rss).findall("./channel/item/pubDate")
@@ -460,7 +558,7 @@ def run():
         search_n = len(json.loads((DOCS / "search.json").read_text(encoding="utf-8")))
     except Exception:
         search_n = -1
-    checks.append(check("Search covers articles and tutorials", search_n == indexed_total, "search=%d articles=%d tutorials=%d" % (search_n, total, tutorial_count)))
+    checks.append(check("Search covers articles and tutorials", search_n == indexed_total, "search=%d articles=%d tutorials=%d bilingual course pages=%d" % (search_n, total, tutorial_count, len(course_entries))))
 
     docs_n = len(list((DOCS / "posts").glob("*/index.html")))
     checks.append(check("Generated post pages == posts", docs_n == total, "pages=%d posts=%d" % (docs_n, total)))
@@ -540,7 +638,12 @@ def run():
     checks.append(check('Shared navigation and dark-first shell',not chrome_errors,'; '.join(chrome_errors[:15]) if chrome_errors else 'All generated pages retain both language controls, matching navigation, and dark initialization'))
     from content_tools import catalog
     catalog_curriculum = dict(curriculum, lessons=[dict(lesson, url='/tutorials/polymer-ai/' + lesson['slug'] + '/') for lesson in lessons])
-    items = catalog.entries(loaded, catalog_curriculum)
+    items = catalog.entries(loaded, catalog_curriculum) + course_entries
+    course_pairs, course_content, course_totals = course_integrity_errors(courses, course_entries, build.CATEGORIES)
+    checks.append(check('Bilingual biomaterials tutorial routes and topic integration', not course_pairs,
+                        '; '.join(course_pairs[:15]) if course_pairs else '48 complete language pairs with localized titles, canonical URLs, alternate links and topic breadcrumbs'))
+    checks.append(check('Imported tutorial content, figures, equations and scientific labs', not course_content,
+                        '; '.join(course_content[:15]) if course_content else 'All 96 pages preserve their sealed source: ' + ', '.join(str(value) + ' ' + key for key, value in course_totals.items())))
     home_errors = homepage_errors(items, build.CATEGORIES)
     checks.append(check('Home language switch preserves page type', not home_errors,
                         '; '.join(home_errors[:15]) if home_errors else 'Localized research homepages, topic counts, tutorial picks and same-page language links agree'))
@@ -556,7 +659,7 @@ def run():
     for post in loaded:
         pair=build.find_pair(post,by_lang)
         if pair and pair['category']!=post['category']:primary_errors.append(post['slug'])
-    checks.append(check('One primary topic with bilingual agreement',not primary_errors,', '.join(primary_errors) if primary_errors else '44 Chinese and 24 English entries have one primary topic; article pairs agree'))
+    checks.append(check('One primary topic with bilingual agreement',not primary_errors,', '.join(primary_errors) if primary_errors else str(sum(i['lang'] == 'zh' for i in items)) + ' Chinese and ' + str(sum(i['lang'] == 'en' for i in items)) + ' English entries have one primary topic; article pairs agree'))
 
     # Keep production pages free of the redundant display notes removed by review.
     clutter=[]
@@ -569,7 +672,7 @@ def run():
         text=(DOCS/route).read_text(encoding='utf8')
         hero=re.search(r'<header class="fn-hero">(.*?)</header>',text,re.S)
         if not hero or 'fn-scene-canvas' not in hero[1] or re.search(r'<button|id="(?:nodes|motion|reset|readout)"',hero[1]):clutter.append(route)
-        if not re.search(r'/static/js/fibernet-scene\.js\?v=',text):clutter.append(route+': stale scene URL')
+        if not re.search(r'/static/js/fibernet-flow\.js\?v=',text):clutter.append(route+': stale scene URL')
     checks.append(check('Concise page copy and automatic FiberNet scene',not clutter,', '.join(clutter) if clutter else 'Redundant display notes absent; both project pages have automatic decoration without display controls'))
 
     broken = broken_local_links()

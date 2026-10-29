@@ -1,0 +1,4616 @@
+{
+  "version": 1,
+  "date": "2026-10-29",
+  "source": "User-supplied bilingual biomaterials courses",
+  "lessons": [
+    {
+      "id": "BM01",
+      "group": "BM",
+      "title": {
+        "zh": "从氨基酸到蛋白质：顺序怎样变成结构",
+        "en": "From Amino Acids to Proteins: How Sequence Becomes Structure"
+      },
+      "standfirst": {
+        "zh": "从豆腐、头发和鸡蛋清的变化出发，认识氨基酸、肽键、序列与折叠。沿着测序和结构研究的科学史，逐步理解螺旋、折叠片、分子间连接，以及蛋白质怎样成为有功能的分子和材料。",
+        "en": "Starting with changes in tofu, hair and egg white, explore amino acids, peptide bonds, sequences and folding. Follow the history of sequencing and structural chemistry to understand helices, sheets, molecular connections, and how proteins become functional molecules and materials."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一块豆腐、一根头发与一个共同的问题",
+            "en": "Tofu, hair and a shared molecular question"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "氨基酸怎样成为带有方向的链",
+            "en": "How amino acids become a chain with a direction"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "为什么必须知道顺序：从胰岛素到片段拼接",
+            "en": "Why order matters: insulin and overlapping fragments"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "链能转动，却不能任意穿过自己",
+            "en": "A chain can rotate, but it cannot pass through itself"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "螺旋和折叠片怎样从局部连接中出现",
+            "en": "How local connections produce helices and sheets"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "从局部结构到完整分子：水、接触与自由能",
+            "en": "The complete molecule: water, contacts and free energy"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "展开之后能否回来：变性、复性与折叠环境",
+            "en": "Can an unfolded chain return? Denaturation and its surroundings"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把结构层次用于解释一个真实现象",
+            "en": "Using structural levels to explain an observation"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "next": "BM02"
+      },
+      "source_file": "bm01.html",
+      "source_sha256": "cac0e62f15458ddc6a055d5820eaebc6fb2098fdb03d94703cee21eb1a087e82",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "77e0c2ada54eed7b36c2a294a6f69222d8f7f5fe5962c796e50cd23cff35b524"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "a1b73fb330b8e92e062bcd0a7786fbe8530b6444134195f7c9e34579eddfe87a"
+        }
+      }
+    },
+    {
+      "id": "BM02",
+      "group": "BM",
+      "title": {
+        "zh": "怎样把氨基酸按顺序连接：多肽合成的化学",
+        "en": "Joining Amino Acids in Order: The Chemistry of Peptide Synthesis"
+      },
+      "standfirst": {
+        "zh": "把氨基酸排成指定顺序，需要同时安排反应位置、反应能力和分离方式。从一条短肽的增长出发，理解保护基、固相树脂与片段连接怎样协同工作，再用可调的数量模型观察微小的单步损失如何积累。",
+        "en": "Building a specified peptide requires control of reaction sites, reactivity, and separation. Follow a growing chain to understand protecting groups, solid supports, and fragment ligation, then explore how small losses in individual cycles accumulate."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "把单元连起来之前，先决定谁和谁连接",
+            "en": "Before joining the units, decide which groups should react"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "活化与保护：给反应安排入口和出口",
+            "en": "Activation and protection organize access to a reaction"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "保护基为什么改变了多肽合成的工作方式",
+            "en": "How protecting groups changed peptide synthesis"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把正在生长的链固定住：固相合成的想法",
+            "en": "Holding the growing chain in place: solid-phase synthesis"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "为什么每一步都“差一点”会积成大问题",
+            "en": "Why small losses accumulate across many steps"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "长链的难处：化学副反应与分子接近",
+            "en": "Long chains introduce chemistry and accessibility problems"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从一条序列到一组序列：多肽库怎样建立",
+            "en": "Making a family of sequences: peptide libraries"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "指定序列与聚合物分布：两种不同的控制目标",
+            "en": "Specified sequences and polymer distributions"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "BM01",
+        "next": "BM03"
+      },
+      "source_file": "bm02.html",
+      "source_sha256": "7b98b4529c44833db869ae77045d75d2b63c9a661dc1aca0028328ed6ce3fa3b",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 7,
+          "labs": 1,
+          "sha256": "8a2f033e2a00718dfb3b30e60778533b86db708d5c98136ae66c443cb1de1e94"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 7,
+          "labs": 1,
+          "sha256": "3facce2fa98827bcac7bd371ed99199b1d7d2c0a44484cef4c685c038fc13c8f"
+        }
+      }
+    },
+    {
+      "id": "BM03",
+      "group": "BM",
+      "title": {
+        "zh": "从混合物中找到一种蛋白质：分离、鉴定与结构测量",
+        "en": "Finding a Protein in a Mixture: Separation and Characterization"
+      },
+      "standfirst": {
+        "zh": "一管澄清溶液中可能藏着许多不同的蛋白质。沿着目标的去向，理解大小、电荷与识别怎样成为分离工具，再把色谱曲线、凝胶条带和质谱峰接回样品的身份、数量与状态。",
+        "en": "A clear solution can contain many different proteins. Follow a target through separation by size, charge, and recognition, then connect chromatograms, gel bands, and mass spectra to the identity, amount, and state of the recovered sample."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "找到目标，先要知道自己在找什么",
+            "en": "Finding a target begins with knowing what to look for"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "让蛋白质进入溶液，也让它保留需要的状态",
+            "en": "Release the protein while preserving its useful state"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "用大小作区分：膜与多孔小球做的事情不同",
+            "en": "Sorting by size: membranes and porous beads do different jobs"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "用电荷作区分：让分子选择表面或方向",
+            "en": "Sorting by charge: choosing a surface or a direction"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "利用识别来捕获：亲和力也需要材料配合",
+            "en": "Capture through recognition also requires a suitable material"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "从曲线决定收集哪一管：纯度与回收率的关系",
+            "en": "Choose which fractions to collect: purity and recovery"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "一条带告诉了什么：凝胶、电泳与免疫印迹",
+            "en": "What does one band tell us? Gels and immunoblotting"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把分子变成可称量的离子，再把证据接回样品",
+            "en": "Turn molecules into measurable ions, then reconnect the evidence"
+          }
+        }
+      ],
+      "category": "wet-lab-data",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "BM02",
+        "next": "BM04"
+      },
+      "source_file": "bm03.html",
+      "source_sha256": "96ec56df3f0f794a9de3ea07e835cbc32ba96dfad4596b3b4eb00b2a298c08b5",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 8,
+          "figures": 5,
+          "labs": 1,
+          "sha256": "58f546c4210a8d3521ff7a570cfdedd4b723fe0ea956ff3d83ebece01cb3a1a9"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 8,
+          "figures": 5,
+          "labs": 1,
+          "sha256": "f79a5d76611db48a8250ec335cd70e858b5f9db06e2c2e6a57236a46429b8620"
+        }
+      }
+    },
+    {
+      "id": "BM04",
+      "group": "BM",
+      "title": {
+        "zh": "蛋白质怎样工作：携氧、催化与承力",
+        "en": "How Proteins Work: Oxygen Binding, Catalysis and Structure"
+      },
+      "standfirst": {
+        "zh": "从一次呼吸、一根头发和一条承力肌腱出发，追踪蛋白质怎样结合小分子、加快反应、组织纤维并产生运动。把结构、环境和数量关系放在一起，看清相似的化学骨架为何能完成不同任务。",
+        "en": "Begin with a breath, a strand of hair, and a load-bearing tendon. Follow how proteins bind molecules, accelerate reactions, organize fibers, and generate motion. Structure, environment, and quantitative behavior explain how related backbone chemistry supports different jobs."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "同样是蛋白质，为什么能完成完全不同的任务",
+            "en": "How can proteins perform such different jobs?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "肌红蛋白：给氧安排一个可逆的停靠位置",
+            "en": "Myoglobin provides a reversible place for oxygen"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "血红蛋白：让几个结合位点相互影响",
+            "en": "Hemoglobin lets binding sites influence one another"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "酶：结合以后，还要把反应这一步做好",
+            "en": "An enzyme must do more than bind its substrate"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "胶原：从三条肽链到有条纹的承力纤维",
+            "en": "Collagen: three chains become a banded load-bearing fibril"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "组织怎样承受拉力：方向、卷曲与逐级参与",
+            "en": "How tissue carries tension: direction, crimp, and recruitment"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "角蛋白：头发的力学行为来自纤维与基质",
+            "en": "Keratin: hair combines reinforcing filaments and matrix"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "弹性蛋白：回缩要把水也算进去",
+            "en": "Elastin recoil involves water as well as protein"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "肌肉：结构还能把化学循环变成运动",
+            "en": "Muscle converts a chemical cycle into organized movement"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "BM03",
+        "next": "BM05"
+      },
+      "source_file": "bm04.html",
+      "source_sha256": "ad72468078a8188d9ae94d8b7b91643e1914076cfe5883db813a8e9f7e31761c",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 5,
+          "figures": 8,
+          "labs": 1,
+          "sha256": "7d9c38914eeb80bc9330ef4b4037cc8bbb0e645768787912f18dcd3685d37ccc"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 5,
+          "figures": 8,
+          "labs": 1,
+          "sha256": "88c019195d3248a6fe1e433bf828bbe6cda1192fad3fd93f43ff498bd795ef2a"
+        }
+      }
+    },
+    {
+      "id": "BM05",
+      "group": "BM",
+      "title": {
+        "zh": "一根丝里的材料科学：分子组装、纺丝与生物矿化",
+        "en": "The Materials Science of Silk: Assembly, Spinning and Mineralization"
+      },
+      "standfirst": {
+        "zh": "蚕茧、蛛网、透明薄膜和含水凝胶可以由相近的蛋白质构件形成，却承担不同任务。沿着丝的分子顺序、组装、纺丝与湿度响应，理解结构怎样留下加工的痕迹，再把这些认识用于多孔支架、矿物复合物和短肽材料。",
+        "en": "A cocoon, a spider web, a transparent film and a water-rich gel can be built from related protein components yet serve very different purposes. Follow silk from molecular sequence through assembly, spinning and hydration, then use those connections to understand porous scaffolds, mineral composites and short-peptide materials."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "先看一根丝需要完成什么任务",
+            "en": "Begin with the job a silk must do"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从氨基酸顺序到有序与柔软共存的结构",
+            "en": "From sequence to a structure with order and mobility"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "把蛋白质溶液变成纤维",
+            "en": "Turning a protein solution into a fibre"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "组装为什么有等待期，又怎样加快",
+            "en": "Why assembly has a lag and how it accelerates"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "怎样读懂一根丝的力学表现",
+            "en": "Reading the mechanical response of a silk"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "水进入丝以后：变软、收缩与约束",
+            "en": "When water enters silk: softening, contraction and constraint"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "让丝重新成为薄膜、颗粒和多孔支架",
+            "en": "Remaking silk as films, particles and porous scaffolds"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "丝凝胶怎样留住水，又怎样通过喷嘴",
+            "en": "How silk gels hold water and pass through a nozzle"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "有机骨架怎样参与矿物生长",
+            "en": "How an organic framework influences mineral growth"
+          }
+        },
+        {
+          "id": "s10",
+          "title": {
+            "zh": "从长链切出短肽，再设计新的组装",
+            "en": "Cutting short peptides from long chains and designing new assemblies"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "BM04",
+        "next": "BM06"
+      },
+      "source_file": "bm05.html",
+      "source_sha256": "29d2fd1095cf60d52016fa0ba9df8ef3678a90c87a049feb9486f564b5cee338",
+      "counts": {
+        "zh": {
+          "sections": 10,
+          "equations": 6,
+          "figures": 8,
+          "labs": 2,
+          "sha256": "6fe191a2a9f8753fe007ba1c26c82e3080c423f8ca93a955faf7db6595e3f5d7"
+        },
+        "en": {
+          "sections": 10,
+          "equations": 6,
+          "figures": 8,
+          "labs": 2,
+          "sha256": "96f07a24e9906533e3bfab4feb9ddb47aaf25812b7ac50a37ebc0978de7db138"
+        }
+      }
+    },
+    {
+      "id": "BM06",
+      "group": "BM",
+      "title": {
+        "zh": "怎样改变蛋白质而保留功能：化学修饰与连接",
+        "en": "Modifying Proteins While Retaining Function"
+      },
+      "standfirst": {
+        "zh": "给蛋白质接上荧光标签、把酶固定在材料表面、用颜色数出可反应基团，都需要在复杂的分子上选择合适位置。理解反应性、酸碱度、空间可接近性与标记分布，才能把一次化学变化变成读得懂的结构信息和用得上的功能材料。",
+        "en": "Attaching a fluorescent label, immobilising an enzyme and counting reactive groups with a colour change all require choosing where to act on a complex molecule. Reactivity, acidity, accessibility and the distribution of labels connect chemical modification to interpretable structural information and useful functional materials."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "给一台分子机器装上可见的把手",
+            "en": "Giving a molecular machine a visible handle"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "选择反应位置：化学种类、酸碱度与空间",
+            "en": "Choosing a site: chemistry, acidity and access"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "用巯基把结构变化变成颜色",
+            "en": "Using thiols to turn structural change into colour"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把标签与蛋白质连接起来",
+            "en": "Connecting a label to a protein"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "从一个端点读出一条链的顺序",
+            "en": "Reading a chain from one end"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "修饰得多快，功能又怎样改变",
+            "en": "How fast modification proceeds and how function changes"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "让结合引导反应，再设计专用接口",
+            "en": "Using recognition to guide reaction and designing new handles"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "平均一个标签，不等于每个分子一个",
+            "en": "One label on average does not mean one on every molecule"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "把修饰后的蛋白质变成可用材料",
+            "en": "Turning modified proteins into functional materials"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "BM05",
+        "next": "BM07"
+      },
+      "source_file": "bm06.html",
+      "source_sha256": "8e235005bb3e65d61d7714661dec3429839bcb12963da76ca342f3a19937d09d",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 6,
+          "figures": 5,
+          "labs": 1,
+          "sha256": "1ab321dc6968ccfa799f1c21462a3848629902128fe192878700e4fe42b7f3c8"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 6,
+          "figures": 5,
+          "labs": 1,
+          "sha256": "ba909908408d0dfd333623a3e41f277e65a1e411a09f350e36868ad8694b33bd"
+        }
+      }
+    },
+    {
+      "id": "BM07",
+      "group": "BM",
+      "title": {
+        "zh": "同样的糖怎样长成不同材料：多糖的连接与组装",
+        "en": "How Sugars Build Different Materials: Polysaccharides"
+      },
+      "standfirst": {
+        "zh": "米饭、棉布、虾壳和关节里的含水组织，都把糖单元组织成了长链。连接位置、空间方向、分支和电荷，让这些长链承担储能、支撑、保水与润滑等不同任务。从单个糖环开始，逐步理解分子结构如何成为材料性质，以及实验怎样读出这些连接。",
+        "en": "Rice, cotton, shells and water-rich joint tissues all organise sugar units into long chains. Linkage positions, stereochemistry, branching and charge turn those chains into stores of energy, structural fibres and hydrated networks. Starting with a single sugar ring, connect molecular structure with material behaviour and the experiments used to identify its linkages."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从米饭与棉布认识一个糖环",
+            "en": "From rice and cotton to a sugar ring"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "连接写在哪里，长链就怎样生长",
+            "en": "How linkage positions build a chain"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "淀粉和糖原怎样储存与释放糖",
+            "en": "How starch and glycogen store and release sugars"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "纤维素为什么能吸水却不轻易溶解",
+            "en": "Why cellulose absorbs water without readily dissolving"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "从甲壳素到壳聚糖：一个侧基的变化",
+            "en": "From chitin to chitosan: changing a side group"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "带电糖链怎样组织含水空间",
+            "en": "How charged sugar chains organise hydrated space"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "水、盐和网络共同承担压力",
+            "en": "Water, salt and networks share the load"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "一份多糖里到底有多长的链",
+            "en": "How long are the chains in a polysaccharide sample?"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "沿着化学痕迹找回连接结构",
+            "en": "Recovering linkage structures from chemical evidence"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "BM06",
+        "next": "BM08"
+      },
+      "source_file": "bm07.html",
+      "source_sha256": "2ee0e55cf6b84e1b7c1513f1e40e385c9dd49113d9291b204dc70ab724fbcfa0",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 5,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "61f3f6e6e70c41c1b9822f7e79f642ffac5d65054c6cd9bdc2ede8bd919e788e"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 5,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "0de36d234861b58aad53219e3a9da65df7799a3e6b71d06eb04dd7b23e553967"
+        }
+      }
+    },
+    {
+      "id": "BM08",
+      "group": "BM",
+      "title": {
+        "zh": "把糖连接到蛋白质：糖缀合物的结构与识别",
+        "en": "Connecting Sugars to Proteins: Glycoconjugates and Recognition"
+      },
+      "standfirst": {
+        "zh": "糖链是许多生物分子面对水和其他分子的界面。它接在哪里、朝向哪里、彼此相隔多远，都会改变识别和材料行为。从天然糖基化与人工连接的区别开始，理解怎样读出糖链、选择连接位置，并把分子识别变成可解释的表面功能。",
+        "en": "Glycans form an interface between many biological molecules, water and their binding partners. Attachment position, orientation and spacing influence recognition and material behaviour. Distinguish natural glycosylation from designed conjugation, learn how glycan structures are read, and connect attachment chemistry with useful surface function."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "糖链把分子的表面变成了什么",
+            "en": "What a sugar chain does to a molecular surface"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "天然糖基化、糖化与人工连接",
+            "en": "Glycosylation, glycation and designed conjugation"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "一层层切下来，怎样读懂一条糖链",
+            "en": "Reading a glycan by removing its outer residues"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "利用还原端连接，同时决定保留什么结构",
+            "en": "Connecting through the reducing end"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "更换连接化学，也会更换界面性质",
+            "en": "Changing the bond changes the interface"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "一个结合位点与一整片糖表面",
+            "en": "One binding site and a whole carbohydrate surface"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "改造整条多糖：反应位置决定材料变化",
+            "en": "Modifying a whole polysaccharide"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让糖固定在表面，仍然保留识别机会",
+            "en": "Immobilising sugars while preserving access"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "从一瓶产物到一个可以解释的实验",
+            "en": "From a product mixture to an interpretable experiment"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "BM07",
+        "next": "BM09"
+      },
+      "source_file": "bm08.html",
+      "source_sha256": "0f95c7c197c1f788cdc28a82fcdb2b89f93c50c461946098f80c4582931ce582",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 4,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "7b4367ad123f7cbb31dc1ea558601749a29573025e8933ae55c5831f23159683"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 4,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "7c05629e6ea30d2ac00f1d44f4b5150ee2c05bf471e32e66a7a30a4715f72d2b"
+        }
+      }
+    },
+    {
+      "id": "BM09",
+      "group": "BM",
+      "title": {
+        "zh": "从核苷酸到遗传信息：DNA与RNA的结构和作用",
+        "en": "From Nucleotides to Genetic Information: DNA and RNA"
+      },
+      "standfirst": {
+        "zh": "四种字母怎样成为可以复制的信息，柔软的分子怎样成为工作的结构？从核苷酸的连接方向出发，沿着双螺旋、复制实验、RNA折叠和蛋白质合成逐步展开，再理解测量、化学合成与扩增如何利用这些分子规律。",
+        "en": "How can four letters encode copyable information, and how can a flexible chain become a working structure? Begin with nucleotide connectivity and follow duplex formation, replication experiments, RNA folding and protein synthesis before exploring how measurement, chemical synthesis and amplification use the same molecular principles."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一条分子怎样保存可以复制的信息",
+            "en": "How a molecule stores information that can be copied"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "糖、磷酸和碱基怎样组成有方向的链",
+            "en": "Sugars, phosphates and bases make a directional chain"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "双螺旋为什么能配对，又能够弯曲",
+            "en": "Why a double helix pairs and still bends"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "复制保留了什么：氮同位素标记实验的推理",
+            "en": "What replication preserves: reasoning with heavy nitrogen"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "RNA可以传信，也可以形成工作的结构",
+            "en": "RNA carries messages and forms working structures"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "怎样看见核酸的数量、长度与配对状态",
+            "en": "Measuring amount, length and pairing"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从基因到密码子：顺序怎样换一种语言",
+            "en": "From genes to codons: changing molecular language"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "核糖体怎样把接头上的氨基酸连成链",
+            "en": "How the ribosome joins amino acids carried by adaptors"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "人工合成一条指定顺序的核酸",
+            "en": "Chemically making a specified nucleic acid sequence"
+          }
+        },
+        {
+          "id": "s10",
+          "title": {
+            "zh": "扩增让信号变多，验证让信息可信",
+            "en": "Amplification increases signal; verification identifies it"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "BM08"
+      },
+      "source_file": "bm09.html",
+      "source_sha256": "7878a0916d281fd27791d4cff6eb6e2c1033162c0872f3543abe64986c8d8854",
+      "counts": {
+        "zh": {
+          "sections": 10,
+          "equations": 7,
+          "figures": 8,
+          "labs": 2,
+          "sha256": "3fe650741c2d5d847f7d44d06ca3938676a71b201ae5c7f6471df499af210d32"
+        },
+        "en": {
+          "sections": 10,
+          "equations": 7,
+          "figures": 8,
+          "labs": 2,
+          "sha256": "a6dfba5bcc9303ed3be34a04db43678e561597c4eaa7116dd22e7926fdc114a6"
+        }
+      }
+    },
+    {
+      "id": "CP00",
+      "group": "CP",
+      "title": {
+        "zh": "长链、软物质与时间：高分子物理的起点",
+        "en": "Long Chains, Soft Matter and Time: A Starting Point"
+      },
+      "standfirst": {
+        "zh": "橡皮筋为什么回弹，塑料为什么慢慢变形，富含水的凝胶为什么能保持形状？从原子、分子和长链讲起，认识连接与构象、凝聚态与热运动，再用力学量和可操作的松弛实验把材料结构与观察时间联系起来。",
+        "en": "Why does rubber recover, plastic creep, and a water-rich gel hold its shape? Begin with atoms, molecules and long chains, distinguish connectivity from conformation, then connect condensed states, thermal motion and mechanical response through an interactive relaxation experiment."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从橡皮筋、塑料袋和凝胶开始",
+            "en": "Begin with a rubber band, a bag, and a gel"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "为什么要相信一条分子真的可以很长",
+            "en": "Why believe that a single molecule can be very long?"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "长链并不总是直线：连接、形状与尺度",
+            "en": "Connection, shape, and the length of a chain"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "凝聚态与软物质：致密并不等于不能流动",
+            "en": "Condensed matter can still flow"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "材料内部有许多时钟",
+            "en": "A material contains many clocks"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "先认识力、形变与速率，再谈弹性和黏性",
+            "en": "Force, deformation, and rate before elasticity and viscosity"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "黏弹性：形状保持住了，力却还在变化",
+            "en": "Viscoelasticity: fixed shape, changing force"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把天然材料、合成材料与真实实验放在同一张图里",
+            "en": "Natural materials, synthetic materials, and useful experiments"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "next": "CP01"
+      },
+      "source_file": "cp00.html",
+      "source_sha256": "99b9e4b584fbc6f0e0d997e12ed046fe72090ad3396d3700200060e02e3a0289",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "f078c75f5f1806a2a6165058f725cdeea655bc8eaec600b066cd27431e18389f"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "181bda2da0347ad579db482a900987694e662522e8d7047c61507dcbab5957b0"
+        }
+      }
+    },
+    {
+      "id": "CP01",
+      "group": "CP",
+      "title": {
+        "zh": "长链怎样变成材料：高分子统计物理的入口",
+        "en": "How Long Chains Become Materials: An Introduction to Polymer Statistical Physics"
+      },
+      "standfirst": {
+        "zh": "橡皮筋能回弹，塑料熔体会缓慢流动，蛋白质能改变形状并完成特定功能。这些现象都涉及长链分子的许多可能状态。先从链的连接和可数的构象出发，理解概率、熵、热运动与观察时间怎样把微观结构连接到材料的力学、混合和生命功能。",
+        "en": "Rubber recovers, polymer melts flow slowly, and proteins change shape to perform specific functions. These behaviors involve many possible states of long-chain molecules. Begin with connectivity and countable conformations, then connect probability, entropy, thermal motion and observation time to mechanics, mixing and biological function."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "同样由分子组成，长链有什么不同",
+            "en": "What changes when molecules become long chains"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从长分子的证据到形状的统计",
+            "en": "From evidence for long molecules to statistics of shape"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "先数清一条小链的可能形状",
+            "en": "Counting the possible shapes of a small chain"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "熵怎样把状态数变成物理倾向",
+            "en": "How entropy connects state counts to physical preference"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "为什么拉伸一条链需要力",
+            "en": "Why extending a chain requires force"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "许多条链如何改变混合与结构",
+            "en": "How many chains change mixing and structure"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "观察时间与生命分子的形状变化",
+            "en": "Observation time and the changing shapes of biological molecules"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "怎样把统计模型接到实际测量",
+            "en": "Connecting statistical models to measurements"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP00",
+        "next": "CP02"
+      },
+      "source_file": "cp01.html",
+      "source_sha256": "93e5032ced62919b50e3741d009aaf979faeb2bc3ef59fbd4b5789c528f67ddb",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "7dab0320b10a06ffc155219c3b26d47ec03f236cc64f6bf0dfc2c582e720e7b4"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "a7b68fe85279af3323789f90ef3edbcea5d58e933bf6b21af29eef9c00d33d8a"
+        }
+      }
+    },
+    {
+      "id": "CP02",
+      "group": "CP",
+      "title": {
+        "zh": "从一个状态到许多可能：相空间、概率与系综",
+        "en": "From One State to Many Possibilities: Phase Space, Probability and Ensembles"
+      },
+      "standfirst": {
+        "zh": "知道一条链或一个粒子在哪里，还不足以预测它接下来怎样运动；只看一次测量，也不一定得到稳定的材料性质。从位置与动量出发，建立状态空间和概率平均，再用能量、热浴和粒子交换说明不同系综。最后比较慢跳转过程中的时间平均与系综概率，理解平衡与观测时间之间的关系。",
+        "en": "Knowing where a chain or particle is does not fully determine its next motion, and one observation need not give a stable material property. Begin with position and momentum, build state space and probability averages, and distinguish ensembles through energy, thermal contact and particle exchange. A slow-jump model then connects equilibrium probabilities with finite observation times."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "要预测运动，必须知道哪些量",
+            "en": "What must be known to predict motion"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "相空间是一张完整状态的地图",
+            "en": "Phase space maps complete states"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "概率与概率密度怎样使用",
+            "en": "Using probabilities and probability densities"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "时间平均与系综平均为何需要区分",
+            "en": "Why time averages and ensemble averages differ"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "孤立体系怎样给出微正则系综",
+            "en": "The microcanonical ensemble for an isolated system"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "热浴为什么给出Boltzmann权重",
+            "en": "Why a heat bath produces Boltzmann weights"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "允许交换粒子时，化学势进入概率",
+            "en": "Particle exchange brings chemical potential into probability"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "相同平衡概率，可以有完全不同的等待时间",
+            "en": "The same equilibrium can have very different waiting times"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "熵、粗粒化与有限样品",
+            "en": "Entropy, coarse graining and finite specimens"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP01",
+        "next": "CP03"
+      },
+      "source_file": "cp02.html",
+      "source_sha256": "968f3dd301facbd09a08bca49fc9e7bcf0b1707839b228e61647ed4a93ec695f",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 13,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "07c248eb9626d1a07226430b573b11aa8e438d2d5b975cf4e376c0e8c5aaeca6"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 13,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "fa6db30c68247a0ccfbf2295bb8efbbe762695e983535ac0323bab5e331bcb3e"
+        }
+      }
+    },
+    {
+      "id": "CP03",
+      "group": "CP",
+      "title": {
+        "zh": "一条链能占多大空间：理想链的构象统计",
+        "en": "How Much Space Does a Chain Occupy? Ideal-Chain Statistics"
+      },
+      "standfirst": {
+        "zh": "沿链量出的长度、两端之间的距离和整条链的空间尺寸，为什么是不同的量？从随机步子出发，逐步理解回转半径、库恩长度、概率分布和熵弹性，再比较柔性链、半刚性链与环状和支化结构。",
+        "en": "Contour length, end-to-end distance and overall molecular size measure different things. Random steps lead to the radius of gyration, Kuhn length, probability distributions and entropic elasticity, followed by semiflexible chains, rings and branches."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一根很长的链，为什么能装进很小的地方",
+            "en": "How a long chain fits into a small region"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "先把方向、长度和平均分开",
+            "en": "Separating direction, length and averaging"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "从两端走向整条链：回转半径",
+            "en": "Beyond the two ends: radius of gyration"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "局部化学怎样改变整条链的尺寸",
+            "en": "How local chemistry changes overall dimensions"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "库恩长度：把化学细节换成有效步长",
+            "en": "Kuhn length: replacing chemical detail with effective steps"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "为什么末端距形成一条概率曲线",
+            "en": "Why end-to-end distances form a probability curve"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "没有拉长化学键，也会产生回复力",
+            "en": "A restoring force without stretching chemical bonds"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从柔性线团到半刚性细杆",
+            "en": "From flexible coils to semiflexible rods"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "环、星形与支化：连接方式也在决定尺寸",
+            "en": "Rings, stars and branches: connectivity changes size"
+          }
+        },
+        {
+          "id": "s10",
+          "title": {
+            "zh": "把单链统计接到材料与实验",
+            "en": "Connecting single-chain statistics to materials and experiments"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP02",
+        "next": "CP04"
+      },
+      "source_file": "cp03.html",
+      "source_sha256": "82e441b3a2a64b180900ce90065df0000a31b42021f83f0bfb9d3c1db2f60744",
+      "counts": {
+        "zh": {
+          "sections": 10,
+          "equations": 10,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "9b4cfd1b48b7ca188b50476723f514af7c36cc8a2afe8cda1a809506c520773a"
+        },
+        "en": {
+          "sections": 10,
+          "equations": 10,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "01f64e43ce168f0eddcb5e298b7ac991055656819b8ea5b106fdf8c320783def"
+        }
+      }
+    },
+    {
+      "id": "CP04",
+      "group": "CP",
+      "title": {
+        "zh": "链遇到自己和溶剂时：排除体积与溶液行为",
+        "en": "A Chain Meets Itself and Its Solvent: Excluded Volume"
+      },
+      "standfirst": {
+        "zh": "同一种长链放进不同液体，为什么会舒展、收缩，甚至让溶液变浑？从一根绳子的空间占据开始，理解分子之间的接触如何改变线团大小，再把这些变化与混合、渗透压和溶液浓度联系起来。",
+        "en": "Why does the same long molecule expand in one liquid, contract in another, or make a solution turn cloudy? Starting with the space occupied by a flexible chain, this chapter connects molecular contacts to coil size, mixing, osmotic pressure and concentration."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "同一条链，为什么换一种液体就不一样",
+            "en": "The same chain in a different liquid"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "链不能随意穿过自己：排除体积的直觉",
+            "en": "A chain cannot freely pass through itself"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "溶剂改变的，是接触的代价与排列的机会",
+            "en": "Solvent changes contacts and possibilities"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把舒展和回缩放在一起计算",
+            "en": "Balancing expansion against the cost of stretching"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "θ条件：抵消的是有效作用，原子仍然占空间",
+            "en": "Theta conditions: cancellation without disappearing atoms"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "看不见线团时，怎样知道它在舒展",
+            "en": "Measuring a coil that cannot be seen directly"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "当线团彼此重叠：浓度怎样成为新的尺度",
+            "en": "When coils overlap: concentration introduces a new scale"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把尺寸、相互作用和浓度一起判断",
+            "en": "Reading size, interactions and concentration together"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP03",
+        "next": "CP05"
+      },
+      "source_file": "cp04.html",
+      "source_sha256": "025ec41d3eb2b6d25325f74faa746a33df80ed22e1285e288e206914debb81a4",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "f28ed8961f7060cc585855debd2473a372ddd6701e77425be6a086033a67cd85"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "8f60d8bb8f3b66fc5336576826c6745777a67e1c324a6179f4d199cdc30461cd"
+        }
+      }
+    },
+    {
+      "id": "CP05",
+      "group": "CP",
+      "title": {
+        "zh": "许多长链聚在一起：共混、微相结构与结晶",
+        "en": "Many Chains Together: Blending, Microphases and Crystallization"
+      },
+      "standfirst": {
+        "zh": "两种塑料混合后可能形成均匀材料，也可能分成微小区域；把不同链段接在同一分子上，又能得到规则的层和柱。沿着这些现象，从长链的混合自由能走向微相分离与折叠链晶体，理解分子连接、界面和构象如何共同决定材料内部的组织。",
+        "en": "Two polymers can form a uniform material or separate into domains. Connecting unlike blocks within each molecule can instead produce organized layers and cylinders. Follow these phenomena from the free energy of mixing to microphase separation and folded-chain crystals, and see how connectivity, interfaces and conformation organize a material."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从一杯混合物到一块塑料",
+            "en": "From a mixed liquid to a solid polymer"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "链很多时，为什么还可以讨论一条链",
+            "en": "Why a single chain remains useful in a crowded material"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "混合收益为何被长链削弱",
+            "en": "Why long chains reduce the entropic reward for mixing"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从自由能曲线读出分相",
+            "en": "Reading phase separation from a free-energy curve"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "给熔体留出体积：状态方程的作用",
+            "en": "Allowing the melt to change volume: equations of state"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把两种链连在一起，为什么长出微相结构",
+            "en": "Why connected blocks form microphases"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "长链如何折进薄晶片",
+            "en": "How a long chain enters a thin crystal"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把平衡图景接回实际材料",
+            "en": "Connecting equilibrium structure to real materials"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP04",
+        "next": "CP06"
+      },
+      "source_file": "cp05.html",
+      "source_sha256": "8b477c798d7e4e8d100acbad1dcfd07664d914d93b84588f80e3dc6b07807ade",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 8,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "44fdbe2af7a84a5e7eb1e8a81b0eadf0f1f169f50dcf622c721df3e7b8ceacc5"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 8,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "c17b14f734fe304313f33ecc729fa5ae19d55a35e37c7f22edade3095a534fe9"
+        }
+      }
+    },
+    {
+      "id": "CP06",
+      "group": "CP",
+      "title": {
+        "zh": "材料怎样改变状态：相变、临界现象与标度",
+        "en": "How Materials Change State: Transitions, Criticality and Scaling"
+      },
+      "standfirst": {
+        "zh": "冰融化时吸热，某些共混物接近分相温度时变得浑浊，磁体升温后会失去自发磁化。这些变化怎样从许多分子的运动中产生？从相平衡和序参量出发，逐步建立自由能、涨落、关联长度与标度的联系，并用可操作的自由能模型比较连续转变和不连续转变。",
+        "en": "Ice absorbs heat as it melts, some blends turn cloudy near demixing, and magnets lose spontaneous magnetization on heating. How do collective changes emerge from molecular motion? Starting with phase equilibrium and order parameters, connect free energy, fluctuations, correlation length and scaling, and compare continuous and discontinuous transitions through an interactive free-energy model."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "看见变化，也要说清改变的是什么",
+            "en": "Identify what changes when a material changes state"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "自由能的斜率怎样记录相变",
+            "en": "How free-energy slopes record a transition"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "序参量把集体变化变成一个可读的量",
+            "en": "An order parameter makes collective change measurable"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "一个最低点如何让位于另一个",
+            "en": "How one minimum gives way to another"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "从两种局部选择走向集体有序",
+            "en": "From two local choices to collective order"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "涨落怎样把远处的区域联系起来",
+            "en": "How fluctuations correlate distant regions"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "幂律如何比较不同临界现象",
+            "en": "Using power laws to compare critical behaviour"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "为什么不同材料会共享一种临界规律",
+            "en": "Why different materials can share critical behaviour"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP05",
+        "next": "CP07"
+      },
+      "source_file": "cp06.html",
+      "source_sha256": "54b032b5e382e553c3152aa86d9fb7290894216c48205b3bdbd09e7e4df224e0",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "7b69c4cbbec8eeab5ccf9fffa67a32bb143c80cbd68ce664dc8c511ea2e5373b"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "bbf2fcd3401b66d74a54ad559e89a72747ee19a9f9ed076f220923a1e265becf"
+        }
+      }
+    },
+    {
+      "id": "CP07",
+      "group": "CP",
+      "title": {
+        "zh": "会排列的长分子：高分子液晶的统计物理",
+        "en": "Long Molecules That Align: Polymer Liquid Crystals"
+      },
+      "standfirst": {
+        "zh": "长分子既能流动，又能沿某个方向保持集体排列，这种组合使材料具有方向相关的光学和力学性质。从浑浊液体为何仍有秩序讲起，用取向概率、排除体积和平均场逐步解释液晶形成，再把分子模型连接到柔性链、局部纹理与加工后的材料性能。",
+        "en": "Long molecules can flow while retaining collective alignment, combining mobility with direction-dependent optical and mechanical properties. Starting with order inside a fluid, use orientation probability, excluded volume and mean fields to explain liquid-crystal formation, then connect molecular models to flexible chains, local textures and processed materials."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "流动和有序可以同时存在",
+            "en": "Flow and order can coexist"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "用概率准确描述分子的方向",
+            "en": "Describe molecular directions with probability"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "硬棒没有吸引力，为什么仍会排齐",
+            "en": "Why hard rods can align without attraction"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "格子模型怎样把溶剂和长链放在一起",
+            "en": "How lattice models include solvent and connected rods"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "吸引作用怎样形成自洽的取向场",
+            "en": "How interactions create a self-consistent orienting field"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "分子连成长链后，多了哪些限制",
+            "en": "What connectivity adds to orientational statistics"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从邻居取向到连续的液晶纹理",
+            "en": "From neighbouring orientations to continuous textures"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "怎样把取向理论用于材料判断",
+            "en": "Using orientation theory to interpret materials"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP06",
+        "next": "CP08"
+      },
+      "source_file": "cp07.html",
+      "source_sha256": "d1d02d0b11ce92551210f7ffdcedefaac6330179bf73de0fcd653dad3afb31cc",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 9,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "08fa4633d962c88eda90e398144015f7e5e9c625fe79e5fd844236ceabada2e2"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 9,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "bc23aa7d34ea06012e2a2eaf9233431c748c2defb4be4dd4728feab1ac958c8e"
+        }
+      }
+    },
+    {
+      "id": "CP08",
+      "group": "CP",
+      "title": {
+        "zh": "材料边界为何重要：高分子表面与界面",
+        "en": "Why Boundaries Matter: Polymer Surfaces and Interfaces"
+      },
+      "standfirst": {
+        "zh": "水滴是否铺开、胶体是否团聚、涂层是否牢固，都可能由很薄的边界区域决定。跟随一条长链接近墙面、吸附或被一端固定的过程，理解构象、渗透压和界面自由能如何共同作用，再把这些概念用于聚合物刷、共混界面与膜孔中的传输。",
+        "en": "Whether a drop spreads, colloids aggregate or a coating adheres can depend on a very thin boundary region. Follow a chain as it approaches a wall, adsorbs or becomes tethered at one end. Connect conformation, osmotic pressure and interfacial free energy, then apply the ideas to polymer brushes, blend interfaces and transport through pores."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "薄薄一层怎样影响整件材料",
+            "en": "How a thin layer affects a whole material"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "表面自由能怎样连接润湿与黏附",
+            "en": "How surface free energy connects wetting and adhesion"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "一条链接近墙：吸附与贫化",
+            "en": "A chain approaches a wall: adsorption and depletion"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把一端固定：从蘑菇到聚合物刷",
+            "en": "Tether one end: from mushrooms to a polymer brush"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "两个表面接近时，链层为何会推开或拉近它们",
+            "en": "Why polymer layers repel or attract approaching surfaces"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "游离链为什么也能让颗粒相互吸引",
+            "en": "Why free chains can also attract particles"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "两种聚合物相遇：界面宽度与链的跨越",
+            "en": "When two polymers meet: width and chain crossing"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把边界图景带进膜孔与涂层",
+            "en": "Applying boundary physics to pores and coatings"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP07",
+        "next": "CP09"
+      },
+      "source_file": "cp08.html",
+      "source_sha256": "900127e8e26efe16920045bd5d10402566e40396ff651ae02609298ddbddfb3e",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 9,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "36c5470e7296dc7df4b02bba1132b9531a06af04706f106d228c9c82bb5dbbf0"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 9,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "ca82d8a9c065aec272c3dcdd40a099d5b3a7bec7e3288b618857169dabd5a5f8"
+        }
+      }
+    },
+    {
+      "id": "CP09",
+      "group": "CP",
+      "title": {
+        "zh": "从分枝到凝胶：分形、逾渗与网络",
+        "en": "From Branches to Gels: Fractals, Percolation and Networks"
+      },
+      "standfirst": {
+        "zh": "一锅液体为什么会连成能够承力的整体？一团看似稀疏的导电填料怎样贯穿材料？从放大后仍然参差的形状出发，追踪连接形成、网络承力与吸水膨胀的不同机制，理解凝胶形成和凝胶体积转变。",
+        "en": "Why can a liquid become a connected load-bearing material? How does a sparse set of conducting fillers span a specimen? Begin with shapes that remain irregular under magnification, then follow connection, mechanical support and solvent uptake to distinguish gel formation from gel-volume transitions."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一条贯穿路径能够改变什么",
+            "en": "What a spanning path can change"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "分形维数怎样描述疏松结构",
+            "en": "How fractal dimension describes an open structure"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "随机连接与逾渗阈值",
+            "en": "Random connections and the percolation threshold"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "应该怎样给集群取平均",
+            "en": "How to average over clusters"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "支化反应怎样形成化学凝胶",
+            "en": "How branching reactions form a chemical gel"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "贯穿网络中哪些部分真正承力",
+            "en": "Which parts of a spanning network carry load"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "网络为什么吸水又不会无限膨胀",
+            "en": "Why a network swells without expanding indefinitely"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "凝胶形成与凝胶体积转变是两件事",
+            "en": "Gel formation and gel-volume transitions"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP08",
+        "next": "CP10"
+      },
+      "source_file": "cp09.html",
+      "source_sha256": "5db42567bd42315b7ea7bff675c97153b16ee3763a8f33337a2a0694af6fbf62",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 8,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "02666ad05db935db471cf1e9e092818254b8a84ed884268f96d9bf4f81d65489"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 8,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "5a9f58ba3944636a5cad04be00afefd14f225050ac6dd745053a9d0486699112"
+        }
+      }
+    },
+    {
+      "id": "CP10",
+      "group": "CP",
+      "title": {
+        "zh": "蛋白质螺旋怎样形成：协同折叠的统计图景",
+        "en": "How Protein Helices Form: A Statistical View of Cooperativity"
+      },
+      "standfirst": {
+        "zh": "一段蛋白质螺旋的形成，要同时安排原子接触与主链姿势。为什么开始一段比继续延长更有代价，许多微观排列又怎样变成一条实验曲线？从三个位置的手算例子走向有限长链，理解协同性、平均螺旋含量与折叠时间各自回答什么问题。",
+        "en": "Forming a protein helix balances molecular contacts against conformational choices. Why does initiation differ from propagation, and how do many arrangements become an experimental curve? Move from a three-position counting example to finite chains, and distinguish cooperativity, mean helicity and folding times."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一小段螺旋为什么值得单独研究",
+            "en": "Why study one short helix?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从化学几何走到α螺旋",
+            "en": "From chemical geometry to the α-helix"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "形成接触的收益，限制姿势的代价",
+            "en": "The benefit of contacts and the cost of fewer conformations"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "给每一种排列分配权重",
+            "en": "Assigning a weight to every arrangement"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "从许多排列算出平均螺旋含量",
+            "en": "Turning arrangements into average helicity"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "协同性怎样改变曲线，链长又怎样改变答案",
+            "en": "How cooperativity and chain length change a curve"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "把光谱与热量变成结构问题",
+            "en": "Using light and heat to ask structural questions"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "相同的平衡比例，可以用不同速度到达",
+            "en": "The same equilibrium can be reached at different speeds"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "把局部螺旋放回真实蛋白质与材料",
+            "en": "Returning the local helix to proteins and materials"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP09",
+        "next": "CP11"
+      },
+      "source_file": "cp10.html",
+      "source_sha256": "e9c3c52c9bd9f888b8106a817b5db464fedf14af3dc11759cb19ad642d5dc706",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 7,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "e7ead2e62a7cf318ca769cc514e5798f4f157a6301009c8bea3446be423e3237"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 7,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "4cc8b396432ca7acc0e9c369f161c44f4cf7091c67f37ee2d39fcf0aced31483"
+        }
+      }
+    },
+    {
+      "id": "CP11",
+      "group": "CP",
+      "title": {
+        "zh": "变化为什么有方向：不可逆过程与耗散",
+        "en": "Why Processes Have a Direction: Irreversibility and Dissipation"
+      },
+      "standfirst": {
+        "zh": "热茶会冷却，染料会扩散，流动的聚合物会把机械功转为热。能量守恒并没有禁止这些过程倒着发生，那么时间方向从何而来？从粒子计数和随机运动出发，连接熵、扩散、热流与黏性耗散，理解平衡和持续受驱动的材料。",
+        "en": "Tea cools, dye spreads, and a flowing polymer converts mechanical work into heat. Energy conservation alone does not prohibit the reverse processes, so where does their direction come from? Connect particle counting and random motion to entropy, diffusion, heat flow and viscous dissipation, distinguishing equilibrium from continuously driven materials."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "能量守恒之后，还需要知道什么",
+            "en": "What energy conservation leaves to explain"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "宏观状态背后有多少种微观安排",
+            "en": "How many microscopic arrangements lie behind a macrostate"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "双室模型：平均弛豫与单次涨落",
+            "en": "Two chambers: mean relaxation and individual fluctuations"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从随机走动到扩散方程",
+            "en": "From random motion to the diffusion equation"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "热涨落与阻力为何彼此相连",
+            "en": "Why thermal fluctuations and drag are connected"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "热流与物质流怎样相互耦合",
+            "en": "How heat and material flows become coupled"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "黏性耗散与持续运行的稳态",
+            "en": "Viscous dissipation and sustained steady states"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "怎样把时间方向变成可检验的问题",
+            "en": "Turning the direction of change into testable questions"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP10",
+        "next": "CP12"
+      },
+      "source_file": "cp11.html",
+      "source_sha256": "8758b643cdd43befc9800c480e2af7ed4ee3dddcb33a620894902dbffc849d8c",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "7e78e7b62e298870d352a1e8227d9f6c947677f7a641d1c3be877945b95c2a87"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "638a98c9f55c87aff4b6be2b9fc65373c6bcace35657081d89c7e81f555baa8a"
+        }
+      }
+    },
+    {
+      "id": "CP12",
+      "group": "CP",
+      "title": {
+        "zh": "长链怎样移动和回弹：柔性高分子的动力学",
+        "en": "How Flexible Chains Move and Relax"
+      },
+      "standfirst": {
+        "zh": "同一块软材料，缓慢拉动时会流动，快速拉动时却明显回弹。沿着加载、等待和释放的过程，理解应力如何消失；再把宏观松弛连接到链段运动、流体耦合和缠结约束，用可调节的振荡实验读懂储能与损耗。",
+        "en": "The same soft material can flow under slow loading and recoil under rapid deformation. Follow loading, waiting and release to understand stress relaxation, then connect it to segment motion, fluid coupling and entanglement. An adjustable oscillatory experiment makes storage and loss directly visible."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "软硬为什么取决于观察时间",
+            "en": "Why stiffness depends on observation time"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "让形变固定，看应力怎样消失",
+            "en": "Hold deformation and watch stress disappear"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "来回变形怎样分开储能与损耗",
+            "en": "Separating storage and loss with oscillation"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "一条长链为什么有一整组松弛时间",
+            "en": "Why a chain has a spectrum of relaxation times"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "Rouse模型：连接使局部运动彼此协调",
+            "en": "The Rouse model: connectivity coordinates local motion"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "Zimm模型：流体把链的不同部分连接起来",
+            "en": "The Zimm model: coupling through the surrounding fluid"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "缠结如何让整链松弛变得很慢",
+            "en": "How entanglements slow whole-chain relaxation"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "温度怎样移动整个时间窗口",
+            "en": "How temperature shifts the time window"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "把分子时间尺度用于流动与加工",
+            "en": "Using molecular timescales in flow and processing"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP11",
+        "next": "CP13"
+      },
+      "source_file": "cp12.html",
+      "source_sha256": "184526a140bbdd0af55555fd7e8a0dda5212027a40720abebe58b8dabc7ffc3e",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 12,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "3b784de7d916cb3c40f1bf9b5b6ec83354eedcd8e5ceb0fd0676476d713febca"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 12,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "0daa844e96dad60302f33c0d63913967c22b0d76cd409337847d9d4e8ce48208"
+        }
+      }
+    },
+    {
+      "id": "CP13",
+      "group": "CP",
+      "title": {
+        "zh": "流动怎样转动分子：高分子液晶的动力学",
+        "en": "How Flow Reorients Molecules: Liquid-Crystal Dynamics"
+      },
+      "standfirst": {
+        "zh": "拉出一根纤维或铺展一层液晶聚合物时，分子不仅移动，还会改变朝向。它们可能稳定地倾斜，也可能持续翻滚；局部排列又会通过弹性、边界与外场形成整幅纹理。从单根杆的转动出发，理解这些运动如何改变流动、光学与加工后的材料结构。",
+        "en": "During fibre drawing or coating of a liquid-crystal polymer, molecules change orientation as well as position. They may settle at a steady angle or keep tumbling, while elasticity, boundaries and fields organize their collective texture. Begin with a rotating rod and connect these motions to rheology, optics and the structure retained after processing."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "材料流过以后，方向留下了什么",
+            "en": "What direction remains after material flows"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "一根杆在剪切流中为什么会转动",
+            "en": "Why one rod rotates in shear"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "稳定倾斜与持续翻滚的分界",
+            "en": "The boundary between steady alignment and tumbling"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "热转动、分子拥挤与取向分布",
+            "en": "Thermal rotation, crowding and the orientation distribution"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "方向在空间中改变，要付出多少代价",
+            "en": "The cost of changing direction across space"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "边界与外场怎样选择方向",
+            "en": "How boundaries and fields select orientation"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "怎样同时读懂流变曲线与光学图像",
+            "en": "Reading rheology and optical images together"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把流动取向变成可保留、可恢复的结构",
+            "en": "Turning flow alignment into retained or recoverable structure"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP12",
+        "next": "CP14"
+      },
+      "source_file": "cp13.html",
+      "source_sha256": "b929f737f10107956b27cffc58dd10ee7943befd647e066ce97629acf228a17b",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 9,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "528541cbfe734d59263d14bc02ab46709ee233a6356f412262a64c4468e1bad6"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 9,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "6b2238c4d58dfb2765d7f0f5b46d9ebe73f291e29457aa883ef8b6674bc19ea3"
+        }
+      }
+    },
+    {
+      "id": "CP14",
+      "group": "CP",
+      "title": {
+        "zh": "均匀材料怎样长出花纹：失稳、图案与尺度选择",
+        "en": "How Patterns Emerge: Instability and Length-Scale Selection"
+      },
+      "standfirst": {
+        "zh": "一层均匀聚合物溶液可以变成互相连通的两相网络，平整薄膜可以长出孔洞，连接在同一条链上的两种链段又能排成纳米条纹。沿着微小起伏被放大、不同尺度彼此竞争和结构逐渐固定的过程，理解材料为什么出现图案，以及怎样用加工条件改变它。",
+        "en": "A uniform polymer solution can develop connected domains, a flat film can open holes, and two blocks of one chain can organize into nanoscale stripes. Follow the amplification of small fluctuations, competition between length scales and eventual retention of structure to understand why patterns emerge and how processing changes them."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "图案首先是材料怎样分布",
+            "en": "A pattern describes how material is distributed"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "自由能曲线为何决定起伏的命运",
+            "en": "Why free-energy curvature controls a fluctuation"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "让物质沿降低自由能的方向迁移",
+            "en": "Moving matter down a free-energy gradient"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "最先长大的波长怎样选出",
+            "en": "Selecting the wavelength that grows first"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "早期条纹为何会变粗，也为何能够停下",
+            "en": "Why early patterns coarsen or retain a finite scale"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "扩散为什么也能参与制造图案",
+            "en": "How diffusion can participate in pattern formation"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "边界、缺陷与加工历史怎样选择最后的样子",
+            "en": "How boundaries, defects and processing select the outcome"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "怎样从图像和时间序列判断机制",
+            "en": "Inferring mechanism from images and time series"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP13",
+        "next": "CP15"
+      },
+      "source_file": "cp14.html",
+      "source_sha256": "164e079c08c8093f875a3a44babc63ad8d5bee8d3ce9b6bfde6969e2eacc7987",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "b52c8364fd94058c6dfe92f84be6e2ab43268a6b1b75f3e55a922c598847baf9"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 10,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "6fc6d4f25bd3f1a54057e500bb5fdfd567674a3465ff47af775ea1575f1a5c19"
+        }
+      }
+    },
+    {
+      "id": "CP15",
+      "group": "CP",
+      "title": {
+        "zh": "简单规律为何产生复杂变化：混沌入门",
+        "en": "How Simple Rules Produce Complex Motion: An Introduction to Chaos"
+      },
+      "standfirst": {
+        "zh": "一个严格确定的更新规则，也可能产生长期不重复、对起始状态极其敏感的变化。从一条可以手算的迭代关系出发，观察稳定值、周期翻倍和混沌怎样接续出现，再把这些概念带回流动材料的结构反馈、测量和预测问题。",
+        "en": "A strictly deterministic rule can produce motion that does not repeat over long times and is highly sensitive to its starting state. Begin with a rule that can be calculated by hand, follow fixed points, period doubling and chaos, then connect these ideas to structural feedback, measurement and prediction in flowing materials."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "确定的规律，为什么仍有预测困难",
+            "en": "Why deterministic rules can still be hard to predict"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "一条迭代规则怎样产生稳定状态",
+            "en": "How an iteration produces a stable state"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "固定点失稳以后，为什么先出现周期",
+            "en": "Why a lost fixed point can give way to a cycle"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把对初值的敏感性算出来",
+            "en": "Quantifying sensitivity to initial conditions"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "预测期限与统计规律可以同时存在",
+            "en": "Prediction horizons can coexist with statistical regularity"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "连续运动中的伸展、折返与吸引子",
+            "en": "Stretching, return and attractors in continuous motion"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "流动材料怎样形成持续反馈",
+            "en": "How flowing materials sustain dynamical feedback"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "怎样用实验区分周期、混沌与噪声",
+            "en": "Distinguishing periodic motion, chaos and noise experimentally"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP14",
+        "next": "CP16"
+      },
+      "source_file": "cp15.html",
+      "source_sha256": "69cb14f7b9e6b3ee3c21ca24779aad71116cdf81f46870a9bd503983264b274d",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 9,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "0d922247d2b58b84c7c9084c752f785ce21a98a0e5f84020b3b636d0fcacc1d4"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 9,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "d47df3a67624f55454173505a8f90ece529efa4593b5b20bdeafe7b7a5f32673"
+        }
+      }
+    },
+    {
+      "id": "CP16",
+      "group": "CP",
+      "title": {
+        "zh": "生命中的折叠与自组织：从能量景观到空间图案",
+        "en": "Folding and Self-Organization in Living Systems"
+      },
+      "standfirst": {
+        "zh": "一条链怎样形成结构，一群分子怎样变成液滴，局部反应又怎样长成条纹和波？从折叠实验与物质守恒出发，逐步理解自由能、动力学、扩散和持续供能怎样共同组织生命中的材料。",
+        "en": "How does a chain acquire structure, a collection of molecules form a droplet, or a local reaction grow into stripes and waves? Folding experiments and material balances lead into free energy, kinetics, diffusion and the energy supplies that organize living materials."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一条链、一个液滴和一幅图案",
+            "en": "One chain, one droplet and a spatial pattern"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "折叠的偏好从哪里来",
+            "en": "Where the preference for a folded structure comes from"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "喜欢某个结构，为什么还需要等待",
+            "en": "Why reaching a favored structure takes time"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "许多链在一起：液滴怎样出现",
+            "en": "Many chains together: how droplets appear"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "扩散怎样把局部变化传给周围",
+            "en": "How diffusion communicates a local change"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "扩散为什么也能帮助形成图案",
+            "en": "How diffusion can help create a pattern"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "让一个反应—扩散系统在眼前展开",
+            "en": "Watching a reaction–diffusion system develop"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "细胞中的动态结构怎样获得能量",
+            "en": "How dynamic cellular structures receive energy"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "把漂亮图案变成可以解释的实验",
+            "en": "Turning an attractive pattern into an explanatory experiment"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "CP15"
+      },
+      "source_file": "cp16.html",
+      "source_sha256": "422f0aecc0ba15bb320f2a685bd211378c3b7a6ade7466170fa6619a452bd143",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 6,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "8bdc2c4fdb143405b0c60339f671becd8c9d998806054f1c875d4e1e6a7bcff6"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 6,
+          "figures": 6,
+          "labs": 1,
+          "sha256": "e8e501908028222cf79f48fd3a5a05a778cad97748cc522e5d4b56a660baa153"
+        }
+      }
+    },
+    {
+      "id": "PE01",
+      "group": "PE",
+      "title": {
+        "zh": "从湿颗粒到纯净熔体：聚合物干燥与脱挥",
+        "en": "From Wet Pellets to a Clean Melt: Drying and Devolatilization"
+      },
+      "standfirst": {
+        "zh": "一颗外表干爽的塑料粒子，内部仍可能留着水或溶剂。沿着一个小分子离开材料的路线，认识扩散、湿度、热量、薄膜与气泡，并用可调的模型理解为什么厚度、空气条件和熔体黏度会改变脱除速度。",
+        "en": "A polymer pellet that looks dry may still hold water or solvent inside. Follow a small molecule's route out to understand diffusion, humidity, heat, thin films, and bubbles, then explore how thickness, air conditions, and melt viscosity change the rate of removal."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "水藏在哪里，为什么需要把它移走",
+            "en": "Where water hides, and why it needs to leave"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "分子为什么会从内部走向外面",
+            "en": "Why molecules move toward the outside"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "为什么薄一点，往往快得不止一点",
+            "en": "Why a thinner material can dry much faster"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "干燥空气能把水带到什么程度",
+            "en": "How dry air sets the attainable moisture level"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "水分减少时，热量怎样跟着走",
+            "en": "Following the heat as water leaves"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "熔体里的挥发物，怎样找到出口",
+            "en": "How volatile molecules escape from a melt"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从水分散体中移走单体",
+            "en": "Removing monomer from an aqueous dispersion"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把数量、时间和设备放进同一个问题",
+            "en": "Combining amount, time, and equipment"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "next": "PE02"
+      },
+      "source_file": "pe01.html",
+      "source_sha256": "9a87a9204229cfaaeea7645ac7c8b559068eb40f9f427de8868f92adcb2da53b",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 13,
+          "figures": 8,
+          "labs": 2,
+          "sha256": "3a2d0574a56a6c17b0516c2f47fe2decab5d35206577e485f294c6f15c998a8f"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 13,
+          "figures": 8,
+          "labs": 2,
+          "sha256": "3ffc568e272b3406c241a781739c2fa468f8e65b1d838ff90f5c0b6296f7d0f3"
+        }
+      }
+    },
+    {
+      "id": "PE02",
+      "group": "PE",
+      "title": {
+        "zh": "同一种反应，为什么要用不同的反应器",
+        "en": "Why the Same Reaction Needs Different Reactors"
+      },
+      "standfirst": {
+        "zh": "一锅做完再出料、边进料边搅拌、沿着长管连续前进，看起来只是容器不同，却会改变分子经历的浓度、反应时间和产物去向。从一份物料收支表出发，逐步理解反应速率、三种理想反应器、选择性与设备组合，学会判断什么时候需要更大的容器，什么时候应该换一种操作方式。",
+        "en": "A batch vessel, a continuously stirred tank and a flowing tube expose molecules to different concentrations and reaction histories. Starting with a material balance, this chapter develops reaction rates, three ideal reactor models, product selectivity and reactor combinations, showing when a larger vessel helps and when a different operating strategy matters more."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "先数清楚：原料去了哪里",
+            "en": "Start by counting: where did the reactant go?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "快慢从哪里来：浓度、温度与反应级数",
+            "en": "What sets the speed: concentration, temperature and reaction order"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "一锅反应的时间：为什么最后一点最难消耗",
+            "en": "Time in a batch: why the last fraction takes longer"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "边流边反应：搅拌釜与管道的不同经历",
+            "en": "Reacting in flow: the tank and the tube"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "把设备接起来：串联、并联与循环",
+            "en": "Connecting reactors: cascades, parallel paths and recycle"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "原料消失以后：怎样让它去往目标产物",
+            "en": "After the reactant disappears: steering it toward the desired product"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "反应也会往回走：平衡与温度的另一面",
+            "en": "Reactions can run backward: equilibrium and the other role of temperature"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从计算走向选择：完成一份反应器方案",
+            "en": "From calculation to choice: building a reactor proposal"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PE01",
+        "next": "PE03"
+      },
+      "source_file": "pe02.html",
+      "source_sha256": "184dfc7589b2adb610468118a4c5761cb507f3d62c064c423c8c94eba64941e0",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 16,
+          "figures": 6,
+          "labs": 2,
+          "sha256": "f01729db7696cca21b0129c67733167757bc451e953b60e39136b737a514618a"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 16,
+          "figures": 6,
+          "labs": 2,
+          "sha256": "903f771cf898850ce581eb18b43e93c1306199da950bb16dcd39ae3fae5f0114"
+        }
+      }
+    },
+    {
+      "id": "PE03",
+      "group": "PE",
+      "title": {
+        "zh": "同一台设备，为什么物料停留的时间不同",
+        "en": "Why Material Spends Different Amounts of Time in the Same Reactor"
+      },
+      "standfirst": {
+        "zh": "平均加热十分钟，并不表示每一小份物料都加热了十分钟。跟随一次示踪物的进入和离开，认识停留时间的分布、测量与计算，再看流动经历怎样影响反应程度、聚合物链长和乳胶粒子的大小。从一条出口曲线读懂设备内部的差别。",
+        "en": "An average of ten minutes in a heated vessel does not give every portion of material ten minutes of treatment. Following a tracer from entry to exit reveals how residence times are distributed, measured and calculated, and how these flow histories affect conversion, polymer chain lengths and latex particle sizes."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "平均十分钟，包含了哪些不同经历",
+            "en": "What different histories hide inside a ten-minute average?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "给流体做记号：从示踪实验得到时间分布",
+            "en": "Marking the fluid: measuring a distribution with tracers"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "一只釜、许多只釜和一列流体薄片",
+            "en": "One tank, many tanks and a train of fluid slices"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "管道里的快慢车道：层流为什么有长尾",
+            "en": "Fast and slow lanes in a tube: why laminar flow has a long tail"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "从停留时间推算反应，什么时候还需要混合信息",
+            "en": "Predicting reaction: when mixing information is also needed"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "一条链的年龄，和一份物料的年龄",
+            "en": "The age of a chain and the age of a portion of fluid"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "乳胶粒子一起长大，为什么仍有大小差别",
+            "en": "Why growing latex particles still have different sizes"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把一条出口曲线变成可用的判断",
+            "en": "Turning an outlet curve into a useful decision"
+          }
+        }
+      ],
+      "category": "wet-lab-data",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PE02",
+        "next": "PE04"
+      },
+      "source_file": "pe03.html",
+      "source_sha256": "ee768748443be204f0c82d285672844541553d2d0bc9e3eb302473f1cb77e9c9",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 16,
+          "figures": 5,
+          "labs": 2,
+          "sha256": "017ac4fa6efca526825126de68d87f8824ba9184b37da9c2e0f935b691152b94"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 16,
+          "figures": 5,
+          "labs": 2,
+          "sha256": "bc25d885e794c1829c5e440c572f4738daa6d2a099f6c8a8f5cdb052f962b36c"
+        }
+      }
+    },
+    {
+      "id": "PE04",
+      "group": "PE",
+      "title": {
+        "zh": "反应为什么越热越快：聚合过程的热平衡与稳定性",
+        "en": "When Reactions Heat Themselves: Thermal Balance and Stability in Polymerization"
+      },
+      "standfirst": {
+        "zh": "从一杯正在固化的树脂出发，沿着产热、传热与反应物消耗，理解温度为什么恢复、跳变或持续升高。通过科学史、热流图和可调参数的反应器，看清聚合自动加速、颗粒传质与设备放大之间的联系。",
+        "en": "Start with a cup of curing resin and follow heat generation, transfer and reactant consumption. Historical insights, heat-flow diagrams and adjustable reactor models explain temperature recovery, state changes, polymerization autoacceleration and the consequences of scale-up."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一杯树脂为什么会越放越热",
+            "en": "Why a cup of resin can keep getting hotter"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "热量离开反应器，要经过哪些路",
+            "en": "The route that heat takes out of a reactor"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "温度偏离以后，为什么有时回来，有时越走越远",
+            "en": "Why some temperature disturbances recover and others grow"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "连续进料让放热曲线改变了形状",
+            "en": "Continuous feed changes the shape of heat generation"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "温度和浓度要一起变化，才能看懂过渡过程",
+            "en": "Temperature and concentration evolve together"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "聚合越黏，为什么有时反而越快",
+            "en": "Why polymerization can accelerate as the liquid thickens"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "水中的小颗粒，怎样改变反应与传热",
+            "en": "Small particles in water reorganize reaction and heat transfer"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把小试放大，先问还会释放多少热",
+            "en": "Scaling up starts with the heat still available"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PE03",
+        "next": "PE05"
+      },
+      "source_file": "pe04.html",
+      "source_sha256": "6527b3efdc090d854d6c8130f4891ea7c9c782ad5e637f7532b45685f03cb2d4",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 17,
+          "figures": 5,
+          "labs": 2,
+          "sha256": "b30ff2370116deee9102e38485849834194139c6d1a7beca6c8c2e3116096317"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 17,
+          "figures": 5,
+          "labs": 2,
+          "sha256": "ee406698e333a517753daaabd9b74951aeb6804731e28a6b21c9d4da4aca8ce1"
+        }
+      }
+    },
+    {
+      "id": "PE05",
+      "group": "PE",
+      "title": {
+        "zh": "反应器怎样塑造材料：流动、混合与工业放大",
+        "en": "How Reactors Shape Materials: Flow, Mixing and Scale-Up"
+      },
+      "standfirst": {
+        "zh": "同一份配方，为什么换一台设备就可能得到不同的材料？从反应物的旅程出发，认识釜、管、薄膜与螺杆怎样安排流动、传热和分子相遇，再用可操作的尺度比较理解工业放大。",
+        "en": "Why can the same formulation produce a different material in different equipment? Follow the reactants through vessels, tubes, films and screws, then explore how flow, heat transfer and mechanical action change during scale-up."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "材料的配方，还需要一段合适的旅程",
+            "en": "A formulation needs a suitable journey"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "釜、管和塔，分别安排了怎样的停留经历",
+            "en": "Vessels, tubes and columns create different residence histories"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "黏度升高以后，让表面不断更新",
+            "en": "Renewing surfaces when the material becomes viscous"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "压力、密封和换热，为什么要一起考虑",
+            "en": "Pressure, sealing and heat transfer belong together"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "把颜色搅匀，还不等于把分子混匀",
+            "en": "Moving colour around is only part of mixing"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "桨叶的形状，怎样改变物料运动",
+            "en": "Impeller shape changes the route through the liquid"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "电机用了多少功，分别用在什么地方",
+            "en": "Where the motor's work goes"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "放大十倍，为什么不能什么都保持相同",
+            "en": "Why scale-up cannot keep everything unchanged"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PE04",
+        "next": "PE06"
+      },
+      "source_file": "pe05.html",
+      "source_sha256": "d6ae09f8bcc731a6b9fa420e34f2bd40738fc9b8091908b79a78893d27323686",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 12,
+          "figures": 5,
+          "labs": 1,
+          "sha256": "999023e549c253029f750640de0442587631af6f41cbd3c45b9005c84467d5ef"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 12,
+          "figures": 5,
+          "labs": 1,
+          "sha256": "17302ceb840d936bac1492884facf92970f07f270ffbd7bdf06b36a596cb1899"
+        }
+      }
+    },
+    {
+      "id": "PE06",
+      "group": "PE",
+      "title": {
+        "zh": "单体从哪里来：原子、能量与材料的起点",
+        "en": "Where Monomers Come From: Atoms, Energy and the Start of a Material"
+      },
+      "standfirst": {
+        "zh": "从塑料瓶、凝胶和尼龙追溯单体的制造，沿着裂解、氧化、循环回用与酶催化，读懂分子怎样被准备好，再用连续算例连接产量、热量和设备尺度。",
+        "en": "Trace bottles, gels and nylon back to their monomers. Follow cracking, oxidation, recycle and enzyme catalysis, then connect product output, heat and equipment size through one continuous worked example."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从一只瓶子，追问分子是怎样准备好的",
+            "en": "What has to happen before a bottle can become a bottle?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "分离原料与改变分子，是两件不同的事",
+            "en": "Separating a feedstock and changing a molecule"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "裂解炉里，为什么既要加热又要迅速冷却",
+            "en": "Why a cracking furnace needs rapid heating and rapid cooling"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从每小时一吨乙烯，算到热量与流动",
+            "en": "From one tonne of ethylene per hour to heat and flow"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "同样的两个碳，为什么能走向不同材料",
+            "en": "The same two carbons can lead to very different materials"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "氯乙烯的路线，怎样把副产物流接回去",
+            "en": "Vinyl chloride and the return journey of a by-product"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从腈到酰胺：蛋白质也能参与制造单体",
+            "en": "From nitrile to amide: a protein can help manufacture a monomer"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "纯度与配比，怎样决定后面的长链",
+            "en": "Purity and stoichiometry prepare the way for long chains"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PE05",
+        "next": "PE07"
+      },
+      "source_file": "pe06.html",
+      "source_sha256": "d1b91fa0b28da02fc050dfad74ab43583ee54f21bfb10460935a18c3afb2e713",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 14,
+          "figures": 5,
+          "labs": 1,
+          "sha256": "b82577cf0f33e08213cae3b1bb5fec49118af1dc63f727c27b7288827795cc63"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 14,
+          "figures": 5,
+          "labs": 1,
+          "sha256": "cac946eafded033fa6b272486ca771c0df1466c0f56fc20e83c1acf56e4d00c2"
+        }
+      }
+    },
+    {
+      "id": "PE07",
+      "group": "PE",
+      "title": {
+        "zh": "自由基怎样造出不同材料：从活性链到工业颗粒",
+        "en": "How Radicals Make Different Materials: From Active Chains to Industrial Particles"
+      },
+      "standfirst": {
+        "zh": "薄膜、硬壳与纤维都可以从自由基反应出发。沿着增长、转移、分相与颗粒形成，理解速率和分子量为何不同步，以及工业流程怎样把分子事件变成材料性能。",
+        "en": "Films, rigid housings and fibres can all begin with radical reactions. Follow propagation, transfer, phase separation and particle formation to understand how rate, chain length and manufacturing history become material properties."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "同样是接成长链，为什么会得到薄膜、硬壳和纤维",
+            "en": "One way of growing chains, many kinds of material"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "反应更快，链却可能更短",
+            "en": "A faster reaction can make shorter chains"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "聚乙烯薄膜的柔软，从反应中的支链开始",
+            "en": "The flexibility of polyethylene film begins with branches"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "硬塑料里的软颗粒，怎样帮助吸收冲击",
+            "en": "How soft particles help a hard plastic absorb impact"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "悬浮聚合中的一滴单体，内部也会长出结构",
+            "en": "A suspended monomer droplet develops internal structure"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "聚丙烯腈怎样从反应液走向一根纤维",
+            "en": "How polyacrylonitrile travels from reaction liquid to fibre"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "乳液里的小粒子，怎样改变自由基的相遇机会",
+            "en": "Small particles change how often radicals meet"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "ABS 的制造，把接枝、颗粒与基体接到一起",
+            "en": "ABS brings grafting, particles and a matrix together"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PE06",
+        "next": "PE08"
+      },
+      "source_file": "pe07.html",
+      "source_sha256": "6dcb4b350b9996e1d33630723b2161b80664eafb48ca9dd105472f514cbace56",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 11,
+          "figures": 7,
+          "labs": 2,
+          "sha256": "eea0fb9a1bc52d3000b3b9c1b8d034f152b0f1ab1012cfe62a068e25756e5b41"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 11,
+          "figures": 7,
+          "labs": 2,
+          "sha256": "0c0eecc5a6f4c4941cb7e8ba46a374694db36efb429def18468bfe4074baa3a2"
+        }
+      }
+    },
+    {
+      "id": "PE08",
+      "group": "PE",
+      "title": {
+        "zh": "从连接方式到材料性格：聚酯、聚氨酯与聚烯烃的制造",
+        "en": "From Molecular Connections to Material Behaviour: Making Polyesters, Polyurethanes and Polyolefins"
+      },
+      "standfirst": {
+        "zh": "衣服、坐垫和水管为何需要不同的分子连接？从数清反应接口开始，理解缩聚如何增长长链、聚氨酯如何形成弹性体和泡沫，再进入催化剂与颗粒内部，看看反应和扩散怎样共同塑造材料。",
+        "en": "Why do clothes, cushions and pipes need different molecular connections? Count reactive groups, follow chain growth in polycondensation and the formation of polyurethane elastomers and foams, then enter catalysts and particles to see how reaction and diffusion shape materials."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从衣服、坐垫和水管，认识三种连接方式",
+            "en": "Three ways of connecting molecules, seen in clothes, cushions and pipes"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "聚酯的长链，为什么要靠排出小分子来完成",
+            "en": "Why polyester chain growth depends on removing small molecules"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "尼龙要配平接口，不饱和聚酯要安排第二次连接",
+            "en": "Balancing nylon end groups and scheduling a second connection in polyester"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "聚氨酯的配方，为什么要数羟基而不只称重量",
+            "en": "Why polyurethane formulation counts hydroxyl groups as well as mass"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "让同一种连接变成弹性体、泡沫和水分散体",
+            "en": "Turning the same chemistry into elastomers, foams and water dispersions"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "催化剂怎样把丙烯排列成有序长链",
+            "en": "How a catalyst gives polypropylene a regular spatial sequence"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "同样是聚烯烃，为什么有淤浆、溶液和气相路线",
+            "en": "Why polyolefins use slurry, solution and gas-phase processes"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "链长、支链和链群怎样共同决定加工与使用",
+            "en": "How chain length, branches and populations shape processing and use"
+          }
+        },
+        {
+          "id": "s9",
+          "title": {
+            "zh": "进入一颗粒子内部，看见反应与扩散的竞争",
+            "en": "Inside a particle: competition between reaction and diffusion"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PE07"
+      },
+      "source_file": "pe08.html",
+      "source_sha256": "0cb81f53dc598679b808a5a8de9f541b43c2fa2912f1f82ad3d17204593beae3",
+      "counts": {
+        "zh": {
+          "sections": 9,
+          "equations": 14,
+          "figures": 8,
+          "labs": 2,
+          "sha256": "2b3f1420009a8fa0eb665c32e48e39d8cd75061658165a55ca311930db5cbc48"
+        },
+        "en": {
+          "sections": 9,
+          "equations": 14,
+          "figures": 8,
+          "labs": 2,
+          "sha256": "df1880c3149c482893eecc5b8a9509f9e69e26a4403845bd33898faf66fe62a7"
+        }
+      }
+    },
+    {
+      "id": "PM01",
+      "group": "PM",
+      "title": {
+        "zh": "从一件物品认识高分子材料：组成、结构与性能",
+        "en": "Understanding Polymer Materials Through Everyday Objects"
+      },
+      "standfirst": {
+        "zh": "保鲜膜、瓶子、橡皮筋和缝衣线都含有长链分子，却承担不同的工作。从这些物品出发，认识分子连接、内部组织、加工历史和性能测量，理解一袋树脂怎样成为能够使用的材料。",
+        "en": "Food wrap, bottles, rubber bands and sewing threads all contain long molecular chains but perform different jobs. Starting with these objects, explore molecular connections, internal organization, processing history and property measurements to understand how a resin becomes a useful material."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "先从一件物品问起",
+            "en": "Begin with an everyday object"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "长链给分子增加了哪些可能",
+            "en": "What changes when molecules become long chains?"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "从橡胶和纤维看见分子连接",
+            "en": "Rubber and fibers reveal the importance of connection"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从一条链到一块材料",
+            "en": "From individual chains to a piece of material"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "把“结实”和“柔软”变成可以比较的量",
+            "en": "Turn “strong” and “soft” into comparable quantities"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "为什么能用的材料还必须能加工",
+            "en": "A useful material must also be processable"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "读懂一张材料数据表",
+            "en": "Read a material data sheet as a description of a test"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把用途、制造和使用后的去向连起来",
+            "en": "Connect use, manufacturing and the next life of the material"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "next": "PM02"
+      },
+      "source_file": "pm01.html",
+      "source_sha256": "1351cccff1903bcc5587a6108a2779eb17a5fd989bf9c45929b6ff8bba03af11",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "bdb79a3ad77c705b83fdafa2433f1ce2514173cbedeb4fab62ec86a1202d44c6"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "40ee80fe7db8abff2c1f59d7ab1549bf528fb4bbb9699efcb6ad62b8453a1720"
+        }
+      }
+    },
+    {
+      "id": "PM02",
+      "group": "PM",
+      "title": {
+        "zh": "同样是聚乙烯，为何有的柔软、有的坚硬",
+        "en": "Why Polyethylene Can Be Soft or Stiff"
+      },
+      "standfirst": {
+        "zh": "从包装膜、瓶体和热收缩套管出发，追踪聚乙烯从高压自由基聚合到催化共聚的发展。通过链长、支化、结晶与网络，理解同一化学骨架如何形成不同的流动、承载与形状恢复能力。",
+        "en": "Starting with wrapping films, bottles and heat-shrink sleeves, follow polyethylene from high-pressure radical polymerization to catalytic copolymerization. Chain length, branching, crystals and networks explain how one chemical backbone acquires different flow, mechanical and shape-recovery behavior."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一个化学名字，为什么对应许多材料",
+            "en": "Why one chemical name describes many materials"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从高压实验到柔软的支化链",
+            "en": "From high-pressure experiments to flexible branched chains"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "催化剂怎样改变链的生长路线",
+            "en": "How catalysts redirect chain growth"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "线性低密度聚乙烯：把支链有意接进去",
+            "en": "Linear low-density polyethylene: adding short branches deliberately"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "用密度理解结晶，但不把密度当成全部答案",
+            "en": "Using density to understand crystallinity"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把链做得很长：性能与加工同时改变",
+            "en": "Making chains very long changes performance and processing"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "把链连成网：为什么聚乙烯能够记住形状",
+            "en": "Connecting chains into a network: how polyethylene remembers shape"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "在乙烯主链上增加新的功能",
+            "en": "Adding new functions to an ethylene-based backbone"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM01",
+        "next": "PM03"
+      },
+      "source_file": "pm02.html",
+      "source_sha256": "c3f0ddca65937ebed56d0ddeecf30cb5c2b7a2834f57e89da83687fc12e4bafb",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "8b7f4f494541bb932b509d5068bb4e72428ceb4d6935345bf1380b69e3bf344e"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "5f950f2a7209ad02c3003c6a93b4ce41d009b6e3bfa8fec12419fe4ffcc61d4e"
+        }
+      }
+    },
+    {
+      "id": "PM03",
+      "group": "PM",
+      "title": {
+        "zh": "把聚乙烯的链分清楚：分布、分级与材料设计",
+        "en": "Reading Polyethylene Chain Distributions for Material Design"
+      },
+      "standfirst": {
+        "zh": "一根管道既要容易制造，也要长期承载。从这个具体问题出发，理解链长与支化为什么需要分布描述，再用色谱、结晶分级和量热温度程序，把看不见的链群转变成可以解释的实验曲线。",
+        "en": "A pipe must be manufacturable and sustain loading over time. Starting with that problem, learn why chain length and branching need distribution descriptions, and how chromatography, crystallization fractionation and calorimetric programs turn molecular populations into interpretable curves."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "管道为什么需要一群不同的链",
+            "en": "Why a pipe needs a population of different chains"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "平均值如何把不同的链群藏起来",
+            "en": "How an average can conceal different populations"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "支链数量之外，还要看支链分给了谁",
+            "en": "Beyond branch count: which chains receive the branches?"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "让不同测量方法分别回答一个问题",
+            "en": "Let each measurement answer a particular question"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "利用结晶把混在一起的链分开",
+            "en": "Using crystallization to separate mixed chains"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "用热量读出结构，再设计温度程序",
+            "en": "Reading heat signals and designing a temperature program"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "留下晶种：连续自成核与退火的思路",
+            "en": "Leaving crystal seeds: successive self-nucleation and annealing"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把曲线重新接回材料的使用问题",
+            "en": "Connecting the curves back to material use"
+          }
+        }
+      ],
+      "category": "wet-lab-data",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM02",
+        "next": "PM04"
+      },
+      "source_file": "pm03.html",
+      "source_sha256": "49410d2d9dfde04255881e44dcb4f4f151676a9790ab0580be1e4110f4178249",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "05d68939a9ae845635d3894e2d08615d99d2a36ef9406d896efb7ecacacd762e"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "5d662741855255cde053703c5567fafa116bd1817ebb1af8b442833ba25c0c60"
+        }
+      }
+    },
+    {
+      "id": "PM04",
+      "group": "PM",
+      "title": {
+        "zh": "一个侧基怎样改变塑料：聚丙烯的结构与用途",
+        "en": "How a Side Group Changes a Plastic: Polypropylene"
+      },
+      "standfirst": {
+        "zh": "从反复弯折的瓶盖、透明容器和承载外壳出发，认识聚丙烯甲基的空间排列。把立体规整性、共聚序列、结晶组织和制品几何连接起来，理解透明、刚挺与耐弯折如何由不同结构安排实现。",
+        "en": "Start with folding lids, clear containers and load-bearing shells to explore the spatial arrangement of polypropylene’s methyl groups. Connect stereoregularity, comonomer sequence, crystalline morphology and product geometry to understand how different arrangements deliver clarity, stiffness and repeated bending."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从反复开合的瓶盖认识聚丙烯",
+            "en": "Meet polypropylene through a repeatedly folding lid"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "甲基怎样排列：立体规整性的发现",
+            "en": "Arranging methyl groups: the discovery of stereoregularity"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "从规则长链到半结晶固体",
+            "en": "From regular chains to a semicrystalline solid"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "无规共聚并不等于无规立构",
+            "en": "Random copolymerization is different from atacticity"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "让材料透光：从晶体数量转向组织尺寸",
+            "en": "Transmitting light: look at structural size as well as crystal amount"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "刚度、韧性与薄铰链为什么不是同一个指标",
+            "en": "Stiffness, toughness and living hinges measure different things"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "温度、氧与时间怎样改变长期表现",
+            "en": "How heat, oxygen and time change long-term behavior"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把结构选择连接到具体产品",
+            "en": "Connecting structural choices to real products"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM03",
+        "next": "PM05"
+      },
+      "source_file": "pm04.html",
+      "source_sha256": "aa6b89d853c02b23b04c119fea8a52f8a528f8e7ac88dc62f599e65e644ad61f",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "906734e024ddbbf5c98b99c7685373531c2e060185ceb68355429c37191ba067"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "a1a7e344752e6b355f907383fd2c170b45186cb67ffa4f9dc4742f3588772722"
+        }
+      }
+    },
+    {
+      "id": "PM05",
+      "group": "PM",
+      "title": {
+        "zh": "把两种聚合物混在一起：形态形成与增韧",
+        "en": "Mixing Polymers: Morphology and Toughening"
+      },
+      "standfirst": {
+        "zh": "柔软颗粒怎样改善较硬塑料的抗冲表现？从配方、分布与分散出发，认识液滴破碎、聚并和界面作用，再通过银纹、剪切屈服与粒间基体，把显微形态连接到实际的能量吸收。",
+        "en": "How can soft particles improve impact behavior in a harder plastic? Begin with composition, distribution and dispersion, follow droplet breakup, coalescence and interfaces, then connect morphology with energy absorption through crazing, shear yielding and the matrix between particles."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "为什么把柔软橡胶放进较硬的塑料",
+            "en": "Why put soft rubber into a relatively hard plastic?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "先把配方中的百分数算清楚",
+            "en": "First establish what each percentage means"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "分布均匀与颗粒细小是两件事",
+            "en": "Uniform distribution and small particles are different tasks"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "为什么充分搅拌后仍会出现两个相",
+            "en": "Why two phases can remain after thorough mixing"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "界面如何决定液滴破碎、合并与传力",
+            "en": "How interfaces control breakup, coalescence and load transfer"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "橡胶颗粒怎样让基体吸收更多能量",
+            "en": "How rubber particles engage the matrix in energy absorption"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "看颗粒之间的基体，而不只看颗粒",
+            "en": "Look between the particles as well as at them"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把形态设计变成可检验的材料方案",
+            "en": "Turn morphological design into a testable material proposal"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM04",
+        "next": "PM06"
+      },
+      "source_file": "pm05.html",
+      "source_sha256": "c2fe26991587b808f1e7b84424220da2314bb0e88882aaca813147310b879eef",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 4,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "d48ad502b26e0473fa4660bc1c422431bea76d318ba1c75370a93bc464b97099"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 4,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "215dcda53328ac5f507d9c755be587ff1cacd0fab5cee709d66f5943bf249b44"
+        }
+      }
+    },
+    {
+      "id": "PM06",
+      "group": "PM",
+      "title": {
+        "zh": "从橡胶微粒到抗冲塑料：聚丙烯合金的制造",
+        "en": "From Rubber Domains to Impact-Resistant Polypropylene"
+      },
+      "standfirst": {
+        "zh": "从一粒多孔聚合物粉体出发，追踪分阶段聚合、熔融混合与冷却结晶怎样共同制造抗冲聚丙烯。通过组成守恒、分级、量热和动态力学，分清总体乙烯含量、柔软相以及真正承担增韧作用的结构。",
+        "en": "Follow a porous polymer granule through staged polymerization, melt mixing and crystallization to understand impact polypropylene manufacture. Composition balances, fractionation, calorimetry and dynamic mechanics distinguish bulk ethylene content from the soft phase and the structures that produce toughening."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "让外壳既能承载，也能吸收冲击",
+            "en": "A housing that carries load and absorbs impact"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "把一粒树脂中的不同链群找出来",
+            "en": "Identify the molecular populations within one resin"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "多孔颗粒怎样成为聚合的内部空间",
+            "en": "How a porous particle becomes an internal reaction space"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "分阶段聚合怎样调节组成",
+            "en": "How staged polymerization adjusts composition"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "熔融加工重新安排柔软相",
+            "en": "Molten processing rearranges the soft phase"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "冷却结晶把动态相结构变成固体组织",
+            "en": "Crystallization turns a dynamic phase structure into a solid"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "用分级、量热与动态力学相互印证",
+            "en": "Connect fractionation, calorimetry and dynamic mechanics"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把目标性能转成制造变量",
+            "en": "Translate performance targets into manufacturing variables"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM05",
+        "next": "PM07"
+      },
+      "source_file": "pm06.html",
+      "source_sha256": "ebc910eb0cae7b82d955c3f61d6eb6c00dea957dbea1e72b13c74008a53912ed",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 4,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "a96bdb8a745e1aef002465cc6853e227d37e8d5b8a3531efa50ea4d6a48181a7"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 4,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "7531e0c7f3c513ce5a7b47234e2601044abe465113deb381efd2bf17000ee234"
+        }
+      }
+    },
+    {
+      "id": "PM07",
+      "group": "PM",
+      "title": {
+        "zh": "从透明塑料到柔软管材：苯乙烯树脂与聚氯乙烯",
+        "en": "From Clear Plastics to Flexible Tubing: Styrenics and PVC"
+      },
+      "standfirst": {
+        "zh": "透明、耐摔和柔软来自不同层次的结构。沿着PS、HIPS、ABS、SBS与PVC的变化，理解长链侧基、橡胶分散相、物理连接点和增塑剂怎样改变光、裂纹与分子运动，再用配方换算和交互曲线把材料设计落到具体数量。",
+        "en": "Clarity, impact resistance and flexibility arise at different structural levels. Follow PS, HIPS, ABS, SBS and PVC to see how side groups, rubber particles, physical junctions and plasticizers control light, cracks and molecular movement, then connect these mechanisms to formulation calculations and an interactive curve."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "透明盒、抗摔外壳和软管，为什么能来自相近的长链",
+            "en": "Clear containers, impact-resistant housings and flexible tubing"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "普通 PS 的透明与脆性，怎样由结构共同产生",
+            "en": "How ordinary PS can be both clear and brittle"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "HIPS 与 ABS：把容易开裂的局部变成耗能区域",
+            "en": "HIPS and ABS: creating regions that dissipate energy"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "SBS 与 SEBS：让硬区域成为可拆开的连接点",
+            "en": "SBS and SEBS: rigid domains as reversible junctions"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "PVC 的转折：从难加工树脂到可以设计柔软度的材料",
+            "en": "PVC: from difficult resin to adjustable flexibility"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "粉末怎样成为连续材料：颗粒吸收、融合与成型",
+            "en": "From powder to a continuous material"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "为什么 PVC 会变色：稳定剂争取的是可用的加工时间",
+            "en": "Why PVC changes color and how stabilization provides processing time"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把配方放回真实使用：柔软、耐久与接触介质",
+            "en": "Flexibility, durability and contact with real environments"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM06",
+        "next": "PM08"
+      },
+      "source_file": "pm07.html",
+      "source_sha256": "757d38ed474089762a3dd1f5b4c9f364fcd64e9743e2f26bcf3c4cf2e32f28f2",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "c51b6de397545a85fa9bacec429c77338eacc9c0576055e87e3d4a11b18ee839"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "589e2f257184984ac627010ac5c34d74ad3df3ca45f0e8e2b09c5b6e80e4360f"
+        }
+      }
+    },
+    {
+      "id": "PM08",
+      "group": "PM",
+      "title": {
+        "zh": "塑料怎样承担结构工作：工程塑料的分子设计",
+        "en": "How Plastics Carry Structural Loads: Engineering Polymers"
+      },
+      "standfirst": {
+        "zh": "从齿轮与连接器的实际要求出发，理解酰胺、酯、芳香骨架及增强纤维如何控制承载、吸湿和耐热。把分子结构、加工历史、蠕变与零件厚度放在一起，建立能够用于选材和设计的判断方法。",
+        "en": "Start with the demands on gears and connectors, then examine how amides, esters, aromatic backbones and fibers control loading, moisture and heat response. Connect molecular structure and processing with creep and section thickness to make practical material-selection decisions."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一个塑料齿轮，需要的不只是拉不断",
+            "en": "A plastic gear must do more than resist breaking"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从尼龙的诞生，看化学键怎样组织长链",
+            "en": "Nylon and the organization of long chains"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "水为何能使尼龙变软，也使尺寸变化",
+            "en": "Why water changes nylon stiffness and dimensions"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "PET 与 PBT：两个碳的差别怎样进入加工过程",
+            "en": "PET and PBT: two extra carbons enter the processing cycle"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "提高使用温度：晶体路线与高玻璃化温度路线",
+            "en": "Two routes to elevated-temperature performance"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "芳香骨架中的连接方式：PEEK、聚酰亚胺与聚芳酯",
+            "en": "Connections in aromatic backbones: PEEK, polyimides and polyarylates"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "让增强材料和零件形状一起承担载荷",
+            "en": "Making reinforcement and geometry share the load"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把材料名称转化为一套可执行的选材判断",
+            "en": "Turning material names into practical selection decisions"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM07",
+        "next": "PM09"
+      },
+      "source_file": "pm08.html",
+      "source_sha256": "07b3758ff4c0da2552f4d5fa3eb870c8c7b8b1bc1ece7f8e9229cb33996e491b",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "e11d83ec000dce9ec03596f39c7402ea746ec1b75186ef531fda8cff96a19ce5"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "4629eee288808a0a87310a636a814f15a3529821c9bbc7b8c3dbb2a29c7f3708"
+        }
+      }
+    },
+    {
+      "id": "PM09",
+      "group": "PM",
+      "title": {
+        "zh": "长链怎样排成晶体：结晶、形态与材料性能",
+        "en": "How Long Chains Crystallize: Structure, Growth and Properties"
+      },
+      "standfirst": {
+        "zh": "从一片薄薄的聚乙烯晶体，走到晶格、层片与球晶的不同尺度。把成核代价、链段运动、结晶速度和熔化热联系起来，理解冷却、成核剂、流动与退火怎样改变材料的透明度、尺寸与受力行为。",
+        "en": "Start with a thin polyethylene crystal and connect the scales of lattices, lamellae and spherulites. Nucleation costs, molecular mobility, transformation rates and melting enthalpy explain how cooling, nucleating agents, flow and annealing change clarity, dimensions and deformation."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "同一种长链，为什么能变出不同的硬度与透明度",
+            "en": "Why the same long chains produce different solids"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "晶格是位置规则，晶胞是描述它的单元",
+            "en": "Lattices describe positions; unit cells describe repetition"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "成核与生长：为什么冷却并不是越快越容易结晶",
+            "en": "Nucleation and growth compete during cooling"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "用一条结晶曲线，分清速度与最终数量",
+            "en": "Separating crystallization speed from final quantity"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "层片厚度、球晶大小和连接链各控制什么",
+            "en": "Lamellar thickness, spherulite size and connecting chains"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "量热、衍射、密度和光谱怎样互相校对",
+            "en": "Cross-checking calorimetry, diffraction, density and spectroscopy"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "PE 与 PP：同一层次的规则，产生不同晶体组织",
+            "en": "PE and PP: different crystals built from related principles"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从 PET、尼龙到 PTFE 与 PLA：结晶规律怎样随结构改变",
+            "en": "Applying crystallization principles to PET, nylon, PTFE and PLA"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM08",
+        "next": "PM10"
+      },
+      "source_file": "pm09.html",
+      "source_sha256": "2e663cfbdf17d2f35aeffe1d47b7d0f89b158b144807d4fad7abc3570bba7f44",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "25fa0cd148092ac6d3795bbde1c9eb1f43b16482bd3c7daa28ae88efd86f665f"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "0457c7212a8b411e5f06f6e4cc8284aa7f1a5d98c8fb37950e7bea4c6ffb38c4"
+        }
+      }
+    },
+    {
+      "id": "PM10",
+      "group": "PM",
+      "title": {
+        "zh": "把软段与硬段接在一起：嵌段共聚物和热塑性弹性体",
+        "en": "Connecting Soft and Hard Blocks: Copolymers and Elastomers"
+      },
+      "standfirst": {
+        "zh": "从鞋底回弹和密封圈的持续支撑出发，理解不同片段怎样在同一条链上合作。沿着微区自组装、结构测量和弹性网络，比较嵌段体系、聚烯烃共混物与动态硫化材料，找出柔软、恢复与热加工之间的结构联系。",
+        "en": "Begin with shoe-sole recovery and sustained support in a seal. Follow block self-assembly, structural measurements and elastic networks to compare molecular block systems, olefin blends and dynamic vulcanizates, connecting softness and recovery to thermoplastic processing."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "柔软与定形，怎样在一条长链里合作",
+            "en": "How flexible chains and firm junctions work together"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "微相分离：为什么会出现球、柱、层与网络",
+            "en": "Why microphase separation produces spheres, cylinders, layers and networks"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "加入溶剂或压成薄膜，组织规则怎样改变",
+            "en": "How solvents and thin surfaces change the organization"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从散射峰到三维网络，怎样证明结构",
+            "en": "From scattering peaks to three-dimensional evidence"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "物理连接点怎样把链变成弹簧网络",
+            "en": "How physical junctions turn chains into an elastic network"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "TPU、TPEE与聚酰胺弹性体：软硬片段各做什么",
+            "en": "What the segments do in TPU, copolyester and polyamide elastomers"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "苯乙烯体系与烯烃体系：同样柔软，连接方式不同",
+            "en": "Styrenic and olefin systems use different kinds of connection"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "选材料时，把柔软、回弹和长期稳定分开测",
+            "en": "Measure softness, recovery and long-term support separately"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM09",
+        "next": "PM11"
+      },
+      "source_file": "pm10.html",
+      "source_sha256": "bb840e92f822314d757265725bf51e6744e8c1aba279fd89fe97a5395d47eeee",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "fc71384a806871dfeb8ded4f9b32a8c618f52dd01fea7e387515e14700dfbb1d"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "1a2433b6d030100932de9d0c75d3bdf646e2b2661ceeefc20dd52b14da707858"
+        }
+      }
+    },
+    {
+      "id": "PM11",
+      "group": "PM",
+      "title": {
+        "zh": "两种材料怎样共同受力：聚合物共混与复合",
+        "en": "How Materials Work Together: Polymer Blends and Composites"
+      },
+      "standfirst": {
+        "zh": "从橡胶颗粒阻止脆裂，到纤维接过树脂传来的载荷，理解不同材料怎样在界面两侧合作。把混合自由能、相形态、增容与载荷传递联系起来，再用理想刚度模型比较配方相同、结构不同的结果。",
+        "en": "From rubber particles that promote energy absorption to fibers receiving load through a matrix, explore cooperation across interfaces. Connect mixing free energy, morphology, compatibilization and load transfer, then compare ideal stiffnesses for the same ingredients arranged differently."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "组合材料，首先要安排各自怎样工作",
+            "en": "Combining materials means assigning them useful jobs"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "长链为什么难混匀：从排列数到自由能曲线",
+            "en": "Why long chains resist mixing: arrangements and free-energy curves"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "怎样把热分析、显微图和分子作用接起来",
+            "en": "Connecting thermal analysis, microscopy and molecular interactions"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "颗粒、双连续、微纤与层片怎样服务不同用途",
+            "en": "Particles, connected phases, microfibers and layers perform different jobs"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "制备与增容：把需要的界面保留下来",
+            "en": "Processing and compatibilization preserve useful interfaces"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "纤维增强的核心：载荷怎样进入纤维",
+            "en": "Fiber reinforcement depends on transferring load into fibers"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "界面并非越强越好：连接、耗能与制造窗口",
+            "en": "Interfaces balance load transfer, dissipation and manufacturability"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把结构效率放回重量、零件与验证中",
+            "en": "Relate structural efficiency to mass, components and validation"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM10",
+        "next": "PM12"
+      },
+      "source_file": "pm11.html",
+      "source_sha256": "5a9e222841a21ece0df28373019211c60820d885b1270380cd71f0432d89f08b",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "daa6f705f6f703bd0d8c8380fe5ae9c2e1143b30ef441c01a1f1080a4de61f46"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "sha256": "5c0ebb5da752846977209eb452142e669103a9e32cd606c38f86e2f06dfb00dd"
+        }
+      }
+    },
+    {
+      "id": "PM12",
+      "group": "PM",
+      "title": {
+        "zh": "会流动也会回弹：看懂高分子的黏弹性",
+        "en": "Flow and Recovery: Understanding Polymer Viscoelasticity"
+      },
+      "standfirst": {
+        "zh": "塑料为什么会慢慢变形，熔体为什么会记得刚经过的口模？从力、形变与速率讲起，用松弛、蠕变和振荡实验追踪长链的时间尺度，再把温度、流动失稳与仪器测量联系到真实加工。",
+        "en": "Why does plastic deform slowly, and why does a melt remember the die it has just passed through? Begin with force, deformation and rate, then use relaxation, creep and oscillation to trace molecular timescales and connect temperature, flow instabilities and rheometry to processing."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一块材料为什么会有不同的时间表",
+            "en": "Why one material follows several clocks"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "把力、形变和变化速度分清楚",
+            "en": "Separate force, deformation and the rate of deformation"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "剪切越快越容易流，是什么意思",
+            "en": "What it means to flow more easily when sheared faster"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "固定形变与持续施力：两种时间实验",
+            "en": "Fixed deformation and sustained force are different time experiments"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "轻轻来回摇动，读出储能与损耗",
+            "en": "Small oscillations reveal storage and loss"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "温度怎样移动材料的时钟",
+            "en": "Temperature shifts the material’s clock"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "爬杆、胀大与表面裂纹：流动也会储存应力",
+            "en": "Rod climbing, die swell and rough surfaces reveal stored stresses in flow"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "流变仪怎样把压力、转矩变成材料曲线",
+            "en": "How instruments turn pressure and torque into rheological curves"
+          }
+        }
+      ],
+      "category": "wet-lab-data",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM11",
+        "next": "PM13"
+      },
+      "source_file": "pm12.html",
+      "source_sha256": "8a4fa8ded58bf708facfe8eb5fd83d96e0c885a5c8ad8e8c84aced761ce9dbe6",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 11,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "cf807fd6554a464a20c4522f8cd76c3aed1736565ea6d83cb82fea2926763a72"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 11,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "a4e8de9bacfebd2ebd935ca11bedf495c7264b420ff61f895741235b7dea4820"
+        }
+      }
+    },
+    {
+      "id": "PM13",
+      "group": "PM",
+      "title": {
+        "zh": "颗粒怎样变成均匀熔体：混合与螺杆挤出",
+        "en": "From Pellets to a Uniform Melt: Mixing and Extrusion"
+      },
+      "standfirst": {
+        "zh": "配方相同，混合方式不同，材料为什么会表现不同？从分布与分散讲起，跟随颗粒走过计量、固体输送、熔融和熔体泵送，再用双螺杆结构、能量与停留时间设计具体的配混路线。",
+        "en": "Why can identical ingredients produce different materials? Follow distribution and dispersion through metering, solids conveying, melting and melt pumping, then connect twin-screw design, energy and residence time to practical compounding routes."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "先决定要把什么混到什么程度",
+            "en": "Decide what needs mixing, and at what scale"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "配方进入机器之前：预混、计量与加料",
+            "en": "Before the barrel: premixing, metering, and feeding"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "从辊筒到密炼室：材料经历了多少作用",
+            "en": "Rolls and internal mixers: measuring the material's experience"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "一根螺杆怎样输送固体并把它熔化",
+            "en": "How one screw conveys solids and melts them"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "熔体既被向前拖，也受到出口阻力",
+            "en": "Forward drag competes with outlet resistance"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "两根螺杆怎样分工：输送、混合与排气",
+            "en": "Two screws organize conveying, mixing, and venting"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "材料不是同时进、同时出：停留时间与放大",
+            "en": "Residence time and the challenge of scale-up"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把一条加工路线设计成可检验的材料方案",
+            "en": "Design a process around the structure the product needs"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM12",
+        "next": "PM14"
+      },
+      "source_file": "pm13.html",
+      "source_sha256": "6847d9ec649e549717de01ef0fe65edf16f1b605030dc773c57ec608f433bf5b",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "df460b19e824dc1d5cb1576a5e4ad08cb0b15fa7597c1fb6a92e198c48e3b9ae"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "3ba829b1d255d9d8e50cab608c2a79445729ec0754b8bc4ae3cfc5090e236248"
+        }
+      }
+    },
+    {
+      "id": "PM14",
+      "group": "PM",
+      "title": {
+        "zh": "熔体怎样成为物品：挤出、注射与成型",
+        "en": "How a Melt Becomes an Object: Extrusion, Injection and Forming"
+      },
+      "standfirst": {
+        "zh": "水管、薄膜、瓶子和外壳为什么使用不同机器？从流动和定形的共同任务出发，比较挤出与注射的过程，计算厚度、锁模力和冷却时间，再认识吹塑、热成型、发泡与逐层制造怎样留下不同内部结构。",
+        "en": "Why do pipes, films, bottles and housings need different machines? Connect flow with shape fixation, compare extrusion and injection, calculate thickness, clamping and cooling, and follow the structures created by blowing, thermoforming, foaming and layerwise manufacturing."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "成型的任务：让材料流到该去的位置，再留下来",
+            "en": "Move material into place, then make it stay"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "连续挤出：口模出口只是形状形成的中途",
+            "en": "Extrusion: the die exit is an intermediate stage"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "薄膜：把两个方向的拉伸分开看",
+            "en": "Films: distinguish stretching in two directions"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "注射成型：填满、补料、冷却是不同阶段",
+            "en": "Injection molding: filling, packing, and cooling have different jobs"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "为什么厚壁难冷却，为什么冷却后还会变形",
+            "en": "Why thick sections cool slowly and parts distort"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "压制、压延和热成型：从已有材料重新分配形状",
+            "en": "Compression, calendering, and thermoforming"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "中空与多孔：让气体参与形状形成",
+            "en": "Hollow and cellular structures: involving gas"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "逐层制造与工艺选择：最终结构仍是判断中心",
+            "en": "Layerwise manufacturing and process selection"
+          }
+        }
+      ],
+      "category": "biomaterials",
+      "date": "2026-10-29",
+      "neighbors": {
+        "prev": "PM13"
+      },
+      "source_file": "pm14.html",
+      "source_sha256": "8f4b2bf054f7912c610af673020ac30c0c918c394e4a09492c123202831386d2",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 8,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "1284b8c17ed82153d897c71680e4cb1061497726f8dbdf24ae276c81d59dbffd"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 8,
+          "figures": 4,
+          "labs": 1,
+          "sha256": "bd4bc2e291d58ffd8e42b4a804027e6d5e873a70f52624e5a0f04377bfe9e962"
+        }
+      }
+    }
+  ]
+}

@@ -6,7 +6,7 @@
 <nav class="fn-actions" aria-label="项目入口"><a href="#fibernet-install">安装与示例</a><a href="https://github.com/GellmanSparrowS/fibernet" target="_blank" rel="noopener">GitHub 源码</a><a href="https://github.com/GellmanSparrowS/fibernet/releases/tag/v4.2.0" target="_blank" rel="noopener">FiberScope 桌面版</a></nav>
 <p class="fn-language"><a href="/fibernet/en/" lang="en" hreflang="en">English version</a></p>
 </div>
-<div class="fn-scene" aria-hidden="true"><canvas class="fn-scene-canvas" aria-hidden="true"></canvas></div>
+<div class="fn-scene" aria-hidden="true"><canvas class="fn-scene-canvas fn-flow-canvas" data-flow-src="/static/data/fibernet-flow.json" aria-hidden="true"></canvas></div>
 </header>
 <section class="fn-two-column">
 <div class="fn-panel"><h2>Python 工具库</h2><p>FiberNet 以节点和连边组织结构数据，将结构生成、分析、模拟和导出连接到可复用的 Python 工作流。</p><ul><li>二维与三维结构生成，节点、连边及纤维半径管理。</li><li>平面结构快照、孔隙分布与给定轨迹上的拉伸招募分析。</li><li>梁框架 FEM，以及按需安装的其他计算后端。</li><li>原生图与结果保存，配合示例开展后续分析。</li></ul></div>
@@ -41,4 +41,4 @@ result.save(&quot;fem_result.json&quot;)</code></pre><p class="fn-note">4.2.0 �
 </section>
 <section class="fn-section"><h2>文档与示例</h2><div class="fn-source-list"><a href="https://pypi.org/project/fibernet/4.2.0/" target="_blank" rel="noopener">PyPI 4.2.0</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/RELEASE_4_2_0.md" target="_blank" rel="noopener">4.2.0 发行说明</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/quickstart.rst" target="_blank" rel="noopener">快速开始</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/docs/METHODS_BEAM_FEM_CONTRACT.md" target="_blank" rel="noopener">梁 FEM 模型与单位</a><a href="https://github.com/GellmanSparrowS/fibernet/tree/v4.2.0/examples" target="_blank" rel="noopener">示例目录</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/v4.2.0/tutorials/complete_tutorial_v4.ipynb" target="_blank" rel="noopener">完整 Notebook 教程</a></div></section>
 </div></article>
-<script src="/static/js/fibernet-scene.js" defer></script>
+<script src="/static/js/fibernet-flow.js" defer></script>

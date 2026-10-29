@@ -1,0 +1,16 @@
+document.querySelectorAll('[data-lab="CP16-I1"]').forEach(root=>{
+ const z=root.dataset.lang==='zh',get=n=>root.querySelector('[data-field="'+n+'"]');let cached=-1,frames=[];
+ function simulate(d){const n=64,dt=.01;let u=Array.from({length:n},(_,i)=>1+.01*(Math.sin(2*Math.PI*5*i/n)+.5*Math.cos(2*Math.PI*7*i/n))),v=Array(n).fill(.9);frames=[{u:u.slice(),v:v.slice()}];
+ for(let step=1;step<=20000;step++){let un=Array(n),vn=Array(n);for(let i=0;i<n;i++){let l=(i+n-1)%n,r=(i+1)%n,q=u[i]*u[i]*v[i];un[i]=u[i]+dt*(.1-u[i]+q+u[l]-2*u[i]+u[r]);vn[i]=v[i]+dt*(.9-q+d*(v[l]-2*v[i]+v[r]));}u=un;v=vn;if(step%500===0)frames.push({u:u.slice(),v:v.slice()});}cached=d;}
+ function text(x,y,s,size=18){return '<text x="'+x+'" y="'+y+'" font-family="sans-serif" font-size="'+size+'" fill="#173b43">'+s+'</text>';}
+ function draw(){const d=+get('diff').value,t=+get('time').value;if(d!==cached)simulate(d);const f=frames[Math.round(t/5)],lo=Math.min(...f.u),hi=Math.max(...f.u);get('values').textContent=(z?'底物扩散系数 Dᵥ = ':'Substrate diffusivity Dᵥ = ')+d+(z?'；时间 τ = ':'; time τ = ')+t;
+ let s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 660" role="img" aria-label="'+(z?'浓度曲线和空间时间图':'Concentration profiles and space–time map')+'"><rect width="600" height="660" fill="#f4f1e8"/>';
+ s+=text(65,27,z?'当前分布：u 绿色，v 棕色':'Current profiles: u green, v brown',21);
+ for(let y=0;y<=3;y++){let yy=235-y*60;s+='<path d="M65 '+yy+'H550" stroke="#d5ddd6"/>'+text(34,yy+6,y.toString());}
+ const path=(a,col)=>'<polyline points="'+a.concat(a[0]).map((x,i)=>(65+i*485/64).toFixed(2)+','+(235-x*60).toFixed(2)).join(' ')+'" fill="none" stroke="'+col+'" stroke-width="3"/>';
+ s+=path(f.u,'#148579')+path(f.v,'#b9763b')+text(65,263,'0')+text(524,263,'64')+text(200,289,z?'环形空间位置 ξ':'Position ξ on the ring',20)+text(65,331,z?'u 的演化：固定色标 0—3':'Evolution of u: fixed color scale 0–3',21);
+ for(let j=0;j<frames.length;j++)for(let i=0;i<64;i++){const q=Math.max(0,Math.min(1,frames[j].u[i]/3)),r=Math.round(239-210*q),g=Math.round(236-114*q),b=Math.round(215-103*q);s+='<rect x="'+(65+i*485/64).toFixed(2)+'" y="'+(350+j*240/41).toFixed(2)+'" width="7.7" height="6" fill="rgb('+r+','+g+','+b+')"/>';}
+ s+=text(16,362,'0')+text(5,590,'200')+text(65,620,z?'向下：时间 τ':'Downward: time τ',20);let yy=350+t/200*240;s+='<path d="M65 '+yy+'H550" stroke="#9c4e31" stroke-width="2" stroke-dasharray="6 4"/>'+text(65,649,z?'浅色低浓度；深色高浓度':'Pale: low concentration; dark: high concentration',19)+'</svg>';
+ get('plot').innerHTML=s;get('result').textContent=(z?'u 的最小值 ':'Minimum u ')+lo.toFixed(3)+(z?'，最大值 ':'; maximum ')+hi.toFixed(3)+(z?'，峰谷差 ':'; peak-to-trough difference ')+(hi-lo).toFixed(3)+(z?'。v 的范围 ':'; v range ')+Math.min(...f.v).toFixed(3)+'–'+Math.max(...f.v).toFixed(3)+(z?'。所有量均无量纲。':' . All quantities are dimensionless.');}
+ get('diff').addEventListener('input',draw);get('time').addEventListener('input',draw);get('reset').addEventListener('click',()=>{get('diff').value='10';get('time').value='200';draw();});draw();
+});

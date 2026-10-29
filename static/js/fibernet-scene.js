@@ -97,19 +97,27 @@
       canvas.width=Math.round(width*pixelRatio);canvas.height=Math.round(height*pixelRatio);
       ctx.setTransform(canvas.width/width,0,0,canvas.height/height,0,0);request();
     }
-    new ResizeObserver(resize).observe(canvas);
-    new IntersectionObserver(entries=>{
+    function refreshVisibility(){
+      const r=canvas.getBoundingClientRect();
+      inView=r.width>0&&r.height>0&&r.bottom>0&&r.right>0&&r.top<innerHeight&&r.left<innerWidth;
+      if(inView){last=0;request()}else stop();
+    }
+    function resume(){if(!document.hidden){resize();refreshVisibility()}}
+    if(window.ResizeObserver)new ResizeObserver(()=>{resize();refreshVisibility()}).observe(canvas);
+    if(window.IntersectionObserver)new IntersectionObserver(entries=>{
       inView=entries[0].isIntersecting;if(inView){last=0;request()}else stop();
-    },{threshold:.03}).observe(canvas);
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else{last=0;request()}});
+    },{threshold:0}).observe(canvas);
+    else window.addEventListener('scroll',refreshVisibility,{passive:true});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else resume()});
     window.addEventListener('pagehide',stop,{passive:true});
-    window.addEventListener('pageshow',()=>{last=0;request()},{passive:true});
+    window.addEventListener('pageshow',resume,{passive:true});
+    window.addEventListener('focus',resume,{passive:true});
     window.addEventListener('resize',resize,{passive:true});
     reduced.addEventListener('change',()=>{last=0;request()});
     coarse.addEventListener('change',resize);light.addEventListener('change',palette);
     new MutationObserver(palette).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme','class','style']});
     // Read-only diagnostics; no on-screen controls, counters or readouts.
     canvas.fibernetScene={snapshot:()=>({nodes:points.length,nodesDrawn,edges:edges.length,phase,frames,inView,running:Boolean(raf),reduced:reduced.matches,coarse:coarse.matches,width,height,pixelRatio,backingWidth:canvas.width,backingHeight:canvas.height,...viewAngles()}),finite:()=>projected.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.z))};
-    palette();resize();
+    palette();resize();refreshVisibility();
   });
 })();

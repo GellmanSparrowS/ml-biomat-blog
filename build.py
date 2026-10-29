@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
-from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages
+from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses
 
 ROOT = Path(__file__).resolve().parent
 INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
@@ -455,7 +455,9 @@ def build():
 
     posts = load_posts()
     curriculum = tutorials.load()
-    catalog_items = catalog.entries(posts, curriculum)
+    new_courses = biomaterials_courses.load()
+    course_items = biomaterials_courses.entries(new_courses)
+    catalog_items = catalog.entries(posts, curriculum) + course_items
     check_coverage(posts)
     en = [p for p in posts if p["lang"] == "en"]
     zh = [p for p in posts if p["lang"] == "zh"]
@@ -525,7 +527,8 @@ def build():
     # FiberNet shares the same Chinese/English page contract as profiles and articles.
     for language, source, route in [('zh-CN','fibernet-body.html','/fibernet/'),('en','fibernet-en-body.html','/fibernet/en/')]:
         body = (Path('content')/source).read_text(encoding='utf-8')
-        body = body.replace('src="/static/js/fibernet-scene.js"', f'src="{versioned_asset("/static/js/fibernet-scene.js")}"')
+        body = body.replace('src="/static/js/fibernet-flow.js"', f'src="{versioned_asset("/static/js/fibernet-flow.js")}"')
+        body = body.replace('data-flow-src="/static/data/fibernet-flow.json"', f'data-flow-src="{versioned_asset("/static/data/fibernet-flow.json")}"')
         desc='纤维网络生成、建模与分析的 Python 工具包。安装、示例与项目资源。' if language=='zh-CN' else 'A Python toolkit for fiber network generation, modeling and analysis. Installation, examples and project resources.'
         alts=f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/fibernet/"><link rel="alternate" hreflang="en" href="{SITE["base_url"]}/fibernet/en/">'
         document=make_head(title='FiberNet',desc=desc,url=SITE['base_url']+route,lang=language,wide=True,en_href='/fibernet/en/',zh_href='/fibernet/',alternates=alts)+body+make_footer(language)
@@ -556,6 +559,8 @@ def build():
 
     tutorials.render(curriculum, make_head, make_footer, write_file, versioned_asset, CATEGORIES, posts, SITE["base_url"])
 
+    course_routes = biomaterials_courses.render(new_courses, make_head, make_footer, write_file, versioned_asset, CATEGORIES, SITE["base_url"])
+
     # RSS
     rss_items = []
     for p in posts:
@@ -569,6 +574,9 @@ def build():
     for lesson in curriculum["lessons"]:
         address = SITE["base_url"] + lesson["url"]
         rss_items.insert(lesson["number"] - 1, f'<item><title>{hm.escape(lesson["title"])}</title><link>{address}</link><guid>{address}</guid><description>{hm.escape(lesson["description"])}</description><pubDate>Wed, 28 Oct 2026 00:00:00 +0800</pubDate></item>')
+    for item in reversed(course_items):
+        address = SITE["base_url"] + item["url"]
+        rss_items.insert(0, f'<item><title>{hm.escape(item["title"])}</title><link>{address}</link><guid>{address}</guid><description>{hm.escape(item["description"])}</description><pubDate>Thu, 29 Oct 2026 00:00:00 +0800</pubDate></item>')
     rss = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -603,6 +611,8 @@ def build():
         urls.append(f'  <url><loc>{SITE["base_url"]}/posts/{p["slug"]}/</loc><priority>0.8</priority><lastmod>{p["modified"]}</lastmod></url>')
     for route in [p["url"] for p in curriculum["lessons"]]:
         urls.append(f'<url><loc>{SITE["base_url"]}{route}</loc><priority>0.8</priority><lastmod>{tutorials.DATE}</lastmod></url>')
+    for route in course_routes:
+        urls.append(f'<url><loc>{SITE["base_url"]}{route}</loc><priority>0.8</priority><lastmod>2026-10-29</lastmod></url>')
     write_file("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{chr(10).join(urls)}\n</urlset>')
 
 
@@ -633,6 +643,7 @@ def build():
     for lesson in curriculum["lessons"]:
         search_data.append({"title":lesson["title"], "slug":lesson["slug"], "url":lesson["url"], "date":tutorials.DATE,
                             "category":lesson["categories"][0], "tags":lesson["tags"], "lang":"zh", "description":lesson["description"], "type":"tutorial"})
+    search_data.extend(dict(item, type="tutorial") for item in course_items)
     write_file("search.json", json_mod.dumps(search_data, ensure_ascii=False))
     shutil.copytree("static", static_out)
     # Google verification
