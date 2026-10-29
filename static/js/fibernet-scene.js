@@ -1,5 +1,4 @@
-/* LOCAL PREVIEW ONLY: optional drag interaction on canvas[data-draggable].
-   FiberNet geometry scene.
+/* Automatic FiberNet geometry scene.
    Fixed 3D Voronoi edge geometry. Camera movement and view-depth shading only.
    Provenance and reproducible generator (not shown in the interface):
 {
@@ -12,7 +11,7 @@
   "scipy": "1.18.0",
   "units": "dimensionless",
   "source_code": "def geometry(seed=20261028, n_sites=240):\n    rng = np.random.default_rng(seed)\n    sites = rng.uniform(-1.2, 1.2, (n_sites, 3))\n    vor = Voronoi(sites)\n    vertices = vor.vertices\n    keep = np.sum((vertices / [1.0, 0.78, 0.88]) ** 2, axis=1) < 1.0\n    edges = set()\n    for (s1, s2), face in zip(vor.ridge_points, vor.ridge_vertices):\n        if -1 in face or len(face) < 3:\n            continue\n        center = vertices[face].mean(axis=0)\n        normal = sites[s2] - sites[s1]\n        normal /= np.linalg.norm(normal)\n        u = vertices[face[0]] - center\n        u /= np.linalg.norm(u)\n        v = np.cross(normal, u)\n        angles = np.arctan2((vertices[face]-center) @ v,\n                            (vertices[face]-center) @ u)\n        ordered = np.asarray(face)[np.argsort(angles)]\n        for a, b in zip(ordered, np.roll(ordered, -1)):\n            if keep[a] and keep[b]:\n                edges.add(tuple(sorted((int(a), int(b)))))\n    adjacency = {}\n    for a, b in edges:\n        adjacency.setdefault(a, set()).add(b)\n        adjacency.setdefault(b, set()).add(a)\n    remaining = set(adjacency)\n    components = []\n    while remaining:\n        frontier = [min(remaining)]\n        component = set()\n        while frontier:\n            node = frontier.pop()\n            if node in component:\n                continue\n            component.add(node)\n            frontier.extend(adjacency[node] - component)\n        remaining -= component\n        components.append(component)\n    connected = max(components, key=len)\n    ids = sorted(connected)\n    remap = {old: new for new, old in enumerate(ids)}\n    nodes = [{'id': remap[i], 'p': vertices[i].round(9).tolist()} for i in ids]\n    links = [{'id': j, 'a': remap[a], 'b': remap[b]}\n             for j, (a, b) in enumerate(sorted(edges)) if a in connected and b in connected]\n    return nodes, links",
-  "display": "Fixed topology; rigid camera rotation. Line intensity encodes view depth."
+  "display": "Fixed topology; rigid camera rotation. Line and node intensity encode view depth."
 }
 */
 (()=>{
@@ -24,38 +23,19 @@
   document.querySelectorAll('.fn-scene-canvas').forEach(canvas=>{
     const ctx=canvas.getContext('2d');
     if(!ctx)return;
+    for(const name of ['data-draggable','tabindex','role','aria-label','aria-keyshortcuts'])canvas.removeAttribute(name);
+    canvas.setAttribute('aria-hidden','true');
     const center=[0,1,2].map(d=>(Math.min(...geometry.nodes.map(p=>p[d]))+Math.max(...geometry.nodes.map(p=>p[d])))/2);
     const radius=Math.max(...geometry.nodes.map(p=>Math.hypot(...p.map((v,d)=>v-center[d]))));
     const points=geometry.nodes.map(p=>p.map((v,d)=>(v-center[d])/radius));
     const projected=points.map(()=>({x:0,y:0,z:0}));
     const edges=geometry.edges.map(([a,b])=>({a:projected[a],b:projected[b]}));
+    const nodeOrder=projected.slice();
     const modestDevice=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=4;
-    let width=0,height=0,phase=0,last=0,raf=0,inView=false,px=0,py=0,ax=0,ay=0,frames=0;
-    const draggable=canvas.hasAttribute('data-draggable');
-    let yawOffset=0,pitchOffset=0,drag=null,pendingTouch=null,resumeAge=3;
+    let width=0,height=0,pixelRatio=1,phase=0,last=0,raf=0,inView=false,frames=0,nodesDrawn=0;
     let colors={blue:'#6288a5',teal:'#5fa89b'};
     const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
-    function viewAngles(){return {yaw:.52+phase+yawOffset+px,pitch:clamp(-.28+Math.sin(phase*.57)*.16+pitchOffset+py,-1.3,1.3)}}
-    function autoWeight(){const t=clamp((resumeAge-.65)/1.6,0,1);return drag?0:t*t*(3-2*t)}
-    function holdParallax(){yawOffset+=px;pitchOffset+=py;px=py=ax=ay=0}
-    function limitPitch(value){const base=-.28+Math.sin(phase*.57)*.16;return clamp(value,-1.3-base,1.3-base)}
-    function beginDrag(event){
-      holdParallax();
-      drag={id:event.pointerId,x:event.clientX,y:event.clientY,yaw:yawOffset,pitch:pitchOffset,scale:2.9/Math.max(200,Math.min(width,height))};
-      pendingTouch=null;resumeAge=0;last=0;
-      try{canvas.setPointerCapture(event.pointerId)}catch(_){}
-      canvas.style.cursor='grabbing';
-      canvas.focus({preventScroll:true});request();
-    }
-    function finishDrag(event){
-      if(pendingTouch&&(!event||pendingTouch.id===event.pointerId))pendingTouch=null;
-      if(!drag||(event&&event.pointerId!==drag.id))return;
-      const id=drag.id;drag=null;resumeAge=0;last=0;ax=ay=0;
-      canvas.style.cursor='grab';
-      try{if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id)}catch(_){}
-      request();
-    }
-
+    function viewAngles(){return {yaw:.52+phase,pitch:-.28+Math.sin(phase*.57)*.16}}
     function blend(color,muted,weight){
       const parse=value=>/^#[0-9a-f]{6}$/i.test(value)?[1,3,5].map(i=>parseInt(value.slice(i,i+2),16)):null;
       const a=parse(color),b=parse(muted);
@@ -83,24 +63,27 @@
       ctx.clearRect(0,0,width,height);ctx.lineCap='round';
       edges.sort((p,q)=>(p.a.z+p.b.z)-(q.a.z+q.b.z));
       for(const {a,b} of edges){
-        const depth=Math.max(0,Math.min(1,((a.z+b.z)/2+1)/2));
+        const depth=clamp(((a.z+b.z)/2+1)/2,0,1);
         ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
         ctx.strokeStyle=depth>.66?colors.teal:colors.blue;
-        ctx.lineWidth=.6+depth*.85;ctx.globalAlpha=.1+Math.pow(depth,1.3)*.6;ctx.stroke();
+        ctx.lineWidth=.8+depth*.65;ctx.globalAlpha=.18+Math.pow(depth,1.25)*.56;ctx.stroke();
       }
-      ctx.globalAlpha=1;frames++;
+      nodeOrder.sort((a,b)=>a.z-b.z);
+      for(const node of nodeOrder){
+        const depth=clamp((node.z+1)/2,0,1);
+        ctx.beginPath();ctx.arc(node.x,node.y,.85+depth*.75,0,Math.PI*2);
+        ctx.fillStyle=depth>.66?colors.teal:colors.blue;
+        ctx.globalAlpha=.30+depth*.58;ctx.fill();
+      }
+      nodesDrawn=nodeOrder.length;ctx.globalAlpha=1;frames++;
     }
     function visible(){return inView&&!document.hidden}
     function frame(t){
       raf=0;if(!visible()){last=0;return}
-      const interval=coarse.matches?50:modestDevice?50:33.3;
+      const interval=coarse.matches||modestDevice?50:33.3;
       if(last&&t-last<interval){raf=requestAnimationFrame(frame);return}
       const dt=last?Math.min(.1,(t-last)/1000):0;last=t;
-      if(!reduced.matches){
-        if(!drag)resumeAge+=dt;
-        phase+=dt*(coarse.matches?.085:.12)*autoWeight();
-        const ease=1-Math.exp(-dt*7);px+=(ax-px)*ease;py+=(ay-py)*ease;
-      }else px=py=ax=ay=0;
+      if(!reduced.matches)phase+=dt*(coarse.matches?.085:.12);
       draw();
       if(!reduced.matches)raf=requestAnimationFrame(frame);else last=0;
     }
@@ -108,69 +91,25 @@
     function stop(){cancelAnimationFrame(raf);raf=0;last=0}
     function resize(){
       const r=canvas.getBoundingClientRect();width=r.width;height=r.height;
-      const dpr=Math.min(devicePixelRatio||1,coarse.matches||modestDevice?1.5:2);
-      canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
-      ctx.setTransform(dpr,0,0,dpr,0,0);request();
+      if(!width||!height){stop();return}
+      // Preserve native mobile detail; limit only unusually large backing surfaces.
+      pixelRatio=Math.min(window.devicePixelRatio||1,Math.sqrt(2000000/(width*height)));
+      canvas.width=Math.round(width*pixelRatio);canvas.height=Math.round(height*pixelRatio);
+      ctx.setTransform(canvas.width/width,0,0,canvas.height/height,0,0);request();
     }
     new ResizeObserver(resize).observe(canvas);
     new IntersectionObserver(entries=>{
-      inView=entries[0].isIntersecting;if(inView){last=0;request()}else{finishDrag();stop()}
+      inView=entries[0].isIntersecting;if(inView){last=0;request()}else stop();
     },{threshold:.03}).observe(canvas);
-    if(draggable){
-      canvas.removeAttribute('aria-hidden');
-      if(!canvas.hasAttribute('tabindex'))canvas.tabIndex=0;
-      const english=document.documentElement.lang.startsWith('en');
-      if(!canvas.hasAttribute('aria-label'))canvas.setAttribute('aria-label',english?'3D fiber network. Drag or use arrow keys to rotate; Home resets the view.':'三维纤维网络。拖动或按方向键旋转，Home 键复位。');
-      canvas.setAttribute('role','img');
-      canvas.setAttribute('aria-keyshortcuts','ArrowLeft ArrowRight ArrowUp ArrowDown Home');
-      canvas.style.touchAction='pan-y pinch-zoom';canvas.style.cursor='grab';
-      canvas.addEventListener('pointerdown',e=>{
-        if(!e.isPrimary||e.button!==0||drag||pendingTouch)return;
-        if(e.pointerType==='touch')pendingTouch={id:e.pointerId,x:e.clientX,y:e.clientY};
-        else beginDrag(e);
-      },{passive:true});
-      canvas.addEventListener('pointerup',finishDrag,{passive:true});
-      canvas.addEventListener('pointercancel',finishDrag,{passive:true});
-      canvas.addEventListener('lostpointercapture',finishDrag,{passive:true});
-      canvas.addEventListener('keydown',e=>{
-        if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home'].includes(e.key))return;
-        e.preventDefault();finishDrag();holdParallax();const step=e.shiftKey?.3:.12;
-        if(e.key==='Home'){phase=0;yawOffset=pitchOffset=0}
-        if(e.key==='ArrowLeft')yawOffset-=step;
-        if(e.key==='ArrowRight')yawOffset+=step;
-        if(e.key==='ArrowUp')pitchOffset=limitPitch(pitchOffset+step);
-        if(e.key==='ArrowDown')pitchOffset=limitPitch(pitchOffset-step);
-        resumeAge=0;last=0;request();
-      });
-    }
-    canvas.addEventListener('pointermove',e=>{
-      if(pendingTouch&&e.pointerId===pendingTouch.id){
-        const dx=e.clientX-pendingTouch.x,dy=e.clientY-pendingTouch.y;
-        if(Math.abs(dy)>8&&Math.abs(dy)>Math.abs(dx)*1.15)pendingTouch=null;
-        else if(Math.abs(dx)>9&&Math.abs(dx)>Math.abs(dy)*1.25)beginDrag(e);
-      }
-      if(drag){
-        if(e.pointerId!==drag.id)return;
-        yawOffset=drag.yaw+(e.clientX-drag.x)*drag.scale;
-        pitchOffset=limitPitch(drag.pitch-(e.clientY-drag.y)*drag.scale);
-        request();return;
-      }
-      if(coarse.matches||reduced.matches||e.pointerType==='touch'||resumeAge<.75)return;
-      const r=canvas.getBoundingClientRect();
-      ax=((e.clientX-r.left)/Math.max(1,width)-.5)*.17;
-      ay=((e.clientY-r.top)/Math.max(1,height)-.5)*.12;
-    },{passive:true});
-    const leave=()=>{ax=ay=0};
-    canvas.addEventListener('pointerleave',leave,{passive:true});
-    window.addEventListener('blur',()=>{leave();finishDrag()},{passive:true});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden){finishDrag();stop()}else{last=0;request()}});
-    window.addEventListener('pagehide',()=>{finishDrag();stop()},{passive:true});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else{last=0;request()}});
+    window.addEventListener('pagehide',stop,{passive:true});
     window.addEventListener('pageshow',()=>{last=0;request()},{passive:true});
-    reduced.addEventListener('change',()=>{holdParallax();last=0;request()});
+    window.addEventListener('resize',resize,{passive:true});
+    reduced.addEventListener('change',()=>{last=0;request()});
     coarse.addEventListener('change',resize);light.addEventListener('change',palette);
     new MutationObserver(palette).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme','class','style']});
     // Read-only diagnostics; no on-screen controls, counters or readouts.
-    canvas.fibernetScene={snapshot:()=>({nodes:points.length,edges:edges.length,phase,frames,inView,running:Boolean(raf),reduced:reduced.matches,coarse:coarse.matches,width,height,px,py,...viewAngles(),yawOffset,pitchOffset,draggable,dragging:Boolean(drag),pendingTouch:Boolean(pendingTouch),autoWeight:autoWeight(),resumeAge}),finite:()=>projected.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.z))};
+    canvas.fibernetScene={snapshot:()=>({nodes:points.length,nodesDrawn,edges:edges.length,phase,frames,inView,running:Boolean(raf),reduced:reduced.matches,coarse:coarse.matches,width,height,pixelRatio,backingWidth:canvas.width,backingHeight:canvas.height,...viewAngles()}),finite:()=>projected.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.z))};
     palette();resize();
   });
 })();
