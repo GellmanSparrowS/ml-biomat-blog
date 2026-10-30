@@ -1,15 +1,16 @@
-/* A site-specific motion choice, with the operating-system preference as default.
+/* Automatic motion for every new visitor, with optional off / system-following choices.
  * ?motion=on / off / auto applies once, is remembered, and is removed from the URL.
  */
 (()=>{
  'use strict';
  const key='ml-biomat-motion',system=matchMedia('(prefers-reduced-motion: reduce)');
  const listeners=new Set(),valid=value=>['on','off','auto'].includes(value);
- let mode='auto';
+ const defaultMode='on';
+ let mode=defaultMode;
  try{const saved=localStorage.getItem(key);if(valid(saved))mode=saved;}catch(_){}
  const url=new URL(location.href),requested=url.searchParams.get('motion');
  if(valid(requested)){
-  mode=requested;try{if(mode==='auto')localStorage.removeItem(key);else localStorage.setItem(key,mode);}catch(_){}
+  mode=requested;try{localStorage.setItem(key,mode);}catch(_){}
   url.searchParams.delete('motion');
   try{history.replaceState(history.state,'',url.pathname+url.search+url.hash);}catch(_){}
  }
@@ -25,9 +26,9 @@
   addEventListener(type,callback){if(type==='change')listeners.add(callback);},
   removeEventListener(type,callback){if(type==='change')listeners.delete(callback);},
   addListener(callback){listeners.add(callback);},removeListener(callback){listeners.delete(callback);},
-  set(value){if(!valid(value))return;mode=value;try{if(value==='auto')localStorage.removeItem(key);else localStorage.setItem(key,value);}catch(_){}notify();}
+  set(value){if(!valid(value))return;mode=value;try{localStorage.setItem(key,value);}catch(_){}notify();}
  };
  if(system.addEventListener)system.addEventListener('change',notify);else system.addListener(notify);
- addEventListener('storage',event=>{if(event.key===key||event.key===null){mode=valid(event.newValue)?event.newValue:'auto';notify();}});
+ addEventListener('storage',event=>{if(event.key===key||event.key===null){mode=valid(event.newValue)?event.newValue:defaultMode;notify();}});
  notify();
 })();

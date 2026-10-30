@@ -93,14 +93,14 @@ GitHub 登录由本机凭据管理工具保存。仓库地址使用普通 HTTPS 
 
 ## 首页与网络动态
 
-首页继续显示自动旋转的三维纤维网络，使用 `static/js/fibernet-scene.js`。全站背景在手机上限帧运行，低功耗及慢帧设备进一步降低帧率；返回页面恢复动画，保留系统减少动态偏好。
+首页继续显示自动旋转的三维纤维网络，使用 `static/js/fibernet-scene.js`。全站背景在手机上限帧运行，低功耗及慢帧设备进一步降低帧率；返回页面恢复动画，默认自动播放。
 
 FiberNet 首屏使用 `static/js/fibernet-flow.js` 与 `static/data/fibernet-flow.json`。这是种子固定的标量弹簧网络传力与键逾渗示意：330个节点、989条边和31个连通状态，颜色由各状态平衡后的归一化边载荷产生。它与项目展示的FEM计算图例分别维护。`content_tools/generate_fibernet_flow.py` 可用NumPy/SciPy重新生成数据，日常网站构建直接使用已提交数据，不增加构建依赖。动画不设操作控件，画布按设备像素密度绘制。
 
 
 ## 动态设置与轻量图片（2026-10-30）
 
-本站默认跟随系统动画偏好。[启用本站动态](https://ml-biomat.com/?motion=on)会记住本设备的选择，刷新、切换语言和进入其他页面均继续生效；`?motion=off`暂停，`?motion=auto`恢复跟随系统。处理后地址自动恢复正常页面路径。共享策略为 `static/js/site-motion.js`，Canvas及CSS过渡使用同一设置；不修改系统设置。验证真实Edge时用Playwright `reduced_motion='null'`，否则默认测试环境会替换系统偏好。
+本站默认自动播放，首次访问或普通刷新均无需启用链接。可选的`?motion=off`暂停、`?motion=auto`跟随系统、`?motion=on`恢复播放都会记住本设备的明确选择，刷新、切换语言和进入其他页面继续生效。清除选择后恢复默认播放。FiberNet图形宽高为最初版本的70%，节点、连线与运动节奏保留。处理后地址自动恢复正常页面路径。共享策略为 `static/js/site-motion.js`，Canvas及CSS过渡使用同一设置；不修改系统设置。验证真实Edge时用Playwright `reduced_motion='null'`，否则默认测试环境会替换系统偏好。
 
 `content_tools/image_delivery.py`只改生成HTML中的图片标签：中等清晰度预览、响应式宽度、图片尺寸、延迟加载与原图地址。`static/images/previews/manifest.json`封存原图和预览的尺寸及SHA；原图保持原位，科学SVG和公式继续使用矢量。相册和通用图示查看器先显示预览，高清图加载解码后替换。`content_tools/generate_image_previews.py`重新生成预览时需要Pillow，常规网站构建继续只用标准库。
 

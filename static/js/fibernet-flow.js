@@ -49,7 +49,7 @@
         extentX=Math.max(extentX,Math.abs(out.x));extentY=Math.max(extentY,Math.abs(out.y));
       }
       // Keep every node inside the canvas throughout the full turning cycle.
-      const fittedScale=.90*Math.min(scale,(width/2-12)/extentX,(height/2-12)/extentY);
+      const fittedScale=.70*Math.min(scale,(width/2-12)/extentX,(height/2-12)/extentY);
       for(const point of projected){point.x=width/2+point.x*fittedScale;point.y=height/2+point.y*fittedScale;}
       ctx.clearRect(0,0,width,height);ctx.lineCap='round';
       order.sort((p,q)=>(projected[p.a].z+projected[p.b].z)-(projected[q.a].z+projected[q.b].z));

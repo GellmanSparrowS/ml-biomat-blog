@@ -94,8 +94,8 @@
 ## 动态与性能（2026-10-30）
 
 - 用户确认电脑使用Edge；系统SPI_GETCLIENTAREAANIMATION=0，Edge实际prefers-reduced-motion=true，是此前动画静止的原因。Playwright默认context会覆盖为no-preference，真实系统验收必须显式reduced_motion='null'；测试须同时覆盖auto/on/off。
-- static/js/site-motion.js统一站点动态策略。默认auto尊重系统；用户通过?motion=on显式启用后用ml-biomat-motion记住，正常导航与刷新持续生效；off暂停，auto恢复系统偏好。参数处理后移除，保留其他query/hash，不改操作系统或浏览器全局设置。Canvas与CSS过渡使用同一偏好。
-- FiberNet本轮缩小的是图形占用尺寸（约10%），节点、边、网络复杂度与传力节奏保留。
+- static/js/site-motion.js统一站点动态策略。用户于2026-10-30再次明确：所有访客普通打开页面即自动播放，默认on，不需要启用链接。显式选择off或auto时用ml-biomat-motion记住，刷新与跨页保留；清除选择后恢复on。此规则替代之前默认跟随系统的约定。参数处理后移除，保留其他query/hash，不改操作系统或浏览器全局设置。Canvas与CSS过渡使用同一偏好。
+- FiberNet本轮缩小的是图形占用尺寸（相对最初版本宽高各缩小约30%），节点、边、网络复杂度与传力节奏保留。
 - 页面图片使用可读的中等宽度WebP预览，点击图示或图库再加载原图；预览保留原比例和完整内容，不改原始文件。静态科学SVG、公式保留矢量。隐藏相册不提前请求其他图片。
 - content_tools/image_delivery.py在生成HTML时接入预览与原图地址；预览manifest和生成器负责映射与源hash。通用viewer保留已有导航和图库语义，高清解码后替换可见预览。
 - 代码高亮按需加载本地固定版本；它与本站动画初始化独立，不再用外部defer脚本阻塞导航、背景或场景。优化优先图片请求、重复分配和滚动批处理，避免删节点或降低主视觉清晰度。
