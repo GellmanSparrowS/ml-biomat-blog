@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script><script src="/static/js/site-motion.js?v=73234e8a4e0d" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide — ML-Biomat</title>
 <meta name="description" content="Choose bead mappings and effective interactions for biomolecular networks, then plan equilibration and independent validation. Worked diagrams connect atomic groups, reference distributions and the mechanical quantities a coarse-grained model should preserve.">
@@ -20,9 +20,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide", "description": "Choose bead mappings and effective interactions for biomolecular networks, then plan equilibration and independent validation. Worked diagrams connect atomic groups, reference distributions and the mechanical quantities a coarse-grained model should preserve.", "datePublished": "2026-09-07", "dateModified": "2026-10-28", "wordCount": 3427, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Physical Modeling & Simulation", "item": "https://ml-biomat.com/categories/multiscale-modeling/en/"}, {"@type": "ListItem", "position": 3, "name": "Coarse-Grained Modeling of Biomolecular Networks: A Practical Guide", "item": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks/"}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3dabe63b9fa"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=d6410737c786"></head>
 <body class="site-layout reading-page">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -57,7 +55,7 @@
 <p>A useful pre-flight exercise is to write down the finest observable the simulation is allowed to be wrong about, and the coarsest observable it must be right about. If the model must be right about network modulus but is allowed to be wrong about side-chain packing, a network-level or residue-level mapping is appropriate. If it must be right about a hydrogen-bonded interface, the mapping must slow down and keep the orientational content. Stating these two limits before any parameter is chosen prevents the most common cause of coarse-grained failure, which is the quiet transfer of a model built for one observable to a question that sits below its resolution.</p>
 <h2 id="building-a-mapping-from-atoms-to-beads">Building a Mapping: From Atoms to Beads</h2>
 
-<img src="/static/images/posts/coarse-grained-biomolecular-networks/mapping-en.webp" alt="Atomistic, coarse-grained, and network mapping levels of a biomolecular network" loading="lazy">
+<img src="/static/images/posts/coarse-grained-biomolecular-networks/mapping-en.webp" alt="Atomistic, coarse-grained, and network mapping levels of a biomolecular network" loading="lazy" data-full-src="/static/images/posts/coarse-grained-biomolecular-networks/mapping-en.webp?v=dd9da4a37b77" data-image-delivery="original" width="1140" height="531" decoding="async">
 
 <p>A useful mapping starts from a clear statement of the target quantity. If the goal is to reproduce the elastic modulus of a network, the mapping can discard most intramolecular chemistry and preserve only the connectivity, excluded volume, and crosslink density. If the goal is to distinguish crystalline and amorphous regions, the mapping must retain enough bead specificity to encode both states and their interfaces.</p>
 
@@ -153,6 +151,6 @@
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=894d0d437945" defer></script>
+<script src="/static/js/main.js?v=d827a5a43cfa" defer></script>
 <script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script></body>
 </html>

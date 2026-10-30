@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script><script src="/static/js/site-motion.js?v=73234e8a4e0d" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>生物分子网络的粗粒化建模：从映射方案到验证方法 — ML-Biomat</title>
 <meta name="description" content="围绕生物分子网络选择珠子映射、有效相互作用与平衡策略，并规划独立验证。通过原子分组、参考分布与有效势的示意，说明粗粒化模型需要保留哪些结构信息和力学观测量。">
@@ -20,9 +20,7 @@
 <meta property="og:url" content="https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "生物分子网络的粗粒化建模：从映射方案到验证方法", "description": "围绕生物分子网络选择珠子映射、有效相互作用与平衡策略，并规划独立验证。通过原子分组、参考分布与有效势的示意，说明粗粒化模型需要保留哪些结构信息和力学观测量。", "datePublished": "2026-09-07", "dateModified": "2026-10-28", "wordCount": 4611, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "物理建模与模拟", "item": "https://ml-biomat.com/categories/multiscale-modeling/"}, {"@type": "ListItem", "position": 3, "name": "生物分子网络的粗粒化建模：从映射方案到验证方法", "item": "https://ml-biomat.com/posts/coarse-grained-biomolecular-networks-zh/"}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3dabe63b9fa"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=d6410737c786"></head>
 <body class="site-layout reading-page">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -57,7 +55,7 @@
 <p>一个很有用的起飞前练习，是把模拟“允许算错的最细观测量”和“必须算对的最粗观测量”两条线先写下来。如果模型必须算对网络模量、但可以算错侧链堆积，那么网络级或残基级的映射就合适；如果它必须算对一条氢键界面，映射就得慢下来、保留取向信息。在选定任何参数之前先写清这两条边界，就能避免粗粒化最常见的一种失败：把一个为某个观测量而生的模型，悄悄搬去回答一个低于其分辨率的另一个问题。</p>
 <h2 id="从原子到珠子-如何设计映射">从原子到珠子：如何设计映射</h2>
 
-<img src="/static/images/posts/coarse-grained-biomolecular-networks/mapping-zh.webp" alt="生物分子网络的全原子、粗粒化与网络映射层次" loading="lazy">
+<img src="/static/images/posts/coarse-grained-biomolecular-networks/mapping-zh.webp" alt="生物分子网络的全原子、粗粒化与网络映射层次" loading="lazy" data-full-src="/static/images/posts/coarse-grained-biomolecular-networks/mapping-zh.webp?v=76275b330c40" data-image-delivery="original" width="1140" height="531" decoding="async">
 
 <p>好的映射从一个清晰的目标量开始。如果目标是重现网络的弹性模量，那么映射可以放弃绝大多数分子内化学细节，只保留连接性、排除体积和交联密度。如果目标是区分结晶区与无定形区，那么映射就必须保留足够的珠子特异性，以便同时编码两种状态及其界面。</p>
 
@@ -143,6 +141,6 @@
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=894d0d437945" defer></script>
+<script src="/static/js/main.js?v=d827a5a43cfa" defer></script>
 <script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script></body>
 </html>

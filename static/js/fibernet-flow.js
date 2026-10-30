@@ -4,7 +4,7 @@
  */
 (()=>{
   'use strict';
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  const reduced=window.siteMotion||matchMedia('(prefers-reduced-motion: reduce)');
   const coarse=matchMedia('(pointer: coarse)');
   const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
   const mix=(a,b,f)=>a+(b-a)*f;
@@ -21,6 +21,7 @@
     const projected=nodes.map(()=>({x:0,y:0,z:0}));
     const order=edges.map((edge,id)=>({a:edge[0],b:edge[1],id}));
     const nodeOrder=nodes.map((_,id)=>id);
+    const energies=new Float32Array(nodes.length),front=new Float32Array(nodes.length);
     let width=0,height=0,dpr=1,clock=4,raf=0,last=0,frames=0,inView=false;
     let dark=true,drawn=0,occupancy=.8,spanning=true;
     const modest=(navigator.hardwareConcurrency||8)<=4;
@@ -48,11 +49,12 @@
         extentX=Math.max(extentX,Math.abs(out.x));extentY=Math.max(extentY,Math.abs(out.y));
       }
       // Keep every node inside the canvas throughout the full turning cycle.
-      const fittedScale=Math.min(scale,(width/2-12)/extentX,(height/2-12)/extentY);
+      const fittedScale=.90*Math.min(scale,(width/2-12)/extentX,(height/2-12)/extentY);
       for(const point of projected){point.x=width/2+point.x*fittedScale;point.y=height/2+point.y*fittedScale;}
       ctx.clearRect(0,0,width,height);ctx.lineCap='round';
       order.sort((p,q)=>(projected[p.a].z+projected[p.b].z)-(projected[q.a].z+projected[q.b].z));
-      const energies=new Float32Array(nodes.length);
+      energies.fill(0);
+      for(let k=0;k<nodes.length;k++)front[k]=mix(current.front[k],next.front[k],f);
       const pulse=(clock*.19)%1.5-.18;
       drawn=0;
       for(const e of order){
@@ -60,7 +62,7 @@
         const active=clamp((occupancy-threshold[e.id])/.04+.5);
         const load=mix(current.load[e.id],next.load[e.id],f);
         const energy=Math.pow(load,.55);
-        const arrival=(mix(current.front[e.a],next.front[e.a],f)+mix(current.front[e.b],next.front[e.b],f))*.5;
+        const arrival=(front[e.a]+front[e.b])*.5;
         const wave=Math.exp(-Math.pow((arrival-pulse)/.12,2));
         ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
         ctx.strokeStyle=dark?'#66869c':'#55738a';
@@ -73,7 +75,7 @@
           ctx.lineWidth=.75+energy*1.65+wave*.4;ctx.stroke();drawn++;
           // A short moving glint follows only the stronger load-bearing edges.
           if(energy>.32&&wave>.35){
-            const fa=mix(current.front[e.a],next.front[e.a],f),fb=mix(current.front[e.b],next.front[e.b],f);
+            const fa=front[e.a],fb=front[e.b];
             const t=clamp((pulse-fa)/(fb-fa||.001));
             if(t>0&&t<1){
               ctx.beginPath();ctx.arc(mix(a.x,b.x,t),mix(a.y,b.y,t),1.15+energy*.4,0,Math.PI*2);
@@ -104,7 +106,8 @@
       const r=canvas.getBoundingClientRect();width=r.width;height=r.height;
       if(!width||!height){stop();return;}
       dpr=Math.min(devicePixelRatio||1,Math.sqrt(2000000/(width*height)));
-      canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
+      const backingWidth=Math.round(width*dpr),backingHeight=Math.round(height*dpr);
+      if(canvas.width!==backingWidth||canvas.height!==backingHeight){canvas.width=backingWidth;canvas.height=backingHeight;}
       ctx.setTransform(canvas.width/width,0,0,canvas.height/height,0,0);
       measureVisibility();draw();request();
     }
@@ -114,7 +117,7 @@
       inView=entries[0].isIntersecting;if(inView)resume();else stop();
     },{threshold:0}).observe(canvas);
     window.addEventListener('resize',resize,{passive:true});
-    window.addEventListener('scroll',()=>{const before=inView;measureVisibility();if(inView&&!before)resume();else if(!inView)stop();},{passive:true});
+    if(!('IntersectionObserver' in window))window.addEventListener('scroll',()=>{const before=inView;measureVisibility();if(inView&&!before)resume();else if(!inView)stop();},{passive:true});
     document.addEventListener('visibilitychange',()=>document.hidden?stop():resume());
     window.addEventListener('pagehide',stop,{passive:true});window.addEventListener('pageshow',resume,{passive:true});window.addEventListener('focus',resume,{passive:true});
     reduced.addEventListener('change',()=>{stop();draw();resume();});coarse.addEventListener('change',resize);

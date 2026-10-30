@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script><script src="/static/js/site-motion.js?v=73234e8a4e0d" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AFM力曲线分析：信号标定与弹性模量拟合 — ML-Biomat</title>
 <meta name="description" content="从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。">
@@ -22,9 +22,7 @@
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "AFM力曲线分析：信号标定与弹性模量拟合", "description": "从 AFM 偏转信号转换为力，完成基线校正与接触点识别，再对压入数据进行拟合。标定几何、解析 Hertz 曲线与 Python 函数共同说明测量通道如何转换为黏附力和具有明确单位的弹性模量。", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 1410, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/afm-force-curve-python-zh/", "image": "https://ml-biomat.com/static/images/og/afm-force-curve-python-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "实验表征与数据分析", "item": "https://ml-biomat.com/categories/wet-lab-data/"}, {"@type": "ListItem", "position": 3, "name": "AFM力曲线分析：信号标定与弹性模量拟合", "item": "https://ml-biomat.com/posts/afm-force-curve-python-zh/"}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3dabe63b9fa"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=d6410737c786"></head>
 <body class="site-layout reading-page">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -54,7 +52,7 @@
 
 <table><tr><th>阶段</th><th>物理含义</th><th>提取参数</th></tr><tr><td>逼近</td><td>针尖向样品靠近</td><td>接触点、样品刚度</td></tr><tr><td>接触</td><td>针尖压入样品</td><td>弹性模量 (通过拟合)</td></tr><tr><td>回退</td><td>针尖拉离样品</td><td>粘附力、解结合事件</td></tr></table>
 
-<img src="/static/images/posts/afm-force-curve-python/force-curve-zh.webp" alt="AFM力-距离曲线示意图：显示基线、接触点、逼近、回退与粘附回拉" loading="lazy">
+<img src="/static/images/posts/afm-force-curve-python/force-curve-zh.webp" alt="AFM力-距离曲线示意图：显示基线、接触点、逼近、回退与粘附回拉" loading="lazy" data-full-src="/static/images/posts/afm-force-curve-python/force-curve-zh.webp?v=32aa9c5b8184" data-image-delivery="original" width="1029" height="711" decoding="async">
 
 <pre><code class="language-python">
 import numpy as np
@@ -349,6 +347,6 @@ def sneddon_cone(indentation, E_star, alpha_deg=18):
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=894d0d437945" defer></script>
-<script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script></body>
+<script src="/static/js/main.js?v=d827a5a43cfa" defer></script>
+<script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script><script src="/static/js/code-highlight.js?v=8f9a57135ede" defer data-highlight-js="/static/vendor/highlightjs/11.11.1/highlight.min.js?v=c4a399dd6f48" data-highlight-css="/static/vendor/highlightjs/11.11.1/github-dark.min.css?v=9f208d022102"></script></body>
 </html>

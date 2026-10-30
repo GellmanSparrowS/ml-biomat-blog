@@ -90,3 +90,12 @@
 - 教程正式源为content/tutorials/biomaterials-courses/及manifest.json；生成与导入入口为content_tools/biomaterials_courses.py、import_biomaterials_courses.py。分类、RSS、搜索和站点地图同步更新；统一暗色默认及移动字号。
 - 首页保留自动旋转网格；手机环境背景通过限帧运行，不直接停用或因慢帧永久关闭。离屏和后台暂停、返回恢复，保留系统减少动态偏好。
 - FiberNet右上使用自动传力与键逾渗网络示意，独立脚本fibernet-flow.js和预计算数据fibernet-flow.json；模型边界与可复现规则留在源码和README，不添加展示按钮或说明面板。
+
+## 动态与性能（2026-10-30）
+
+- 用户确认电脑使用Edge；系统SPI_GETCLIENTAREAANIMATION=0，Edge实际prefers-reduced-motion=true，是此前动画静止的原因。Playwright默认context会覆盖为no-preference，真实系统验收必须显式reduced_motion='null'；测试须同时覆盖auto/on/off。
+- static/js/site-motion.js统一站点动态策略。默认auto尊重系统；用户通过?motion=on显式启用后用ml-biomat-motion记住，正常导航与刷新持续生效；off暂停，auto恢复系统偏好。参数处理后移除，保留其他query/hash，不改操作系统或浏览器全局设置。Canvas与CSS过渡使用同一偏好。
+- FiberNet本轮缩小的是图形占用尺寸（约10%），节点、边、网络复杂度与传力节奏保留。
+- 页面图片使用可读的中等宽度WebP预览，点击图示或图库再加载原图；预览保留原比例和完整内容，不改原始文件。静态科学SVG、公式保留矢量。隐藏相册不提前请求其他图片。
+- content_tools/image_delivery.py在生成HTML时接入预览与原图地址；预览manifest和生成器负责映射与源hash。通用viewer保留已有导航和图库语义，高清解码后替换可见预览。
+- 代码高亮按需加载本地固定版本；它与本站动画初始化独立，不再用外部defer脚本阻塞导航、背景或场景。优化优先图片请求、重复分配和滚动批处理，避免删节点或降低主视觉清晰度。

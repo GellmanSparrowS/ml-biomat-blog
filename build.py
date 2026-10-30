@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
-from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses
+from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery
 
 ROOT = Path(__file__).resolve().parent
 INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
@@ -214,6 +214,13 @@ def person_ld():
 
 
 def write_file(path, content):
+    if str(path).endswith('.html'):
+        content = image_delivery.rewrite_html(content, str(path))
+        if re.search(r'<pre\b[^>]*>\s*<code\b', content):
+            highlighter = ('<script src="'+versioned_asset('/static/js/code-highlight.js')+'" defer '
+                           'data-highlight-js="'+versioned_asset('/static/vendor/highlightjs/11.11.1/highlight.min.js')+'" '
+                           'data-highlight-css="'+versioned_asset('/static/vendor/highlightjs/11.11.1/github-dark.min.css')+'"></script>')
+            content = content.replace('</body>', highlighter+'</body>')
     p = Path(BUILD_DIR) / path
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(content, encoding="utf-8")
@@ -258,7 +265,7 @@ def find_pair(post, by_lang):
 
 MATHJAX_SCRIPT = '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>'
 
-HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}" data-theme="dark">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">\n<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>\n{mathjax}</head>\n<body>\n<canvas id="bg-canvas" aria-hidden="true"></canvas>\n'
+HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}" data-theme="dark">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>{title}{title_suffix}</title>\n<meta name="description" content="{desc}">\n<meta name="author" content="{author}">\n<link rel="canonical" href="{url}">\n{alternates}<link rel="api-catalog" href="/.well-known/api-catalog">\n<link rel="describedby" type="text/plain" href="/llms.txt">\n<link rel="alternate" type="application/rss+xml" href="/rss.xml">\n<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />\n<meta name="google-adsense-account" content="ca-pub-7464969092761889">\n{adsense}\n<link rel="stylesheet" href="/static/css/style.css">\n{og}\n{ld}\n{mathjax}</head>\n<body>\n<canvas id="bg-canvas" aria-hidden="true"></canvas>\n'
 
 # Shared headers are rendered by content_tools.chrome.
 
@@ -307,7 +314,7 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
         url=url, lang=language, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld,
         adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates,
         mathjax=(MATHJAX_SCRIPT if needs_math else ""))
-    head = head.replace('<meta charset="utf-8">','<meta charset="utf-8">'+chrome.THEME_INIT)
+    head = head.replace('<meta charset="utf-8">','<meta charset="utf-8">'+chrome.THEME_INIT+'<script src="'+versioned_asset('/static/js/site-motion.js')+'" defer></script>')
     head = head.replace("</head>", f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}"></head>')
     route = urllib.parse.urlsplit(url).path or '/'
     styles=[]

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script><script src="/static/js/site-motion.js?v=73234e8a4e0d" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SciPy曲线拟合：模型、残差与参数不确定性 — ML-Biomat</title>
 <meta name="description" content="从线性趋势、应力松弛到压痕模型，演示 SciPy 曲线拟合中的函数定义、初值、单位与参数边界。通过残差、协方差矩阵和置信区间，理解拟合参数的含义，并检查模型与测量数据是否匹配。">
@@ -22,9 +22,7 @@
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/scipy-curve-fitting-zh.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SciPy曲线拟合：模型、残差与参数不确定性", "description": "从线性趋势、应力松弛到压痕模型，演示 SciPy 曲线拟合中的函数定义、初值、单位与参数边界。通过残差、协方差矩阵和置信区间，理解拟合参数的含义，并检查模型与测量数据是否匹配。", "datePublished": "2026-06-27", "dateModified": "2026-10-28", "wordCount": 1151, "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/scipy-curve-fitting-zh/", "image": "https://ml-biomat.com/static/images/og/scipy-curve-fitting-zh.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "首页", "item": "https://ml-biomat.com/"}, {"@type": "ListItem", "position": 2, "name": "Python科学计算", "item": "https://ml-biomat.com/categories/python-tutorials/"}, {"@type": "ListItem", "position": 3, "name": "SciPy曲线拟合：模型、残差与参数不确定性", "item": "https://ml-biomat.com/posts/scipy-curve-fitting-zh/"}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3dabe63b9fa"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=d6410737c786"></head>
 <body class="site-layout reading-page">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -85,7 +83,7 @@ print(f&quot;杨氏模量: {E:.1f} +/- {E_std:.1f} MPa, R2={r2:.4f}&quot;)
 
 <p>保持应变不变时，标准线性固体模型的松弛模量可写为 E(t) = E_eq + E_branch·exp(−t/τ)，其中 τ = η/E_branch。乘以施加的应变，就得到应力随时间的衰减；下面代码拟合的 A 和 y0 分别是应力衰减幅值与平衡应力，单位为 kPa。这个关系对应 <a href="https://doc.comsol.com/6.4/doc/com.comsol.help.sme/sme_ug_theory.06.029.html">COMSOL 线性黏弹性模型中的单 Maxwell 支路</a>。</p>
 
-<img src="/static/images/posts/scipy-curve-fitting/relaxation-zh.webp" alt="应力松弛数据与指数衰减拟合及平衡应力水平" loading="lazy">
+<img src="/static/images/posts/scipy-curve-fitting/relaxation-zh.webp" alt="应力松弛数据与指数衰减拟合及平衡应力水平" loading="lazy" data-full-src="/static/images/posts/scipy-curve-fitting/relaxation-zh.webp?v=066d1e52a857" data-image-delivery="original" width="1008" height="693" decoding="async">
 
 <pre><code class="language-python">
 time_min = np.array([0, 1, 2, 5, 10, 20, 40, 80])
@@ -189,6 +187,6 @@ print(f&quot;约束优化得到的约化模量: {result.x[0]:.3f} MPa&quot;)
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=894d0d437945" defer></script>
-<script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script></body>
+<script src="/static/js/main.js?v=d827a5a43cfa" defer></script>
+<script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script><script src="/static/js/code-highlight.js?v=8f9a57135ede" defer data-highlight-js="/static/vendor/highlightjs/11.11.1/highlight.min.js?v=c4a399dd6f48" data-highlight-css="/static/vendor/highlightjs/11.11.1/github-dark.min.css?v=9f208d022102"></script></body>
 </html>

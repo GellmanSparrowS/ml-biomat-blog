@@ -239,8 +239,8 @@ main.tutorial-container{max-width:1240px;width:100%;padding:0 28px;min-width:0}
  .tutorial-reader .history-layout .history-diagram{display:block;grid-column:1/-1}
 }
 @media(prefers-reduced-motion:reduce){
- .tutorial-reader,.tutorial-hub{scroll-behavior:auto}
- .tutorial-reader *,.tutorial-hub *,.tutorial-feature *{animation:none!important;transition:none!important}
+ html:not([data-motion="full"]) :is(.tutorial-reader,.tutorial-hub){scroll-behavior:auto}
+ html:not([data-motion="full"]) :is(.tutorial-reader,.tutorial-hub,.tutorial-feature) *{animation:none!important;transition:none!important}
 }
 @media print{
  .tutorial-toolbar,.tutorial-reader aside,.tutorial-neighbors,.tutorial-filter,.tutorial-related{display:none!important}
@@ -378,3 +378,5 @@ main.tutorial-container{max-width:1240px;width:100%;padding:0 28px;min-width:0}
 @media screen and (max-width:360px){.tutorial-hero h1{font-size:22px}}
 
 .tutorial-reader .layout .lesson-main .formula-note{text-align:center;text-align-last:auto;hyphens:manual;-webkit-hyphens:manual}
+
+html[data-motion="reduced"] :is(.tutorial-reader,.tutorial-hub,.tutorial-feature) *{animation:none!important;transition:none!important}

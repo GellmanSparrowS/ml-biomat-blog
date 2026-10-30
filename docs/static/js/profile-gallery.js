@@ -14,20 +14,35 @@
   const next = dialog.querySelector('[data-pr-next]');
   const controls = dialog.querySelector('.pr-viewer-controls');
   const error = dialog.querySelector('.pr-viewer-error');
-  let links = [], index = 0, opener = null, overflow = '';
+  let links = [], index = 0, opener = null, overflow = '', version = 0, pending = null;
   function render(step) {
     index = (step + links.length) % links.length;
-    const link = links[index];
+    const link = links[index], thumbnail = link.querySelector('img');
+    const ticket = ++version;
+    if (pending) pending.removeAttribute('src');
     stage.scrollTo(0, 0);
     stage.setAttribute('aria-busy', 'true');
     error.hidden = true;
-    image.hidden = true;
     image.alt = link.dataset.caption || '';
-    image.src = link.href;
-    if (image.complete && image.naturalWidth) {
-      image.hidden = false;
-      stage.removeAttribute('aria-busy');
-    }
+    const preview = thumbnail && thumbnail.complete && thumbnail.naturalWidth ? thumbnail.currentSrc : '';
+    if (preview) { image.src = preview; image.hidden = false; }
+    else { image.removeAttribute('src'); image.hidden = true; }
+    // Retain a cached preview while decoding the requested original in the background.
+    const full = thumbnail && thumbnail.dataset.fullSrc || link.href;
+    const original = new Image();
+    pending = original; original.decoding = 'async';
+    original.onload = async () => {
+      try { if (original.decode) await original.decode(); } catch (_) {}
+      if (ticket !== version || !dialog.open) return;
+      image.src = full; image.hidden = false; error.hidden = true;
+      stage.removeAttribute('aria-busy'); pending = null;
+    };
+    original.onerror = () => {
+      if (ticket !== version || !dialog.open) return;
+      image.hidden = !preview; error.hidden = !!preview;
+      stage.removeAttribute('aria-busy'); pending = null;
+    };
+    original.src = full;
     caption.textContent = image.alt;
     count.textContent = (index + 1) + ' / ' + links.length;
     controls.hidden = links.length < 2;
@@ -60,12 +75,6 @@
       open(gallery, gallery.querySelector('[data-pr-image]'), link);
     });
   });
-  image.addEventListener('error', () => {
-    image.hidden = true; error.hidden = false; stage.removeAttribute('aria-busy');
-  });
-  image.addEventListener('load', () => {
-    image.hidden = false; error.hidden = true; stage.removeAttribute('aria-busy');
-  });
   prev.addEventListener('click', () => render(index - 1));
   next.addEventListener('click', () => render(index + 1));
   dialog.querySelector('[data-pr-close]').addEventListener('click', () => dialog.close());
@@ -79,6 +88,8 @@
     if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close();
   });
   dialog.addEventListener('close', () => {
+    version++; if (pending) pending.removeAttribute('src'); pending = null;
+    image.removeAttribute('src'); image.hidden = true; stage.removeAttribute('aria-busy');
     document.body.style.overflow = overflow;
     if (opener) opener.focus({preventScroll:true});
   });

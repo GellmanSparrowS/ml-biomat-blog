@@ -335,6 +335,175 @@ def collection_errors(items, categories):
     return errors
 
 
+
+def webp_size(raw):
+    """Read committed preview dimensions without adding a build dependency."""
+    if raw[:4] != b'RIFF' or raw[8:12] != b'WEBP':
+        raise ValueError('not a WebP image')
+    pos = 12
+    while pos + 8 <= len(raw):
+        kind = raw[pos:pos+4]
+        length = int.from_bytes(raw[pos+4:pos+8], 'little')
+        payload = raw[pos+8:pos+8+length]
+        if len(payload) != length:
+            raise ValueError('truncated WebP chunk')
+        if kind == b'VP8X' and len(payload) >= 10:
+            return 1 + int.from_bytes(payload[4:7], 'little'), 1 + int.from_bytes(payload[7:10], 'little')
+        if kind == b'VP8L' and len(payload) >= 5 and payload[0] == 0x2f:
+            bits = int.from_bytes(payload[1:5], 'little')
+            return 1 + (bits & 0x3fff), 1 + ((bits >> 14) & 0x3fff)
+        if kind == b'VP8 ' and len(payload) >= 10 and payload[3:6] == b'\x9d\x01\x2a':
+            return int.from_bytes(payload[6:8], 'little') & 0x3fff, int.from_bytes(payload[8:10], 'little') & 0x3fff
+        pos += 8 + length + length % 2
+    raise ValueError('WebP dimensions unavailable')
+
+
+def image_delivery_inventory():
+    """Verify sealed originals and preview pixels rather than trusting srcset labels."""
+    errors, sources, previews = [], {}, {}
+    manifest_path = ROOT / 'static/images/previews/manifest.json'
+    if not manifest_path.is_file():
+        return {}, sources, previews, ['Image delivery manifest missing']
+    data = json.loads(manifest_path.read_text(encoding='utf8'))['images']
+    for key, item in data.items():
+        full = item['full']
+        if full in sources:
+            if sources[full] != item:
+                errors.append(key + ': aliases disagree about their original')
+            continue
+        sources[full] = item
+        original = ROOT / unquote(full).lstrip('/')
+        built = DOCS / unquote(full).lstrip('/')
+        if not original.resolve().is_relative_to(ROOT) or not built.resolve().is_relative_to(DOCS):
+            errors.append(full + ': image path outside the site')
+            continue
+        if not original.is_file() or not built.is_file():
+            errors.append(full + ': original missing from source or published assets')
+            continue
+        raw = original.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != item['source_sha256'] or len(raw) != item['source_bytes']:
+            errors.append(full + ': sealed original changed; regenerate its preview receipt')
+        if hashlib.sha256(built.read_bytes()).hexdigest() != item['source_sha256']:
+            errors.append(full + ': published original differs from its full-resolution source')
+        w, h = item['width'], item['height']
+        if w <= 0 or h <= 0:
+            errors.append(full + ': invalid original dimensions')
+            continue
+        for variant in item['variants']:
+            url = variant['src'];previews[url] = (item, variant)
+            source = ROOT / unquote(url).lstrip('/')
+            output = DOCS / unquote(url).lstrip('/')
+            if not source.resolve().is_relative_to(ROOT) or not output.resolve().is_relative_to(DOCS):
+                errors.append(url + ': preview path outside the site')
+                continue
+            if not source.is_file() or not output.is_file():
+                errors.append(url + ': preview missing from source or published assets')
+                continue
+            payload = source.read_bytes()
+            if (hashlib.sha256(payload).hexdigest() != variant['sha256'] or len(payload) != variant['bytes']
+                    or hashlib.sha256(output.read_bytes()).hexdigest() != variant['sha256']):
+                errors.append(url + ': preview bytes differ from its receipt')
+            try:
+                actual = webp_size(payload)
+            except ValueError as error:
+                errors.append(url + ': ' + str(error))
+                continue
+            vw, vh = variant['width'], variant['height']
+            if actual != (vw, vh) or vw > w or vh > h or abs(vh - h * vw / w) > .51:
+                errors.append(url + ': preview dimensions distort, crop, or enlarge the source')
+            if len(payload) >= len(raw):
+                errors.append(url + ': preview is not smaller than its original')
+    return data, sources, previews, errors
+
+
+def image_delivery_page(dom, route, mapping, sources, previews, errors):
+    """Every displayed preview must retain its original; hidden albums load on demand."""
+    count = 0
+    def path(value):
+        return unquote(urlsplit(value or '').path)
+    def visit(node, hidden=False):
+        nonlocal count
+        if not isinstance(node, PageNode):
+            return
+        hidden = hidden or 'hidden' in node.attrs
+        if node.tag == 'img':
+            attrs = node.attrs
+            requested = path(attrs.get('data-full-src') or attrs.get('src'))
+            item = sources.get(requested) or mapping.get(requested)
+            if item:
+                count += 1
+                if path(attrs.get('data-full-src')) != item['full']:
+                    errors.append(route + ': preview omits its original image')
+                if 'v=' + item['source_sha256'][:12] not in attrs.get('data-full-src', ''):
+                    errors.append(route + ': original image cache version is stale')
+                if attrs.get('decoding') != 'async' or attrs.get('loading') not in {'lazy', 'eager'}:
+                    errors.append(route + ': image decoding or loading strategy missing')
+                if not attrs.get('width', '').isdigit() or not attrs.get('height', '').isdigit():
+                    errors.append(route + ': image intrinsic dimensions missing')
+                else:
+                    width, height = int(attrs['width']), int(attrs['height'])
+                    if width <= 0 or abs(height - item['height'] * width / item['width']) > 1.1:
+                        errors.append(route + ': image attributes change the original aspect ratio')
+                preview_url = path(attrs.get('data-preview-src') if hidden else attrs.get('src'))
+                if hidden:
+                    if any(name in attrs for name in ['src', 'srcset', 'sizes']) or not preview_url:
+                        errors.append(route + ': hidden gallery image can load before it is opened')
+                mode = attrs.get('data-image-delivery')
+                if mode == 'preview':
+                    entry = previews.get(preview_url)
+                    if not entry or entry[0]['full'] != item['full']:
+                        errors.append(route + ': preview points at the wrong original')
+                    candidates = attrs.get('srcset', '')
+                    if not hidden and not candidates:
+                        errors.append(route + ': displayed preview is missing its responsive candidates')
+                    for candidate in candidates.split(',') if candidates else []:
+                        parts = candidate.strip().split()
+                        listed = previews.get(path(parts[0])) if parts else None
+                        if (len(parts) != 2 or not listed or listed[0]['full'] != item['full']
+                                or parts[1] != str(listed[1]['width']) + 'w'):
+                            errors.append(route + ': invalid preview candidate or declared pixel width')
+                elif mode != 'original' or preview_url != item['full']:
+                    errors.append(route + ': unexpected original/preview delivery mode')
+            elif attrs.get('data-image-delivery') or attrs.get('data-full-src'):
+                errors.append(route + ': image delivery refers to an unsealed original')
+        for child in node.children:
+            visit(child, hidden)
+    visit(dom)
+    return count
+
+
+def startup_asset_errors(dom, route):
+    """A remote dependency must never block local navigation or automatic motion."""
+    errors = []
+    scripts = [n for n in dom.find('script') if n.attrs.get('src')]
+    paths = [urlsplit(n.attrs['src']).path for n in scripts]
+    motion = [i for i, path in enumerate(paths) if path == '/static/js/site-motion.js']
+    if len(motion) != 1 or 'defer' not in scripts[motion[0]].attrs:
+        errors.append(route + ': shared local motion policy is missing or not deferred')
+    else:
+        for i, path in enumerate(paths):
+            if path in {'/static/js/main.js', '/static/js/fibernet-scene.js', '/static/js/fibernet-flow.js'} and i <= motion[0]:
+                errors.append(route + ': animation initializes before the shared motion preference')
+    for script in scripts:
+        src = script.attrs['src'];parsed = urlsplit(src)
+        if parsed.netloc and 'async' not in script.attrs:
+            errors.append(route + ': external script can block local initialization: ' + parsed.path)
+        if 'medium-zoom' in src or ('highlight.min.js' in src and parsed.netloc):
+            errors.append(route + ': image or code presentation still depends on an external library')
+    loaders = [n for n in scripts if urlsplit(n.attrs['src']).path == '/static/js/code-highlight.js']
+    has_code = any(pre.find('code') for pre in dom.find('pre'))
+    if bool(loaders) != has_code or len(loaders) > 1:
+        errors.append(route + ': code highlighting loader does not match code content')
+    for loader in loaders:
+        for attr in ['data-highlight-js', 'data-highlight-css']:
+            value = loader.attrs.get(attr, '')
+            parsed = urlsplit(value)
+            asset = DOCS / unquote(parsed.path).lstrip('/')
+            if parsed.netloc or not parsed.path.startswith('/static/vendor/highlightjs/') or not asset.is_file():
+                errors.append(route + ': code highlighting asset is missing or external')
+    return errors
+
+
 def gallery_errors():
     """Photo inventories, localized captions and direct openers agree with their source."""
     errors = []
@@ -376,6 +545,8 @@ def gallery_errors():
                 thumbs = image.find('img')
                 if len(thumbs) != 1 or not thumbs[0].attrs.get('alt') or thumbs[0].attrs.get('alt') != image.attrs.get('data-caption'):
                     errors.append(route + ': gallery thumbnail/caption missing')
+                elif urlsplit(thumbs[0].attrs.get('data-full-src', '')).path != urlsplit(image.attrs.get('href', '')).path:
+                    errors.append(route + ': gallery thumbnail and click target refer to different originals')
         if route.startswith('/about/'):
             for anchor in ['research', 'publications', 'projects', 'honors', 'activities']:
                 if len(dom.find(attr='id', value=anchor)) != 1:
@@ -610,6 +781,8 @@ def run():
 
     # Site-wide UI contract, including untranslated articles.
     chrome_errors=[]
+    image_mapping, image_sources, image_previews, image_errors = image_delivery_inventory()
+    delivery_count = 0; startup_errors = []
     from content_tools import chrome
     for page_path in DOCS.rglob('*.html'):
         relative=page_path.relative_to(DOCS).as_posix()
@@ -630,12 +803,18 @@ def run():
         if f'href="{home}" class="site-brand"' not in header:
             chrome_errors.append(relative+': home loses locale')
         shared = PageParser(page).root
+        delivery_count += image_delivery_page(shared, relative, image_mapping, image_sources, image_previews, image_errors)
+        startup_errors.extend(startup_asset_errors(shared, relative))
         assets = {urlsplit(node.attrs.get('href', node.attrs.get('src', ''))).path for node in shared.find('link') + shared.find('script')}
         if not {'/static/css/site-layout.css', '/static/css/site-refinement.css', '/static/js/site-catalog.js'} <= assets:
             chrome_errors.append(relative+': shared layout assets missing')
         if len(shared.find('body', cls='site-layout')) != 1:
             chrome_errors.append(relative+': shared layout body class missing')
     checks.append(check('Shared navigation and dark-first shell',not chrome_errors,'; '.join(chrome_errors[:15]) if chrome_errors else 'All generated pages retain both language controls, matching navigation, and dark initialization'))
+    checks.append(check('Readable previews preserve full-resolution originals', not image_errors,
+                        '; '.join(image_errors[:15]) if image_errors else f'{len(image_sources)} sealed originals, {len(image_previews)} dimension-checked previews and {delivery_count} image placements; hidden galleries defer loading'))
+    checks.append(check('Local motion starts independently of external libraries', not startup_errors,
+                        '; '.join(startup_errors[:15]) if startup_errors else 'Shared motion policy precedes local animations; code libraries load locally only on pages with code'))
     from content_tools import catalog
     catalog_curriculum = dict(curriculum, lessons=[dict(lesson, url='/tutorials/polymer-ai/' + lesson['slug'] + '/') for lesson in lessons])
     items = catalog.entries(loaded, catalog_curriculum) + course_entries

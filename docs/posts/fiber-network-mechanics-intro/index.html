@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script><script src="/static/js/site-motion.js?v=73234e8a4e0d" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fiber Network Mechanics: Key Concepts for Biomaterials Research — ML-Biomat</title>
 <meta name="description" content="Understand how fiber waviness, orientation, connectivity and crosslinks shape network mechanics. A straightening sketch and the article’s analytic polynomial illustrate strain stiffening, with experimental and computational routes for studying architecture.">
@@ -22,9 +22,7 @@
 <meta property="og:image" content="https://ml-biomat.com/static/images/og/fiber-network-mechanics-intro.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Fiber Network Mechanics: Key Concepts for Biomaterials Research", "description": "Understand how fiber waviness, orientation, connectivity and crosslinks shape network mechanics. A straightening sketch and the article’s analytic polynomial illustrate strain stiffening, with experimental and computational routes for studying architecture.", "datePublished": "2026-06-26", "dateModified": "2026-10-28", "wordCount": 625, "inLanguage": "en", "author": {"@type": "Person", "name": "Yunhao Yang", "url": "https://github.com/GellmanSparrowS"}, "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": "https://ml-biomat.com"}, "url": "https://ml-biomat.com/posts/fiber-network-mechanics-intro/", "image": "https://ml-biomat.com/static/images/og/fiber-network-mechanics-intro.png"}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ml-biomat.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Materials & Structures", "item": "https://ml-biomat.com/categories/biomaterials/en/"}, {"@type": "ListItem", "position": 3, "name": "Fiber Network Mechanics: Key Concepts for Biomaterials Research", "item": "https://ml-biomat.com/posts/fiber-network-mechanics-intro/"}]}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/styles/github-dark.min.css">
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11/build/highlight.min.js" defer></script>
-<link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3dabe63b9fa"></head>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=d6410737c786"></head>
 <body class="site-layout reading-page">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -45,7 +43,7 @@
 <div class="content">
 <details class="toc" open><summary>Contents</summary><ul><li class="toc-h2"><a href="#why-fiber-networks-matter">Why Fiber Networks Matter</a></li><li class="toc-h2"><a href="#key-mechanical-behaviors">Key Mechanical Behaviors</a></li><li class="toc-h3"><a href="#1-strain-stiffening">1. Strain-Stiffening</a></li><li class="toc-h3"><a href="#2-architecture-property-relationships">2. Architecture-Property Relationships</a></li><li class="toc-h3"><a href="#3-percolation-threshold">3. Percolation Threshold</a></li><li class="toc-h2"><a href="#methods-and-materials">Methods and Materials</a></li><li class="toc-h3"><a href="#experimental-characterization">Experimental Characterization</a></li><li class="toc-h3"><a href="#computational-modeling">Computational Modeling</a></li><li class="toc-h3"><a href="#common-biomaterial-fiber-systems">Common Biomaterial Fiber Systems</a></li><li class="toc-h2"><a href="#key-references">Key References</a></li><li class="toc-h2"><a href="#computational-modeling-of-fiber-networks">Computational Modeling of Fiber Networks</a></li><li class="toc-h2"><a href="#references">References</a></li></ul></details><h2 id="why-fiber-networks-matter">Why Fiber Networks Matter</h2>
 
-<img src="/static/images/posts/fiber-network-mechanics/network-en.webp" alt="Schematic disordered fiber network with fibers, cross-links, and pores" loading="lazy">
+<img src="/static/images/previews/network-en-0834dab954-400.webp" alt="Schematic disordered fiber network with fibers, cross-links, and pores" loading="lazy" srcset="/static/images/previews/network-en-0834dab954-400.webp 400w" sizes="(max-width:760px) calc(100vw - 34px), (max-width:1100px) calc(100vw - 90px), 960px" data-full-src="/static/images/posts/fiber-network-mechanics/network-en.webp?v=0834dab954b0" data-image-delivery="preview" width="717" height="725" decoding="async">
 
 <p>Nature builds structural materials from fibers: collagen in tendons, silk in cocoons, cellulose in plant cell walls. These <strong>disordered fiber networks</strong> achieve remarkable mechanical properties — high strength-to-weight ratios, strain-stiffening, and toughness — through architecture rather than chemistry alone.</p>
 
@@ -162,6 +160,6 @@ stress = 0.1 * strain + 5.0 * strain**3  # simplified
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=894d0d437945" defer></script>
-<script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script></body>
+<script src="/static/js/main.js?v=d827a5a43cfa" defer></script>
+<script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script><script src="/static/js/code-highlight.js?v=8f9a57135ede" defer data-highlight-js="/static/vendor/highlightjs/11.11.1/highlight.min.js?v=c4a399dd6f48" data-highlight-css="/static/vendor/highlightjs/11.11.1/github-dark.min.css?v=9f208d022102"></script></body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script><script src="/static/js/site-motion.js?v=73234e8a4e0d" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>生命中的三类长链：蛋白质、糖链与核酸 — ML-Biomat</title>
 <meta name="description" content="认识三类生物大分子的单元、顺序与连接，用学习实验检查分子表示是否保留影响预测的排列信息。">
@@ -20,9 +20,7 @@
 <meta property="og:url" content="https://ml-biomat.com/tutorials/polymer-ai/03-biological-polymers/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "生命中的三类长链：蛋白质、糖链与核酸", "description": "认识三类生物大分子的单元、顺序与连接，用学习实验检查分子表示是否保留影响预测的排列信息。", "url": "https://ml-biomat.com/tutorials/polymer-ai/03-biological-polymers/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
-
-
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-03.css?v=e59a6f740eed"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3dabe63b9fa"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-03.css?v=e59a6f740eed"><link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=d6410737c786"></head>
 <body class="site-layout">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -45,7 +43,7 @@
 <p>这条骨架还有方向。蛋白质序列通常从N端写向C端，相当于先约定沿链读字母的起点和终点；N与C分别来自氨基端和羧基端的命名。A、G、K分别可以表示丙氨酸、甘氨酸和赖氨酸，字母让冗长的化学名称变成便于存储的序列。不过，符号的意义由所用字母表决定：核酸序列中的A指腺嘌呤。本节后面的学习实验另用A、B表示两种抽象单元，用它们检查排列顺序的作用。保存序列时连同字母表一起保存，程序才能知道自己读到的是哪类分子、哪种表示。</p>
 <p>顺序为什么重要？想象一条链上有几处容易接触水的侧链，还有几处倾向于彼此靠近的侧链。如果把后者集中到同一段，形成的局部环境会与把它们均匀分散在整条链上不同。链的弯曲和接触把序列中相隔很远的残基带到一起，于是原本的一维排列参与组织三维结构。这样的过程要同时考虑周围的水、温度和其他分子。我们以后会用自由能和构象分布进一步解释，此处先抓住一件可以直接检查的事：数出每种残基有多少个，还没有告诉我们这些残基位于哪里。</p>
 <p><span class="history-date">20世纪50年代</span>，Frederick Sanger及合作者研究胰岛素的工作，把这种“位于哪里”的问题变成了可以回答的化学问题。分析长链时，他们需要综合较短片段的信息，确定各个残基的排列，并进一步弄清二硫键的连接。序列可以由实验建立，这使蛋白质从一种含氮的复杂物质，变成可以逐位置描述的具体分子。今天向程序输入一行字母看似简单，这行字母背后却可能对应一整套分离、测量和推断。<a class="source-call" href="#ref-sanger">[1]</a></p>
-<figure class="figure history-figure" id="history-sanger"><div class="history-layout"><img class="history-photo" src="/static/tutorials/polymer-ai/assets/1d40517e51e300f5fcbf647c.jpg" alt="Frederick Sanger的1958年肖像" loading="lazy" decoding="async"><div class="history-copy"><div class="history-date-line">1958 · 把序列确定为可描述的化学结构</div><div class="history-name">Frederick Sanger</div><p>由片段确定排列，再补上链内与链间的连接。今天输入计算机的字母序列，承接着这些实验建立的分子身份。</p></div></div><figcaption><b>图1</b>　Sanger的历史肖像。照片：Nobel Foundation，1958，摄影者未署名；<a href="https://commons.wikimedia.org/wiki/File:Frederick_Sanger.jpg">Wikimedia Commons，PD-Sweden / PD-1996</a>。</figcaption></figure>
+<figure class="figure history-figure" id="history-sanger"><div class="history-layout"><img class="history-photo" src="/static/images/previews/1d40517e51e300f5fcbf647c-1d40517e51-280.webp" alt="Frederick Sanger的1958年肖像" loading="lazy" decoding="async" srcset="/static/images/previews/1d40517e51e300f5fcbf647c-1d40517e51-280.webp 280w" sizes="(max-width:760px) calc(100vw - 34px), (max-width:1100px) calc(100vw - 90px), 960px" data-full-src="/static/tutorials/polymer-ai/assets/1d40517e51e300f5fcbf647c.jpg?v=1d40517e51e3" data-image-delivery="preview" width="280" height="396"><div class="history-copy"><div class="history-date-line">1958 · 把序列确定为可描述的化学结构</div><div class="history-name">Frederick Sanger</div><p>由片段确定排列，再补上链内与链间的连接。今天输入计算机的字母序列，承接着这些实验建立的分子身份。</p></div></div><figcaption><b>图1</b>　Sanger的历史肖像。照片：Nobel Foundation，1958，摄影者未署名；<a href="https://commons.wikimedia.org/wiki/File:Frederick_Sanger.jpg">Wikimedia Commons，PD-Sweden / PD-1996</a>。</figcaption></figure>
 <p>二硫键也提醒我们，写出一行序列以后，连接信息有时还没写完。两处半胱氨酸侧链可以通过二硫键连接，位置可能在同一条主链上，也可能位于不同链上。若把主链画成绳子，这相当于给绳子的某些位置加了扣子。扣子改变哪些运动容易发生，也可能把几条链联系起来。序列文件可以告诉我们哪里有半胱氨酸；要知道实际成了哪些扣子，还需要相应的结构或实验信息。图表示便于把这些额外连接单独记录下来，避免把一行文字误当成全部结构。</p>
 <p>蛋白质承担的作用也不止一种。酶通过具体的空间环境帮助反应发生；胶原构成细胞外基质的重要纤维；肌动蛋白则参与细胞内部骨架的组织。它们都由氨基酸残基组成，研究时关心的量却各不相同：酶可能关注反应活性，胶原纤维可能关注承载与形变，肌动蛋白网络可能关注连接如何随时间改变。把它们一概称作“功能好的蛋白质”无法形成明确的预测任务。AI需要知道输出究竟是活性、结合、尺寸、柔性还是某种力学响应，以及这个量是在什么条件下测得的。</p>
 <p>再回到煮鸡蛋这件事。加热能改变蛋白质原先维持的接触关系，暴露新的接触位置，并促进许多分子形成聚集结构，宏观上便出现凝固。这个过程同时涉及单条链的状态和许多链之间的组织。把鸡蛋从生到熟简单画成“一条卷曲链变成直线”会遗漏关键环节；分子不必全部拉直，样品也并非由一条链构成。以后讲相分离、网络与凝胶时，我们会把这两层联系起来：先认识单分子，再看大量分子如何共同改变材料。</p>
@@ -60,7 +58,7 @@
 <p>“连成一条线”与“长出分支”也不是糖链结构的全部。糖单元的种类、某些位置的修饰、键的立体信息，都可能改变它与其他分子的接触。细胞表面的糖链像一片伸向周围的分子环境，蛋白质可能识别其中某些局部排列；识别所需的局部结构不一定能够用总含糖量概括。描述一次结合实验时，糖链结构、识别它的蛋白质、测量条件与观测信号需要一起记录。后面学习糖链AI时，会把这些信息分成输入与目标，并说明为什么荧光强度和结合常数是不同的量。</p>
 <p>多糖也把生物功能与日常材料联系起来。纤维素能够构成纤维，某些多糖在水中形成黏稠溶液，还有一些能在适当条件下构成凝胶。它们表现不同，与链长、连接、带电基团、分子间接触以及制备条件共同有关。想知道一种多糖是否适合做含水材料，就需要把“是什么结构”与“在什么环境中使用”一起描述。<a href="/tutorials/polymer-ai/04-chain-environments/">《高分子的环境响应：水合、温度与电荷》</a>将专门讨论水、电荷与温度；这一节先把结构身份写清楚，使后面的环境变量有一个确定的作用对象。</p>
 <p><span class="history-date">20世纪20年代开始</span>，Hermann Staudinger围绕长链大分子的研究，推动了对天然与合成高分子连接方式的认识。他在1953年的诺贝尔演讲中讨论了纤维素等对象。对今天的读者而言，这段历史与糖链的联系很直接：要解释一根纤维，我们必须知道它内部是哪些单元通过化学键连成长链，再研究许多长链如何组织。这个先确定分子、再解释材料的顺序，也适用于训练数据的整理。<a class="source-call" href="#ref-staudinger">[2]</a></p>
-<figure class="figure history-figure" id="history-staudinger"><div class="history-layout"><img class="history-photo" src="/static/tutorials/polymer-ai/assets/ed30f776c0eb2d17203db726.jpg" alt="Hermann Staudinger的历史肖像" loading="lazy" decoding="async"><div class="history-copy"><div class="history-date-line">1920年代 → 1953 · 从共价长链理解高分子</div><div class="history-name">Hermann Staudinger</div><p>先确定单元怎样连接为分子，再研究许多分子如何组成纤维和其他材料。糖链让分子结构与宏观材料之间的联系变得具体。</p></div></div><figcaption><b>图3</b>　Staudinger的历史肖像。照片：Nobel Foundation，《Les Prix Nobel en 1953》（1954）；<a href="https://commons.wikimedia.org/wiki/File:Hermann_Staudinger.jpg">Wikimedia Commons，PD-Sweden</a>。</figcaption></figure>
+<figure class="figure history-figure" id="history-staudinger"><div class="history-layout"><img class="history-photo" src="/static/images/previews/ed30f776c0eb2d17203db726-ed30f776c0-1113.webp" alt="Hermann Staudinger的历史肖像" loading="lazy" decoding="async" srcset="/static/images/previews/ed30f776c0eb2d17203db726-ed30f776c0-400.webp 400w, /static/images/previews/ed30f776c0eb2d17203db726-ed30f776c0-640.webp 640w, /static/images/previews/ed30f776c0eb2d17203db726-ed30f776c0-960.webp 960w, /static/images/previews/ed30f776c0eb2d17203db726-ed30f776c0-1113.webp 1113w" sizes="(max-width:760px) calc(100vw - 34px), (max-width:1100px) calc(100vw - 90px), 960px" data-full-src="/static/tutorials/polymer-ai/assets/ed30f776c0eb2d17203db726.jpg?v=ed30f776c0eb" data-image-delivery="preview" width="1113" height="1551"><div class="history-copy"><div class="history-date-line">1920年代 → 1953 · 从共价长链理解高分子</div><div class="history-name">Hermann Staudinger</div><p>先确定单元怎样连接为分子，再研究许多分子如何组成纤维和其他材料。糖链让分子结构与宏观材料之间的联系变得具体。</p></div></div><figcaption><b>图3</b>　Staudinger的历史肖像。照片：Nobel Foundation，《Les Prix Nobel en 1953》（1954）；<a href="https://commons.wikimedia.org/wiki/File:Hermann_Staudinger.jpg">Wikimedia Commons，PD-Sweden</a>。</figcaption></figure>
 <p>描述糖链时，本节使用的圆点和连线是为了突出连接关系。真正的结构图还会区分单糖种类，并标明连接位置和构型；糖生物学中有相应的符号规范，可以把复杂结构画得较为紧凑。规范的意义在于让读图者与程序共享同一套约定。类似地图上蓝色线条代表河流，符号只有在图例明确时才可靠。以后读取糖链数据，应把采用的表示格式也作为数据说明的一部分，尤其要检查简写里有没有省略本次预测需要的连接信息。</p>
 </section>
 
@@ -367,7 +365,7 @@ graph_degree: 测试准确率 100.0%
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=894d0d437945" defer></script>
+<script src="/static/js/main.js?v=d827a5a43cfa" defer></script>
 <script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script><script>
 (function(){
 (()=>{
@@ -398,5 +396,5 @@ graph_degree: 测试准确率 100.0%
 
 document.getElementById("font-toggle").onclick=function(){const v=document.querySelector(".tutorial-reader").classList.toggle("large");this.setAttribute("aria-pressed",String(v));};window.addEventListener("scroll",()=>{const h=document.documentElement;document.getElementById("progress-bar").style.width=(100*scrollY/Math.max(1,h.scrollHeight-innerHeight))+"%";},{passive:true});
 })();
-</script></body>
+</script><script src="/static/js/code-highlight.js?v=8f9a57135ede" defer data-highlight-js="/static/vendor/highlightjs/11.11.1/highlight.min.js?v=c4a399dd6f48" data-highlight-css="/static/vendor/highlightjs/11.11.1/github-dark.min.css?v=9f208d022102"></script></body>
 </html>

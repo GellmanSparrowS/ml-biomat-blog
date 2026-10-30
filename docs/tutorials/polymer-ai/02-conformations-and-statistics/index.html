@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
 <head>
-<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script><script src="/static/js/site-motion.js?v=73234e8a4e0d" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>高分子构象统计：采样、分布与独立样本 — ML-Biomat</title>
 <meta name="description" content="用构象采样理解分布、误差与独立样本，比较按构象和按对象划分数据对模型评价的影响。">
@@ -20,9 +20,7 @@
 <meta property="og:url" content="https://ml-biomat.com/tutorials/polymer-ai/02-conformations-and-statistics/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "高分子构象统计：采样、分布与独立样本", "description": "用构象采样理解分布、误差与独立样本，比较按构象和按对象划分数据对模型评价的影响。", "url": "https://ml-biomat.com/tutorials/polymer-ai/02-conformations-and-statistics/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
-
-
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-02.css?v=847dd41e3192"><link rel="stylesheet" href="/static/css/tutorials.css?v=5d09badddfa4"><link rel="stylesheet" href="/static/css/site-layout.css?v=5e2bca30efe4"><link rel="stylesheet" href="/static/css/site-refinement.css?v=c3dabe63b9fa"></head>
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-02.css?v=847dd41e3192"><link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=d6410737c786"></head>
 <body class="site-layout">
 <canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header"><div class="header-inner">
@@ -44,7 +42,7 @@
 <p>在固定温度、溶剂和链长等条件下，某些姿态出现得多，某些出现得少。把所有允许的状态及其出现的概率放在一起考虑，就得到统计物理中的系综。为了在计算机上研究它，我们抽取许多构象组成样本。可以把系综想成一副张数极多、各张出现机会并不一定相同的牌，模拟得到的构象是从这副牌中抽出的记录。抽到哪几张有随机性，牌的组成和抽取规则决定了长期能够看到的规律。</p>
 <p>这一层区分在生物大分子研究中很实用。同一条蛋白质序列在固定溶液条件下出现许多构象，讨论的是构象分布；把不同序列、不同链长的蛋白质混在一起，得到的分布还包含对象之间的差异。如果两种变化混在一张直方图里，就很难判断图变宽究竟因为分子更柔软，还是因为样品本来就有更多种类。建立数据表时记录序列、链长、温度和溶液条件，正是为了能在分析时把这些问题分别提出。</p>
 <p><span class="history-date">1827年</span>，植物学家Robert Brown观察植物花粉内部微小颗粒在水中的运动。他后来也检查了其他材料，发现这种运动并不限于有生命的对象。1828年发表的记录让一个原本很容易被解释成“生命活动”的现象，变成了需要更一般物理解释的问题。显微镜下可见的是微粒，它们的无规则运动给研究者留下了连续观察的线索。我们今天从多次观测寻找统计规律，与这种把现象记录下来、再比较不同对象的做法相通。<a class="source-call" href="#ref-brown">[1]</a></p>
-<figure class="figure history-figure" id="history-brown"><div class="history-layout"><img class="history-photo" src="/static/tutorials/polymer-ai/assets/e8e9fc0612a77489a2edbbd6.jpg" alt="植物学家Robert Brown的1855年肖像" loading="lazy"><div class="history-copy"><div class="history-date-line">1827年观察 · 1828年发表</div><div class="history-name">Robert Brown</div><svg class="history-diagram" viewBox="0 0 490 145" role="img" aria-label="微粒在不同观察时刻处于不同位置的概念示意"><path d="M30 100L87 72L66 35L130 47L156 110L207 76L257 99L306 52L354 79L402 40L460 65" fill="none" stroke="#00796f" stroke-width="2" stroke-dasharray="4 5"/><g fill="#00796f"><circle cx="30" cy="100" r="7"/><circle cx="87" cy="72" r="7"/><circle cx="66" cy="35" r="7"/><circle cx="130" cy="47" r="7"/><circle cx="156" cy="110" r="7"/><circle cx="207" cy="76" r="7"/><circle cx="257" cy="99" r="7"/><circle cx="306" cy="52" r="7"/><circle cx="354" cy="79" r="7"/><circle cx="402" cy="40" r="7"/><circle cx="460" cy="65" r="7"/></g><text x="245" y="140" text-anchor="middle" font-size="13">多个观察时刻，留下运动的记录</text></svg><p>从植物材料出发，比较其他材料，让“运动来自什么”成为可以逐项检查的问题。</p></div></div><figcaption><b>图1</b>　Brown的肖像与连续观察示意。右图为本节绘制的概念图，各点并非其原始实验坐标。<span class="history-credit">肖像：Maull &amp; Polyblank，1855，National Portrait Gallery；<a href="https://commons.wikimedia.org/wiki/File:Robert_Brown_(botanist).jpg">Wikimedia Commons，公有领域</a>。</span></figcaption></figure>
+<figure class="figure history-figure" id="history-brown"><div class="history-layout"><img class="history-photo" src="/static/images/previews/e8e9fc0612a77489a2edbbd6-e8e9fc0612-469.webp" alt="植物学家Robert Brown的1855年肖像" loading="lazy" srcset="/static/images/previews/e8e9fc0612a77489a2edbbd6-e8e9fc0612-400.webp 400w, /static/images/previews/e8e9fc0612a77489a2edbbd6-e8e9fc0612-469.webp 469w" sizes="(max-width:760px) calc(100vw - 34px), (max-width:1100px) calc(100vw - 90px), 960px" data-full-src="/static/tutorials/polymer-ai/assets/e8e9fc0612a77489a2edbbd6.jpg?v=e8e9fc0612a7" data-image-delivery="preview" width="469" height="571" decoding="async"><div class="history-copy"><div class="history-date-line">1827年观察 · 1828年发表</div><div class="history-name">Robert Brown</div><svg class="history-diagram" viewBox="0 0 490 145" role="img" aria-label="微粒在不同观察时刻处于不同位置的概念示意"><path d="M30 100L87 72L66 35L130 47L156 110L207 76L257 99L306 52L354 79L402 40L460 65" fill="none" stroke="#00796f" stroke-width="2" stroke-dasharray="4 5"/><g fill="#00796f"><circle cx="30" cy="100" r="7"/><circle cx="87" cy="72" r="7"/><circle cx="66" cy="35" r="7"/><circle cx="130" cy="47" r="7"/><circle cx="156" cy="110" r="7"/><circle cx="207" cy="76" r="7"/><circle cx="257" cy="99" r="7"/><circle cx="306" cy="52" r="7"/><circle cx="354" cy="79" r="7"/><circle cx="402" cy="40" r="7"/><circle cx="460" cy="65" r="7"/></g><text x="245" y="140" text-anchor="middle" font-size="13">多个观察时刻，留下运动的记录</text></svg><p>从植物材料出发，比较其他材料，让“运动来自什么”成为可以逐项检查的问题。</p></div></div><figcaption><b>图1</b>　Brown的肖像与连续观察示意。右图为本节绘制的概念图，各点并非其原始实验坐标。<span class="history-credit">肖像：Maull &amp; Polyblank，1855，National Portrait Gallery；<a href="https://commons.wikimedia.org/wiki/File:Robert_Brown_(botanist).jpg">Wikimedia Commons，公有领域</a>。</span></figcaption></figure>
 <p>下面用一个容易计算的珠链模型练习观察。每条链由32段组成，每段长1 nm，相邻两段可以自由改变方向。每次抽样都重新生成所有方向，得到一幅独立构象。这个模型暂时允许链穿过自己，也省略了真实生物大分子的侧基和特定相互作用；它适合把“同样的连接可以对应许多尺寸”这件事单独拿出来看。图中显示三维构象在平面上的投影，端到端距离则用完整三维坐标计算，所以投影里看着很短的一段，在空间中仍然保持1 nm。</p>
 <figure class="figure" id="photo-figure"><p class="figure-title">翻看同一链模型的不同构象</p><svg id="photo-chart" viewBox="0 0 640 360" role="img" aria-label="32段三维珠链的平面投影，橙色虚线连接首尾"></svg><div class="buttons"><button id="previous-photo" type="button">上一幅</button><button id="next-photo" type="button">下一幅</button><button id="play-photos" type="button" aria-pressed="false">自动翻页</button></div><label class="small" for="photo-index">构象 <output id="photo-value">1</output> / 24<input id="photo-index" type="range" min="0" max="23" value="0" step="1"></label><p class="live-line" id="photo-distance" aria-live="polite"></p><figcaption><b>图2</b>　珠链的每个接头位置来自下方Python例子。自动翻页展示独立抽取的不同构象，顺序没有物理时间含义；绿色线为链，橙色虚线为首尾连线。固定视野方便比较尺寸。</figcaption></figure>
 <p>如果只保存其中一幅，首尾距离可能碰巧很小，也可能比较大。保存2000幅以后，就可以把距离按区间计数：落在4到4.5 nm之间的有多少幅，落在4.5到5 nm之间的又有多少幅。把这些计数排成柱子，就得到直方图。它把许多看起来杂乱的姿态压缩成一个可以回答问题的对象：多数构象占据什么尺度，特别伸展的状态常不常见，换一种条件后分布是整体移动，还是只改变了尾部。</p>
@@ -304,7 +302,7 @@ group 准确率: 0.5222 两侧共有样品数: 0
 </div></footer>
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
-<script src="/static/js/main.js?v=894d0d437945" defer></script>
+<script src="/static/js/main.js?v=d827a5a43cfa" defer></script>
 <script src="/static/js/site-catalog.js?v=444211dcb3c7" defer></script><script>
 (function(){
 'use strict';
@@ -379,5 +377,5 @@ drawPhoto();drawPrecision();progress();
 window.lesson={learning,state,drawPhoto,drawPrecision,stats,pause,proseText};
 
 })();
-</script></body>
+</script><script src="/static/js/code-highlight.js?v=8f9a57135ede" defer data-highlight-js="/static/vendor/highlightjs/11.11.1/highlight.min.js?v=c4a399dd6f48" data-highlight-css="/static/vendor/highlightjs/11.11.1/github-dark.min.css?v=9f208d022102"></script></body>
 </html>
