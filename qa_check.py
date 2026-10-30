@@ -287,26 +287,12 @@ def collection_errors(items, categories):
             layout = dom.find(attr='data-explore-mode')
             results = dom.find(cls='explore-results')
             cards = dom.find(cls='topic-overview-card')
-            if (len(layout) != 1 or layout[0].attrs.get('data-explore-mode') != ('overview' if overview else 'articles')
-                    or len(results) != 1 or ('hidden' in results[0].attrs) != overview):
-                errors.append(route + ': incorrect initial overview/list state')
-            if overview:
-                if len(cards) != len(topics) or {c.attrs.get('data-color') for c in cards} != set(topics):
-                    errors.append(route + ': overview must cover each active primary topic once')
-                for card in cards:
-                    key = card.attrs.get('data-color')
-                    covers = card.find('a', cls='topic-cover')
-                    if key not in topics or len(covers) != 1:
-                        errors.append(route + ': invalid topic overview card')
-                        continue
-                    cover = covers[0]
-                    heading, count = cover.find('h2'), cover.find('span')
-                    if (cover.attrs.get('href') != '/categories/' + key + '/' + suffix or len(heading) != 1
-                            or heading[0].text().strip() != categories[key]['name_' + lang]
-                            or len(count) != 1 or count[0].text().strip() != str(len(topics[key])) + (' articles' if lang == 'en' else ' 篇')):
-                        errors.append(route + ': overview label/count/route mismatch: ' + key)
-            elif cards:
-                errors.append(route + ': overview unexpectedly duplicated inside article list')
+            if (len(layout) != 1 or layout[0].attrs.get('data-explore-mode') != ('directory' if overview else 'articles')
+                    or len(results) != 1 or 'hidden' in results[0].attrs or cards):
+                errors.append(route + ': directory must show article results immediately')
+            searches = dom.find('input', attr='data-directory-search')
+            if len(searches) != 1 or searches[0].attrs.get('type') != 'search' or not searches[0].attrs.get('aria-label'):
+                errors.append(route + ': accessible tutorial search missing')
             select = dom.find('select', cls='topic-select')
             expected_values = ({'/categories/' + suffix} | {'/categories/' + key + '/' + suffix for key in topics}
                                if topic else {'all'} | set(topics))
@@ -827,8 +813,8 @@ def run():
     checks.append(check('Home language switch preserves page type', not home_errors,
                         '; '.join(home_errors[:15]) if home_errors else 'Localized research homepages, topic counts, tutorial picks and same-page language links agree'))
     category_errors = collection_errors(items, build.CATEGORIES)
-    checks.append(check('Localized topic overview and complete article collections', not category_errors,
-                        '; '.join(category_errors[:15]) if category_errors else 'Each active topic appears once; overview, full lists and topic pages match source titles, language, counts and mobile controls'))
+    checks.append(check('Localized searchable directory and complete article collections', not category_errors,
+                        '; '.join(category_errors[:15]) if category_errors else 'Directory, full lists and topic pages match source titles, language, counts and mobile controls'))
     profile_errors = gallery_errors()
     checks.append(check('Localized profile and homepage galleries', not profile_errors,
                         '; '.join(profile_errors[:15]) if profile_errors else 'Activity images and captions match source; direct photo/title openers, accessible dialogs and publication links are present'))

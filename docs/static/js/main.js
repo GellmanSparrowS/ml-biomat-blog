@@ -315,8 +315,8 @@ document.addEventListener('DOMContentLoaded',function(){
         }
         function setMask(){
             var rect = main ? main.getBoundingClientRect() : {left:width*.15, right:width*.85};
-            var left = Math.max(18, Math.min(width*.42, rect.left + 14));
-            var right = Math.min(width - 18, Math.max(width*.58, rect.right - 14));
+            var left = Math.max(0, Math.min(width*.42, Math.max(18, rect.left + 14)));
+            var right = Math.min(width, Math.max(width*.58, Math.min(width - 18, rect.right - 14)));
             var feather = mobile ? 30 : 80;
             mask = ctx.createLinearGradient(0, 0, width, 0);
             mask.addColorStop(0, 'rgba(0,0,0,.96)');

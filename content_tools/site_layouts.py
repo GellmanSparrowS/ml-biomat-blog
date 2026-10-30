@@ -32,8 +32,7 @@ def homepage(items,categories,en=False):
     lang='en' if en else 'zh';profile='/about/en/' if en else '/about/';cats=catalog.category_url(lang=lang)
     identity='Yunhao Yang · Fudan University' if en else '杨云浩 · 复旦大学'
     heading='Rational design of biomaterial systems and structures across scales' if en else '跨尺度生物材料体系与结构的理性设计'
-    desc='Physics-informed artificial intelligence and multiscale simulation.' if en else '主要研究方向为物理人工智能与多尺度模拟。'
-    body=f'<section class="home-intro"><div class="home-intro-copy"><p class="home-identity">{identity}</p><h1>{heading}</h1><p class="home-description site-prose">{desc}</p><div class="home-links"><a href="{profile}">{"Research profile" if en else "个人主页"} ↗</a><a href="{cats}">{"Research tutorials" if en else "研究教程"} →</a><a href="/fibernet/{"en/" if en else ""}">FiberNet →</a></div></div><div class="home-scene"><canvas class="fn-scene-canvas" aria-hidden="true"></canvas></div></section>'
+    body=f'<section class="home-intro"><div class="home-intro-copy"><p class="home-identity">{identity}</p><h1>{heading}</h1><div class="home-links"><a href="{profile}">{"Research profile" if en else "个人主页"} ↗</a><a href="{cats}">{"Research tutorials" if en else "研究教程"} →</a><a href="/fibernet/{"en/" if en else ""}">FiberNet →</a></div></div><div class="home-scene"><canvas class="fn-scene-canvas" aria-hidden="true"></canvas></div></section>'
     body+=f'<section class="preview-section home-research"><div class="preview-section-head"><h2>{"Selected research" if en else "代表研究"}</h2><a href="{profile}#publications">{"Publications" if en else "论文与成果"} ↗</a></div><div class="home-work-grid">'
     body+=paper_card(profile,'nc','Nature Communications · 2026','Manufacturability-informed design of fibrous networks' if en else '可制造纤维网络的智能设计','Connecting continuous fiber paths, topology generation and mechanics to guide the design of printable network materials.' if en else '将连续纤维路径、拓扑生成与力学分析结合，让结构设计与实际制造相衔接。')
     body+=paper_card(profile,'as','Advanced Science · 2025','Lightweight three-dimensional fibrous networks' if en else '轻量高强三维无序纤维网络','Deep reinforcement learning for the design of biomimetic three-dimensional fibrous networks.' if en else '通过深度强化学习优化仿生三维无序纤维网络，研究结构组织与轻量高强性能之间的关系。')
@@ -60,7 +59,7 @@ def collection(items,categories,en=False,topic=None,full=False):
     selected=[i for i in items if i['lang']==lang and (topic is None or i['category']==topic)]
     title=categories[topic]['name_'+lang] if topic else ('Research tutorials' if en else '研究教程')
     description=categories[topic].get('description_'+lang,'') if topic else ''
-    mode='overview' if not topic and not full else 'articles'
+    mode='directory' if not topic and not full else 'articles'
     all_label=('All articles' if en else '全部教程') if full else ('All topics' if en else '全部主题')
     total=(f'<span class="topic-total">{len(selected)} '+('articles' if en else '篇')+'</span>') if topic else ''
     body=f'<header class="explore-header"><h1>{e(title)}{total}</h1>'+(f'<p>{e(description)}</p>' if description else '')+'</header>'
@@ -79,20 +78,11 @@ def collection(items,categories,en=False,topic=None,full=False):
         value=catalog.category_url(key,lang) if topic else key
         body+=f'<option value="{value}"'+(' selected' if topic==key else '')+f'>{e(info["name_"+lang])} · {count}</option>'
     body+='</select></aside><div class="explore-content">'
-    if mode=='overview':
-        body+='<div class="topic-overview">'
-        for key,info,count in topics:
-            examples=[i for i in selected if i['category']==key][:2]
-            body+=f'<section class="topic-overview-card" data-color="{key}"><a class="topic-cover" href="{catalog.category_url(key,lang)}">{icon(key)}<h2>{e(info["name_"+lang])}</h2><span>{count} {"articles" if en else "篇"}</span><p>{e(info.get("description_"+lang,""))}</p><b aria-hidden="true">↗</b></a><div class="topic-examples">'
-            for item in examples:body+=f'<a href="{item["url"]}">{e(item["title"])}</a>'
-            body+='</div></section>'
-        body+='</div>'
-    body+='<div class="explore-results"'+(' hidden' if mode=='overview' else '')+'>'
+    body+='<div class="directory-search"><input type="search" data-directory-search placeholder="'+('Search tutorials' if en else '搜索教程')+'" aria-label="'+('Search this tutorial collection' if en else '搜索当前教程目录')+'" autocomplete="off"></div><p class="directory-empty" hidden>'+('No matching tutorials.' if en else '没有匹配的教程。')+'</p><div class="explore-results">'
     if not topic:body+='<div class="explore-results-head"><h2 data-results-title>'+e(all_label)+'</h2><span data-results-count>'+str(len(selected))+'</span></div>'
     body+='<div class="explore-list">'
     for item in sorted(selected,key=lambda i:(list(categories).index(i['category']),i['title'].casefold())):
         category=e(categories[item['category']]['name_'+lang]);title=e(item['title'])
         body+=f'<article class="explore-row tutorial-card" data-topic="{item["category"]}"><a class="tutorial-card-main" href="{item["url"]}"><span class="topic-name">{category}</span><h2>{title}</h2><p>{e(item["description"])}</p><span class="tutorial-arrow" aria-hidden="true">↗</span></a></article>'
     body+='</div></div>'
-    if mode=='overview':body+=f'<a class="all-tutorials-link" href="/articles/{"en/" if en else ""}">{"All research tutorials" if en else "全部研究教程"} <span aria-hidden="true">↗</span></a>'
     return body+'</div></div>'

@@ -35,7 +35,7 @@
       if(!width||!height)return;
       // Increase and decrease bond occupancy slowly; normalize loads once at export.
       const statePosition=reduced.matches?24:(.5+.5*Math.sin(clock*.2-.3))*(states.length-1);
-      const i=Math.floor(statePosition),j=Math.min(i+1,states.length-1),f=statePosition-i;
+      const i=Math.floor(statePosition),j=Math.min(i+1,states.length-1),rawFraction=statePosition-i,f=rawFraction*rawFraction*(3-2*rawFraction);
       const current=states[i],next=states[j];occupancy=mix(current.occupancy,next.occupancy,f);spanning=current.spans||next.spans;
       const yaw=-.42+Math.sin(clock*.085)*.33,pitch=-.27+Math.cos(clock*.09)*.06,roll=-.055;
       const cy=Math.cos(yaw),sy=Math.sin(yaw),cx=Math.cos(pitch),sx=Math.sin(pitch),cr=Math.cos(roll),sr=Math.sin(roll);

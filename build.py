@@ -324,8 +324,10 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
     if route in ('/','/en/','/zh/') or route.startswith('/about/'):
         styles.append('/static/css/profile-layout.css')
     styles.append('/static/css/site-refinement.css')
+    is_catalog = route.startswith(('/categories/', '/articles/'))
+    if is_catalog: styles.append('/static/css/catalog-refinement.css')
     head=head.replace('</head>', ''.join('<link rel="stylesheet" href="'+versioned_asset(path)+'">' for path in styles)+'</head>')
-    body_class='site-layout'+(' reading-page' if route.startswith('/posts/') else '')
+    body_class='site-layout'+(' reading-page' if route.startswith('/posts/') else '')+(' catalog-refined' if is_catalog else '')
     head=head.replace('<body>','<body class="'+body_class+'">')
     return head + chrome.header(language, route, en_href, zh_href, bool(wide))
 
