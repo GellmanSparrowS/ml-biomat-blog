@@ -500,8 +500,12 @@ def gallery_errors():
         if dom is None:
             continue
         activities = dom.find('article', cls='pr-activity')
-        if len(activities) != len(events) or {a.attrs.get('id') for a in activities} != {'activity-' + key for key in events}:
-            errors.append(route + ': activity inventory missing or duplicated')
+        ordered = sorted(events.values(), key=lambda a: a.get('event_date', a['date'].replace('.', '-')), reverse=True)
+        selected = ordered if route.startswith('/about/') else ordered[:3]
+        if [a.attrs.get('id') for a in activities] != ['activity-' + a['id'] for a in selected]:
+            errors.append(route + ': activity order or latest/full inventory differs')
+        if any(a.find('p', cls='pr-prose') for a in activities):
+            errors.append(route + ': redundant activity explanation remains')
         for activity in activities:
             album = events.get(activity.attrs.get('id', '').removeprefix('activity-'))
             if not album:

@@ -26,6 +26,8 @@ def home_activities(en=False):
     dialog=re.search(r'<dialog\b[^>]*class="pr-viewer"[^>]*>.*?</dialog>',source,re.S)
     assert section and dialog,'Profile activity and gallery markup required'
     content=re.sub(r'(<h2 id="activities-title">)(.*?)(</h2>)',lambda m:m[1]+'<a href="'+profile+'#activities">'+m[2]+'</a>'+m[3],section[0])
+    for older in re.findall(r'<article\b[^>]*class="pr-activity"[^>]*>.*?</article>',content,re.S)[3:]:
+        content=content.replace(older,'',1)
     return '<section class="profile-redesign home-activity-section" lang="'+lang+'">'+content+dialog[0]+'</section>'
 
 def homepage(items,categories,en=False):
