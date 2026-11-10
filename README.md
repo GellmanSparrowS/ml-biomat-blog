@@ -105,3 +105,12 @@ FiberNet 首屏使用 `static/js/fibernet-flow.js` 与 `static/data/fibernet-flo
 `content_tools/image_delivery.py`只改生成HTML中的图片标签：中等清晰度预览、响应式宽度、图片尺寸、延迟加载与原图地址。`static/images/previews/manifest.json`封存原图和预览的尺寸及SHA；原图保持原位，科学SVG和公式继续使用矢量。相册和通用图示查看器先显示预览，高清图加载解码后替换。`content_tools/generate_image_previews.py`重新生成预览时需要Pillow，常规网站构建继续只用标准库。
 
 代码高亮使用 `static/js/code-highlight.js` 按需加载 `static/vendor/highlightjs/11.11.1/` 中的固定版本，许可与源地址保存在同目录。页面没有代码时无需加载高亮库；动画启动不等待高亮资源。背景和三维画布复用未变尺寸的背板与数据，滚动更新合并到动画帧，搜索请求合并复用。
+
+
+### Tutorial support and search notifications
+
+All article renderers use the shared support section and the original WeChat/Alipay images. Search-specific titles and summaries live in `content/search-metadata.json`; full article headings remain in their content sources. The build checks rendered titles, descriptions, sitemap coverage and support images.
+
+After a successful Pages deployment, `.github/workflows/indexnow.yml` verifies the public sitemap and ownership file before notifying IndexNow. The same step can be run with `python build.py --submit-indexnow`. A successful response confirms receipt; indexing proceeds separately.
+
+The old comments embed is disabled through `COMMENTS_ENABLED` until GitHub Discussions and the giscus application are configured.

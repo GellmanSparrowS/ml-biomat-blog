@@ -12,6 +12,8 @@ SITE = {
     "author_affiliation": "Fudan University",
     "lang": "zh-CN",
 }
+# Enable after GitHub Discussions and the giscus app are configured.
+COMMENTS_ENABLED = False
 BUILD_DIR = "docs"
 CONTENT_DIR = "content"
 

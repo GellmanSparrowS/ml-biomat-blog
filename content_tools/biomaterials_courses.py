@@ -75,7 +75,7 @@ def render(data, make_head, make_footer, write_file, versioned_asset, categories
             related=('<nav class="bc-related" aria-label="'+('Related tutorials' if en else '相关教程')+'">'+''.join(neighbors)+'</nav>') if neighbors else ''
             body='<div class="biomat-course" data-course="'+item['id']+'" data-lang="'+lang+'">'+crumb+'<div class="bc-layout">'+toc+'<div class="bc-main">'+intro+article+related+'</div></div></div>'
             scripts='<script src="'+versioned_asset('/static/tutorials/biomaterials-courses/'+item['id'].lower()+'.js')+'" defer></script><script src="'+versioned_asset('/static/js/biomaterials-courses.js')+'" defer></script>'
-            page=head+body+make_footer(lang)
+            page=head+body+make_footer(lang, article_support=True)
             page=page.replace('</body>',scripts+'</body>')
             write_file(address.lstrip('/')+'index.html',page)
             routes.append(address)

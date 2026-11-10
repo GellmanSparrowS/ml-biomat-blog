@@ -4,10 +4,11 @@ import argparse, hashlib, os, re, json, shutil, html as hm, urllib.parse
 from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
-from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR
-from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery
+from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR, COMMENTS_ENABLED
+from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support
 
 ROOT = Path(__file__).resolve().parent
+SEARCH_METADATA = json.loads((ROOT / 'content/search-metadata.json').read_text(encoding='utf-8'))
 INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
 os.chdir(str(ROOT))
 
@@ -309,6 +310,9 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
               home_active="", en_active="", zh_active="", wide="", title_suffix=" — ML-Biomat",
               og_image=None, alternates="", needs_math=False, en_href=None, zh_href=None, navigation_language=None):
     language = 'en' if lang == 'en' else 'zh-CN'
+    search_copy = SEARCH_METADATA.get(urllib.parse.urlsplit(url).path or '/', {})
+    title = search_copy.get('title', title)
+    desc = search_copy.get('description', desc)
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
         url=url, lang=language, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld,
@@ -318,6 +322,7 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
     head = head.replace("</head>", f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}"></head>')
     route = urllib.parse.urlsplit(url).path or '/'
     styles=[]
+    if route.startswith(('/posts/', '/tutorials/')): styles.append('/static/css/article-support.css')
     if route.startswith('/fibernet/'):
         styles.append('/static/css/fibernet.css')
     styles.append('/static/css/site-layout.css')
@@ -332,8 +337,8 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
     return head + chrome.header(language, route, en_href, zh_href, bool(wide))
 
 
-def make_footer(language='zh-CN'):
-    footer=FOOT.format(year=datetime.now().year)
+def make_footer(language='zh-CN', article_support=False):
+    footer=(support.render(language, versioned_asset) if article_support else '')+FOOT.format(year=datetime.now().year)
     footer=re.sub(r'<div class="footer-links">.*?</div>',chrome.footer_links(language),footer,flags=re.S)
     footer=footer.replace('id="back-to-top"', 'id="back-to-top" aria-label="'+('Back to top' if language=='en' else '返回顶部')+'"')
     return footer.replace('</body>', '<script src="'+versioned_asset('/static/js/site-catalog.js')+'" defer></script></body>')
@@ -459,7 +464,7 @@ def check_coverage(posts):
 
 def build():
     # Load Giscus HTML for article pages
-    giscus_html = Path("static/giscus.html").read_text(encoding="utf-8") if Path("static/giscus.html").exists() else ""
+    giscus_html = Path("static/giscus.html").read_text(encoding="utf-8") if COMMENTS_ENABLED and Path("static/giscus.html").exists() else ""
     giscus_html = giscus_html.replace('data-theme="preferred_color_scheme"', 'data-theme="dark"')
 
     posts = load_posts()
@@ -519,7 +524,7 @@ def build():
                          en_href=f'/posts/{en_post["slug"]}/' if en_post else "/en/",
                          zh_href=f'/posts/{zh_post["slug"]}/' if zh_post else "/zh/",
                          en_active=' class="active"' if p["lang"] == "en" else "",
-                         zh_active=' class="active"' if p["lang"] == "zh" else "", navigation_language=p["lang"]) + body + make_footer(p["lang"])
+                         zh_active=' class="active"' if p["lang"] == "zh" else "", navigation_language=p["lang"]) + body + make_footer(p["lang"], article_support=True)
         write_file(f"posts/{p['slug']}/index.html", html)
     print("  Posts done")
 
@@ -529,7 +534,7 @@ def build():
     category_routes = catalog.render(catalog_items, CATEGORIES, make_head, make_footer, write_file, SITE['base_url'])
     print("  Categories done")
 
-    tag_routes = tag_pages.render(posts, make_head, make_footer, write_file, SITE['base_url'])
+    tag_routes = tag_pages.render(posts, make_head, make_footer, write_file, SITE['base_url'], find_pair)
     clean_legacy_tag_pages({tag for post in posts for tag in post['tags']})
     print("  Localized tag pages done")
 
@@ -736,6 +741,19 @@ def submit_indexnow():
     key_path = output_root / f"{INDEXNOW_KEY}.txt"
     if not sitemap_path.is_file() or not key_path.is_file():
         raise SystemExit("Build the site and deploy it before submitting IndexNow.")
+    import time
+    for attempt in range(6):
+        try:
+            with urllib.request.urlopen(SITE['base_url']+'/sitemap.xml', timeout=20) as response:
+                deployed_sitemap = response.read()
+            with urllib.request.urlopen(SITE['base_url']+'/'+key_path.name, timeout=20) as response:
+                deployed_key = response.read().decode('utf-8').strip()
+            if deployed_sitemap.decode('utf-8-sig').splitlines() != sitemap_path.read_text(encoding='utf-8-sig').splitlines() or deployed_key != INDEXNOW_KEY:
+                raise RuntimeError('Public sitemap or ownership file does not match this build yet.')
+            break
+        except Exception:
+            if attempt == 5: raise
+            time.sleep(10)
     sitemap = ET.parse(sitemap_path)
     url_list = list(dict.fromkeys(
         node.text.strip()
@@ -761,7 +779,7 @@ def submit_indexnow():
         with urllib.request.urlopen(request, timeout=20) as response:
             if response.status not in (200, 202):
                 raise RuntimeError(f"Unexpected HTTP status: {response.status}")
-        print(f"IndexNow: submitted {len(url_list)} deployed sitemap URLs")
+        print(f"IndexNow: HTTP {response.status}; submitted {len(url_list)} deployed sitemap URLs")
     except Exception as exc:
         raise SystemExit(f"IndexNow submission failed: {exc}") from exc
 

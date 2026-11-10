@@ -25,7 +25,8 @@ def grouped_posts(posts):
     return {slug: list(items.values()) for slug, items in groups.items()}
 
 
-def render(posts,make_head,make_footer,write_file,base_url):
+def render(posts,make_head,make_footer,write_file,base_url,find_pair):
+    by_lang={lang:{p["slug"]:p for p in posts if p["lang"]==lang} for lang in ["zh","en"]}
     groups=grouped_posts(posts)
     routes=[]
     for lang in ['zh','en']:
@@ -48,6 +49,12 @@ def render(posts,make_head,make_footer,write_file,base_url):
                 badge='EN' if post['lang']=='en' else '中文'
                 body+=f'<li class="post-row"><span class="card-lang {post["lang"]}">{badge}</span><a lang="{post["lang"]}" href="/posts/{post["slug"]}/">{escape(post["title"])}</a></li>'
             body+='</ul>'
-            page=make_head(title=tag+' — '+label,desc=description,url=base_url+base+suffix,lang='en' if en else 'zh-CN',en_href=base+'en/',zh_href=base)+body+make_footer(lang)
+            localized = [p for p in items if p['lang'] == lang] or items
+            lead = sorted(localized, key=lambda p:p['datetime'], reverse=True)[0]
+            if lead['lang'] != lang:
+                lead = find_pair(lead, by_lang) or lead
+            topic_description = (f'Tutorials tagged {tag}. ' if en else f'{tag} 相关教程。') + lead['description']
+            page=make_head(title=tag+' — '+label,desc=topic_description,url=base_url+base+suffix,lang='en' if en else 'zh-CN',en_href=base+'en/',zh_href=base)+body+make_footer(lang)
             write_file('tags/'+slug+'/'+suffix+'index.html',page)
+            routes.append(base+suffix)
     return routes

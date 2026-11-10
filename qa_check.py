@@ -16,6 +16,7 @@ from urllib.parse import quote, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent
 DOCS = ROOT / "docs"
+SEARCH_METADATA = json.loads((ROOT / "content/search-metadata.json").read_text(encoding="utf-8"))
 CONTENT = ROOT / "content" / "posts"
 
 
@@ -598,7 +599,7 @@ def course_integrity_errors(data, entries, categories):
             heads = dom.find('head')
             titles = heads[0].find('title') if len(heads) == 1 else []
             if (len(h1) != 1 or h1[0].text().strip() != lesson['title'][lang]
-                    or len(titles) != 1 or titles[0].text().strip() != lesson['title'][lang] + ' — ML-Biomat'
+                    or len(titles) != 1 or titles[0].text().strip() != SEARCH_METADATA.get(address, {}).get('title', lesson['title'][lang]) + ' — ML-Biomat'
                     or len(locale) != 1 or locale[0].attrs.get('lang') != ('en' if lang == 'en' else 'zh-CN')):
                 pairs.append(address + ': localized title or document language does not match source')
             canonical = [n.attrs.get('href') for n in dom.find('link') if n.attrs.get('rel') == 'canonical']
@@ -702,6 +703,35 @@ def run():
     checks.append(check("Sitemap has no duplicated URLs", not dups,
                         "dups=" + ",".join(dups) if dups else "unique urls=%d" % len(locs)))
 
+    search_errors=[]; support_errors=[]; article_pages=0
+    sitemap_routes={unquote(urlsplit(url).path) for url in locs}
+    for file in DOCS.rglob('index.html'):
+        relative=file.relative_to(DOCS).as_posix()
+        if relative.startswith('static/'): continue
+        page=file.read_text(encoding='utf-8')
+        if 'http-equiv="refresh"' in page: continue
+        route='/'+relative.removesuffix('index.html')
+        canonical=re.search(r'<link rel="canonical" href="([^"]+)"',page)
+        title=re.search(r'<title>(.*?)</title>',page,re.S)
+        desc=re.search(r'<meta name="description" content="([^"]*)"',page)
+        en='<html lang="en"' in page
+        if not title or len(html.unescape(title[1]))>70: search_errors.append(route+': long or missing title')
+        minimum=120 if en else (35 if route.startswith('/tutorials/') else 60)
+        if not desc or len(html.unescape(desc[1]))<minimum: search_errors.append(route+': short or missing description')
+        if not canonical or unquote(urlsplit(canonical[1]).path) not in sitemap_routes: search_errors.append(route+': canonical missing from sitemap')
+        count=page.count('class="article-support"')
+        article=route.startswith('/posts/') or (route.startswith('/tutorials/') and not 'http-equiv="refresh"' in page)
+        if article:
+            article_pages+=1
+            if count!=1 or ('Buy me a coffee' if en else '请我喝咖啡') not in page: support_errors.append(route+': missing support section')
+            for name in ['wechat.png','alipay.jpg']:
+                if not re.search(r'<img[^>]+src="/static/images/'+re.escape(name)+r'(?:\?[^"]*)?"',page): support_errors.append(route+': missing original QR '+name)
+        elif count: support_errors.append(route+': misplaced support section')
+    for name in ['wechat.png','alipay.jpg']:
+        if (ROOT/'static/images'/name).read_bytes()!=(DOCS/'static/images'/name).read_bytes(): support_errors.append(name+': QR bytes changed')
+    checks.append(check('Search titles, descriptions and canonical sitemap coverage',not search_errors,'; '.join(search_errors[:20]) if search_errors else 'All indexable pages have concise titles, informative descriptions and sitemap entries'))
+    checks.append(check('Original support QR codes on all tutorial pages',not support_errors and article_pages==indexed_total,'; '.join(support_errors[:20]) if support_errors else str(article_pages)+' bilingual articles and lessons; original images preserved'))
+
     missing_sitemap = []
     for url in locs:
         path = unquote(urlsplit(url).path).lstrip("/")
@@ -755,7 +785,7 @@ def run():
     for post in loaded:
         pair=build.find_pair(post,by_lang)
         page=(DOCS/'posts'/post['slug']/'index.html').read_text(encoding='utf8')
-        expected_title='<title>'+html.escape(post['title'])+' — ML-Biomat</title>'
+        expected_title='<title>'+html.escape(SEARCH_METADATA.get('/posts/'+post['slug']+'/', {}).get('title', post['title']))+' — ML-Biomat</title>'
         switch=re.search(r'<span class="lang-switch">(.*?)</span>',page,re.S)
         if not pair or not switch or '/posts/'+pair['slug']+'/' not in switch[1] or expected_title not in page:
             pair_errors.append(post['slug'])

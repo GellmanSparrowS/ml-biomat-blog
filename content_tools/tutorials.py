@@ -82,7 +82,7 @@ def render(data, make_head, make_footer, write_file, versioned_asset, categories
             if 'application/json' in attrs: return match.group()
             scripts.append(match.group());return ''
         body=re.sub(r'<script\b([^>]*)>(.*?)</script>',collect,body,flags=re.S)
-        document=head+toolbar+'<div class="tutorial-reader">'+body+'</div>'+neighbors+make_footer()
+        document=head+toolbar+'<div class="tutorial-reader">'+body+'</div>'+neighbors+make_footer(article_support=True)
         document=document.replace('</body>',''.join(scripts)+'</body>')
         write_file(lesson['url'].lstrip('/')+'index.html',document)
     print('  Tutorials: 20 complete articles integrated into topic categories')
