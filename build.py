@@ -729,6 +729,10 @@ def build():
     )
     print(f"  {len(posts)} posts, {len(en)} EN + {len(zh)} ZH")
     print(f"  Pages generated: posts/{len(posts)}, en, zh, about, categories, rss, sitemap")
+    # Preserve official ownership files byte-for-byte.
+    for verification in (ROOT / 'content/site-verification').glob('*.html'):
+        shutil.copyfile(verification, Path(BUILD_DIR) / verification.name)
+
     # Public verification file; building never sends network requests.
     (Path(BUILD_DIR) / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
 
