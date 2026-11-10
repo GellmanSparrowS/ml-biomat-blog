@@ -329,6 +329,8 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
     if route in ('/','/en/','/zh/') or route.startswith('/about/'):
         styles.append('/static/css/profile-layout.css')
     styles.append('/static/css/site-refinement.css')
+    if route in ('/', '/en/', '/zh/', '/fibernet/', '/fibernet/en/'):
+        styles.append('/static/css/mobile-hero.css')
     is_catalog = route.startswith(('/categories/', '/articles/'))
     if is_catalog: styles.append('/static/css/catalog-refinement.css')
     head=head.replace('</head>', ''.join('<link rel="stylesheet" href="'+versioned_asset(path)+'">' for path in styles)+'</head>')

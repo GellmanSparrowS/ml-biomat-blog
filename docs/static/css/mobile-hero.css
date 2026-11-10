@@ -1,0 +1,18 @@
+/* Compact phone heroes: the animated network accompanies the heading. */
+@media screen and (max-width:760px){
+ .home-intro{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:8px 12px;align-items:center;padding:24px 0}
+ .home-intro-copy{display:contents}
+ .home-intro .home-identity{grid-column:1;grid-row:1;margin:0;align-self:end;font-size:11px}
+ .home-intro h1{grid-column:1;grid-row:2;font-size:clamp(19px,5vw,24px);line-height:1.5;margin:0;align-self:start;letter-spacing:-.02em}
+ .home-intro .home-scene{grid-column:2;grid-row:1 / 3;width:100%;height:clamp(140px,39vw,230px);margin:0;max-width:none}
+ .home-intro .home-links{grid-column:1 / -1;grid-row:3;gap:10px 20px;margin-top:8px}
+ .fibernet-page .fn-hero{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:8px 12px;margin-top:0;padding:24px 0;align-items:center}
+ .fibernet-page .fn-hero-copy{display:contents}
+ .fibernet-page .fn-release{grid-column:1 / -1;grid-row:1;margin:0 0 5px;font-size:11px}
+ .fibernet-page .fn-hero h1{grid-column:1;grid-row:2;margin:0;align-self:end}
+ .fibernet-page .fn-lead{grid-column:1;grid-row:3;margin:0;align-self:start;font-size:14px;line-height:1.7;text-align:start}
+ .fibernet-page .fn-scene{grid-column:2;grid-row:2 / 4;height:clamp(140px,39vw,230px);width:100%;margin:0}
+ .fibernet-page .fn-intro{grid-column:1 / -1;grid-row:4;margin:8px 0 0}
+ .fibernet-page .fn-actions{grid-column:1 / -1;grid-row:5;margin-top:8px}
+ .fibernet-page .fn-language{grid-column:1 / -1;grid-row:6;margin:0}
+}
