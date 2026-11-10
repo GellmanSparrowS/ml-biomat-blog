@@ -742,12 +742,15 @@ def submit_indexnow():
     if not sitemap_path.is_file() or not key_path.is_file():
         raise SystemExit("Build the site and deploy it before submitting IndexNow.")
     import time
+    publisher_headers = {'User-Agent': 'ML-Biomat-Publisher/1.0 (+https://ml-biomat.com/)'}
+    def fetch_deployed(path):
+        request = urllib.request.Request(SITE['base_url']+path, headers=publisher_headers)
+        with urllib.request.urlopen(request, timeout=20) as response:
+            return response.read()
     for attempt in range(6):
         try:
-            with urllib.request.urlopen(SITE['base_url']+'/sitemap.xml', timeout=20) as response:
-                deployed_sitemap = response.read()
-            with urllib.request.urlopen(SITE['base_url']+'/'+key_path.name, timeout=20) as response:
-                deployed_key = response.read().decode('utf-8').strip()
+            deployed_sitemap = fetch_deployed('/sitemap.xml')
+            deployed_key = fetch_deployed('/'+key_path.name).decode('utf-8').strip()
             if deployed_sitemap.decode('utf-8-sig').splitlines() != sitemap_path.read_text(encoding='utf-8-sig').splitlines() or deployed_key != INDEXNOW_KEY:
                 raise RuntimeError('Public sitemap or ownership file does not match this build yet.')
             break
@@ -773,7 +776,7 @@ def submit_indexnow():
     }).encode("utf-8")
     request = urllib.request.Request(
         "https://api.indexnow.org/indexnow", data=data,
-        headers={"Content-Type": "application/json"},
+        headers={**publisher_headers, "Content-Type": "application/json"},
     )
     try:
         with urllib.request.urlopen(request, timeout=20) as response:
