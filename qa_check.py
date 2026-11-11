@@ -565,15 +565,16 @@ def gallery_errors():
 
 
 
-def course_integrity_errors(data, entries, categories):
+def course_integrity_errors(data, entries, categories, collection=None, count=48):
     """Check every imported language against its sealed source, not template totals."""
     from content_tools import biomaterials_courses
+    if collection is None: collection = biomaterials_courses
     pairs, content = [], []
     totals = dict(sections=0, equations=0, figures=0, labs=0)
     expected_ids = {lesson['id'] for lesson in data['lessons']}
-    expected_urls = {biomaterials_courses.route(identifier, lang)
+    expected_urls = {collection.route(identifier, lang)
                      for identifier in expected_ids for lang in ['zh', 'en']}
-    if len(expected_ids) != 48 or len(entries) != len(expected_urls) or {item['url'] for item in entries} != expected_urls:
+    if len(expected_ids) != count or len(entries) != len(expected_urls) or {item['url'] for item in entries} != expected_urls:
         pairs.append('Imported course IDs or bilingual catalog entries are incomplete or duplicated')
     indexed = {item['url']: item for item in entries}
 
@@ -589,7 +590,7 @@ def course_integrity_errors(data, entries, categories):
         category = lesson['category']
         if category not in categories:
             pairs.append(identifier + ': unknown category')
-        addresses = {lang: biomaterials_courses.route(identifier, lang) for lang in ['zh', 'en']}
+        addresses = {lang: collection.route(identifier, lang) for lang in ['zh', 'en']}
         for lang, address in addresses.items():
             dom = generated_dom(address, pairs)
             if dom is None:
@@ -621,7 +622,7 @@ def course_integrity_errors(data, entries, categories):
                 content.append(address + ': expected one visible language article')
                 continue
             pane = panes[0]
-            source = ROOT / 'content/tutorials/biomaterials-courses' / (identifier + '-' + lang + '.html')
+            source = collection.CONTENT / (identifier + '-' + lang + '.html')
             original = source.read_text(encoding='utf-8')
             expected = lesson['counts'][lang]
             if hashlib.sha256(original.encode('utf-8')).hexdigest() != expected['sha256']:
@@ -646,7 +647,7 @@ def course_integrity_errors(data, entries, categories):
                 if href.startswith('#') and unquote(href[1:]) not in ids:
                     content.append(address + ': missing same-page anchor ' + href)
             script_paths = {urlsplit(n.attrs.get('src', '')).path for n in dom.find('script')}
-            lab_script = '/static/tutorials/biomaterials-courses/' + identifier + '.js'
+            lab_script = '/static'+collection.BASE + identifier + '.js'
             if not {lab_script, '/static/js/biomaterials-courses.js'} <= script_paths:
                 content.append(address + ': interactive lesson or shared reader script missing')
             built_script, source_script = DOCS / lab_script.lstrip('/'), ROOT / lab_script.lstrip('/')
@@ -670,7 +671,11 @@ def run():
     total = len(posts)
     from content_tools import biomaterials_courses
     courses = biomaterials_courses.load()
-    course_entries = biomaterials_courses.entries(courses)
+    from content_tools import molecular_dynamics
+    md_courses = molecular_dynamics.load()
+    md_entries = molecular_dynamics.entries(md_courses)
+    bm_entries = biomaterials_courses.entries(courses)
+    course_entries = bm_entries + md_entries
     indexed_total = total + tutorial_count + len(course_entries)
     en = sum(1 for x in posts if x[0] == "en")
     zh = total - en
@@ -709,7 +714,7 @@ def run():
         relative=file.relative_to(DOCS).as_posix()
         if relative.startswith('static/'): continue
         page=file.read_text(encoding='utf-8')
-        if 'http-equiv="refresh"' in page: continue
+        if 'http-equiv="refresh"' in page or '<meta name="robots" content="noindex,nofollow">' in page: continue
         route='/'+relative.removesuffix('index.html')
         canonical=re.search(r'<link rel="canonical" href="([^"]+)"',page)
         title=re.search(r'<title>(.*?)</title>',page,re.S)
@@ -838,11 +843,15 @@ def run():
     from content_tools import catalog
     catalog_curriculum = dict(curriculum, lessons=[dict(lesson, url='/tutorials/polymer-ai/' + lesson['slug'] + '/') for lesson in lessons])
     items = catalog.entries(loaded, catalog_curriculum) + course_entries
-    course_pairs, course_content, course_totals = course_integrity_errors(courses, course_entries, build.CATEGORIES)
+    course_pairs, course_content, course_totals = course_integrity_errors(courses, bm_entries, build.CATEGORIES)
     checks.append(check('Bilingual biomaterials tutorial routes and topic integration', not course_pairs,
                         '; '.join(course_pairs[:15]) if course_pairs else '48 complete language pairs with localized titles, canonical URLs, alternate links and topic breadcrumbs'))
     checks.append(check('Imported tutorial content, figures, equations and scientific labs', not course_content,
                         '; '.join(course_content[:15]) if course_content else 'All 96 pages preserve their sealed source: ' + ', '.join(str(value) + ' ' + key for key, value in course_totals.items())))
+    md_pairs, md_content, md_totals = course_integrity_errors(md_courses, md_entries, build.CATEGORIES, molecular_dynamics, 35)
+    checks.append(check('Molecular dynamics bilingual routes and preserved scientific content', not md_pairs and not md_content, '; '.join((md_pairs+md_content)[:15]) if md_pairs or md_content else '35 language pairs; '+str(md_totals)))
+    md_assets = [url for url, receipt in md_courses['assets'].items() if not (DOCS/url.lstrip('/')).is_file() or hashlib.sha256((DOCS/url.lstrip('/')).read_bytes()).hexdigest() != receipt['sha256']]
+    checks.append(check('Molecular dynamics trajectory and figure data', not md_assets, '; '.join(md_assets[:10]) if md_assets else str(len(md_courses['assets']))+' original data assets with matching hashes'))
     home_errors = homepage_errors(items, build.CATEGORIES)
     checks.append(check('Home language switch preserves page type', not home_errors,
                         '; '.join(home_errors[:15]) if home_errors else 'Localized research homepages, topic counts, tutorial picks and same-page language links agree'))

@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import worker,{validPayment,PaymentClaim} from './worker.mjs';
+const tx='12345678901234567',now=Date.parse('2026-11-11T12:00:00Z');
+const fields={txn_id:tx,payment_status:'Completed',mc_currency:'USD',mc_gross:'1.00',item_number:'ML-BIOMAT-HTML',payment_date:'2026-11-11T11:00:00Z'};
+const response=(changes={})=>'SUCCESS\n'+new URLSearchParams({...fields,...changes}).toString().replaceAll('&','\n');
+assert(validPayment(response(),tx,now));
+for(const c of [{payment_status:'Pending'},{payment_status:'Refunded'},{mc_currency:'EUR'},{mc_gross:'0.99'},{mc_gross:'NaN'},{item_number:'other'},{txn_id:'BAD'},{payment_date:'2026-11-01T11:00:00Z'},{payment_date:'2026-11-12T11:00:00Z'},{test_ipn:'1'}])assert(!validPayment(response(c),tx,now),JSON.stringify(c));
+assert(!validPayment('FAIL',tx,now));assert(!validPayment('SUCCESS',tx,now));
+const rejected=await worker.fetch(new Request('https://service/verify',{method:'POST',headers:{Origin:'https://evil.example'},body:'{}'}),{});
+assert.equal(rejected.status,403);
+const saved={claim:'a'.repeat(64),page:'/posts/test/'};
+const ctx={blockConcurrencyWhile:fn=>fn(),storage:{get:async()=>saved}};
+const claimant=new PaymentClaim(ctx,{});
+for(const [claim,status] of [['a'.repeat(64),200],['b'.repeat(64),409]])assert.equal((await claimant.fetch(new Request('https://internal',{method:'POST',body:JSON.stringify({...saved,claim,tx})}))).status,status);
+const malformed=await worker.fetch(new Request('https://service/verify',{method:'POST',headers:{Origin:'https://ml-biomat.com'},body:'null'}),{});
+assert.equal(malformed.status,400);
+console.log('17 payment validation, origin and repeat-claim checks passed');

@@ -11,4 +11,4 @@ def render(language, asset):
         src = escape(asset(path), quote=True)
         alt = label + (' support QR code' if en else '赞赏二维码')
         cards.append(f'<figure><a href="{src}" target="_blank" rel="noopener" aria-label="{alt}"><img src="{src}" alt="{alt}" width="{size}" height="{size}" loading="lazy" decoding="async"></a><figcaption>{label}</figcaption></figure>')
-    return '<section class="article-support" aria-labelledby="article-support-heading"><h2 id="article-support-heading">'+heading+'</h2><div class="article-support-codes">'+''.join(cards)+'</div></section>'
+    return '<section class="article-support" aria-labelledby="article-support-heading"><h2 id="article-support-heading">'+heading+'</h2><div class="article-support-codes">'+''.join(cards)+'</div><a class="support-paypal" href="https://www.paypal.com/ncp/payment/BH5JZ28J2BSQL" rel="noopener">PayPal</a></section>'

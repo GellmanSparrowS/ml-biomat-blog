@@ -1,0 +1,2246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script><script src="/static/js/site-motion.js?v=8c14daea22f6" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Putting a protein in water: topology, solvent, and ions — ML-Biomat</title>
+<meta name="description" content="Build a defined ubiquitin solution while connecting periodic geometry, three-site water, and integer ion counts to their physical meaning.">
+<meta name="author" content="Yunhao Yang">
+<link rel="canonical" href="https://ml-biomat.com/tutorials/molecular-dynamics/g06/en/">
+<link rel="alternate" hreflang="zh-CN" href="https://ml-biomat.com/tutorials/molecular-dynamics/g06/"><link rel="alternate" hreflang="en" href="https://ml-biomat.com/tutorials/molecular-dynamics/g06/en/"><link rel="api-catalog" href="/.well-known/api-catalog">
+<link rel="describedby" type="text/plain" href="/llms.txt">
+<link rel="alternate" type="application/rss+xml" href="/rss.xml">
+<meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
+<meta name="google-adsense-account" content="ca-pub-7464969092761889">
+
+<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
+<meta property="og:title" content="Putting a protein in water: topology, solvent, and ions">
+<meta property="og:description" content="Build a defined ubiquitin solution while connecting periodic geometry, three-site water, and integer ion counts to their physical meaning.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ml-biomat.com/tutorials/molecular-dynamics/g06/en/">
+<meta property="og:site_name" content="ML-Biomat">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "Putting a protein in water: topology, solvent, and ions", "description": "Build a defined ubiquitin solution while connecting periodic geometry, three-site water, and integer ion counts to their physical meaning.", "url": "https://ml-biomat.com/tutorials/molecular-dynamics/g06/en/", "inLanguage": "en", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
+<link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/article-support.css?v=9eaac45e6b4c"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=844571487349"><link rel="stylesheet" href="/static/css/molecular-dynamics.css?v=8198fc2ccf4b"><link rel="stylesheet" href="/static/css/biomaterials-courses.css?v=2dd0c44e17fa"></head>
+<body class="site-layout">
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<header class="site-header"><div class="header-inner">
+<a href="/en/" class="site-brand"><span class="site-logo">ML-Biomat<span class="dot">.</span></span></a>
+<nav class="nav-links" aria-label="Main navigation"><a data-nav="home" data-short-label="Home" href="/en/">Home</a><a data-nav="library" data-short-label="Library" href="/fibernet/en/">Library</a><a data-nav="categories" data-short-label="Categories" href="/categories/en/" class="active" aria-current="page">Categories</a><a data-nav="profile" data-short-label="Profile" href="/about/en/">Profile</a></nav>
+<input type="search" id="search-input" class="search-input" placeholder="Search…" aria-label="Search…" autocomplete="off">
+<button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">☀</button>
+<span class="lang-switch"><a data-language="en" href="/tutorials/molecular-dynamics/g06/en/" class="active" aria-current="true">EN</a><a data-language="zh" href="/tutorials/molecular-dynamics/g06/">中文</a></span>
+</div></header><main class="container biomat-container"><div class="biomat-course" data-course="G06" data-lang="en"><nav class="bc-crumb" aria-label="Breadcrumb"><a href="/categories/en/">Categories</a><span aria-hidden="true">/</span><a href="/categories/multiscale-modeling/en/">Physical Modeling &amp; Simulation</a></nav><div class="bc-layout"><aside class="bc-toc"><details open><summary>Contents</summary><nav aria-label="Contents"><a href="#en-s1">Why water belongs in the model</a><a href="#en-s2">From conducting salt solutions to charged particles</a><a href="#en-s3">Coordinates describe positions; topology defines the species</a><a href="#en-s4">Leaving room for water with a periodic cell</a><a href="#en-s5">How much salt is in this small box?</a><a href="#en-s6">A reproducible sequence for the cell, solvent, and ions</a><a href="#en-s7">Checking composition and concentration in the actual output</a><a href="#en-s8">Matching solution conditions to the research question</a></nav></details></aside><div class="bc-main"><header class="bc-hero"><h1>Putting a protein in water: topology, solvent, and ions</h1><p>Build a defined ubiquitin solution while connecting periodic geometry, three-site water, and integer ion counts to their physical meaning.</p></header><article class="language-pane" data-lang="en" lang="en"><section id="en-s1" data-section="s1"><h2>Why water belongs in the model</h2>
+<p>A grain of salt loses its familiar shape when it dissolves in water. A protein also responds to its surroundings, although its response involves changes in molecular interactions and motion rather than simply disappearing from view. Water occupies most of the volume in many biomolecular simulations, yet it is often hidden when we display the protein. This makes the protein easier to see while concealing an active part of the system. In this chapter, we continue with ubiquitin and place the prepared protein in a solution with a specified water model, salt content, and periodic geometry. You will learn what each preparation step adds, how to check agreement between coordinates and topology, and how to calculate salt concentration from the particles actually present.</p>
+<p>The electrons in a water molecule are distributed unevenly: the oxygen region is relatively negative and the hydrogen regions are relatively positive. Consequently, a molecule with no net charge can still turn different parts of itself toward charged neighbors. Charged protein side chains, groups that form hydrogen bonds, and surfaces that make less favorable contacts with water all influence the arrangement and motion of nearby solvent. Water molecules also interact with one another, and thermal motion continuously rearranges their neighbors. Protein conformation, exposed surface area, and the positions of chemical groups therefore belong to one coupled system rather than separate descriptions.</p>
+<p>Think of people changing their positions in a crowded conversation. One person's turn changes several distances and may prompt nearby people to move. Molecules have no intentions: forces and thermal fluctuations determine their motion. The useful part of the analogy is that the surroundings respond as the central object changes. An explicit-solvent simulation includes the interaction sites of individual water molecules, allowing us to examine where water is located, how it is oriented, and how long it occupies a region. This resolution is useful for hydration layers, ion distributions, and the approach of small molecules to a protein. Its computational cost increases with the number of solvent particles.</p>
+<p>Our system combines the AMBER99SB-ILDN protein parameters with TIP3P, a three-site water model used with this force-field family. The object of study is a free ubiquitin monomer surrounded by water and ions. Each water has one oxygen site and two hydrogen sites, with specified molecular geometry maintained during the subsequent dynamics. The selected parameters jointly determine protein–water, water–ion, and other interactions. A classical fixed-topology model describes the motion and contacts of these chemical species. Water dissociation, proton transfer along a hydrogen-bond network, and chemical reactions require a description capable of handling the relevant electronic or bonding changes. Connecting the intended process to the model gives the preparation commands a clear purpose.</p>
+<p>Preparing a simulation resembles arranging a solution experiment: the container size, amount of solute, and solvent identity all matter. Here the container is a periodic cell, particle counts are integers, and concentration depends on both count and volume. We will construct an initial system containing one ubiquitin molecule, 5868 water molecules, 17 sodium ions, and 17 chloride ions. The following chapter will minimize its energy and prepare its temperature and pressure. Our task here is to establish a consistent composition and spatial arrangement, so the dynamics starts from a system whose chemical identities and geometry are understood.</p>
+<figure class="science-figure" data-figure="F1"><div class="figure-wrap" role="group" aria-label="Three panels show one 1231-atom ubiquitin, 5868 three-site waters, and 17 sodium plus 17 chloride ions."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" role="img" aria-label="Protein, water, and ion composition"><rect width="960" height="430" rx="18" fill="#f6f4ee"/><g font-family="Arial,Microsoft YaHei,sans-serif" fill="#233e42" font-size="22"><text x="35" y="43" font-size="27">Three interacting components of a solution</text><path d="M65 215C45 150 110 90 160 135S245 90 270 160S235 295 160 275S75 285 65 215Z" fill="#6c9b90" stroke="#326b69" stroke-width="4"/><path d="M90 210C125 105 175 250 220 158M95 235C160 170 205 270 240 205" fill="none" stroke="#e1ede4" stroke-width="12"/><text x="70" y="320" font-size="22">Ubiquitin: 1 molecule</text><text x="70" y="353" font-size="22">1231 atoms</text><g transform="translate(450 165) rotate(0)"><path d="M0 0L-21 21M0 0L21 21" stroke="#6d8588" stroke-width="6"/><circle r="15" fill="#bb6756"/><circle cx="-21" cy="21" r="10" fill="#fff" stroke="#718487" stroke-width="2"/><circle cx="21" cy="21" r="10" fill="#fff" stroke="#718487" stroke-width="2"/></g><g transform="translate(550 225) rotate(60)"><path d="M0 0L-21 21M0 0L21 21" stroke="#6d8588" stroke-width="6"/><circle r="15" fill="#bb6756"/><circle cx="-21" cy="21" r="10" fill="#fff" stroke="#718487" stroke-width="2"/><circle cx="21" cy="21" r="10" fill="#fff" stroke="#718487" stroke-width="2"/></g><g transform="translate(410 250) rotate(-70)"><path d="M0 0L-21 21M0 0L21 21" stroke="#6d8588" stroke-width="6"/><circle r="15" fill="#bb6756"/><circle cx="-21" cy="21" r="10" fill="#fff" stroke="#718487" stroke-width="2"/><circle cx="21" cy="21" r="10" fill="#fff" stroke="#718487" stroke-width="2"/></g><text x="365" y="320" font-size="22">TIP3P: 5868 waters</text><text x="365" y="353" font-size="22">3 sites per water</text><circle cx="760" cy="170" r="39" fill="#d5a46f"/><circle cx="835" cy="245" r="39" fill="#a4bad0"/><text x="737" y="177" font-size="25">Na⁺</text><text x="815" y="252" font-size="25">Cl⁻</text><text x="690" y="320" font-size="22">17 Na⁺ and 17 Cl⁻</text><text x="690" y="353" font-size="22">Monatomic ions</text><text x="35" y="402" font-size="20">Composition schematic; counts match the actual prepared system</text></g></svg></div><figcaption>Figure 1 · Water and ions are mobile components. Shapes identify component types; counts come from the actual ion-containing structure.</figcaption></figure>
+</section>
+<section id="en-s2" data-section="s2"><h2>From conducting salt solutions to charged particles</h2>
+<p>Why dissolved salts help water conduct electricity was an important question in nineteenth-century physical chemistry. Solid sodium chloride contains an ordered arrangement of positive and negative ions; in solution, charged species can move through the liquid. Arrhenius's work on electrolytic dissociation in the 1880s connected electrical conduction with mobile ions and helped explain why some solution properties did not scale simply with the number of chemical formula units added. The idea most directly relevant to our simulation is the distinction between adding one formula unit and counting the resulting mobile species: one NaCl formula unit supplies one sodium ion and one chloride ion.</p>
+<p>The two ion types carry opposite charges. Equal numbers cancel in the total charge, while each ion still interacts with water and the protein. Water oxygen sites tend to face a nearby sodium ion because of their negative partial charge; hydrogen sites participate in favorable orientations around chloride. These hydration arrangements fluctuate, and neighboring waters can exchange. The schematic orientations in the figure illustrate the relationship between charge and orientation. Actual distributions also depend on crowding, water–water interactions, and temperature. Their combined effects are precisely why we allow the environment to move instead of assigning a permanent ring of water to each ion.</p>
+<p>Ions also influence a protein through collective distributions rather than simply occupying one matching site for every protein charge. More distant ions contribute to the surrounding electrostatic environment, while nearby ions may make direct contacts with particular surface groups. Ion identity, concentration, protein surface chemistry, and the chosen parameters all affect these arrangements. We begin with monovalent sodium and chloride because their counts, charges, and concentration are relatively easy to connect. Replacing sodium with calcium would change the charge number, hydration behavior, and interaction parameters together. Changing the particle name alone would leave the physical model undefined.</p>
+<p>By the later twentieth century, computers could follow the motion of many interacting water molecules. In 1983, Jorgensen and colleagues compared simple potential models for liquid water; TIP3P became an important member of this family of models. Such models reduce a complex electronic distribution to a small number of interaction sites and parameters, making the statistical behavior of a liquid computationally accessible. This simplification helped make explicitly hydrated protein simulations practical. It also made water-model selection part of the scientific method: different models have different performance for quantities such as density, diffusion, and dielectric response. A model name therefore refers to a particular geometry and set of interactions.</p>
+<p>The connection between ionic theory and molecular water models is an increasingly precise account of which objects move and interact in a liquid. Writing NA, CL, OW, or HW in a coordinate file identifies sites but does not fully define their properties. Those names must connect to masses, charges, nonbonded parameters, and geometrical constraints in the topology. The historical picture of solution chemistry meets the computational workflow at this point: identify the species, define their interactions, and then study the statistics of their motion. The remaining sections translate these levels into a consistent set of files.</p>
+<figure class="science-figure" data-figure="F2"><div class="figure-wrap" role="group" aria-label="Sodium drifts toward the negative electrode and chloride toward the positive electrode; water oxygen is partially negative and both hydrogens partially positive."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" role="img" aria-label="Historical concepts of ionic conduction and three-site water"><rect width="960" height="430" rx="18" fill="#f6f4ee"/><g font-family="Arial,Microsoft YaHei,sans-serif" fill="#233e42" font-size="22"><text x="35" y="43" font-size="27">Mobile species and molecular models</text><text x="35" y="87" font-size="24">1880s · Arrhenius</text><line x1="70" y1="130" x2="70" y2="300" stroke="#b36b4c" stroke-width="10"/><line x1="420" y1="130" x2="420" y2="300" stroke="#567795" stroke-width="10"/><circle cx="180" cy="190" r="30" fill="#d5a46f"/><circle cx="305" cy="250" r="30" fill="#a4bad0"/><path d="M218 190H290l-12-9m12 9l-12 9M267 250H195l12-9m-12 9l12 9" fill="none" stroke="#41656a" stroke-width="4"/><text x="56" y="120" font-size="26">+</text><text x="412" y="120" font-size="26">−</text><text x="158" y="198" font-size="22">Na⁺</text><text x="286" y="258" font-size="22">Cl⁻</text><text x="93" y="340" font-size="20">Opposite charges drift oppositely</text><text x="515" y="87" font-size="24">1983 · Jorgensen and colleagues</text><g transform="translate(700 188) scale(2.2)"><g transform="translate(0 0) rotate(0)"><path d="M0 0L-21 21M0 0L21 21" stroke="#6d8588" stroke-width="6"/><circle r="15" fill="#bb6756"/><circle cx="-21" cy="21" r="10" fill="#fff" stroke="#718487" stroke-width="2"/><circle cx="21" cy="21" r="10" fill="#fff" stroke="#718487" stroke-width="2"/></g></g><text x="680" y="160" font-size="23">δ−</text><text x="617" y="285" font-size="23">δ+</text><text x="770" y="285" font-size="23">δ+</text><text x="546" y="340" font-size="20">Three sites represent water charges</text><text x="35" y="402" font-size="20">Left: ionic conduction. Right: the TIP3P site model.</text></g></svg></div><figcaption>Figure 2 · Ionic conduction involves mobile charged species. Three-site water uses a compact geometry and parameters to represent molecular charge distribution. δ labels partial-charge signs.</figcaption></figure>
+</section>
+<section id="en-s3" data-section="s3"><h2>Coordinates describe positions; topology defines the species</h2>
+<p>The processed.gro file from the previous chapter contains the positions of ubiquitin's atoms. The accompanying topol.top contains the protein topology and references to force-field definitions. A useful analogy is a numbered seating plan together with a description of each occupant and the rules connecting them. The plan lets us measure distances; the rules determine the forces at those distances. The two descriptions must use matching atom order and molecular composition. Whenever one file gains water or changes its particle count, the other needs a corresponding update so that each position is assigned the correct physical identity.</p>
+<p>The reference to amber99sb-ildn.ff/forcefield.itp supplies the general force-field definitions. The protein topology then lists atoms, bonds, angles, and other interaction terms, while water and ions have their own definitions. Near the end of topol.top, the molecules section gives the actual number of each molecular species in the system. This hierarchy avoids defining an identical water model thousands of times: the model is defined once, and the molecules section specifies how many copies exist. In our preparation, the SOL count changes from 5902 to 5868 when ions are added. The water parameters stay the same; their number of occurrences changes.</p>
+<p>The solvate command uses a water coordinate template called spc216.gro. Its name can cause confusion because our simulation still uses the TIP3P force field. The template supplies water molecules arranged in a small coordinate box. The program tiles these coordinates across the new cell and removes whole water molecules that overlap too closely with the protein. Such a three-site coordinate template can initialize different three-site water models. The selected water topology determines the charges, molecular geometry, and interaction parameters. Small differences between template geometry and the target model are handled during preparation and equilibration.</p>
+<p>This distinction also explains why model parameters should be kept as a coherent set. Oxygen and hydrogen charges, oxygen repulsion and dispersion parameters, internal geometry, and the compatibility of ion parameters jointly influence solution behavior. Protein force fields and water models are normally used and evaluated in particular combinations. Taking charges from one water model while retaining another model's remaining parameters creates a new combination whose properties require evaluation. Here we retain AMBER99SB-ILDN with TIP3P and select NA and CL through the supplied force-field definitions. This keeps the model choice clear while we focus on preparation and interpretation.</p>
+<p>Adding water is more subtle than filling a featureless shell outside a protein's outline. Protein surfaces contain grooves, and some internal regions may geometrically accommodate water. The solvate program uses coordinates, atomic size information, and overlap criteria to choose initial positions. This establishes a spatial arrangement; subsequent motion allows that arrangement to adjust collectively. Inspection can reveal obvious overlaps, unusually large empty regions, or close approaches to periodic images. For a system with known tightly associated waters, the structure-preparation decision should identify which experimental waters are retained. In this example, the previous chapter removed all 58 crystallographic water oxygen records before constructing the solvent environment.</p>
+<p>When genion adds salt, it replaces selected whole water molecules with single ions and updates the molecular composition. A three-site water contributes three coordinate sites, whereas a monatomic ion contributes one. Each replacement therefore reduces the total site count by two. This gives a convenient independent check: adding 34 ions by replacing 34 waters must reduce the total by 68 sites. A successful command exit and a chemically consistent count address different questions. Combining them lets us confirm that the updated topology and coordinates describe the same solution.</p>
+</section>
+<section id="en-s4" data-section="s4"><h2>Leaving room for water with a periodic cell</h2>
+<p>A protein in a tiny water droplet would experience a substantial liquid surface. Many solution simulations instead aim to describe a bulk-like environment and use periodic boundaries. A cell is repeated by translations in three directions; a molecule leaving one side can be represented at its equivalent position on another side. Neighbors therefore remain available across the boundaries. Only one cell of particles is stored, with image positions defined geometrically. For the protein, this corresponds to a periodic arrangement of protein molecules and solvent, making the distance to its own images an important part of system preparation.</p>
+<p>We use editconf to select the periodic geometry associated with a rhombic dodecahedron and set the distance option to 1.0 nm. For this box type, GROMACS obtains the size from the solute's maximum atom-to-atom diameter and adds space on both sides. Ubiquitin's initial diameter here is approximately 4.491 nm, giving a periodic geometrical scale of about 6.491 nm. This provides initial solvent space and is compatible with the chosen 1.0 nm short-range cutoff. Protein rotation, conformational changes, and later pressure-driven box adjustment can alter the nearest image separation, so this separation is also worth examining in the trajectory. The initial option does not fix a permanent gap throughout the simulation.</p>
+<p>Why choose this geometry instead of a cube? For a compact solute, a rhombic dodecahedron can reduce the volume that must be filled while maintaining the same periodic image distance. Its volume is approximately 0.707 times that of a cube at the same image spacing, reducing the number of waters and the calculation required. The condition of equal image spacing matters: the ratio does not apply indiscriminately to any two boxes of roughly similar side length. Long fibers, membrane patches, and strongly anisotropic molecules can favor other cell shapes. The geometry should serve the scientific object, with solvent economy as one consideration.</p>
+<p>A GRO file records this periodic geometry using three cell vectors rather than a drawing of a twelve-faced shell. Imagine three directed arrows from the same origin. Each arrow specifies a translation that reaches an equivalent cell. Here the vectors are a=(6.49145, 0, 0) nm, b=(0, 6.49145, 0) nm, and c=(3.24572, 3.24572, 4.59015) nm. Vector c has horizontal as well as vertical components and therefore points at an angle. Some viewers display particles inside the associated tilted parallelepiped, while others use a compact dodecahedral representation. These displays can describe the same system when they preserve the same periodic image relationships.</p>
+<figure class="science-figure" data-figure="F3"><div class="figure-wrap" role="group" aria-label="Tilted parallelepiped with base edges a and b, tilted c, dashed perpendicular height, and actual cell dimensions."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" role="img" aria-label="Base and perpendicular height of a tilted cell"><rect width="960" height="430" rx="18" fill="#f6f4ee"/><g font-family="Arial,Microsoft YaHei,sans-serif" fill="#233e42" font-size="22"><text x="35" y="43" font-size="27">A tilted cell: base area times perpendicular height</text><g fill="none" stroke="#527c7b" stroke-width="3"><path d="M135 310L365 310L435 260L205 260Z" fill="#d5e4dd"/><path d="M235 170L465 170L535 120L305 120Z" fill="#e7e9db"/><path d="M135 310L235 170M365 310L465 170M435 260L535 120M205 260L305 120"/></g><path d="M235 170V310" fill="none" stroke="#b77745" stroke-width="3" stroke-dasharray="8 6"/><path d="M235 292H253V310" fill="none" stroke="#b77745" stroke-width="2"/><text x="237" y="346" font-size="21">aₓ = 6.49145 nm</text><text x="381" y="306" font-size="23">bᵧ</text><text x="155" y="221" font-size="26">c</text><text x="251" y="238" font-size="23">c<tspan baseline-shift="sub" font-size="16">z</tspan></text><text x="555" y="160" font-size="23">Base: aₓ × bᵧ</text><text x="555" y="204" font-size="23">Height: c<tspan baseline-shift="sub" font-size="16">z</tspan> = 4.59015 nm</text><text x="555" y="260" font-size="24">V = 193.4239779 nm³</text><text x="555" y="309" font-size="20">Length of c differs from height</text><text x="35" y="402" font-size="20">Parallelepiped schematic; values are actual periodic-cell parameters</text></g></svg></div><figcaption>Figure 3 · Three cell vectors encode periodic translations. For the specified arrangement, base area times the vertical component of c gives volume. The code reads all nine GRO components.</figcaption></figure>
+<p>To calculate volume, the familiar rule “base area times perpendicular height” is more informative than multiplying three edge lengths. Vectors a and b are perpendicular and lie in the horizontal plane, giving a base area of 6.49145×6.49145 nm². The vertical component of c, 4.59015 nm, is the height above that base. Its horizontal components shift the upper face sideways without adding volume. A stack of equal sheets slid sideways illustrates the same geometry: sheet area and total thickness still determine its volume. For this coordinate arrangement, the volume reduces to a product of three components. A general tilted cell is handled by the determinant of its full matrix.</p>
+<div class="equation" data-equation="E1"><div class="equation-heading"><span>Volume of this tilted cell</span><span>Eq. 1</span></div><div class="math" role="img" aria-label="Volume of this tilted cell"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.667ex;" xmlns="http://www.w3.org/2000/svg" width="10.91ex" height="2.237ex" role="img" focusable="false" viewBox="0 -694 4822.3 989"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g><g data-mml-node="mo" transform="translate(1046.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msub" transform="translate(2102.6,0)"><g data-mml-node="mi"><path data-c="1D44E" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"></path></g><g data-mml-node="mi" transform="translate(562,-150) scale(0.707)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g></g><g data-mml-node="msub" transform="translate(3119,0)"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="mi" transform="translate(462,-150) scale(0.707)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="msub" transform="translate(3977.5,0)"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mi" transform="translate(466,-150) scale(0.707)"><path data-c="1D467" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"></path></g></g></g></g></svg></mjx-container></div><table class="symbols"><colgroup><col><col><col></colgroup><thead><tr><th scope="col">Symbol</th><th scope="col">Meaning</th><th scope="col">Unit</th></tr></thead><tbody><tr><td>V</td><td>Whole periodic-cell volume, including protein and solvent</td><td>nm³</td></tr><tr><td>a<sub>x</sub>, b<sub>y</sub>, c<sub>z</sub></td><td>The x component of vector a, y component of b, and z component of c; here the perpendicular base edges and height</td><td>nm for each component</td></tr><tr><td>x, y, z</td><td>Subscripts identifying Cartesian directions</td><td>Direction labels; no units</td></tr><tr><td>=, ×</td><td>Equality; adjacent components are multiplied, including their units</td><td>Operators; no units</td></tr></tbody></table><p><span class="eq-label">Reading the relationship</span>Here a lies along x and b along y, giving base area aₓbᵧ. The vertical component c_z supplies the height. Horizontal tilt adds neither base area nor height.</p><p><span class="eq-label">A worked example</span>6.49145 nm×6.49145 nm×4.59015 nm=193.4239779 nm³. Multiplication by 10⁻²⁴ converts nm³ to L, giving 1.934239779×10⁻²² L.</p><p><span class="eq-label">Conditions</span>This product applies to the triangular cell-vector arrangement specified in the text. A general cell uses the absolute determinant of its three-vector matrix.</p></div>
+<p>The resulting volume is approximately 193.424 nm³. This is the initial cell volume used when adding ions; pressure equilibration will subsequently make the volume fluctuate. It includes the space occupied by the protein as well as water and ions. The concentration definition used by genion refers to this whole-cell volume. Making that definition explicit avoids silently replacing it with an estimated solvent-accessible volume and comparing two concentrations that use different denominators.</p>
+</section>
+<section id="en-s5" data-section="s5"><h2>How much salt is in this small box?</h2>
+<p>In the laboratory, we may weigh salt and prepare a specified volume of solution. In a simulation, we directly choose a number of ions. The mole connects these descriptions: one mole contains exactly 6.02214076×10²³ specified entities. This is the numerical value associated with the Avogadro constant. The entity must be identified: it might be a water molecule, a sodium ion, or a NaCl formula unit. A 0.15 mol/L NaCl solution contains the equivalent of 0.15 mol of NaCl formula units per liter. For fully dissociated monovalent salt, it supplies the same amount of sodium ions and chloride ions separately.</p>
+<p>Our cell is so small that nanometers are convenient for its dimensions. One nanometer is one billionth of a meter. Cubing this length conversion gives 1 nm³=10⁻²⁷ m³=10⁻²⁴ L, so the cell volume is approximately 193.424×10⁻²⁴ L. Dividing 17 sodium ions by the Avogadro constant converts the particle count to an amount in moles; dividing that amount by the volume gives sodium molarity. There are also 17 chloride ions, giving the same chloride molarity. In this neutral NaCl example, the formula-unit salt concentration equals the concentration of either individual ion species.</p>
+<div class="equation" data-equation="E2"><div class="equation-heading"><span>Molar concentration from particle count</span><span>Eq. 2</span></div><div class="math" role="img" aria-label="Molar concentration from particle count"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -1.897ex;" xmlns="http://www.w3.org/2000/svg" width="10.703ex" height="4.972ex" role="img" focusable="false" viewBox="0 -1359 4730.8 2197.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="mo" transform="translate(710.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mfrac" transform="translate(1766.6,0)"><g data-mml-node="mi" transform="translate(1038.1,676)"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="mrow" transform="translate(220,-686)"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(836,-152.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="41" d="M255 0Q240 3 140 3Q48 3 39 0H32V46H47Q119 49 139 88Q140 91 192 245T295 553T348 708Q351 716 366 716H376Q396 715 400 709Q402 707 508 390L617 67Q624 54 636 51T687 46H717V0H708Q699 3 581 3Q458 3 437 0H427V46H440Q510 46 510 64Q510 66 486 138L462 209H229L209 150Q189 91 189 85Q189 72 209 59T259 46H264V0H255ZM447 255L345 557L244 256Q244 255 345 255H447Z"></path></g></g></g></g><g data-mml-node="msub" transform="translate(1416.3,0)"><g data-mml-node="mi"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g><g data-mml-node="TeXAtom" transform="translate(616,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4C" d="M128 622Q121 629 117 631T101 634T58 637H25V683H36Q48 680 182 680Q324 680 348 683H360V637H333Q273 637 258 635T233 622L232 342V129Q232 57 237 52Q243 47 313 47Q384 47 410 53Q470 70 498 110T536 221Q536 226 537 238T540 261T542 272T562 273H582V268Q580 265 568 137T554 5V0H25V46H58Q100 47 109 49T128 61V622Z"></path></g></g></g></g></g><rect width="2724.3" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></div><table class="symbols"><colgroup><col><col><col></colgroup><thead><tr><th scope="col">Symbol</th><th scope="col">Meaning</th><th scope="col">Unit</th></tr></thead><tbody><tr><td>c</td><td>Molar concentration of the specified entity; here NaCl formula units or one ion species</td><td>mol/L; multiply by 1000 for mM</td></tr><tr><td>N</td><td>Number of counted entities; 17 NaCl pairs correspond to 17 formula units</td><td>Integer count; dimensionless</td></tr><tr><td>N<sub>A</sub></td><td>Avogadro constant, 6.02214076×10²³ entities per mole</td><td>mol⁻¹</td></tr><tr><td>V<sub>L</sub></td><td>Whole-cell volume expressed in liters; subscript L identifies the volume unit</td><td>L</td></tr><tr><td>=, /, ×</td><td>Equality, division, and multiplication; the fraction divides N by the full denominator, whose adjacent factors multiply</td><td>Operators; no units</td></tr></tbody></table><p><span class="eq-label">Reading the relationship</span>N/N_A converts entity count to moles, followed by division by solution volume. The denominator has units mol⁻¹×L, giving mol/L.</p><p><span class="eq-label">A worked example</span>With N=17 and V_L=193.4239779×10⁻²⁴ L, c=0.14594449 mol/L=145.94449 mM. Eighteen pairs give 154.52946 mM.</p><p><span class="eq-label">Conditions</span>This defines a cell-average concentration at the current volume. Local hydration concentrations require separate measurement. For NaCl formula units, do not add positive and negative ion counts.</p></div>
+<p>Using the actual cell volume, 17 ion pairs correspond to 0.145944 mol/L, or approximately 145.94 mM. The unit mM means millimoles per liter, so 1000 mM equals 1 mol/L. The command requests a nominal 150 mM, but the realized value is slightly lower because particle counts must be integers. Adding one more NaCl pair to this cell changes the concentration by about 8.585 mM, and 18 pairs would give approximately 154.53 mM. The target lies between these two possibilities. In a larger cell, the same one-pair increment changes concentration by less, giving finer concentration resolution.</p>
+<p>A second counting distinction is equally useful. Seventeen sodium ions plus seventeen chloride ions give 34 ions in total, but the NaCl concentration is not obtained by replacing 17 with 34 in the preceding calculation. One formula unit supplies both ion species, so the formula-unit count remains 17. If the question concerns total ion particle density, we can add the species and explicitly report total ion concentration. Different physical questions use different counted entities. The definition accompanying a concentration is therefore as important as its numerical value. Ionic strength, osmotic properties, and diffusion will use related but distinct quantities.</p>
+<p>Neutralization and salt addition also serve different purposes. Neutralization adjusts the net charge to a chosen value, usually zero; salt addition establishes an environment containing both positive and negative ions. With the selected termini and His68 state, our ubiquitin has zero net charge. Seventeen Na⁺ and seventeen Cl⁻ therefore preserve neutrality. Suppose another protein instead carried −5e. After adding the same 17 NaCl pairs, five extra sodium counterions would be required for neutrality. The resulting counts would be 22 sodium and 17 chloride ions. Their concentrations would differ because the additional counterions compensate the protein charge.</p>
+<div class="equation" data-equation="E3"><div class="equation-heading"><span>Charge accounting for monovalent salt</span><span>Eq. 3</span></div><div class="math" role="img" aria-label="Charge accounting for monovalent salt"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -1.577ex;" xmlns="http://www.w3.org/2000/svg" width="22.804ex" height="4.86ex" role="img" focusable="false" viewBox="0 -1451.2 10079.6 2148.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mi" transform="translate(220,676)"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g><g data-mml-node="mi" transform="translate(382.5,-686)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><rect width="991" height="60" x="120" y="220"></rect></g><g data-mml-node="mo" transform="translate(1508.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msub" transform="translate(2564.6,0)"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(836,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="4E" d="M42 46Q74 48 94 56T118 69T128 86V634H124Q114 637 52 637H25V683H232L235 680Q237 679 322 554T493 303L578 178V598Q572 608 568 613T544 627T492 637H475V683H483Q498 680 600 680Q706 680 715 683H724V637H707Q634 633 622 598L621 302V6L614 0H600Q585 0 582 3T481 150T282 443T171 605V345L172 86Q183 50 257 46H274V0H265Q250 3 150 3Q48 3 33 0H25V46H42Z"></path><path data-c="61" d="M137 305T115 305T78 320T63 359Q63 394 97 421T218 448Q291 448 336 416T396 340Q401 326 401 309T402 194V124Q402 76 407 58T428 40Q443 40 448 56T453 109V145H493V106Q492 66 490 59Q481 29 455 12T400 -6T353 12T329 54V58L327 55Q325 52 322 49T314 40T302 29T287 17T269 6T247 -2T221 -8T190 -11Q130 -11 82 20T34 107Q34 128 41 147T68 188T116 225T194 253T304 268H318V290Q318 324 312 340Q290 411 215 411Q197 411 181 410T156 406T148 403Q170 388 170 359Q170 334 154 320ZM126 106Q126 75 150 51T209 26Q247 26 276 49T315 109Q317 116 318 175Q318 233 317 233Q309 233 296 232T251 223T193 203T147 166T126 106Z" transform="translate(750,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(4556.7,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="msub" transform="translate(5556.9,0)"><g data-mml-node="mi"><path data-c="1D441" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(836,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="43" d="M56 342Q56 428 89 500T174 615T283 681T391 705Q394 705 400 705T408 704Q499 704 569 636L582 624L612 663Q639 700 643 704Q644 704 647 704T653 705H657Q660 705 666 699V419L660 413H626Q620 419 619 430Q610 512 571 572T476 651Q457 658 426 658Q322 658 252 588Q173 509 173 342Q173 221 211 151Q232 111 263 84T328 45T384 29T428 24Q517 24 571 93T626 244Q626 251 632 257H660L666 251V236Q661 133 590 56T403 -21Q262 -21 159 83T56 342Z"></path><path data-c="6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z" transform="translate(722,0)"></path></g></g></g></g><g data-mml-node="mo" transform="translate(7372.2,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mfrac" transform="translate(8372.4,0)"><g data-mml-node="msub" transform="translate(220,747.2)"><g data-mml-node="mi"><path data-c="1D444" d="M399 -80Q399 -47 400 -30T402 -11V-7L387 -11Q341 -22 303 -22Q208 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435Q740 255 592 107Q529 47 461 16L444 8V3Q444 2 449 -24T470 -66T516 -82Q551 -82 583 -60T625 -3Q631 11 638 11Q647 11 649 2Q649 -6 639 -34T611 -100T557 -165T481 -194Q399 -194 399 -87V-80ZM636 468Q636 523 621 564T580 625T530 655T477 665Q429 665 379 640Q277 591 215 464T153 216Q153 110 207 59Q231 38 236 38V46Q236 86 269 120T347 155Q372 155 390 144T417 114T429 82T435 55L448 64Q512 108 557 185T619 334T636 468ZM314 18Q362 18 404 39L403 49Q399 104 366 115Q354 117 347 117Q344 117 341 117T337 118Q317 118 296 98T274 52Q274 18 314 18Z"></path></g><g data-mml-node="TeXAtom" transform="translate(824,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="70" d="M36 -148H50Q89 -148 97 -134V-126Q97 -119 97 -107T97 -77T98 -38T98 6T98 55T98 106Q98 140 98 177T98 243T98 296T97 335T97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 61 434T98 436Q115 437 135 438T165 441T176 442H179V416L180 390L188 397Q247 441 326 441Q407 441 464 377T522 216Q522 115 457 52T310 -11Q242 -11 190 33L182 40V-45V-101Q182 -128 184 -134T195 -145Q216 -148 244 -148H260V-194H252L228 -193Q205 -192 178 -192T140 -191Q37 -191 28 -194H20V-148H36ZM424 218Q424 292 390 347T305 402Q234 402 182 337V98Q222 26 294 26Q345 26 384 80T424 218Z"></path></g></g></g></g><g data-mml-node="mi" transform="translate(620.6,-686)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><rect width="1467.2" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></div><table class="symbols"><colgroup><col><col><col></colgroup><thead><tr><th scope="col">Symbol</th><th scope="col">Meaning</th><th scope="col">Unit</th></tr></thead><tbody><tr><td>Q, Q<sub>p</sub></td><td>Total system charge and protein charge; subscript p denotes protein</td><td>C, or expressed as multiples of e</td></tr><tr><td>e</td><td>Positive elementary charge, 1.602176634×10⁻¹⁹ C</td><td>C</td></tr><tr><td>N<sub>Na</sub>, N<sub>Cl</sub></td><td>Sodium and chloride counts; subscripts identify chemical species</td><td>Integer counts; dimensionless</td></tr><tr><td>Q/e, Q<sub>p</sub>/e</td><td>Total and protein charges measured in elementary-charge units</td><td>Dimensionless</td></tr><tr><td>=, −, +, /</td><td>Equality, subtraction, addition, and division; each Na⁺ contributes +1 and each Cl⁻ contributes −1</td><td>Operators; no units</td></tr></tbody></table><p><span class="eq-label">Reading the relationship</span>Add the charges of all components. Each water has zero net charge here, so no water term is needed in this net-charge expression.</p><p><span class="eq-label">A worked example</span>The present system gives 17−17+0=0. For a protein with charge −5e, 22−17−5=0, requiring five additional sodium counterions.</p><p><span class="eq-label">Conditions</span>Applies to the listed Na⁺, Cl⁻, and neutral waters. Multivalent ions and other charged molecules require their corresponding charge factors.</p></div>
+<p>The -conc option of genion calculates added salt from the whole-cell volume in the input TPR. The -neutral option adds the counterions needed for neutralization on top of that salt. Existing ions require attention: -conc specifies additional salt and does not subtract ions already present to achieve a final total concentration. Repeating the command on an already salted system therefore changes its composition. Keeping counts at each preparation stage and calculating concentration from the resulting system avoids this ambiguity. The interaction below connects cell volume, pair count, and protein charge so that their different roles can be explored directly.</p>
+<div class="lab" data-lang="en"><div data-lab="G06-I1" data-language="en"><p>Change pair count and whole-cell volume to compare salt addition with neutralization.</p><label>NaCl pair count <input data-field="pairs" type="range" min="0" max="40" step="1" value="17"><output data-read="pairs">17</output></label><label>Cell volume / nm³ <input data-field="volume" type="range" min="50" max="500" step="0.001" value="193.424"><output data-read="volume">193.424</output></label><label>Protein net charge <select data-field="charge"><option value="0">0e</option><option value="-5">−5e</option><option value="5">+5e</option></select></label><button type="button" data-action="reset">Reset</button><svg viewBox="0 0 640 330" role="img" aria-label="Sodium and chloride count comparison"><line x1="70" y1="260" x2="580" y2="260" stroke="#75908e" stroke-width="2"/><rect data-bar="na" x="145" y="192" width="100" height="68" fill="#be854d"/><rect data-bar="cl" x="395" y="192" width="100" height="68" fill="#6d8da8"/><g fill="currentColor" font-size="24" text-anchor="middle"><text x="195" y="300">Na⁺</text><text x="445" y="300">Cl⁻</text><text data-count="na" x="195" y="180">17</text><text data-count="cl" x="445" y="180">17</text></g></svg><p data-feedback role="status" aria-live="polite"></p></div><p class="lab-caption">An integer-count calculation using whole-cell volume. Counterions compensate protein charge; subsequent molecular dynamics describes positions and motion.</p></div>
+</section>
+<section id="en-s6" data-section="s6"><h2>A reproducible sequence for the cell, solvent, and ions</h2>
+<p>The preparation begins with protein.pdb from the previous chapter, containing the selected protein heavy atoms of chain A in 1UBQ. The script first repeats the same pdb2gmx choices: AMBER99SB-ILDN, TIP3P, explicit selection of HIE for His68, and the free charged termini used in this construction. This makes the chapter's preparation reproducible from its selected structure. The initial printf supplies choice 1 for the histidine state, selecting the neutral form with its ring hydrogen on NE2. This answer depends on the present residues and force field; another protein requires reading the prompts and inspecting its generated topology again.</p>
+<p>The editconf command reads processed.gro and places the protein in the selected periodic cell. The -c option centers it, while -d 1.0 and -bt dodecahedron define the initial spacing and box type. Centering changes absolute positions while preserving internal distances and connectivity. Next, solvate takes the protein-containing cell through -cp, the solvent coordinate template through -cs, the output coordinates through -o, and the topology to update through -p. Each stage has a separate output filename, making it straightforward to compare what changed when solvent was added.</p>
+<p>Before genion can operate, grompp compiles a TPR containing the system definition. The accompanying ions.mdp sets nsteps to zero. Its purpose at this stage is to combine coordinates, topology, and the required settings into an input that genion can read. No mdrun command is issued here, so the stage does not generate a segment of molecular motion. PME specifies long-range electrostatic treatment, and the short-range cutoffs are 1.0 nm, consistent with the subsequent workflow. Understanding this use of a TPR separates preparation of a computational system from the actual integration of its dynamics.</p>
+<div class="code-example" data-code="C1"><div class="code-title"><h3>System definition for ion replacement</h3><div><button data-copy-code>Copy</button><button data-download-code data-filename="ions.mdp">Download</button></div></div><pre tabindex="0"><code data-language="ini">integrator = steep
+nsteps = 0
+cutoff-scheme = Verlet
+nstlist = 20
+coulombtype = PME
+rcoulomb = 1.0
+fourierspacing = 0.12
+ewald-rtol = 1e-5
+vdwtype = Cut-off
+vdw-modifier = Potential-shift
+rvdw = 1.0
+DispCorr = EnerPres
+pbc = xyz
+</code></pre><p>nsteps=0; grompp uses this file to build ions.tpr for genion.</p></div>
+<p>The genion command specifies NA and CL through -pname and -nname, requests nominal 0.15 mol/L salt, enables neutralization, and fixes the replacement seed at 20261120. Selecting SOL chooses water molecules as the objects to replace. The seed makes this randomized preparation choice traceable, while the initial ion positions remain starting coordinates for subsequent dynamics. An equilibrium spatial distribution develops through motion. The selected solvent molecules must have consistent composition and form a contiguous solvent group. This is why the command selects the complete SOL group rather than an arbitrary collection of oxygen atoms.</p>
+<div class="code-example" data-code="C2"><div class="code-title"><h3>Build a salted aqueous protein system</h3><div><button data-copy-code>Copy</button><button data-download-code data-filename="build_solution.sh">Download</button></div></div><pre tabindex="0"><code data-language="bash">#!/usr/bin/env bash
+set -euo pipefail
+
+# protein.pdb contains the complete selected chain A of 1UBQ.
+printf &#x27;1\n&#x27; | gmx pdb2gmx -f protein.pdb -o processed.gro -p topol.top \
+    -i posre.itp -ff amber99sb-ildn -water tip3p -his
+gmx editconf -f processed.gro -o boxed.gro -c -d 1.0 -bt dodecahedron
+gmx solvate -cp boxed.gro -cs spc216.gro -o solvated.gro -p topol.top
+gmx grompp -f ions.mdp -c solvated.gro -p topol.top -o ions.tpr
+printf &#x27;SOL\n&#x27; | gmx genion -s ions.tpr -o solvated-ions.gro -p topol.top \
+    -pname NA -nname CL -conc 0.15 -neutral -seed 20261120
+python inspect_solution.py . --output solution-analysis --language en
+</code></pre><p>Place protein.pdb, ions.mdp, and inspect_solution.py in one example directory. The protein file is the chain A selection from the preceding chapter. With GROMACS 2026.4, the final command creates counts and figures.</p></div>
+<p>After execution, compare solvated.gro, solvated-ions.gro, and topol.top. The first two show the coordinate and particle-count changes; the third gives the updated molecular composition. Keeping each updated topology paired with its corresponding coordinates provides a consistent input for minimization. If their counts disagree, return to the operation that introduced the mismatch and regenerate the pair. Editing a topology count merely to make the total look correct can assign molecular definitions to the wrong sequence of coordinates, even when the final numbers happen to agree.</p>
+<p>These commands run sequentially in the prepared GROMACS 2026.4 environment. The complete script stops when a command fails so that later steps do not use missing or incomplete output. For readers new to the command line, a useful approach is to identify each line's input and output, run the small system, and then compare the count report with the expected changes. At this point, solvent molecules, ions, and new cell information all have a physical purpose. The report becomes a record that can be interpreted rather than a collection of unfamiliar numbers.</p>
+</section>
+<section id="en-s7" data-section="s7"><h2>Checking composition and concentration in the actual output</h2>
+<p>The Python program below reads the two GRO files and the molecules section of the topology. In an orthogonal GRO cell, three box components can be placed on the matrix diagonal. A tilted cell supplies six additional components; the program rearranges all nine according to the file format and takes the absolute determinant of the resulting cell matrix. The determinant gives an oriented parallelepiped volume, and its absolute value gives the physical volume. Concentration therefore follows the actual periodic geometry, regardless of whether the structure viewer displays a visually rectangular box.</p>
+<p>For counting, the program uses this TIP3P model's OW names to identify water molecules and checks that each water contributes three sites. NA and CL are counted as monatomic ions. It also checks that ion replacement preserves the initial cell, that the number of removed waters equals the number of inserted ions, and that coordinate counts agree with topology counts. These rules follow the names and composition of the present model. Four-site water, different ion names, or multiple protein molecules would require corresponding changes while retaining the same principle: the model determines how particles and molecules are counted.</p>
+<div class="code-example" data-code="C3"><div class="code-title"><h3>Complete Python: composition, volume, and salt concentration</h3><div><button data-copy-code>Copy</button><button data-download-code data-filename="inspect_solution.py">Download</button></div></div><pre tabindex="0"><code data-language="python">&quot;&quot;&quot;Count molecules and quantify salt concentration in the prepared solution.&quot;&quot;&quot;
+import argparse
+import csv
+import json
+from pathlib import Path
+
+import numpy as np
+import matplotlib
+matplotlib.use(&quot;Agg&quot;)
+import matplotlib.pyplot as plt
+
+AVOGADRO = 6.02214076e23
+
+
+def gro(path):
+    lines = path.read_text(encoding=&quot;utf-8&quot;).splitlines()
+    n = int(lines[1])
+    rows = [dict(resid=int(line[:5]), resname=line[5:10].strip(),
+                 name=line[10:15].strip(),
+                 xyz_nm=[float(line[i:i+8]) for i in (20, 28, 36)])
+            for line in lines[2:2+n]]
+    v = [float(x) for x in lines[2+n].split()]
+    if len(v) == 3:
+        cell = np.diag(v)
+    elif len(v) == 9:
+        cell = np.array([[v[0], v[3], v[4]],
+                         [v[5], v[1], v[6]],
+                         [v[7], v[8], v[2]]])
+    else:
+        raise ValueError(&quot;A GRO cell requires three or nine components.&quot;)
+    return rows, cell
+
+
+def molecule_counts(path):
+    counts, section = {}, &quot;&quot;
+    for line in path.read_text(encoding=&quot;utf-8&quot;).splitlines():
+        line = line.split(&quot;;&quot;, 1)[0].strip()
+        if line.startswith(&quot;[&quot;):
+            section = line.strip(&quot;[] &quot;)
+        elif section == &quot;molecules&quot; and line and not line.startswith(&quot;#&quot;):
+            name, count = line.split()[:2]
+            counts[name] = counts.get(name, 0) + int(count)
+    return counts
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument(&quot;directory&quot;, type=Path)
+    p.add_argument(&quot;--output&quot;, type=Path, default=Path(&quot;solution-analysis&quot;))
+    p.add_argument(&quot;--language&quot;, choices=(&quot;zh&quot;, &quot;en&quot;), default=&quot;en&quot;)
+    args = p.parse_args()
+    args.output.mkdir(parents=True, exist_ok=True)
+    before, cell0 = gro(args.directory / &quot;solvated.gro&quot;)
+    after, cell = gro(args.directory / &quot;solvated-ions.gro&quot;)
+    top = molecule_counts(args.directory / &quot;topol.top&quot;)
+    if not np.allclose(cell, cell0):
+        raise ValueError(&quot;Ion replacement should preserve the initial cell.&quot;)
+    water_before = sum(a[&quot;resname&quot;] == &quot;SOL&quot; and a[&quot;name&quot;] == &quot;OW&quot; for a in before)
+    water_after = sum(a[&quot;resname&quot;] == &quot;SOL&quot; and a[&quot;name&quot;] == &quot;OW&quot; for a in after)
+    water_sites = sum(a[&quot;resname&quot;] == &quot;SOL&quot; for a in after)
+    na = sum(a[&quot;resname&quot;] == &quot;NA&quot; for a in after)
+    cl = sum(a[&quot;resname&quot;] == &quot;CL&quot; for a in after)
+    protein_atoms = len(after) - water_sites - na - cl
+    assert water_sites == 3 * water_after
+    assert (top[&quot;SOL&quot;], top[&quot;NA&quot;], top[&quot;CL&quot;]) == (water_after, na, cl)
+    assert top[&quot;Protein_chain_A&quot;] == 1
+    assert water_before - water_after == na + cl
+    volume = float(abs(np.linalg.det(cell)))
+    litre_volume = volume * 1e-24
+    pair_increment_mM = 1000 / (AVOGADRO * litre_volume)
+    summary = dict(initial_cell_vectors_nm=cell.tolist(),
+                   initial_cell_volume_nm3=volume,
+                   protein_atoms=protein_atoms, waters_before=water_before,
+                   waters_after=water_after, sodium_ions=na, chloride_ions=cl,
+                   total_atoms=len(after), topology_molecules=top,
+                   sodium_concentration_mM=na*pair_increment_mM,
+                   chloride_concentration_mM=cl*pair_increment_mM,
+                   one_pair_increment_mM=pair_increment_mM,
+                   nominal_added_salt_mM=150,
+                   ionic_charge_e=na-cl,
+                   atom_count_expected=protein_atoms+3*water_after+na+cl)
+    (args.output / &quot;solution_summary.json&quot;).write_text(
+        json.dumps(summary, ensure_ascii=False, indent=2)+&quot;\n&quot;, encoding=&quot;utf-8&quot;)
+    with (args.output / &quot;salt_count_concentration.csv&quot;).open(&quot;w&quot;, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as f:
+        writer = csv.writer(f)
+        writer.writerow([&quot;NaCl_pairs&quot;, &quot;concentration_mM&quot;])
+        writer.writerows((n, n*pair_increment_mM) for n in range(36))
+    zh = args.language == &quot;zh&quot;
+    fonts = [&quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, &quot;Source Han Sans SC&quot;,
+             &quot;WenQuanYi Zen Hei&quot;, &quot;DejaVu Sans&quot;] if zh else [&quot;DejaVu Sans&quot;]
+    plt.rcParams.update({&quot;font.family&quot;: fonts,
+                         &quot;font.size&quot;: 14, &quot;svg.fonttype&quot;: &quot;path&quot;,
+                         &quot;axes.spines.top&quot;: False, &quot;axes.spines.right&quot;: False})
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5), constrained_layout=True)
+    axes[0].bar([0, 1], [water_before, water_after], color=[&quot;#a9c9c0&quot;, &quot;#257d85&quot;])
+    axes[0].set_xticks([0, 1], [&quot;加盐前&quot;, &quot;加盐后&quot;] if zh else [&quot;Before ions&quot;, &quot;After ions&quot;])
+    axes[0].set_ylabel(&quot;水分子数&quot; if zh else &quot;Water molecules&quot;)
+    axes[0].set_ylim(0, water_before*1.15)
+    for i, n in enumerate([water_before, water_after]):
+        axes[0].text(i, n+80, str(n), ha=&quot;center&quot;)
+    axes[1].bar([0, 1], [na, cl], color=[&quot;#b6773f&quot;, &quot;#567795&quot;])
+    axes[1].set_xticks([0, 1], [&quot;Na⁺&quot;, &quot;Cl⁻&quot;])
+    axes[1].set_ylim(0, max(na, cl)*1.2)
+    axes[1].set_ylabel(&quot;离子数&quot; if zh else &quot;Ions&quot;)
+    for i, n in enumerate([na, cl]):
+        axes[1].text(i, n+.4, str(n), ha=&quot;center&quot;)
+    n = np.arange(36)
+    axes[2].plot(n, n*pair_increment_mM, color=&quot;#8fa8a1&quot;, lw=1.5)
+    axes[2].scatter(n, n*pair_increment_mM, color=&quot;#257d85&quot;, s=20)
+    axes[2].axhline(150, color=&quot;#b6773f&quot;, linestyle=&quot;--&quot;, label=&quot;150 mM&quot;)
+    axes[2].scatter([na], [na*pair_increment_mM], color=&quot;#b6773f&quot;, s=80, zorder=4)
+    axes[2].set_xlabel(&quot;NaCl离子对数&quot; if zh else &quot;Number of NaCl pairs&quot;)
+    axes[2].set_ylabel(&quot;按整盒体积计算的浓度 / mM&quot; if zh else &quot;Whole-cell concentration / mM&quot;)
+    axes[2].legend(frameon=False)
+    for ax in axes:
+        ax.grid(axis=&quot;y&quot;, alpha=.2)
+        ax.set_axisbelow(True)
+    fig.suptitle(&quot;泛素溶液：组成与整数离子数&quot; if zh else &quot;Ubiquitin solution: composition and integer ion counts&quot;, fontsize=19)
+    fig.savefig(args.output / &quot;solution_composition.svg&quot;)
+    fig.savefig(args.output / &quot;solution_composition.png&quot;, dpi=150)
+    plt.close(fig)
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre><p>Requires NumPy and Matplotlib. Reads solvated.gro, solvated-ions.gro, and topol.top from the supplied directory. Use --language zh or en for figure language.</p></div>
+<p>The actual output contains 5902 waters before ion replacement and 5868 afterward. Their difference, 34, equals the combined number of sodium and chloride ions. The protein retains 1231 atoms, giving a final total of 1231+3×5868+17+17=18869 sites. Addition combines the component counts, while multiplication accounts for three sites per water molecule. A second calculation reaches the same total: the solvated structure initially contains 18937 sites, and 34 replacements of three-site water by one-site ions remove 68 sites. Agreement between these two routes provides a transparent check of the molecular replacement.</p>
+<div class="run-result" data-case="gromacs-protein"><h3>Actual composition of the ubiquitin solution</h3><p>Initial periodic volume: 193.4239779 nm³. Water count changes from 5902 to 5868, with 17 Na⁺ and 17 Cl⁻. The right panel calculates concentration from integer pair counts and whole-cell volume; the orange point marks the actual 17-pair preparation.</p><p class="run-conditions">GROMACS 2026.4; chain A of PDB 1UBQ, 76 residues; AMBER99SB-ILDN with TIP3P. All 602 experimental heavy atoms are retained and 629 hydrogen atoms added. His68 uses neutral NE2 protonation, with charged free termini.</p><div class="reference-downloads"><a download href="https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-protein-solution-data.zip">Download reference data and complete inputs (ZIP) <span>0.53 MB</span></a></div><figure class="result-figure"><div class="figure-wrap"><?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1080pt" height="360pt" viewBox="0 0 1080 360" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="en-graphic8-figure_1">
+  <g id="en-graphic8-patch_1">
+   <path d="M 0 360 
+L 1080 360 
+L 1080 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="en-graphic8-axes_1">
+   <g id="en-graphic8-patch_2">
+    <path d="M 63.179615 318.90101 
+L 360.655288 318.90101 
+L 360.655288 27.389158 
+L 63.179615 27.389158 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="en-graphic8-matplotlib.axis_1">
+    <g id="en-graphic8-xtick_1">
+     <g id="en-graphic8-line2d_1">
+      <defs>
+       <path id="en-graphic8-mdc721e7005" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#en-graphic8-mdc721e7005" x="136.797332" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_1">
+      <!-- Before ions -->
+      <g transform="translate(97.377488 336.538822) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-42" d="M 1259 2228 
+L 1259 519 
+L 2272 519 
+Q 2781 519 3026 730 
+Q 3272 941 3272 1375 
+Q 3272 1813 3026 2020 
+Q 2781 2228 2272 2228 
+L 1259 2228 
+z
+M 1259 4147 
+L 1259 2741 
+L 2194 2741 
+Q 2656 2741 2882 2914 
+Q 3109 3088 3109 3444 
+Q 3109 3797 2882 3972 
+Q 2656 4147 2194 4147 
+L 1259 4147 
+z
+M 628 4666 
+L 2241 4666 
+Q 2963 4666 3353 4366 
+Q 3744 4066 3744 3513 
+Q 3744 3084 3544 2831 
+Q 3344 2578 2956 2516 
+Q 3422 2416 3680 2098 
+Q 3938 1781 3938 1306 
+Q 3938 681 3513 340 
+Q 3088 0 2303 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-65" d="M 3597 1894 
+L 3597 1613 
+L 953 1613 
+Q 991 1019 1311 708 
+Q 1631 397 2203 397 
+Q 2534 397 2845 478 
+Q 3156 559 3463 722 
+L 3463 178 
+Q 3153 47 2828 -22 
+Q 2503 -91 2169 -91 
+Q 1331 -91 842 396 
+Q 353 884 353 1716 
+Q 353 2575 817 3079 
+Q 1281 3584 2069 3584 
+Q 2775 3584 3186 3129 
+Q 3597 2675 3597 1894 
+z
+M 3022 2063 
+Q 3016 2534 2758 2815 
+Q 2500 3097 2075 3097 
+Q 1594 3097 1305 2825 
+Q 1016 2553 972 2059 
+L 3022 2063 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-66" d="M 2375 4863 
+L 2375 4384 
+L 1825 4384 
+Q 1516 4384 1395 4259 
+Q 1275 4134 1275 3809 
+L 1275 3500 
+L 2222 3500 
+L 2222 3053 
+L 1275 3053 
+L 1275 0 
+L 697 0 
+L 697 3053 
+L 147 3053 
+L 147 3500 
+L 697 3500 
+L 697 3744 
+Q 697 4328 969 4595 
+Q 1241 4863 1831 4863 
+L 2375 4863 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-6f" d="M 1959 3097 
+Q 1497 3097 1228 2736 
+Q 959 2375 959 1747 
+Q 959 1119 1226 758 
+Q 1494 397 1959 397 
+Q 2419 397 2687 759 
+Q 2956 1122 2956 1747 
+Q 2956 2369 2687 2733 
+Q 2419 3097 1959 3097 
+z
+M 1959 3584 
+Q 2709 3584 3137 3096 
+Q 3566 2609 3566 1747 
+Q 3566 888 3137 398 
+Q 2709 -91 1959 -91 
+Q 1206 -91 779 398 
+Q 353 888 353 1747 
+Q 353 2609 779 3096 
+Q 1206 3584 1959 3584 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-72" d="M 2631 2963 
+Q 2534 3019 2420 3045 
+Q 2306 3072 2169 3072 
+Q 1681 3072 1420 2755 
+Q 1159 2438 1159 1844 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1341 3275 1631 3429 
+Q 1922 3584 2338 3584 
+Q 2397 3584 2469 3576 
+Q 2541 3569 2628 3553 
+L 2631 2963 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-20" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-69" d="M 603 3500 
+L 1178 3500 
+L 1178 0 
+L 603 0 
+L 603 3500 
+z
+M 603 4863 
+L 1178 4863 
+L 1178 4134 
+L 603 4134 
+L 603 4863 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-6e" d="M 3513 2113 
+L 3513 0 
+L 2938 0 
+L 2938 2094 
+Q 2938 2591 2744 2837 
+Q 2550 3084 2163 3084 
+Q 1697 3084 1428 2787 
+Q 1159 2491 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1366 3272 1645 3428 
+Q 1925 3584 2291 3584 
+Q 2894 3584 3203 3211 
+Q 3513 2838 3513 2113 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-73" d="M 2834 3397 
+L 2834 2853 
+Q 2591 2978 2328 3040 
+Q 2066 3103 1784 3103 
+Q 1356 3103 1142 2972 
+Q 928 2841 928 2578 
+Q 928 2378 1081 2264 
+Q 1234 2150 1697 2047 
+L 1894 2003 
+Q 2506 1872 2764 1633 
+Q 3022 1394 3022 966 
+Q 3022 478 2636 193 
+Q 2250 -91 1575 -91 
+Q 1294 -91 989 -36 
+Q 684 19 347 128 
+L 347 722 
+Q 666 556 975 473 
+Q 1284 391 1588 391 
+Q 1994 391 2212 530 
+Q 2431 669 2431 922 
+Q 2431 1156 2273 1281 
+Q 2116 1406 1581 1522 
+L 1381 1569 
+Q 847 1681 609 1914 
+Q 372 2147 372 2553 
+Q 372 3047 722 3315 
+Q 1072 3584 1716 3584 
+Q 2034 3584 2315 3537 
+Q 2597 3491 2834 3397 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-42"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(68.603516 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-66" transform="translate(130.126953 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(165.332031 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-72" transform="translate(226.513672 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(265.376953 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(326.900391 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(358.6875 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(386.470703 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(447.652344 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-73" transform="translate(511.03125 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-xtick_2">
+     <g id="en-graphic8-line2d_2">
+      <g>
+       <use xlink:href="#en-graphic8-mdc721e7005" x="287.037571" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_2">
+      <!-- After ions -->
+      <g transform="translate(253.69679 336.538822) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-41" d="M 2188 4044 
+L 1331 1722 
+L 3047 1722 
+L 2188 4044 
+z
+M 1831 4666 
+L 2547 4666 
+L 4325 0 
+L 3669 0 
+L 3244 1197 
+L 1141 1197 
+L 716 0 
+L 50 0 
+L 1831 4666 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-74" d="M 1172 4494 
+L 1172 3500 
+L 2356 3500 
+L 2356 3053 
+L 1172 3053 
+L 1172 1153 
+Q 1172 725 1289 603 
+Q 1406 481 1766 481 
+L 2356 481 
+L 2356 0 
+L 1766 0 
+Q 1100 0 847 248 
+Q 594 497 594 1153 
+L 594 3053 
+L 172 3053 
+L 172 3500 
+L 594 3500 
+L 594 4494 
+L 1172 4494 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-41"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-66" transform="translate(64.783203 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(98.238281 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(137.447266 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-72" transform="translate(198.970703 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(240.083984 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(271.871094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(299.654297 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(360.835938 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-73" transform="translate(424.214844 0)"/>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="en-graphic8-matplotlib.axis_2">
+    <g id="en-graphic8-ytick_1">
+     <g id="en-graphic8-line2d_3">
+      <path d="M 63.179615 318.90101 
+L 360.655288 318.90101 
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_4">
+      <defs>
+       <path id="en-graphic8-mda92867c64" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="63.179615" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_3">
+      <!-- 0 -->
+      <g transform="translate(47.272115 324.219916) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-30" d="M 2034 4250 
+Q 1547 4250 1301 3770 
+Q 1056 3291 1056 2328 
+Q 1056 1369 1301 889 
+Q 1547 409 2034 409 
+Q 2525 409 2770 889 
+Q 3016 1369 3016 2328 
+Q 3016 3291 2770 3770 
+Q 2525 4250 2034 4250 
+z
+M 2034 4750 
+Q 2819 4750 3233 4129 
+Q 3647 3509 3647 2328 
+Q 3647 1150 3233 529 
+Q 2819 -91 2034 -91 
+Q 1250 -91 836 529 
+Q 422 1150 422 2328 
+Q 422 3509 836 4129 
+Q 1250 4750 2034 4750 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-30"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_2">
+     <g id="en-graphic8-line2d_5">
+      <path d="M 63.179615 275.951405 
+L 360.655288 275.951405 
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_6">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="63.179615" y="275.951405" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_4">
+      <!-- 1000 -->
+      <g transform="translate(20.549615 281.270311) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-31" d="M 794 531 
+L 1825 531 
+L 1825 4091 
+L 703 3866 
+L 703 4441 
+L 1819 4666 
+L 2450 4666 
+L 2450 531 
+L 3481 531 
+L 3481 0 
+L 794 0 
+L 794 531 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(190.869141 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_3">
+     <g id="en-graphic8-line2d_7">
+      <path d="M 63.179615 233.0018 
+L 360.655288 233.0018 
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_8">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="63.179615" y="233.0018" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_5">
+      <!-- 2000 -->
+      <g transform="translate(20.549615 238.320707) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-32" d="M 1228 531 
+L 3431 531 
+L 3431 0 
+L 469 0 
+L 469 531 
+Q 828 903 1448 1529 
+Q 2069 2156 2228 2338 
+Q 2531 2678 2651 2914 
+Q 2772 3150 2772 3378 
+Q 2772 3750 2511 3984 
+Q 2250 4219 1831 4219 
+Q 1534 4219 1204 4116 
+Q 875 4013 500 3803 
+L 500 4441 
+Q 881 4594 1212 4672 
+Q 1544 4750 1819 4750 
+Q 2544 4750 2975 4387 
+Q 3406 4025 3406 3419 
+Q 3406 3131 3298 2873 
+Q 3191 2616 2906 2266 
+Q 2828 2175 2409 1742 
+Q 1991 1309 1228 531 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-32"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(190.869141 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_4">
+     <g id="en-graphic8-line2d_9">
+      <path d="M 63.179615 190.052196 
+L 360.655288 190.052196 
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_10">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="63.179615" y="190.052196" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_6">
+      <!-- 3000 -->
+      <g transform="translate(20.549615 195.371102) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-33" d="M 2597 2516 
+Q 3050 2419 3304 2112 
+Q 3559 1806 3559 1356 
+Q 3559 666 3084 287 
+Q 2609 -91 1734 -91 
+Q 1441 -91 1130 -33 
+Q 819 25 488 141 
+L 488 750 
+Q 750 597 1062 519 
+Q 1375 441 1716 441 
+Q 2309 441 2620 675 
+Q 2931 909 2931 1356 
+Q 2931 1769 2642 2001 
+Q 2353 2234 1838 2234 
+L 1294 2234 
+L 1294 2753 
+L 1863 2753 
+Q 2328 2753 2575 2939 
+Q 2822 3125 2822 3475 
+Q 2822 3834 2567 4026 
+Q 2313 4219 1838 4219 
+Q 1578 4219 1281 4162 
+Q 984 4106 628 3988 
+L 628 4550 
+Q 988 4650 1302 4700 
+Q 1616 4750 1894 4750 
+Q 2613 4750 3031 4423 
+Q 3450 4097 3450 3541 
+Q 3450 3153 3228 2886 
+Q 3006 2619 2597 2516 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-33"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(190.869141 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_5">
+     <g id="en-graphic8-line2d_11">
+      <path d="M 63.179615 147.102591 
+L 360.655288 147.102591 
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_12">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="63.179615" y="147.102591" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_7">
+      <!-- 4000 -->
+      <g transform="translate(20.549615 152.421497) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-34" d="M 2419 4116 
+L 825 1625 
+L 2419 1625 
+L 2419 4116 
+z
+M 2253 4666 
+L 3047 4666 
+L 3047 1625 
+L 3713 1625 
+L 3713 1100 
+L 3047 1100 
+L 3047 0 
+L 2419 0 
+L 2419 1100 
+L 313 1100 
+L 313 1709 
+L 2253 4666 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-34"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(190.869141 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_6">
+     <g id="en-graphic8-line2d_13">
+      <path d="M 63.179615 104.152986 
+L 360.655288 104.152986 
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_14">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="63.179615" y="104.152986" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_8">
+      <!-- 5000 -->
+      <g transform="translate(20.549615 109.471892) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-35" d="M 691 4666 
+L 3169 4666 
+L 3169 4134 
+L 1269 4134 
+L 1269 2991 
+Q 1406 3038 1543 3061 
+Q 1681 3084 1819 3084 
+Q 2600 3084 3056 2656 
+Q 3513 2228 3513 1497 
+Q 3513 744 3044 326 
+Q 2575 -91 1722 -91 
+Q 1428 -91 1123 -41 
+Q 819 9 494 109 
+L 494 744 
+Q 775 591 1075 516 
+Q 1375 441 1709 441 
+Q 2250 441 2565 725 
+Q 2881 1009 2881 1497 
+Q 2881 1984 2565 2268 
+Q 2250 2553 1709 2553 
+Q 1456 2553 1204 2497 
+Q 953 2441 691 2322 
+L 691 4666 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-35"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(190.869141 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_7">
+     <g id="en-graphic8-line2d_15">
+      <path d="M 63.179615 61.203381 
+L 360.655288 61.203381 
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_16">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="63.179615" y="61.203381" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_9">
+      <!-- 6000 -->
+      <g transform="translate(20.549615 66.522288) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-36" d="M 2113 2584 
+Q 1688 2584 1439 2293 
+Q 1191 2003 1191 1497 
+Q 1191 994 1439 701 
+Q 1688 409 2113 409 
+Q 2538 409 2786 701 
+Q 3034 994 3034 1497 
+Q 3034 2003 2786 2293 
+Q 2538 2584 2113 2584 
+z
+M 3366 4563 
+L 3366 3988 
+Q 3128 4100 2886 4159 
+Q 2644 4219 2406 4219 
+Q 1781 4219 1451 3797 
+Q 1122 3375 1075 2522 
+Q 1259 2794 1537 2939 
+Q 1816 3084 2150 3084 
+Q 2853 3084 3261 2657 
+Q 3669 2231 3669 1497 
+Q 3669 778 3244 343 
+Q 2819 -91 2113 -91 
+Q 1303 -91 875 529 
+Q 447 1150 447 2328 
+Q 447 3434 972 4092 
+Q 1497 4750 2381 4750 
+Q 2619 4750 2861 4703 
+Q 3103 4656 3366 4563 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-36"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(190.869141 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-text_10">
+     <!-- Water molecules -->
+     <g transform="translate(13.638053 231.600553) rotate(-90) scale(0.14 -0.14)">
+      <defs>
+       <path id="en-graphic8-DejaVuSans-57" d="M 213 4666 
+L 850 4666 
+L 1831 722 
+L 2809 4666 
+L 3519 4666 
+L 4500 722 
+L 5478 4666 
+L 6119 4666 
+L 4947 0 
+L 4153 0 
+L 3169 4050 
+L 2175 0 
+L 1381 0 
+L 213 4666 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-61" d="M 2194 1759 
+Q 1497 1759 1228 1600 
+Q 959 1441 959 1056 
+Q 959 750 1161 570 
+Q 1363 391 1709 391 
+Q 2188 391 2477 730 
+Q 2766 1069 2766 1631 
+L 2766 1759 
+L 2194 1759 
+z
+M 3341 1997 
+L 3341 0 
+L 2766 0 
+L 2766 531 
+Q 2569 213 2275 61 
+Q 1981 -91 1556 -91 
+Q 1019 -91 701 211 
+Q 384 513 384 1019 
+Q 384 1609 779 1909 
+Q 1175 2209 1959 2209 
+L 2766 2209 
+L 2766 2266 
+Q 2766 2663 2505 2880 
+Q 2244 3097 1772 3097 
+Q 1472 3097 1187 3025 
+Q 903 2953 641 2809 
+L 641 3341 
+Q 956 3463 1253 3523 
+Q 1550 3584 1831 3584 
+Q 2591 3584 2966 3190 
+Q 3341 2797 3341 1997 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-6d" d="M 3328 2828 
+Q 3544 3216 3844 3400 
+Q 4144 3584 4550 3584 
+Q 5097 3584 5394 3201 
+Q 5691 2819 5691 2113 
+L 5691 0 
+L 5113 0 
+L 5113 2094 
+Q 5113 2597 4934 2840 
+Q 4756 3084 4391 3084 
+Q 3944 3084 3684 2787 
+Q 3425 2491 3425 1978 
+L 3425 0 
+L 2847 0 
+L 2847 2094 
+Q 2847 2600 2669 2842 
+Q 2491 3084 2119 3084 
+Q 1678 3084 1418 2786 
+Q 1159 2488 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 3500 
+L 1159 3500 
+L 1159 2956 
+Q 1356 3278 1631 3431 
+Q 1906 3584 2284 3584 
+Q 2666 3584 2933 3390 
+Q 3200 3197 3328 2828 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-6c" d="M 603 4863 
+L 1178 4863 
+L 1178 0 
+L 603 0 
+L 603 4863 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-63" d="M 3122 3366 
+L 3122 2828 
+Q 2878 2963 2633 3030 
+Q 2388 3097 2138 3097 
+Q 1578 3097 1268 2742 
+Q 959 2388 959 1747 
+Q 959 1106 1268 751 
+Q 1578 397 2138 397 
+Q 2388 397 2633 464 
+Q 2878 531 3122 666 
+L 3122 134 
+Q 2881 22 2623 -34 
+Q 2366 -91 2075 -91 
+Q 1284 -91 818 406 
+Q 353 903 353 1747 
+Q 353 2603 823 3093 
+Q 1294 3584 2113 3584 
+Q 2378 3584 2631 3529 
+Q 2884 3475 3122 3366 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-75" d="M 544 1381 
+L 544 3500 
+L 1119 3500 
+L 1119 1403 
+Q 1119 906 1312 657 
+Q 1506 409 1894 409 
+Q 2359 409 2629 706 
+Q 2900 1003 2900 1516 
+L 2900 3500 
+L 3475 3500 
+L 3475 0 
+L 2900 0 
+L 2900 538 
+Q 2691 219 2414 64 
+Q 2138 -91 1772 -91 
+Q 1169 -91 856 284 
+Q 544 659 544 1381 
+z
+M 1991 3584 
+L 1991 3584 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#en-graphic8-DejaVuSans-57"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-61" transform="translate(92.501953 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(153.78125 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(192.990234 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-72" transform="translate(254.513672 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(295.626953 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6d" transform="translate(327.414062 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(424.826172 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6c" transform="translate(486.007812 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(513.791016 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-63" transform="translate(575.314453 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-75" transform="translate(630.294922 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6c" transform="translate(693.673828 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(721.457031 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-73" transform="translate(782.980469 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="en-graphic8-patch_3">
+    <path d="M 76.701237 318.90101 
+L 196.893428 318.90101 
+L 196.893428 65.412443 
+L 76.701237 65.412443 
+z
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: #a9c9c0"/>
+   </g>
+   <g id="en-graphic8-patch_4">
+    <path d="M 226.941476 318.90101 
+L 347.133667 318.90101 
+L 347.133667 66.872729 
+L 226.941476 66.872729 
+z
+" clip-path="url(#en-graphic8-p510c1c16ac)" style="fill: #257d85"/>
+   </g>
+   <g id="en-graphic8-patch_5">
+    <path d="M 63.179615 318.90101 
+L 63.179615 27.389158 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="en-graphic8-patch_6">
+    <path d="M 63.179615 318.90101 
+L 360.655288 318.90101 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="en-graphic8-text_11">
+    <!-- 5902 -->
+    <g transform="translate(118.982332 61.976474) scale(0.14 -0.14)">
+     <defs>
+      <path id="en-graphic8-DejaVuSans-39" d="M 703 97 
+L 703 672 
+Q 941 559 1184 500 
+Q 1428 441 1663 441 
+Q 2288 441 2617 861 
+Q 2947 1281 2994 2138 
+Q 2813 1869 2534 1725 
+Q 2256 1581 1919 1581 
+Q 1219 1581 811 2004 
+Q 403 2428 403 3163 
+Q 403 3881 828 4315 
+Q 1253 4750 1959 4750 
+Q 2769 4750 3195 4129 
+Q 3622 3509 3622 2328 
+Q 3622 1225 3098 567 
+Q 2575 -91 1691 -91 
+Q 1453 -91 1209 -44 
+Q 966 3 703 97 
+z
+M 1959 2075 
+Q 2384 2075 2632 2365 
+Q 2881 2656 2881 3163 
+Q 2881 3666 2632 3958 
+Q 2384 4250 1959 4250 
+Q 1534 4250 1286 3958 
+Q 1038 3666 1038 3163 
+Q 1038 2656 1286 2365 
+Q 1534 2075 1959 2075 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#en-graphic8-DejaVuSans-35"/>
+     <use xlink:href="#en-graphic8-DejaVuSans-39" transform="translate(63.623047 0)"/>
+     <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+     <use xlink:href="#en-graphic8-DejaVuSans-32" transform="translate(190.869141 0)"/>
+    </g>
+   </g>
+   <g id="en-graphic8-text_12">
+    <!-- 5868 -->
+    <g transform="translate(269.222571 63.436761) scale(0.14 -0.14)">
+     <defs>
+      <path id="en-graphic8-DejaVuSans-38" d="M 2034 2216 
+Q 1584 2216 1326 1975 
+Q 1069 1734 1069 1313 
+Q 1069 891 1326 650 
+Q 1584 409 2034 409 
+Q 2484 409 2743 651 
+Q 3003 894 3003 1313 
+Q 3003 1734 2745 1975 
+Q 2488 2216 2034 2216 
+z
+M 1403 2484 
+Q 997 2584 770 2862 
+Q 544 3141 544 3541 
+Q 544 4100 942 4425 
+Q 1341 4750 2034 4750 
+Q 2731 4750 3128 4425 
+Q 3525 4100 3525 3541 
+Q 3525 3141 3298 2862 
+Q 3072 2584 2669 2484 
+Q 3125 2378 3379 2068 
+Q 3634 1759 3634 1313 
+Q 3634 634 3220 271 
+Q 2806 -91 2034 -91 
+Q 1263 -91 848 271 
+Q 434 634 434 1313 
+Q 434 1759 690 2068 
+Q 947 2378 1403 2484 
+z
+M 1172 3481 
+Q 1172 3119 1398 2916 
+Q 1625 2713 2034 2713 
+Q 2441 2713 2670 2916 
+Q 2900 3119 2900 3481 
+Q 2900 3844 2670 4047 
+Q 2441 4250 2034 4250 
+Q 1625 4250 1398 4047 
+Q 1172 3844 1172 3481 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#en-graphic8-DejaVuSans-35"/>
+     <use xlink:href="#en-graphic8-DejaVuSans-38" transform="translate(63.623047 0)"/>
+     <use xlink:href="#en-graphic8-DejaVuSans-36" transform="translate(127.246094 0)"/>
+     <use xlink:href="#en-graphic8-DejaVuSans-38" transform="translate(190.869141 0)"/>
+    </g>
+   </g>
+  </g>
+  <g id="en-graphic8-axes_2">
+   <g id="en-graphic8-patch_7">
+    <path d="M 423.576538 318.90101 
+L 721.052212 318.90101 
+L 721.052212 27.389158 
+L 423.576538 27.389158 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="en-graphic8-matplotlib.axis_3">
+    <g id="en-graphic8-xtick_3">
+     <g id="en-graphic8-line2d_17">
+      <g>
+       <use xlink:href="#en-graphic8-mdc721e7005" x="497.194255" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_13">
+      <!-- Na⁺ -->
+      <g transform="translate(483.973005 336.538822) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-4e" d="M 628 4666 
+L 1478 4666 
+L 3547 763 
+L 3547 4666 
+L 4159 4666 
+L 4159 0 
+L 3309 0 
+L 1241 3903 
+L 1241 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-207a" d="M 1853 4334 
+L 1853 3359 
+L 2950 3359 
+L 2950 3063 
+L 1853 3063 
+L 1853 2088 
+L 1525 2088 
+L 1525 3063 
+L 428 3063 
+L 428 3359 
+L 1525 3359 
+L 1525 4334 
+L 1853 4334 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-4e"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-61" transform="translate(74.804688 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-207a" transform="translate(136.083984 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-xtick_4">
+     <g id="en-graphic8-line2d_18">
+      <g>
+       <use xlink:href="#en-graphic8-mdc721e7005" x="647.434495" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_14">
+      <!-- Cl⁻ -->
+      <g transform="translate(636.907151 336.538822) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-43" d="M 4122 4306 
+L 4122 3641 
+Q 3803 3938 3442 4084 
+Q 3081 4231 2675 4231 
+Q 1875 4231 1450 3742 
+Q 1025 3253 1025 2328 
+Q 1025 1406 1450 917 
+Q 1875 428 2675 428 
+Q 3081 428 3442 575 
+Q 3803 722 4122 1019 
+L 4122 359 
+Q 3791 134 3420 21 
+Q 3050 -91 2638 -91 
+Q 1578 -91 968 557 
+Q 359 1206 359 2328 
+Q 359 3453 968 4101 
+Q 1578 4750 2638 4750 
+Q 3056 4750 3426 4639 
+Q 3797 4528 4122 4306 
+z
+" transform="scale(0.015625)"/>
+        <path id="en-graphic8-DejaVuSans-207b" d="M 428 3359 
+L 2950 3359 
+L 2950 3063 
+L 428 3063 
+L 428 3359 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-43"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-6c" transform="translate(69.824219 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-207b" transform="translate(97.607422 0)"/>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g id="en-graphic8-matplotlib.axis_4">
+    <g id="en-graphic8-ytick_8">
+     <g id="en-graphic8-line2d_19">
+      <path d="M 423.576538 318.90101 
+L 721.052212 318.90101 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_20">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_15">
+      <!-- 0.0 -->
+      <g transform="translate(394.312163 324.219916) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-2e" d="M 684 794 
+L 1344 794 
+L 1344 0 
+L 684 0 
+L 684 794 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-30"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_9">
+     <g id="en-graphic8-line2d_21">
+      <path d="M 423.576538 283.176518 
+L 721.052212 283.176518 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_22">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="283.176518" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_16">
+      <!-- 2.5 -->
+      <g transform="translate(394.312163 288.495425) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-32"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-35" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_10">
+     <g id="en-graphic8-line2d_23">
+      <path d="M 423.576538 247.452027 
+L 721.052212 247.452027 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_24">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="247.452027" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_17">
+      <!-- 5.0 -->
+      <g transform="translate(394.312163 252.770933) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-35"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_11">
+     <g id="en-graphic8-line2d_25">
+      <path d="M 423.576538 211.727535 
+L 721.052212 211.727535 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_26">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="211.727535" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_18">
+      <!-- 7.5 -->
+      <g transform="translate(394.312163 217.046441) scale(0.14 -0.14)">
+       <defs>
+        <path id="en-graphic8-DejaVuSans-37" d="M 525 4666 
+L 3525 4666 
+L 3525 4397 
+L 1831 0 
+L 1172 0 
+L 2766 4134 
+L 525 4134 
+L 525 4666 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#en-graphic8-DejaVuSans-37"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-35" transform="translate(95.410156 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_12">
+     <g id="en-graphic8-line2d_27">
+      <path d="M 423.576538 176.003043 
+L 721.052212 176.003043 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_28">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="176.003043" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_19">
+      <!-- 10.0 -->
+      <g transform="translate(385.404663 181.321949) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_13">
+     <g id="en-graphic8-line2d_29">
+      <path d="M 423.576538 140.278551 
+L 721.052212 140.278551 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_30">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="140.278551" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_20">
+      <!-- 12.5 -->
+      <g transform="translate(385.404663 145.597458) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-32" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-35" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_14">
+     <g id="en-graphic8-line2d_31">
+      <path d="M 423.576538 104.55406 
+L 721.052212 104.55406 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_32">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="104.55406" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_21">
+      <!-- 15.0 -->
+      <g transform="translate(385.404663 109.872966) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-35" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_15">
+     <g id="en-graphic8-line2d_33">
+      <path d="M 423.576538 68.829568 
+L 721.052212 68.829568 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_34">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="68.829568" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_22">
+      <!-- 17.5 -->
+      <g transform="translate(385.404663 74.148474) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-37" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-35" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_16">
+     <g id="en-graphic8-line2d_35">
+      <path d="M 423.576538 33.105076 
+L 721.052212 33.105076 
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_36">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="423.576538" y="33.105076" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_23">
+      <!-- 20.0 -->
+      <g transform="translate(385.404663 38.423982) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-32"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-2e" transform="translate(127.246094 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(159.033203 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-text_24">
+     <!-- Ions -->
+     <g transform="translate(378.493101 187.576021) rotate(-90) scale(0.14 -0.14)">
+      <defs>
+       <path id="en-graphic8-DejaVuSans-49" d="M 628 4666 
+L 1259 4666 
+L 1259 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#en-graphic8-DejaVuSans-49"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(29.492188 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(90.673828 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-73" transform="translate(154.052734 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="en-graphic8-patch_8">
+    <path d="M 437.09816 318.90101 
+L 557.290351 318.90101 
+L 557.290351 75.974466 
+L 437.09816 75.974466 
+z
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: #b6773f"/>
+   </g>
+   <g id="en-graphic8-patch_9">
+    <path d="M 587.338399 318.90101 
+L 707.53059 318.90101 
+L 707.53059 75.974466 
+L 587.338399 75.974466 
+z
+" clip-path="url(#en-graphic8-p835fd5375b)" style="fill: #567795"/>
+   </g>
+   <g id="en-graphic8-patch_10">
+    <path d="M 423.576538 318.90101 
+L 423.576538 27.389158 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="en-graphic8-patch_11">
+    <path d="M 423.576538 318.90101 
+L 721.052212 318.90101 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="en-graphic8-text_25">
+    <!-- 17 -->
+    <g transform="translate(488.286755 70.258548) scale(0.14 -0.14)">
+     <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+     <use xlink:href="#en-graphic8-DejaVuSans-37" transform="translate(63.623047 0)"/>
+    </g>
+   </g>
+   <g id="en-graphic8-text_26">
+    <!-- 17 -->
+    <g transform="translate(638.526995 70.258548) scale(0.14 -0.14)">
+     <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+     <use xlink:href="#en-graphic8-DejaVuSans-37" transform="translate(63.623047 0)"/>
+    </g>
+   </g>
+  </g>
+  <g id="en-graphic8-axes_3">
+   <g id="en-graphic8-patch_12">
+    <path d="M 779.524087 318.90101 
+L 1076.99976 318.90101 
+L 1076.99976 27.389158 
+L 779.524087 27.389158 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="en-graphic8-matplotlib.axis_5">
+    <g id="en-graphic8-xtick_5">
+     <g id="en-graphic8-line2d_37">
+      <g>
+       <use xlink:href="#en-graphic8-mdc721e7005" x="793.045708" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_27">
+      <!-- 0 -->
+      <g transform="translate(788.591958 336.538822) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-30"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-xtick_6">
+     <g id="en-graphic8-line2d_38">
+      <g>
+       <use xlink:href="#en-graphic8-mdc721e7005" x="870.312117" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_28">
+      <!-- 10 -->
+      <g transform="translate(861.404617 336.538822) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-xtick_7">
+     <g id="en-graphic8-line2d_39">
+      <g>
+       <use xlink:href="#en-graphic8-mdc721e7005" x="947.578525" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_29">
+      <!-- 20 -->
+      <g transform="translate(938.671025 336.538822) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-32"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-xtick_8">
+     <g id="en-graphic8-line2d_40">
+      <g>
+       <use xlink:href="#en-graphic8-mdc721e7005" x="1024.844934" y="318.90101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_30">
+      <!-- 30 -->
+      <g transform="translate(1015.937434 336.538822) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-33"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-text_31">
+     <!-- Number of NaCl pairs -->
+     <g transform="translate(853.158486 354.088197) scale(0.14 -0.14)">
+      <defs>
+       <path id="en-graphic8-DejaVuSans-62" d="M 3116 1747 
+Q 3116 2381 2855 2742 
+Q 2594 3103 2138 3103 
+Q 1681 3103 1420 2742 
+Q 1159 2381 1159 1747 
+Q 1159 1113 1420 752 
+Q 1681 391 2138 391 
+Q 2594 391 2855 752 
+Q 3116 1113 3116 1747 
+z
+M 1159 2969 
+Q 1341 3281 1617 3432 
+Q 1894 3584 2278 3584 
+Q 2916 3584 3314 3078 
+Q 3713 2572 3713 1747 
+Q 3713 922 3314 415 
+Q 2916 -91 2278 -91 
+Q 1894 -91 1617 61 
+Q 1341 213 1159 525 
+L 1159 0 
+L 581 0 
+L 581 4863 
+L 1159 4863 
+L 1159 2969 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-70" d="M 1159 525 
+L 1159 -1331 
+L 581 -1331 
+L 581 3500 
+L 1159 3500 
+L 1159 2969 
+Q 1341 3281 1617 3432 
+Q 1894 3584 2278 3584 
+Q 2916 3584 3314 3078 
+Q 3713 2572 3713 1747 
+Q 3713 922 3314 415 
+Q 2916 -91 2278 -91 
+Q 1894 -91 1617 61 
+Q 1341 213 1159 525 
+z
+M 3116 1747 
+Q 3116 2381 2855 2742 
+Q 2594 3103 2138 3103 
+Q 1681 3103 1420 2742 
+Q 1159 2381 1159 1747 
+Q 1159 1113 1420 752 
+Q 1681 391 2138 391 
+Q 2594 391 2855 752 
+Q 3116 1113 3116 1747 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#en-graphic8-DejaVuSans-4e"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-75" transform="translate(74.804688 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6d" transform="translate(138.183594 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-62" transform="translate(235.595703 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(299.072266 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-72" transform="translate(360.595703 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(401.708984 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(433.496094 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-66" transform="translate(494.677734 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(529.882812 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-4e" transform="translate(561.669922 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-61" transform="translate(636.474609 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-43" transform="translate(697.753906 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6c" transform="translate(767.578125 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(795.361328 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-70" transform="translate(827.148438 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-61" transform="translate(890.625 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(951.904297 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-72" transform="translate(979.6875 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-73" transform="translate(1020.800781 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="en-graphic8-matplotlib.axis_6">
+    <g id="en-graphic8-ytick_17">
+     <g id="en-graphic8-line2d_41">
+      <path d="M 779.524087 305.650471 
+L 1076.99976 305.650471 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_42">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="779.524087" y="305.650471" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_32">
+      <!-- 0 -->
+      <g transform="translate(763.616587 310.969378) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-30"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_18">
+     <g id="en-graphic8-line2d_43">
+      <path d="M 779.524087 261.551678 
+L 1076.99976 261.551678 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_44">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="779.524087" y="261.551678" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_33">
+      <!-- 50 -->
+      <g transform="translate(754.709087 266.870584) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-35"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_19">
+     <g id="en-graphic8-line2d_45">
+      <path d="M 779.524087 217.452885 
+L 1076.99976 217.452885 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_46">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="779.524087" y="217.452885" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_34">
+      <!-- 100 -->
+      <g transform="translate(745.801587 222.771791) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_20">
+     <g id="en-graphic8-line2d_47">
+      <path d="M 779.524087 173.354092 
+L 1076.99976 173.354092 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_48">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="779.524087" y="173.354092" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_35">
+      <!-- 150 -->
+      <g transform="translate(745.801587 178.672998) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-35" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_21">
+     <g id="en-graphic8-line2d_49">
+      <path d="M 779.524087 129.255298 
+L 1076.99976 129.255298 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_50">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="779.524087" y="129.255298" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_36">
+      <!-- 200 -->
+      <g transform="translate(745.801587 134.574205) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-32"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_22">
+     <g id="en-graphic8-line2d_51">
+      <path d="M 779.524087 85.156505 
+L 1076.99976 85.156505 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_52">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="779.524087" y="85.156505" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_37">
+      <!-- 250 -->
+      <g transform="translate(745.801587 90.475411) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-32"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-35" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-ytick_23">
+     <g id="en-graphic8-line2d_53">
+      <path d="M 779.524087 41.057712 
+L 1076.99976 41.057712 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.2; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="en-graphic8-line2d_54">
+      <g>
+       <use xlink:href="#en-graphic8-mda92867c64" x="779.524087" y="41.057712" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="en-graphic8-text_38">
+      <!-- 300 -->
+      <g transform="translate(745.801587 46.376618) scale(0.14 -0.14)">
+       <use xlink:href="#en-graphic8-DejaVuSans-33"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(63.623047 0)"/>
+       <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="en-graphic8-text_39">
+     <!-- Whole-cell concentration / mM -->
+     <g transform="translate(738.890024 279.979303) rotate(-90) scale(0.14 -0.14)">
+      <defs>
+       <path id="en-graphic8-DejaVuSans-68" d="M 3513 2113 
+L 3513 0 
+L 2938 0 
+L 2938 2094 
+Q 2938 2591 2744 2837 
+Q 2550 3084 2163 3084 
+Q 1697 3084 1428 2787 
+Q 1159 2491 1159 1978 
+L 1159 0 
+L 581 0 
+L 581 4863 
+L 1159 4863 
+L 1159 2956 
+Q 1366 3272 1645 3428 
+Q 1925 3584 2291 3584 
+Q 2894 3584 3203 3211 
+Q 3513 2838 3513 2113 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-2d" d="M 313 2009 
+L 1997 2009 
+L 1997 1497 
+L 313 1497 
+L 313 2009 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-2f" d="M 1625 4666 
+L 2156 4666 
+L 531 -594 
+L 0 -594 
+L 1625 4666 
+z
+" transform="scale(0.015625)"/>
+       <path id="en-graphic8-DejaVuSans-4d" d="M 628 4666 
+L 1569 4666 
+L 2759 1491 
+L 3956 4666 
+L 4897 4666 
+L 4897 0 
+L 4281 0 
+L 4281 4097 
+L 3078 897 
+L 2444 897 
+L 1241 4097 
+L 1241 0 
+L 628 0 
+L 628 4666 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#en-graphic8-DejaVuSans-57"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-68" transform="translate(98.876953 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(162.255859 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6c" transform="translate(223.4375 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(251.220703 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-2d" transform="translate(312.744141 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-63" transform="translate(348.828125 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(403.808594 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6c" transform="translate(465.332031 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6c" transform="translate(493.115234 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(520.898438 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-63" transform="translate(552.685547 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(607.666016 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(668.847656 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-63" transform="translate(732.226562 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(787.207031 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(848.730469 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(912.109375 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-72" transform="translate(951.318359 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-61" transform="translate(992.431641 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(1053.710938 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(1092.919922 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(1120.703125 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(1181.884766 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(1245.263672 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-2f" transform="translate(1277.050781 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(1310.742188 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6d" transform="translate(1342.529297 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-4d" transform="translate(1439.941406 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="en-graphic8-PathCollection_1">
+    <defs>
+     <path id="en-graphic8-mb0fce0f9e0" d="M 0 2.236068 
+C 0.593012 2.236068 1.161816 2.000462 1.581139 1.581139 
+C 2.000462 1.161816 2.236068 0.593012 2.236068 0 
+C 2.236068 -0.593012 2.000462 -1.161816 1.581139 -1.581139 
+C 1.161816 -2.000462 0.593012 -2.236068 0 -2.236068 
+C -0.593012 -2.236068 -1.161816 -2.000462 -1.581139 -1.581139 
+C -2.000462 -1.161816 -2.236068 -0.593012 -2.236068 0 
+C -2.236068 0.593012 -2.000462 1.161816 -1.581139 1.581139 
+C -1.161816 2.000462 -0.593012 2.236068 0 2.236068 
+z
+" style="stroke: #257d85"/>
+    </defs>
+    <g clip-path="url(#en-graphic8-pad8e83d4ad)">
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="793.045708" y="305.650471" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="800.772349" y="298.078735" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="808.49899" y="290.506998" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="816.225631" y="282.935262" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="823.952272" y="275.363526" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="831.678913" y="267.791789" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="839.405553" y="260.220053" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="847.132194" y="252.648316" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="854.858835" y="245.07658" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="862.585476" y="237.504843" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="870.312117" y="229.933107" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="878.038758" y="222.361371" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="885.765399" y="214.789634" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="893.492039" y="207.217898" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="901.21868" y="199.646161" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="908.945321" y="192.074425" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="916.671962" y="184.502688" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="924.398603" y="176.930952" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="932.125244" y="169.359216" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="939.851885" y="161.787479" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="947.578525" y="154.215743" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="955.305166" y="146.644006" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="963.031807" y="139.07227" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="970.758448" y="131.500533" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="978.485089" y="123.928797" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="986.21173" y="116.357061" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="993.938371" y="108.785324" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1001.665012" y="101.213588" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1009.391652" y="93.641851" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1017.118293" y="86.070115" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1024.844934" y="78.498378" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1032.571575" y="70.926642" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1040.298216" y="63.354906" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1048.024857" y="55.783169" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1055.751498" y="48.211433" style="fill: #257d85; stroke: #257d85"/>
+     <use xlink:href="#en-graphic8-mb0fce0f9e0" x="1063.478138" y="40.639696" style="fill: #257d85; stroke: #257d85"/>
+    </g>
+   </g>
+   <g id="en-graphic8-line2d_55">
+    <path d="M 793.045708 305.650471 
+L 800.772349 298.078735 
+L 808.49899 290.506998 
+L 816.225631 282.935262 
+L 823.952272 275.363526 
+L 831.678913 267.791789 
+L 839.405553 260.220053 
+L 847.132194 252.648316 
+L 854.858835 245.07658 
+L 862.585476 237.504843 
+L 870.312117 229.933107 
+L 878.038758 222.361371 
+L 885.765399 214.789634 
+L 893.492039 207.217898 
+L 901.21868 199.646161 
+L 908.945321 192.074425 
+L 916.671962 184.502688 
+L 924.398603 176.930952 
+L 932.125244 169.359216 
+L 939.851885 161.787479 
+L 947.578525 154.215743 
+L 955.305166 146.644006 
+L 963.031807 139.07227 
+L 970.758448 131.500533 
+L 978.485089 123.928797 
+L 986.21173 116.357061 
+L 993.938371 108.785324 
+L 1001.665012 101.213588 
+L 1009.391652 93.641851 
+L 1017.118293 86.070115 
+L 1024.844934 78.498378 
+L 1032.571575 70.926642 
+L 1040.298216 63.354906 
+L 1048.024857 55.783169 
+L 1055.751498 48.211433 
+L 1063.478138 40.639696 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke: #8fa8a1; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="en-graphic8-line2d_56">
+    <path d="M 779.524087 173.354092 
+L 1076.99976 173.354092 
+" clip-path="url(#en-graphic8-pad8e83d4ad)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #b6773f; stroke-width: 1.5"/>
+   </g>
+   <g id="en-graphic8-patch_13">
+    <path d="M 779.524087 318.90101 
+L 779.524087 27.389158 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="en-graphic8-patch_14">
+    <path d="M 779.524087 318.90101 
+L 1076.99976 318.90101 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="en-graphic8-PathCollection_2">
+    <defs>
+     <path id="en-graphic8-me1b06cb526" d="M 0 4.472136 
+C 1.186024 4.472136 2.323632 4.000923 3.162278 3.162278 
+C 4.000923 2.323632 4.472136 1.186024 4.472136 0 
+C 4.472136 -1.186024 4.000923 -2.323632 3.162278 -3.162278 
+C 2.323632 -4.000923 1.186024 -4.472136 0 -4.472136 
+C -1.186024 -4.472136 -2.323632 -4.000923 -3.162278 -3.162278 
+C -4.000923 -2.323632 -4.472136 -1.186024 -4.472136 0 
+C -4.472136 1.186024 -4.000923 2.323632 -3.162278 3.162278 
+C -2.323632 4.000923 -1.186024 4.472136 0 4.472136 
+z
+" style="stroke: #b6773f"/>
+    </defs>
+    <g clip-path="url(#en-graphic8-pad8e83d4ad)">
+     <use xlink:href="#en-graphic8-me1b06cb526" x="924.398603" y="176.930952" style="fill: #b6773f; stroke: #b6773f"/>
+    </g>
+   </g>
+   <g id="en-graphic8-legend_1">
+    <g id="en-graphic8-line2d_57">
+     <path d="M 792.124087 45.72697 
+L 806.124087 45.72697 
+L 820.124087 45.72697 
+" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #b6773f; stroke-width: 1.5"/>
+    </g>
+    <g id="en-graphic8-text_40">
+     <!-- 150 mM -->
+     <g transform="translate(831.324087 50.62697) scale(0.14 -0.14)">
+      <use xlink:href="#en-graphic8-DejaVuSans-31"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-35" transform="translate(63.623047 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-30" transform="translate(127.246094 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(190.869141 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-6d" transform="translate(222.65625 0)"/>
+      <use xlink:href="#en-graphic8-DejaVuSans-4d" transform="translate(320.068359 0)"/>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="en-graphic8-text_41">
+   <!-- Ubiquitin solution: composition and integer ion counts -->
+   <g transform="translate(282.340703 17.437271) scale(0.19 -0.19)">
+    <defs>
+     <path id="en-graphic8-DejaVuSans-55" d="M 556 4666 
+L 1191 4666 
+L 1191 1831 
+Q 1191 1081 1462 751 
+Q 1734 422 2344 422 
+Q 2950 422 3222 751 
+Q 3494 1081 3494 1831 
+L 3494 4666 
+L 4128 4666 
+L 4128 1753 
+Q 4128 841 3676 375 
+Q 3225 -91 2344 -91 
+Q 1459 -91 1007 375 
+Q 556 841 556 1753 
+L 556 4666 
+z
+" transform="scale(0.015625)"/>
+     <path id="en-graphic8-DejaVuSans-71" d="M 947 1747 
+Q 947 1113 1208 752 
+Q 1469 391 1925 391 
+Q 2381 391 2643 752 
+Q 2906 1113 2906 1747 
+Q 2906 2381 2643 2742 
+Q 2381 3103 1925 3103 
+Q 1469 3103 1208 2742 
+Q 947 2381 947 1747 
+z
+M 2906 525 
+Q 2725 213 2448 61 
+Q 2172 -91 1784 -91 
+Q 1150 -91 751 415 
+Q 353 922 353 1747 
+Q 353 2572 751 3078 
+Q 1150 3584 1784 3584 
+Q 2172 3584 2448 3432 
+Q 2725 3281 2906 2969 
+L 2906 3500 
+L 3481 3500 
+L 3481 -1331 
+L 2906 -1331 
+L 2906 525 
+z
+" transform="scale(0.015625)"/>
+     <path id="en-graphic8-DejaVuSans-3a" d="M 750 794 
+L 1409 794 
+L 1409 0 
+L 750 0 
+L 750 794 
+z
+M 750 3309 
+L 1409 3309 
+L 1409 2516 
+L 750 2516 
+L 750 3309 
+z
+" transform="scale(0.015625)"/>
+     <path id="en-graphic8-DejaVuSans-64" d="M 2906 2969 
+L 2906 4863 
+L 3481 4863 
+L 3481 0 
+L 2906 0 
+L 2906 525 
+Q 2725 213 2448 61 
+Q 2172 -91 1784 -91 
+Q 1150 -91 751 415 
+Q 353 922 353 1747 
+Q 353 2572 751 3078 
+Q 1150 3584 1784 3584 
+Q 2172 3584 2448 3432 
+Q 2725 3281 2906 2969 
+z
+M 947 1747 
+Q 947 1113 1208 752 
+Q 1469 391 1925 391 
+Q 2381 391 2643 752 
+Q 2906 1113 2906 1747 
+Q 2906 2381 2643 2742 
+Q 2381 3103 1925 3103 
+Q 1469 3103 1208 2742 
+Q 947 2381 947 1747 
+z
+" transform="scale(0.015625)"/>
+     <path id="en-graphic8-DejaVuSans-67" d="M 2906 1791 
+Q 2906 2416 2648 2759 
+Q 2391 3103 1925 3103 
+Q 1463 3103 1205 2759 
+Q 947 2416 947 1791 
+Q 947 1169 1205 825 
+Q 1463 481 1925 481 
+Q 2391 481 2648 825 
+Q 2906 1169 2906 1791 
+z
+M 3481 434 
+Q 3481 -459 3084 -895 
+Q 2688 -1331 1869 -1331 
+Q 1566 -1331 1297 -1286 
+Q 1028 -1241 775 -1147 
+L 775 -588 
+Q 1028 -725 1275 -790 
+Q 1522 -856 1778 -856 
+Q 2344 -856 2625 -561 
+Q 2906 -266 2906 331 
+L 2906 616 
+Q 2728 306 2450 153 
+Q 2172 0 1784 0 
+Q 1141 0 747 490 
+Q 353 981 353 1791 
+Q 353 2603 747 3093 
+Q 1141 3584 1784 3584 
+Q 2172 3584 2450 3431 
+Q 2728 3278 2906 2969 
+L 2906 3500 
+L 3481 3500 
+L 3481 434 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#en-graphic8-DejaVuSans-55"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-62" transform="translate(73.193359 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(136.669922 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-71" transform="translate(164.453125 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-75" transform="translate(227.929688 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(291.308594 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(319.091797 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(358.300781 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(386.083984 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(449.462891 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-73" transform="translate(481.25 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(533.349609 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6c" transform="translate(594.53125 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-75" transform="translate(622.314453 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(685.693359 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(724.902344 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(752.685547 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(813.867188 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-3a" transform="translate(877.246094 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(910.9375 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-63" transform="translate(942.724609 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(997.705078 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6d" transform="translate(1058.886719 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-70" transform="translate(1156.298828 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(1219.775391 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-73" transform="translate(1280.957031 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(1333.056641 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(1360.839844 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(1400.048828 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(1427.832031 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(1489.013672 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(1552.392578 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-61" transform="translate(1584.179688 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(1645.458984 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-64" transform="translate(1708.837891 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(1772.314453 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(1804.101562 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(1831.884766 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(1895.263672 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(1934.472656 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-67" transform="translate(1995.996094 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-65" transform="translate(2059.472656 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-72" transform="translate(2120.996094 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(2162.109375 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-69" transform="translate(2193.896484 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(2221.679688 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(2282.861328 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-20" transform="translate(2346.240234 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-63" transform="translate(2378.027344 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6f" transform="translate(2433.007812 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-75" transform="translate(2494.189453 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-6e" transform="translate(2557.568359 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-74" transform="translate(2620.947266 0)"/>
+    <use xlink:href="#en-graphic8-DejaVuSans-73" transform="translate(2660.15625 0)"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="en-graphic8-p510c1c16ac">
+   <rect x="63.179615" y="27.389158" width="297.475673" height="291.511852"/>
+  </clipPath>
+  <clipPath id="en-graphic8-p835fd5375b">
+   <rect x="423.576538" y="27.389158" width="297.475673" height="291.511852"/>
+  </clipPath>
+  <clipPath id="en-graphic8-pad8e83d4ad">
+   <rect x="779.524087" y="27.389158" width="297.475673" height="291.511852"/>
+  </clipPath>
+ </defs>
+</svg>
+</div><figcaption>Solution composition checked against the actual GRO coordinates and topology. Seventeen Na⁺ and seventeen Cl⁻ replace 34 whole waters. The right panel converts integer pair counts into concentrations using the initial cell volume of 193.4239779 nm³; adding one pair changes the concentration by a discrete increment.</figcaption></figure></div>
+<p>The left panel shows the small reduction in water count, the middle panel shows equal positive and negative ion counts, and the right panel converts integer NaCl pair counts to whole-cell concentration. The horizontal 150 mM target lies between the points for 17 and 18 pairs; the actual preparation occupies the 17-pair point. Showing the continuous concentration scale alongside discrete particle numbers explains the small system more fully than reporting “150 mM” alone. The numerical report retains extra digits for reproducibility, while approximately 146 mM is an appropriate concise description of the initial realized concentration.</p>
+<p>These figures describe composition and geometry at preparation. Local hydration, enrichment of ions near particular protein sites, and the evolution of density and pressure require the subsequent trajectory. In particular, pressure coupling changes volume while particle numbers remain fixed, so concentration calculated from instantaneous volume also fluctuates. A useful scientific account can give the nominal salt setting, actual ion counts, and average volume of the analyzed trajectory. Together they make both the concentration definition and the stage of the simulation clear.</p>
+</section>
+<section id="en-s8" data-section="s8"><h2>Matching solution conditions to the research question</h2>
+<p>The system now has specified chemical composition, periodic geometry, and interaction parameters. Its initial positions next need to adjust under those interactions. Newly placed water and randomly positioned ions have not yet undergone their local rearrangement, and the protein must adapt to its current environment. Energy minimization first resolves unfavorable close contacts, followed by preparation at the chosen temperature and pressure. Treating composition preparation and state preparation as related stages helps locate problems: counts and charge lead back to this chapter, while unusual temperature, volume, or local contacts lead to the procedures examined next.</p>
+<p>For an introductory question about ubiquitin's surface motion, this provides a defined starting point: a free monomer, explicit water, monovalent salt, fixed protonation choices, and periodic boundaries. Zero net protein charge still leaves positively and negatively charged surface regions, to which water and ions respond differently. When we later examine structural fluctuations, these interactions remain part of the explanation. The same modeling logic extends to DNA, carbohydrates, and polymer solutions, although the required parameters and scientific questions change with the molecular system.</p>
+<p>If the goal becomes measuring how a particular salt affects protein structure, the comparison should be organized around that change. Keep the protein model, temperature, pressure, analysis definitions, and preparation procedures consistent where possible; specify whether ion identity or amount is changing; and verify actual particle numbers and final volumes. In a small cell, concentration increments may cause two nominal settings to produce the same integer number of ions. A larger cell or conditions distinguishable by particle count may then be useful. This check translates an experimental comparison into genuinely different computational systems.</p>
+<p>Other questions concern long-lived ion contacts, rare binding events, or slow conformational responses to salt. Their sampling times and independent replicas should match those processes, and ion parameters should suit the relevant coordination environment. These considerations help choose the next observable: rapid local hydration changes, an average spatial distribution, or probabilities spanning several conformational states. A consistently prepared solution supplies the common foundation. Trajectories, statistical analysis, and appropriate model evaluation then connect that foundation to the specific question.</p>
+<p>Each number in our preparation now has a physical interpretation. The initial periodic volume is 193.424 nm³; 5868 is the number of remaining water molecules; 17 and 17 are the positive and negative ion counts; approximately 146 mM is the salt concentration calculated from the whole cell; and 18869 is the total number of atomic sites advanced by the program. With these meanings established, defining a cell, solvating, and adding ions become a set of inspectable modeling decisions. The next chapter uses this defined composition to examine how energy, temperature, and volume guide preparation of a protein trajectory.</p>
+</section>
+<div class="open-references"><h2>Further Reading and Open Materials</h2><ul><li><a href="https://tutorials.gromacs.org/docs/md-intro-tutorial.html">Introduction to Molecular Dynamics</a> · Cathrine Bergh; Maryam Majdolhosseini; Alessandra Villa · CC BY 4.0<p>Cell construction, solvation, TPR preparation, and ion replacement.</p><p>Retains the operation sequence with 1UBQ/AMBER99SB-ILDN/TIP3P; adds cell-volume reasoning, integer salt concentration, and composition checks.</p></li><li><a href="https://github.com/jalemkul/gmx_tutorials_livecoms">From Proteins to Perturbed Hamiltonians: A Suite of Tutorials for the GROMACS-2018 Molecular Simulation Package</a> · Justin A. Lemkul · CC BY 4.0<p>Protein-solution preparation and topology-update sequence.</p><p>Uses ubiquitin and GROMACS 2026.4, with bilingual explanation, count figures, and a complete analysis program.</p></li><li><a href="https://manual.gromacs.org/2026.4/onlinehelp/gmx-editconf.html">gmx editconf — GROMACS 2026.4</a> · GROMACS developers · GROMACS documentation terms; factual reference<p>Command options and geometrical or counting behavior.</p><p>Independent explanation of the options and output used here.</p></li><li><a href="https://manual.gromacs.org/2026.4/onlinehelp/gmx-solvate.html">gmx solvate — GROMACS 2026.4</a> · GROMACS developers · GROMACS documentation terms; factual reference<p>Command options and geometrical or counting behavior.</p><p>Independent explanation of the options and output used here.</p></li><li><a href="https://manual.gromacs.org/2026.4/onlinehelp/gmx-genion.html">gmx genion — GROMACS 2026.4</a> · GROMACS developers · GROMACS documentation terms; factual reference<p>Command options and geometrical or counting behavior.</p><p>Independent explanation of the options and output used here.</p></li><li><a href="https://www.nobelprize.org/prizes/themes/the-nobel-prize-in-chemistry-the-development-of-modern-chemistry/">The Nobel Prize in Chemistry: The Development of Modern Chemistry</a> · Bo G. Malmström; Bertil Andersson; Nobel Foundation · Public historical reference; factual discussion<p>Historical context of Arrhenius&#x27;s work on electrolytic dissociation.</p><p>Rewritten discussion of solution species with an ionic-migration schematic.</p></li><li><a href="https://doi.org/10.1063/1.445869">Comparison of simple potential functions for simulating liquid water</a> · William L. Jorgensen; Jayaraman Chandrasekhar; Jeffry D. Madura; Roger W. Impey; Michael L. Klein · Publisher copyright; factual citation<p>The 1983 comparison of water models and the context of TIP3P.</p><p>Summarizes the modeling idea with a conceptual water-site diagram.</p></li></ul></div></article><nav class="bc-related" aria-label="Related tutorials"><a rel="prev" href="/tutorials/molecular-dynamics/g05/en/">From an experimental structure to a protein model</a><a rel="next" href="/tutorials/molecular-dynamics/g07/en/">From preparation to sampling: adapting a protein to water</a></nav></div></div></div><section class="article-support" aria-labelledby="article-support-heading"><h2 id="article-support-heading">Buy me a coffee</h2><div class="article-support-codes"><figure><a href="/static/images/wechat.png?v=7f968fa1f086" target="_blank" rel="noopener" aria-label="WeChat support QR code"><img src="/static/images/wechat.png?v=7f968fa1f086" alt="WeChat support QR code" width="423" height="423" loading="lazy" decoding="async"></a><figcaption>WeChat</figcaption></figure><figure><a href="/static/images/alipay.jpg?v=8d41a879ed50" target="_blank" rel="noopener" aria-label="Alipay support QR code"><img src="/static/images/alipay.jpg?v=8d41a879ed50" alt="Alipay support QR code" width="666" height="666" loading="lazy" decoding="async"></a><figcaption>Alipay</figcaption></figure></div><a class="support-paypal" href="https://www.paypal.com/ncp/payment/BH5JZ28J2BSQL" rel="noopener">PayPal</a></section></main>
+<footer class="site-footer"><div class="footer-inner">
+<span>© 2026 ML-Biomat · by Yunhao Yang</span>
+<div class="footer-links"><a href="/about/en/">Profile</a><a href="/fibernet/en/">Library</a><a href="/categories/en/">Categories</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/en/">Tools</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/en/">Privacy</a></div>
+</div></footer>
+<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
+<button id="back-to-top" aria-label="Back to top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
+<script src="/static/js/main.js?v=510b43212be6" defer></script>
+<script src="/static/js/paypal-support.js?v=d8e5c16b0db8" defer></script><script src="/static/js/site-catalog.js?v=b4cb9d038737" defer></script><script src="/static/tutorials/molecular-dynamics/g06.js?v=6b06cf66dd21" defer></script><script src="/static/js/biomaterials-courses.js?v=2827fc46fbdb" defer></script><script src="/static/js/molecular-dynamics.js?v=144237911a9f" defer></script><script src="/static/js/code-highlight.js?v=8f9a57135ede" defer data-highlight-js="/static/vendor/highlightjs/11.11.1/highlight.min.js?v=c4a399dd6f48" data-highlight-css="/static/vendor/highlightjs/11.11.1/github-dark.min.css?v=9f208d022102"></script></body>
+</html>

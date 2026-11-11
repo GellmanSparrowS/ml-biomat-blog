@@ -1,0 +1,3607 @@
+{
+  "lessons": [
+    {
+      "id": "S00",
+      "group": "S",
+      "title": {
+        "zh": "开始实践：准备运行环境与文件",
+        "en": "Getting Started: Your Environment and Files"
+      },
+      "standfirst": {
+        "zh": "把一份输入变成可以观察和分析的分子轨迹，需要哪些程序？从终端和文件夹开始，准备两套课程共用的运行环境。",
+        "en": "What turns an input file into a molecular trajectory you can inspect and analyse? Start with terminals and folders, then prepare the environment shared by both courses."
+      },
+      "sections": [
+        {
+          "id": "roles",
+          "title": {
+            "zh": "先认识计算中的三个角色",
+            "en": "Three roles in a simulation"
+          }
+        },
+        {
+          "id": "terminal",
+          "title": {
+            "zh": "打开正确的终端，选好工作目录",
+            "en": "Choose a terminal and workspace"
+          }
+        },
+        {
+          "id": "engines",
+          "title": {
+            "zh": "把源代码变成可运行的引擎",
+            "en": "Build the simulation engines"
+          }
+        },
+        {
+          "id": "analysis",
+          "title": {
+            "zh": "给数据分析准备自己的工具箱",
+            "en": "Prepare the analysis environment"
+          }
+        },
+        {
+          "id": "first",
+          "title": {
+            "zh": "从参考数据走到自己的一次运行",
+            "en": "From reference data to your own run"
+          }
+        },
+        {
+          "id": "find",
+          "title": {
+            "zh": "顺着报错找到需要补齐的一步",
+            "en": "Use an error message to find the next step"
+          }
+        },
+        {
+          "id": "modeling",
+          "title": {
+            "zh": "为配体和聚合物准备建模工具",
+            "en": "Prepare tools for ligands and polymers"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "e61b15095c02e7782c2c1e6d4b2c818d05208c02f7c536ca71292d157ecb7526",
+      "source_file": "getting-started.html",
+      "counts": {
+        "zh": {
+          "sections": 7,
+          "equations": 0,
+          "figures": 1,
+          "labs": 0,
+          "result_figures": 0,
+          "trajectories": 0,
+          "sha256": "782d2ae6951f9d4bc3126a916587b40c17a4849ee2ad3af0065ed6687bf3a9bd"
+        },
+        "en": {
+          "sections": 7,
+          "equations": 0,
+          "figures": 1,
+          "labs": 0,
+          "result_figures": 0,
+          "trajectories": 0,
+          "sha256": "0a1061d3c392c178f785ae852f70bb6bd4cdd94d44656333d5ea78aa8d20789c"
+        }
+      },
+      "neighbors": {}
+    },
+    {
+      "id": "G01",
+      "group": "G",
+      "title": {
+        "zh": "分子模拟能告诉我们什么",
+        "en": "What Molecular Simulation Can Tell Us"
+      },
+      "standfirst": {
+        "zh": "从一盒水出发，理解模型怎样生成运动，运动怎样形成可测量的密度，以及一条曲线怎样回答一个具体的科学问题。",
+        "en": "Start with a box of water to understand how a model produces motion, how motion connects to measurable density, and how a curve answers a specific scientific question."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从一杯水开始，把问题缩小到分子能回答的范围",
+            "en": "Start with a glass of water and a question molecules can answer"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从“看不见的运动”到可以检验的液体模型",
+            "en": "Turning invisible motion into a testable model of a liquid"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "一盒“水”在计算机里究竟由什么组成",
+            "en": "What the computational box of water actually contains"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "为什么位置可以一步一步算出来",
+            "en": "Why the next position can be calculated"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "密度怎样把许多分子的运动连到日常测量",
+            "en": "How density connects molecular motion to an everyday measurement"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把真实记录变成一张能解释的图",
+            "en": "Turn the recorded data into a figure you can explain"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "动画里发生了什么，统计图又多告诉了什么",
+            "en": "What an animation shows, and what statistics add"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "怎样把一个好奇心变成可计算的问题",
+            "en": "Turn curiosity into a calculable research question"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "ba38758bc39f24961a1ea395566fd01fb35be20238e58c4b9abd4f6612335c61",
+      "source_file": "g01.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 1,
+          "sha256": "fd46c1257360acfc1bf398ebc3c9dd7d0bcb82c904a57319a04a8684dcd65008"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 1,
+          "sha256": "0b1dad403706a9744bb788e4329ce3a9e7621d8055fbc020dfd45618f441b5f8"
+        }
+      },
+      "neighbors": {
+        "next": "G02"
+      }
+    },
+    {
+      "id": "G02",
+      "group": "G",
+      "title": {
+        "zh": "从文件到轨迹：准备一次分子模拟",
+        "en": "From Files to Trajectories: Preparing a Simulation"
+      },
+      "standfirst": {
+        "zh": "打开水盒的坐标、拓扑与参数，理解它们如何组成一次运行，再用完整程序核对分子身份、位点数量和盒子几何。",
+        "en": "Open the water box coordinates, topology, and parameters, understand how they define a run, and inspect molecular identities, site counts, and box geometry with a complete program."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "让一份计算在另一台电脑上仍然说得清楚",
+            "en": "Make a calculation understandable on another computer"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "科学为什么需要可以交换的原子坐标",
+            "en": "Why science needs exchangeable atomic coordinates"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "读懂一行坐标：身份、位置与长度单位",
+            "en": "Read a coordinate line: identity, position, and length units"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "拓扑把坐标上的名字变成一个物理模型",
+            "en": "A topology turns names and positions into a physical model"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "参数文件描述一次观察怎样进行",
+            "en": "Run parameters describe how an observation is performed"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "预处理、运行与续算，三个动作怎样接起来",
+            "en": "Connect preprocessing, running, and continuation"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "用一段完整程序检查水盒的身份与几何",
+            "en": "Use a complete program to inspect the water box"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把一套输入整理成可以继续研究的起点",
+            "en": "Organize an input set that can support further research"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "deea408a2ef1c44bd0bb6dd128f92fbd58ac14a8a99ca9d8fdef8eeb228d1cc8",
+      "source_file": "g02.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 2,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "cc7313fdedf6fd7669b055ae038ab8fe0af017fc221b4a22f3e6f2b7dc748257"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 2,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "07dd6377818ca3e98570f076b48adc83cfaf4ef38fcba8b014581a88bc0a85f5"
+        }
+      },
+      "neighbors": {
+        "prev": "G01",
+        "next": "G03"
+      }
+    },
+    {
+      "id": "G03",
+      "group": "G",
+      "title": {
+        "zh": "一盒水的第一场模拟",
+        "en": "A First Simulation of a Box of Water"
+      },
+      "standfirst": {
+        "zh": "让水经过几何整理、温度调整与体积调整，再从真实的力、能量和密度记录理解每一步的作用。",
+        "en": "Prepare water geometry, temperature, and volume, then use actual force, energy, and density records to understand what each stage accomplishes."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "让水动起来之前，先给它一个合适的起点",
+            "en": "Give the water a suitable starting point before it moves"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "最小化在整理几何，不是在等待水冷却",
+            "en": "Minimization prepares geometry rather than waiting for water to cool"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "控温要保留热涨落，不能只追求一条平直曲线",
+            "en": "Temperature control must preserve thermal fluctuations"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "让体积响应压力，水才有机会选择自己的密度",
+            "en": "Allow volume to respond so water can establish its density"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "完整运行脚本怎样把阶段连接起来",
+            "en": "How the complete script connects the stages"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把分阶段记录画在合适的坐标轴上",
+            "en": "Plot each stage on an axis with the right meaning"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "“稳定”需要说明稳定的是哪一种观察",
+            "en": "Specify which observation is stable"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从第一次运行走向有目的的比较",
+            "en": "Move from a first run to a purposeful comparison"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "5c3c84c4b6f7f4c0a835cefe508b9c7133004d777edfddc2abb625dd15ecbcbd",
+      "source_file": "g03.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 1,
+          "sha256": "214e971435c774b79361e08f9ceb6d0657a91768d801c2130c5ddc84ee7eb203"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 1,
+          "sha256": "91905888c0d4c3ea452560940e24ae72d28357df9138f365c872bca69998ebb2"
+        }
+      },
+      "neighbors": {
+        "prev": "G02",
+        "next": "G04"
+      }
+    },
+    {
+      "id": "G04",
+      "group": "G",
+      "title": {
+        "zh": "分子为什么这样运动：力场、时间步与边界",
+        "en": "Why Molecules Move: Force Fields, Time Steps and Boundaries"
+      },
+      "standfirst": {
+        "zh": "从吸引和排斥到周期空间，再用同一盒水的1飞秒与2飞秒计算分开观察快速波动和缓慢漂移。",
+        "en": "Connect attraction, repulsion, and periodic space, then compare fast fluctuations and slow drift in actual 1 fs and 2 fs water calculations."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "同一杯水，可以有不同的计算描述",
+            "en": "The same water can have different computational descriptions"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从吸引和排斥理解力场里的数字",
+            "en": "Read force-field parameters through attraction and repulsion"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "每一步走多远，取决于需要追踪多快的运动",
+            "en": "Choose a step that resolves the motions retained in the model"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "走出盒子边缘，为什么会从另一边回来",
+            "en": "Why does a molecule leaving one edge return at the other?"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "近邻逐个计算，远处的电荷怎样处理",
+            "en": "Calculate neighbours directly and handle distant charges collectively"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "让两条分支从同一个状态出发",
+            "en": "Start both branches from the same prepared state"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "快速波动变小，为什么缓慢漂移仍可能更大",
+            "en": "Smaller fast fluctuations can coexist with greater slow drift"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把数值检查带到真正的分子问题里",
+            "en": "Carry numerical checks into a molecular research question"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "19df63e7d89ee4026a1976cc524ca007a549e8c46b15c4c985b1aecfb1d9fd04",
+      "source_file": "g04.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "f7ce494c51f7e088e1bc330bc356a91af2c25e04d4c4430a1118eff5b18eb1a0"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "fd3ab1a6d0171be25587862fa776a9eb572203dc50ef4d5d691c093b73d8afc3"
+        }
+      },
+      "neighbors": {
+        "prev": "G03",
+        "next": "G05"
+      }
+    },
+    {
+      "id": "G05",
+      "group": "G",
+      "title": {
+        "zh": "从实验结构到可计算的蛋白质",
+        "en": "From an experimental structure to a protein model"
+      },
+      "standfirst": {
+        "zh": "从泛素的分子标签功能出发，读懂序列、坐标与实验记录，明确氢、末端和电荷，再把同一个分子交给GROMACS。",
+        "en": "Start with ubiquitin's role as a molecular tag, read its sequence and structural records, and define hydrogens, termini, and charges before building the GROMACS model."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从细胞里的分子标签说起",
+            "en": "Begin with a molecular tag inside the cell"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "读懂一条蛋白质链的化学语言",
+            "en": "Read the chemical language of a protein chain"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "从序列到立体结构：实验怎样补齐这张图",
+            "en": "How experiments connected sequence with three-dimensional structure"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把1UBQ中的每一类记录读清楚",
+            "en": "Read the different records in 1UBQ"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "选择保留什么，也是在选择研究对象",
+            "en": "Choosing what to retain defines the object being studied"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "氢的位置、链的两端和电荷怎样决定",
+            "en": "Choose hydrogen positions, terminal groups, and charges"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "完整示例：从结构检查到生成拓扑",
+            "en": "A complete example: inspect the structure and generate the topology"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把准备好的模型接到真正的科学问题上",
+            "en": "Connect the prepared model to a scientific question"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "760c718fb349a9d1e34110b45373baae31f2a875a896d93ca57cfac9f212784f",
+      "source_file": "g05.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 2,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "43b82466bdd8478973d8e9a2db6c748e24bd88748c6c0b0257fdda9fe71cb6a8"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 2,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "5d8fe6f061b46c3f2e182bc742488dac519739d40d3aa284d16a448c0eacdbd8"
+        }
+      },
+      "neighbors": {
+        "prev": "G04",
+        "next": "G06"
+      }
+    },
+    {
+      "id": "G06",
+      "group": "G",
+      "title": {
+        "zh": "把蛋白质放进水里：拓扑、溶剂与离子",
+        "en": "Putting a protein in water: topology, solvent, and ions"
+      },
+      "standfirst": {
+        "zh": "从泛素的水环境出发，读懂周期晶胞、三位点水和盐的整数计数，逐步建立组成明确的溶液。",
+        "en": "Build a defined ubiquitin solution while connecting periodic geometry, three-site water, and integer ion counts to their physical meaning."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "水为什么必须进入我们的模型",
+            "en": "Why water belongs in the model"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从盐溶液导电到计算中的带电粒子",
+            "en": "From conducting salt solutions to charged particles"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "坐标告诉我们在哪里，拓扑告诉我们是什么",
+            "en": "Coordinates describe positions; topology defines the species"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "用周期晶胞给蛋白质留出水的空间",
+            "en": "Leaving room for water with a periodic cell"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "一盒盐水里究竟有多少盐",
+            "en": "How much salt is in this small box?"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把建盒、加水和加盐连成可重复的操作",
+            "en": "A reproducible sequence for the cell, solvent, and ions"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从真实输出中核对组成与浓度",
+            "en": "Checking composition and concentration in the actual output"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让溶液条件与研究问题保持一致",
+            "en": "Matching solution conditions to the research question"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "6e2f2522a2f41daa6a1c3811107be5c5899fb7f6856a7d7a9d140b4afb1d0c49",
+      "source_file": "g06.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "6105cb460ade8209c0f2d242380daebefa2b8cea674629b22fe1e4c9958cdd8a"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "3502b9c3d0057a50bde3c1f63f1115da8bbd4958146ae1c54e9e99de9fb83603"
+        }
+      },
+      "neighbors": {
+        "prev": "G05",
+        "next": "G07"
+      }
+    },
+    {
+      "id": "G07",
+      "group": "G",
+      "title": {
+        "zh": "从准备到采样：让蛋白质适应水环境",
+        "en": "From preparation to sampling: adapting a protein to water"
+      },
+      "standfirst": {
+        "zh": "用位置限制、检查点与真实温压曲线，理解几何松弛、环境调整和蛋白质运动各自需要什么。",
+        "en": "Use restraints, checkpoints, and actual temperature and pressure records to distinguish geometrical relaxation, environmental adjustment, and protein motion."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "让刚刚装好的分子系统开始运动",
+            "en": "Starting the motion of a newly assembled system"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "最低点附近仍然有生命分子的运动",
+            "en": "Molecules still move around an energy minimum"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "先松开过近接触，再给系统真实的时间",
+            "en": "Relax close contacts before assigning physical time"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "位置限制像弹簧，键长约束像固定连接",
+            "en": "Position restraints act like springs; constraints fix geometry"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "温度、压力与体积怎样共同准备",
+            "en": "Preparing temperature, pressure, and volume together"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把状态接下去，而不是在每段重新开始",
+            "en": "Continue the state rather than restart it at every stage"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "让四幅图回答四个具体问题",
+            "en": "Four panels answer four specific questions"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "根据要测的现象决定准备是否充分",
+            "en": "Let the observable determine what sufficient preparation means"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "b35f173a689c505fecc5a494abc79ed6b73d7e32588e536fe6e179ef7b524ee9",
+      "source_file": "g07.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 2,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "5b6cb06c8d56ce47028ee5e6f5992ac6c0d9093bcd8875225f3f7a85cbc9c51e"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 2,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 0,
+          "sha256": "ee236ee29a64eddc3659750c4da9fd458bc3bf97671f04a68b21971b979676cc"
+        }
+      },
+      "neighbors": {
+        "prev": "G06",
+        "next": "G08"
+      }
+    },
+    {
+      "id": "G08",
+      "group": "G",
+      "title": {
+        "zh": "从轨迹读懂蛋白质的运动",
+        "en": "Reading protein motion from a trajectory"
+      },
+      "standfirst": {
+        "zh": "把整体移动、内部形变和局部波动分开，再用一段真实泛素轨迹理解RMSD、回转半径与RMSF。",
+        "en": "Separate overall motion, internal deformation, and local fluctuations, then read RMSD, radius of gyration, and RMSF from an actual ubiquitin trajectory."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一段分子电影，三种不同的问题",
+            "en": "One molecular movie, three different questions"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "先把跨过边界的蛋白质接回来",
+            "en": "Reconstruct the protein across periodic boundaries"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "让两幅结构站在同一个坐标系里",
+            "en": "Place two structures in a common coordinate frame"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "RMSD：相对一幅参考结构改变了多少",
+            "en": "RMSD: how far a structure has moved from a reference"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "回转半径：质量分布在多大的范围里",
+            "en": "Radius of gyration: the size of a mass distribution"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "RMSF：哪些位置在自己的平均位置附近移动",
+            "en": "RMSF: motion around each position’s own time average"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "用完整程序把轨迹变成可读的图",
+            "en": "Turn the trajectory into readable figures with complete programs"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把三种读数放回同一段运动",
+            "en": "Bring the three measurements back to the same motion"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "5ed9a89dcf8903d93037b82c191a498480427497a8f14b1db713716949dfc8f8",
+      "source_file": "g08.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 1,
+          "sha256": "df57dcab12b278b53a5a2e05a2f696f5208af75c4df8d8e35c325cf61bc25df9"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 3,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 1,
+          "sha256": "d377f85e1afbcc8c8e4acbf54cc70f5cceb3dc8bc86c1e15d298d70fd48b17b6"
+        }
+      },
+      "neighbors": {
+        "prev": "G07",
+        "next": "G09"
+      }
+    },
+    {
+      "id": "G09",
+      "group": "G",
+      "title": {
+        "zh": "一条曲线有多可靠：重复、相关与误差",
+        "en": "How Reliable Is a Curve? Replicates, Correlation and Error"
+      },
+      "standfirst": {
+        "zh": "用三条泛素轨迹区分真实涨落、时间相关与平均值的不确定性，让下一次计算补充需要的信息。",
+        "en": "Use three ubiquitin trajectories to separate fluctuations, temporal correlation, and uncertainty in an average, then plan the next sampling step."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "多算几千帧，为什么还要问结果有多可靠",
+            "en": "Why thousands of saved frames still need a reliability check"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "连续运动留下记忆：分块思想从哪里来",
+            "en": "Continuous motion retains memory: the origin of blocking"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "把重复设计好，再开始比较",
+            "en": "Design the repetitions before comparing them"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "平均值、涨落宽度和累计曲线分别说明什么",
+            "en": "What means, fluctuation widths, and cumulative curves describe"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "相隔多久，两次观察才带来不同的信息",
+            "en": "How far apart must observations be to add different information?"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把相邻时刻合成一块，看看误差怎样改变",
+            "en": "Combine neighbouring times and watch the error estimate change"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "三条轨迹之间的差异，怎样进入结论",
+            "en": "How differences between trajectories enter a conclusion"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让保存频率、运行时长和重复各有任务",
+            "en": "Give output frequency, run duration, and replication separate jobs"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "8eba0ff0086e46123eedebfa9e0f2839ef7ff9a65943fdd308bc45723229721f",
+      "source_file": "g09.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "30069d34155ba9d49a08263367f5f5ed2824005926fffa3d3a16f7586e2dfa13"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "782686726c88f6f088e07a6e6df26650107f1fc4d601cc71093cd8f8a54ba317"
+        }
+      },
+      "neighbors": {
+        "prev": "G08",
+        "next": "G10"
+      }
+    },
+    {
+      "id": "G10",
+      "group": "G",
+      "title": {
+        "zh": "蛋白质与小分子怎样相遇",
+        "en": "Simulating a Protein and a Small Molecule"
+      },
+      "standfirst": {
+        "zh": "从实验结合结构建立蛋白质—配体模型，读懂口袋中的位移、接触与方向。",
+        "en": "Build a protein–ligand model from an experimental bound structure and interpret displacement, contacts, and orientation inside its pocket."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从一个已经结合的口袋，理解分子识别",
+            "en": "Understanding molecular recognition from an occupied pocket"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "把结构里的每一种身份认清",
+            "en": "Establishing the identity of every component"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "一套相互作用规则怎样容纳蛋白质和配体",
+            "en": "One interaction model for a protein and its ligand"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把化学身份、坐标顺序和拓扑接在一起",
+            "en": "Connecting chemical identity, coordinate order, and topology"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "让口袋和溶液共同调整，再解除位置限制",
+            "en": "Relaxing the pocket and solution before releasing restraints"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "让每一个“接触”都有明确的测量方法",
+            "en": "Giving every contact a precise measurement"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "把轨迹中的局部变化画出来",
+            "en": "Visualizing local changes in the recorded trajectory"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从局部运动走向结合问题的研究设计",
+            "en": "Designing the next study beyond local motion"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "85d9383943251f8ff57170f4070e3c8b7a338775b220e40b1408ec0654031abb",
+      "source_file": "g10.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 2,
+          "trajectories": 0,
+          "sha256": "bd5fdd61a6adc6f22cf4126feee40506dbf7d50d18782dd6d8870ec4a3d165ec"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 2,
+          "trajectories": 0,
+          "sha256": "a9d4375b0cb21102aab4b590d9a48b4839ab4f54194e7fadb421e1ff4d1ffa82"
+        }
+      },
+      "neighbors": {
+        "prev": "G09",
+        "next": "G11"
+      }
+    },
+    {
+      "id": "G11",
+      "group": "G",
+      "title": {
+        "zh": "双螺旋在溶液里怎样运动",
+        "en": "How a Double Helix Moves in Solution"
+      },
+      "standfirst": {
+        "zh": "从碱基配对、水和离子出发，运行周期DNA模型，观察双螺旋中持续发生的局部运动。",
+        "en": "Start with base pairing, water, and ions; run a periodic DNA model and measure the local motion within its double helix."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从遗传分子到可设计的材料",
+            "en": "From genetic molecule to designed material"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "衍射图为什么改变了对DNA的理解",
+            "en": "How diffraction changed the picture of DNA"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "沿着一对碱基读懂分子模型",
+            "en": "Reading the model through one base pair"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "周期连接给双螺旋施加了什么条件",
+            "en": "What periodic connectivity means for a helix"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "运行一段有明确起点的DNA轨迹",
+            "en": "Running a DNA trajectory from a defined state"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把局部运动拆成距离、方向与倾斜",
+            "en": "Resolving local motion into distance, direction, and tilt"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "把时间轨迹读成分布和环境变化",
+            "en": "Reading distributions and environmental changes"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让模型选择对应生物学问题",
+            "en": "Matching the model to the biological question"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "df9f73d9d04b1e3c64cf02d15fe6a272eb87457658181592a85badf8f78ac13d",
+      "source_file": "g11.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "44cfffb4007e16109449f51cccbe1bc59bef34a165da70100757d6220b8b5f21"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "5bc738d1e4fc13ea9f5d88f1f92cd610faa9fd343f0b7630237f389b5f14d8a4"
+        }
+      },
+      "neighbors": {
+        "prev": "G10",
+        "next": "G12"
+      }
+    },
+    {
+      "id": "G12",
+      "group": "G",
+      "title": {
+        "zh": "糖的立体形状与身边的水",
+        "en": "Sugar Shape and the Water Around It"
+      },
+      "standfirst": {
+        "zh": "用海藻糖的全原子轨迹理解糖苷键转动、圆周统计和水化层，把化学身份、空间构象与材料问题连起来。",
+        "en": "Use an atomistic trehalose trajectory to understand glycosidic rotation, circular statistics, and hydration, connecting chemical identity to molecular shape and materials questions."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "糖为什么值得单独建立模型",
+            "en": "Why sugars deserve their own molecular models"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从费歇尔的糖到分子的立体身份",
+            "en": "From Fischer’s sugars to molecular identity"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "把两个糖环连接成海藻糖",
+            "en": "Connecting two glucose rings into trehalose"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "参数怎样完整地进入GROMACS",
+            "en": "Carrying the complete parameters into GROMACS"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "让糖和水一起运动",
+            "en": "Letting the sugar and its water move together"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "沿着圆周理解糖苷键的转动",
+            "en": "Understanding glycosidic rotation on a circle"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "糖周围的水应该怎样数",
+            "en": "How to count the water around a sugar"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从一个双糖走向糖链材料",
+            "en": "From one disaccharide to glycan materials"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "a0c9c7a8735cd395dcb3acd81c3484b74c558232fd04ae95a72a1a4889f4dbb6",
+      "source_file": "g12.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 4,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "eb6a1e1856ab014a6151516e5a16d1da56fd51971ea807357af454da97ed2ecc"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 4,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "15b3be2156a975c7ee67fc682c475d97d90f4faa3ea1f690e5c30f4dd05f346e"
+        }
+      },
+      "neighbors": {
+        "prev": "G11",
+        "next": "G13"
+      }
+    },
+    {
+      "id": "G13",
+      "group": "G",
+      "title": {
+        "zh": "膜怎样组织分子：脂质与界面",
+        "en": "How Membranes Organize Molecules: Lipids and Interfaces"
+      },
+      "standfirst": {
+        "zh": "从两层脂质的方向出发，读取膜蛋白周围的面积、厚度、密度与分子取向。",
+        "en": "Start with the two lipid leaflets and read area, thickness, density and molecular orientation around a membrane protein."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一层薄膜，怎样同时隔开水和组织分子",
+            "en": "How can a thin membrane separate water and organize molecules?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从铺开的脂质，到会流动的分子拼图",
+            "en": "From spread-out lipids to a moving molecular mosaic"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "认识这片膜：通道、脂质、水和离子",
+            "en": "Meet the system: channel, lipids, water and ions"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "膜有两个方向，盒子也要分别调整",
+            "en": "A membrane has two kinds of direction"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "先找到两层，再定义面积和厚度",
+            "en": "Find the leaflets before defining area and thickness"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "沿膜切薄片，看见水和脂质怎样分层",
+            "en": "Slice the membrane to reveal molecular layering"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "尾链怎样排列，为什么一个角度还不够",
+            "en": "How do the tails orient, and what does one angle leave out?"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让结构图、曲线和完整代码回答同一个问题",
+            "en": "Connect the structure, curves and complete analysis"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "eef016f76f7d9d9b2c7c410f9a86206448bd0bfdfc58cec7950ed93817f3312f",
+      "source_file": "g13.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "91c434638ac9df6be1f44384f2fb210e1afc87814c9134b86270f116b556d022"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "8b0fc7d09aaefeb7bcdea892bffde4f8f0f6c529623deb5664c5488fa940676d"
+        }
+      },
+      "neighbors": {
+        "prev": "G12",
+        "next": "G14"
+      }
+    },
+    {
+      "id": "G14",
+      "group": "G",
+      "title": {
+        "zh": "聚合物在水中伸展还是蜷缩",
+        "en": "How Polymers Extend and Coil in Water"
+      },
+      "standfirst": {
+        "zh": "从羟基端基 PEG 的连接方式出发，生成原子模型，再用两条真实轨迹读懂链的尺寸、构象分布与水化。",
+        "en": "Build hydroxyl-ended PEG from its chemical connectivity, then use two recorded trajectories to understand chain dimensions, conformational distributions, and hydration."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一条柔软的链，究竟有多大",
+            "en": "How large is a flexible chain?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从连接方式理解柔性：为什么长分子会蜷曲",
+            "en": "Connectivity and flexibility: why a long molecule coils"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "把重复单元和端基写对，再生成分子",
+            "en": "Specify the repeat units and ends before building the molecule"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "让同一条链经历两段独立的运动",
+            "en": "Give the same chain two independent motion histories"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "回转半径与端到端距离：同一条链的两把尺子",
+            "en": "Radius of gyration and end-to-end distance: two rulers for one chain"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把许多形状放在一起，平均值才有含义",
+            "en": "An average acquires meaning from many shapes"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "水化不是在链外面套一个固定的壳",
+            "en": "Hydration is a changing neighborhood"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从完整分析程序走向下一次比较",
+            "en": "Use the complete analysis to design the next comparison"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "612ead69e1ee05506a794e5120f1798851f8266c16c764cd7d3b0ee335d739cc",
+      "source_file": "g14.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "906364b2836a845d831a25c9015d04ffb32952b12a00012f677b729492c9e6d0"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "51b60d1b89599745680d9c77e1a544078f59f91b2e0e2170306c0f51a6837194"
+        }
+      },
+      "neighbors": {
+        "prev": "G13",
+        "next": "G15"
+      }
+    },
+    {
+      "id": "G15",
+      "group": "G",
+      "title": {
+        "zh": "脂质如何自己排成一层膜",
+        "en": "How Lipids Assemble into a Membrane"
+      },
+      "standfirst": {
+        "zh": "把原子细节汇总为化学珠子，观察DSPC的真实自组装，并用叶片面积、密度和取向理解双层结构。",
+        "en": "Represent chemical fragments as beads, follow recorded DSPC self-assembly, and interpret the bilayer through leaflet area, density, and orientation."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一层膜怎样从散开的分子中出现",
+            "en": "How a membrane emerges from dispersed molecules"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从原子到珠子：保留什么，平均什么",
+            "en": "From atoms to beads: what is retained and averaged"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "让参数文件与分子组成相互对应",
+            "en": "Match parameter files to molecular composition"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "观察自组装：从位置变化找到共同方向",
+            "en": "Read assembly through positions and collective orientation"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "把膜转正，让横向面积能够独立调整",
+            "en": "Rotate the membrane and release its lateral area"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "一片膜，两种每脂质面积",
+            "en": "One membrane and two areas per lipid"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "用密度和取向读懂膜的内部",
+            "en": "Read the membrane interior through density and orientation"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把自组装记录变成可继续研究的模型",
+            "en": "Turn an assembly record into a model for further study"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "72b41a5f5ff77adeb0334acf7112cea81af545ccd380ca7f6d26c61555565cb4",
+      "source_file": "g15.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "cc76fc5425b40f73dcdc9431f6ba296d5eb871b3d6726d6b0fe0543ca9d463a1"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "64858f8b1a1e21373f5039eaa05be379edfcf20ad964c09efae9464b18e6b372"
+        }
+      },
+      "neighbors": {
+        "prev": "G14",
+        "next": "G16"
+      }
+    },
+    {
+      "id": "G16",
+      "group": "G",
+      "title": {
+        "zh": "给膜接上聚合物：从稀疏线团到拥挤外衣",
+        "en": "Grafting Polymers onto a Membrane"
+      },
+      "standfirst": {
+        "zh": "比较两种PEG接枝比例，用真实轨迹理解表面密度、质量分布、末端高度与初始构象的影响。",
+        "en": "Compare two PEG grafting fractions through recorded surface densities, mass distributions, terminal heights, and preparation histories."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "给脂质膜穿上一层会运动的外衣",
+            "en": "A moving polymer coat on a lipid membrane"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从脂质载体实验到可以构建的分子外衣",
+            "en": "From lipid-carrier experiments to molecular construction"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "认清一个接枝分子：珠子、质量和电荷",
+            "en": "Identify one grafted molecule: beads, mass, and charge"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把链接到正确的脂质上",
+            "en": "Connect each chain to the correct lipid"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "让水、离子、链和膜一起松弛",
+            "en": "Relax the water, ions, polymers, and membrane together"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "接枝比例相同，表面拥挤程度也可能不同",
+            "en": "Composition and surface crowding are different quantities"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "一条链有不止一种高度",
+            "en": "A chain has more than one useful height"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把分布、完整代码和研究问题连起来",
+            "en": "Connect distributions, complete analysis, and research questions"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "437608cfe14396759c7264deb336f38198667e27054a98e4c3faa622b1d31265",
+      "source_file": "g16.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "b58f4d4c5218b959603aa12586f292c3e237f05dd792636ebcab654abc98be39"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "97eb34842ecba69cff9b481eac3463517a8a8b84dff7743d4d2490e823b0f9d8"
+        }
+      },
+      "neighbors": {
+        "prev": "G15",
+        "next": "G17"
+      }
+    },
+    {
+      "id": "G17",
+      "group": "G",
+      "title": {
+        "zh": "让分子走过少见的构象：伞形采样与自由能",
+        "en": "Visiting Rare Conformations: Umbrella Sampling and Free Energy"
+      },
+      "standfirst": {
+        "zh": "沿十残基短肽的端距布置观察窗口，读懂偏置、重叠、构象历史与真实自由能剖面的变化。",
+        "en": "Place observation windows along a ten-residue peptide’s end distance and interpret bias, overlap, conformational history, and recorded free-energy profiles."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "分子为什么愿意停留在某些形状里",
+            "en": "Why does a molecule favor some shapes?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "一条十残基短肽，连接了怎样的科学问题",
+            "en": "A ten-residue peptide connects several scientific questions"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "虚拟弹簧怎样改变分子的访问机会",
+            "en": "How a virtual spring changes sampling"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从初始结构生成二十六个观察窗口",
+            "en": "Generate twenty-six observation windows"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "相邻窗口是否真的看到了共同的区域",
+            "en": "Do neighboring windows observe common regions?"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "同一个中心，从两种构象开始",
+            "en": "One center, two starting conformations"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "去掉偏置后，怎样把窗口拼成自由能剖面",
+            "en": "Remove the bias and combine the windows"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让一条曲线变成可以判断的研究结果",
+            "en": "Turn a profile into an assessable research result"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "171e1852067996c2b203b4df8754de5965c48ba6eacc769efb692952924d33b0",
+      "source_file": "g17.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "16564975a6f6b16ccb41ad403a076d1212e3cd644152a468706382c15016a8b4"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "d8b94e1586e2247b9b350da5b5919d3162f49d8e2a7d519f8e5a70f13590ee94"
+        }
+      },
+      "neighbors": {
+        "prev": "G16",
+        "next": "G18"
+      }
+    },
+    {
+      "id": "G18",
+      "group": "G",
+      "title": {
+        "zh": "完整研究：PEG链长、构象与水化",
+        "en": "A Complete Study: PEG Chain Length, Conformation and Hydration"
+      },
+      "standfirst": {
+        "zh": "比较三种 PEG 链长与六条真实轨迹，把空间尺寸、水化计数和采样差异放进同一项可重算研究。",
+        "en": "Compare three PEG lengths and six recorded trajectories, linking molecular dimensions, hydration counts, and sampling variation in one reproducible study."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "把链加长，究竟改变了什么",
+            "en": "What changes when a chain becomes longer?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "先把重复单元、端基和原子数对齐",
+            "en": "Align repeat units, end groups, and atom counts"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "从随机步行到真实链：为何要除以链长的平方根",
+            "en": "From random steps to real chains: why divide by a square root?"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "六条轨迹怎样放在同一把尺子下",
+            "en": "Put six trajectories on a common footing"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "三种长度、两把空间尺子",
+            "en": "Three chain lengths and two spatial rulers"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "增长趋势怎样读，斜率又怎样算",
+            "en": "Read growth trends and calculate local slopes"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "水变多了，还是每个位置更容易接近水",
+            "en": "More water overall, or more water near each site?"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把比较写成可重算的研究流程",
+            "en": "Turn the comparison into a reproducible study"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "930501343bb832eb23032ff836ca347a3c05fd5331babfb12cca37155cc150c9",
+      "source_file": "g18.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "3ae6a768391675cfe9cebe8b7c63501332c71d64d51feaaaf7fddab02a95bda1"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "99ba4b16c2ec5ba9d1cd2a574f0b61ab72b1b003ef34dffa62c5adcd6a61dc02"
+        }
+      },
+      "neighbors": {
+        "prev": "G17"
+      }
+    },
+    {
+      "id": "L01",
+      "group": "L",
+      "title": {
+        "zh": "一盒粒子为什么会动",
+        "en": "Why a Box of Particles Moves"
+      },
+      "standfirst": {
+        "zh": "从墨水扩散和液体运动出发，建立一盒两类粒子的模型，理解相互作用、时间推进与热运动，再把完整输入、实际轨迹和能量曲线连起来。",
+        "en": "Start with diffusion and liquid motion, build a box containing two particle types, and connect interactions, time evolution and thermal motion to a complete input, an actual trajectory and energy curves."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从一滴液体开始，认识计算机里的粒子",
+            "en": "From a drop of liquid to particles in a computer"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "把很大的世界装进一个有边界的盒子",
+            "en": "Putting a large world inside a finite box"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "吸引和排斥怎样写成一个能量地形",
+            "en": "Writing attraction and repulsion as an energy landscape"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从局部规则到运动：计算为什么能够推进",
+            "en": "How local rules advance a moving system"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "结构最小化与动力学回答不同的问题",
+            "en": "Minimisation and dynamics answer different questions"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "读懂完整输入，而后运行它",
+            "en": "Read the complete input, then run it"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "把轨迹和曲线放在一起看",
+            "en": "Read trajectories and curves together"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "用一次小改变，建立模拟比较的习惯",
+            "en": "Use one small change to build a useful comparison"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "47911f52c7e79319daa724b795ed401dff507edea314026fe0e3dc87022dd5f1",
+      "source_file": "l01.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 1,
+          "sha256": "00a86eba130089117ff42f5ac9f658e64592afa2a6d920d51472c1364e8d743a"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 1,
+          "trajectories": 1,
+          "sha256": "49ce07d8e27ffbd38a22e22b62cd8e6e9c34752f91ad003c3aa6ad91484d2e72"
+        }
+      },
+      "neighbors": {
+        "next": "L02"
+      }
+    },
+    {
+      "id": "L02",
+      "group": "L",
+      "title": {
+        "zh": "从输入文件到第一段轨迹",
+        "en": "From an Input File to a First Trajectory"
+      },
+      "standfirst": {
+        "zh": "把输入、轨迹、数值表和重启状态串起来，学会从真实坐标得到可解释的图。",
+        "en": "Connect inputs, trajectories, numerical tables and restart states, and turn actual coordinates into interpretable figures."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "把一段运动变成能够读懂的记录",
+            "en": "Turn motion into a readable record"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "输入是一组按顺序生效的动作",
+            "en": "An input is a sequence of actions"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "给数字装上单位，也给时间找到起点",
+            "en": "Give numbers units and time an origin"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "轨迹是一张反复出现的粒子表",
+            "en": "A trajectory is a repeated particle table"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "先看一列数据怎样产生，再谈平均",
+            "en": "Understand a reading before averaging it"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "从文件到图：一段完整而可检查的分析",
+            "en": "From files to figures with a complete analysis"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "保存状态之后，怎样把计算接下去",
+            "en": "Continue from a saved state"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让文件组织服务于一个明确的比较",
+            "en": "Organise records around a clear comparison"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "dd4323e30048be143ac50973be8bf23fb35dde275d1c159e3065ca76c2a9acab",
+      "source_file": "l02.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 4,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "57d026c13a2b3df80330f5799324f8086ad2f29654fb158d205bbd0cadbff275"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 4,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "1da7a3130958a53f9708e46b40a25c8227218052fddb301eb649839decaaaefc"
+        }
+      },
+      "neighbors": {
+        "prev": "L01",
+        "next": "L03"
+      }
+    },
+    {
+      "id": "L03",
+      "group": "L",
+      "title": {
+        "zh": "力、能量和时间怎样连接",
+        "en": "Connecting Force, Energy and Time"
+      },
+      "standfirst": {
+        "zh": "从势能的坡度走到一次完整的时间步，用同一起点的真实对照分清积分误差、截断效应与采样。",
+        "en": "Follow an energy slope through one full time step, then use a common-state comparison to distinguish integration error, cutoff effects and sampling."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "动画很顺畅，运动就算对了吗",
+            "en": "Smooth animation and accurate motion"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从能量地形的坡度读出作用力",
+            "en": "Read force from an energy slope"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "一次时间步怎样把位置和速度接起来",
+            "en": "Connect position and velocity over one step"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "最快的运动怎样限制时间步",
+            "en": "How fast motion constrains the time step"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "势能截断为什么会留在能量曲线上",
+            "en": "Why a cutoff leaves a signature in energy"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "邻居表让计算更快，也需要及时更新",
+            "en": "Neighbour lists accelerate a changing calculation"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "用同一起点完成三次真实对照",
+            "en": "Run three comparisons from a common origin"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把数值证据带到更复杂的材料中",
+            "en": "Carry numerical evidence into more complex materials"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "ecd70e691ba203c03ab402e76952d1dbcd75c86468c0e65cb93616da7edfa80b",
+      "source_file": "l03.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 2,
+          "trajectories": 0,
+          "sha256": "57cf5895a08874021ab7cbb58439845c9c555fd6cbe637784227671e20d10171"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 2,
+          "trajectories": 0,
+          "sha256": "54eb3d4949d9e523162974cb1e0e9ef6c85761f4a12b7756051f6eea9b9065b2"
+        }
+      },
+      "neighbors": {
+        "prev": "L02",
+        "next": "L04"
+      }
+    },
+    {
+      "id": "L04",
+      "group": "L",
+      "title": {
+        "zh": "温度、压力与边界怎样控制",
+        "en": "Controlling Temperature, Pressure and Boundaries"
+      },
+      "standfirst": {
+        "zh": "从同一温度下不同质量的速度分布，读懂热浴、压力和边界怎样进入分子模拟。",
+        "en": "Use mass-dependent velocity distributions at one temperature to understand how baths, pressure and boundaries enter molecular simulations."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "材料处在什么环境里，决定我们怎样模拟",
+            "en": "The environment determines how a material is simulated"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "温度描述热运动，不要求所有粒子一样快",
+            "en": "Temperature describes thermal motion, not one common speed"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "从布朗运动理解 Langevin 热浴",
+            "en": "Understand a Langevin bath through Brownian motion"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "NVE、NVT 与 NPT 说的是哪些量受到约束",
+            "en": "What NVE, NVT and NPT constrain"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "没有墙的周期盒，压力从哪里来",
+            "en": "Pressure in a periodic box without walls"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "周期、自由表面和墙面是三种不同几何",
+            "en": "Periodic space, free surfaces and walls describe different geometries"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "用真实速度和压力读懂三段运行",
+            "en": "Read the three intervals through actual velocities and pressure"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把环境条件变成可解释的研究选择",
+            "en": "Make environmental conditions an interpretable research choice"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "b039bb99db5b44801d345456437da90f9c0ba87fcb09855600168e6a490fa432",
+      "source_file": "l04.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 2,
+          "trajectories": 0,
+          "sha256": "619b12aa2e557d66b4b366e3c4f17034e47d8f3e99ac0cf89633c939f2f3cf89"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 2,
+          "trajectories": 0,
+          "sha256": "53c7572a8138ec728e7ca39921350045c7b819c389ca8774ee5c409c6d12f97c"
+        }
+      },
+      "neighbors": {
+        "prev": "L03",
+        "next": "L05"
+      }
+    },
+    {
+      "id": "L05",
+      "group": "L",
+      "title": {
+        "zh": "把一个分子写进计算机",
+        "en": "Representing a Molecule in a Computer"
+      },
+      "standfirst": {
+        "zh": "从一条短PEG认识原子身份、连接、参数与构象，再把分子放进水里。",
+        "en": "Use a short PEG chain to connect atomic identity, connectivity, parameters, and conformation before inserting it into water."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从一条软链开始，认识分子的三种身份",
+            "en": "Start with a flexible chain and distinguish its identities"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "为什么“连在一起”曾经是一个科学问题",
+            "en": "Why being connected was once a scientific question"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "从三个原子读懂一份分子模板",
+            "en": "Read a molecular template through three atoms"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "键、角和扭转，分别为哪一种变化计费",
+            "en": "Which geometric change does each energy term measure?"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "一套参数，需要连同它的单位和配对规则一起读",
+            "en": "Read parameters together with units and pairing rules"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把分子放进水里，需要给它真正腾出空间",
+            "en": "Give an inserted molecule actual space in the solvent"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "让连接表、结构图和运行记录互相核对",
+            "en": "Make connection tables, structural pictures, and records agree"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从一份模板走向一个有明确条件的研究对象",
+            "en": "Turn a template into a research object with stated conditions"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "73519ed205434351e4b3099ed6ca5a822a7ae8fa34b6bd6699cf6cc1ebf0fb91",
+      "source_file": "l05.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 1,
+          "sha256": "33f0504e2c21addb1c9fd8847479a5e7c34c2baa64d7e853f7fb8d7f5a1574f4"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 1,
+          "sha256": "79f402a6ec678fa7fce0563fa689b862db4ef8d2a9153b24265542148132e9d4"
+        }
+      },
+      "neighbors": {
+        "prev": "L04",
+        "next": "L06"
+      }
+    },
+    {
+      "id": "L06",
+      "group": "L",
+      "title": {
+        "zh": "水和离子怎样相互作用",
+        "en": "How Water and Ions Interact"
+      },
+      "standfirst": {
+        "zh": "从盐水导电的认识出发，读懂刚性水、离子和壁面如何共同组织局部结构，再从真实轨迹测量水化邻居与分子朝向。",
+        "en": "From the origins of electrolyte theory to rigid water, ions, and interfaces: measure hydration neighbours and molecular orientation in an actual confined solution."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一粒盐消失以后，水里多了什么",
+            "en": "What remains in the water after a grain of salt disappears"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从电中性到相互吸引：先把电荷和能量分开",
+            "en": "From neutrality to attraction: distinguishing charge from energy"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "三个原子、四个作用位置：读懂TIP4P/2005",
+            "en": "Three atoms and four interaction sites: understanding TIP4P/2005"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "让水保持形状，也让参数保持一致",
+            "en": "Maintaining water geometry and a consistent parameter set"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "把盐水放进窄缝：边界和长程静电一起考虑",
+            "en": "Placing salt water in a slit: boundaries and long-range electrostatics"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "先看准备过程，再读分子结构",
+            "en": "Inspecting preparation before interpreting molecular structure"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "怎样量出水化层：邻居数量和分子朝向",
+            "en": "Measuring hydration: neighbour counts and molecular orientation"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从局部水化走向界面：把平均量放回空间里",
+            "en": "From local hydration to interfaces: returning averages to space"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "4072c39fff47669983e8f8fb4ca6453c93335cd6139382f52bbc5664ec4d691b",
+      "source_file": "l06.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 1,
+          "sha256": "7df344f533374a2e494cb66e4a6ed1341c7aabe260104c40f0f8e4ee7c0fc072"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 1,
+          "sha256": "9eaf946947fe24159e0df36807ad357bd2eebcd808ef5aaf12d696065443aa85"
+        }
+      },
+      "neighbors": {
+        "prev": "L05",
+        "next": "L07"
+      }
+    },
+    {
+      "id": "L07",
+      "group": "L",
+      "title": {
+        "zh": "一条高分子链的形状与运动",
+        "en": "The Shape and Motion of a Polymer Chain"
+      },
+      "standfirst": {
+        "zh": "沿着真实PEG轨迹区分端点、轮廓与整体尺寸，观察恒力怎样改变构象，并从两个端点的位移计算外力功。",
+        "en": "Distinguish endpoint, contour, and whole-chain size in an actual PEG trajectory, follow the response to constant forces, and calculate work from endpoint displacements."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "一根柔软的连接臂，怎样量它的大小",
+            "en": "How do we measure a flexible molecular linker?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "同一条链为何需要许多幅图：从连接关系走向构象统计",
+            "en": "Why one chain needs many pictures: from connectivity to conformational statistics"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "端点距离、方向投影和轮廓长各回答什么",
+            "en": "What terminal distance, projection, and contour length measure"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "回转半径：让每个原子都参与尺寸测量",
+            "en": "Radius of gyration: including every atom in the size measurement"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "让同一条链先松动，再承受明确的恒力",
+            "en": "Letting the same chain fluctuate before applying a defined constant force"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "读真实构象：尺寸增加的同时，形状怎样改变",
+            "en": "Reading actual conformations: how shape changes as size grows"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "两端的力相互抵消，为什么仍然做功",
+            "en": "Why opposite endpoint forces can still do work"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把一段变化整理成可以继续研究的结果",
+            "en": "Turning a trajectory into results that support the next question"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "1d977497d9e02f552e7b4f94414a4624a29cc0e75a8ed22b16731708f7f8c3a8",
+      "source_file": "l07.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "3853376f8901debbec585dbde3dd3ef7ebf0cae34180f2e636506558c01fe39d"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "4f78fd50c5ab256d85c3bac412f1b3d26fd93f7e98bb8954079e0baec70bdc44"
+        }
+      },
+      "neighbors": {
+        "prev": "L06",
+        "next": "L08"
+      }
+    },
+    {
+      "id": "L08",
+      "group": "L",
+      "title": {
+        "zh": "从单链走向熔体与溶液",
+        "en": "From One Chain to Melts and Solutions"
+      },
+      "standfirst": {
+        "zh": "把一条链放进许多条链组成的环境，逐步读懂浓度、排斥、内部尺寸与运动。",
+        "en": "Follow a chain into a crowded polymer environment and measure concentration, packing, internal dimensions and motion."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从一根线到一团线，问题发生了什么变化",
+            "en": "What changes when one chain becomes a crowd?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "为什么把原子变成珠子：长链运动提出的历史问题",
+            "en": "Why replace atoms with beads? The historical problem of long-chain motion"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "连接与排斥各做一件事：读懂珠簧模型",
+            "en": "Connectivity and repulsion: reading the bead–spring model"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "怎样把80条链放进同一个盒子",
+            "en": "How to put 80 chains into one box"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "温度稳定以后，还要看链是否记得初始形状",
+            "en": "After temperature settles, do chains remember their starting shapes?"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "珠子的邻居是谁：把链内结构与链间堆积分开",
+            "en": "Who are a bead’s neighbours? Separating internal structure from packing"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "一颗珠子动得快，为什么整条链仍移动得慢",
+            "en": "Why can a bead move faster than its whole chain?"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让模型回答材料问题：熔体、溶液与下一步比较",
+            "en": "Using the model to ask material questions"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "c9c437ee3cb7a3616bc6c26fc1c9c3e17208e6c5369005706bc7634a407ff282",
+      "source_file": "l08.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "ab9e1ecfe9575c0aeaad05f607aa8d83becb358e86b29e2a999937f43dddcb06"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "3498c196048c698851d160a0ce8610e19ac743c9c51504d26a42908a78866795"
+        }
+      },
+      "neighbors": {
+        "prev": "L07",
+        "next": "L09"
+      }
+    },
+    {
+      "id": "L09",
+      "group": "L",
+      "title": {
+        "zh": "把长链连成网络",
+        "en": "Connecting Chains into a Network"
+      },
+      "standfirst": {
+        "zh": "用真实的珠簧网络，把连接数、连通结构、周期贯穿与准备松弛逐步分清。",
+        "en": "Build bead–spring networks and connect link counts with clusters, periodic winding and structural relaxation."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "把链连起来，为什么材料会改变",
+            "en": "Why does joining chains change a material?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "凝胶问题怎样变成连接问题",
+            "en": "How gelation became a connectivity problem"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "同一个熔体，怎样得到三种可比较的连接方案",
+            "en": "Three comparable connection patterns from one melt"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把新增连接写进LAMMPS，邻居关系也要跟着改变",
+            "en": "Writing new connections and updating neighbour relationships"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "大团簇、闭合路线与悬垂部分",
+            "en": "Large clusters, closed routes and dangling portions"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "穿过周期边界，和贯穿周期网络有什么不同",
+            "en": "Crossing a boundary and winding through a periodic network"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "连接完成以后，为什么还要让网络松一口气",
+            "en": "Why a newly connected network needs to relax"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "从连接统计走向可解释的材料比较",
+            "en": "From connectivity statistics to an interpretable material comparison"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "26ab4cdf6bd8acc3afe9a8b70114944116f6f30794fdaa2da137d42167e2df68",
+      "source_file": "l09.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "c67533ace128e634511834f95f808f82ddf5f84a8ebd07dece69d9cf73a30701"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "36a2f35a0d4c4248aeadb8468a1d412dc11dc2e67d9103cf84973f05aae5f546"
+        }
+      },
+      "neighbors": {
+        "prev": "L08",
+        "next": "L10"
+      }
+    },
+    {
+      "id": "L10",
+      "group": "L",
+      "title": {
+        "zh": "拉伸与松弛：从分子读出力学",
+        "en": "Stretching and Relaxation: Reading Mechanics from Molecules"
+      },
+      "standfirst": {
+        "zh": "从盒子形变到压力张量，把网络拉伸、链取向和固定形变后的调整联系起来。",
+        "en": "Connect prescribed cell deformation with network stress, strand orientation and adjustment at fixed strain."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "拉长以后再停住，材料还在做什么",
+            "en": "What continues after stretching stops?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从力和长度，走到热运动与链的形状",
+            "en": "From force and length to thermal motion and chain shape"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "应变是怎样从盒长中算出来的",
+            "en": "Calculating strain from recorded cell lengths"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "用周期盒子加载，珠子怎样跟着变化",
+            "en": "Loading a periodic cell and moving its particles"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "从压力张量读出拉伸方向的机械响应",
+            "en": "Reading tensile response from the pressure tensor"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "拉伸改变了哪些方向：局部键与整条链",
+            "en": "Which directions change? Bonds and whole chains"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "固定形变后的应力，怎样读才有物理意义",
+            "en": "Interpreting stress after deformation is held fixed"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让加载、统计与材料条件对应起来",
+            "en": "Connecting loading, statistics and material conditions"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "31c1de3d190a3fe0357b96ed900ee06924f5c2a8f85d0694420a17267e55f694",
+      "source_file": "l10.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 5,
+          "trajectories": 0,
+          "sha256": "05dda39d38b1bac4e079964aa77cd9c35605d1fdf4c111a613e6c11cd5cbf0eb"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 5,
+          "trajectories": 0,
+          "sha256": "f749b58d80e8220bb628c33655664a5924184b29177e9a8544b92ef24c137763"
+        }
+      },
+      "neighbors": {
+        "prev": "L09",
+        "next": "L11"
+      }
+    },
+    {
+      "id": "L11",
+      "group": "L",
+      "title": {
+        "zh": "流动的阻力从哪里来",
+        "en": "Where Resistance to Flow Comes From"
+      },
+      "standfirst": {
+        "zh": "让两面墙朝相反方向运动，从水分子的速度、壁面受力与温度记录中读懂剪切，并亲手测量限域盐水的一段流动。",
+        "en": "Drive two walls in opposite directions and connect molecular velocities, wall forces, and temperature to the measured shear response of a confined electrolyte."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "把水夹在两块滑动的表面之间",
+            "en": "Liquid between two sliding surfaces"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从旋转圆筒到纳米窄缝",
+            "en": "From rotating cylinders to a nanoslit"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "流动的模型保留了哪些分子细节",
+            "en": "The molecular details retained by the flow model"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "平均流动和热运动怎样分开",
+            "en": "Separating mean flow from thermal motion"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "用完整输入建立并驱动盐水",
+            "en": "Building and driving the electrolyte"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "沿窄缝切片，读出速度和层化",
+            "en": "Slicing the pore to measure velocity and layering"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从壁面受力走到黏度",
+            "en": "From wall force to viscosity"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让时间窗口和实验条件对得上",
+            "en": "Connecting sampling windows with experimental conditions"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "039a6768d28605cf819bf97c3d109af928072c00f40fcd6fb6ba00e3b77a5b43",
+      "source_file": "l11.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 1,
+          "sha256": "77e21d8780fde1027d6f35d8d218c52cb1852704d38df3e8db9a3e9ce11b0614"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 1,
+          "sha256": "b4b3fd9836b5dc46a3f30597c7d3cbb37a71b31597711cda1c9f5d4b9fa1a59c"
+        }
+      },
+      "neighbors": {
+        "prev": "L10",
+        "next": "L12"
+      }
+    },
+    {
+      "id": "L12",
+      "group": "L",
+      "title": {
+        "zh": "分子为何停留在表面",
+        "en": "Why Molecules Remain at a Surface"
+      },
+      "standfirst": {
+        "zh": "让水分子与储库交换，在一个真实裂隙中读懂吸附数量、空间分布和采样过程。",
+        "en": "Exchange water with a reservoir and read population, spatial distribution, and sampling in a molecular crack."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从干燥剂到分子停留的位置",
+            "en": "From a drying agent to molecular positions"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "表面为什么值得单独研究",
+            "en": "Why a surface deserves its own description"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "开放体系怎样与储库交换分子",
+            "en": "How an open system exchanges molecules"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "把裂隙与水写成明确的相互作用",
+            "en": "Defining the crack and its interactions with water"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "运行一次能够逐项检查的交换过程",
+            "en": "Running an exchange process that can be checked"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "接受率怎样帮助阅读数量曲线",
+            "en": "Using acceptance statistics to read a population curve"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从分子计数走向空间分布",
+            "en": "Turning molecular counts into spatial distributions"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把一个吸附算例发展成材料比较",
+            "en": "Developing an adsorption example into a comparison"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "ed15ae7ef345e8d6b1deb76fad722979a05ae2566d46694ccd537497e987ba54",
+      "source_file": "l12.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "5868d99474228c2d2a6c44f29ebe5bc84560d3913335efadabc5d49022a69264"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "2f65c7e0a43e7ceedfce72370c3f049e8b4b7c7afe5ae062e43e5f358f06a3eb"
+        }
+      },
+      "neighbors": {
+        "prev": "L11",
+        "next": "L13"
+      }
+    },
+    {
+      "id": "L13",
+      "group": "L",
+      "title": {
+        "zh": "分子怎样自己聚成一团",
+        "en": "How Molecules Assemble into Aggregates"
+      },
+      "standfirst": {
+        "zh": "运行二维两亲分子模型，从头尾相互作用走到真实聚集轨迹，再用周期距离与图的连通性测量团簇。",
+        "en": "Run a two-dimensional amphiphile model, follow its actual assembly trajectory, and measure aggregates using periodic distances and graph connectivity."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "从洗涤剂到会聚集的分子",
+            "en": "From detergents to molecules that assemble"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "肥皂溶液为何推动了胶束研究",
+            "en": "Why soap solutions prompted the study of micelles"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "一个头和两个尾珠保留了什么",
+            "en": "What one head and two tail beads retain"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从温和排斥走到正式相互作用",
+            "en": "From a soft preparation to the main interactions"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "读懂真实的温度和结构变化",
+            "en": "Reading the actual temperature and structural changes"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "怎样从坐标认出一个团簇",
+            "en": "Recognizing a cluster from coordinates"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "平均胶束大小为何不止一种",
+            "en": "Why mean aggregate size has more than one meaning"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "让自组装模拟回答材料问题",
+            "en": "Using self-assembly simulations for materials questions"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "142410906d7c270893a1feae9a8f27afb8de4fed8f5725f2fb17457802cd3771",
+      "source_file": "l13.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "9713cbf5992de86eb08d85ff3702a48cf76f190fbf481394e606715a1111286d"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 5,
+          "figures": 4,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 1,
+          "sha256": "d8282348e58bbd3ac73e6fe635402fb5e76e38c3d292864f8d857d0e4df120a6"
+        }
+      },
+      "neighbors": {
+        "prev": "L12",
+        "next": "L14"
+      }
+    },
+    {
+      "id": "L14",
+      "group": "L",
+      "title": {
+        "zh": "跨过少见的变化：自由能与采样",
+        "en": "Rare Changes: Free Energy and Sampling"
+      },
+      "standfirst": {
+        "zh": "从直接采样的空白出发，用相互重叠的伞形窗口重建自由能，并把误差与分子结构一同读懂。",
+        "en": "Start from gaps in direct sampling, reconstruct free energy with overlapping umbrella windows, and interpret sampling variation alongside molecular structure."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "想看见一次罕见变化，需要等多久",
+            "en": "How long must we wait for a rare change?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从访问次数到自由能：对数为什么出现",
+            "en": "From visit counts to free energy: why a logarithm?"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "先直接观察：同样四纳秒，哪里留下空白",
+            "en": "Direct observation: what remains empty after four nanoseconds?"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "给少见的位置安排观察窗口",
+            "en": "Arranging observation windows around rare positions"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "窗口要相互认识：重叠怎样指导补充计算",
+            "en": "Windows need shared observations: using overlap to add sampling"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "怎样把弹簧的影响从概率中取走",
+            "en": "Removing the spring’s statistical effect"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "一条平滑曲线之后，还有哪些统计问题",
+            "en": "What remains to check after obtaining a smooth profile?"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把例题变成生物材料中的路径问题",
+            "en": "Turning the example into a biomaterials pathway study"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "f7fa4d30f4f22b504ee79996d44858f34a1566b7a0b58227459949748d32c698",
+      "source_file": "l14.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "950ff8d2c606f3454095ac71387433aa0bd01025c9467773543505ab79914c16"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 4,
+          "trajectories": 0,
+          "sha256": "587ff5609924b15786ece914e50e64fbe760d71342d0d9567c25bd542cd148e5"
+        }
+      },
+      "neighbors": {
+        "prev": "L13",
+        "next": "L15"
+      }
+    },
+    {
+      "id": "L15",
+      "group": "L",
+      "title": {
+        "zh": "怎样设计可信的模拟比较",
+        "en": "Designing Reliable Simulation Comparisons"
+      },
+      "standfirst": {
+        "zh": "从九条网络轨迹中读懂重复、配对与时间相关，让每一根误差条对应明确的测量问题。",
+        "en": "Use nine network trajectories to understand replication, matching and temporal correlation, connecting every error bar to a defined measurement."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "两条曲线之间，究竟差了什么",
+            "en": "What differs between two simulation curves?"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "先找到真正的重复单位",
+            "en": "Finding the unit that was actually repeated"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "把运动记录变成一个定义清楚的响应",
+            "en": "Defining one response from a moving record"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "同一制备内相减，再比较三次制备",
+            "en": "Subtract within each preparation, then compare preparations"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "标准差、标准误与误差条各在说什么",
+            "en": "What standard deviation and standard error describe"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "一条轨迹里的连续记录，怎样分块观察",
+            "en": "Examining correlated records with chronological blocks"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "观察窗口改变时，问题也要保持清楚",
+            "en": "Keeping the question clear when observation time changes"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "运行完整比较，并安排下一组计算",
+            "en": "Running the comparison and planning the next study"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "00ebdaa102fa41a05824f1aa4a272d36c02678e0255f70b3f7409efd4313bfba",
+      "source_file": "l15.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "3fa0fef9925d1fa7eb0abbf6cad6f1b31b1362c7cc7707f726c3e881480470d5"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 6,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "d4a21469b524560f1523e1478786413d7bf2bd2a8e5640d6cbc3338331dd06f5"
+        }
+      },
+      "neighbors": {
+        "prev": "L14",
+        "next": "L16"
+      }
+    },
+    {
+      "id": "L16",
+      "group": "L",
+      "title": {
+        "zh": "完整研究：交联、网络结构与力学",
+        "en": "A Complete Study: Crosslinks, Network Structure and Mechanics"
+      },
+      "standfirst": {
+        "zh": "把连接、链形状、加载与统计连成一个完整研究：同一批网络，逐项追踪结构如何对应机械响应。",
+        "en": "Connect bonding, chain shape, loading and statistics in one complete study, tracing structure and mechanical response within the same network samples."
+      },
+      "sections": [
+        {
+          "id": "s1",
+          "title": {
+            "zh": "把一块网络材料的结构与受力连起来",
+            "en": "Connecting a network material’s structure and response"
+          }
+        },
+        {
+          "id": "s2",
+          "title": {
+            "zh": "从凝胶形成到珠簧模型：研究问题怎样汇合",
+            "en": "From gel formation to bead–spring models"
+          }
+        },
+        {
+          "id": "s3",
+          "title": {
+            "zh": "让每条新增连接有明确的物理含义",
+            "en": "Giving each added connection a physical meaning"
+          }
+        },
+        {
+          "id": "s4",
+          "title": {
+            "zh": "从键表读出大团簇、循环与周期连接",
+            "en": "Reading components, cycles and periodic connections"
+          }
+        },
+        {
+          "id": "s5",
+          "title": {
+            "zh": "相同连接关系，也可以有不同空间响应",
+            "en": "The same connectivity can have different spatial responses"
+          }
+        },
+        {
+          "id": "s6",
+          "title": {
+            "zh": "把结构与力学放进同一张条件表",
+            "en": "Joining structure and mechanics in one condition table"
+          }
+        },
+        {
+          "id": "s7",
+          "title": {
+            "zh": "从完整输入运行到可追踪的综合图",
+            "en": "From complete inputs to a traceable study figure"
+          }
+        },
+        {
+          "id": "s8",
+          "title": {
+            "zh": "把研究继续推进到具体生物材料",
+            "en": "Extending the study towards a particular biomaterial"
+          }
+        }
+      ],
+      "category": "multiscale-modeling",
+      "source_sha256": "a04fb23acf8e1609d09b8c0bd9ee89b0e154ac4d6a26c64a76b8b8c8f3e556f4",
+      "source_file": "l16.html",
+      "counts": {
+        "zh": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "045a0f77fc982f9aa27cf2d91c0a7c7589233ad05982ce6a6f34939d81dca7ee"
+        },
+        "en": {
+          "sections": 8,
+          "equations": 7,
+          "figures": 3,
+          "labs": 1,
+          "result_figures": 3,
+          "trajectories": 0,
+          "sha256": "48dd0c4aed6b5f858293e69b66b1b26333a7d02def2efc0580355ebbe29b990f"
+        }
+      },
+      "neighbors": {
+        "prev": "L15"
+      }
+    }
+  ],
+  "assets": {
+    "/static/tutorials/molecular-dynamics/trajectories/ec77d6eac8052801a41409eca0b28447ce71309fc3cee91ed7c9f8fad4c752b6.json": {
+      "sha256": "ec77d6eac8052801a41409eca0b28447ce71309fc3cee91ed7c9f8fad4c752b6",
+      "bytes": 2767337
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/11e012b1533de18d3de12459ce9ac7a9f9a8f5b7ff8733f23e7078310ce39786.json": {
+      "sha256": "11e012b1533de18d3de12459ce9ac7a9f9a8f5b7ff8733f23e7078310ce39786",
+      "bytes": 124670
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/62147ed8d850d48f9fe0928da6dc105ab7a75e07c4c74d4f0539dfde5398e720.json": {
+      "sha256": "62147ed8d850d48f9fe0928da6dc105ab7a75e07c4c74d4f0539dfde5398e720",
+      "bytes": 1554390
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/bda4aa5eacd0edd8e14803ad31d49b1082a142d5a6e399e1c79e067bf9738cde.json": {
+      "sha256": "bda4aa5eacd0edd8e14803ad31d49b1082a142d5a6e399e1c79e067bf9738cde",
+      "bytes": 127455
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/da5ccea8dd4095bc6bae15a8d860073824b8d94e09e34b5c1847e64ef189dd01.json": {
+      "sha256": "da5ccea8dd4095bc6bae15a8d860073824b8d94e09e34b5c1847e64ef189dd01",
+      "bytes": 2241628
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/7ecb335142e389eea9822b69c734a02f5445f6ebc7cd11297479065cc7fc3508.json": {
+      "sha256": "7ecb335142e389eea9822b69c734a02f5445f6ebc7cd11297479065cc7fc3508",
+      "bytes": 2513292
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/a15d8f6cecaf664d267c951f9bd7dbd4de360515a922a92015dce65dea7c3602.json": {
+      "sha256": "a15d8f6cecaf664d267c951f9bd7dbd4de360515a922a92015dce65dea7c3602",
+      "bytes": 2912870
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/05075b56c9edc3e2a07274293e1f29a6a4302a2416380eb73d07bf839ea5aafb.json": {
+      "sha256": "05075b56c9edc3e2a07274293e1f29a6a4302a2416380eb73d07bf839ea5aafb",
+      "bytes": 3664142
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/c148f0484ed573c0b8c8c386bdf66eb116c26e5dc4cd0438f53b05e867e88ee3.json": {
+      "sha256": "c148f0484ed573c0b8c8c386bdf66eb116c26e5dc4cd0438f53b05e867e88ee3",
+      "bytes": 2826147
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/bc2d3648239ff57f4c6e54a34cf459ad9e15ba0a31b2684d5fa035c7ac1ccd78.json": {
+      "sha256": "bc2d3648239ff57f4c6e54a34cf459ad9e15ba0a31b2684d5fa035c7ac1ccd78",
+      "bytes": 4611123
+    },
+    "/static/tutorials/molecular-dynamics/trajectories/d5cafa85cf831b13df06685739b6c1e70322f8987f27d9e351a03cd48b8cca78.json": {
+      "sha256": "d5cafa85cf831b13df06685739b6c1e70322f8987f27d9e351a03cd48b8cca78",
+      "bytes": 1437100
+    }
+  },
+  "downloads": {
+    "setup-modeling-tools.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/setup-modeling-tools.zip",
+      "sha256": "fc453b385af6ea3aaf88ced56c136a4ffd8d61a2f1c87e0a3e93813bf97451d8",
+      "bytes": 6210,
+      "source": "examples/shared/setup/modeling-tools.zip"
+    },
+    "gromacs-water-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-water-reference-data.zip",
+      "sha256": "8b43504cd29f249e3e2aceae6b37ee6a4e34c178df481ed0f9077125e97c3afd",
+      "bytes": 1912850,
+      "source": "examples/shared/gromacs-water/reference-data.zip"
+    },
+    "gromacs-protein-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-protein-reference-data.zip",
+      "sha256": "50685591b315b5416dd0f6a62d688282d6c3a9c64dc01895c7adda35fa43da04",
+      "bytes": 92783,
+      "source": "examples/shared/gromacs-protein/reference-data.zip"
+    },
+    "gromacs-protein-solution-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-protein-solution-data.zip",
+      "sha256": "de6d657690c9ca7f70a789e1f16eca69753e345fe7c5b6c23914eae249e320c5",
+      "bytes": 554786,
+      "source": "examples/shared/gromacs-protein/solution-data.zip"
+    },
+    "gromacs-protein-preparation-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-protein-preparation-data.zip",
+      "sha256": "d1903456a948982e8fdfd6094cf1fcb1cb0238720c5662bab29b455f11069679",
+      "bytes": 384421,
+      "source": "examples/shared/gromacs-protein/preparation-data.zip"
+    },
+    "gromacs-protein-motion-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-protein-motion-data.zip",
+      "sha256": "c46decf1f10199d42b2c7625709952af568f65ad3b2b912953db73002f5e475b",
+      "bytes": 135328650,
+      "source": "examples/shared/gromacs-protein/motion-data.zip"
+    },
+    "gromacs-protein-replicate-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-protein-replicate-data.zip",
+      "sha256": "98b50f99bd7d54fc15f8248e6b8422cacbf54e90bc1fad11cdd36fb951ec9981",
+      "bytes": 378762,
+      "source": "examples/shared/gromacs-protein/replicate-data.zip"
+    },
+    "gromacs-complex-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-complex-reference-data.zip",
+      "sha256": "47d40743c17816d946ae0115c24df022b02900ee89a4cd12cbbf16c5987e0413",
+      "bytes": 123939531,
+      "source": "examples/shared/gromacs-complex/reference-data.zip"
+    },
+    "gromacs-dna-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-dna-reference-data.zip",
+      "sha256": "b2d1fd20a094cfd009e5c30c63827940173c13700931f8945014ec5f596dc1ff",
+      "bytes": 34888735,
+      "source": "examples/shared/gromacs-dna/reference-data.zip"
+    },
+    "gromacs-glycan-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-glycan-reference-data.zip",
+      "sha256": "34622aa22e54da4a0871d0e3fbd45b0ed901b2be1a4e51031befc4c58d7f156d",
+      "bytes": 14937043,
+      "source": "examples/shared/gromacs-glycan/reference-data.zip"
+    },
+    "gromacs-membrane-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-membrane-reference-data.zip",
+      "sha256": "7a775450cf280eda6815c8f36b4a0f3854970d1d1fc5cca60b5ff94e4566bd2c",
+      "bytes": 116238660,
+      "source": "examples/shared/gromacs-membrane/reference-data.zip"
+    },
+    "gromacs-peg16-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-peg16-reference-data.zip",
+      "sha256": "f0e8b7a113ee9660f096ccb29978cb5c76470c44e90825fcb747fb63c66cb620",
+      "bytes": 62283196,
+      "source": "examples/shared/gromacs-peg16/reference-data.zip"
+    },
+    "gromacs-dspc-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-dspc-reference-data.zip",
+      "sha256": "5fd09fb45d8cfaf8a39ef15daf3a4adf89f013d3d889e20cf1da5ef47f629206",
+      "bytes": 6264685,
+      "source": "examples/shared/gromacs-dspc/reference-data.zip"
+    },
+    "gromacs-pegmembrane-comparison-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-pegmembrane-comparison-reference-data.zip",
+      "sha256": "dab25c379d016adbc01b4c1bd198cdd45c4678460c9230a31e81702d07de021c",
+      "bytes": 22293240,
+      "source": "examples/shared/gromacs-pegmembrane-comparison/reference-data.zip"
+    },
+    "gromacs-chignolin-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-chignolin-reference-data.zip",
+      "sha256": "9aea7a7fea665ec5c6f0ed06b0ca834af0c8deab2e821176cb4924bc989f425b",
+      "bytes": 20306414,
+      "source": "examples/shared/gromacs-chignolin/reference-data.zip"
+    },
+    "gromacs-peg-lengths-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/gromacs-peg-lengths-reference-data.zip",
+      "sha256": "0cd7d5e7de34b4c049c1fa38fa89da14d37a93ee81291c840daa63f4e3994d14",
+      "bytes": 186784734,
+      "source": "examples/shared/gromacs-peg-lengths/reference-data.zip"
+    },
+    "lammps-lj-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-lj-reference-data.zip",
+      "sha256": "d6347c094241a131854dfb1167b3a2ad7c1d58321ab4cdd0947ff8c5802f5782",
+      "bytes": 7059236,
+      "source": "examples/shared/lammps-lj/reference-data.zip"
+    },
+    "lammps-lj-shifted-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-lj-shifted-reference-data.zip",
+      "sha256": "e0b3d4ed1d754a5a178b92a19ad20a7e3c3c5b217d82ead21cdba6cb6ccb95a5",
+      "bytes": 308155,
+      "source": "examples/shared/lammps-lj-shifted/reference-data.zip"
+    },
+    "lammps-peg-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-peg-reference-data.zip",
+      "sha256": "82508c8571a83a94208ec1fc23717f2abf4e3cf8b18b8674e5bafc1b70ece6f2",
+      "bytes": 4688368,
+      "source": "examples/shared/lammps-peg/reference-data.zip"
+    },
+    "lammps-electrolyte-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-electrolyte-reference-data.zip",
+      "sha256": "b6b2cff8f824e9dc3617b58738274efc9abede950e9bd1a97a7c5d3050cae9fa",
+      "bytes": 3326418,
+      "source": "examples/shared/lammps-electrolyte/reference-data.zip"
+    },
+    "lammps-network-melt-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-network-melt-data.zip",
+      "sha256": "69d26bca1304c11a630ddc3780091f1ef56eca6ba55ecad9f7593f3d91134341",
+      "bytes": 6206144,
+      "source": "examples/shared/lammps-network/melt-data.zip"
+    },
+    "lammps-network-connectivity-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-network-connectivity-data.zip",
+      "sha256": "f9c6640dcdb5e2fca3fd145e34d4d213ed5f3e7d4574baeaaa7959f0d0759398",
+      "bytes": 2438093,
+      "source": "examples/shared/lammps-network/connectivity-data.zip"
+    },
+    "lammps-network-extended-mechanics-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-network-extended-mechanics-data.zip",
+      "sha256": "de5f57b1aced379b13553bcefb5feeb312d7bfce1989e6a5ac3e6b056ddcf474",
+      "bytes": 49428586,
+      "source": "examples/shared/lammps-network-extended/mechanics-data.zip"
+    },
+    "lammps-electrolyte-shear-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-electrolyte-shear-data.zip",
+      "sha256": "69ab1881f4549f93431dcc34a6fe809a949625338ae6002bf46c3d5745610428",
+      "bytes": 20222620,
+      "source": "examples/shared/lammps-electrolyte/shear-data.zip"
+    },
+    "lammps-adsorption-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-adsorption-reference-data.zip",
+      "sha256": "b0936a7d250c60f594e9f2a78842df65c154b0d3f67d1710fb51a1f03ee89505",
+      "bytes": 1522664,
+      "source": "examples/shared/lammps-adsorption/reference-data.zip"
+    },
+    "lammps-micelle-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-micelle-reference-data.zip",
+      "sha256": "5669575f55c12d9395c4594b861235f0cf2335e9c2f3d817e6f1fadf5a889007",
+      "bytes": 5165373,
+      "source": "examples/shared/lammps-micelle/reference-data.zip"
+    },
+    "lammps-free-energy-reference-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-free-energy-reference-data.zip",
+      "sha256": "eb714e81b782ec40582203fa5c04f7f168861bcfb9a9a724addcbe3dc4798c5b",
+      "bytes": 1088921,
+      "source": "examples/shared/lammps-free-energy/reference-data.zip"
+    },
+    "lammps-network-comparison-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-network-comparison-data.zip",
+      "sha256": "554b39fc06c9002852994efad916fa66e8437bc2a08e0fbee58404d21ff6de62",
+      "bytes": 431642,
+      "source": "examples/shared/lammps-network/comparison-data.zip"
+    },
+    "lammps-network-study-data.zip": {
+      "url": "https://github.com/GellmanSparrowS/ml-biomat-blog/releases/download/md-courses-2026-11/lammps-network-study-data.zip",
+      "sha256": "976e78fee2caceb24434142dc28edd9376e1a34b615892ae7b502fdcbb12f28c",
+      "bytes": 51069658,
+      "source": "examples/shared/lammps-network/study-data.zip"
+    }
+  }
+}

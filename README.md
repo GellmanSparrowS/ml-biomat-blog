@@ -114,3 +114,16 @@ All article renderers use the shared support section and the original WeChat/Ali
 After a successful Pages deployment, `.github/workflows/indexnow.yml` verifies the public sitemap and ownership file before notifying IndexNow. The same step can be run with `python build.py --submit-indexnow`. A successful response confirms receipt; indexing proceeds separately.
 
 The old comments embed is disabled through `COMMENTS_ENABLED` until GitHub Discussions and the giscus application are configured.
+
+
+### 分子动力学教程（2026-11）
+
+35 篇课程（18 篇 GROMACS、16 篇 LAMMPS、1 篇环境准备），中英文共 70 页，归入物理建模与模拟。源片段和导入收据在 content/tutorials/molecular-dynamics/；python -B -m content_tools.import_molecular_dynamics SOURCE_ROOT 显式重新导入。源目录只读，按页面引用复制公开资产，轨迹按需加载。29 个原始教学 ZIP 使用 md-courses-2026-11 GitHub Release，哈希和来源相对路径保存在 manifest；不进入网页构建目录。
+
+### PayPal 与 HTML 领取
+
+赞赏入口使用用户指定的 BH5JZ28J2BSQL，原商品金额 1 USD。付款完成返回 /support/complete/；该页面 noindex，且不进入 sitemap。前端记住当前教程与随机领取标识，经 Cloudflare Worker 的 PayPal PDT 验证成功后导出对应 HTML；嵌入本地样式、脚本、图片及轨迹数据。外部文献、下载附件与第三方公式渲染服务仍为在线资源。
+
+服务源码 payment/worker.mjs，允许领取的路由由构建生成 payment/routes.mjs；node payment/tests.mjs 检查金额、币种、商品、状态、时间、来源和重复领取。部署服务名 ml-biomat-paypal，Durable Object PaymentClaim 使用 SQLite，保存领取标识与页面，不保存付款人资料，7 日清理。PayPal 商品 ID 为 ML-BIOMAT-HTML；身份令牌只放 Cloudflare 的 PAYPAL_PDT_TOKEN secret，不写源码、本机日志或 Git。
+
+日后新增教程需同步部署 worker 的路由清单，保留 Durable Object 绑定和现有 secret。模拟付款验证通过不等同于真实扣款验收；真实支付测试由账户持有人操作。
