@@ -64,6 +64,8 @@
 .profile-redesign .pr-industry{padding-top:0}
 .profile-redesign .pr-industry>h3{font-size:17px;margin-bottom:19px}
 .profile-redesign .pr-industry ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;list-style:none}
+.profile-redesign .pr-industry+.pr-industry{margin-top:28px}
+.profile-redesign .pr-industry-partner ol{grid-template-columns:minmax(0,1fr)}
 .profile-redesign .pr-industry li{border-top:2px solid var(--pr-line);padding-top:15px}
 .profile-redesign .pr-date{font-size:12px;color:var(--pr-muted)}
 .profile-redesign .pr-industry h4{font-size:15px;margin:8px 0}
@@ -78,6 +80,7 @@
 .profile-redesign .pr-honors li:last-child{padding-bottom:0}
 .profile-redesign .pr-honors time{font-size:13px;color:var(--pr-accent)}
 .profile-redesign .pr-honors h3{font-size:15.5px;font-weight:550;line-height:1.7}
+.profile-redesign .pr-honors .pr-honor-role{font-size:.88em;font-weight:400;color:var(--pr-muted);white-space:nowrap}
 .profile-redesign .pr-honors p{font-size:13px;color:var(--pr-muted);margin-top:4px}
 /* One dated gallery per activity; all original photos remain in its viewer. */
 .profile-redesign .pr-activities{position:relative;display:block;padding:0 0 0 24px}
@@ -89,6 +92,9 @@
 .profile-redesign .pr-activity-photo{position:relative;min-height:0;aspect-ratio:1.5;background:color-mix(in srgb,var(--c-bg) 74%,var(--c-surface));padding:12px;border-right:1px solid var(--pr-line)}
 .profile-redesign .pr-activity-photo>.pr-image-link{position:absolute;inset:12px;height:auto;width:auto}
 .profile-redesign .pr-activity-photo img{height:100%;width:100%;object-fit:contain}
+/* Requested landscape covers; gallery links retain the complete originals. */
+.profile-redesign #activity-fudan-frontier-2026 .pr-activity-photo img{object-fit:cover;object-position:center top}
+.profile-redesign #activity-fuzhou .pr-activity-photo img{object-fit:cover;object-position:58% 42%}
 .profile-redesign .pr-activity-copy{min-width:0;padding:28px 31px}
 .profile-redesign .pr-activity:last-child{margin-bottom:0}
 .profile-redesign .pr-activity-title{cursor:zoom-in;text-decoration:none}

@@ -2,7 +2,7 @@
 from html import escape
 
 THEME_INIT = '''<script>(function(){var theme='dark';try{var saved=localStorage.getItem('ml-biomat-theme');if(saved==='light'||saved==='dark')theme=saved;}catch(e){}document.documentElement.dataset.theme=theme;})();</script>'''
-NAV = [('home','首页','Home'),('library','工具库','Library'),('categories','分类','Categories'),('profile','个人主页','Profile')]
+NAV = [('home','首页','Home'),('library','工具库','Library'),('categories','教程','Tutorials'),('profile','个人主页','Profile')]
 
 
 def paths(language):
@@ -54,7 +54,7 @@ def header(language, route, en_href=None, zh_href=None, wide=False):
 def footer_links(language):
     en=language=='en';p=paths(language)
     links=[(p['profile'],'Profile' if en else '个人主页'),(p['library'],'Library' if en else '工具库'),
-           (p['categories'],'Categories' if en else '分类'),('/rss.xml','RSS'),
+           (p['categories'],'Tutorials' if en else '教程'),('/rss.xml','RSS'),
            ('/tools/stress-strain/'+('en/' if en else ''),'Tools' if en else '交互工具'),
            ('/sitemap.xml','Sitemap' if en else '站点地图'),('/privacy/'+('en/' if en else ''),'Privacy' if en else '隐私政策')]
     return '<div class="footer-links">'+''.join(f'<a href="{url}">{label}</a>' for url,label in links)+'</div>'
