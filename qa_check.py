@@ -756,7 +756,23 @@ def run():
         search_n = -1
     checks.append(check("Search covers articles and tutorials", search_n == indexed_total, "search=%d articles=%d tutorials=%d bilingual course pages=%d" % (search_n, total, tutorial_count, len(course_entries))))
 
-    docs_n = len(list((DOCS / "posts").glob("*/index.html")))
+    # Compatibility redirects are not additional articles.
+    docs_n = sum('http-equiv="refresh"' not in p.read_text(encoding='utf-8')
+                 for p in (DOCS / "posts").glob("*/index.html"))
+    legacy_errors = []
+    for old, target in {
+        '/categories/research-notes/': '/categories/',
+        '/posts/multiscale-modeling-fiber-biomaterials-zh/': '/posts/multiscale-modeling-biomaterials-intro-zh/',
+    }.items():
+        alias_path = DOCS / old.strip('/') / 'index.html'
+        alias = alias_path.read_text(encoding='utf-8') if alias_path.exists() else ''
+        if (f'<meta http-equiv="refresh" content="0; url={target}">' not in alias
+                or f'<link rel="canonical" href="https://ml-biomat.com{target}">' not in alias
+                or old in sitemap_routes or target not in sitemap_routes
+                or not (DOCS / target.strip('/') / 'index.html').is_file()):
+            legacy_errors.append(old)
+    checks.append(check('Legacy article and category destinations', not legacy_errors,
+                        ', '.join(legacy_errors) if legacy_errors else 'Old URLs lead directly to canonical, existing pages'))
     checks.append(check("Generated post pages == posts", docs_n == total, "pages=%d posts=%d" % (docs_n, total)))
 
     tutorial_errors = []

@@ -644,8 +644,26 @@ def build():
 # Robots.txt
     write_file("robots.txt", f"User-agent: *\nContent-Signal: ai-train=yes, search=yes, ai-input=yes\nAllow: /\nSitemap: {SITE['base_url']}/sitemap.xml\n")
 
-    # 404
+    # Historical URLs keep their exact current destinations, outside the sitemap.
+    legacy_routes = {
+        '/categories/research-notes/': ('/categories/', '研究教程'),
+        '/posts/multiscale-modeling-fiber-biomaterials-zh/': (
+            '/posts/multiscale-modeling-biomaterials-intro-zh/', '生物材料多尺度模拟'),
+    }
+    for old_route, (target, label) in legacy_routes.items():
+        alias = ('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
+                 '<meta name="viewport" content="width=device-width,initial-scale=1">'
+                 f'<title>{label} — ML-Biomat</title>'
+                 f'<link rel="canonical" href="{SITE["base_url"]}{target}">'
+                 f'<meta http-equiv="refresh" content="0; url={target}">'
+                 f'</head><body><a href="{target}">{label}</a></body></html>')
+        write_file(old_route.lstrip('/') + 'index.html', alias)
+
+    # 404: case-only aliases cannot coexist as directories on Windows.
+    # This repairs old visitor links; unknown paths still return a real 404.
+    case_alias = '<script>if(location.pathname==="/tags/Mamba/"||location.pathname==="/tags/Mamba"){location.replace("/tags/mamba/"+location.search+location.hash)}</script>'
     not_found = make_head(title="页面未找到", desc="页面未找到", url=f'{SITE["base_url"]}/404.html')
+    not_found = not_found.replace('<head>', '<head>' + case_alias, 1)
     not_found += '<h1 style="font-size:3rem;margin-top:3rem">404</h1><p>页面未找到。<a href="/">返回首页</a></p>' + make_footer()
     write_file("404.html", not_found)
 
