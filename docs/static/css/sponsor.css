@@ -1,0 +1,29 @@
+/* A single manual footer unit; no overlays or automatically inserted placements. */
+.site-sponsor {
+  margin: 32px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-border);
+}
+.site-sponsor[hidden] { display: none; }
+.site-sponsor-label {
+  margin: 0 0 12px;
+  color: var(--c-fg-soft);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+.site-sponsor-unit {
+  text-decoration: none;
+  width: 100%;
+  max-width: 970px;
+  height: 90px;
+  margin: 0 auto;
+}
+.site-sponsor:has(.site-sponsor-unit[data-ad-status="unfilled"]),
+.site-sponsor:has(.site-sponsor-unit[data-ad-status="unfill-optimized"]) {
+  display: none;
+}
+@media (max-width: 600px) {
+  .site-sponsor { margin-top: 24px; padding-top: 16px; }
+  .site-sponsor-unit { max-width: 320px; height: 100px; }
+}

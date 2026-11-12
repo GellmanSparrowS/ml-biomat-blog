@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR, COMMENTS_ENABLED
-from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support, molecular_dynamics, payment
+from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support, molecular_dynamics, payment, sponsorship
 
 ROOT = Path(__file__).resolve().parent
 SEARCH_METADATA = json.loads((ROOT / 'content/search-metadata.json').read_text(encoding='utf-8'))
@@ -290,7 +290,6 @@ ARTICLE_HTML = '<article><nav class="article-breadcrumb" aria-label="{breadcrumb
 
 
 GISCUS_SCRIPT = '<section style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--c-border)"><h2>Comments</h2><script src="https://giscus.app/client.js" data-repo="GellmanSparrowS/ml-biomat-blog" data-repo-id="R_kgDOTEwhsA" data-category="General" data-category-id="DIC_kwDOTEwhsM4CpPbT" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script></section>'
-ADSENSE_SCRIPT = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7464969092761889" crossorigin="anonymous"></script>'
 
 ENGAGE_BANNER = '<section class="cta-banner">\n<h3>\U0001f4ac Questions or Feedback?</h3>\n<p>This blog is actively maintained by a PhD researcher. Reach out on GitHub for collaborations or corrections.</p>\n<a href="https://github.com/GellmanSparrowS/ml-biomat-blog">View on GitHub</a>\n</section>'
 
@@ -316,13 +315,14 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
     head = HEAD_TOP.format(
         title=hm.escape(title), desc=hm.escape(desc), author=SITE["author"],
         url=url, lang=language, og=og_tags(title, desc, url, og_type, og_image=og_image), ld=ld,
-        adsense=ADSENSE_SCRIPT, title_suffix=title_suffix, alternates=alternates,
+        adsense="", title_suffix=title_suffix, alternates=alternates,
         mathjax=(MATHJAX_SCRIPT if needs_math else ""))
     head = head.replace('<meta charset="utf-8">','<meta charset="utf-8">'+chrome.THEME_INIT+'<script src="'+versioned_asset('/static/js/site-motion.js')+'" defer></script>')
     head = head.replace("</head>", f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}"></head>')
     route = urllib.parse.urlsplit(url).path or '/'
     styles=[]
     if route.startswith(('/posts/', '/tutorials/')): styles.append('/static/css/article-support.css')
+    if route in ('/', '/en/', '/zh/') or route.startswith(('/posts/', '/tutorials/')): styles.append('/static/css/sponsor.css')
     if route.startswith('/fibernet/'):
         styles.append('/static/css/fibernet.css')
     styles.append('/static/css/site-layout.css')
@@ -340,10 +340,10 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
 
 
 def make_footer(language='zh-CN', article_support=False):
-    footer=(support.render(language, versioned_asset) if article_support else '')+FOOT.format(year=datetime.now().year)
+    footer=(support.render(language, versioned_asset)+sponsorship.render(language, 'tutorial') if article_support else '')+FOOT.format(year=datetime.now().year)
     footer=re.sub(r'<div class="footer-links">.*?</div>',chrome.footer_links(language),footer,flags=re.S)
     footer=footer.replace('id="back-to-top"', 'id="back-to-top" aria-label="'+('Back to top' if language=='en' else '返回顶部')+'"')
-    if article_support: footer=footer.replace('</body>','<script src="'+versioned_asset('/static/js/paypal-support.js')+'" defer></script></body>')
+    if article_support: footer=footer.replace('</body>','<script src="'+versioned_asset('/static/js/paypal-support.js')+'" defer></script><script src="'+versioned_asset('/static/js/sponsor.js')+'" defer></script></body>')
     return footer.replace('</body>', '<script src="'+versioned_asset('/static/js/site-catalog.js')+'" defer></script></body>')
 
 

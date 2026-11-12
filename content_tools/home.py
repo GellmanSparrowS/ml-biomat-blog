@@ -1,5 +1,5 @@
 """Paired research homepages and separate tutorial collections."""
-from . import catalog, site_layouts
+from . import catalog, site_layouts, sponsorship
 
 
 def render(items, categories, site, make_head, make_footer, write_file, site_ld, versioned_asset):
@@ -8,7 +8,8 @@ def render(items, categories, site, make_head, make_footer, write_file, site_ld,
         en=lang=='en'; route='/en/' if en else '/'
         description=site['description_'+lang]
         body=site_layouts.homepage(items,categories,en=en)
-        for script in ['fibernet-scene.js','profile-gallery.js']:
+        body+=sponsorship.render(lang, 'home')
+        for script in ['fibernet-scene.js','profile-gallery.js','sponsor.js']:
             body+='<script src="'+versioned_asset('/static/js/'+script)+'" defer></script>'
         alternatives=f'<link rel="alternate" hreflang="zh-CN" href="{site["base_url"]}/"><link rel="alternate" hreflang="en" href="{site["base_url"]}/en/">'
         page=make_head(title='Home' if en else '首页',desc=description,url=site['base_url']+route,lang='en' if en else 'zh-CN',ld=site_ld(),wide=True,
