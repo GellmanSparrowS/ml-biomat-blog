@@ -1,15 +1,14 @@
-# FiberNet v4.0.5
+# FiberNet
 
-Python toolkit for fiber network design and optimization.
+FiberNet is a Python toolkit for fiber-network geometry, analysis and mechanical modeling.
+FiberScope provides a desktop interface for viewing, configuring and exporting networks.
 
-## Key Links
-- GitHub: https://github.com/GellmanSparrowS/fibernet
-- PyPI: https://pypi.org/project/fibernet/
-- Page: https://ml-biomat.com/fibernet/
+## Documentation
+- Chinese: https://ml-biomat.com/fibernet/
+- English: https://ml-biomat.com/fibernet/en/
+- Markdown: https://ml-biomat.com/fibernet/en/index.md
+- Source and releases: https://github.com/GellmanSparrowS/fibernet
+- Package: https://pypi.org/project/fibernet/
 
-## Capabilities
-- 12 unit types for structure generation
-- Taichi GPU-accelerated simulation
-- 94-dim feature extraction
-- One-line ML and RL APIs
-- 368D continuous action space
+Use the release-specific documentation linked from the site for installation, examples and units.
+FiberNet runs locally after installation; this website provides documentation rather than a hosted simulation API.

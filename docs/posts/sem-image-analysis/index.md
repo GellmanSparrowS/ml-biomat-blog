@@ -1,0 +1,179 @@
+# SEM Fiber Image Analysis: Segmentation, Diameter and Orientation
+
+Source: https://ml-biomat.com/posts/sem-image-analysis/
+Language: en
+
+2026-06-26·2 min read·[Experimental Characterization & Data Analysis](https://ml-biomat.com/categories/wet-lab-data/en/)
+
+## Why Automate SEM Analysis?
+
+Manual measurement of fiber diameters and orientations from SEM images is tedious, subjective, and irreproducible. A Python script does it consistently in seconds per image. This guide uses scikit-image, a library purpose-built for scientific image analysis.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import io, filters, measure, morphology, feature
+```
+
+## The Analysis Pipeline
+
+### Step 1: Load and Preprocess
+
+```python
+# Load SEM image (8-bit or 16-bit TIFF)
+img = io.imread("sem_fiber_network.tif", as_gray=True)
+print(f"Image shape: {img.shape}, range: [{img.min():.0f}, {img.max():.0f}]")
+
+# Normalize to 0-1
+img_norm = (img - img.min()) / (img.max() - img.min())
+
+# Denoise with Gaussian filter
+from scipy.ndimage import gaussian_filter
+img_denoised = gaussian_filter(img_norm, sigma=1.0)
+```
+
+### Step 2: Thresholding
+
+Choosing the right threshold method is critical:
+
+```python
+methods = {
+    "Otsu": filters.threshold_otsu(img_denoised),
+    "Li": filters.threshold_li(img_denoised),
+    "Yen": filters.threshold_yen(img_denoised),
+}
+
+# Otsu is usually best for bimodal fiber/background images
+thresh = methods["Otsu"]
+binary = img_denoised > thresh
+
+# Verify: fibers should be white (True), background black (False)
+print(f"Fiber coverage: {binary.mean()*100:.1f}%")
+```
+
+### Step 3: Clean the Binary Mask
+
+```python
+# Remove small noise objects (< 50 pixels)
+cleaned = morphology.remove_small_objects(binary, min_size=50)
+
+# Close small gaps in fibers
+selem = morphology.disk(2)
+closed = morphology.binary_closing(cleaned, selem)
+
+# Skeletonize for orientation analysis
+skeleton = morphology.skeletonize(closed)
+```
+
+ ![One geometry, three image representations](https://ml-biomat.com/static/images/article-guides/mech-sem-masks-en.svg)
+
+The same synthetic fiber geometry is shown as an intensity image, a foreground mask and a centerline overlay. Threshold selection changes the mask; skeletonization supplies the locations where a local distance-transform width can be sampled.
+
+### Step 4: Measure Fiber Properties
+
+```python
+# Label connected regions
+labels = measure.label(closed)
+props = measure.regionprops_table(labels, properties=[
+    "area", "perimeter", "eccentricity", "orientation",
+    "major_axis_length", "minor_axis_length",
+    "solidity", "extent"
+])
+import pandas as pd
+df_fibers = pd.DataFrame(props)
+
+# Equivalent-ellipse shape descriptor from second moments
+df_fibers["ellipse_minor_axis_px"] = df_fibers["minor_axis_length"]
+df_fibers["aspect_ratio"] = (df_fibers["major_axis_length"] /
+                               df_fibers["minor_axis_length"])
+
+print(f"Found {len(df_fibers)} fiber segments")
+print(f"Mean ellipse minor axis: {df_fibers['ellipse_minor_axis_px'].mean():.1f} +/- {df_fibers['ellipse_minor_axis_px'].std():.1f} px")
+print(f"Mean aspect ratio: {df_fibers['aspect_ratio'].mean():.2f}")
+```
+
+The `minor_axis_length` returned by `regionprops` is the minor axis of an ellipse with the same normalized second moments as the connected region. It describes the whole object; local widths along an isolated fiber can instead be estimated from the distance transform sampled on its skeleton. The pixel grid and segmentation boundary set the resolution of that estimate. [scikit-image region properties](https://scikit-image.org/docs/stable/api/skimage.measure.html#skimage.measure.regionprops), [SciPy distance transform](https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.distance_transform_edt.html).
+
+```python
+from scipy.ndimage import distance_transform_edt
+
+# Example calibration: replace with the SEM scale-bar value
+scale_nm_per_px = 2.5
+radius_nm = distance_transform_edt(closed, sampling=scale_nm_per_px)
+local_width_nm = 2 * radius_nm[skeleton]
+```
+
+ ![Convert pixels into a local fiber width](https://ml-biomat.com/static/images/article-guides/mech-sem-width-en.svg)
+
+For an isolated straight strip, the local width is d = 2rpxs, with rpx the distance from a skeleton point to the nearest background and s the physical length per pixel. Crossings, branches and edge-truncated objects require separate review.
+
+### Step 5: Orientation Analysis
+
+ ![Polar histogram of fiber orientation with a dominant alignment near 90 degrees](https://ml-biomat.com/static/images/posts/sem-image-analysis/orientation-en.webp?v=9a0cd9ada2bd)
+
+```python
+from skimage.transform import radon
+
+# Radon transform for orientation distribution
+theta = np.linspace(0., 180., max(img.shape), endpoint=False)
+sinogram = radon(skeleton, theta=theta)
+
+# Sum across each angle
+orientation_profile = sinogram.sum(axis=0)
+
+# Find dominant orientation
+dominant_angle = theta[np.argmax(orientation_profile)]
+print(f"Dominant fiber orientation: {dominant_angle:.1f} degrees")
+```
+
+### Step 6: Batch Processing
+
+```python
+import glob
+from pathlib import Path
+
+def batch_analyze_sem(image_dir, scale_nm_per_px=10.0):
+    results = []
+    for filepath in glob.glob(f"{image_dir}/*.tif"):
+        img = io.imread(filepath, as_gray=True)
+        img_n = (img - img.min()) / (img.max() - img.min())
+        binary = img_n > filters.threshold_otsu(img_n)
+        cleaned = morphology.remove_small_objects(binary, 50)
+        labels = measure.label(cleaned)
+        props = measure.regionprops_table(labels, properties=[
+            "area", "eccentricity", "major_axis_length", "minor_axis_length"
+        ])
+        df = pd.DataFrame(props)
+        results.append({
+            "file": Path(filepath).name,
+            "n_fibers": len(df),
+            "mean_ellipse_minor_axis_nm": df["minor_axis_length"].mean() * scale_nm_per_px,
+            "coverage_pct": cleaned.mean() * 100,
+        })
+    return pd.DataFrame(results)
+
+# df_summary = batch_analyze_sem("./sem_images/", scale_nm_per_px=8.5)
+# df_summary.to_csv("sem_analysis_summary.csv", index=False)
+```
+
+## Common Pitfalls
+
+| Problem | Solution |
+| --- | --- |
+| Uneven illumination | Apply rolling ball background subtraction |
+| Touching fibers | Use watershed segmentation |
+| Over-segmentation | Increase `min_size` in `remove_small_objects` |
+| Wrong scale bar | Always verify pixel-to-nm calibration |
+| Saturated pixels | Use 16-bit images, avoid overexposure |
+
+## References
+
+- van der Walt, S. et al. (2014). scikit-image: image processing in Python. *PeerJ*, 2, e453.
+- Gostick, J. et al. (2019). PoreSpy: A Python toolkit for quantitative analysis of porous media images. *JOSS*, 4(37), 1296.
+- GitHub: [scikit-image/scikit-image](https://github.com/scikit-image/scikit-image)
+
+## Related articles
+
+- 2026-09-06[Mechanical Testing of Biomaterials: A Reproducible Protocol Guide](https://ml-biomat.com/posts/biomaterials-mechanical-testing/)
+- 2026-06-26[Stress–Strain Analysis: Modulus, Strength and Energy Density](https://ml-biomat.com/posts/stress-strain-curves/)
+- 2026-06-26[Practical AFM Force Curve Analysis with Python](https://ml-biomat.com/posts/afm-force-curve-python/)

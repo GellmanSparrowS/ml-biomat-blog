@@ -1,0 +1,79 @@
+# 纤维网络力学基础：生物材料研究的关键概念
+
+Source: https://ml-biomat.com/posts/fiber-network-mechanics-zh/
+Language: zh-CN
+
+2026-06-26·3 分钟阅读·[材料与结构](https://ml-biomat.com/categories/biomaterials/)
+
+## 为什么纤维网络很重要
+
+ ![无序纤维网络示意：纤维、交联与孔隙](https://ml-biomat.com/static/images/posts/fiber-network-mechanics/network-zh.webp?v=7a03be7d783f)
+
+自然界用纤维构建结构材料：肌腱中的胶原蛋白、蚕茧中的丝素蛋白、植物细胞壁中的纤维素。这些无序纤维网络通过架构而非化学组成实现卓越的力学性能——高比强度、应变强化和韧性。理解纤维网络力学对设计更好的生物材料至关重要。
+
+## 关键力学行为
+
+ ![拉直过程改变纤维承载方式](https://ml-biomat.com/static/images/article-guides/mech-fiber-recruitment-zh.svg)
+
+弯曲纤维在初期通过弯曲与重取向适应伸长，进一步取向后轴向承载贡献增加。机制图用于理解网络非线性响应。
+
+### 应变强化
+
+与金属不同，纤维网络越拉越硬。低应变时，纤维重新取向排列。高应变时，已排列的纤维轴向承载：
+
+```python
+import numpy as np
+strain = np.linspace(0, 0.5, 100)
+stress = 0.1 * strain + 5.0 * strain**3
+```
+
+ ![教学模型中的应变强化](https://ml-biomat.com/static/images/article-guides/mech-fiber-stiffening-zh.svg)
+
+正文的示意多项式 σ*= 0.1ε + 5ε³ 对应切线刚度 dσ*/dε = 0.1 + 15ε²，因此刚度随应变增加。纵轴采用任意单位，曲线由所示公式计算。
+
+### 架构-性能关系
+
+| 参数 | 对力学的影响 |
+| --- | --- |
+| 纤维直径 | 更细 = 网络更柔 |
+| 网络密度 | 更高 = 模量更高 |
+| 交联密度 | 更多交联 = 更刚，韧性下降 |
+| 纤维取向 | 取向排列 = 各向异性 |
+| 纤维长径比 | 更长 = 更好的载荷传递 |
+
+### 逾渗阈值
+
+纤维网络需要最低密度才能传递载荷。低于此密度，网络是互不连接的纤维"汤"。高于阈值，形成连续的载荷传递路径。
+
+## 实验表征
+
+常用的纤维网络力学探测：AFM纳米压痕（局部刚度）、拉伸测试（宏观应力-应变）、流变学（粘弹性G'、G""）、SEM/TEM成像（网络架构可视化）、SAXS/WAXS（变形过程中分子级结构变化）。
+
+## 计算模拟
+
+三种主要方法：分子动力学MD（原子分辨率）、粗粒化CG模型（介观尺度）、有限元FE模型（连续介质）。多尺度方法结合三者，从分子参数预测宏观性能。
+
+## 常见生物材料纤维体系
+
+丝素蛋白（优异韧性）、胶原蛋白（层级结构、细胞指导性）、纤维素纳米纤维（高刚度）、静电纺丝聚合物（架构可调）。
+
+## 参考文献
+
+- Buehler, M.J. (2006). Nature designs tough collagen. *PNAS*, 103(33), 12285-12290.
+- Picu, R.C. (2011). Mechanics of random fiber networks. *Soft Matter*, 7, 6768-6785.
+- Stauffer, D. & Aharony, A. (1994). *Introduction to Percolation Theory*. Taylor & Francis.
+- Head, D.A. et al. (2003). Distinct regimes of elastic response and deformation modes of cross-linked cytoskeletal and semiflexible polymer networks. *Physical Review E*, 68(6), 061907.
+
+## 深入研究：逾渗理论与纤维网络力学
+
+纤维网络的力学行为由两个关键因素决定：网络的连通性和单根纤维的力学属性。逾渗理论提供理解网络连通性的数学框架。当纤维密度低于临界值时，网络由孤立纤维或无应力承载能力的松散团簇组成。超过临界密度后，纤维之间形成足够多的连接点，网络突然获得了承载能力——这就是逾渗转变。对于典型的随机纤维网络，逾渗阈值与纤维长径比成反比：纤维越长越细，越容易在较低密度下形成连通网络。
+
+逾渗转变在生物材料中有重要的实际意义。例如胶原蛋白纤维在伤口愈合过程中逐渐沉积并交联。在早期阶段，纤维密度低于逾渗阈值，组织几乎没有力学强度。当纤维密度超过阈值后，组织突然获得承载能力。理解逾渗转变有助于设计组织工程支架，确保支架在植入后立即具有足够的力学支撑。
+
+从计算角度看，逾渗分析可以通过网络建模来实现。使用随机纤维网络生成算法创建不同密度的网络结构，然后计算网络的刚度矩阵来确定其是否能够承载载荷。Python结合NetworkX等图论库可以高效地进行这类分析。
+
+## 相关阅读
+
+- 2026-06-30[工程超结构力学：折纸、蜂巢、拉胀与点阵](https://ml-biomat.com/posts/engineered-superstructures-zh/)
+- 2026-06-30[生物材料的层级超结构：从分子到宏观的力学设计](https://ml-biomat.com/posts/bio-hierarchical-structures-zh/)
+- 2026-06-26[丝素蛋白：从分子结构到力学功能](https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/)

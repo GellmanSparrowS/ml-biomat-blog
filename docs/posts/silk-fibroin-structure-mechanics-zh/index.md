@@ -1,0 +1,74 @@
+# 丝素蛋白：从分子结构到力学功能
+
+Source: https://ml-biomat.com/posts/silk-fibroin-structure-mechanics-zh/
+Language: zh-CN
+
+2026-06-26·3 分钟阅读·[材料与结构](https://ml-biomat.com/categories/biomaterials/)
+
+丝素蛋白是自然界最优异的结构蛋白之一。单根蚕茧纤维同时具备高强度（约500 MPa）、高延伸性（约20%应变）和超越Kevlar的韧性。理解这种性能如何从分子架构中产生，是设计更好的蛋白质基材料的基础。
+
+## 层级结构
+
+| 尺度 | 特征 | 力学作用 |
+| --- | --- | --- |
+| 1-10 nm | beta-折叠结晶 | 刚度、交联节点 |
+| 10-100 nm | 晶区/非晶区 | 牺牲键增韧 |
+| 100 nm-1 um | 纳米原纤维 | 载荷分配 |
+| 1-10 um | 微纤维 | 纤维单元 |
+
+## 分子组成
+
+蚕丝素蛋白由三条链组成：
+
+- **H链（约390 kDa）**：Gly-Ala-Gly-Ala-Gly-Ser重复序列形成beta-折叠
+- **L链（约26 kDa）**：通过二硫键与H链连接
+- **P25糖蛋白**：维持链化学计量比
+
+## beta-折叠结晶
+
+(GAGAGS)n重复序列组装成反平行beta-折叠，作为非晶基质中的物理交联点。关键参数：结晶尺寸2-6 nm (XRD)，结晶度指数10-50%，片层间距0.35 nm（氢键），链间距0.95 nm（范德华力）。
+
+ ![丝素：结晶区中的有序链段](https://ml-biomat.com/static/images/article-guides/mech-silk-sheets-zh.svg)
+
+反平行 β-折叠中，相邻链段方向相反，并通过链间氢键连接。示意图区分了单个折叠片层与堆积的结晶区，距离采用示意比例。
+
+## 工艺-结构-性能关系
+
+| 处理步骤 | 结构变化 | 性能变化 |
+| --- | --- | --- |
+| 脱胶（煮沸） | 去除丝胶包衣 | 纤维分离，微刚度下降 |
+| LiBr溶解 | 蛋白质变性，断氢键 | 失去结晶性 |
+| 甲醇/乙醇处理 | 诱导beta-折叠 | 增加刚度，降低溶解性 |
+| 牵伸 | 分子链取向 | 增加强度和各向异性 |
+
+ ![结晶节点与可伸展链段](https://ml-biomat.com/static/images/article-guides/mech-silk-composite-zh.svg)
+
+结晶区提供物理连接，连接其间的非晶链段在伸展中改变构象。前后两图保留相同连接关系，用于解释两相机制。
+
+## 实验建议
+
+1. 脱胶时间很关键：过度煮沸会降解H链
+2. 含水量强烈影响力学性能——始终报告RH%
+3. AFM表征用PeakForce QNM获取纳米模量分布
+4. 再生丝素很少能匹配天然纤维力学——专注于工艺优化
+
+## 参考文献
+
+- Keten, S. et al. (2010). Nanoconfinement controls stiffness, strength and toughness of beta-sheet crystals in silk. *Nature Materials*, 9, 359-367.
+- Omenetto, F.G. & Kaplan, D.L. (2010). New opportunities for an ancient material. *Science*, 329(5991), 528-531.
+- Shao, Z. & Vollrath, F. (2002). Surprising strength of silkworm silk. *Nature*, 418, 741.
+- Porter, D. & Vollrath, F. (2009). Silk as a biomimetic ideal for structural polymers. *Advanced Materials*, 21, 487-492.
+
+## 丝素蛋白力学性能的微观起源
+
+理解丝素蛋白的优异力学性能需要从分子尺度开始。天然丝素纤维的强度源自高度有序的反平行beta-折叠纳米晶体。这些晶体的尺寸非常小——通常只有几纳米——而这种纳米尺度恰恰是丝素强度的关键。经典的材料科学告诉我们，材料强度随着缺陷尺寸的减小而增加——Griffith断裂理论预测理论强度只能在无缺陷或缺陷极小的材料中实现。丝素的beta-折叠纳米晶体正是这种接近理论强度的"无缺陷"结构单元。
+
+丝素的韧性则来源于更复杂的多尺度机制。在分子水平上，beta-折叠晶体之间的非晶域充当牺牲键——在受力时这些区域首先变形和断裂，耗散能量，保护晶体本身不被破坏。这种机制类似于汽车中的保险杠——牺牲一个廉价部件来保护整体结构。在纳米尺度上，beta-折叠晶体与丝素重链分子之间的界面提供了进一步的能量耗散途径。氢键网络可以在断裂后重新形成，赋予材料一定的自愈合能力。
+
+丝素的力学性能还表现出显著的各向异性——沿着纤维轴向的模量和强度远高于横向方向。这种各向异性是beta-折叠晶体和分子链沿纤维轴择优取向的直接结果。在再生丝素材料的制备中，通过控制加工条件诱导分子取向是获得优异力学性能的关键策略。
+
+## 相关阅读
+
+- 2026-06-30[工程超结构力学：折纸、蜂巢、拉胀与点阵](https://ml-biomat.com/posts/engineered-superstructures-zh/)
+- 2026-06-30[生物材料的层级超结构：从分子到宏观的力学设计](https://ml-biomat.com/posts/bio-hierarchical-structures-zh/)
+- 2026-06-26[纤维网络力学基础：生物材料研究的关键概念](https://ml-biomat.com/posts/fiber-network-mechanics-zh/)

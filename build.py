@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR, COMMENTS_ENABLED
-from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support, molecular_dynamics, python_scientific, machine_learning, payment, sponsorship
+from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support, molecular_dynamics, python_scientific, machine_learning, payment, sponsorship, agent_content
 
 ROOT = Path(__file__).resolve().parent
 SEARCH_METADATA = json.loads((ROOT / 'content/search-metadata.json').read_text(encoding='utf-8'))
@@ -222,6 +222,15 @@ def write_file(path, content):
                            'data-highlight-js="'+versioned_asset('/static/vendor/highlightjs/11.11.1/highlight.min.js')+'" '
                            'data-highlight-css="'+versioned_asset('/static/vendor/highlightjs/11.11.1/github-dark.min.css')+'"></script>')
             content = content.replace('</body>', highlighter+'</body>')
+        if '<link rel="canonical"' in content and '<main' in content and not re.search(r'<meta\b[^>]*\bcontent=[\"\'][^\"\']*noindex', content, re.I):
+            canonical = re.search(r'<link rel="canonical" href="([^"]+)"', content)
+            if canonical and str(path).endswith('index.html'):
+                expected = SITE['base_url'].rstrip('/') + '/' + urllib.parse.quote(str(path)[:-10], safe='/')
+                if canonical[1] == expected:
+                    markdown_url = canonical[1] + 'index.md'
+                    discovery = '<link rel="alternate" type="text/markdown" href="' + markdown_url + '">\n'
+                    tools_script = '<script src="'+versioned_asset('/static/js/agent-tools.js')+'" defer></script>\n'
+                    content = content.replace('</head>', discovery+tools_script+'</head>')
     p = Path(BUILD_DIR) / path
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(content, encoding="utf-8")
@@ -738,11 +747,6 @@ def build():
     if auth_src.exists():
         shutil.copy2(auth_src, Path(BUILD_DIR) / "auth.md")
 
-    for llms_file in ['llms.txt', 'llms-full.txt']:
-        src = Path('content') / llms_file
-        if src.exists():
-            shutil.copy2(src, Path(BUILD_DIR) / llms_file)
-
     # --- CNAME for custom domain ---
     (Path(BUILD_DIR) / ".nojekyll").write_text("", encoding="utf-8")
     (Path(BUILD_DIR) / "CNAME").write_text("ml-biomat.com", encoding="utf-8")
@@ -761,6 +765,9 @@ def build():
     # Preserve official ownership files byte-for-byte.
     for verification in (ROOT / 'content/site-verification').glob('*.html'):
         shutil.copyfile(verification, Path(BUILD_DIR) / verification.name)
+
+    agent_stats = agent_content.generate(Path(BUILD_DIR), SITE['base_url'], search_data)
+    print('  Agent reading:', agent_stats)
 
     # Public verification file; building never sends network requests.
     (Path(BUILD_DIR) / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")

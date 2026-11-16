@@ -1,0 +1,79 @@
+# 材料特征工程：描述符构造、编码与特征选择
+
+Source: https://ml-biomat.com/posts/feature-engineering-materials-zh/
+Language: zh-CN
+
+2026-06-26·3 分钟阅读·[机器学习](https://ml-biomat.com/categories/machine-learning/)
+
+## 真正的瓶颈
+
+| 特征工程手段 | 作用 | 材料研究示例 |
+| --- | --- | --- |
+| 分类变量编码 | 把类别文本转成数值特征 | 溶剂类型、晶体结构、处理分组 |
+| 数值变换 | 缩放、标准化或取对数 | 浓度、晶粒尺寸、模量 |
+| 交互特征 | 组合两个或多个原始特征 | 密度×模量、氢键密度×结晶度 |
+| 缺失值处理 | 填补或显式标记缺失 | 传感器缺失行、批次差异 |
+| 小样本特征选择 | 去除冗余维度、保留关键信息 | 正则化、K-best、域先验 |
+
+大多数材料ML教程从干净的CSV直接跳到模型拟合。现实中，你的数据分散在实验本、仪器导出文件和Excel表格里。特征工程是将原始观测转化为结构化特征矩阵的过程，占实际工作量的80%。
+
+```python
+import pandas as pd; import numpy as np
+df = pd.DataFrame({"纤维直径_nm": [45,52,48], "交联密度_pct": [2.5,1.8,3.2], "处理": ["甲醇","乙醇","水"], "杨氏模量_GPa": [2.8,1.9,2.3]})
+```
+
+## 分类变量编码
+
+ ![以乙醇为参照类别时，两列指示变量即可区分三种溶剂](https://ml-biomat.com/static/images/article-guides/comp-guide-one-hot-zh.svg)
+
+以乙醇为参照类别时，两列指示变量即可区分三种溶剂。全零行是有效的类别表示，并不意味着该样品的信息缺失。
+
+```python
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder(sparse_output=False, drop="first")
+encoded = encoder.fit_transform(df[["处理"]])
+```
+
+## 域知识驱动的交互特征
+
+```python
+def engineer_features(df):
+    df = df.copy()
+    df["crosslink_x_diameter"] = df["交联密度_pct"] * df["纤维直径_nm"]
+    df["orient_diameter_ratio"] = df.get("取向标准差_deg", 15) / (df["纤维直径_nm"] + 1e-6)
+    return df
+```
+
+## 小样本特征选择
+
+样本少于100时避免自动化特征选择。改用：相关性分析（去除|r|>0.95的特征）、方差阈值（去除近常数特征）、域知识筛选（只保留物理上合理的特征）。
+
+## 检查清单
+
+所有特征已数值化、没有特征泄露目标变量、缺失值已处理、分类变量已编码、交互特征有物理依据。
+
+## 参考文献
+
+- Kuhn, M. & Johnson, K. (2019). *Feature Engineering and Selection*. CRC Press.
+- Ramprasad, R. et al. (2017). Machine learning in materials informatics. *npj Computational Materials*, 3, 54.
+- Guyon, I. & Elisseeff, A. (2003). An introduction to variable and feature selection. *Journal of Machine Learning Research*, 3, 1157-1182.
+
+## 深入探讨：特征缩放与标准化
+
+ ![这个教学缩放器从训练值 (2, 4, 6) 得到均值 4 和标准差 √(8/3)](https://ml-biomat.com/static/images/article-guides/comp-guide-train-scaling-zh.svg)
+
+这个教学缩放器从训练值 [2, 4, 6] 得到均值 4 和标准差 √(8/3)。将同一组参数用于测试值 8，结果约为 2.449，从而让训练与测试数据处于一致的坐标基准。
+
+特征缩放是机器学习预处理中容易被忽视但至关重要的步骤。不同物理量通常具有截然不同的量级——纤维直径可能只有几十纳米，而杨氏模量可能有几个吉帕。如果不进行缩放，依赖距离的模型会将量级大的特征视为更重要，即使它们物理上并不更关键。
+
+StandardScaler将每个特征转换为均值为零标准差为一的分布。这对于线性回归、支持向量机和神经网络等模型至关重要。对于树模型如随机森林，特征缩放不是必需的，因为决策树基于特征值的排序而非距离。了解这一点可以避免不必要的预处理步骤。
+
+特征归一化通过MinMaxScaler将所有特征缩放到给定范围如零到一之间。当你不确定特征分布是否近似正态时，归一化是更安全的选择。但归一化对异常值敏感——单个极端值可以压缩所有其他值到窄小区间。
+
+特征工程的质量远比模型选择重要。在材料科学的小样本场景中，一两个精心构造的物理特征对模型性能的提升往往超过尝试十种不同算法。花时间理解你的数据，与领域专家讨论，让物理直觉指导特征构造——这是任何自动化工具都无法替代的人类价值。
+
+## 相关阅读
+
+- 2026-07-03[常用的机器学习回归模型：从线性基准到梯度提升](https://ml-biomat.com/posts/regression-models-zh/)
+- 2026-07-03[深度学习基础：神经网络、反向传播与模型训练](https://ml-biomat.com/posts/deep-learning-intro-zh/)
+- 2026-06-30[常用的机器学习分类模型：从逻辑回归到梯度提升](https://ml-biomat.com/posts/ml-classification-models-zh/)

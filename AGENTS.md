@@ -124,3 +124,10 @@
 - 正式源为 D:/DW/ml-dl-curriculum-planning/course/public，共41课M01–M41，完整中英文共82页；通过 content_tools/machine_learning.py 接入 machine-learning 分类，地址为 /tutorials/machine-learning/m01/ 与 /en/ 等配对形式。元数据取正式HTML，原项目COURSES.json旧状态和英文简介不代表当前成品。
 - 教程目录及上下篇保留课程的教学顺序（不按M编号排序），既有机器学习文章保留；不另建系列入口。图表、完整代码、交互、下载包与许可证一并发布，根目录规划、authoring和private不发布。
 - 课程实验识别本站zh-CN中文语言；科学SVG外置后保持内部图片自包含。新增课程PayPal继续暂缓，二维码和免费代码下载保留。
+
+## AI 阅读入口（2026-11-16）
+
+- `content_tools/agent_content.py` 在构建末尾从公开规范页面生成 `index.md`、`agent-index.json`、`llms.txt` 和完整 `llms-full.txt`。新增课程自动进入索引；不再维护手工旧目录。保留正文、代码、公式、引用和许可，移除导航、广告与赞赏控件。
+- `static/js/agent-tools.js` 提供 WebMCP 只读搜索、主题列表和公开正文读取；按浏览器支持情况启用。不添加假的浏览器 API，不引入写操作、付款操作或外部任意 URL 请求。
+- `edge/markdown/worker.mjs` 是独立的内容格式协商服务，须在 Cloudflare 实际部署并验证后，才能宣称同一 URL 支持 `Accept: text/markdown`。静态文件发布本身不等于已接通协商。默认 HTML、状态码、既有付款服务和缓存隔离必须验证。
+- 本站公开阅读无需注册。不要为扫描得分发布不存在的 OAuth、A2A 或 MCP 服务。Cloudflare 登录仍由用户通过 GitHub 完成，密钥不写入仓库。

@@ -83,6 +83,7 @@ def tag_integrity_errors(posts):
             slug = tag.casefold() if tag.casefold() in {'python', 'mamba'} else tag
             expected.setdefault(slug, set()).add(post['slug'])
     files = {path.relative_to(DOCS).as_posix(): path for path in DOCS.rglob('*.html')}
+    markdown_files = {path.relative_to(DOCS).as_posix() for path in (DOCS / 'tags').rglob('index.md')}
     errors = []
     for slug, members in expected.items():
         for language in ['zh', 'en']:
@@ -125,7 +126,7 @@ def tag_integrity_errors(posts):
             target = decoded.lstrip('/')
             if decoded.endswith('/'):
                 target += 'index.html'
-            if target not in files:
+            if target not in files and target not in markdown_files:
                 errors.append(relative + ': tag URL casing or target missing: ' + url)
             parts = decoded.strip('/').split('/')
             if len(parts) >= 2 and parts[1].casefold() in {'python', 'mamba'} and parts[1] != parts[1].casefold():
@@ -935,6 +936,11 @@ def run():
             issue_rows.append((lang, stem, ", ".join(errs)))
     checks.append(check("No per-post SEO/frontmatter issues", not issue_rows,
                         "%d posts with issues" % len(issue_rows) if issue_rows else "clean"))
+    from content_tools import agent_content
+    agent_result = agent_content.validate(DOCS)
+    checks.append(check('Agent Markdown coverage and scientific content', agent_result['ok'],
+                        '; '.join(agent_result['errors'][:10]) if not agent_result['ok'] else
+                        f"{agent_result['pages']} pages, {agent_result['articles']} articles, {agent_result['code_blocks']} intact code blocks, {agent_result['math_blocks']} preserved formulas"))
     return checks, issue_rows, {"total": total, "en": en, "zh": zh}
 
 
