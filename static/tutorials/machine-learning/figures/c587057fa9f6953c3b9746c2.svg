@@ -1,0 +1,1189 @@
+<svg role="img" aria-label="Analytic array sizes, not runtime measurements. Left: full attention scores and unrolled training-state counts. Right: float32 storage for ordinary one-layer KV caches and the example’s current recurrent core. Convolution buffers, weights, and other intermediates are separate." xmlns:xlink="http://www.w3.org/1999/xlink" width="828pt" height="309.6pt" viewBox="0 0 828 309.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M32-F6-figure_1">
+  <g id="M32-F6-patch_1">
+   <path d="M 0 309.6 
+L 828 309.6 
+L 828 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M32-F6-axes_1">
+   <g id="M32-F6-patch_2">
+    <path d="M 43.540396 272.480854 
+L 409.86 272.480854 
+L 409.86 3.00024 
+L 43.540396 3.00024 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M32-F6-matplotlib.axis_1">
+    <g id="M32-F6-xtick_1">
+     <g id="M32-F6-line2d_1">
+      <defs>
+       <path id="M32-F6-mc594dedf3c" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M32-F6-mc594dedf3c" x="185.970034" y="272.480854" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_1">
+      <!-- $\mathdefault{10^{2}}$ -->
+      <g transform="translate(177.060034 288.273979)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_2">
+     <g id="M32-F6-line2d_2">
+      <g>
+       <use xlink:href="#M32-F6-mc594dedf3c" x="344.007357" y="272.480854" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_2">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g transform="translate(335.097357 288.273979)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_3">
+     <g id="M32-F6-line2d_3">
+      <defs>
+       <path id="M32-F6-mb3efb764d1" d="M 0 0 
+L 0 2 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="75.506686" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_4">
+     <g id="M32-F6-line2d_4">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="103.335677" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_5">
+     <g id="M32-F6-line2d_5">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="123.080661" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_6">
+     <g id="M32-F6-line2d_6">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="138.39606" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_7">
+     <g id="M32-F6-line2d_7">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="150.909652" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_8">
+     <g id="M32-F6-line2d_8">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="161.489743" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_9">
+     <g id="M32-F6-line2d_9">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="170.654635" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_10">
+     <g id="M32-F6-line2d_10">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="178.738643" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_11">
+     <g id="M32-F6-line2d_11">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="233.544009" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_12">
+     <g id="M32-F6-line2d_12">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="261.373" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_13">
+     <g id="M32-F6-line2d_13">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="281.117983" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_14">
+     <g id="M32-F6-line2d_14">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="296.433382" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_15">
+     <g id="M32-F6-line2d_15">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="308.946974" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_16">
+     <g id="M32-F6-line2d_16">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="319.527066" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_17">
+     <g id="M32-F6-line2d_17">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="328.691958" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_18">
+     <g id="M32-F6-line2d_18">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="336.775966" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_19">
+     <g id="M32-F6-line2d_19">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="391.581331" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-text_3">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="226.700198" y="303.801635" transform="rotate(-0 226.700198 303.801635)">Sequence lengthT</text>
+    </g>
+   </g>
+   <g id="M32-F6-matplotlib.axis_2">
+    <g id="M32-F6-ytick_1">
+     <g id="M32-F6-line2d_20">
+      <defs>
+       <path id="M32-F6-m75ba92d499" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M32-F6-m75ba92d499" x="43.540396" y="260.830467" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_4">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g transform="translate(18.720396 265.227029)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_2">
+     <g id="M32-F6-line2d_21">
+      <g>
+       <use xlink:href="#M32-F6-m75ba92d499" x="43.540396" y="202.700907" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_5">
+      <!-- $\mathdefault{10^{4}}$ -->
+      <g transform="translate(18.720396 207.09747)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">4</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_3">
+     <g id="M32-F6-line2d_22">
+      <g>
+       <use xlink:href="#M32-F6-m75ba92d499" x="43.540396" y="144.571347" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_6">
+      <!-- $\mathdefault{10^{5}}$ -->
+      <g transform="translate(18.720396 148.96791)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">5</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_4">
+     <g id="M32-F6-line2d_23">
+      <g>
+       <use xlink:href="#M32-F6-m75ba92d499" x="43.540396" y="86.441787" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_7">
+      <!-- $\mathdefault{10^{6}}$ -->
+      <g transform="translate(18.720396 90.83835)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">6</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_5">
+     <g id="M32-F6-line2d_24">
+      <g>
+       <use xlink:href="#M32-F6-m75ba92d499" x="43.540396" y="28.312227" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_8">
+      <!-- $\mathdefault{10^{7}}$ -->
+      <g transform="translate(18.720396 32.70879)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">7</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_6">
+     <g id="M32-F6-line2d_25">
+      <defs>
+       <path id="M32-F6-m0c3a5fbb4e" d="M 0 0 
+L -2 0 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="269.83485" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_7">
+     <g id="M32-F6-line2d_26">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="266.463803" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_8">
+     <g id="M32-F6-line2d_27">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="263.49033" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_9">
+     <g id="M32-F6-line2d_28">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="243.331726" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_10">
+     <g id="M32-F6-line2d_29">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="233.095618" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_11">
+     <g id="M32-F6-line2d_30">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="225.832985" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_12">
+     <g id="M32-F6-line2d_31">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="220.199648" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_13">
+     <g id="M32-F6-line2d_32">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="215.596877" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_14">
+     <g id="M32-F6-line2d_33">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="211.70529" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_15">
+     <g id="M32-F6-line2d_34">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="208.334243" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_16">
+     <g id="M32-F6-line2d_35">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="205.36077" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_17">
+     <g id="M32-F6-line2d_36">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="185.202166" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_18">
+     <g id="M32-F6-line2d_37">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="174.966058" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_19">
+     <g id="M32-F6-line2d_38">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="167.703425" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_20">
+     <g id="M32-F6-line2d_39">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="162.070088" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_21">
+     <g id="M32-F6-line2d_40">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="157.467317" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_22">
+     <g id="M32-F6-line2d_41">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="153.57573" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_23">
+     <g id="M32-F6-line2d_42">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="150.204684" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_24">
+     <g id="M32-F6-line2d_43">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="147.23121" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_25">
+     <g id="M32-F6-line2d_44">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="127.072606" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_26">
+     <g id="M32-F6-line2d_45">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="116.836499" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_27">
+     <g id="M32-F6-line2d_46">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="109.573865" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_28">
+     <g id="M32-F6-line2d_47">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="103.940528" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_29">
+     <g id="M32-F6-line2d_48">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="99.337757" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_30">
+     <g id="M32-F6-line2d_49">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="95.44617" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_31">
+     <g id="M32-F6-line2d_50">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="92.075124" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_32">
+     <g id="M32-F6-line2d_51">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="89.10165" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_33">
+     <g id="M32-F6-line2d_52">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="68.943046" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_34">
+     <g id="M32-F6-line2d_53">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="58.706939" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_35">
+     <g id="M32-F6-line2d_54">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="51.444305" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_36">
+     <g id="M32-F6-line2d_55">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="45.810969" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_37">
+     <g id="M32-F6-line2d_56">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="41.208198" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_38">
+     <g id="M32-F6-line2d_57">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="37.31661" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_39">
+     <g id="M32-F6-line2d_58">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="33.945564" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_40">
+     <g id="M32-F6-line2d_59">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="30.97209" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_41">
+     <g id="M32-F6-line2d_60">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="43.540396" y="10.813486" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-text_9">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="11.922271" y="137.740547" transform="rotate(-90 11.922271 137.740547)">Scalars in the specified array</text>
+    </g>
+   </g>
+   <g id="M32-F6-line2d_61">
+    <path d="M 60.191287 260.231735 
+L 107.765262 225.234253 
+L 155.339236 190.23677 
+L 202.913211 155.239288 
+L 250.487185 120.241806 
+L 298.06116 85.244323 
+L 345.635134 50.246841 
+L 393.209109 15.249359 
+" clip-path="url(#M32-F6-paab6881eb9)" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="M32-F6-m5b96b0e023" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #0072b2"/>
+    </defs>
+    <g clip-path="url(#M32-F6-paab6881eb9)">
+     <use xlink:href="#M32-F6-m5b96b0e023" x="60.191287" y="260.231735" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="107.765262" y="225.234253" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="155.339236" y="190.23677" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="202.913211" y="155.239288" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="250.487185" y="120.241806" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="298.06116" y="85.244323" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="345.635134" y="50.246841" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="393.209109" y="15.249359" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="M32-F6-line2d_62">
+    <path d="M 60.191287 249.995628 
+L 107.765262 232.496886 
+L 155.339236 214.998145 
+L 202.913211 197.499404 
+L 250.487185 180.000663 
+L 298.06116 162.501922 
+L 345.635134 145.003181 
+L 393.209109 127.504439 
+" clip-path="url(#M32-F6-paab6881eb9)" style="fill: none; stroke: #d58500; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="M32-F6-m9384eafae8" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #d58500"/>
+    </defs>
+    <g clip-path="url(#M32-F6-paab6881eb9)">
+     <use xlink:href="#M32-F6-m9384eafae8" x="60.191287" y="249.995628" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="107.765262" y="232.496886" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="155.339236" y="214.998145" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="202.913211" y="197.499404" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="250.487185" y="180.000663" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="298.06116" y="162.501922" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="345.635134" y="145.003181" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="393.209109" y="127.504439" style="fill: #d58500; stroke: #d58500"/>
+    </g>
+   </g>
+   <g id="M32-F6-patch_3">
+    <path d="M 43.540396 272.480854 
+L 43.540396 3.00024 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M32-F6-patch_4">
+    <path d="M 43.540396 272.480854 
+L 409.86 272.480854 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M32-F6-legend_1">
+    <g id="M32-F6-patch_5">
+     <path d="M 49.840396 38.063677 
+L 194.377584 38.063677 
+Q 196.177584 38.063677 196.177584 36.263677 
+L 196.177584 9.30024 
+Q 196.177584 7.50024 194.377584 7.50024 
+L 49.840396 7.50024 
+Q 48.040396 7.50024 48.040396 9.30024 
+L 48.040396 36.263677 
+Q 48.040396 38.063677 49.840396 38.063677 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="M32-F6-line2d_63">
+     <path d="M 51.640396 15.144615 
+L 60.640396 15.144615 
+L 69.640396 15.144615 
+" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#M32-F6-m5b96b0e023" x="60.640396" y="15.144615" style="fill: #0072b2; stroke: #0072b2"/>
+     </g>
+    </g>
+    <g id="M32-F6-text_10">
+     <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="76.840396" y="18.294615" transform="rotate(-0 76.840396 18.294615)">Four-head attention scores</text>
+    </g>
+    <g id="M32-F6-line2d_64">
+     <path d="M 51.640396 29.076334 
+L 60.640396 29.076334 
+L 69.640396 29.076334 
+" style="fill: none; stroke: #d58500; stroke-width: 1.5; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#M32-F6-m9384eafae8" x="60.640396" y="29.076334" style="fill: #d58500; stroke: #d58500"/>
+     </g>
+    </g>
+    <g id="M32-F6-text_11">
+     <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="76.840396" y="32.226334" transform="rotate(-0 76.840396 32.226334)">Unrolled selective states</text>
+    </g>
+   </g>
+  </g>
+  <g id="M32-F6-axes_2">
+   <g id="M32-F6-patch_6">
+    <path d="M 458.680156 272.480854 
+L 824.99976 272.480854 
+L 824.99976 3.00024 
+L 458.680156 3.00024 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M32-F6-matplotlib.axis_3">
+    <g id="M32-F6-xtick_20">
+     <g id="M32-F6-line2d_65">
+      <g>
+       <use xlink:href="#M32-F6-mc594dedf3c" x="601.109794" y="272.480854" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_12">
+      <!-- $\mathdefault{10^{2}}$ -->
+      <g transform="translate(592.199794 288.273979)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_21">
+     <g id="M32-F6-line2d_66">
+      <g>
+       <use xlink:href="#M32-F6-mc594dedf3c" x="759.147117" y="272.480854" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_13">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g transform="translate(750.237117 288.273979)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_22">
+     <g id="M32-F6-line2d_67">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="490.646446" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_23">
+     <g id="M32-F6-line2d_68">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="518.475437" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_24">
+     <g id="M32-F6-line2d_69">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="538.220421" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_25">
+     <g id="M32-F6-line2d_70">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="553.53582" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_26">
+     <g id="M32-F6-line2d_71">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="566.049412" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_27">
+     <g id="M32-F6-line2d_72">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="576.629503" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_28">
+     <g id="M32-F6-line2d_73">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="585.794395" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_29">
+     <g id="M32-F6-line2d_74">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="593.878403" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_30">
+     <g id="M32-F6-line2d_75">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="648.683769" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_31">
+     <g id="M32-F6-line2d_76">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="676.51276" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_32">
+     <g id="M32-F6-line2d_77">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="696.257743" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_33">
+     <g id="M32-F6-line2d_78">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="711.573142" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_34">
+     <g id="M32-F6-line2d_79">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="724.086734" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_35">
+     <g id="M32-F6-line2d_80">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="734.666826" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_36">
+     <g id="M32-F6-line2d_81">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="743.831718" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_37">
+     <g id="M32-F6-line2d_82">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="751.915726" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-xtick_38">
+     <g id="M32-F6-line2d_83">
+      <g>
+       <use xlink:href="#M32-F6-mb3efb764d1" x="806.721091" y="272.480854" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-text_14">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="641.839958" y="303.801635" transform="rotate(-0 641.839958 303.801635)">Observed lengthT</text>
+    </g>
+   </g>
+   <g id="M32-F6-matplotlib.axis_4">
+    <g id="M32-F6-ytick_42">
+     <g id="M32-F6-line2d_84">
+      <g>
+       <use xlink:href="#M32-F6-m75ba92d499" x="458.680156" y="226.947241" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_15">
+      <!-- $\mathdefault{10^{0}}$ -->
+      <g transform="translate(433.860156 231.343804)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_43">
+     <g id="M32-F6-line2d_85">
+      <g>
+       <use xlink:href="#M32-F6-m75ba92d499" x="458.680156" y="148.808892" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_16">
+      <!-- $\mathdefault{10^{1}}$ -->
+      <g transform="translate(433.860156 153.205455)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_44">
+     <g id="M32-F6-line2d_86">
+      <g>
+       <use xlink:href="#M32-F6-m75ba92d499" x="458.680156" y="70.670543" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M32-F6-text_17">
+      <!-- $\mathdefault{10^{2}}$ -->
+      <g transform="translate(433.860156 75.067105)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_45">
+     <g id="M32-F6-line2d_87">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="267.804123" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_46">
+     <g id="M32-F6-line2d_88">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="258.041617" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_47">
+     <g id="M32-F6-line2d_89">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="250.469228" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_48">
+     <g id="M32-F6-line2d_90">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="244.282136" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_49">
+     <g id="M32-F6-line2d_91">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="239.051025" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_50">
+     <g id="M32-F6-line2d_92">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="234.51963" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_51">
+     <g id="M32-F6-line2d_93">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="230.522656" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_52">
+     <g id="M32-F6-line2d_94">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="203.425254" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_53">
+     <g id="M32-F6-line2d_95">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="189.665774" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_54">
+     <g id="M32-F6-line2d_96">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="179.903267" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_55">
+     <g id="M32-F6-line2d_97">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="172.330879" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_56">
+     <g id="M32-F6-line2d_98">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="166.143787" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_57">
+     <g id="M32-F6-line2d_99">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="160.912676" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_58">
+     <g id="M32-F6-line2d_100">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="156.381281" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_59">
+     <g id="M32-F6-line2d_101">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="152.384307" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_60">
+     <g id="M32-F6-line2d_102">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="125.286905" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_61">
+     <g id="M32-F6-line2d_103">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="111.527425" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_62">
+     <g id="M32-F6-line2d_104">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="101.764918" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_63">
+     <g id="M32-F6-line2d_105">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="94.19253" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_64">
+     <g id="M32-F6-line2d_106">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="88.005438" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_65">
+     <g id="M32-F6-line2d_107">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="82.774326" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_66">
+     <g id="M32-F6-line2d_108">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="78.242931" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_67">
+     <g id="M32-F6-line2d_109">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="74.245958" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_68">
+     <g id="M32-F6-line2d_110">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="47.148556" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_69">
+     <g id="M32-F6-line2d_111">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="33.389076" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_70">
+     <g id="M32-F6-line2d_112">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="23.626569" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_71">
+     <g id="M32-F6-line2d_113">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="16.05418" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_72">
+     <g id="M32-F6-line2d_114">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="9.867089" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-ytick_73">
+     <g id="M32-F6-line2d_115">
+      <g>
+       <use xlink:href="#M32-F6-m0c3a5fbb4e" x="458.680156" y="4.635977" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M32-F6-text_18">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="427.062031" y="137.740547" transform="rotate(-90 427.062031 137.740547)">float32 state storage(KiB)</text>
+    </g>
+   </g>
+   <g id="M32-F6-line2d_116">
+    <path d="M 475.331047 179.903267 
+L 522.905022 156.381281 
+L 570.478996 132.859294 
+L 618.052971 109.337307 
+L 665.626945 85.81532 
+L 713.20092 62.293333 
+L 760.774894 38.771346 
+L 808.348869 15.249359 
+" clip-path="url(#M32-F6-p801b09a3b8)" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: square"/>
+    <g clip-path="url(#M32-F6-p801b09a3b8)">
+     <use xlink:href="#M32-F6-m5b96b0e023" x="475.331047" y="179.903267" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="522.905022" y="156.381281" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="570.478996" y="132.859294" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="618.052971" y="109.337307" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="665.626945" y="85.81532" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="713.20092" y="62.293333" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="760.774894" y="38.771346" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M32-F6-m5b96b0e023" x="808.348869" y="15.249359" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="M32-F6-line2d_117">
+    <path d="M 475.331047 260.231735 
+L 522.905022 260.231735 
+L 570.478996 260.231735 
+L 618.052971 260.231735 
+L 665.626945 260.231735 
+L 713.20092 260.231735 
+L 760.774894 260.231735 
+L 808.348869 260.231735 
+" clip-path="url(#M32-F6-p801b09a3b8)" style="fill: none; stroke: #d58500; stroke-width: 1.5; stroke-linecap: square"/>
+    <g clip-path="url(#M32-F6-p801b09a3b8)">
+     <use xlink:href="#M32-F6-m9384eafae8" x="475.331047" y="260.231735" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="522.905022" y="260.231735" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="570.478996" y="260.231735" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="618.052971" y="260.231735" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="665.626945" y="260.231735" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="713.20092" y="260.231735" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="760.774894" y="260.231735" style="fill: #d58500; stroke: #d58500"/>
+     <use xlink:href="#M32-F6-m9384eafae8" x="808.348869" y="260.231735" style="fill: #d58500; stroke: #d58500"/>
+    </g>
+   </g>
+   <g id="M32-F6-patch_7">
+    <path d="M 458.680156 272.480854 
+L 458.680156 3.00024 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M32-F6-patch_8">
+    <path d="M 458.680156 272.480854 
+L 824.99976 272.480854 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M32-F6-legend_2">
+    <g id="M32-F6-patch_9">
+     <path d="M 464.980156 38.115709 
+L 603.224375 38.115709 
+Q 605.024375 38.115709 605.024375 36.315709 
+L 605.024375 9.30024 
+Q 605.024375 7.50024 603.224375 7.50024 
+L 464.980156 7.50024 
+Q 463.180156 7.50024 463.180156 9.30024 
+L 463.180156 36.315709 
+Q 463.180156 38.115709 464.980156 38.115709 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="M32-F6-line2d_118">
+     <path d="M 466.780156 15.144615 
+L 475.780156 15.144615 
+L 484.780156 15.144615 
+" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#M32-F6-m5b96b0e023" x="475.780156" y="15.144615" style="fill: #0072b2; stroke: #0072b2"/>
+     </g>
+    </g>
+    <g id="M32-F6-text_19">
+     <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="491.980156" y="18.294615" transform="rotate(-0 491.980156 18.294615)">One-layer KV cache,d=32</text>
+    </g>
+    <g id="M32-F6-line2d_119">
+     <path d="M 466.780156 29.128365 
+L 475.780156 29.128365 
+L 484.780156 29.128365 
+" style="fill: none; stroke: #d58500; stroke-width: 1.5; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#M32-F6-m9384eafae8" x="475.780156" y="29.128365" style="fill: #d58500; stroke: #d58500"/>
+     </g>
+    </g>
+    <g id="M32-F6-text_20">
+     <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="491.980156" y="32.278365" transform="rotate(-0 491.980156 32.278365)">24×4 recurrent state</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M32-F6-paab6881eb9">
+   <rect x="43.540396" y="3.00024" width="366.319604" height="269.480614"/>
+  </clipPath>
+  <clipPath id="M32-F6-p801b09a3b8">
+   <rect x="458.680156" y="3.00024" width="366.319604" height="269.480614"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,4606 @@
+{
+  "title": {
+    "zh": "机器学习与深度学习",
+    "en": "Machine Learning and Deep Learning"
+  },
+  "lessons": [
+    {
+      "id": "M01",
+      "title": {
+        "zh": "数据、特征与机器学习任务",
+        "en": "Problems, data and learning tasks"
+      },
+      "standfirst": {
+        "zh": "从共享单车的一天出发，确定样本、信息出现的时间与预测目标，再用三条完整规则建立可以比较的起点。",
+        "en": "Follow a day of bicycle rentals to define observations, information timing and a target, then build three inspectable forecasting baselines."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "数据、数学与评估",
+        "en": "Data, mathematics and evaluation"
+      },
+      "search_title": {
+        "zh": "数据、特征与机器学习任务",
+        "en": "Problems, data and learning tasks"
+      },
+      "keywords": [
+        "样本",
+        "目标泄漏",
+        "baseline",
+        "data dictionary",
+        "supervised learning",
+        "unsupervised learning",
+        "reinforcement learning"
+      ],
+      "sections": [
+        {
+          "id": "M01-question",
+          "title": {
+            "zh": "先说清明天要做什么",
+            "en": "Begin with tomorrow's decision"
+          }
+        },
+        {
+          "id": "M01-record",
+          "title": {
+            "zh": "一行记录怎样成为一个样本",
+            "en": "What makes one row an observation?"
+          }
+        },
+        {
+          "id": "M01-time",
+          "title": {
+            "zh": "把信息出现的时间画出来",
+            "en": "Draw the moment when information becomes available"
+          }
+        },
+        {
+          "id": "M01-quality",
+          "title": {
+            "zh": "先分清没有记录、重复记录和真实变化",
+            "en": "Separate missing records, duplicates and real change"
+          }
+        },
+        {
+          "id": "M01-look",
+          "title": {
+            "zh": "让每一幅图回答一个具体问题",
+            "en": "Give each figure a question"
+          }
+        },
+        {
+          "id": "M01-learning",
+          "title": {
+            "zh": "从经验改进规则，究竟在学什么",
+            "en": "What does improving a rule from experience mean?"
+          }
+        },
+        {
+          "id": "M01-baseline",
+          "title": {
+            "zh": "三条完整规则与一次真正的预测实验",
+            "en": "Three complete rules and a forecasting experiment"
+          }
+        },
+        {
+          "id": "M01-action",
+          "title": {
+            "zh": "把预测误差接到行动成本",
+            "en": "Connect prediction errors to the cost of action"
+          }
+        },
+        {
+          "id": "M01-lab",
+          "title": {
+            "zh": "需求与容量的成本账本",
+            "en": "A capacity-and-demand account"
+          }
+        },
+        {
+          "id": "M01-carry",
+          "title": {
+            "zh": "带着一份清楚的任务说明进入模型",
+            "en": "Carry a clear task definition into modeling"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": null,
+        "next": "M02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "M02",
+      "title": {
+        "zh": "让模型算得明白：线性代数、微积分与概率",
+        "en": "Mathematics that makes a model inspectable"
+      },
+      "standfirst": {
+        "zh": "形状与单位检查、空间变换、梯度步和概率代价，在四组小实验中连接起来。",
+        "en": "Connect shapes, units, transformations, gradient steps and probability costs through four small experiments."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "数据、数学与评估",
+        "en": "Data, mathematics and evaluation"
+      },
+      "search_title": {
+        "zh": "线性代数、微积分、概率统计与信息论",
+        "en": "Mathematical and probabilistic foundations"
+      },
+      "keywords": [
+        "matrix",
+        "tensor shape",
+        "projection",
+        "eigenvalue",
+        "SVD",
+        "gradient",
+        "chain rule",
+        "probability",
+        "likelihood",
+        "entropy",
+        "KL",
+        "convexity",
+        "numerical stability"
+      ],
+      "sections": [
+        {
+          "id": "M02-purpose",
+          "title": {
+            "zh": "数学是一套检查预测的方法",
+            "en": "Mathematics as a way to inspect predictions"
+          }
+        },
+        {
+          "id": "M02-shapes",
+          "title": {
+            "zh": "从一列数到一次批量计算",
+            "en": "From a column of numbers to a batch calculation"
+          }
+        },
+        {
+          "id": "M02-geometry",
+          "title": {
+            "zh": "矩阵改变空间，投影留下一个方向",
+            "en": "Matrices transform space; projections retain directions"
+          }
+        },
+        {
+          "id": "M02-svd",
+          "title": {
+            "zh": "把复杂变化拆成一组可排序的成分",
+            "en": "Decomposing a transformation into ordered components"
+          }
+        },
+        {
+          "id": "M02-calculus",
+          "title": {
+            "zh": "导数衡量一次小调整会带来什么",
+            "en": "What does a small adjustment change?"
+          }
+        },
+        {
+          "id": "M02-optimization",
+          "title": {
+            "zh": "沿坡下降：为什么步长决定成败",
+            "en": "Descending a slope, one controlled step at a time"
+          }
+        },
+        {
+          "id": "M02-lab",
+          "title": {
+            "zh": "一步一步走向谷底",
+            "en": "Walk toward the minimum, one step at a time"
+          }
+        },
+        {
+          "id": "M02-probability",
+          "title": {
+            "zh": "一次结果与一组可能结果",
+            "en": "An observed outcome and a distribution of possibilities"
+          }
+        },
+        {
+          "id": "M02-information",
+          "title": {
+            "zh": "从通信中的信息，到预测中的对数代价",
+            "en": "From communication to the cost of probability forecasts"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M01",
+        "next": "M03"
+      },
+      "prerequisites": [
+        "M01"
+      ]
+    },
+    {
+      "id": "M03",
+      "title": {
+        "zh": "分数可信么：评估、泛化与实验设计",
+        "en": "Can the score be trusted? Evaluation and experimental design"
+      },
+      "standfirst": {
+        "zh": "从熟悉对象的满分，到罕见事件的零检出，重新设计能回答实际问题的测试。",
+        "en": "From perfect recognition of familiar objects to detecting none of the rare events, design tests that answer the practical question."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "数据、数学与评估",
+        "en": "Data, mathematics and evaluation"
+      },
+      "search_title": {
+        "zh": "模型评估、交叉验证与泛化",
+        "en": "Evaluation, generalization and experiments"
+      },
+      "keywords": [
+        "group split",
+        "time split",
+        "nested cross-validation",
+        "precision",
+        "recall",
+        "NDCG",
+        "threshold",
+        "bootstrap",
+        "ablation",
+        "PAC",
+        "VC dimension",
+        "Holm"
+      ],
+      "sections": [
+        {
+          "id": "M03-question",
+          "title": {
+            "zh": "考试成绩，要和将来的工作相对应",
+            "en": "An examination should resemble the future job"
+          }
+        },
+        {
+          "id": "M03-splits",
+          "title": {
+            "zh": "按行、按对象和按时间，实际上在问三个问题",
+            "en": "Rows, objects and time imply different questions"
+          }
+        },
+        {
+          "id": "M03-validation",
+          "title": {
+            "zh": "轮流考试，也需要另一层检验选择过程",
+            "en": "Cross-validation also needs protection from selection"
+          }
+        },
+        {
+          "id": "M03-metrics",
+          "title": {
+            "zh": "指标衡量的，是你愿意怎样计算错误",
+            "en": "A metric specifies how errors are counted"
+          }
+        },
+        {
+          "id": "M03-decision",
+          "title": {
+            "zh": "93.5%的准确率，为什么一个事件也没找到",
+            "en": "How 93.5% accuracy can detect no events"
+          }
+        },
+        {
+          "id": "M03-lab",
+          "title": {
+            "zh": "把阈值变成一张成本账本",
+            "en": "Turn a threshold into a cost ledger"
+          }
+        },
+        {
+          "id": "M03-curves",
+          "title": {
+            "zh": "训练很好、验证很差，下一步该补数据还是改模型",
+            "en": "Should the next step add data or change the model?"
+          }
+        },
+        {
+          "id": "M03-uncertainty",
+          "title": {
+            "zh": "差多少、稳不稳，和是否过了一条检验线",
+            "en": "Magnitude, stability and a statistical test answer different questions"
+          }
+        },
+        {
+          "id": "M03-theory",
+          "title": {
+            "zh": "为什么有限样本有机会支持对未来的判断",
+            "en": "Why can finite observations tell us about future errors?"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M02",
+        "next": "M04"
+      },
+      "prerequisites": [
+        "M01",
+        "M02"
+      ]
+    },
+    {
+      "id": "M04",
+      "title": {
+        "zh": "用简单模型解释预测：回归、近邻与贝叶斯",
+        "en": "Explain predictions with regression, neighbors and Bayes"
+      },
+      "standfirst": {
+        "zh": "读懂系数与残差，再为概率、计数和没有完整观察到的寿命选择合适模型。",
+        "en": "Read coefficients and residuals, then choose models for probabilities, counts and partially observed lifetimes."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "经典机器学习与统计推断",
+        "en": "Classical machine learning"
+      },
+      "search_title": {
+        "zh": "线性回归、逻辑回归、kNN与朴素贝叶斯",
+        "en": "Regression and classification"
+      },
+      "keywords": [
+        "OLS",
+        "Ridge",
+        "Lasso",
+        "LogisticRegression",
+        "KNN",
+        "GaussianNB",
+        "Pipeline",
+        "imputation",
+        "Poisson",
+        "GLM",
+        "Kaplan Meier",
+        "censoring"
+      ],
+      "sections": [
+        {
+          "id": "M04-purpose",
+          "title": {
+            "zh": "从一个可解释的预测开始",
+            "en": "Begin with a prediction you can inspect"
+          }
+        },
+        {
+          "id": "M04-regression",
+          "title": {
+            "zh": "一条线怎样决定自己应该经过哪里",
+            "en": "How does a line choose where to pass?"
+          }
+        },
+        {
+          "id": "M04-penalties",
+          "title": {
+            "zh": "让相似的解释少一些相互争抢",
+            "en": "Stabilizing competing explanations"
+          }
+        },
+        {
+          "id": "M04-pipeline",
+          "title": {
+            "zh": "模型前面的步骤，也是需要学习的一部分",
+            "en": "The steps before the model also learn from data"
+          }
+        },
+        {
+          "id": "M04-logistic",
+          "title": {
+            "zh": "从连续分数到类别概率",
+            "en": "Turning a score into a class probability"
+          }
+        },
+        {
+          "id": "M04-neighbors",
+          "title": {
+            "zh": "询问邻居，或者比较每一类怎样产生特征",
+            "en": "Ask nearby observations, or compare class-generating mechanisms"
+          }
+        },
+        {
+          "id": "M04-glm",
+          "title": {
+            "zh": "目标是计数时，均值也需要合适的形状",
+            "en": "Count targets need an appropriate mean structure"
+          }
+        },
+        {
+          "id": "M04-survival",
+          "title": {
+            "zh": "还没看到故障，提供了什么信息",
+            "en": "What do we learn when failure has not yet been observed?"
+          }
+        },
+        {
+          "id": "M04-lab",
+          "title": {
+            "zh": "亲手维护一个风险集",
+            "en": "Maintain a risk set by hand"
+          }
+        },
+        {
+          "id": "M04-workflow",
+          "title": {
+            "zh": "用预测问题选择起点，再读懂它为什么出错",
+            "en": "Choose a baseline that reveals the next useful experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M03",
+        "next": "M05"
+      },
+      "prerequisites": [
+        "M02",
+        "M03"
+      ]
+    },
+    {
+      "id": "M05",
+      "title": {
+        "zh": "支持向量机：间隔、核与边界",
+        "en": "Support vector machines: margins, kernels and boundaries"
+      },
+      "standfirst": {
+        "zh": "从七个点的几何到手写数字、容忍带与正常区域，理解边界由谁决定。",
+        "en": "From seven points to handwritten digits, tolerance tubes and normal regions: discover what determines a boundary."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "经典机器学习与统计推断",
+        "en": "Classical machine learning"
+      },
+      "search_title": {
+        "zh": "支持向量机SVM、SVR与核方法",
+        "en": "Support vector machines and kernel methods"
+      },
+      "keywords": [
+        "SVM",
+        "SVC",
+        "SVR",
+        "kernel",
+        "margin",
+        "One-Class SVM",
+        "Nystroem",
+        "support vectors"
+      ],
+      "sections": [
+        {
+          "id": "M05-purpose",
+          "title": {
+            "zh": "把两个群体分开，为什么还要留出走廊",
+            "en": "Separating two groups while leaving a corridor"
+          }
+        },
+        {
+          "id": "M05-geometry",
+          "title": {
+            "zh": "距离从哪里来：分数、法向量与支持向量",
+            "en": "Scores, normal vectors and the observations that matter"
+          }
+        },
+        {
+          "id": "M05-soft",
+          "title": {
+            "zh": "给错误标价，而不是追着每一个点跑",
+            "en": "Putting a price on violations"
+          }
+        },
+        {
+          "id": "M05-lab",
+          "title": {
+            "zh": "亲手比较边界的代价",
+            "en": "Compare the cost of a boundary"
+          }
+        },
+        {
+          "id": "M05-kernels",
+          "title": {
+            "zh": "弯曲的边界，怎样由两两相似性得到",
+            "en": "Curved boundaries from pairwise comparisons"
+          }
+        },
+        {
+          "id": "M05-digits",
+          "title": {
+            "zh": "让手写数字检验几何直觉",
+            "en": "Testing the geometry on handwritten digits"
+          }
+        },
+        {
+          "id": "M05-regression",
+          "title": {
+            "zh": "从分界线到一条有容忍宽度的预测曲线",
+            "en": "A prediction curve with an explicit tolerance"
+          }
+        },
+        {
+          "id": "M05-novelty",
+          "title": {
+            "zh": "只有正常样本时，学习它们占据的区域",
+            "en": "Learning a normal region without fault examples"
+          }
+        },
+        {
+          "id": "M05-choice",
+          "title": {
+            "zh": "把精确核、近似核与线性方法放进同一张工作台",
+            "en": "Comparing exact kernels, approximate kernels and linear models"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M04",
+        "next": "M30"
+      },
+      "prerequisites": [
+        "M02",
+        "M03",
+        "M04"
+      ]
+    },
+    {
+      "id": "M30",
+      "title": {
+        "zh": "决策树与森林：让不同的规则共同判断",
+        "en": "Trees and forests: combining different decision rules"
+      },
+      "standfirst": {
+        "zh": "读懂一刀切分，再用真实树的差异、袋外记录和相关特征检验集成。",
+        "en": "Read a split, then investigate ensembles through actual tree diversity, out-of-bag records and correlated features."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "经典机器学习与统计推断",
+        "en": "Classical machine learning"
+      },
+      "search_title": {
+        "zh": "决策树、随机森林与Bagging",
+        "en": "Decision trees, random forests and bagging"
+      },
+      "keywords": [
+        "CART",
+        "Gini",
+        "entropy",
+        "pruning",
+        "bootstrap",
+        "bagging",
+        "random forest",
+        "OOB",
+        "Extra Trees",
+        "voting",
+        "stacking",
+        "permutation importance"
+      ],
+      "sections": [
+        {
+          "id": "M30-purpose",
+          "title": {
+            "zh": "一次只问一个问题，为什么也能形成复杂判断",
+            "en": "How can one question at a time produce a complex decision?"
+          }
+        },
+        {
+          "id": "M30-cart",
+          "title": {
+            "zh": "沿着树读一次预测，再看它切出了什么",
+            "en": "Follow a prediction through the tree and into feature space"
+          }
+        },
+        {
+          "id": "M30-impurity",
+          "title": {
+            "zh": "怎样判断一刀切得好不好",
+            "en": "What makes one cut better than another?"
+          }
+        },
+        {
+          "id": "M30-pruning",
+          "title": {
+            "zh": "树应该长到什么时候",
+            "en": "When should a tree stop growing?"
+          }
+        },
+        {
+          "id": "M30-lab",
+          "title": {
+            "zh": "这一次分裂，改善了多少",
+            "en": "How much does this split improve?"
+          }
+        },
+        {
+          "id": "M30-bagging",
+          "title": {
+            "zh": "重新抽取数据，让不稳定的树彼此补充",
+            "en": "Resampling makes unstable trees complement one another"
+          }
+        },
+        {
+          "id": "M30-forest",
+          "title": {
+            "zh": "为什么每个节点还要少看几列特征",
+            "en": "Why restrict the features considered at each node?"
+          }
+        },
+        {
+          "id": "M30-oob",
+          "title": {
+            "zh": "没被某棵树抽中的记录，可以做什么",
+            "en": "What can observations omitted from a tree tell us?"
+          }
+        },
+        {
+          "id": "M30-combine",
+          "title": {
+            "zh": "更随机的树、直接投票与再学一次组合规则",
+            "en": "Random thresholds, direct voting and a learned combination"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M05",
+        "next": "M31"
+      },
+      "prerequisites": [
+        "M03",
+        "M04"
+      ]
+    },
+    {
+      "id": "M31",
+      "title": {
+        "zh": "提升树：每一步修正怎样成为强模型",
+        "en": "Boosted trees: how successive corrections build a strong model"
+      },
+      "standfirst": {
+        "zh": "从八个样本的权重变化，走到 XGBoost、LightGBM、CatBoost 的真实训练、排序与解释。",
+        "en": "From the changing weights of eight observations to actual XGBoost, LightGBM and CatBoost training, ranking and explanation."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "经典机器学习与统计推断",
+        "en": "Classical machine learning"
+      },
+      "search_title": {
+        "zh": "Boosting：AdaBoost、GBDT、XGBoost、LightGBM与CatBoost",
+        "en": "Boosting and gradient-boosted decision trees"
+      },
+      "keywords": [
+        "AdaBoost",
+        "GBDT",
+        "XGBoost",
+        "LightGBM",
+        "CatBoost",
+        "ordered boosting",
+        "categorical features",
+        "learning to rank",
+        "early stopping"
+      ],
+      "sections": [
+        {
+          "id": "M31-purpose",
+          "title": {
+            "zh": "后一棵树，接着修正前面留下的问题",
+            "en": "The next tree repairs what the current model leaves behind"
+          }
+        },
+        {
+          "id": "M31-adaboost",
+          "title": {
+            "zh": "难分的样本，怎样在下一轮变得更重要",
+            "en": "How do difficult observations gain attention?"
+          }
+        },
+        {
+          "id": "M31-lab",
+          "title": {
+            "zh": "一轮提升怎样重新分配注意力",
+            "en": "How one boosting round reallocates attention"
+          }
+        },
+        {
+          "id": "M31-gradient",
+          "title": {
+            "zh": "从追着错误跑，到沿损失的下降方向修正",
+            "en": "From mistakes to a direction that reduces loss"
+          }
+        },
+        {
+          "id": "M31-xgboost",
+          "title": {
+            "zh": "XGBoost：把一轮修正写成可快速比较的目标",
+            "en": "XGBoost makes a correction cheap to compare"
+          }
+        },
+        {
+          "id": "M31-lightgbm",
+          "title": {
+            "zh": "LightGBM：把分裂统计压进直方图，再选择最值得长的叶",
+            "en": "LightGBM combines histograms with selective leaf growth"
+          }
+        },
+        {
+          "id": "M31-catboost",
+          "title": {
+            "zh": "CatBoost：类别统计怎样避免偷看自己的答案",
+            "en": "Category statistics without reading an observation's own answer"
+          }
+        },
+        {
+          "id": "M31-budget",
+          "title": {
+            "zh": "比较的单位，是完整工作流程",
+            "en": "The complete workflow is the comparison unit"
+          }
+        },
+        {
+          "id": "M31-tasks",
+          "title": {
+            "zh": "换一个目标，树仍然累加，修正信号却会改变",
+            "en": "The trees still add, but the correction target changes"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M30",
+        "next": "M06"
+      },
+      "prerequisites": [
+        "M03",
+        "M04",
+        "M30"
+      ]
+    },
+    {
+      "id": "M06",
+      "title": {
+        "zh": "寻找没有标签的结构：从PCA到聚类与异常",
+        "en": "Finding unlabeled structure: PCA, clustering and anomalies"
+      },
+      "standfirst": {
+        "zh": "用真实数字图像、形状对照与误报记录，检查压缩、分组和二维地图保留了什么。",
+        "en": "Use real digit images, shape comparisons and false alarms to examine what compression, clustering and maps preserve."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "经典机器学习与统计推断",
+        "en": "Classical machine learning"
+      },
+      "search_title": {
+        "zh": "PCA、聚类、GMM、UMAP与异常检测",
+        "en": "Unsupervised learning and anomalies"
+      },
+      "keywords": [
+        "PCA",
+        "k-means",
+        "hierarchical clustering",
+        "DBSCAN",
+        "GMM",
+        "t-SNE",
+        "UMAP",
+        "Isolation Forest",
+        "LOF",
+        "novelty detection"
+      ],
+      "sections": [
+        {
+          "id": "M06-purpose",
+          "title": {
+            "zh": "没有答案标签，也可以提出清楚的问题",
+            "en": "Clear questions are possible without answer labels"
+          }
+        },
+        {
+          "id": "M06-distance",
+          "title": {
+            "zh": "相似性从量尺开始",
+            "en": "Similarity begins with the measuring scale"
+          }
+        },
+        {
+          "id": "M06-pca",
+          "title": {
+            "zh": "PCA保留的是变化，压缩损失可以算出来",
+            "en": "PCA preserves variation, and its compression loss is measurable"
+          }
+        },
+        {
+          "id": "M06-lab",
+          "title": {
+            "zh": "把点云投到一条线上",
+            "en": "Project a point cloud onto one line"
+          }
+        },
+        {
+          "id": "M06-clusters",
+          "title": {
+            "zh": "一组的含义，由聚类规则决定",
+            "en": "The clustering rule defines what a group means"
+          }
+        },
+        {
+          "id": "M06-density",
+          "title": {
+            "zh": "高斯混合给出柔性的归属，也给出密度",
+            "en": "A Gaussian mixture supplies soft membership and density"
+          }
+        },
+        {
+          "id": "M06-maps",
+          "title": {
+            "zh": "二维地图要检查邻居，不能只看岛屿",
+            "en": "Check neighbors in a two-dimensional map, not only islands"
+          }
+        },
+        {
+          "id": "M06-anomaly",
+          "title": {
+            "zh": "异常分数最终要变成多少次检查",
+            "en": "An anomaly score becomes a number of inspections"
+          }
+        },
+        {
+          "id": "M06-workflow",
+          "title": {
+            "zh": "从一张地图走回原始对象",
+            "en": "Return from the map to the original objects"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M31",
+        "next": "M07"
+      },
+      "prerequisites": [
+        "M02",
+        "M03"
+      ]
+    },
+    {
+      "id": "M07",
+      "title": {
+        "zh": "让证据更新认识：贝叶斯、隐变量与高斯过程",
+        "en": "Let evidence update belief: Bayesian models, hidden states and Gaussian processes"
+      },
+      "standfirst": {
+        "zh": "从七次成功的手算后验，走到层次共享、消息传递与可检查的计算近似。",
+        "en": "From a hand-computed posterior after seven successes to partial pooling, message passing and inspectable approximations."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "经典机器学习与统计推断",
+        "en": "Classical machine learning"
+      },
+      "search_title": {
+        "zh": "贝叶斯推断、概率图模型、HMM与高斯过程",
+        "en": "Bayesian and probabilistic modeling"
+      },
+      "keywords": [
+        "Bayes",
+        "Beta-binomial",
+        "hierarchical model",
+        "HMM",
+        "EM",
+        "MCMC",
+        "R-hat",
+        "ESS",
+        "variational inference",
+        "Gaussian process"
+      ],
+      "sections": [
+        {
+          "id": "M07-bayes",
+          "title": {
+            "zh": "七次成功以后，知道了多少",
+            "en": "How much do seven successes tell us?"
+          }
+        },
+        {
+          "id": "M07-conjugate",
+          "title": {
+            "zh": "一条可以手算的后验，也能预测下一批结果",
+            "en": "A hand-computable posterior can predict future results"
+          }
+        },
+        {
+          "id": "M07-lab",
+          "title": {
+            "zh": "逐次加入证据，再看未来十次",
+            "en": "Add evidence one observation at a time"
+          }
+        },
+        {
+          "id": "M07-hierarchy",
+          "title": {
+            "zh": "小店能从其他店学到什么",
+            "en": "What can a small shop learn from other shops?"
+          }
+        },
+        {
+          "id": "M07-graphs",
+          "title": {
+            "zh": "看不见的状态，也可以逐步传递证据",
+            "en": "Evidence can travel through states we cannot see"
+          }
+        },
+        {
+          "id": "M07-em",
+          "title": {
+            "zh": "EM在猜归属和改参数之间迭代",
+            "en": "EM alternates soft assignments and parameter updates"
+          }
+        },
+        {
+          "id": "M07-mcmc",
+          "title": {
+            "zh": "抽了很多次，也可能只在原地挪动",
+            "en": "Many accepted moves can still explore very little"
+          }
+        },
+        {
+          "id": "M07-variational",
+          "title": {
+            "zh": "用一个容易计算的分布靠近后验",
+            "en": "Approximate a posterior with an easier distribution"
+          }
+        },
+        {
+          "id": "M07-gp",
+          "title": {
+            "zh": "高斯过程把不确定性画在整条函数上",
+            "en": "A Gaussian process places uncertainty over a function"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M06",
+        "next": "M08"
+      },
+      "prerequisites": [
+        "M02",
+        "M04",
+        "M06"
+      ]
+    },
+    {
+      "id": "M08",
+      "title": {
+        "zh": "如果改变选择，结果会怎样：因果推断与实验设计",
+        "en": "What changes when we intervene? Causal inference and experimental design"
+      },
+      "standfirst": {
+        "zh": "从雨天带伞的反直觉比较，理解随机实验、观察调整、自然实验与样本量。",
+        "en": "From the umbrella paradox to randomization, observational adjustment, natural experiments and power."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "经典机器学习与统计推断",
+        "en": "Classical machine learning"
+      },
+      "search_title": {
+        "zh": "因果推断与实验设计",
+        "en": "Causal inference and experiments"
+      },
+      "keywords": [
+        "potential outcomes",
+        "causal graph",
+        "ATE",
+        "propensity",
+        "AIPW",
+        "DML",
+        "IV",
+        "DiD",
+        "RD",
+        "power"
+      ],
+      "sections": [
+        {
+          "id": "M08-question",
+          "title": {
+            "zh": "同一个人，如果没有领券，会怎样",
+            "en": "What would the same customer have done without a coupon?"
+          }
+        },
+        {
+          "id": "M08-graph",
+          "title": {
+            "zh": "先把人群为什么不同画出来",
+            "en": "Draw why the comparison groups differ"
+          }
+        },
+        {
+          "id": "M08-lab",
+          "title": {
+            "zh": "观察带伞者，还是为同一群人设置带伞",
+            "en": "Observe umbrella users, or intervene on the same population"
+          }
+        },
+        {
+          "id": "M08-random",
+          "title": {
+            "zh": "随机分配怎样建立可比较的对照",
+            "en": "How random assignment creates a comparison"
+          }
+        },
+        {
+          "id": "M08-adjust",
+          "title": {
+            "zh": "匹配与加权，怎样重组观察数据",
+            "en": "Matching and weighting reshape observational comparisons"
+          }
+        },
+        {
+          "id": "M08-dml",
+          "title": {
+            "zh": "预测模型怎样帮助估计因果效应",
+            "en": "Use prediction models to estimate treatment effects"
+          }
+        },
+        {
+          "id": "M08-instrument",
+          "title": {
+            "zh": "工具变量借助另一种分配机会",
+            "en": "An instrument offers another source of assignment variation"
+          }
+        },
+        {
+          "id": "M08-quasi",
+          "title": {
+            "zh": "利用时间变化或阈值附近的对照",
+            "en": "Find comparisons in time changes and thresholds"
+          }
+        },
+        {
+          "id": "M08-sensitivity",
+          "title": {
+            "zh": "把假设变化转成可检查的情景",
+            "en": "Turn assumption changes into inspectable scenarios"
+          }
+        },
+        {
+          "id": "M08-power",
+          "title": {
+            "zh": "开始实验前，先决定要看见多大的变化",
+            "en": "Decide how large a change the experiment should detect"
+          }
+        },
+        {
+          "id": "M08-workflow",
+          "title": {
+            "zh": "让每个估计值都对应一个可复述的问题",
+            "en": "Give every estimate a question that can be repeated"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M07",
+        "next": "M09"
+      },
+      "prerequisites": [
+        "M02",
+        "M03",
+        "M04"
+      ]
+    },
+    {
+      "id": "M09",
+      "title": {
+        "zh": "MLP与反向传播：看清网络怎样学习",
+        "en": "MLPs and backpropagation: how a network learns"
+      },
+      "standfirst": {
+        "zh": "从一条可以手算的计算链，走到真正训练、评价和保存的神经网络。",
+        "en": "From a hand-calculable chain to a neural network you can train, evaluate, and save."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "神经网络与表示学习",
+        "en": "Neural networks and representations"
+      },
+      "search_title": {
+        "zh": "MLP、反向传播、自动微分与PyTorch",
+        "en": "Neural networks and automatic differentiation"
+      },
+      "keywords": [
+        "MLP",
+        "神经元",
+        "backpropagation",
+        "autograd",
+        "PyTorch",
+        "张量",
+        "DataLoader",
+        "梯度检查",
+        "模型保存"
+      ],
+      "sections": [
+        {
+          "id": "M09-purpose",
+          "title": {
+            "zh": "一条直线分不开的时候",
+            "en": "When a straight line cannot separate the data"
+          }
+        },
+        {
+          "id": "M09-neuron",
+          "title": {
+            "zh": "神经元怎样组成可学习的变换",
+            "en": "Building a transformation from artificial neurons"
+          }
+        },
+        {
+          "id": "M09-forward",
+          "title": {
+            "zh": "沿着一条短计算链走一遍",
+            "en": "Follow one short computation from beginning to end"
+          }
+        },
+        {
+          "id": "M09-backward",
+          "title": {
+            "zh": "反向传播是在传递变化率",
+            "en": "Backpropagation carries rates of change"
+          }
+        },
+        {
+          "id": "M09-tensors",
+          "title": {
+            "zh": "把样本、张量和损失对齐",
+            "en": "Align samples, tensors, predictions, and losses"
+          }
+        },
+        {
+          "id": "M09-experiment",
+          "title": {
+            "zh": "实际训练：看边界，也看未见样本",
+            "en": "Train a real model and inspect unseen observations"
+          }
+        },
+        {
+          "id": "M09-check",
+          "title": {
+            "zh": "怎样知道梯度和训练确实算对了",
+            "en": "Check the derivative as well as the learning curve"
+          }
+        },
+        {
+          "id": "M09-lab",
+          "title": {
+            "zh": "亲手转动一个权重",
+            "en": "Turn one weight yourself"
+          }
+        },
+        {
+          "id": "M09-reuse",
+          "title": {
+            "zh": "让一次实验成为可以复用的模型",
+            "en": "Turn one experiment into a reusable predictor"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M08",
+        "next": "M10"
+      },
+      "prerequisites": [
+        "M02",
+        "M03",
+        "M04"
+      ]
+    },
+    {
+      "id": "M10",
+      "title": {
+        "zh": "让训练走稳：优化器、尺度与泛化",
+        "en": "Make training work: optimizers, scale, and generalization"
+      },
+      "standfirst": {
+        "zh": "从一次能手算的更新，到真实网络的损失、梯度和学习率。",
+        "en": "From a hand-calculated update to measured network losses, gradients, and learning rates."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "神经网络与表示学习",
+        "en": "Neural networks and representations"
+      },
+      "search_title": {
+        "zh": "SGD、Adam、正则化与训练优化",
+        "en": "Optimization and training dynamics"
+      },
+      "keywords": [
+        "SGD",
+        "momentum",
+        "Adam",
+        "AdamW",
+        "initialization",
+        "BatchNorm",
+        "LayerNorm",
+        "Dropout",
+        "hyperparameter search",
+        "AutoML"
+      ],
+      "sections": [
+        {
+          "id": "M10-purpose",
+          "title": {
+            "zh": "模型已经搭好，为什么还学不动",
+            "en": "The model is built. Why is learning still difficult?"
+          }
+        },
+        {
+          "id": "M10-sgd",
+          "title": {
+            "zh": "从坡度到一步更新",
+            "en": "Turn a slope into one update"
+          }
+        },
+        {
+          "id": "M10-momentum",
+          "title": {
+            "zh": "记住过去的方向，再调整各坐标的步幅",
+            "en": "Remember recent directions and adapt coordinate scales"
+          }
+        },
+        {
+          "id": "M10-schedule",
+          "title": {
+            "zh": "学习率不是从头到尾都要一样",
+            "en": "The learning rate can change during training"
+          }
+        },
+        {
+          "id": "M10-scale",
+          "title": {
+            "zh": "让信号穿过深层网络",
+            "en": "Keep signals usable through deeper layers"
+          }
+        },
+        {
+          "id": "M10-regularize",
+          "title": {
+            "zh": "训练误差下降之后，还要看新数据",
+            "en": "Lower training error still leaves a question about new data"
+          }
+        },
+        {
+          "id": "M10-experiment",
+          "title": {
+            "zh": "同一网络的四条训练记录",
+            "en": "Four training records from the same network"
+          }
+        },
+        {
+          "id": "M10-lab",
+          "title": {
+            "zh": "在同一条谷地里选择更新规则",
+            "en": "Choose an update rule in the same valley"
+          }
+        },
+        {
+          "id": "M10-diagnose",
+          "title": {
+            "zh": "把调参变成有次序的实验",
+            "en": "Make tuning an ordered investigation"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M09",
+        "next": "M12"
+      },
+      "prerequisites": [
+        "M09"
+      ]
+    },
+    {
+      "id": "M12",
+      "title": {
+        "zh": "让图像成为可计算的结构：卷积、残差与迁移",
+        "en": "Images as computable structure: convolution, residuals, and transfer"
+      },
+      "standfirst": {
+        "zh": "从九个乘积读懂一个像素响应，再用真实手写图像观察网络怎样识别、犯错和适应变化。",
+        "en": "Start with nine products, then use real handwriting to inspect recognition, errors, and adaptation."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "神经网络与表示学习",
+        "en": "Neural networks and representations"
+      },
+      "search_title": {
+        "zh": "CNN、ResNet与视觉Transformer（ViT）",
+        "en": "Images, convolutions and visual recognition"
+      },
+      "keywords": [
+        "CNN",
+        "convolution",
+        "ResNet",
+        "transfer learning",
+        "feature maps",
+        "image augmentation",
+        "Vision Transformer"
+      ],
+      "sections": [
+        {
+          "id": "M12-purpose",
+          "title": {
+            "zh": "同一个数字，换个位置还能认出来吗",
+            "en": "Can a digit move without changing its identity?"
+          }
+        },
+        {
+          "id": "M12-convolution",
+          "title": {
+            "zh": "一张小模板怎样读完整幅图",
+            "en": "A small template reads the whole image"
+          }
+        },
+        {
+          "id": "M12-geometry",
+          "title": {
+            "zh": "边界、步幅与逐渐扩大的视野",
+            "en": "Boundaries, strides, and a growing field of view"
+          }
+        },
+        {
+          "id": "M12-lab",
+          "title": {
+            "zh": "逐格算一幅特征图",
+            "en": "Calculate a feature map, one patch at a time"
+          }
+        },
+        {
+          "id": "M12-architecture",
+          "title": {
+            "zh": "从局部笔画走向深层网络",
+            "en": "From local strokes to deeper networks"
+          }
+        },
+        {
+          "id": "M12-experiment",
+          "title": {
+            "zh": "用真实手写图像训练并核对结果",
+            "en": "Train on real handwriting and inspect the result"
+          }
+        },
+        {
+          "id": "M12-features",
+          "title": {
+            "zh": "特征图亮起来，究竟说明什么",
+            "en": "What does a bright feature-map region mean?"
+          }
+        },
+        {
+          "id": "M12-transfer",
+          "title": {
+            "zh": "移动图像与迁移特征",
+            "en": "Move images, then transfer features"
+          }
+        },
+        {
+          "id": "M12-next",
+          "title": {
+            "zh": "从卷积窗口走向图像词元",
+            "en": "From convolution windows to image tokens"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M10",
+        "next": "M15"
+      },
+      "prerequisites": [
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M15",
+      "title": {
+        "zh": "把记忆留到最后：RNN、LSTM与GRU",
+        "en": "Keeping a memory alive: RNN, LSTM, and GRU"
+      },
+      "standfirst": {
+        "zh": "沿着一条序列追踪状态与梯度，再亲手打开循环网络的记忆门。",
+        "en": "Follow states and gradients through a sequence, then open the gates of recurrent memory."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "神经网络与表示学习",
+        "en": "Neural networks and representations"
+      },
+      "search_title": {
+        "zh": "RNN、LSTM、GRU与序列到序列模型",
+        "en": "Recurrent networks: RNN, LSTM, GRU and seq2seq"
+      },
+      "keywords": [
+        "RNN",
+        "LSTM",
+        "GRU",
+        "BPTT",
+        "teacher forcing",
+        "sequence-to-sequence",
+        "masking"
+      ],
+      "sections": [
+        {
+          "id": "M15-purpose",
+          "title": {
+            "zh": "读到最后，还记得开头吗",
+            "en": "After reaching the end, do you still remember the beginning?"
+          }
+        },
+        {
+          "id": "M15-unroll",
+          "title": {
+            "zh": "同一套参数，沿时间使用多次",
+            "en": "One update rule, used repeatedly through time"
+          }
+        },
+        {
+          "id": "M15-gradient",
+          "title": {
+            "zh": "长序列为什么难训练",
+            "en": "Why learning across a long interval is difficult"
+          }
+        },
+        {
+          "id": "M15-lstm",
+          "title": {
+            "zh": "LSTM：保存、写入和读出分开控制",
+            "en": "LSTM separates retention, writing, and reading"
+          }
+        },
+        {
+          "id": "M15-gru",
+          "title": {
+            "zh": "GRU与不同长度的序列",
+            "en": "GRU and records of unequal length"
+          }
+        },
+        {
+          "id": "M15-experiment",
+          "title": {
+            "zh": "用实际实验测量记忆距离",
+            "en": "Measure memory distance with a controlled experiment"
+          }
+        },
+        {
+          "id": "M15-seq2seq",
+          "title": {
+            "zh": "从一个答案走向一段输出",
+            "en": "From one answer to a sequence of outputs"
+          }
+        },
+        {
+          "id": "M15-lab",
+          "title": {
+            "zh": "把三个门交给你控制",
+            "en": "Take control of three gates"
+          }
+        },
+        {
+          "id": "M15-workflow",
+          "title": {
+            "zh": "带着时间结构检查一个新任务",
+            "en": "Inspect a new task along its time axis"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M12",
+        "next": "M32"
+      },
+      "prerequisites": [
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M32",
+      "title": {
+        "zh": "按内容读取，按输入记忆：Transformer与Mamba",
+        "en": "Read by content, remember selectively: Transformer and Mamba"
+      },
+      "standfirst": {
+        "zh": "从查询、键和值的手算，走到真实注意力、选择性状态与长序列计算。",
+        "en": "From a hand-calculated query to trained attention, selective states, and long-context computation."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "神经网络与表示学习",
+        "en": "Neural networks and representations"
+      },
+      "search_title": {
+        "zh": "注意力、Transformer与状态空间模型SSM/Mamba",
+        "en": "Attention, Transformers and state-space sequence models"
+      },
+      "keywords": [
+        "attention",
+        "QKV",
+        "Transformer",
+        "causal mask",
+        "SSM",
+        "Mamba",
+        "selective scan",
+        "KV cache"
+      ],
+      "sections": [
+        {
+          "id": "M32-purpose",
+          "title": {
+            "zh": "需要答案时，怎样找到相关的那条信息",
+            "en": "How do you find the record relevant to a question?"
+          }
+        },
+        {
+          "id": "M32-qkv",
+          "title": {
+            "zh": "查询、键和值分别做什么",
+            "en": "Queries, keys, and values have different jobs"
+          }
+        },
+        {
+          "id": "M32-heads",
+          "title": {
+            "zh": "多个读取视角，还要知道哪些位置可以看",
+            "en": "Several reading views, with explicit information boundaries"
+          }
+        },
+        {
+          "id": "M32-transformer",
+          "title": {
+            "zh": "把读取、局部变换和直接路径组装起来",
+            "en": "Combine reading, local processing, and direct paths"
+          }
+        },
+        {
+          "id": "M32-ssm",
+          "title": {
+            "zh": "另一条路线：维护一份会随输入变化的状态",
+            "en": "Another route: maintain a state that evolves with input"
+          }
+        },
+        {
+          "id": "M32-mamba",
+          "title": {
+            "zh": "选择性状态：当前内容决定怎样更新",
+            "en": "Selective states let content shape the update"
+          }
+        },
+        {
+          "id": "M32-experiments",
+          "title": {
+            "zh": "两个实际实验：按内容读取与按标记保存",
+            "en": "Train content-based retrieval and selective memory"
+          }
+        },
+        {
+          "id": "M32-lab",
+          "title": {
+            "zh": "转动查询，观察信息从哪里流入",
+            "en": "Move the query and watch where information comes from"
+          }
+        },
+        {
+          "id": "M32-cost",
+          "title": {
+            "zh": "长序列的代价，来自保存和计算什么",
+            "en": "Long-context cost follows what must be stored and compared"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M15",
+        "next": "M11"
+      },
+      "prerequisites": [
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M11",
+      "title": {
+        "zh": "标签不够时怎样学习：表示、提问与记忆",
+        "en": "Learning with fewer labels: representations, questions, and memory"
+      },
+      "standfirst": {
+        "zh": "从同一张照片的两种视图出发，学会安排无标签训练、人工标注、新任务适应与旧知识回放。",
+        "en": "Start with two views of one image, then connect unlabeled training, annotation, adaptation, and replay."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "神经网络与表示学习",
+        "en": "Neural networks and representations"
+      },
+      "search_title": {
+        "zh": "自监督、迁移、半监督、主动与持续学习",
+        "en": "Representation and data-efficient learning"
+      },
+      "keywords": [
+        "SimCLR",
+        "BYOL",
+        "MAE",
+        "FixMatch",
+        "active learning",
+        "MAML",
+        "domain adaptation",
+        "continual learning"
+      ],
+      "sections": [
+        {
+          "id": "M11-purpose",
+          "title": {
+            "zh": "照片很多，答案很少：学习从哪里开始",
+            "en": "Many photographs, few answers: where learning begins"
+          }
+        },
+        {
+          "id": "M11-embedding",
+          "title": {
+            "zh": "表示空间：把相似性变成能计算的距离",
+            "en": "Representation space: making similarity computable"
+          }
+        },
+        {
+          "id": "M11-contrastive",
+          "title": {
+            "zh": "对比学习：同一张图为什么要看两遍",
+            "en": "Contrastive learning: why inspect the same image twice?"
+          }
+        },
+        {
+          "id": "M11-other-supervision",
+          "title": {
+            "zh": "补缺口、跟老师学、使用不完整的答案",
+            "en": "Fill a gap, follow a teacher, or use an incomplete answer"
+          }
+        },
+        {
+          "id": "M11-active",
+          "title": {
+            "zh": "把下一次提问留给哪张图",
+            "en": "Which image deserves the next question?"
+          }
+        },
+        {
+          "id": "M11-fewshot",
+          "title": {
+            "zh": "少量示例、快速适应与换一个环境",
+            "en": "A few examples, rapid adaptation, and a different environment"
+          }
+        },
+        {
+          "id": "M11-continual",
+          "title": {
+            "zh": "学会新东西，为什么会忘记旧东西",
+            "en": "Why learning something new can erase something old"
+          }
+        },
+        {
+          "id": "M11-code",
+          "title": {
+            "zh": "把一份数据拆成几种学习问题",
+            "en": "Turn one dataset into several learning questions"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M32",
+        "next": "M33"
+      },
+      "prerequisites": [
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M33",
+      "title": {
+        "zh": "从压缩一张图到生成新图：AE与VAE",
+        "en": "From compressing an image to generating one: AE and VAE"
+      },
+      "standfirst": {
+        "zh": "用同一批手写图，看懂瓶颈、去噪、重参数化与ELBO，再亲手走进训练出的潜空间。",
+        "en": "Inspect bottlenecks, denoising, reparameterization, and the ELBO, then navigate a trained latent space."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "分布建模方法专题",
+        "en": "Generative modeling"
+      },
+      "search_title": {
+        "zh": "自编码器AE与变分自编码器VAE",
+        "en": "Autoencoders and variational autoencoders"
+      },
+      "keywords": [
+        "autoencoder",
+        "denoising",
+        "VAE",
+        "ELBO",
+        "KL",
+        "reparameterization",
+        "beta-VAE",
+        "conditional VAE"
+      ],
+      "sections": [
+        {
+          "id": "M33-purpose",
+          "title": {
+            "zh": "把一幅画装进小纸条，再从纸条把它画回来",
+            "en": "Put a picture on a small note, then draw it again"
+          }
+        },
+        {
+          "id": "M33-ae",
+          "title": {
+            "zh": "瓶颈为什么能学到结构",
+            "en": "Why a bottleneck can capture structure"
+          }
+        },
+        {
+          "id": "M33-denoise",
+          "title": {
+            "zh": "去噪时，为什么输入和答案不一样",
+            "en": "Why a denoiser receives one image and targets another"
+          }
+        },
+        {
+          "id": "M33-distribution",
+          "title": {
+            "zh": "VAE的短纸条是一团可能性",
+            "en": "A VAE encodes a cloud of possibilities"
+          }
+        },
+        {
+          "id": "M33-gradient",
+          "title": {
+            "zh": "随机抽样怎样接上梯度",
+            "en": "How a random sample carries a gradient"
+          }
+        },
+        {
+          "id": "M33-elbo",
+          "title": {
+            "zh": "重建与KL：为什么目标里需要两笔账",
+            "en": "Reconstruction and KL: why keep two accounts?"
+          }
+        },
+        {
+          "id": "M33-control",
+          "title": {
+            "zh": "调信息容量，也给生成过程一个条件",
+            "en": "Control information capacity and add a condition"
+          }
+        },
+        {
+          "id": "M33-space",
+          "title": {
+            "zh": "在潜空间散步，观察生成模型真正学了什么",
+            "en": "Walk through latent space and inspect what was learned"
+          }
+        },
+        {
+          "id": "M33-code",
+          "title": {
+            "zh": "完整实验：固定划分，分别检查重建与生成",
+            "en": "The complete experiment: separate reconstruction from generation"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M11",
+        "next": "M18"
+      },
+      "prerequisites": [
+        "M09",
+        "M10",
+        "M02"
+      ]
+    },
+    {
+      "id": "M18",
+      "title": {
+        "zh": "让生成器学会分布：GAN、DCGAN与WGAN",
+        "en": "Teaching a generator a distribution: GAN, DCGAN, and WGAN"
+      },
+      "standfirst": {
+        "zh": "从八个小簇追踪对抗训练，再看卷积图像、条件控制与生成评价为什么需要不同证据。",
+        "en": "Follow adversarial training across eight clusters, then examine convolutional images, conditioning, and complementary evaluation measures."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "分布建模方法专题",
+        "en": "Generative modeling"
+      },
+      "search_title": {
+        "zh": "生成对抗网络GAN：DCGAN、WGAN与条件生成",
+        "en": "Generative adversarial networks"
+      },
+      "keywords": [
+        "GAN",
+        "DCGAN",
+        "WGAN-GP",
+        "conditional GAN",
+        "pix2pix",
+        "mode collapse",
+        "FID"
+      ],
+      "sections": [
+        {
+          "id": "M18-purpose",
+          "title": {
+            "zh": "没有逐张答案，怎样教模型画出合理的图",
+            "en": "How can a model learn to draw without one exact answer?"
+          }
+        },
+        {
+          "id": "M18-game",
+          "title": {
+            "zh": "生成器给样本，判别器给反馈",
+            "en": "The generator supplies samples; the discriminator supplies feedback"
+          }
+        },
+        {
+          "id": "M18-updates",
+          "title": {
+            "zh": "交替更新：同一张计算图，两种梯度路径",
+            "en": "Alternating updates create two gradient paths"
+          }
+        },
+        {
+          "id": "M18-wasserstein",
+          "title": {
+            "zh": "从真假概率转向搬运一堆沙子的距离",
+            "en": "Replace realness probability with the cost of moving sand"
+          }
+        },
+        {
+          "id": "M18-dcgan",
+          "title": {
+            "zh": "DCGAN怎样从小网格长出一张图",
+            "en": "How DCGAN expands a small grid into an image"
+          }
+        },
+        {
+          "id": "M18-conditional",
+          "title": {
+            "zh": "指定想要什么：条件GAN与图像翻译",
+            "en": "Specify what is wanted: conditional GANs and image translation"
+          }
+        },
+        {
+          "id": "M18-evaluate",
+          "title": {
+            "zh": "画得像、种类全、变化足，要分开检查",
+            "en": "Inspect plausibility, coverage, and variation separately"
+          }
+        },
+        {
+          "id": "M18-code",
+          "title": {
+            "zh": "完整实验：同时保留样本、梯度和预算",
+            "en": "The complete experiment retains samples, gradients, and budgets"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M33",
+        "next": "M36"
+      },
+      "prerequisites": [
+        "M09",
+        "M10",
+        "M12"
+      ]
+    },
+    {
+      "id": "M36",
+      "title": {
+        "zh": "一步一步生成：自回归模型与解码的选择",
+        "en": "Generating one step at a time: autoregression and decoding"
+      },
+      "standfirst": {
+        "zh": "从下一字符的概率走到完整文本、像素与音频；训练一个LSTM，再比较采样、截断和束搜索。",
+        "en": "Connect next-character probabilities to text, pixels, and audio; train an LSTM and compare sampling, truncation, and beam search."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "分布建模方法专题",
+        "en": "Generative modeling"
+      },
+      "search_title": {
+        "zh": "自回归生成：语言、图像与音频",
+        "en": "Autoregressive generative modeling"
+      },
+      "keywords": [
+        "autoregressive",
+        "likelihood",
+        "LSTM",
+        "PixelCNN",
+        "WaveNet",
+        "temperature",
+        "top-p",
+        "beam search"
+      ],
+      "sections": [
+        {
+          "id": "M36-next",
+          "title": {
+            "zh": "1　从输入法的下一个字，到一整个对象的概率",
+            "en": "1　From the next character to the probability of an entire object"
+          }
+        },
+        {
+          "id": "M36-likelihood",
+          "title": {
+            "zh": "2　为什么预测下一个字符就能学习整句话",
+            "en": "2　Why predicting the next character can learn whole sentences"
+          }
+        },
+        {
+          "id": "M36-architectures",
+          "title": {
+            "zh": "3　同一条概率链，可以由不同网络实现",
+            "en": "3　Different networks can implement the same probability chain"
+          }
+        },
+        {
+          "id": "M36-pixels",
+          "title": {
+            "zh": "4　像素和声音，也能按顺序接龙",
+            "en": "4　Pixels and sound can also take turns"
+          }
+        },
+        {
+          "id": "M36-decoding",
+          "title": {
+            "zh": "5　温度和候选截断，怎样改变生成的选择",
+            "en": "5　How temperature and truncation change the available choices"
+          }
+        },
+        {
+          "id": "M36-beam",
+          "title": {
+            "zh": "6　搜索一整句，与随机写一句有什么不同",
+            "en": "6　Searching for a sentence and sampling one are different operations"
+          }
+        },
+        {
+          "id": "M36-experiment",
+          "title": {
+            "zh": "7　真实训练：看懂低困惑度背后的选择和错误",
+            "en": "7　Actual training: choices and errors behind low perplexity"
+          }
+        },
+        {
+          "id": "M36-code",
+          "title": {
+            "zh": "8　从条件续写到可复核的完整实验",
+            "en": "8　Conditional continuation and a reproducible complete experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M18",
+        "next": "M35"
+      },
+      "prerequisites": [
+        "M09",
+        "M15",
+        "M32"
+      ]
+    },
+    {
+      "id": "M35",
+      "title": {
+        "zh": "点云怎样变形，密度怎样改变：Normalizing Flow",
+        "en": "How clouds deform and densities change: normalizing flows"
+      },
+      "standfirst": {
+        "zh": "用概率质量守恒理解体积变化与Jacobian，从仿射耦合走到样条与连续流，并训练一个能采样、打分和逆向回算的模型。",
+        "en": "Use probability-mass conservation to understand volume changes and Jacobians, then connect affine coupling, splines, and continuous flows through an actual trained density model."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "分布建模方法专题",
+        "en": "Generative modeling"
+      },
+      "search_title": {
+        "zh": "Normalizing Flow：可逆变换与显式密度",
+        "en": "Normalizing flows and exact density transformations"
+      },
+      "keywords": [
+        "normalizing flow",
+        "Real NVP",
+        "Jacobian",
+        "coupling",
+        "MAF",
+        "IAF",
+        "spline",
+        "CNF"
+      ],
+      "sections": [
+        {
+          "id": "M35-stretch",
+          "title": {
+            "zh": "1　把一团点拉成弯月，概率去了哪里",
+            "en": "1　Where does probability go when a cloud is bent?"
+          }
+        },
+        {
+          "id": "M35-jacobian",
+          "title": {
+            "zh": "2　从长度到面积：为什么要算行列式",
+            "en": "2　From length to area: why a determinant appears"
+          }
+        },
+        {
+          "id": "M35-coupling",
+          "title": {
+            "zh": "3　留下半边作为参照，另一半就容易找回",
+            "en": "3　Keep one half as a reference and recover the other"
+          }
+        },
+        {
+          "id": "M35-train",
+          "title": {
+            "zh": "4　真正训练一个弯曲分布的可逆网络",
+            "en": "4　Train an actual invertible model of a curved density"
+          }
+        },
+        {
+          "id": "M35-autoregressive",
+          "title": {
+            "zh": "5　自回归Flow：哪一个方向能够并行",
+            "en": "5　Autoregressive flows: which direction is parallel?"
+          }
+        },
+        {
+          "id": "M35-spline",
+          "title": {
+            "zh": "6　把直线缩放换成柔软的单调曲线",
+            "en": "6　Replace straight scaling with a flexible monotone curve"
+          }
+        },
+        {
+          "id": "M35-continuous",
+          "title": {
+            "zh": "7　很多小步接起来，就走到连续Flow",
+            "en": "7　From many small transformations to a continuous flow"
+          }
+        },
+        {
+          "id": "M35-use",
+          "title": {
+            "zh": "8　用密度发现变化，也要认识概率质量的位置",
+            "en": "8　Use density to detect change and understand where mass lies"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M36",
+        "next": "M34"
+      },
+      "prerequisites": [
+        "M02",
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M34",
+      "title": {
+        "zh": "从雪花到图像：扩散、Score与条件生成",
+        "en": "From static to images: diffusion, scores, and conditioning"
+      },
+      "standfirst": {
+        "zh": "跟随真实去噪轨迹，比较DDPM、DDIM和引导强度，再走进潜空间。",
+        "en": "Follow actual denoising trajectories, compare DDPM, DDIM, and guidance, then enter latent space."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "分布建模方法专题",
+        "en": "Generative modeling"
+      },
+      "search_title": {
+        "zh": "扩散模型Diffusion、DDPM、DDIM与Score",
+        "en": "Diffusion and score-based generative models"
+      },
+      "keywords": [
+        "diffusion",
+        "DDPM",
+        "DDIM",
+        "score",
+        "SDE",
+        "ODE",
+        "classifier-free guidance",
+        "latent diffusion"
+      ],
+      "sections": [
+        {
+          "id": "M34-purpose",
+          "title": {
+            "zh": "从电视雪花点里画出一枚圆环",
+            "en": "Drawing a ring from television static"
+          }
+        },
+        {
+          "id": "M34-forward",
+          "title": {
+            "zh": "怎样加噪，才知道每一时刻发生了什么",
+            "en": "Adding noise while keeping track of each distribution"
+          }
+        },
+        {
+          "id": "M34-denoiser",
+          "title": {
+            "zh": "让网络学习一个能检查的目标：加入了多少噪声",
+            "en": "Learning a target we can check: the noise that was added"
+          }
+        },
+        {
+          "id": "M34-score",
+          "title": {
+            "zh": "二维箭头告诉我们，去噪为什么指向数据",
+            "en": "Why denoising arrows point toward the data"
+          }
+        },
+        {
+          "id": "M34-sampler",
+          "title": {
+            "zh": "同一个模型，为什么可以走64步，也可以走16步",
+            "en": "Using one model with 64 steps or 16 steps"
+          }
+        },
+        {
+          "id": "M34-guidance",
+          "title": {
+            "zh": "把“请画圆环”变成可调节的方向",
+            "en": "Turning “draw a ring” into an adjustable direction"
+          }
+        },
+        {
+          "id": "M34-latent",
+          "title": {
+            "zh": "先压缩再生成：潜空间里反复去噪",
+            "en": "Compress first, then denoise repeatedly in latent space"
+          }
+        },
+        {
+          "id": "M34-experiment",
+          "title": {
+            "zh": "把图、数字和完整程序放在同一个实验里",
+            "en": "Keeping pictures, measurements, and the full program together"
+          }
+        },
+        {
+          "id": "M34-applications",
+          "title": {
+            "zh": "从图像走向声音与动作，评价也要随对象改变",
+            "en": "Sounds and actions require their own measures of success"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M35",
+        "next": "M41"
+      },
+      "prerequisites": [
+        "M02",
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M41",
+      "title": {
+        "zh": "让噪声沿速度场走向数据：Flow Matching与Rectified Flow",
+        "en": "Moving noise toward data: flow matching and rectified flow"
+      },
+      "standfirst": {
+        "zh": "区分训练线段与实际轨迹，用配对、Reflow和求解器解释生成速度与精度。",
+        "en": "Distinguish training segments from actual trajectories, then compare coupling, reflow, and numerical solvers."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "分布建模方法专题",
+        "en": "Generative modeling"
+      },
+      "search_title": {
+        "zh": "Flow Matching、Rectified Flow与生成ODE",
+        "en": "Flow matching and generative ODEs"
+      },
+      "keywords": [
+        "Flow Matching",
+        "Rectified Flow",
+        "Reflow",
+        "optimal transport",
+        "CNF",
+        "Euler",
+        "Heun",
+        "RK4"
+      ],
+      "sections": [
+        {
+          "id": "M41-purpose",
+          "title": {
+            "zh": "给一群点安排方向，让它们组成图案",
+            "en": "Giving a cloud of points directions until it forms a pattern"
+          }
+        },
+        {
+          "id": "M41-path",
+          "title": {
+            "zh": "一条路径怎样产生位置、时间与速度标签",
+            "en": "How a path supplies positions, times, and velocity labels"
+          }
+        },
+        {
+          "id": "M41-average",
+          "title": {
+            "zh": "交叉路口只有一个速度，为什么还能搬运整群点",
+            "en": "One velocity at an intersection can still transport a population"
+          }
+        },
+        {
+          "id": "M41-coupling",
+          "title": {
+            "zh": "先把起点和终点配得合理一些",
+            "en": "Choosing more useful pairs before learning the field"
+          }
+        },
+        {
+          "id": "M41-reflow",
+          "title": {
+            "zh": "Rectified Flow：让已经学会的路线再直一些",
+            "en": "Rectified flow: learning to straighten routes that already work"
+          }
+        },
+        {
+          "id": "M41-solver",
+          "title": {
+            "zh": "用几次速度查询，换来多准确的一段运动",
+            "en": "Trading velocity queries for integration accuracy"
+          }
+        },
+        {
+          "id": "M41-relations",
+          "title": {
+            "zh": "与连续Flow、扩散放在同一张地图上",
+            "en": "Locating flow matching alongside continuous flows and diffusion"
+          }
+        },
+        {
+          "id": "M41-experiment",
+          "title": {
+            "zh": "完整实验：风车的形状、覆盖与真实训练",
+            "en": "The complete pinwheel experiment"
+          }
+        },
+        {
+          "id": "M41-conditions",
+          "title": {
+            "zh": "条件决定去哪一片区域，评价决定是否到得合适",
+            "en": "A condition chooses the region; evaluation checks the arrival"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M34",
+        "next": "M40"
+      },
+      "prerequisites": [
+        "M02",
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M40",
+      "title": {
+        "zh": "低谷里有多少概率：能量模型、Score Matching与采样",
+        "en": "How much probability lies in a valley? Energy models, score matching, and sampling"
+      },
+      "standfirst": {
+        "zh": "从能量差算到概率，再用真实训练与随机链区分模型形状、概率质量和采样覆盖。",
+        "en": "Turn energy differences into probabilities, then separate model shape, probability mass, and sampling coverage through real training and chains."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "分布建模方法专题",
+        "en": "Generative modeling"
+      },
+      "search_title": {
+        "zh": "能量模型EBM、Score Matching与采样",
+        "en": "Energy-based models and score matching"
+      },
+      "keywords": [
+        "EBM",
+        "partition function",
+        "Langevin",
+        "MALA",
+        "Contrastive Divergence",
+        "Score Matching",
+        "DSM",
+        "JEM"
+      ],
+      "sections": [
+        {
+          "id": "M40-purpose",
+          "title": {
+            "zh": "画一张地形图，让样本知道哪里值得停留",
+            "en": "Drawing a landscape that tells samples where to spend time"
+          }
+        },
+        {
+          "id": "M40-density",
+          "title": {
+            "zh": "能量变成概率，还差一个总账",
+            "en": "Turning energy into probability requires a global total"
+          }
+        },
+        {
+          "id": "M40-likelihood",
+          "title": {
+            "zh": "训练为什么既要看真实样本，也要看模型自己相信的样本",
+            "en": "Why training needs data and samples the model currently favors"
+          }
+        },
+        {
+          "id": "M40-sampling",
+          "title": {
+            "zh": "下坡加随机步：Langevin与接受修正",
+            "en": "Downhill motion plus noise: Langevin and acceptance correction"
+          }
+        },
+        {
+          "id": "M40-contrast",
+          "title": {
+            "zh": "短链、持续链，以及它们怎样改变训练",
+            "en": "Short chains and persistent chains change the learning problem"
+          }
+        },
+        {
+          "id": "M40-score",
+          "title": {
+            "zh": "不先求总账，也能学习局部方向吗",
+            "en": "Learning local directions without first evaluating the total"
+          }
+        },
+        {
+          "id": "M40-experiment",
+          "title": {
+            "zh": "完整实验：把能量地形与概率质量都画出来",
+            "en": "The complete experiment: landscapes and probability mass"
+          }
+        },
+        {
+          "id": "M40-mixing",
+          "title": {
+            "zh": "会在谷底活动，与会访问所有低谷，是两回事",
+            "en": "Moving inside a valley differs from visiting all valleys"
+          }
+        },
+        {
+          "id": "M40-connections",
+          "title": {
+            "zh": "从分类分数到扩散方向，哪些信息能够共用",
+            "en": "Connecting classification scores, energy, and diffusion"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M41",
+        "next": "M13"
+      },
+      "prerequisites": [
+        "M02",
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M13",
+      "title": {
+        "zh": "不只认出物体：定位、轮廓与运动",
+        "en": "Beyond recognition: location, shape, and motion"
+      },
+      "standfirst": {
+        "zh": "检测、分割、视频跟踪、姿态和 OCR，围绕输出结构读懂视觉系统。",
+        "en": "Understand detection, segmentation, tracking, pose, and OCR through the structure of their outputs."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "目标检测、分割、OCR、姿态与视频跟踪",
+        "en": "Detection, segmentation and video"
+      },
+      "keywords": [
+        "detection",
+        "IoU",
+        "NMS",
+        "U-Net",
+        "SAM",
+        "tracking",
+        "optical flow",
+        "pose",
+        "OCR",
+        "CTC"
+      ],
+      "sections": [
+        {
+          "id": "M13-purpose",
+          "title": {
+            "zh": "1. 认出一辆车以后，还要回答哪些问题",
+            "en": "1. After recognizing a car, what else must a system know?"
+          }
+        },
+        {
+          "id": "M13-boxes",
+          "title": {
+            "zh": "2. 框准不准，不能只看中心有没有落在物体上",
+            "en": "2. A box needs the right extent, not just the right center"
+          }
+        },
+        {
+          "id": "M13-detectors",
+          "title": {
+            "zh": "3. 先提出候选，直接预测，还是一次给出一个集合",
+            "en": "3. Propose regions, predict directly, or predict a set"
+          }
+        },
+        {
+          "id": "M13-segmentation",
+          "title": {
+            "zh": "4. 把一个类别扩展到每个像素",
+            "en": "4. Expanding a category prediction to every pixel"
+          }
+        },
+        {
+          "id": "M13-time",
+          "title": {
+            "zh": "5. 从一张图到一段视频：位移、身份和动作",
+            "en": "5. From an image to a video: displacement, identity, and action"
+          }
+        },
+        {
+          "id": "M13-pose-ocr",
+          "title": {
+            "zh": "6. 有结构的对象：关节连成姿态，字符组成文字",
+            "en": "6. Structured objects: joints form poses and characters form text"
+          }
+        },
+        {
+          "id": "M13-code",
+          "title": {
+            "zh": "7. 完整实验：让掩码、误差与轨迹一起出现",
+            "en": "7. A complete experiment: masks, errors, and trajectories together"
+          }
+        },
+        {
+          "id": "M13-design",
+          "title": {
+            "zh": "8. 从一幅漂亮结果到可用的视觉测量",
+            "en": "8. Turning a convincing picture into a useful visual measurement"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M40",
+        "next": "M14"
+      },
+      "prerequisites": [
+        "M12"
+      ]
+    },
+    {
+      "id": "M14",
+      "title": {
+        "zh": "从照片走向三维：相机、辐射场与点云",
+        "en": "From photographs to 3D: cameras, radiance fields, and point clouds"
+      },
+      "standfirst": {
+        "zh": "手算深度，沿射线看见颜色，再用PointNet式网络学习无序点集。",
+        "en": "Calculate depth, accumulate color along rays, and learn unordered point sets with a PointNet-style network."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "三维视觉、PointNet、NeRF与3D Gaussian Splatting",
+        "en": "Geometry and 3D vision"
+      },
+      "keywords": [
+        "camera",
+        "stereo",
+        "SfM",
+        "NeRF",
+        "3D Gaussian Splatting",
+        "PointNet",
+        "point cloud"
+      ],
+      "sections": [
+        {
+          "id": "M14-purpose",
+          "title": {
+            "zh": "1. 一张照片缺少的，是沿视线方向的距离",
+            "en": "1. A photograph loses distance along the viewing direction"
+          }
+        },
+        {
+          "id": "M14-camera",
+          "title": {
+            "zh": "2. 相机是一个坐标转换器",
+            "en": "2. A camera converts coordinate systems"
+          }
+        },
+        {
+          "id": "M14-multiview",
+          "title": {
+            "zh": "3. 两条视线交会，距离才有了约束",
+            "en": "3. Two viewing rays constrain distance"
+          }
+        },
+        {
+          "id": "M14-representations",
+          "title": {
+            "zh": "4. 点、面和场，各自保留什么信息",
+            "en": "4. What points, surfaces, and fields preserve"
+          }
+        },
+        {
+          "id": "M14-nerf",
+          "title": {
+            "zh": "5. NeRF：沿一条射线，把颜色逐层累积",
+            "en": "5. NeRF: accumulating color along a ray"
+          }
+        },
+        {
+          "id": "M14-gaussians",
+          "title": {
+            "zh": "6. 3D Gaussian Splatting：把场景写成可投影的椭球",
+            "en": "6. Gaussian splatting: projectable ellipsoids describe a scene"
+          }
+        },
+        {
+          "id": "M14-pointnet",
+          "title": {
+            "zh": "7. PointNet：一袋没有顺序的点怎样进入网络",
+            "en": "7. PointNet: learning from an unordered bag of coordinates"
+          }
+        },
+        {
+          "id": "M14-evaluation",
+          "title": {
+            "zh": "8. 让模型回答几何问题，也回答观测覆盖的问题",
+            "en": "8. Evaluate geometry together with observation coverage"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M13",
+        "next": "M16"
+      },
+      "prerequisites": [
+        "M02",
+        "M12"
+      ]
+    },
+    {
+      "id": "M16",
+      "title": {
+        "zh": "语言模型怎样学会续写与回答",
+        "en": "How Language Models Learn to Continue and Respond"
+      },
+      "standfirst": {
+        "zh": "从小语料的因果预测走到 LoRA、偏好优化、量化与可核查的能力评价。",
+        "en": "From causal prediction on a small corpus to LoRA, preferences, quantization, and inspectable evaluation."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "大语言模型LLM：预训练、LoRA与偏好优化",
+        "en": "LLM training and adaptation"
+      },
+      "keywords": [
+        "LLM",
+        "tokenization",
+        "pretraining",
+        "LoRA",
+        "QLoRA",
+        "DPO",
+        "RLHF",
+        "MoE"
+      ],
+      "sections": [
+        {
+          "id": "M16-purpose",
+          "title": {
+            "zh": "1. 从补全一句话，到完成一项语言任务",
+            "en": "1. From completing a sentence to performing a language task"
+          }
+        },
+        {
+          "id": "M16-data",
+          "title": {
+            "zh": "2. 语料与分词决定模型究竟读到了什么",
+            "en": "2. Corpus preparation and tokenization determine what is read"
+          }
+        },
+        {
+          "id": "M16-lm",
+          "title": {
+            "zh": "3. 下一词预测怎样变成一个可训练的模型",
+            "en": "3. Make next-token prediction trainable"
+          }
+        },
+        {
+          "id": "M16-scale",
+          "title": {
+            "zh": "4. 预算应分给参数、数据与实际计算",
+            "en": "4. Allocate a budget across parameters, data, and computation"
+          }
+        },
+        {
+          "id": "M16-adapt",
+          "title": {
+            "zh": "5. 指令微调与 LoRA：把更新限制在小的变化空间",
+            "en": "5. Instruction tuning and LoRA restrict the learned update"
+          }
+        },
+        {
+          "id": "M16-lab",
+          "title": {
+            "zh": "把低秩支路与合并权重算成同一个结果",
+            "en": "Compute the same output through an adapter or merged weights"
+          }
+        },
+        {
+          "id": "M16-efficient",
+          "title": {
+            "zh": "6. 量化与蒸馏减少的资源并不相同",
+            "en": "6. Quantization and distillation reduce different resources"
+          }
+        },
+        {
+          "id": "M16-preference",
+          "title": {
+            "zh": "7. 偏好优化怎样利用两个回答之间的比较",
+            "en": "7. Learn from comparisons between two responses"
+          }
+        },
+        {
+          "id": "M16-experiment",
+          "title": {
+            "zh": "8. 完整实验：先学句子，再只更新 712 个参数",
+            "en": "8. Learn sentences, then update only 712 parameters"
+          }
+        },
+        {
+          "id": "M16-use",
+          "title": {
+            "zh": "9. 推理计算、能力评价与可复用模型",
+            "en": "9. Allocate inference computation and preserve a reusable model"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M14",
+        "next": "M17"
+      },
+      "prerequisites": [
+        "M11",
+        "M32"
+      ]
+    },
+    {
+      "id": "M17",
+      "title": {
+        "zh": "让回答带着证据：检索、工具与智能体",
+        "en": "Answers with Evidence: Retrieval, Tools, and Agents"
+      },
+      "standfirst": {
+        "zh": "从一份参观指南构建可检查的检索、证据引用和多步工具流程。",
+        "en": "Build inspectable retrieval, evidence attribution, and multi-step tools from a visitor guide."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "RAG、工具调用与智能体系统",
+        "en": "Retrieval augmentation, tools and agents"
+      },
+      "keywords": [
+        "RAG",
+        "BM25",
+        "RRF",
+        "reranking",
+        "agents",
+        "tool calling"
+      ],
+      "sections": [
+        {
+          "id": "M17-purpose",
+          "title": {
+            "zh": "1. 回答一个出行问题，需要哪些证据",
+            "en": "1. A practical question needs several kinds of evidence"
+          }
+        },
+        {
+          "id": "M17-documents",
+          "title": {
+            "zh": "2. 文档先变成可以正确引用的片段",
+            "en": "2. Turn documents into passages that remain interpretable"
+          }
+        },
+        {
+          "id": "M17-retrieval",
+          "title": {
+            "zh": "3. 关键词与向量，怎样给同一批资料排序",
+            "en": "3. Lexical and vector methods rank the same collection"
+          }
+        },
+        {
+          "id": "M17-lab",
+          "title": {
+            "zh": "交互：两张排名表，能否找到完整答案",
+            "en": "Lab: can two rankings supply a complete answer?"
+          }
+        },
+        {
+          "id": "M17-reranking",
+          "title": {
+            "zh": "4. 先广泛找候选，再仔细比较问题与段落",
+            "en": "4. Retrieve broadly, then inspect query–passage relationships"
+          }
+        },
+        {
+          "id": "M17-rag",
+          "title": {
+            "zh": "5. 找到材料后，怎样让回答保留证据关系",
+            "en": "5. Preserve the relationship between an answer and its evidence"
+          }
+        },
+        {
+          "id": "M17-tools",
+          "title": {
+            "zh": "6. 工具调用把语言请求变成有边界的计算",
+            "en": "6. Tool calls give language requests explicit computational boundaries"
+          }
+        },
+        {
+          "id": "M17-agents",
+          "title": {
+            "zh": "7. 多步任务要依靠观察更新，而不是一直延长计划",
+            "en": "7. Multi-step tasks progress through observations and state"
+          }
+        },
+        {
+          "id": "M17-evaluation",
+          "title": {
+            "zh": "8. 完整实验与评价：从相关片段到最终答案",
+            "en": "8. Run the complete experiment and evaluate the whole task"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M16",
+        "next": "M19"
+      },
+      "prerequisites": [
+        "M32",
+        "M23"
+      ]
+    },
+    {
+      "id": "M19",
+      "title": {
+        "zh": "图像与文字怎样会合：多模态对齐与融合",
+        "en": "Where Images Meet Words: Multimodal Alignment and Fusion"
+      },
+      "standfirst": {
+        "zh": "从配对检索走向视觉问答，检查每种模态究竟提供了什么信息。",
+        "en": "From paired retrieval to visual question answering, inspect the information supplied by each modality."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "多模态学习：CLIP、VLM与跨模态对齐",
+        "en": "Multimodal learning"
+      },
+      "keywords": [
+        "CLIP",
+        "VLM",
+        "multimodal",
+        "contrastive",
+        "retrieval",
+        "cross-attention",
+        "多模态"
+      ],
+      "sections": [
+        {
+          "id": "M19-purpose",
+          "title": {
+            "zh": "1. 用一句话寻找图片，为什么需要两种表示？",
+            "en": "1. Search for an image with a sentence"
+          }
+        },
+        {
+          "id": "M19-pairs",
+          "title": {
+            "zh": "2. 配对数据告诉模型什么才是“同一件事”",
+            "en": "2. Pairs define what counts as the same thing"
+          }
+        },
+        {
+          "id": "M19-contrast",
+          "title": {
+            "zh": "3. 对比学习把一批配对变成许多个比较",
+            "en": "3. A batch of pairs becomes a set of comparisons"
+          }
+        },
+        {
+          "id": "M19-lab",
+          "title": {
+            "zh": "方向、温度与候选集合怎样改变分数",
+            "en": "Direction, temperature, and the candidate set change scores"
+          }
+        },
+        {
+          "id": "M19-retrieval",
+          "title": {
+            "zh": "4. 共享向量适合检索，但检索还要定义正确答案",
+            "en": "4. Shared vectors support retrieval, but relevance needs a definition"
+          }
+        },
+        {
+          "id": "M19-fusion",
+          "title": {
+            "zh": "5. 融合让模态在计算过程中互相提问",
+            "en": "5. Fusion lets modalities exchange information during computation"
+          }
+        },
+        {
+          "id": "M19-tasks",
+          "title": {
+            "zh": "6. 描述、问答与音视频，需要不同的证据",
+            "en": "6. Captions, questions, and audiovisual events need different evidence"
+          }
+        },
+        {
+          "id": "M19-experiment",
+          "title": {
+            "zh": "7. 完整实验：颜色与形状怎样在两个空间里会合",
+            "en": "7. Make color and shape meet in two learned spaces"
+          }
+        },
+        {
+          "id": "M19-evaluation",
+          "title": {
+            "zh": "8. 让评价检查模态的贡献与互相矛盾的证据",
+            "en": "8. Test the contribution of each modality and contradictory evidence"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M17",
+        "next": "M20"
+      },
+      "prerequisites": [
+        "M11",
+        "M12",
+        "M32"
+      ]
+    },
+    {
+      "id": "M20",
+      "title": {
+        "zh": "听见结构：语音、声谱与音频学习",
+        "en": "Hearing Structure: Speech, Spectra, and Audio Learning"
+      },
+      "standfirst": {
+        "zh": "从一个音调到一句话，连接采样、声音事件、识别、合成和声源分离。",
+        "en": "From a tone to an utterance: connect sampling, sound events, recognition, synthesis, and separation."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "语音与音频：ASR、TTS与声源分离",
+        "en": "Speech, audio and music"
+      },
+      "keywords": [
+        "audio",
+        "speech",
+        "ASR",
+        "TTS",
+        "CTC",
+        "Mel",
+        "vocoder",
+        "diarization"
+      ],
+      "sections": [
+        {
+          "id": "M20-listening",
+          "title": {
+            "zh": "1. 一段声音，可以回答几种不同的问题？",
+            "en": "1. One recording can answer several different questions"
+          }
+        },
+        {
+          "id": "M20-sampling",
+          "title": {
+            "zh": "2. 从空气振动到一列数字",
+            "en": "2. Turn continuous vibration into a sequence of numbers"
+          }
+        },
+        {
+          "id": "M20-spectrum",
+          "title": {
+            "zh": "3. 声谱图让频率随着时间展开",
+            "en": "3. A spectrogram unfolds frequency through time"
+          }
+        },
+        {
+          "id": "M20-events",
+          "title": {
+            "zh": "4. 从一段声音的类别，到事件发生的时间",
+            "en": "4. Classify a recording, then locate events inside it"
+          }
+        },
+        {
+          "id": "M20-asr",
+          "title": {
+            "zh": "5. 语音识别的难点，是声音与文字没有逐帧对齐",
+            "en": "5. Speech and text do not arrive with frame-by-frame alignment"
+          }
+        },
+        {
+          "id": "M20-lab",
+          "title": {
+            "zh": "八条声学路径，三个可能转写",
+            "en": "Eight acoustic paths, three possible transcripts"
+          }
+        },
+        {
+          "id": "M20-synthesis",
+          "title": {
+            "zh": "6. 从文字生成声音：发音、韵律与声码器",
+            "en": "6. Generate speech through pronunciation, prosody, and a vocoder"
+          }
+        },
+        {
+          "id": "M20-separation",
+          "title": {
+            "zh": "7. 混合声里找目标，也要知道丢掉了什么",
+            "en": "7. Extract a target from a mixture and inspect what was removed"
+          }
+        },
+        {
+          "id": "M20-experiment",
+          "title": {
+            "zh": "8. 完整实验，以及说话人表示的下一步",
+            "en": "8. Run the experiment, then connect it to speaker representations"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M19",
+        "next": "M21"
+      },
+      "prerequisites": [
+        "M02",
+        "M09"
+      ]
+    },
+    {
+      "id": "M21",
+      "title": {
+        "zh": "时间序列：站在过去，预测未来",
+        "en": "Time Series: Forecasting from the Past"
+      },
+      "standfirst": {
+        "zh": "从面包店备货到设备监测，把季节规律、深度预测与不确定性放在同一条时间轴上。",
+        "en": "From bakery production to equipment monitoring, connect seasonality, deep forecasting, and uncertainty on one timeline."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "时间序列：ARIMA、状态空间与深度预测",
+        "en": "Time-series and spatiotemporal forecasting"
+      },
+      "keywords": [
+        "time series",
+        "ARIMA",
+        "ETS",
+        "GRU",
+        "forecasting",
+        "calibration",
+        "时序预测"
+      ],
+      "sections": [
+        {
+          "id": "M21-purpose",
+          "title": {
+            "zh": "1. 预测的第一步，是站在正确的时间点上",
+            "en": "1. Forecast from the time when the decision must be made"
+          }
+        },
+        {
+          "id": "M21-components",
+          "title": {
+            "zh": "2. 今天、上周与慢慢变化的水平",
+            "en": "2. Today's value, last week's pattern, and a changing level"
+          }
+        },
+        {
+          "id": "M21-dynamics",
+          "title": {
+            "zh": "3. ARIMA 与状态空间：从相邻时刻的关系入手",
+            "en": "3. ARIMA and state-space models connect successive observations"
+          }
+        },
+        {
+          "id": "M21-backtest",
+          "title": {
+            "zh": "4. 回测要重演当时能做出的决定",
+            "en": "4. A backtest should replay decisions that were possible then"
+          }
+        },
+        {
+          "id": "M21-deep",
+          "title": {
+            "zh": "5. 深度预测：学习跨时间复用的表示",
+            "en": "5. Deep forecasting learns reusable temporal representations"
+          }
+        },
+        {
+          "id": "M21-uncertainty",
+          "title": {
+            "zh": "6. 未来有波动，预测也应表达范围",
+            "en": "6. Describe a range of futures, then check it"
+          }
+        },
+        {
+          "id": "M21-experiment",
+          "title": {
+            "zh": "7. 完整实验：六种预测器站在相同的日历上",
+            "en": "7. Run six forecasters on the same calendar"
+          }
+        },
+        {
+          "id": "M21-lab",
+          "title": {
+            "zh": "把预测起点推到变化的前后",
+            "en": "Move the forecast origin across a change"
+          }
+        },
+        {
+          "id": "M21-space-change",
+          "title": {
+            "zh": "8. 当邻站影响你，当规律本身发生变化",
+            "en": "8. Neighbors influence the series, and the mechanism can change"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M20",
+        "next": "M22"
+      },
+      "prerequisites": [
+        "M03",
+        "M04"
+      ]
+    },
+    {
+      "id": "M22",
+      "title": {
+        "zh": "图神经网络：让关系进入计算",
+        "en": "Graph neural networks: learning through relationships"
+      },
+      "standfirst": {
+        "zh": "从一跳消息到 GCN、GraphSAGE、GAT 和几何等变性，亲手检查信息怎样沿边传播。",
+        "en": "From local messages to GCN, GraphSAGE, GAT, and geometric equivariance: inspect how information travels along edges."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "图神经网络GNN：GCN、GAT与等变网络",
+        "en": "Graph and geometric deep learning"
+      },
+      "keywords": [
+        "GNN",
+        "GCN",
+        "GraphSAGE",
+        "GAT",
+        "graph",
+        "equivariance",
+        "oversmoothing"
+      ],
+      "sections": [
+        {
+          "id": "M22-purpose",
+          "title": {
+            "zh": "1. 拿掉连线，问题会变成什么",
+            "en": "1. What disappears when we remove the connections?"
+          }
+        },
+        {
+          "id": "M22-representation",
+          "title": {
+            "zh": "2. 从关系图到一张可计算的矩阵",
+            "en": "2. Turning relationships into a computable matrix"
+          }
+        },
+        {
+          "id": "M22-gcn",
+          "title": {
+            "zh": "3. GCN：让邻居说话，也让热门节点少一点音量",
+            "en": "3. GCN: gathering messages without letting degree dominate"
+          }
+        },
+        {
+          "id": "M22-variants",
+          "title": {
+            "zh": "4. GraphSAGE 与 GAT：新邻居怎样加入，意见怎样加权",
+            "en": "4. GraphSAGE and GAT: welcoming new nodes and weighting opinions"
+          }
+        },
+        {
+          "id": "M22-tasks",
+          "title": {
+            "zh": "5. 标签落在哪里，决定怎样训练和检验",
+            "en": "5. Where the label lives determines the experiment"
+          }
+        },
+        {
+          "id": "M22-experiment",
+          "title": {
+            "zh": "6. 一个完整实验：关系能把噪声中的群体找出来吗",
+            "en": "6. A complete experiment: recovering communities from noisy observations"
+          }
+        },
+        {
+          "id": "M22-geometry",
+          "title": {
+            "zh": "7. 编号可以改变，物理对象不应跟着改变",
+            "en": "7. Change the indexing or coordinate system, preserve the object"
+          }
+        },
+        {
+          "id": "M22-depth",
+          "title": {
+            "zh": "8. 传播得远，也要保留值得区分的差别",
+            "en": "8. Let information travel without erasing useful distinctions"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M21",
+        "next": "M23"
+      },
+      "prerequisites": [
+        "M02",
+        "M09"
+      ]
+    },
+    {
+      "id": "M23",
+      "title": {
+        "zh": "从找得到到排得好：检索、排序与推荐",
+        "en": "Find useful candidates, then rank them: retrieval and recommendation"
+      },
+      "standfirst": {
+        "zh": "拆开查询词分数、搜索近似、交互反馈与时间评价，训练一套可检查的双阶段推荐实验。",
+        "en": "Inspect term scores, search approximations, interaction feedback and temporal evaluation in a complete two-stage recommendation experiment."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "视觉、语言、音频与结构化任务",
+        "en": "Vision, language and structured data"
+      },
+      "search_title": {
+        "zh": "信息检索、学习排序与推荐系统",
+        "en": "Search, ranking and recommendation"
+      },
+      "keywords": [
+        "BM25",
+        "TF-IDF",
+        "LSA",
+        "RRF",
+        "IVF",
+        "BPR",
+        "two-tower",
+        "LambdaMART",
+        "cold start",
+        "NDCG"
+      ],
+      "sections": [
+        {
+          "id": "M23-find",
+          "title": {
+            "zh": "找到一篇文章，与推荐下一部电影",
+            "en": "Finding a repair guide and recommending the next film"
+          }
+        },
+        {
+          "id": "M23-lexical",
+          "title": {
+            "zh": "一个词为什么值得更多分",
+            "en": "Why should one word contribute more than another?"
+          }
+        },
+        {
+          "id": "M23-lab",
+          "title": {
+            "zh": "拆开每个词的贡献",
+            "en": "Inspect each term contribution"
+          }
+        },
+        {
+          "id": "M23-vector",
+          "title": {
+            "zh": "用向量补充词面，再决定怎样融合",
+            "en": "Add vector evidence, then choose a fusion rule"
+          }
+        },
+        {
+          "id": "M23-ann",
+          "title": {
+            "zh": "少看一些候选，要付出多少召回代价",
+            "en": "How much recall does scanning less data cost?"
+          }
+        },
+        {
+          "id": "M23-feedback",
+          "title": {
+            "zh": "用户—物品矩阵里，空白意味着什么",
+            "en": "What does a blank in the user–item matrix mean?"
+          }
+        },
+        {
+          "id": "M23-tower",
+          "title": {
+            "zh": "把内容接入双塔，再给候选精排",
+            "en": "Connect content through two towers, then rerank candidates"
+          }
+        },
+        {
+          "id": "M23-exposure",
+          "title": {
+            "zh": "冷启动与曝光，会怎样改变学习到的兴趣",
+            "en": "Cold starts and exposure change what a model learns"
+          }
+        },
+        {
+          "id": "M23-evaluate",
+          "title": {
+            "zh": "让指标对应真正要展示的那一页",
+            "en": "Make the metric match the page people will see"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M22",
+        "next": "M24"
+      },
+      "prerequisites": [
+        "M02",
+        "M03",
+        "M06",
+        "M09",
+        "M31"
+      ]
+    },
+    {
+      "id": "M24",
+      "title": {
+        "zh": "强化学习：从试探到长期决策",
+        "en": "Reinforcement learning: from exploration to decisions"
+      },
+      "standfirst": {
+        "zh": "从午餐选择和悬崖边的路线，理解 Bandit、MDP、Bellman、TD、SARSA 与 Q-learning。",
+        "en": "Use restaurant choices and cliff-side routes to understand bandits, MDPs, Bellman updates, TD, SARSA and Q-learning."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "强化学习RL与控制",
+        "en": "Reinforcement learning and control"
+      },
+      "search_title": {
+        "zh": "强化学习RL基础：Bandit、MDP、TD与Q-learning",
+        "en": "Reinforcement learning fundamentals"
+      },
+      "keywords": [
+        "Bandit",
+        "MDP",
+        "Bellman",
+        "Monte Carlo",
+        "TD",
+        "SARSA",
+        "Q-learning",
+        "on-policy",
+        "off-policy",
+        "reward design"
+      ],
+      "sections": [
+        {
+          "id": "M24-purpose",
+          "title": {
+            "zh": "先选午餐，还是先学会走路",
+            "en": "Choosing lunch, then learning to walk"
+          }
+        },
+        {
+          "id": "M24-bandits",
+          "title": {
+            "zh": "探索的成本，与没有探索的成本",
+            "en": "The cost of exploring and the cost of never exploring"
+          }
+        },
+        {
+          "id": "M24-mdp",
+          "title": {
+            "zh": "给连续决策一张可以计算的地图",
+            "en": "A map for sequential decisions"
+          }
+        },
+        {
+          "id": "M24-bellman",
+          "title": {
+            "zh": "为什么长期问题能拆成一步",
+            "en": "Why a long journey can be decomposed into one step"
+          }
+        },
+        {
+          "id": "M24-lab",
+          "title": {
+            "zh": "亲手传播一张价值地图",
+            "en": "Propagate a value map yourself"
+          }
+        },
+        {
+          "id": "M24-td",
+          "title": {
+            "zh": "从一次旅程的结局，到下一次预测",
+            "en": "Learning from the next prediction"
+          }
+        },
+        {
+          "id": "M24-control",
+          "title": {
+            "zh": "SARSA 与 Q-learning 学的是什么",
+            "en": "What SARSA and Q-learning learn"
+          }
+        },
+        {
+          "id": "M24-code",
+          "title": {
+            "zh": "把目标、路径和回报放在同一实验里",
+            "en": "Put the objective, route and return into one experiment"
+          }
+        },
+        {
+          "id": "M24-design",
+          "title": {
+            "zh": "从格子世界带走的实验习惯",
+            "en": "Experimental habits that transfer beyond the grid"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M23",
+        "next": "M37"
+      },
+      "prerequisites": [
+        "M02",
+        "M03"
+      ]
+    },
+    {
+      "id": "M37",
+      "title": {
+        "zh": "从动作价值到策略更新：深度强化学习",
+        "en": "From Action Values to Policy Updates: Deep Reinforcement Learning"
+      },
+      "standfirst": {
+        "zh": "在同一个随机走廊中运行DQN与PPO，理解回放、优势、裁剪和连续控制。",
+        "en": "Run DQN and PPO in one stochastic corridor, then connect replay, advantages, clipping, and continuous control."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "强化学习RL与控制",
+        "en": "Reinforcement learning and control"
+      },
+      "search_title": {
+        "zh": "深度强化学习：DQN、Actor–Critic、PPO与SAC",
+        "en": "Deep reinforcement learning"
+      },
+      "keywords": [
+        "DQN",
+        "Double DQN",
+        "Dueling",
+        "REINFORCE",
+        "GAE",
+        "PPO",
+        "DDPG",
+        "TD3",
+        "SAC"
+      ],
+      "sections": [
+        {
+          "id": "M37-purpose",
+          "title": {
+            "zh": "1. 当状态多到放不进一张表",
+            "en": "1. When the state space no longer fits in a table"
+          }
+        },
+        {
+          "id": "M37-dqn",
+          "title": {
+            "zh": "2. DQN：让网络学习动作价值",
+            "en": "2. DQN learns a value for each discrete action"
+          }
+        },
+        {
+          "id": "M37-double",
+          "title": {
+            "zh": "3. Double 与 Dueling 分别改变了哪里",
+            "en": "3. Double and Dueling change different components"
+          }
+        },
+        {
+          "id": "M37-policy",
+          "title": {
+            "zh": "4. 直接调整动作概率：REINFORCE 与基线",
+            "en": "4. REINFORCE adjusts action probabilities directly"
+          }
+        },
+        {
+          "id": "M37-policy-advantage",
+          "title": {
+            "zh": "5. Actor–Critic 与 GAE：在等待回报和及时更新之间",
+            "en": "5. Actor–Critic and GAE connect immediate feedback to later rewards"
+          }
+        },
+        {
+          "id": "M37-ppo",
+          "title": {
+            "zh": "6. PPO 为什么限制一个动作概率变化的收益",
+            "en": "6. PPO limits the reward for changing probabilities too far"
+          }
+        },
+        {
+          "id": "M37-lab",
+          "title": {
+            "zh": "交互：PPO削去了哪一边的更新收益",
+            "en": "Lab: which incentive does PPO remove?"
+          }
+        },
+        {
+          "id": "M37-continuous",
+          "title": {
+            "zh": "7. 连续动作：DDPG、TD3 与 SAC",
+            "en": "7. Continuous actions require DDPG, TD3, or SAC-style choices"
+          }
+        },
+        {
+          "id": "M37-experiment",
+          "title": {
+            "zh": "8. 同一环境、同一交互预算，观察两种学习路线",
+            "en": "8. Compare learning routes under the same interaction budget"
+          }
+        },
+        {
+          "id": "M37-evaluation",
+          "title": {
+            "zh": "9. 把探索、样本效率与稳定评价分开看",
+            "en": "9. Separate exploration, sample efficiency, and evaluation stability"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M24",
+        "next": "M38"
+      },
+      "prerequisites": [
+        "M24",
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M38",
+      "title": {
+        "zh": "从经验到行动：离线学习、预测控制与多智能体",
+        "en": "From experience to action: offline learning, predictive control, and multiple agents"
+      },
+      "standfirst": {
+        "zh": "让历史数据、运动模型与伙伴信息各尽其用，理解一个决策怎样走出模拟环境。",
+        "en": "Use recorded experience, dynamical models, and information from other agents to understand how decisions reach the real world."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "强化学习RL与控制",
+        "en": "Reinforcement learning and control"
+      },
+      "search_title": {
+        "zh": "强化学习专题：离线RL、模型式RL、多智能体与机器人控制",
+        "en": "Offline RL, model-based RL, multi-agent learning and robotics"
+      },
+      "keywords": [
+        "离线RL、覆盖问题与保守估计",
+        "行为克隆、模仿学习与数据采集",
+        "模型式RL、规划与世界模型",
+        "LQR、MPC与连续控制桥梁",
+        "多智能体合作、竞争与信用分配",
+        "机器人观测、动作、仿真与迁移",
+        "部分可观测、约束和离线策略评价"
+      ],
+      "sections": [
+        {
+          "id": "M38-purpose",
+          "title": {
+            "zh": "一辆小车，需要的不只是一张奖励表",
+            "en": "A delivery cart needs more than a reward table"
+          }
+        },
+        {
+          "id": "M38-offline",
+          "title": {
+            "zh": "从示范学习，到处理数据中没有出现的动作",
+            "en": "Learning demonstrations and reasoning about missing actions"
+          }
+        },
+        {
+          "id": "M38-model",
+          "title": {
+            "zh": "先预测下一步，为什么能帮助选动作",
+            "en": "Predicting the next state before selecting an action"
+          }
+        },
+        {
+          "id": "M38-control",
+          "title": {
+            "zh": "LQR给出反馈规律，MPC把约束放进计划",
+            "en": "LQR gives feedback; MPC plans within constraints"
+          }
+        },
+        {
+          "id": "M38-lab",
+          "title": {
+            "zh": "每走一步，重算接下来的路",
+            "en": "Replan after every executed step"
+          }
+        },
+        {
+          "id": "M38-multi",
+          "title": {
+            "zh": "伙伴也在学习，环境就会跟着改变",
+            "en": "Learning partners change the environment"
+          }
+        },
+        {
+          "id": "M38-credit",
+          "title": {
+            "zh": "共同成功以后，怎样知道谁帮上了忙",
+            "en": "Assigning credit after a shared outcome"
+          }
+        },
+        {
+          "id": "M38-robot",
+          "title": {
+            "zh": "从完整状态走向相机、延迟与真实执行器",
+            "en": "From complete states to cameras and physical actuators"
+          }
+        },
+        {
+          "id": "M38-evaluation",
+          "title": {
+            "zh": "没有重新运行策略，怎样评价它可能做到什么",
+            "en": "Evaluating a policy using someone else’s records"
+          }
+        },
+        {
+          "id": "M38-experiment",
+          "title": {
+            "zh": "把三个实验放到同一套可重复流程中",
+            "en": "Running three experiments with traceable outputs"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M37",
+        "next": "M25"
+      },
+      "prerequisites": [
+        "M37"
+      ]
+    },
+    {
+      "id": "M25",
+      "title": {
+        "zh": "看懂模型怎样判断：可解释性、归因与内部机制",
+        "en": "Understand how a model decides: explanations, attribution and internal mechanisms"
+      },
+      "standfirst": {
+        "zh": "从可读模型出发，逐步检查替换、背景、梯度与内部干预，让每种解释回答一个明确问题。",
+        "en": "Start with readable models, then inspect replacement, backgrounds, gradients and internal interventions—each tied to a specific question."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "可解释性XAI与可靠学习",
+        "en": "Interpretability and reliable learning"
+      },
+      "search_title": {
+        "zh": "可解释性学习XAI：可解释模型、SHAP、LIME与归因",
+        "en": "Interpretable learning and explainable AI"
+      },
+      "keywords": [
+        "GAM",
+        "permutation",
+        "PDP",
+        "ICE",
+        "ALE",
+        "LIME",
+        "SHAP",
+        "Integrated Gradients",
+        "Grad-CAM",
+        "TCAV",
+        "mechanistic interpretability"
+      ],
+      "sections": [
+        {
+          "id": "M25-question",
+          "title": {
+            "zh": "预测正确之后，还想知道什么",
+            "en": "What do we want to know after a correct prediction?"
+          }
+        },
+        {
+          "id": "M25-intrinsic",
+          "title": {
+            "zh": "先选择能直接读懂结构的模型",
+            "en": "Begin with a structure that can be read directly"
+          }
+        },
+        {
+          "id": "M25-global",
+          "title": {
+            "zh": "打乱一列，与沿着一列移动",
+            "en": "Shuffle a column, or move along its values"
+          }
+        },
+        {
+          "id": "M25-local",
+          "title": {
+            "zh": "用附近的简单模型解释一个预测",
+            "en": "Explain one prediction with a nearby simple model"
+          }
+        },
+        {
+          "id": "M25-shap",
+          "title": {
+            "zh": "把预测差额分给特征，先说清参照",
+            "en": "Allocate a prediction difference after choosing its reference"
+          }
+        },
+        {
+          "id": "M25-lab",
+          "title": {
+            "zh": "两种加入顺序，怎样分配同一项交互",
+            "en": "Two feature orders allocate the same interaction"
+          }
+        },
+        {
+          "id": "M25-pixels",
+          "title": {
+            "zh": "热图里，亮的是敏感度还是贡献",
+            "en": "Does a bright pixel indicate sensitivity or contribution?"
+          }
+        },
+        {
+          "id": "M25-concept",
+          "title": {
+            "zh": "从像素走向概念，再观察内部表示",
+            "en": "Move from pixels to concepts and internal representations"
+          }
+        },
+        {
+          "id": "M25-circuit",
+          "title": {
+            "zh": "让解释经受一次真正的改变",
+            "en": "Make an explanation face an actual change"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M38",
+        "next": "M39"
+      },
+      "prerequisites": [
+        "M02",
+        "M04",
+        "M09",
+        "M13"
+      ]
+    },
+    {
+      "id": "M39",
+      "title": {
+        "zh": "让预测值得使用：不确定性、可靠性与隐私",
+        "en": "Make predictions useful: uncertainty, reliability and privacy"
+      },
+      "standfirst": {
+        "zh": "从“有多大把握”走到“在哪些条件下仍能工作”，用实际概率、预测集合、扰动与分布变化检查模型。",
+        "en": "Move from confidence to operating conditions through probabilities, prediction sets, perturbations and distribution changes."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "可解释性XAI与可靠学习",
+        "en": "Interpretability and reliable learning"
+      },
+      "search_title": {
+        "zh": "不确定性、校准、共形预测、鲁棒性与隐私",
+        "en": "Uncertainty, calibration, robustness and privacy"
+      },
+      "keywords": [
+        "数据不确定性与模型不确定性",
+        "校准、可靠性图和决策阈值",
+        "共形预测与覆盖条件",
+        "OOD、分布变化与鲁棒性",
+        "对抗扰动、投毒机制与防护评价",
+        "公平性、分组评价与数据治理",
+        "差分隐私、联邦学习与隐私预算"
+      ],
+      "sections": [
+        {
+          "id": "M39-question",
+          "title": {
+            "zh": "1. 从“答对多少”走到“怎样使用答案”",
+            "en": "1. From counting correct answers to using a prediction"
+          }
+        },
+        {
+          "id": "M39-uncertainty",
+          "title": {
+            "zh": "2. 看不清的数据，与还没学会的模型",
+            "en": "2. Noisy observations and an incompletely learned model"
+          }
+        },
+        {
+          "id": "M39-calibration",
+          "title": {
+            "zh": "3. 让九成把握对应大约九成正确",
+            "en": "3. Making ninety-percent confidence mean something"
+          }
+        },
+        {
+          "id": "M39-conformal",
+          "title": {
+            "zh": "4. 用一个集合表达哪些答案还值得保留",
+            "en": "4. Retaining a set of plausible answers"
+          }
+        },
+        {
+          "id": "M39-lab",
+          "title": {
+            "zh": "让校准秩变成可见的区间",
+            "en": "Turn a calibration rank into visible intervals"
+          }
+        },
+        {
+          "id": "M39-distribution",
+          "title": {
+            "zh": "5. 换一台相机，原来的把握还在吗",
+            "en": "5. A new camera can change the operating problem"
+          }
+        },
+        {
+          "id": "M39-robustness",
+          "title": {
+            "zh": "6. 随机噪声与朝着错误方向的扰动",
+            "en": "6. Noise chosen to move toward an error"
+          }
+        },
+        {
+          "id": "M39-groups",
+          "title": {
+            "zh": "7. 平均表现怎样落到不同人和不同对象身上",
+            "en": "7. Following average performance into individual groups"
+          }
+        },
+        {
+          "id": "M39-privacy",
+          "title": {
+            "zh": "8. 少让一条记录左右发布结果",
+            "en": "8. Reducing one record’s influence on a release"
+          }
+        },
+        {
+          "id": "M39-federated",
+          "title": {
+            "zh": "9. 数据留在各处，模型怎样一起学习",
+            "en": "9. Learning together while records remain distributed"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M25",
+        "next": "M26"
+      },
+      "prerequisites": [
+        "M02",
+        "M03",
+        "M09",
+        "M25"
+      ]
+    },
+    {
+      "id": "M26",
+      "title": {
+        "zh": "让训练跑得明白：精度、内存、并行与恢复",
+        "en": "Understand the training system: precision, memory, parallelism, and recovery"
+      },
+      "standfirst": {
+        "zh": "先找到时间和内存花在哪里，再把一个正确的训练目标拆给更多计算资源。",
+        "en": "Locate time and memory costs before distributing a correct training objective across more resources."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "训练工程、科学计算与研究实践",
+        "en": "Training systems and scientific machine learning"
+      },
+      "search_title": {
+        "zh": "训练系统：混合精度、DDP、FSDP与并行",
+        "en": "Training systems and efficiency"
+      },
+      "keywords": [
+        "性能剖析、吞吐、延迟与显存",
+        "数据加载、批处理和缓存",
+        "混合精度、梯度累积与检查点",
+        "DDP、FSDP和ZeRO式分片",
+        "张量、流水线与专家并行",
+        "通信、容错、检查点和恢复",
+        "JAX与Keras/TF对照专题"
+      ],
+      "sections": [
+        {
+          "id": "M26-purpose",
+          "title": {
+            "zh": "训练慢，先找出谁在等待",
+            "en": "When training is slow, find out who is waiting"
+          }
+        },
+        {
+          "id": "M26-data",
+          "title": {
+            "zh": "把数据及时送到计算发生的地方",
+            "en": "Deliver data before the computation needs it"
+          }
+        },
+        {
+          "id": "M26-gradient",
+          "title": {
+            "zh": "拆开批次以后，怎样保持同一个训练目标",
+            "en": "Split a batch without changing its objective"
+          }
+        },
+        {
+          "id": "M26-precision",
+          "title": {
+            "zh": "少存一些数，或者把一部分数重新算出来",
+            "en": "Store fewer bits, or recompute intermediate values"
+          }
+        },
+        {
+          "id": "M26-ddp",
+          "title": {
+            "zh": "数据并行：每个副本计算一部分，再共同更新",
+            "en": "Data parallelism computes locally and updates together"
+          }
+        },
+        {
+          "id": "M26-sharding",
+          "title": {
+            "zh": "模型太大时，哪些东西必须每台都保存",
+            "en": "Which training state must each device keep?"
+          }
+        },
+        {
+          "id": "M26-lab",
+          "title": {
+            "zh": "一个梯度怎样在多个进程间形成共同更新",
+            "en": "How local gradients become a shared update"
+          }
+        },
+        {
+          "id": "M26-parallel",
+          "title": {
+            "zh": "分张量、分网络阶段，还是分给不同专家",
+            "en": "Partition a tensor, a sequence of layers, or a set of experts"
+          }
+        },
+        {
+          "id": "M26-recovery",
+          "title": {
+            "zh": "保存权重，不等于保存了训练过程",
+            "en": "Saving weights is different from saving a training process"
+          }
+        },
+        {
+          "id": "M26-frameworks",
+          "title": {
+            "zh": "在PyTorch、JAX与Keras中寻找同一个计算",
+            "en": "Find the same computation in PyTorch, JAX, and Keras"
+          }
+        },
+        {
+          "id": "M26-experiment",
+          "title": {
+            "zh": "完整实验：先核对，再测量，再扩大",
+            "en": "Verify first, measure next, then scale"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M39",
+        "next": "M27"
+      },
+      "prerequisites": [
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M27",
+      "title": {
+        "zh": "把模型交到别人手中：部署、压缩与持续观察",
+        "en": "Putting a model to work: deployment, compression and monitoring"
+      },
+      "standfirst": {
+        "zh": "沿着一个手写数字模型完成导出、真实接口调用、压缩比较和灰度重放，理解数据、版本、速度与反馈怎样共同决定可用性。",
+        "en": "Follow a digit recognizer through export, real interface calls, compression and canary replay, connecting data, versions, latency and feedback."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "训练工程、科学计算与研究实践",
+        "en": "Training systems and scientific machine learning"
+      },
+      "search_title": {
+        "zh": "模型部署、压缩、监测与MLOps",
+        "en": "Deployment and MLOps"
+      },
+      "keywords": [
+        "ONNX",
+        "MLOps",
+        "distillation",
+        "quantization",
+        "pruning",
+        "monitoring",
+        "canary",
+        "rollback"
+      ],
+      "sections": [
+        {
+          "id": "M27-purpose",
+          "title": {
+            "zh": "1　模型出了实验室，还要带上什么",
+            "en": "1　What needs to travel with a trained model?"
+          }
+        },
+        {
+          "id": "M27-version",
+          "title": {
+            "zh": "2　让一次预测找到自己的来路",
+            "en": "2　Giving every prediction a traceable identity"
+          }
+        },
+        {
+          "id": "M27-contract",
+          "title": {
+            "zh": "3　把图片变成接口能够理解的约定",
+            "en": "3　An interface is a shared agreement about the data"
+          }
+        },
+        {
+          "id": "M27-export",
+          "title": {
+            "zh": "4　导出一张可以检查的计算图",
+            "en": "4　Exporting a graph whose steps can be inspected"
+          }
+        },
+        {
+          "id": "M27-compress",
+          "title": {
+            "zh": "5　用更小的模型承担同一项工作",
+            "en": "5　Several ways to make the same task smaller"
+          }
+        },
+        {
+          "id": "M27-speed",
+          "title": {
+            "zh": "6　测量等待时间，而不只数参数",
+            "en": "6　Measuring the wait rather than counting parameters"
+          }
+        },
+        {
+          "id": "M27-monitor",
+          "title": {
+            "zh": "7　输入看起来没变，任务也可能已经改变",
+            "en": "7　A stable statistic can conceal a changed task"
+          }
+        },
+        {
+          "id": "M27-release",
+          "title": {
+            "zh": "8　逐步替换版本，让反馈形成下一轮实验",
+            "en": "8　Replacing a version gradually and learning from feedback"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M26",
+        "next": "M29"
+      },
+      "prerequisites": [
+        "M03",
+        "M09"
+      ]
+    },
+    {
+      "id": "M29",
+      "title": {
+        "zh": "从一杯咖啡到科学机器学习：PINN、FNO与方程发现",
+        "en": "From a cup of coffee to scientific machine learning: PINNs, FNOs, and equation discovery"
+      },
+      "standfirst": {
+        "zh": "把已知规律、观测数据和数值方法放在一起，分清求解、识别、算子学习与机制发现。",
+        "en": "Connect scientific laws, observations, and numerical methods through solving, identification, operator learning, and equation discovery."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "训练工程、科学计算与研究实践",
+        "en": "Training systems and scientific machine learning"
+      },
+      "search_title": {
+        "zh": "科学机器学习：PINN、FNO、符号回归与可微计算",
+        "en": "Scientific machine learning"
+      },
+      "keywords": [
+        "动力系统、微分方程与数值基线补课",
+        "系统辨识和逆问题",
+        "PINN、残差约束与边界条件",
+        "神经算子与FNO",
+        "可微模拟、混合模型与守恒结构",
+        "符号回归、外推与误差分析"
+      ],
+      "sections": [
+        {
+          "id": "M29-purpose",
+          "title": {
+            "zh": "1. 一杯咖啡，能把哪些问题交给机器学习",
+            "en": "1. What can a cup of coffee teach us about scientific machine learning?"
+          }
+        },
+        {
+          "id": "M29-dynamics",
+          "title": {
+            "zh": "2. 微分方程是在说明“现在怎样变化”",
+            "en": "2. A differential equation describes how a state changes now"
+          }
+        },
+        {
+          "id": "M29-lab",
+          "title": {
+            "zh": "计算器会让咖啡越来越热吗？",
+            "en": "Can a numerical solver make coffee hotter?"
+          }
+        },
+        {
+          "id": "M29-pinn",
+          "title": {
+            "zh": "3. PINN把一条曲线放进方程里检查",
+            "en": "3. A PINN checks a learned curve against an equation"
+          }
+        },
+        {
+          "id": "M29-inverse",
+          "title": {
+            "zh": "4. 反问题：让观测告诉我们参数是多少",
+            "en": "4. An inverse problem lets observations determine parameters"
+          }
+        },
+        {
+          "id": "M29-operator",
+          "title": {
+            "zh": "5. FNO学习的是“给一整条初始曲线，返回一整条终态曲线”",
+            "en": "5. FNO maps an entire initial field to an entire final field"
+          }
+        },
+        {
+          "id": "M29-structure",
+          "title": {
+            "zh": "6. 已经知道的守恒关系，可以直接参与表示",
+            "en": "6. A known conservation relation can shape the output directly"
+          }
+        },
+        {
+          "id": "M29-discovery",
+          "title": {
+            "zh": "7. 从曲线发现方程：先决定允许哪些表达式",
+            "en": "7. Discovering an equation begins with a library of possible terms"
+          }
+        },
+        {
+          "id": "M29-experiment",
+          "title": {
+            "zh": "8. 完整实验：从数值基线走到可检查的学习模型",
+            "en": "8. The complete experiment connects numerical baselines and learned models"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M27",
+        "next": "M28"
+      },
+      "prerequisites": [
+        "M02",
+        "M07",
+        "M09",
+        "M10"
+      ]
+    },
+    {
+      "id": "M28",
+      "title": {
+        "zh": "综合项目：把一个改进写成可以复现的证据",
+        "en": "Projects: turn an improvement into reproducible evidence"
+      },
+      "standfirst": {
+        "zh": "同一张数字挪动一格，准确率为什么骤降？用完整增广对照串起复现、消融、统计与实验写作。",
+        "en": "Why does moving a digit by one pixel change recognition? Use a complete controlled study to connect reproduction, ablation, statistics, and experimental writing."
+      },
+      "category": "machine-learning",
+      "group": {
+        "zh": "训练工程、科学计算与研究实践",
+        "en": "Training systems and scientific machine learning"
+      },
+      "search_title": {
+        "zh": "综合项目、论文复现与实验写作",
+        "en": "Projects and paper reproduction"
+      },
+      "keywords": [
+        "复现",
+        "消融",
+        "实验设计",
+        "bootstrap",
+        "成对比较",
+        "reproduction",
+        "paired",
+        "augmentation"
+      ],
+      "sections": [
+        {
+          "id": "M28-question",
+          "title": {
+            "zh": "1. 一个几乎满分的识别器，为什么经不起挪动一格",
+            "en": "1. Why does a nearly perfect recognizer struggle with a one-pixel move?"
+          }
+        },
+        {
+          "id": "M28-data",
+          "title": {
+            "zh": "2. 在训练之前，先认清一条样本是什么",
+            "en": "2. Before training, decide what one observation represents"
+          }
+        },
+        {
+          "id": "M28-design",
+          "title": {
+            "zh": "3. 增广有效，是因为看到了新位置，还是因为样本数变多了",
+            "en": "3. Does augmentation help because of new positions or simply more rows?"
+          }
+        },
+        {
+          "id": "M28-run",
+          "title": {
+            "zh": "4. 运行完整实验，再读一张有比较条件的图",
+            "en": "4. Run the complete experiment, then read the comparisons"
+          }
+        },
+        {
+          "id": "M28-paired",
+          "title": {
+            "zh": "5. 把两种模型放在同一张答卷上比较",
+            "en": "5. Compare two models on the same answer sheet"
+          }
+        },
+        {
+          "id": "M28-projects",
+          "title": {
+            "zh": "6. 把同一套实验逻辑带到六类综合项目",
+            "en": "6. Carry the experiment logic into six project families"
+          }
+        },
+        {
+          "id": "M28-writing",
+          "title": {
+            "zh": "7. 让图、表和文字各自完成一件事",
+            "en": "7. Give figures, tables, and prose distinct jobs"
+          }
+        },
+        {
+          "id": "M28-delivery",
+          "title": {
+            "zh": "8. 把成果交给下一个愿意运行它的人",
+            "en": "8. Hand the result to the next person who will run it"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M29",
+        "next": null
+      },
+      "prerequisites": [
+        "M03",
+        "M05",
+        "M09",
+        "M10"
+      ]
+    }
+  ]
+}

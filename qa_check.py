@@ -368,6 +368,11 @@ def image_delivery_inventory():
             errors.append(full + ': original missing from source or published assets')
             continue
         raw = original.read_bytes()
+        if original.suffix.lower() == '.svg':
+            try:
+                ET.fromstring(raw)
+            except ET.ParseError as error:
+                errors.append(full + ': standalone SVG is not valid XML: ' + str(error))
         if hashlib.sha256(raw).hexdigest() != item['source_sha256'] or len(raw) != item['source_bytes']:
             errors.append(full + ': sealed original changed; regenerate its preview receipt')
         if hashlib.sha256(built.read_bytes()).hexdigest() != item['source_sha256']:
@@ -678,7 +683,10 @@ def run():
     from content_tools import python_scientific
     python_courses = python_scientific.load()
     python_entries = python_scientific.entries(python_courses)
-    course_entries = bm_entries + md_entries + python_entries
+    from content_tools import machine_learning
+    ml_courses = machine_learning.load()
+    ml_entries = machine_learning.entries(ml_courses)
+    course_entries = bm_entries + md_entries + python_entries + ml_entries
     indexed_total = total + tutorial_count + len(course_entries)
     en = sum(1 for x in posts if x[0] == "en")
     zh = total - en

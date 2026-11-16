@@ -118,3 +118,9 @@
 - 新课程来自 D:/DW/python-scientific-courses/public，共37课（P01–P30、S01–S07），中英文分74页；通过 content_tools/python_scientific.py 融入 python-tutorials 分类，使用 /tutorials/python-scientific/p01/ 与 /en/ 等配对地址。
 - 配套37份ZIP、完整正文、公式、实验脚本与许可一并保留；不发布源项目的 authoring、private 或环境。科学SVG独立加载时，内部栅格图仍需内嵌，避免浏览器阻止加载图层；原图经共享图片清单校验。
 - 用户确认本轮先发布课程，PayPal后续接通。新课程 PAYPAL_ENABLED=False；二维码与免费代码包正常显示。更新线上付款服务的课程名单并验证后，再开启新课程PayPal入口。已有课程付款设置不变。
+
+## 机器学习与深度学习教程（2026-11-16）
+
+- 正式源为 D:/DW/ml-dl-curriculum-planning/course/public，共41课M01–M41，完整中英文共82页；通过 content_tools/machine_learning.py 接入 machine-learning 分类，地址为 /tutorials/machine-learning/m01/ 与 /en/ 等配对形式。元数据取正式HTML，原项目COURSES.json旧状态和英文简介不代表当前成品。
+- 教程目录及上下篇保留课程的教学顺序（不按M编号排序），既有机器学习文章保留；不另建系列入口。图表、完整代码、交互、下载包与许可证一并发布，根目录规划、authoring和private不发布。
+- 课程实验识别本站zh-CN中文语言；科学SVG外置后保持内部图片自包含。新增课程PayPal继续暂缓，二维码和免费代码下载保留。

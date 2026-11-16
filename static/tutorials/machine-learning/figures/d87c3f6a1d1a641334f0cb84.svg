@@ -1,0 +1,654 @@
+<svg role="img" aria-label="同一8×8数字的原图、FGSM扰动图与实际像素差，颜色范围分别为0–1与−0.1到0.1。右图对每个模型分别重新求梯度，比较相同扰动预算下的白盒FGSM准确率。" xmlns:xlink="http://www.w3.org/1999/xlink" width="944.881608pt" height="368.39952pt" viewBox="0 0 944.881608 368.39952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M39-F4-figure_1">
+  <g id="M39-F4-patch_1">
+   <path d="M 0 368.39952 
+L 944.881608 368.39952 
+L 944.881608 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M39-F4-axes_1">
+   <g id="M39-F4-patch_2">
+    <path d="M 7.2 243.938262 
+L 156.335754 243.938262 
+L 156.335754 94.802508 
+L 7.2 94.802508 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M39-F4-p580b86f276)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAANAAAADQCAYAAAB2pO90AAADBUlEQVR4nO3cUW0iQBhG0emm760ELNQBKCgScICUtg7AAVKQAA5w0H1aA3uTaTo5x8AHCTfD0/80xvgeC7lcLlN23t/fx0re3t6m7Fyv17GSPz/9AeA3ExAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEgYAgeB6LmXUxdLfbLXVpdbvdTtm5ukwK/OMvHAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCBY7jLp/X6fsnM4HKbsvLy8LHUBdTVeIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAiWu0z6+fk5Zefj42PKzvl8nrJzu92m7KzGCwSBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBATBcpdJV7uwud1up+y8vr5O2Xk8HmMlXiAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCAgHBz/ACQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEwdMY43ss5HK5LHUBddZl0lnfZ7/fj5V4gSAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCBY7jLp4/GYsnM6ncZKDofDlJ3NZrPU78ALBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBMHzWMztdpuyczwep+x8fX1N2dnv90tdDJ3FCwSBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBATj//0FjzRBNbMuopkAAAAASUVORK5CYII=" id="M39-F4-image83615135c5" transform="scale(1 -1) translate(0 -149.76)" x="7.2" y="-94.178262" width="149.76" height="149.76"/>
+   </g>
+   <g id="M39-F4-matplotlib.axis_1"/>
+   <g id="M39-F4-matplotlib.axis_2"/>
+   <g id="M39-F4-patch_3">
+    <path d="M 7.2 243.938262 
+L 7.2 94.802508 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M39-F4-patch_4">
+    <path d="M 7.2 243.938262 
+L 156.335754 243.938262 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M39-F4-text_1">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="81.767877" y="88.802508" transform="rotate(-0 81.767877 88.802508)">原图：真实8，预测8</text>
+   </g>
+  </g>
+  <g id="M39-F4-axes_2">
+   <g id="M39-F4-patch_5">
+    <path d="M 201.285262 243.938262 
+L 350.421016 243.938262 
+L 350.421016 94.802508 
+L 201.285262 94.802508 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M39-F4-p038494b5cd)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAANAAAADQCAYAAAB2pO90AAADRElEQVR4nO3cMUprWxiG4Z3Laa2sVhGwFoJTcC52tk4klbWVnZAhWFkHBLG3yADsBPHM4b6wDm6eZwJfiv2yUv2bMcbPsiKHw2HKzna7Xdbk5uZmys7xeFzW5L9//QPgNxMQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIPizTHI6nVZ1MfTu7m7KzuPj45Sds7OzVX0HY4wpO14gCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCDZjjJ9lRRcpX15epux8fn5O2dntdlN2Li4upux8fX0ta+IFgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCguDPMskYY8rOfr9f1c7Dw8OUnfPz82VNTpMu4XqBIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAINiMMX6WFdlut1N2DofDqi6GXl1dTdl5f39f1SVcLxAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBgYDg3/ACQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEv+Ey6el0mjGz3N/fr+pi6PX19ZSdp6enKTu3t7dTdlwmhV/AXzgIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBsFmWZcpl0lne3t6m7Ly+vi5rstvtpuxcXl4ua+IFgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgmAzxljVZdLj8Thl5/v7e8rOfr+fsvPx8TFl5/n5eVkTLxAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEgYAgEBAs/99fxV5NvHDWl/0AAAAASUVORK5CYII=" id="M39-F4-image2d5530ae80" transform="scale(1 -1) translate(0 -149.76)" x="201.285262" y="-94.178262" width="149.76" height="149.76"/>
+   </g>
+   <g id="M39-F4-matplotlib.axis_3"/>
+   <g id="M39-F4-matplotlib.axis_4"/>
+   <g id="M39-F4-patch_6">
+    <path d="M 201.285262 243.938262 
+L 201.285262 94.802508 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M39-F4-patch_7">
+    <path d="M 201.285262 243.938262 
+L 350.421016 243.938262 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M39-F4-text_2">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="275.853139" y="88.802508" transform="rotate(-0 275.853139 88.802508)">FGSM ε=0.1：预测1</text>
+   </g>
+  </g>
+  <g id="M39-F4-axes_3">
+   <g id="M39-F4-patch_8">
+    <path d="M 395.370524 243.938262 
+L 544.506278 243.938262 
+L 544.506278 94.802508 
+L 395.370524 94.802508 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M39-F4-pc50005812d)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAANAAAADQCAYAAAB2pO90AAAC/ElEQVR4nO3csU2bQRiA4SN4C3qQvECKTGDRsEBE55rWWcBtareMgJC7rJAOiQGYg8wQXuWM/zxPb3+nk1+dq+/i6fL6ffDX9pvDom5td9ye+ghn6cupDwDnTEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCYDUmWb8+T5nz/eFtUZs8v/74NmXO3ZizafXx59WUOS83t1PmeIEgEBAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICAIBQSAgCAQEgYDgHDaT8jF3v+9d3SfehOsFgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCguDi6fL6fSzIfnM49RHO0u64HUuytpkUPj9/4SAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBATBqnyYf8/G0I95ubkdM3iBIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgEBKfhBYJAQBAICAIBQSAgCAQEgYAgEBAEAoJAQBAICM5hM+n69XnOoIe3KWOWtjF0vzlMmfM4lsULBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBMFq2sZQGGMcfl1NuYftpN+1FwgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAKCQEAQCAiCi6fL6/fyBf+r/eYwlmR33J76CGfJCwSBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBASBgCAQEAQCgkBAEAgIAgFBICAIBATj4/4A+vUu+CgfsmoAAAAASUVORK5CYII=" id="M39-F4-imagef716952cf0" transform="scale(1 -1) translate(0 -149.76)" x="395.370524" y="-94.178262" width="149.76" height="149.76"/>
+   </g>
+   <g id="M39-F4-matplotlib.axis_5"/>
+   <g id="M39-F4-matplotlib.axis_6"/>
+   <g id="M39-F4-patch_9">
+    <path d="M 395.370524 243.938262 
+L 395.370524 94.802508 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M39-F4-patch_10">
+    <path d="M 395.370524 243.938262 
+L 544.506278 243.938262 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M39-F4-text_3">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="469.938401" y="88.802508" transform="rotate(-0 469.938401 88.802508)">像素变化（真实尺度）</text>
+   </g>
+  </g>
+  <g id="M39-F4-axes_4">
+   <g id="M39-F4-patch_11">
+    <path d="M 638.742661 327.144207 
+L 937.014169 327.144207 
+L 937.014169 11.596562 
+L 638.742661 11.596562 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M39-F4-matplotlib.axis_7">
+    <g id="M39-F4-xtick_1">
+     <g id="M39-F4-line2d_1">
+      <defs>
+       <path id="M39-F4-m42dc4b56ba" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="652.300457" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_4">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="652.300457" y="342.937332" transform="rotate(-0 652.300457 342.937332)">0.000</text>
+     </g>
+    </g>
+    <g id="M39-F4-xtick_2">
+     <g id="M39-F4-line2d_2">
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="686.194946" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_5">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="686.194946" y="342.937332" transform="rotate(-0 686.194946 342.937332)">0.025</text>
+     </g>
+    </g>
+    <g id="M39-F4-xtick_3">
+     <g id="M39-F4-line2d_3">
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="720.089436" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_6">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="720.089436" y="342.937332" transform="rotate(-0 720.089436 342.937332)">0.050</text>
+     </g>
+    </g>
+    <g id="M39-F4-xtick_4">
+     <g id="M39-F4-line2d_4">
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="753.983926" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_7">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="753.983926" y="342.937332" transform="rotate(-0 753.983926 342.937332)">0.075</text>
+     </g>
+    </g>
+    <g id="M39-F4-xtick_5">
+     <g id="M39-F4-line2d_5">
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="787.878415" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_8">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="787.878415" y="342.937332" transform="rotate(-0 787.878415 342.937332)">0.100</text>
+     </g>
+    </g>
+    <g id="M39-F4-xtick_6">
+     <g id="M39-F4-line2d_6">
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="821.772905" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_9">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="821.772905" y="342.937332" transform="rotate(-0 821.772905 342.937332)">0.125</text>
+     </g>
+    </g>
+    <g id="M39-F4-xtick_7">
+     <g id="M39-F4-line2d_7">
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="855.667394" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_10">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="855.667394" y="342.937332" transform="rotate(-0 855.667394 342.937332)">0.150</text>
+     </g>
+    </g>
+    <g id="M39-F4-xtick_8">
+     <g id="M39-F4-line2d_8">
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="889.561884" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_11">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="889.561884" y="342.937332" transform="rotate(-0 889.561884 342.937332)">0.175</text>
+     </g>
+    </g>
+    <g id="M39-F4-xtick_9">
+     <g id="M39-F4-line2d_9">
+      <g>
+       <use xlink:href="#M39-F4-m42dc4b56ba" x="923.456374" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_12">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="923.456374" y="342.937332" transform="rotate(-0 923.456374 342.937332)">0.200</text>
+     </g>
+    </g>
+    <g id="M39-F4-text_13">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="787.878415" y="358.464989" transform="rotate(-0 787.878415 358.464989)">L∞扰动上限</text>
+    </g>
+   </g>
+   <g id="M39-F4-matplotlib.axis_8">
+    <g id="M39-F4-ytick_1">
+     <g id="M39-F4-line2d_10">
+      <defs>
+       <path id="M39-F4-mbd45754bd8" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M39-F4-mbd45754bd8" x="638.742661" y="327.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_14">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="631.742661" y="331.54077" transform="rotate(-0 631.742661 331.54077)">0.0</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_2">
+     <g id="M39-F4-line2d_11">
+      <g>
+       <use xlink:href="#M39-F4-mbd45754bd8" x="638.742661" y="264.034678" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_15">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="631.742661" y="268.431241" transform="rotate(-0 631.742661 268.431241)">0.2</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_3">
+     <g id="M39-F4-line2d_12">
+      <g>
+       <use xlink:href="#M39-F4-mbd45754bd8" x="638.742661" y="200.925149" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_16">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="631.742661" y="205.321712" transform="rotate(-0 631.742661 205.321712)">0.4</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_4">
+     <g id="M39-F4-line2d_13">
+      <g>
+       <use xlink:href="#M39-F4-mbd45754bd8" x="638.742661" y="137.81562" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_17">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="631.742661" y="142.212183" transform="rotate(-0 631.742661 142.212183)">0.6</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_5">
+     <g id="M39-F4-line2d_14">
+      <g>
+       <use xlink:href="#M39-F4-mbd45754bd8" x="638.742661" y="74.706091" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_18">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="631.742661" y="79.102654" transform="rotate(-0 631.742661 79.102654)">0.8</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_6">
+     <g id="M39-F4-line2d_15">
+      <g>
+       <use xlink:href="#M39-F4-mbd45754bd8" x="638.742661" y="11.596562" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_19">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="631.742661" y="15.993125" transform="rotate(-0 631.742661 15.993125)">1.0</text>
+     </g>
+    </g>
+    <g id="M39-F4-text_20">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="609.458598" y="169.370385" transform="rotate(-90 609.458598 169.370385)">相应模型的FGSM准确率</text>
+    </g>
+   </g>
+   <g id="M39-F4-line2d_16">
+    <path d="M 652.300457 36.438665 
+L 720.089436 76.608885 
+L 787.878415 164.877655 
+L 923.456374 309.17332 
+" clip-path="url(#M39-F4-p3798e2b90d)" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="M39-F4-m4f8dd12966" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #1f77b4"/>
+    </defs>
+    <g clip-path="url(#M39-F4-p3798e2b90d)">
+     <use xlink:href="#M39-F4-m4f8dd12966" x="652.300457" y="36.438665" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M39-F4-m4f8dd12966" x="720.089436" y="76.608885" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M39-F4-m4f8dd12966" x="787.878415" y="164.877655" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M39-F4-m4f8dd12966" x="923.456374" y="309.17332" style="fill: #1f77b4; stroke: #1f77b4"/>
+    </g>
+   </g>
+   <g id="M39-F4-line2d_17">
+    <path d="M 652.300457 39.610013 
+L 720.089436 64.980661 
+L 787.878415 105.150881 
+L 923.456374 244.160994 
+" clip-path="url(#M39-F4-p3798e2b90d)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="M39-F4-maf02d45302" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #ff7f0e"/>
+    </defs>
+    <g clip-path="url(#M39-F4-p3798e2b90d)">
+     <use xlink:href="#M39-F4-maf02d45302" x="652.300457" y="39.610013" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M39-F4-maf02d45302" x="720.089436" y="64.980661" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M39-F4-maf02d45302" x="787.878415" y="105.150881" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M39-F4-maf02d45302" x="923.456374" y="244.160994" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+    </g>
+   </g>
+   <g id="M39-F4-patch_12">
+    <path d="M 638.742661 327.144207 
+L 638.742661 11.596562 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M39-F4-patch_13">
+    <path d="M 638.742661 327.144207 
+L 937.014169 327.144207 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M39-F4-legend_1">
+    <g id="M39-F4-patch_14">
+     <path d="M 873.814169 42.764062 
+L 931.414169 42.764062 
+Q 933.014169 42.764062 933.014169 41.164062 
+L 933.014169 17.196562 
+Q 933.014169 15.596562 931.414169 15.596562 
+L 873.814169 15.596562 
+Q 872.214169 15.596562 872.214169 17.196562 
+L 872.214169 41.164062 
+Q 872.214169 42.764062 873.814169 42.764062 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="M39-F4-line2d_18">
+     <path d="M 875.414169 22.391562 
+L 883.414169 22.391562 
+L 891.414169 22.391562 
+" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#M39-F4-m4f8dd12966" x="883.414169" y="22.391562" style="fill: #1f77b4; stroke: #1f77b4"/>
+     </g>
+    </g>
+    <g id="M39-F4-text_21">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="897.814169" y="25.191562" transform="rotate(-0 897.814169 25.191562)">标准训练</text>
+    </g>
+    <g id="M39-F4-line2d_19">
+     <path d="M 875.414169 34.775312 
+L 883.414169 34.775312 
+L 891.414169 34.775312 
+" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#M39-F4-maf02d45302" x="883.414169" y="34.775312" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     </g>
+    </g>
+    <g id="M39-F4-text_22">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="897.814169" y="37.575312" transform="rotate(-0 897.814169 37.575312)">对抗训练</text>
+    </g>
+   </g>
+  </g>
+  <g id="M39-F4-axes_5">
+   <g id="M39-F4-patch_15">
+    <path d="M 163.792542 256.145987 
+L 172.470102 256.145987 
+L 172.470102 82.594783 
+L 163.792542 82.594783 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAA0AAADxCAYAAAAQuz0eAAAAo0lEQVR4nO2XwQnDUBTDvk33X7mF4AXSQ6mCfBcB+ZkkOee8z828ktxlngm1/dGTInRFEYsiFke4eBGLIhZfaosXsShi8SNx8SIWRUBE1J8uRE8RQoioe0L0FCGEiLonRE8RQoioe0L0FCGEiLonRE8Req6IOkJETxFCiKh7QvQUIYSIuidETxFCiKh7QvQUIYSIuidETxFCiKh7uvLvPX0DfQA+nAe+IlF0zAAAAABJRU5ErkJggg==" id="M39-F4-image906e5365c5" transform="scale(1 -1) translate(0 -173.52)" x="163.44" y="-82.08" width="9.36" height="173.52"/>
+   <g id="M39-F4-matplotlib.axis_9"/>
+   <g id="M39-F4-matplotlib.axis_10">
+    <g id="M39-F4-ytick_7">
+     <g id="M39-F4-line2d_20">
+      <defs>
+       <path id="M39-F4-m668330e313" d="M 0 0 
+L 3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="172.470102" y="256.145987" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_23">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="179.470102" y="260.54255" transform="rotate(-0 179.470102 260.54255)">0.0</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_8">
+     <g id="M39-F4-line2d_21">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="172.470102" y="221.435746" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_24">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="179.470102" y="225.832309" transform="rotate(-0 179.470102 225.832309)">0.2</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_9">
+     <g id="M39-F4-line2d_22">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="172.470102" y="186.725505" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_25">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="179.470102" y="191.122068" transform="rotate(-0 179.470102 191.122068)">0.4</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_10">
+     <g id="M39-F4-line2d_23">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="172.470102" y="152.015265" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_26">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="179.470102" y="156.411827" transform="rotate(-0 179.470102 156.411827)">0.6</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_11">
+     <g id="M39-F4-line2d_24">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="172.470102" y="117.305024" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_27">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="179.470102" y="121.701586" transform="rotate(-0 179.470102 121.701586)">0.8</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_12">
+     <g id="M39-F4-line2d_25">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="172.470102" y="82.594783" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_28">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="179.470102" y="86.991345" transform="rotate(-0 179.470102 86.991345)">1.0</text>
+     </g>
+    </g>
+   </g>
+   <g id="M39-F4-LineCollection_1"/>
+   <g id="M39-F4-patch_16">
+    <path d="M 163.792542 256.145987 
+L 168.131322 256.145987 
+L 172.470102 256.145987 
+L 172.470102 82.594783 
+L 168.131322 82.594783 
+L 163.792542 82.594783 
+L 163.792542 256.145987 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M39-F4-axes_6">
+   <g id="M39-F4-patch_17">
+    <path d="M 357.877804 256.145987 
+L 366.555364 256.145987 
+L 366.555364 82.594783 
+L 357.877804 82.594783 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAADxCAYAAAD/eVYgAAAAn0lEQVR4nO2WwQnAMAwDY3P7r9yOYPXX4Lu/IEgySp1znvMBquqsE3T3355UCmbQpQA8oADsUgC6FICDEoBd2uJS+8G6M7hSMIP3EIBdCmClS+0+3BlcKZjBewjALgWw0qV2H+4MrhTM4D0EYJcC0KUAHJQA7NIWl9oP1p3BlYIZvIcA7FIAK11q9+HO4ErBDN5DAHYpgJUutfsw88PgXsUtB75/26taAAAAAElFTkSuQmCC" id="M39-F4-imagecb941a81df" transform="scale(1 -1) translate(0 -173.52)" x="357.84" y="-82.08" width="8.64" height="173.52"/>
+   <g id="M39-F4-matplotlib.axis_11"/>
+   <g id="M39-F4-matplotlib.axis_12">
+    <g id="M39-F4-ytick_13">
+     <g id="M39-F4-line2d_26">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="366.555364" y="256.145987" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_29">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="373.555364" y="260.54255" transform="rotate(-0 373.555364 260.54255)">0.0</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_14">
+     <g id="M39-F4-line2d_27">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="366.555364" y="221.435746" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_30">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="373.555364" y="225.832309" transform="rotate(-0 373.555364 225.832309)">0.2</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_15">
+     <g id="M39-F4-line2d_28">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="366.555364" y="186.725505" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_31">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="373.555364" y="191.122068" transform="rotate(-0 373.555364 191.122068)">0.4</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_16">
+     <g id="M39-F4-line2d_29">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="366.555364" y="152.015265" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_32">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="373.555364" y="156.411827" transform="rotate(-0 373.555364 156.411827)">0.6</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_17">
+     <g id="M39-F4-line2d_30">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="366.555364" y="117.305024" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_33">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="373.555364" y="121.701586" transform="rotate(-0 373.555364 121.701586)">0.8</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_18">
+     <g id="M39-F4-line2d_31">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="366.555364" y="82.594783" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_34">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="373.555364" y="86.991345" transform="rotate(-0 373.555364 86.991345)">1.0</text>
+     </g>
+    </g>
+   </g>
+   <g id="M39-F4-LineCollection_2"/>
+   <g id="M39-F4-patch_18">
+    <path d="M 357.877804 256.145987 
+L 362.216584 256.145987 
+L 366.555364 256.145987 
+L 366.555364 82.594783 
+L 362.216584 82.594783 
+L 357.877804 82.594783 
+L 357.877804 256.145987 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M39-F4-axes_7">
+   <g id="M39-F4-patch_19">
+    <path d="M 551.963066 256.145987 
+L 560.640626 256.145987 
+L 560.640626 82.594783 
+L 551.963066 82.594783 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAADxCAYAAAD/eVYgAAABWUlEQVR4nO2VwXUDQQxChcZdpQUX7bocj3ANHJjHbrJ33gchzeLn+WIJ3wPdJQogCmAntEhYa6VZgkroA2OFKIA9dKsE2EP3HYqDJliPldZD20NDbxqXb7oTx1pmAlTBWvK7VGk9tF5cuS21HLrilg9y6DIToBLanqHtTbf/1YDdEsq+S6UKkBYaeVNadkIfGCvzLJUmaDUDDlgqkVDuDG1fjXWgB16+B8gZKs4SKrAHphFWniXkETrPEvwC5Fkq/yOwRQLtGTj/BEMPzBsr5V0aTVAqoSnfw5gtwT7W0glj3qXKC1324uoAYdxj3fsGTY/b0rhXo+zLV3qGybNEVTDue5i8DCMSaCeUSqB/rOMmcK5fHO33QHtxPLCtvPxqcOJ6YN4uzcf9kNE/pZHvgWmWeIDANEuz8yx95gZToiqYP5hhx2UYmbDdxe23/EOhaOmXNyCMnaAJvqK4Rq44g9QPAAAAAElFTkSuQmCC" id="M39-F4-imagebf4d21e3c0" transform="scale(1 -1) translate(0 -173.52)" x="552.24" y="-82.08" width="8.64" height="173.52"/>
+   <g id="M39-F4-matplotlib.axis_13"/>
+   <g id="M39-F4-matplotlib.axis_14">
+    <g id="M39-F4-ytick_19">
+     <g id="M39-F4-line2d_32">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="560.640626" y="256.145987" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_35">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="567.640626" y="260.54255" transform="rotate(-0 567.640626 260.54255)">-0.10</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_20">
+     <g id="M39-F4-line2d_33">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="560.640626" y="212.758186" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_36">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="567.640626" y="217.154749" transform="rotate(-0 567.640626 217.154749)">-0.05</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_21">
+     <g id="M39-F4-line2d_34">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="560.640626" y="169.370385" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_37">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="567.640626" y="173.766947" transform="rotate(-0 567.640626 173.766947)">0.00</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_22">
+     <g id="M39-F4-line2d_35">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="560.640626" y="125.982584" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_38">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="567.640626" y="130.379146" transform="rotate(-0 567.640626 130.379146)">0.05</text>
+     </g>
+    </g>
+    <g id="M39-F4-ytick_23">
+     <g id="M39-F4-line2d_36">
+      <g>
+       <use xlink:href="#M39-F4-m668330e313" x="560.640626" y="82.594783" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M39-F4-text_39">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="567.640626" y="86.991345" transform="rotate(-0 567.640626 86.991345)">0.10</text>
+     </g>
+    </g>
+   </g>
+   <g id="M39-F4-LineCollection_3"/>
+   <g id="M39-F4-patch_20">
+    <path d="M 551.963066 256.145987 
+L 556.301846 256.145987 
+L 560.640626 256.145987 
+L 560.640626 82.594783 
+L 556.301846 82.594783 
+L 551.963066 82.594783 
+L 551.963066 256.145987 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M39-F4-p580b86f276">
+   <rect x="7.2" y="94.802508" width="149.135754" height="149.135754"/>
+  </clipPath>
+  <clipPath id="M39-F4-p038494b5cd">
+   <rect x="201.285262" y="94.802508" width="149.135754" height="149.135754"/>
+  </clipPath>
+  <clipPath id="M39-F4-pc50005812d">
+   <rect x="395.370524" y="94.802508" width="149.135754" height="149.135754"/>
+  </clipPath>
+  <clipPath id="M39-F4-p3798e2b90d">
+   <rect x="638.742661" y="11.596562" width="298.271509" height="315.547645"/>
+  </clipPath>
+ </defs>
+</svg>

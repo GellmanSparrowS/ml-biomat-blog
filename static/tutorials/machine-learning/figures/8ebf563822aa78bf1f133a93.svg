@@ -1,0 +1,743 @@
+<svg role="img" aria-label="真实CPU剖析与独立计时。上图为预热后3步Adam训练的分析器范围；左下按自身CPU时间列出算子；右下为SGD完整更新的12组计时，每组5次，横线取中位数。两部分的优化器与测量开销不同，不能把范围长度直接相加当作右下的速度。" xmlns:xlink="http://www.w3.org/1999/xlink" width="922.79952pt" height="591.59952pt" viewBox="0 0 922.79952 591.59952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M26-F1-figure_1">
+  <g id="M26-F1-patch_1">
+   <path d="M 0 591.59952 
+L 922.79952 591.59952 
+L 922.79952 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M26-F1-axes_1">
+   <g id="M26-F1-patch_2">
+    <path d="M 88.814375 259.150224 
+L 915.59952 259.150224 
+L 915.59952 59.75175 
+L 88.814375 59.75175 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M26-F1-PolyCollection_1">
+    <path d="M 126.395518 68.815317 
+L 126.395518 108.468423 
+L 173.812618 108.468423 
+L 173.812618 68.815317 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-PolyCollection_2">
+    <path d="M 174.858933 68.815317 
+L 174.858933 108.468423 
+L 183.467253 108.468423 
+L 183.467253 68.815317 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #dd8b38"/>
+   </g>
+   <g id="M26-F1-PolyCollection_3">
+    <path d="M 184.204429 68.815317 
+L 184.204429 108.468423 
+L 271.952222 108.468423 
+L 271.952222 68.815317 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #8a63a2"/>
+   </g>
+   <g id="M26-F1-PolyCollection_4">
+    <path d="M 273.117437 68.815317 
+L 273.117437 108.468423 
+L 387.046887 108.468423 
+L 387.046887 68.815317 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #4c9276"/>
+   </g>
+   <g id="M26-F1-PolyCollection_5">
+    <path d="M 391.493727 139.624434 
+L 391.493727 179.27754 
+L 432.133558 179.27754 
+L 432.133558 139.624434 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-PolyCollection_6">
+    <path d="M 432.942074 139.624434 
+L 432.942074 179.27754 
+L 441.823863 179.27754 
+L 441.823863 139.624434 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #dd8b38"/>
+   </g>
+   <g id="M26-F1-PolyCollection_7">
+    <path d="M 442.584819 139.624434 
+L 442.584819 179.27754 
+L 525.089146 179.27754 
+L 525.089146 139.624434 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #8a63a2"/>
+   </g>
+   <g id="M26-F1-PolyCollection_8">
+    <path d="M 526.135461 139.624434 
+L 526.135461 179.27754 
+L 634.928456 179.27754 
+L 634.928456 139.624434 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #4c9276"/>
+   </g>
+   <g id="M26-F1-PolyCollection_9">
+    <path d="M 638.768908 210.433552 
+L 638.768908 250.086657 
+L 676.031995 250.086657 
+L 676.031995 210.433552 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-PolyCollection_10">
+    <path d="M 676.828621 210.433552 
+L 676.828621 250.086657 
+L 685.79364 250.086657 
+L 685.79364 210.433552 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #dd8b38"/>
+   </g>
+   <g id="M26-F1-PolyCollection_11">
+    <path d="M 686.423807 210.433552 
+L 686.423807 250.086657 
+L 767.382441 250.086657 
+L 767.382441 210.433552 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #8a63a2"/>
+   </g>
+   <g id="M26-F1-PolyCollection_12">
+    <path d="M 768.404976 210.433552 
+L 768.404976 250.086657 
+L 878.018377 250.086657 
+L 878.018377 210.433552 
+z
+" clip-path="url(#M26-F1-padf097fb5e)" style="fill: #4c9276"/>
+   </g>
+   <g id="M26-F1-matplotlib.axis_1">
+    <g id="M26-F1-xtick_1">
+     <g id="M26-F1-line2d_1">
+      <defs>
+       <path id="M26-F1-m700733ce20" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="126.395518" y="259.150224" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_1">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="126.395518" y="274.943349" transform="rotate(-0 126.395518 274.943349)">0</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_2">
+     <g id="M26-F1-line2d_2">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="245.294966" y="259.150224" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_2">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="245.294966" y="274.943349" transform="rotate(-0 245.294966 274.943349)">1</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_3">
+     <g id="M26-F1-line2d_3">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="364.194413" y="259.150224" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_3">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="364.194413" y="274.943349" transform="rotate(-0 364.194413 274.943349)">2</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_4">
+     <g id="M26-F1-line2d_4">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="483.093861" y="259.150224" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_4">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="483.093861" y="274.943349" transform="rotate(-0 483.093861 274.943349)">3</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_5">
+     <g id="M26-F1-line2d_5">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="601.993309" y="259.150224" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_5">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="601.993309" y="274.943349" transform="rotate(-0 601.993309 274.943349)">4</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_6">
+     <g id="M26-F1-line2d_6">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="720.892757" y="259.150224" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_6">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="720.892757" y="274.943349" transform="rotate(-0 720.892757 274.943349)">5</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_7">
+     <g id="M26-F1-line2d_7">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="839.792205" y="259.150224" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_7">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="839.792205" y="274.943349" transform="rotate(-0 839.792205 274.943349)">6</text>
+     </g>
+    </g>
+    <g id="M26-F1-text_8">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="502.206947" y="290.471006" transform="rotate(-0 502.206947 290.471006)">从首个前向开始 / ms</text>
+    </g>
+   </g>
+   <g id="M26-F1-matplotlib.axis_2">
+    <g id="M26-F1-ytick_1">
+     <g id="M26-F1-line2d_8">
+      <defs>
+       <path id="M26-F1-m54c4b6b310" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="88.64187" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_9">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="93.038432" transform="rotate(-0 81.814375 93.038432)">1</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_2">
+     <g id="M26-F1-line2d_9">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="159.450987" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_10">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="163.84755" transform="rotate(-0 81.814375 163.84755)">2</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_3">
+     <g id="M26-F1-line2d_10">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="230.260105" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_11">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="234.656667" transform="rotate(-0 81.814375 234.656667)">3</text>
+     </g>
+    </g>
+    <g id="M26-F1-text_12">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="68.629375" y="159.450987" transform="rotate(-90 68.629375 159.450987)">训练步</text>
+    </g>
+   </g>
+   <g id="M26-F1-line2d_11"/>
+   <g id="M26-F1-line2d_12"/>
+   <g id="M26-F1-line2d_13"/>
+   <g id="M26-F1-line2d_14"/>
+   <g id="M26-F1-patch_3">
+    <path d="M 88.814375 259.150224 
+L 88.814375 59.75175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F1-patch_4">
+    <path d="M 88.814375 259.150224 
+L 915.59952 259.150224 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F1-text_13">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="502.206947" y="17.75175" transform="rotate(-0 502.206947 17.75175)">CPU 实际分析器范围（包含测量开销）</text>
+   </g>
+   <g id="M26-F1-legend_1">
+    <g id="M26-F1-line2d_15">
+     <path d="M 352.606947 22.751272 
+L 363.606947 22.751272 
+L 374.606947 22.751272 
+" style="fill: none; stroke: #266d86; stroke-width: 7; stroke-linecap: square"/>
+    </g>
+    <g id="M26-F1-text_14">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="383.406947" y="26.601272" transform="rotate(-0 383.406947 26.601272)">前向</text>
+    </g>
+    <g id="M26-F1-line2d_16">
+     <path d="M 427.406947 22.751272 
+L 438.406947 22.751272 
+L 449.406947 22.751272 
+" style="fill: none; stroke: #dd8b38; stroke-width: 7; stroke-linecap: square"/>
+    </g>
+    <g id="M26-F1-text_15">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="458.206947" y="26.601272" transform="rotate(-0 458.206947 26.601272)">损失</text>
+    </g>
+    <g id="M26-F1-line2d_17">
+     <path d="M 502.206947 22.751272 
+L 513.206947 22.751272 
+L 524.206947 22.751272 
+" style="fill: none; stroke: #8a63a2; stroke-width: 7; stroke-linecap: square"/>
+    </g>
+    <g id="M26-F1-text_16">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="533.006947" y="26.601272" transform="rotate(-0 533.006947 26.601272)">反向</text>
+    </g>
+    <g id="M26-F1-line2d_18">
+     <path d="M 577.006947 22.751272 
+L 588.006947 22.751272 
+L 599.006947 22.751272 
+" style="fill: none; stroke: #4c9276; stroke-width: 7; stroke-linecap: square"/>
+    </g>
+    <g id="M26-F1-text_17">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="607.806947" y="26.601272" transform="rotate(-0 607.806947 26.601272)">参数更新</text>
+    </g>
+   </g>
+  </g>
+  <g id="M26-F1-axes_2">
+   <g id="M26-F1-patch_5">
+    <path d="M 88.814375 550.344208 
+L 475.348651 550.344208 
+L 475.348651 315.757767 
+L 88.814375 315.757767 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M26-F1-patch_6">
+    <path d="M 88.814375 326.420787 
+L 456.942257 326.420787 
+L 456.942257 351.510246 
+L 88.814375 351.510246 
+z
+" clip-path="url(#M26-F1-p9fc2bba56d)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-patch_7">
+    <path d="M 88.814375 357.782611 
+L 372.874392 357.782611 
+L 372.874392 382.872069 
+L 88.814375 382.872069 
+z
+" clip-path="url(#M26-F1-p9fc2bba56d)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-patch_8">
+    <path d="M 88.814375 389.144434 
+L 305.934528 389.144434 
+L 305.934528 414.233893 
+L 88.814375 414.233893 
+z
+" clip-path="url(#M26-F1-p9fc2bba56d)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-patch_9">
+    <path d="M 88.814375 420.506258 
+L 302.707514 420.506258 
+L 302.707514 445.595717 
+L 88.814375 445.595717 
+z
+" clip-path="url(#M26-F1-p9fc2bba56d)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-patch_10">
+    <path d="M 88.814375 451.868081 
+L 277.636094 451.868081 
+L 277.636094 476.95754 
+L 88.814375 476.95754 
+z
+" clip-path="url(#M26-F1-p9fc2bba56d)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-patch_11">
+    <path d="M 88.814375 483.229905 
+L 239.656616 483.229905 
+L 239.656616 508.319364 
+L 88.814375 508.319364 
+z
+" clip-path="url(#M26-F1-p9fc2bba56d)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-patch_12">
+    <path d="M 88.814375 514.591729 
+L 228.817157 514.591729 
+L 228.817157 539.681187 
+L 88.814375 539.681187 
+z
+" clip-path="url(#M26-F1-p9fc2bba56d)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F1-matplotlib.axis_3">
+    <g id="M26-F1-xtick_8">
+     <g id="M26-F1-line2d_19">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="88.814375" y="550.344208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_18">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="88.814375" y="566.137332" transform="rotate(-0 88.814375 566.137332)">0.0</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_9">
+     <g id="M26-F1-line2d_20">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="171.558336" y="550.344208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_19">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="171.558336" y="566.137332" transform="rotate(-0 171.558336 566.137332)">0.1</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_10">
+     <g id="M26-F1-line2d_21">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="254.302297" y="550.344208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_20">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="254.302297" y="566.137332" transform="rotate(-0 254.302297 566.137332)">0.2</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_11">
+     <g id="M26-F1-line2d_22">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="337.046257" y="550.344208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_21">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="337.046257" y="566.137332" transform="rotate(-0 337.046257 566.137332)">0.3</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_12">
+     <g id="M26-F1-line2d_23">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="419.790218" y="550.344208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_22">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="419.790218" y="566.137332" transform="rotate(-0 419.790218 566.137332)">0.4</text>
+     </g>
+    </g>
+    <g id="M26-F1-text_23">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="282.081513" y="581.664989" transform="rotate(-0 282.081513 581.664989)">三步累计自身 CPU 时间 / ms</text>
+    </g>
+   </g>
+   <g id="M26-F1-matplotlib.axis_4">
+    <g id="M26-F1-ytick_4">
+     <g id="M26-F1-line2d_24">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="338.965516" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_24">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="343.362079" transform="rotate(-0 81.814375 343.362079)">aten::mm</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_5">
+     <g id="M26-F1-line2d_25">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="370.32734" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_25">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="374.723903" transform="rotate(-0 81.814375 374.723903)">aten::addmm</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_6">
+     <g id="M26-F1-line2d_26">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="401.689164" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_26">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="406.048773" transform="rotate(-0 81.814375 406.048773)">aten::_to_copy</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_7">
+     <g id="M26-F1-line2d_27">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="433.050987" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_27">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="437.44755" transform="rotate(-0 81.814375 437.44755)">aten::div</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_8">
+     <g id="M26-F1-line2d_28">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="464.412811" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_28">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="468.809373" transform="rotate(-0 81.814375 468.809373)">aten::to</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_9">
+     <g id="M26-F1-line2d_29">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="495.774634" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_29">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="500.171197" transform="rotate(-0 81.814375 500.171197)">aten::sqrt</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_10">
+     <g id="M26-F1-line2d_30">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="88.814375" y="527.136458" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_30">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="81.814375" y="531.533021" transform="rotate(-0 81.814375 531.533021)">aten::add_</text>
+     </g>
+    </g>
+   </g>
+   <g id="M26-F1-patch_13">
+    <path d="M 88.814375 550.344208 
+L 88.814375 315.757767 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F1-patch_14">
+    <path d="M 88.814375 550.344208 
+L 475.348651 550.344208 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M26-F1-axes_3">
+   <g id="M26-F1-patch_15">
+    <path d="M 529.065244 550.344208 
+L 915.59952 550.344208 
+L 915.59952 315.757767 
+L 529.065244 315.757767 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M26-F1-PathCollection_1">
+    <defs>
+     <path id="M26-F1-mf022a34fa7" d="M 0 2.12132 
+C 0.562581 2.12132 1.102195 1.897805 1.5 1.5 
+C 1.897805 1.102195 2.12132 0.562581 2.12132 0 
+C 2.12132 -0.562581 1.897805 -1.102195 1.5 -1.5 
+C 1.102195 -1.897805 0.562581 -2.12132 0 -2.12132 
+C -0.562581 -2.12132 -1.102195 -1.897805 -1.5 -1.5 
+C -1.897805 -1.102195 -2.12132 -0.562581 -2.12132 0 
+C -2.12132 0.562581 -1.897805 1.102195 -1.5 1.5 
+C -1.102195 1.897805 -0.562581 2.12132 0 2.12132 
+z
+" style="stroke: #266d86; stroke-opacity: 0.7"/>
+    </defs>
+    <g clip-path="url(#M26-F1-p1d0f531002)">
+     <use xlink:href="#M26-F1-mf022a34fa7" x="564.204724" y="539.133103" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="566.334389" y="539.43355" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="568.464055" y="539.039258" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="570.59372" y="536.325956" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="572.723386" y="538.77485" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="574.853051" y="539.370035" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="576.982717" y="538.721683" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="579.112382" y="539.477083" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="581.242047" y="539.681187" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="583.371713" y="539.513479" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="585.501378" y="539.442471" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-mf022a34fa7" x="587.631044" y="539.606254" style="fill: #266d86; fill-opacity: 0.7; stroke: #266d86; stroke-opacity: 0.7"/>
+    </g>
+   </g>
+   <g id="M26-F1-PathCollection_2">
+    <defs>
+     <path id="M26-F1-m7c2960854c" d="M 0 2.12132 
+C 0.562581 2.12132 1.102195 1.897805 1.5 1.5 
+C 1.897805 1.102195 2.12132 0.562581 2.12132 0 
+C 2.12132 -0.562581 1.897805 -1.102195 1.5 -1.5 
+C 1.102195 -1.897805 0.562581 -2.12132 0 -2.12132 
+C -0.562581 -2.12132 -1.102195 -1.897805 -1.5 -1.5 
+C -1.897805 -1.102195 -2.12132 -0.562581 -2.12132 0 
+C -2.12132 0.562581 -1.897805 1.102195 -1.5 1.5 
+C -1.102195 1.897805 -0.562581 2.12132 0 2.12132 
+z
+" style="stroke: #dd8b38; stroke-opacity: 0.7"/>
+    </defs>
+    <g clip-path="url(#M26-F1-p1d0f531002)">
+     <use xlink:href="#M26-F1-m7c2960854c" x="710.619222" y="366.637175" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="712.748888" y="363.876416" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="714.878553" y="367.107115" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="717.008219" y="364.241091" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="719.137884" y="366.012374" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="721.267549" y="360.699954" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="723.397215" y="362.255357" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="725.52688" y="369.044678" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="727.656546" y="331.254347" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="729.786211" y="326.420787" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="731.915877" y="329.202243" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m7c2960854c" x="734.045542" y="341.811747" style="fill: #dd8b38; fill-opacity: 0.7; stroke: #dd8b38; stroke-opacity: 0.7"/>
+    </g>
+   </g>
+   <g id="M26-F1-PathCollection_3">
+    <defs>
+     <path id="M26-F1-m1bd2731bc2" d="M 0 2.12132 
+C 0.562581 2.12132 1.102195 1.897805 1.5 1.5 
+C 1.897805 1.102195 2.12132 0.562581 2.12132 0 
+C 2.12132 -0.562581 1.897805 -1.102195 1.5 -1.5 
+C 1.102195 -1.897805 0.562581 -2.12132 0 -2.12132 
+C -0.562581 -2.12132 -1.102195 -1.897805 -1.5 -1.5 
+C -1.897805 -1.102195 -2.12132 -0.562581 -2.12132 0 
+C -2.12132 0.562581 -1.897805 1.102195 -1.5 1.5 
+C -1.102195 1.897805 -0.562581 2.12132 0 2.12132 
+z
+" style="stroke: #8a63a2; stroke-opacity: 0.7"/>
+    </defs>
+    <g clip-path="url(#M26-F1-p1d0f531002)">
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="857.033721" y="515.07699" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="859.163386" y="526.938231" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="861.293052" y="528.907195" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="863.422717" y="528.756614" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="865.552382" y="528.43226" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="867.682048" y="529.526287" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="869.811713" y="528.935027" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="871.941379" y="530.08686" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="874.071044" y="527.083102" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="876.20071" y="529.351086" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="878.330375" y="528.370886" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+     <use xlink:href="#M26-F1-m1bd2731bc2" x="880.46004" y="529.026731" style="fill: #8a63a2; fill-opacity: 0.7; stroke: #8a63a2; stroke-opacity: 0.7"/>
+    </g>
+   </g>
+   <g id="M26-F1-matplotlib.axis_5">
+    <g id="M26-F1-xtick_13">
+     <g id="M26-F1-line2d_31">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="575.917884" y="550.344208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_31">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="575.917884" y="566.137332" transform="rotate(-0 575.917884 566.137332)">FP32</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_14">
+     <g id="M26-F1-line2d_32">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="722.332382" y="550.344208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_32">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="722.332382" y="566.137332" transform="rotate(-0 722.332382 566.137332)">CPU BF16</text>
+     </g>
+    </g>
+    <g id="M26-F1-xtick_15">
+     <g id="M26-F1-line2d_33">
+      <g>
+       <use xlink:href="#M26-F1-m700733ce20" x="868.746881" y="550.344208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_33">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="868.746881" y="566.137332" transform="rotate(-0 868.746881 566.137332)">重计算</text>
+     </g>
+    </g>
+   </g>
+   <g id="M26-F1-matplotlib.axis_6">
+    <g id="M26-F1-ytick_11">
+     <g id="M26-F1-line2d_34">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="529.065244" y="550.043047" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_34">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="522.065244" y="554.439609" transform="rotate(-0 522.065244 554.439609)">0</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_12">
+     <g id="M26-F1-line2d_35">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="529.065244" y="514.360485" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_35">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="522.065244" y="518.757047" transform="rotate(-0 522.065244 518.757047)">2</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_13">
+     <g id="M26-F1-line2d_36">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="529.065244" y="478.677923" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_36">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="522.065244" y="483.074485" transform="rotate(-0 522.065244 483.074485)">4</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_14">
+     <g id="M26-F1-line2d_37">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="529.065244" y="442.99536" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_37">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="522.065244" y="447.391923" transform="rotate(-0 522.065244 447.391923)">6</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_15">
+     <g id="M26-F1-line2d_38">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="529.065244" y="407.312798" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_38">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="522.065244" y="411.709361" transform="rotate(-0 522.065244 411.709361)">8</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_16">
+     <g id="M26-F1-line2d_39">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="529.065244" y="371.630236" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_39">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="522.065244" y="376.026799" transform="rotate(-0 522.065244 376.026799)">10</text>
+     </g>
+    </g>
+    <g id="M26-F1-ytick_17">
+     <g id="M26-F1-line2d_40">
+      <g>
+       <use xlink:href="#M26-F1-m54c4b6b310" x="529.065244" y="335.947674" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F1-text_40">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="522.065244" y="340.344237" transform="rotate(-0 522.065244 340.344237)">12</text>
+     </g>
+    </g>
+    <g id="M26-F1-text_41">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="502.429776" y="433.050987" transform="rotate(-90 502.429776 433.050987)">每次更新 / ms</text>
+    </g>
+   </g>
+   <g id="M26-F1-line2d_41">
+    <path d="M 546.634984 539.401793 
+L 605.200784 539.401793 
+" clip-path="url(#M26-F1-p1d0f531002)" style="fill: none; stroke: #243749; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F1-line2d_42">
+    <path d="M 693.049483 363.065886 
+L 751.615282 363.065886 
+" clip-path="url(#M26-F1-p1d0f531002)" style="fill: none; stroke: #243749; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F1-line2d_43">
+    <path d="M 839.463981 528.831904 
+L 898.02978 528.831904 
+" clip-path="url(#M26-F1-p1d0f531002)" style="fill: none; stroke: #243749; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F1-patch_16">
+    <path d="M 529.065244 550.344208 
+L 529.065244 315.757767 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F1-patch_17">
+    <path d="M 529.065244 550.344208 
+L 915.59952 550.344208 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F1-text_42">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="722.332382" y="309.757767" transform="rotate(-0 722.332382 309.757767)">12组计时，每组5次更新</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M26-F1-padf097fb5e">
+   <rect x="88.814375" y="59.75175" width="826.785145" height="199.398474"/>
+  </clipPath>
+  <clipPath id="M26-F1-p9fc2bba56d">
+   <rect x="88.814375" y="315.757767" width="386.534276" height="234.586441"/>
+  </clipPath>
+  <clipPath id="M26-F1-p1d0f531002">
+   <rect x="529.065244" y="315.757767" width="386.534276" height="234.586441"/>
+  </clipPath>
+ </defs>
+</svg>

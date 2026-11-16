@@ -1,0 +1,1154 @@
+<svg role="img" aria-label="左：同一冷却方程的解析与Euler结果，k=.35min⁻¹；中：PINN只在τ≤1训练，虚线外检查到τ=2；右：实际残差训练曲线。" xmlns:xlink="http://www.w3.org/1999/xlink" width="980.39952pt" height="296.39952pt" viewBox="0 0 980.39952 296.39952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M29-F2-figure_1">
+  <g id="M29-F2-patch_1">
+   <path d="M 0 296.39952 
+L 980.39952 296.39952 
+L 980.39952 0 
+L 0 0 
+z
+" style="fill: #faf9f5"/>
+  </g>
+  <g id="M29-F2-axes_1">
+   <g id="M29-F2-patch_2">
+    <path d="M 50.7875 255.144207 
+L 325.889892 255.144207 
+L 325.889892 23.75175 
+L 50.7875 23.75175 
+z
+" style="fill: #faf9f5"/>
+   </g>
+   <g id="M29-F2-matplotlib.axis_1">
+    <g id="M29-F2-xtick_1">
+     <g id="M29-F2-line2d_1">
+      <defs>
+       <path id="M29-F2-md077f44671" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="63.292154" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_1">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="63.292154" y="270.937332" transform="rotate(-0 63.292154 270.937332)">0</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_2">
+     <g id="M29-F2-line2d_2">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="104.974335" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_2">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="104.974335" y="270.937332" transform="rotate(-0 104.974335 270.937332)">2</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_3">
+     <g id="M29-F2-line2d_3">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="146.656515" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_3">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="146.656515" y="270.937332" transform="rotate(-0 146.656515 270.937332)">4</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_4">
+     <g id="M29-F2-line2d_4">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="188.338696" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_4">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="188.338696" y="270.937332" transform="rotate(-0 188.338696 270.937332)">6</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_5">
+     <g id="M29-F2-line2d_5">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="230.020877" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_5">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="230.020877" y="270.937332" transform="rotate(-0 230.020877 270.937332)">8</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_6">
+     <g id="M29-F2-line2d_6">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="271.703057" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_6">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="271.703057" y="270.937332" transform="rotate(-0 271.703057 270.937332)">10</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_7">
+     <g id="M29-F2-line2d_7">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="313.385238" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_7">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="313.385238" y="270.937332" transform="rotate(-0 313.385238 270.937332)">12</text>
+     </g>
+    </g>
+    <g id="M29-F2-text_8">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="188.338696" y="286.464989" transform="rotate(-0 188.338696 286.464989)">时间 / min</text>
+    </g>
+   </g>
+   <g id="M29-F2-matplotlib.axis_2">
+    <g id="M29-F2-ytick_1">
+     <g id="M29-F2-line2d_8">
+      <defs>
+       <path id="M29-F2-m68a638e920" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="50.7875" y="235.520014" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_9">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="43.7875" y="239.916577" transform="rotate(-0 43.7875 239.916577)">−40</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_2">
+     <g id="M29-F2-line2d_9">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="50.7875" y="205.165501" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_10">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="43.7875" y="209.562063" transform="rotate(-0 43.7875 209.562063)">−20</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_3">
+     <g id="M29-F2-line2d_10">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="50.7875" y="174.810987" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_11">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="43.7875" y="179.20755" transform="rotate(-0 43.7875 179.20755)">0</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_4">
+     <g id="M29-F2-line2d_11">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="50.7875" y="144.456474" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_12">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="43.7875" y="148.853036" transform="rotate(-0 43.7875 148.853036)">20</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_5">
+     <g id="M29-F2-line2d_12">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="50.7875" y="114.10196" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_13">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="43.7875" y="118.498522" transform="rotate(-0 43.7875 118.498522)">40</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_6">
+     <g id="M29-F2-line2d_13">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="50.7875" y="83.747446" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_14">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="43.7875" y="88.144009" transform="rotate(-0 43.7875 88.144009)">60</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_7">
+     <g id="M29-F2-line2d_14">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="50.7875" y="53.392933" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_15">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="43.7875" y="57.789495" transform="rotate(-0 43.7875 57.789495)">80</text>
+     </g>
+    </g>
+    <g id="M29-F2-text_16">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="15.993125" y="139.447979" transform="rotate(-90 15.993125 139.447979)">温度 / °C</text>
+    </g>
+   </g>
+   <g id="M29-F2-line2d_15">
+    <path d="M 63.292154 53.392933 
+L 67.04355 58.952956 
+L 71.420179 65.012065 
+L 75.796808 70.641802 
+L 80.173437 75.872594 
+L 84.550066 80.732712 
+L 88.926695 85.248423 
+L 93.303324 89.444134 
+L 97.679953 93.34252 
+L 102.056582 96.964652 
+L 106.433211 100.330106 
+L 111.435073 103.885312 
+L 116.436934 107.154079 
+L 121.438796 110.159486 
+L 126.440658 112.922751 
+L 132.067752 115.766219 
+L 137.694847 118.353284 
+L 143.321941 120.707068 
+L 149.574268 123.074301 
+L 155.826595 125.205579 
+L 162.704155 127.305456 
+L 169.581715 129.176279 
+L 177.084507 130.985227 
+L 185.212532 132.704073 
+L 193.96579 134.310697 
+L 203.344281 135.789172 
+L 213.348004 137.129537 
+L 223.97696 138.327315 
+L 235.856382 139.435833 
+L 248.986269 140.429329 
+L 263.366621 141.293358 
+L 280.247904 142.074195 
+L 299.630118 142.736072 
+L 313.385238 143.090923 
+L 313.385238 143.090923 
+" clip-path="url(#M29-F2-p2dd4298e9b)" style="fill: none; stroke: #183a4c; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-line2d_16">
+    <path d="M 63.292154 53.392933 
+L 84.133244 85.265172 
+L 104.974335 105.982127 
+L 125.815425 119.448149 
+L 146.656515 128.201062 
+L 167.497606 133.890456 
+L 188.338696 137.588562 
+L 209.179786 139.992331 
+L 230.020877 141.554781 
+L 250.861967 142.570373 
+L 271.703057 143.230508 
+L 292.544148 143.659596 
+L 313.385238 143.938503 
+" clip-path="url(#M29-F2-p2dd4298e9b)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #267b7d; stroke-width: 1.5"/>
+    <defs>
+     <path id="M29-F2-me9b82d6371" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #267b7d"/>
+    </defs>
+    <g clip-path="url(#M29-F2-p2dd4298e9b)">
+     <use xlink:href="#M29-F2-me9b82d6371" x="63.292154" y="53.392933" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="84.133244" y="85.265172" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="104.974335" y="105.982127" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="125.815425" y="119.448149" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="146.656515" y="128.201062" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="167.497606" y="133.890456" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="188.338696" y="137.588562" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="209.179786" y="139.992331" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="230.020877" y="141.554781" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="250.861967" y="142.570373" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="271.703057" y="143.230508" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="292.544148" y="143.659596" style="fill: #267b7d; stroke: #267b7d"/>
+     <use xlink:href="#M29-F2-me9b82d6371" x="313.385238" y="143.938503" style="fill: #267b7d; stroke: #267b7d"/>
+    </g>
+   </g>
+   <g id="M29-F2-line2d_17">
+    <path d="M 63.292154 53.392933 
+L 188.338696 244.626369 
+L 313.385238 34.269589 
+" clip-path="url(#M29-F2-p2dd4298e9b)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #bd653f; stroke-width: 1.5"/>
+    <defs>
+     <path id="M29-F2-mdbdd8e6fa5" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #bd653f"/>
+    </defs>
+    <g clip-path="url(#M29-F2-p2dd4298e9b)">
+     <use xlink:href="#M29-F2-mdbdd8e6fa5" x="63.292154" y="53.392933" style="fill: #bd653f; stroke: #bd653f"/>
+     <use xlink:href="#M29-F2-mdbdd8e6fa5" x="188.338696" y="244.626369" style="fill: #bd653f; stroke: #bd653f"/>
+     <use xlink:href="#M29-F2-mdbdd8e6fa5" x="313.385238" y="34.269589" style="fill: #bd653f; stroke: #bd653f"/>
+    </g>
+   </g>
+   <g id="M29-F2-line2d_18">
+    <path d="M 50.7875 144.456474 
+L 325.889892 144.456474 
+" clip-path="url(#M29-F2-p2dd4298e9b)" style="fill: none; stroke: #aaaaaa; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-patch_3">
+    <path d="M 50.7875 255.144207 
+L 50.7875 23.75175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-patch_4">
+    <path d="M 50.7875 255.144207 
+L 325.889892 255.144207 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-text_17">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="188.338696" y="17.75175" transform="rotate(-0 188.338696 17.75175)">A  步长改变数值行为</text>
+   </g>
+   <g id="M29-F2-legend_1">
+    <g id="M29-F2-patch_5">
+     <path d="M 56.3875 251.144207 
+L 118.9575 251.144207 
+Q 120.5575 251.144207 120.5575 249.544207 
+L 120.5575 213.192957 
+Q 120.5575 211.592957 118.9575 211.592957 
+L 56.3875 211.592957 
+Q 54.7875 211.592957 54.7875 213.192957 
+L 54.7875 249.544207 
+Q 54.7875 251.144207 56.3875 251.144207 
+z
+" style="fill: #faf9f5; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="M29-F2-line2d_19">
+     <path d="M 57.9875 218.387957 
+L 65.9875 218.387957 
+L 73.9875 218.387957 
+" style="fill: none; stroke: #183a4c; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="M29-F2-text_18">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: start" x="80.3875" y="221.187957" transform="rotate(-0 80.3875 221.187957)">解析解</text>
+    </g>
+    <g id="M29-F2-line2d_20">
+     <path d="M 57.9875 230.771707 
+L 65.9875 230.771707 
+L 73.9875 230.771707 
+" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #267b7d; stroke-width: 1.5"/>
+     <g>
+      <use xlink:href="#M29-F2-me9b82d6371" x="65.9875" y="230.771707" style="fill: #267b7d; stroke: #267b7d"/>
+     </g>
+    </g>
+    <g id="M29-F2-text_19">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: start" x="80.3875" y="233.571707" transform="rotate(-0 80.3875 233.571707)">Euler h=1</text>
+    </g>
+    <g id="M29-F2-line2d_21">
+     <path d="M 57.9875 243.155457 
+L 65.9875 243.155457 
+L 73.9875 243.155457 
+" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #bd653f; stroke-width: 1.5"/>
+     <g>
+      <use xlink:href="#M29-F2-mdbdd8e6fa5" x="65.9875" y="243.155457" style="fill: #bd653f; stroke: #bd653f"/>
+     </g>
+    </g>
+    <g id="M29-F2-text_20">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: start" x="80.3875" y="245.955457" transform="rotate(-0 80.3875 245.955457)">Euler h=6</text>
+    </g>
+   </g>
+  </g>
+  <g id="M29-F2-axes_2">
+   <g id="M29-F2-patch_6">
+    <path d="M 370.44708 255.144207 
+L 645.549472 255.144207 
+L 645.549472 23.75175 
+L 370.44708 23.75175 
+z
+" style="fill: #faf9f5"/>
+   </g>
+   <g id="M29-F2-matplotlib.axis_3">
+    <g id="M29-F2-xtick_8">
+     <g id="M29-F2-line2d_22">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="382.951734" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_21">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="382.951734" y="270.937332" transform="rotate(-0 382.951734 270.937332)">0.0</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_9">
+     <g id="M29-F2-line2d_23">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="445.475005" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_22">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="445.475005" y="270.937332" transform="rotate(-0 445.475005 270.937332)">0.5</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_10">
+     <g id="M29-F2-line2d_24">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="507.998276" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_23">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="507.998276" y="270.937332" transform="rotate(-0 507.998276 270.937332)">1.0</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_11">
+     <g id="M29-F2-line2d_25">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="570.521547" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_24">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="570.521547" y="270.937332" transform="rotate(-0 570.521547 270.937332)">1.5</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_12">
+     <g id="M29-F2-line2d_26">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="633.044817" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_25">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="633.044817" y="270.937332" transform="rotate(-0 633.044817 270.937332)">2.0</text>
+     </g>
+    </g>
+    <g id="M29-F2-text_26">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="507.998276" y="286.464989" transform="rotate(-0 507.998276 286.464989)">无量纲时间 τ</text>
+    </g>
+   </g>
+   <g id="M29-F2-matplotlib.axis_4">
+    <g id="M29-F2-ytick_8">
+     <g id="M29-F2-line2d_27">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="370.44708" y="244.818364" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_27">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="363.44708" y="249.214927" transform="rotate(-0 363.44708 249.214927)">0.0</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_9">
+     <g id="M29-F2-line2d_28">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="370.44708" y="202.708609" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_28">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="363.44708" y="207.105172" transform="rotate(-0 363.44708 207.105172)">0.2</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_10">
+     <g id="M29-F2-line2d_29">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="370.44708" y="160.598854" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_29">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="363.44708" y="164.995417" transform="rotate(-0 363.44708 164.995417)">0.4</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_11">
+     <g id="M29-F2-line2d_30">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="370.44708" y="118.489099" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_30">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="363.44708" y="122.885662" transform="rotate(-0 363.44708 122.885662)">0.6</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_12">
+     <g id="M29-F2-line2d_31">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="370.44708" y="76.379344" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_31">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="363.44708" y="80.775907" transform="rotate(-0 363.44708 80.775907)">0.8</text>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_13">
+     <g id="M29-F2-line2d_32">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="370.44708" y="34.269589" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_32">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: end" x="363.44708" y="38.666151" transform="rotate(-0 363.44708 38.666151)">1.0</text>
+     </g>
+    </g>
+    <g id="M29-F2-text_33">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="341.163017" y="139.447979" transform="rotate(-90 341.163017 139.447979)">无量纲温差 u</text>
+    </g>
+   </g>
+   <g id="M29-F2-line2d_33">
+    <path d="M 382.951734 34.269589 
+L 386.077897 51.909603 
+L 389.204061 68.071717 
+L 392.330224 82.87975 
+L 395.456388 96.44715 
+L 398.582552 108.877858 
+L 401.708715 120.267107 
+L 404.834879 130.702152 
+L 407.961042 140.262937 
+L 411.087206 149.022708 
+L 414.213369 157.048576 
+L 417.339533 164.402028 
+L 420.465696 171.1394 
+L 423.59186 177.312306 
+L 426.718023 182.96804 
+L 429.844187 188.14993 
+L 432.970351 192.897675 
+L 436.096514 197.247649 
+L 439.222678 201.233177 
+L 442.348841 204.884794 
+L 445.475005 208.230473 
+L 448.601168 211.295848 
+L 452.352564 214.637221 
+L 456.103961 217.645541 
+L 459.855357 220.354005 
+L 463.606753 222.792502 
+L 467.35815 224.98794 
+L 471.734778 227.274271 
+L 476.111407 229.297001 
+L 480.488036 231.086523 
+L 485.489898 232.880475 
+L 490.49176 234.440062 
+L 496.118854 235.952421 
+L 501.745949 237.244394 
+L 507.998276 238.460342 
+L 514.875835 239.573668 
+L 522.378628 240.567096 
+L 531.131886 241.490877 
+L 541.135609 242.303504 
+L 552.389798 242.983047 
+L 565.519685 243.547474 
+L 581.775735 244.012051 
+L 602.408415 244.36578 
+L 631.169119 244.616019 
+L 633.044817 244.626369 
+L 633.044817 244.626369 
+" clip-path="url(#M29-F2-p441058def9)" style="fill: none; stroke: #183a4c; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-line2d_34">
+    <path d="M 382.951734 34.269589 
+L 386.077897 51.486673 
+L 389.204061 67.567852 
+L 392.330224 82.497564 
+L 395.456388 96.282759 
+L 398.582552 108.951315 
+L 401.708715 120.548978 
+L 404.834879 131.135342 
+L 407.961042 140.77945 
+L 411.087206 149.555535 
+L 414.213369 157.539299 
+L 417.339533 164.804965 
+L 420.465696 171.423136 
+L 423.59186 177.459434 
+L 426.718023 182.973771 
+L 429.844187 188.02011 
+L 432.970351 192.646569 
+L 436.096514 196.895726 
+L 439.222678 200.805061 
+L 442.348841 204.407434 
+L 446.100237 208.365278 
+L 449.851634 211.965032 
+L 453.60303 215.242915 
+L 457.354426 218.229548 
+L 461.105822 220.950772 
+L 464.857219 223.428357 
+L 469.233848 226.035187 
+L 473.610477 228.359244 
+L 477.987106 230.420068 
+L 482.363735 232.233464 
+L 486.740364 233.812171 
+L 491.116992 235.166399 
+L 495.493621 236.304289 
+L 499.87025 237.232293 
+L 504.246879 237.955481 
+L 508.623508 238.477809 
+L 513.000137 238.802331 
+L 518.001999 238.93397 
+L 523.003861 238.812862 
+L 528.005722 238.440853 
+L 533.007584 237.81924 
+L 538.009446 236.948935 
+L 543.011307 235.830584 
+L 548.013169 234.464677 
+L 553.015031 232.851622 
+L 558.016892 230.991819 
+L 563.018754 228.885709 
+L 568.020616 226.533815 
+L 573.022477 223.936776 
+L 578.024339 221.095372 
+L 583.026201 218.010539 
+L 588.028062 214.683386 
+L 593.029924 211.115202 
+L 598.657018 206.814728 
+L 604.284113 202.213443 
+L 609.911207 197.31402 
+L 615.538302 192.119415 
+L 621.165396 186.632866 
+L 626.79249 180.857872 
+L 633.044817 174.107481 
+L 633.044817 174.107481 
+" clip-path="url(#M29-F2-p441058def9)" style="fill: none; stroke: #267b7d; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-line2d_35">
+    <path d="M 507.998276 255.144207 
+L 507.998276 23.75175 
+" clip-path="url(#M29-F2-p441058def9)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #bd653f; stroke-width: 1.5"/>
+   </g>
+   <g id="M29-F2-patch_7">
+    <path d="M 370.44708 255.144207 
+L 370.44708 23.75175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-patch_8">
+    <path d="M 370.44708 255.144207 
+L 645.549472 255.144207 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-text_34">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="507.998276" y="17.75175" transform="rotate(-0 507.998276 17.75175)">B  训练区间与外推</text>
+   </g>
+   <g id="M29-F2-legend_2">
+    <g id="M29-F2-patch_9">
+     <path d="M 590.349472 54.91925 
+L 639.949472 54.91925 
+Q 641.549472 54.91925 641.549472 53.31925 
+L 641.549472 29.35175 
+Q 641.549472 27.75175 639.949472 27.75175 
+L 590.349472 27.75175 
+Q 588.749472 27.75175 588.749472 29.35175 
+L 588.749472 53.31925 
+Q 588.749472 54.91925 590.349472 54.91925 
+z
+" style="fill: #faf9f5; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="M29-F2-line2d_36">
+     <path d="M 591.949472 34.54675 
+L 599.949472 34.54675 
+L 607.949472 34.54675 
+" style="fill: none; stroke: #183a4c; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="M29-F2-text_35">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: start" x="614.349472" y="37.34675" transform="rotate(-0 614.349472 37.34675)">解析解</text>
+    </g>
+    <g id="M29-F2-line2d_37">
+     <path d="M 591.949472 46.9305 
+L 599.949472 46.9305 
+L 607.949472 46.9305 
+" style="fill: none; stroke: #267b7d; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="M29-F2-text_36">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: start" x="614.349472" y="49.7305" transform="rotate(-0 614.349472 49.7305)">PINN</text>
+    </g>
+   </g>
+  </g>
+  <g id="M29-F2-axes_3">
+   <g id="M29-F2-patch_10">
+    <path d="M 698.097128 255.144207 
+L 973.19952 255.144207 
+L 973.19952 23.75175 
+L 698.097128 23.75175 
+z
+" style="fill: #faf9f5"/>
+   </g>
+   <g id="M29-F2-matplotlib.axis_5">
+    <g id="M29-F2-xtick_13">
+     <g id="M29-F2-line2d_38">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="710.601782" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_37">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="710.601782" y="270.937332" transform="rotate(-0 710.601782 270.937332)">0</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_14">
+     <g id="M29-F2-line2d_39">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="750.680802" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_38">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="750.680802" y="270.937332" transform="rotate(-0 750.680802 270.937332)">250</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_15">
+     <g id="M29-F2-line2d_40">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="790.759822" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_39">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="790.759822" y="270.937332" transform="rotate(-0 790.759822 270.937332)">500</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_16">
+     <g id="M29-F2-line2d_41">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="830.838842" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_40">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="830.838842" y="270.937332" transform="rotate(-0 830.838842 270.937332)">750</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_17">
+     <g id="M29-F2-line2d_42">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="870.917861" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_41">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="870.917861" y="270.937332" transform="rotate(-0 870.917861 270.937332)">1000</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_18">
+     <g id="M29-F2-line2d_43">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="910.996881" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_42">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="910.996881" y="270.937332" transform="rotate(-0 910.996881 270.937332)">1250</text>
+     </g>
+    </g>
+    <g id="M29-F2-xtick_19">
+     <g id="M29-F2-line2d_44">
+      <g>
+       <use xlink:href="#M29-F2-md077f44671" x="951.075901" y="255.144207" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_43">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="951.075901" y="270.937332" transform="rotate(-0 951.075901 270.937332)">1500</text>
+     </g>
+    </g>
+    <g id="M29-F2-text_44">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="835.648324" y="286.464989" transform="rotate(-0 835.648324 286.464989)">更新次数</text>
+    </g>
+   </g>
+   <g id="M29-F2-matplotlib.axis_6">
+    <g id="M29-F2-ytick_14">
+     <g id="M29-F2-line2d_45">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="698.097128" y="241.184879" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_45">
+      <!-- $\mathdefault{10^{-3}}$ -->
+      <g transform="translate(667.557128 245.581442)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_15">
+     <g id="M29-F2-line2d_46">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="698.097128" y="189.747189" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_46">
+      <!-- $\mathdefault{10^{-2}}$ -->
+      <g transform="translate(667.557128 194.143751)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_16">
+     <g id="M29-F2-line2d_47">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="698.097128" y="138.309498" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_47">
+      <!-- $\mathdefault{10^{-1}}$ -->
+      <g transform="translate(667.557128 142.706061)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_17">
+     <g id="M29-F2-line2d_48">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="698.097128" y="86.871808" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_48">
+      <!-- $\mathdefault{10^{0}}$ -->
+      <g transform="translate(673.277128 91.26837)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_18">
+     <g id="M29-F2-line2d_49">
+      <g>
+       <use xlink:href="#M29-F2-m68a638e920" x="698.097128" y="35.434117" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M29-F2-text_49">
+      <!-- $\mathdefault{10^{1}}$ -->
+      <g transform="translate(673.277128 39.83068)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_19">
+     <g id="M29-F2-line2d_50">
+      <defs>
+       <path id="M29-F2-me4697b6ca2" d="M 0 0 
+L -2 0 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="252.596266" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_20">
+     <g id="M29-F2-line2d_51">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="249.152678" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_21">
+     <g id="M29-F2-line2d_52">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="246.169706" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_22">
+     <g id="M29-F2-line2d_53">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="243.538539" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_23">
+     <g id="M29-F2-line2d_54">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="225.700591" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_24">
+     <g id="M29-F2-line2d_55">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="216.642864" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_25">
+     <g id="M29-F2-line2d_56">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="210.216304" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_26">
+     <g id="M29-F2-line2d_57">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="205.231476" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_27">
+     <g id="M29-F2-line2d_58">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="201.158576" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_28">
+     <g id="M29-F2-line2d_59">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="197.714988" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_29">
+     <g id="M29-F2-line2d_60">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="194.732016" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_30">
+     <g id="M29-F2-line2d_61">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="192.100848" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_31">
+     <g id="M29-F2-line2d_62">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="174.262901" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_32">
+     <g id="M29-F2-line2d_63">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="165.205173" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_33">
+     <g id="M29-F2-line2d_64">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="158.778613" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_34">
+     <g id="M29-F2-line2d_65">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="153.793786" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_35">
+     <g id="M29-F2-line2d_66">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="149.720886" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_36">
+     <g id="M29-F2-line2d_67">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="146.277297" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_37">
+     <g id="M29-F2-line2d_68">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="143.294326" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_38">
+     <g id="M29-F2-line2d_69">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="140.663158" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_39">
+     <g id="M29-F2-line2d_70">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="122.825211" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_40">
+     <g id="M29-F2-line2d_71">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="113.767483" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_41">
+     <g id="M29-F2-line2d_72">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="107.340923" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_42">
+     <g id="M29-F2-line2d_73">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="102.356096" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_43">
+     <g id="M29-F2-line2d_74">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="98.283195" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_44">
+     <g id="M29-F2-line2d_75">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="94.839607" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_45">
+     <g id="M29-F2-line2d_76">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="91.856635" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_46">
+     <g id="M29-F2-line2d_77">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="89.225467" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_47">
+     <g id="M29-F2-line2d_78">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="71.38752" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_48">
+     <g id="M29-F2-line2d_79">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="62.329792" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_49">
+     <g id="M29-F2-line2d_80">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="55.903232" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_50">
+     <g id="M29-F2-line2d_81">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="50.918405" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_51">
+     <g id="M29-F2-line2d_82">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="46.845505" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_52">
+     <g id="M29-F2-line2d_83">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="43.401916" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_53">
+     <g id="M29-F2-line2d_84">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="40.418945" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-ytick_54">
+     <g id="M29-F2-line2d_85">
+      <g>
+       <use xlink:href="#M29-F2-me4697b6ca2" x="698.097128" y="37.787777" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M29-F2-text_50">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="660.822597" y="139.447979" transform="rotate(-90 660.822597 139.447979)">残差均方</text>
+    </g>
+   </g>
+   <g id="M29-F2-line2d_86">
+    <path d="M 710.601782 34.269589 
+L 717.014425 90.482397 
+L 723.427068 119.822721 
+L 729.839712 122.330121 
+L 736.252355 125.161476 
+L 742.664998 129.066061 
+L 749.077641 134.43011 
+L 755.490284 141.624393 
+L 761.902927 150.903194 
+L 768.315571 162.046219 
+L 774.728214 173.770967 
+L 781.140857 184.010208 
+L 787.5535 191.713207 
+L 793.966143 197.526846 
+L 800.378787 202.360316 
+L 806.79143 206.613773 
+L 813.204073 210.385222 
+L 819.616716 213.704209 
+L 826.029359 216.601736 
+L 832.442002 219.118127 
+L 838.854646 221.300818 
+L 845.267289 223.200949 
+L 851.679932 224.869726 
+L 858.092575 226.35531 
+L 864.505218 227.700685 
+L 870.917861 228.942602 
+L 877.330505 230.111376 
+L 883.743148 231.231275 
+L 890.155791 232.321234 
+L 896.568434 233.395686 
+L 902.981077 234.46539 
+L 909.39372 235.538184 
+L 915.806364 236.619628 
+L 922.219007 237.713545 
+L 928.63165 238.822452 
+L 935.044293 239.947906 
+L 941.456936 241.090776 
+L 947.869579 242.251454 
+L 954.282223 243.43002 
+L 960.694866 244.626369 
+" clip-path="url(#M29-F2-p0eea23c1dd)" style="fill: none; stroke: #267b7d; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-patch_11">
+    <path d="M 698.097128 255.144207 
+L 698.097128 23.75175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-patch_12">
+    <path d="M 698.097128 255.144207 
+L 973.19952 255.144207 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M29-F2-text_51">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', 'DejaVu Sans', sans-serif; text-anchor: middle" x="835.648324" y="17.75175" transform="rotate(-0 835.648324 17.75175)">C  自动微分形成约束</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M29-F2-p2dd4298e9b">
+   <rect x="50.7875" y="23.75175" width="275.102392" height="231.392458"/>
+  </clipPath>
+  <clipPath id="M29-F2-p441058def9">
+   <rect x="370.44708" y="23.75175" width="275.102392" height="231.392458"/>
+  </clipPath>
+  <clipPath id="M29-F2-p0eea23c1dd">
+   <rect x="698.097128" y="23.75175" width="275.102392" height="231.392458"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -83,7 +83,7 @@ def collection(items,categories,en=False,topic=None,full=False):
     body+='<div class="directory-search"><input type="search" data-directory-search placeholder="'+('Search tutorials' if en else '搜索教程')+'" aria-label="'+('Search this tutorial collection' if en else '搜索当前教程目录')+'" autocomplete="off"></div><p class="directory-empty" hidden>'+('No matching tutorials.' if en else '没有匹配的教程。')+'</p><div class="explore-results">'
     if not topic:body+='<div class="explore-results-head"><h2 data-results-title>'+e(all_label)+'</h2><span data-results-count>'+str(len(selected))+'</span></div>'
     body+='<div class="explore-list">'
-    for item in sorted(selected,key=lambda i:(list(categories).index(i['category']),i['title'].casefold())):
+    for item in sorted(selected,key=lambda i:(list(categories).index(i['category']), i.get('tutorial_order', float('inf')), i['title'].casefold())):
         category=e(categories[item['category']]['name_'+lang]);title=e(item['title'])
         body+=f'<article class="explore-row tutorial-card" data-topic="{item["category"]}"><a class="tutorial-card-main" href="{item["url"]}"><span class="topic-name">{category}</span><h2>{title}</h2><p>{e(item["description"])}</p><span class="tutorial-arrow" aria-hidden="true">↗</span></a></article>'
     body+='</div></div>'

@@ -1,0 +1,1067 @@
+<svg role="img" aria-label="左图比较不同有限差分步长的梯度绝对误差；右图展开链式法则的三个局部因子。64位运算下误差先降后升，能看到截断与浮点舍入的共同影响。" xmlns:xlink="http://www.w3.org/1999/xlink" width="800.39952pt" height="310.79952pt" viewBox="0 0 800.39952 310.79952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M09-F3-figure_1">
+  <g id="M09-F3-patch_1">
+   <path d="M 0 310.79952 
+L 800.39952 310.79952 
+L 800.39952 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M09-F3-axes_1">
+   <g id="M09-F3-patch_2">
+    <path d="M 58.217656 269.544208 
+L 455.268542 269.544208 
+L 455.268542 7.2 
+L 58.217656 7.2 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M09-F3-matplotlib.axis_1">
+    <g id="M09-F3-xtick_1">
+     <g id="M09-F3-line2d_1">
+      <defs>
+       <path id="M09-F3-m8dfacedb4d" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="116.371574" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_1">
+      <!-- $\mathdefault{10^{-9}}$ -->
+      <g transform="translate(104.601574 285.337333)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">9</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_2">
+     <g id="M09-F3-line2d_2">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="196.583874" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_2">
+      <!-- $\mathdefault{10^{-7}}$ -->
+      <g transform="translate(184.813874 285.337333)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">7</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_3">
+     <g id="M09-F3-line2d_3">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="276.796174" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_3">
+      <!-- $\mathdefault{10^{-5}}$ -->
+      <g transform="translate(265.026174 285.337333)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">5</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_4">
+     <g id="M09-F3-line2d_4">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="357.008474" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_4">
+      <!-- $\mathdefault{10^{-3}}$ -->
+      <g transform="translate(345.238474 285.337333)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_5">
+     <g id="M09-F3-line2d_5">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="437.220774" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_5">
+      <!-- $\mathdefault{10^{-1}}$ -->
+      <g transform="translate(425.450774 285.337333)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-text_6">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="256.743099" y="300.864989" transform="rotate(-0 256.743099 300.864989)">有限差分步长 ε（无量纲）</text>
+    </g>
+   </g>
+   <g id="M09-F3-matplotlib.axis_2">
+    <g id="M09-F3-ytick_1">
+     <g id="M09-F3-line2d_6">
+      <defs>
+       <path id="M09-F3-m9c09fbafaa" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="242.957184" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_7">
+      <!-- $\mathdefault{10^{-10}}$ -->
+      <g transform="translate(22.727656 247.353747)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="23.581836" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_2">
+     <g id="M09-F3-line2d_7">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="215.862882" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_8">
+      <!-- $\mathdefault{10^{-9}}$ -->
+      <g transform="translate(27.677656 220.259445)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">9</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_3">
+     <g id="M09-F3-line2d_8">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="188.76858" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_9">
+      <!-- $\mathdefault{10^{-8}}$ -->
+      <g transform="translate(27.677656 193.165143)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">8</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_4">
+     <g id="M09-F3-line2d_9">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="161.674278" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_10">
+      <!-- $\mathdefault{10^{-7}}$ -->
+      <g transform="translate(27.677656 166.070841)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">7</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_5">
+     <g id="M09-F3-line2d_10">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="134.579976" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_11">
+      <!-- $\mathdefault{10^{-6}}$ -->
+      <g transform="translate(27.677656 138.976539)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">6</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_6">
+     <g id="M09-F3-line2d_11">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="107.485674" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_12">
+      <!-- $\mathdefault{10^{-5}}$ -->
+      <g transform="translate(27.677656 111.882237)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">5</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_7">
+     <g id="M09-F3-line2d_12">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="80.391372" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_13">
+      <!-- $\mathdefault{10^{-4}}$ -->
+      <g transform="translate(27.677656 84.787935)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">4</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_8">
+     <g id="M09-F3-line2d_13">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="53.29707" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_14">
+      <!-- $\mathdefault{10^{-3}}$ -->
+      <g transform="translate(27.677656 57.693633)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_9">
+     <g id="M09-F3-line2d_14">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="58.217656" y="26.202768" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_15">
+      <!-- $\mathdefault{10^{-2}}$ -->
+      <g transform="translate(27.677656 30.599331)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">2</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_10">
+     <g id="M09-F3-line2d_15">
+      <defs>
+       <path id="M09-F3-m83f56578e8" d="M 0 0 
+L -2 0 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="261.895289" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_11">
+     <g id="M09-F3-line2d_16">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="257.124219" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_12">
+     <g id="M09-F3-line2d_17">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="253.739091" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_13">
+     <g id="M09-F3-line2d_18">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="251.113382" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_14">
+     <g id="M09-F3-line2d_19">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="248.968022" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_15">
+     <g id="M09-F3-line2d_20">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="247.154145" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_16">
+     <g id="M09-F3-line2d_21">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="245.582894" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_17">
+     <g id="M09-F3-line2d_22">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="244.196952" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_18">
+     <g id="M09-F3-line2d_23">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="234.800987" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_19">
+     <g id="M09-F3-line2d_24">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="230.029917" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_20">
+     <g id="M09-F3-line2d_25">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="226.644789" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_21">
+     <g id="M09-F3-line2d_26">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="224.01908" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_22">
+     <g id="M09-F3-line2d_27">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="221.873719" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_23">
+     <g id="M09-F3-line2d_28">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="220.059843" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_24">
+     <g id="M09-F3-line2d_29">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="218.488592" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_25">
+     <g id="M09-F3-line2d_30">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="217.10265" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_26">
+     <g id="M09-F3-line2d_31">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="207.706685" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_27">
+     <g id="M09-F3-line2d_32">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="202.935615" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_28">
+     <g id="M09-F3-line2d_33">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="199.550487" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_29">
+     <g id="M09-F3-line2d_34">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="196.924778" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_30">
+     <g id="M09-F3-line2d_35">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="194.779417" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_31">
+     <g id="M09-F3-line2d_36">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="192.965541" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_32">
+     <g id="M09-F3-line2d_37">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="191.39429" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_33">
+     <g id="M09-F3-line2d_38">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="190.008348" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_34">
+     <g id="M09-F3-line2d_39">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="180.612383" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_35">
+     <g id="M09-F3-line2d_40">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="175.841313" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_36">
+     <g id="M09-F3-line2d_41">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="172.456185" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_37">
+     <g id="M09-F3-line2d_42">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="169.830476" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_38">
+     <g id="M09-F3-line2d_43">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="167.685115" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_39">
+     <g id="M09-F3-line2d_44">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="165.871239" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_40">
+     <g id="M09-F3-line2d_45">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="164.299988" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_41">
+     <g id="M09-F3-line2d_46">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="162.914046" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_42">
+     <g id="M09-F3-line2d_47">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="153.518081" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_43">
+     <g id="M09-F3-line2d_48">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="148.747011" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_44">
+     <g id="M09-F3-line2d_49">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="145.361883" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_45">
+     <g id="M09-F3-line2d_50">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="142.736174" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_46">
+     <g id="M09-F3-line2d_51">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="140.590813" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_47">
+     <g id="M09-F3-line2d_52">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="138.776937" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_48">
+     <g id="M09-F3-line2d_53">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="137.205686" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_49">
+     <g id="M09-F3-line2d_54">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="135.819744" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_50">
+     <g id="M09-F3-line2d_55">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="126.423779" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_51">
+     <g id="M09-F3-line2d_56">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="121.652709" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_52">
+     <g id="M09-F3-line2d_57">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="118.267581" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_53">
+     <g id="M09-F3-line2d_58">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="115.641872" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_54">
+     <g id="M09-F3-line2d_59">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="113.496511" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_55">
+     <g id="M09-F3-line2d_60">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="111.682635" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_56">
+     <g id="M09-F3-line2d_61">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="110.111384" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_57">
+     <g id="M09-F3-line2d_62">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="108.725442" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_58">
+     <g id="M09-F3-line2d_63">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="99.329477" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_59">
+     <g id="M09-F3-line2d_64">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="94.558407" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_60">
+     <g id="M09-F3-line2d_65">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="91.173279" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_61">
+     <g id="M09-F3-line2d_66">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="88.54757" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_62">
+     <g id="M09-F3-line2d_67">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="86.402209" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_63">
+     <g id="M09-F3-line2d_68">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="84.588333" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_64">
+     <g id="M09-F3-line2d_69">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="83.017082" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_65">
+     <g id="M09-F3-line2d_70">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="81.63114" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_66">
+     <g id="M09-F3-line2d_71">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="72.235175" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_67">
+     <g id="M09-F3-line2d_72">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="67.464105" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_68">
+     <g id="M09-F3-line2d_73">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="64.078977" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_69">
+     <g id="M09-F3-line2d_74">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="61.453268" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_70">
+     <g id="M09-F3-line2d_75">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="59.307907" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_71">
+     <g id="M09-F3-line2d_76">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="57.494031" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_72">
+     <g id="M09-F3-line2d_77">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="55.92278" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_73">
+     <g id="M09-F3-line2d_78">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="54.536838" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_74">
+     <g id="M09-F3-line2d_79">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="45.140873" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_75">
+     <g id="M09-F3-line2d_80">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="40.369803" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_76">
+     <g id="M09-F3-line2d_81">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="36.984675" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_77">
+     <g id="M09-F3-line2d_82">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="34.358966" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_78">
+     <g id="M09-F3-line2d_83">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="32.213605" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_79">
+     <g id="M09-F3-line2d_84">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="30.399729" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_80">
+     <g id="M09-F3-line2d_85">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="28.828478" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_81">
+     <g id="M09-F3-line2d_86">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="27.442536" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_82">
+     <g id="M09-F3-line2d_87">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="18.046571" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_83">
+     <g id="M09-F3-line2d_88">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="13.275501" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_84">
+     <g id="M09-F3-line2d_89">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="9.890373" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_85">
+     <g id="M09-F3-line2d_90">
+      <g>
+       <use xlink:href="#M09-F3-m83f56578e8" x="58.217656" y="7.264664" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+    </g>
+    <g id="M09-F3-text_16">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="15.993125" y="138.372104" transform="rotate(-90 15.993125 138.372104)">梯度绝对误差</text>
+    </g>
+   </g>
+   <g id="M09-F3-line2d_91">
+    <path d="M 437.220774 19.124737 
+L 397.114624 72.959315 
+L 357.008474 127.144384 
+L 316.902324 181.333218 
+L 276.796174 235.545991 
+L 236.690024 257.619471 
+L 196.583874 241.834146 
+L 156.477724 200.229332 
+L 116.371574 190.388016 
+L 76.265424 155.072689 
+" clip-path="url(#M09-F3-p773566017c)" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="M09-F3-m7c74f8395e" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #0072b2"/>
+    </defs>
+    <g clip-path="url(#M09-F3-p773566017c)">
+     <use xlink:href="#M09-F3-m7c74f8395e" x="437.220774" y="19.124737" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="397.114624" y="72.959315" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="357.008474" y="127.144384" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="316.902324" y="181.333218" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="276.796174" y="235.545991" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="236.690024" y="257.619471" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="196.583874" y="241.834146" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="156.477724" y="200.229332" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="116.371574" y="190.388016" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#M09-F3-m7c74f8395e" x="76.265424" y="155.072689" style="fill: #0072b2; stroke: #0072b2"/>
+    </g>
+   </g>
+   <g id="M09-F3-patch_3">
+    <path d="M 58.217656 269.544208 
+L 58.217656 7.2 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M09-F3-patch_4">
+    <path d="M 58.217656 269.544208 
+L 455.268542 269.544208 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M09-F3-axes_2">
+   <g id="M09-F3-patch_5">
+    <path d="M 501.816979 269.544208 
+L 785.424754 269.544208 
+L 785.424754 7.2 
+L 501.816979 7.2 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M09-F3-patch_6">
+    <path d="M 588.47491 257.619471 
+L 546.100534 257.619471 
+L 546.100534 189.478118 
+L 588.47491 189.478118 
+z
+" clip-path="url(#M09-F3-p9aca36f68f)" style="fill: #d58500"/>
+   </g>
+   <g id="M09-F3-patch_7">
+    <path d="M 588.47491 172.44278 
+L 650.431214 172.44278 
+L 650.431214 104.301427 
+L 588.47491 104.301427 
+z
+" clip-path="url(#M09-F3-p9aca36f68f)" style="fill: #008675"/>
+   </g>
+   <g id="M09-F3-patch_8">
+    <path d="M 588.47491 87.266089 
+L 746.034786 87.266089 
+L 746.034786 19.124737 
+L 588.47491 19.124737 
+z
+" clip-path="url(#M09-F3-p9aca36f68f)" style="fill: #0072b2"/>
+   </g>
+   <g id="M09-F3-matplotlib.axis_3">
+    <g id="M09-F3-xtick_6">
+     <g id="M09-F3-line2d_92">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="509.694973" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_17">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="509.694973" y="285.337333" transform="rotate(-0 509.694973 285.337333)">−1.0</text>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_7">
+     <g id="M09-F3-line2d_93">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="549.084942" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_18">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="549.084942" y="285.337333" transform="rotate(-0 549.084942 285.337333)">−0.5</text>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_8">
+     <g id="M09-F3-line2d_94">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="588.47491" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_19">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="588.47491" y="285.337333" transform="rotate(-0 588.47491 285.337333)">0.0</text>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_9">
+     <g id="M09-F3-line2d_95">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="627.864879" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_20">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="627.864879" y="285.337333" transform="rotate(-0 627.864879 285.337333)">0.5</text>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_10">
+     <g id="M09-F3-line2d_96">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="667.254848" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_21">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="667.254848" y="285.337333" transform="rotate(-0 667.254848 285.337333)">1.0</text>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_11">
+     <g id="M09-F3-line2d_97">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="706.644817" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_22">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="706.644817" y="285.337333" transform="rotate(-0 706.644817 285.337333)">1.5</text>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_12">
+     <g id="M09-F3-line2d_98">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="746.034786" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_23">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="746.034786" y="285.337333" transform="rotate(-0 746.034786 285.337333)">2.0</text>
+     </g>
+    </g>
+    <g id="M09-F3-xtick_13">
+     <g id="M09-F3-line2d_99">
+      <g>
+       <use xlink:href="#M09-F3-m8dfacedb4d" x="785.424754" y="269.544208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_24">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="785.424754" y="285.337333" transform="rotate(-0 785.424754 285.337333)">2.5</text>
+     </g>
+    </g>
+    <g id="M09-F3-text_25">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="643.620867" y="300.864989" transform="rotate(-0 643.620867 300.864989)">局部导数（无量纲）</text>
+    </g>
+   </g>
+   <g id="M09-F3-matplotlib.axis_4">
+    <g id="M09-F3-ytick_86">
+     <g id="M09-F3-line2d_100">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="501.816979" y="223.548794" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_26">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="494.816979" y="227.945357" transform="rotate(-0 494.816979 227.945357)">∂L/∂h</text>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_87">
+     <g id="M09-F3-line2d_101">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="501.816979" y="138.372104" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_27">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="494.816979" y="142.768666" transform="rotate(-0 494.816979 142.768666)">∂h/∂z</text>
+     </g>
+    </g>
+    <g id="M09-F3-ytick_88">
+     <g id="M09-F3-line2d_102">
+      <g>
+       <use xlink:href="#M09-F3-m9c09fbafaa" x="501.816979" y="53.195413" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M09-F3-text_28">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="494.816979" y="57.591976" transform="rotate(-0 494.816979 57.591976)">∂z/∂w</text>
+     </g>
+    </g>
+   </g>
+   <g id="M09-F3-line2d_103">
+    <path d="M 588.47491 269.544208 
+L 588.47491 7.2 
+" clip-path="url(#M09-F3-p9aca36f68f)" style="fill: none; stroke: #65747d; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="M09-F3-patch_9">
+    <path d="M 501.816979 269.544208 
+L 501.816979 7.2 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M09-F3-patch_10">
+    <path d="M 501.816979 269.544208 
+L 785.424754 269.544208 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M09-F3-text_29">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="542.949336" y="226.578091" transform="rotate(-0 542.949336 226.578091)">-0.5379</text>
+   </g>
+   <g id="M09-F3-text_30">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="653.582411" y="141.401401" transform="rotate(-0 653.582411 141.401401)">0.7864</text>
+   </g>
+   <g id="M09-F3-text_31">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="749.185983" y="56.22471" transform="rotate(-0 749.185983 56.22471)">2.0000</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M09-F3-p773566017c">
+   <rect x="58.217656" y="7.2" width="397.050885" height="262.344208"/>
+  </clipPath>
+  <clipPath id="M09-F3-p9aca36f68f">
+   <rect x="501.816979" y="7.2" width="283.607775" height="262.344208"/>
+  </clipPath>
+ </defs>
+</svg>

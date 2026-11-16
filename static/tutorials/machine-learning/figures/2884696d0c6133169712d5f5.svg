@@ -1,0 +1,677 @@
+<svg role="img" aria-label="同一个真实数字3的输入、绝对梯度、黑色基线IG、均值基线IG与第二卷积层取正部前/后的Grad-CAM。解释目标为类别3的logit；两幅IG共用色标范围，Grad-CAM缩放到0–1。" xmlns:xlink="http://www.w3.org/1999/xlink" width="799.717968pt" height="510.520013pt" viewBox="0 0 799.717968 510.520013" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M25-F4-figure_1">
+  <g id="M25-F4-patch_1">
+   <path d="M 0 510.520013 
+L 799.717968 510.520013 
+L 799.717968 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M25-F4-axes_1">
+   <g id="M25-F4-patch_2">
+    <path d="M 7.2 236.920013 
+L 221.838138 236.920013 
+L 221.838138 22.281875 
+L 7.2 22.281875 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M25-F4-pd4d3ce4e1e)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAASsAAAErCAYAAACGpKW0AAAEyklEQVR4nO3WUW1rSRRFweNR/m0ol0kcBjaDMEjCIBBuEERmEAhh5NFj8L7GvUZVCLZaraVzmJn78Fcul8tyL/X5+TmrOR6Ps6Kvr69ZzYp/alX/PHoAwN8QKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhIOM3N/9IiK+329p7per4+ekPH+/j6rWXHTH/u+z2pcVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkDC0yzocrnMij4+PmY1+74/ekLG+Xye1Wzb9ugJGS4rIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSHiaBe37/ugJGa+vr7Oa0+k0K3p+fp7VvLy8PHpChssKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSDjMzP3RIyq2bZvV/Pz8zGqOx+Os6Hq9zmr2fX/0hAyXFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSQcZuY+i9m2bVZ0Pp9nNb+/v7Oa7+/vWdHh8Oe7U+WyAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgISnWdC2bbOit7e3Wc3tdnv0BPhPuKyABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayAhKdZ0L7vs6LT6TSruVwus5rb7fboCfwPuayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECtgCv4F6Zc1/RywYe0AAAAASUVORK5CYII=" id="M25-F4-imagec3f24471ef" transform="scale(1 -1) translate(0 -215.28)" x="7.2" y="-21.640013" width="215.28" height="215.28"/>
+   </g>
+   <g id="M25-F4-matplotlib.axis_1"/>
+   <g id="M25-F4-matplotlib.axis_2"/>
+   <g id="M25-F4-patch_3">
+    <path d="M 7.2 236.920013 
+L 7.2 22.281875 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-patch_4">
+    <path d="M 7.2 236.920013 
+L 221.838138 236.920013 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-text_1">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="114.519069" y="16.281875" transform="rotate(-0 114.519069 16.281875)">真实输入：3</text>
+   </g>
+  </g>
+  <g id="M25-F4-axes_2">
+   <g id="M25-F4-patch_5">
+    <path d="M 269.613594 236.920013 
+L 484.251732 236.920013 
+L 484.251732 22.281875 
+L 269.613594 22.281875 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M25-F4-p300784c373)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAASsAAAErCAYAAACGpKW0AAAFb0lEQVR4nO3W36sfchzH8fd3zqYOZxNLhIuVnbgjRVLj2oWUUqRYyYWy5G53bt254IZLVy4WxYULuXChXHJjyqZQSGHW1n61419w5/Osx+MveNe7nr02O9v37c1iLl7+fVZ04u7XZzU//HN5VvP9nJkV/XThq1nNpSu/zooObu/Oavb93wcA/BdiBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQMLm1p2H9mYx1/euzYquXD0/q3nmlhdmNX9fWfN/T9xxYFbz/P0/zYru+vjUrMayAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhK2ju57dFbz9bn3ZkWXTz47qzn12d6s5t2zF2ZFr5/4c1azeeD+WdH+T26e1VhWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkLB1aXNxVnNw+95Z0ZsfHp3VfPTX6VnNW7tHZkVPndye1fw+Z2ZFB/bvzGosKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBh68i+O2c13148Mys6fvS3Wc1v3+zOal787uNZ0R9/vz2r2Xf69Kzo2GM3zmosKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkjYbN1w294sZuuG7VnRX689Pqs58ODhWc3Blz+dFT1503OzmivXr8+Kvp+zsxrLCkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhI2xw69sTeL+fLcO7OizWb/rObhg8dnNS/dc9us6Ondn2c1x7+4fVb0+fn3ZzWWFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZCw2dm+b28Wc/7i2VnRI4demdUc3uzMal7dnSV98OP+Wc13V3+ZFV3bXJvVWFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBUwBf8CAl5hP+0kVMoAAAAASUVORK5CYII=" id="M25-F4-image5955cb3e69" transform="scale(1 -1) translate(0 -215.28)" x="269.613594" y="-21.640013" width="215.28" height="215.28"/>
+   </g>
+   <g id="M25-F4-matplotlib.axis_3"/>
+   <g id="M25-F4-matplotlib.axis_4"/>
+   <g id="M25-F4-patch_6">
+    <path d="M 269.613594 236.920013 
+L 269.613594 22.281875 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-patch_7">
+    <path d="M 269.613594 236.920013 
+L 484.251732 236.920013 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-text_2">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="376.932663" y="16.281875" transform="rotate(-0 376.932663 16.281875)">|Saliency|</text>
+   </g>
+  </g>
+  <g id="M25-F4-axes_3">
+   <g id="M25-F4-patch_8">
+    <path d="M 536.786406 236.920013 
+L 751.424544 236.920013 
+L 751.424544 22.281875 
+L 536.786406 22.281875 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M25-F4-p28e721ce61)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAASsAAAErCAYAAACGpKW0AAAFI0lEQVR4nO3WsWoedBSH4f+Xph2KCkFCB0FBXURBBIUighfQuW4uDg4OnZ29BQfFzcVZcBGdBXFoQeigSQQdLNKKhA4RNfncnYQO33nhea7gxxlezubk+Gi7+F+u/Xpn3qV++H6N88Ira6L7115a01xs9nY9IcOlgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIGFzcny03fWIigd/P7mm+fP8yprm8t75muiZT95d0xy8+vKa6N71m2sanxWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQsL8G2tterIk++2reuW7duLfrCRm3P7yzpjl87ac10eH1m2sanxWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUk7K+BLjYzG3rrxm9rmqt/na5pHv/m8zXR3W/vrmk2jz1cM/2+pplZBYD/ECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApI2N/1gJIfHz69pvnl/uU1zdtP3V4TffH16Zrm/bf+2PWEDJ8VkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJGxOjo+2a5jztb8m+ujLwzXN889dXdO8/uyDNdETl053PYFH4LMCEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayAhM3J8dF2DXPp4p810cHpz2ua7668uaZ58dN31kRn732w6wk8Ap8VkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkLC/BjrfGzlrbTebNc0bxx+vac4OD9ZEZ7sewCPxWQEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVsAq+Bc6ek4Eaj+TgwAAAABJRU5ErkJggg==" id="M25-F4-image7a312ec070" transform="scale(1 -1) translate(0 -215.28)" x="536.786406" y="-21.640013" width="215.28" height="215.28"/>
+   </g>
+   <g id="M25-F4-matplotlib.axis_5"/>
+   <g id="M25-F4-matplotlib.axis_6"/>
+   <g id="M25-F4-patch_9">
+    <path d="M 536.786406 236.920013 
+L 536.786406 22.281875 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-patch_10">
+    <path d="M 536.786406 236.920013 
+L 751.424544 236.920013 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-text_3">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="644.105475" y="16.281875" transform="rotate(-0 644.105475 16.281875)">IG：黑色基线</text>
+   </g>
+  </g>
+  <g id="M25-F4-axes_4">
+   <g id="M25-F4-patch_11">
+    <path d="M 7.2 503.320013 
+L 221.838138 503.320013 
+L 221.838138 288.681875 
+L 7.2 288.681875 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M25-F4-p078a8f9d63)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAASsAAAErCAYAAACGpKW0AAAFSElEQVR4nO3WsWreZRiH4fdL0hLTqhTRKiI4FAcXBxE8DQc9BhfBzcPSXSdnhS4OkgRBAnUpaltTm6T5C46lB/DccF1H8A7vc/PbnZ4cb2uYbe2tifa3qzXN4eXjNc3FwdGa6Grvxppmt407v/9tu92aZmYVAF4gVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSQcbAN7ta3dmujZOlzT3H7+cE2z//xyTfTKoz/WNJdHr6+J/nz1vTXNvFIBvIRYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQMLBGuhgu1wTPbm+vaY5+vn7Nc0vn361Jvrw+mxNs/fDt2ui7bOv1zSWFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSTsTk+OtzXM3na9Jrr703drmrNPvljTPLy4syba2837V7cPnq6JDnfnaxrLCkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkg42Ab2arddrYkuzs7WNA8/urOm+eDZ/TXRjYt/1jT7/z5eEz1495M1zbxSAbyEWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZCwOz053tYw29CGvvHotzXN9d6NNc3ft95ZE7198uOa5q/3P14Tnd94bU0zswoALxArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEg7WQAfXF2uiJ7furmmu9m6uad56cH9N9M2vn69pvrz3ZE10uM7XNJYVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkLA7PTne1jDb0IbefP50TXO921/TPN3dWhOdnb+5prl39Pua6Ho37wbnvQjgJcQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayAVfAfIRtl5m+ngm4AAAAASUVORK5CYII=" id="M25-F4-image5a30f86c95" transform="scale(1 -1) translate(0 -215.28)" x="7.2" y="-288.040013" width="215.28" height="215.28"/>
+   </g>
+   <g id="M25-F4-matplotlib.axis_7"/>
+   <g id="M25-F4-matplotlib.axis_8"/>
+   <g id="M25-F4-patch_12">
+    <path d="M 7.2 503.320013 
+L 7.2 288.681875 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-patch_13">
+    <path d="M 7.2 503.320013 
+L 221.838138 503.320013 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-text_4">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="114.519069" y="282.681875" transform="rotate(-0 114.519069 282.681875)">IG：均值基线</text>
+   </g>
+  </g>
+  <g id="M25-F4-axes_5">
+   <g id="M25-F4-patch_14">
+    <path d="M 269.613594 503.320013 
+L 484.251732 503.320013 
+L 484.251732 288.681875 
+L 269.613594 288.681875 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M25-F4-p5d535cb8da)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAASsAAAErCAYAAACGpKW0AAAFUElEQVR4nO3Wva4VRBRA4Tlw+BcwIQqiqCQWoFZ01LyIz2nBE1hJNEg0AQwEUORXQOTea2xvZedeyfc9wWRmz8reXL/x594a5tnrw2uiF68Orml+uPVmTXP/16dror3dcaO+rl37aE105ZNHa5oD//cBAP4LsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBhu7u7WdM8fHJwTXT927trmnu37qxpjp48sSZ6/fzlmubJwydroqPfXF7T2KyABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayAhO0a6NmL3TXRmXOn1zTnP7+ypvn68ok10W9/zJurH288WhP9dHtnTWOzAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgITtm3fbNc35D2Y29MLZU2ua72++XdPcf7izJrp7++ma5sBmsyba213jzKwCwD5iBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQnbI9udNc3RwzMbure3WdM8uPdsTXPru5trotMfnlnTXL12aU308bmDa5qZVQDYR6yABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApI2B7Y7K1p7v8+s6E///JiTfPeqWNrmi+vfrUmOnL00Jrm0sWZs376+Ns1zcybAthHrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkgQKyBBrIAEsQISxApIECsgQayABLECEsQKSBArIEGsgASxAhLECkjYbjZ7a5pnz3fWRA/uPF7TPLx9f03z7u93a6ILly+uaV79dWpNdPbUvDe0WQEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJ24ObvTXNF5/ObOixY5+tae5cOLOmefr45Zro5PvH1zSHt/P+378OHdhZ08ysAsA+YgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVkCCWAEJYgUkiBWQIFZAglgBCWIFJIgVkCBWQIJYAQliBSSIFZAgVsAq+AeahGQJGX/eBwAAAABJRU5ErkJggg==" id="M25-F4-image89c2301f9c" transform="scale(1 -1) translate(0 -215.28)" x="269.613594" y="-288.040013" width="215.28" height="215.28"/>
+   </g>
+   <g id="M25-F4-matplotlib.axis_9"/>
+   <g id="M25-F4-matplotlib.axis_10"/>
+   <g id="M25-F4-patch_15">
+    <path d="M 269.613594 503.320013 
+L 269.613594 288.681875 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-patch_16">
+    <path d="M 269.613594 503.320013 
+L 484.251732 503.320013 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-text_5">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="376.932663" y="282.681875" transform="rotate(-0 376.932663 282.681875)">Grad-CAM：取正部之前</text>
+   </g>
+  </g>
+  <g id="M25-F4-axes_6">
+   <g id="M25-F4-patch_17">
+    <path d="M 536.786406 503.320013 
+L 751.424544 503.320013 
+L 751.424544 288.681875 
+L 536.786406 288.681875 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M25-F4-p02019e8e3d)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAASsAAAErCAYAAACGpKW0AAAD7UlEQVR4nO3UQQ3AMBDAsFvHH/NGob82ko0grzwz7zcAl1unAwB2mBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFZBgVkCCWQEJZgUkmBWQYFZAglkBCWYFJJgVkGBWQIJZAQlmBSSYFTAFPwNFA1jJ53joAAAAAElFTkSuQmCC" id="M25-F4-image143bf7389d" transform="scale(1 -1) translate(0 -215.28)" x="536.786406" y="-288.040013" width="215.28" height="215.28"/>
+   </g>
+   <g id="M25-F4-matplotlib.axis_11"/>
+   <g id="M25-F4-matplotlib.axis_12"/>
+   <g id="M25-F4-patch_18">
+    <path d="M 536.786406 503.320013 
+L 536.786406 288.681875 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-patch_19">
+    <path d="M 536.786406 503.320013 
+L 751.424544 503.320013 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M25-F4-text_6">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="644.105475" y="282.681875" transform="rotate(-0 644.105475 282.681875)">Grad-CAM：取正部之后</text>
+   </g>
+  </g>
+  <g id="M25-F4-axes_7">
+   <g id="M25-F4-patch_20">
+    <path d="M 232.570045 207.7208 
+L 240.38203 207.7208 
+L 240.38203 51.481088 
+L 232.570045 51.481088 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAsAAADZCAYAAAD2WsoCAAAAfklEQVR4nO3SMRaAQAwC0YXn/a+sZVJaKszUW8iPknSfl12Szt8e2/7CZ+gbj41Gk4bTBwqNiXN3aTh9oNCYOPcOjS4Npw8UGhPn7tJw+kChMaGx4+fv0nD6QKExce4dGl0aTh8oNCbO3aXh9IFCY+LcOzS6NJw+UGhMnPusHuOaB144p0ihAAAAAElFTkSuQmCC" id="M25-F4-image84659c846e" transform="scale(1 -1) translate(0 -156.24)" x="232.56" y="-51.12" width="7.92" height="156.24"/>
+   <g id="M25-F4-matplotlib.axis_13"/>
+   <g id="M25-F4-matplotlib.axis_14">
+    <g id="M25-F4-ytick_1">
+     <g id="M25-F4-line2d_1">
+      <defs>
+       <path id="M25-F4-m3d282da70f" d="M 0 0 
+L 3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="207.7208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_7">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="212.117362" transform="rotate(-0 247.38203 212.117362)">0.0</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_2">
+     <g id="M25-F4-line2d_2">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="176.472857" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_8">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="180.86942" transform="rotate(-0 247.38203 180.86942)">0.2</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_3">
+     <g id="M25-F4-line2d_3">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="145.224915" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_9">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="149.621478" transform="rotate(-0 247.38203 149.621478)">0.4</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_4">
+     <g id="M25-F4-line2d_4">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="113.976973" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_10">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="118.373535" transform="rotate(-0 247.38203 118.373535)">0.6</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_5">
+     <g id="M25-F4-line2d_5">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="82.72903" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_11">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="87.125593" transform="rotate(-0 247.38203 87.125593)">0.8</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_6">
+     <g id="M25-F4-line2d_6">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="51.481088" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_12">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="55.87765" transform="rotate(-0 247.38203 55.87765)">1.0</text>
+     </g>
+    </g>
+   </g>
+   <g id="M25-F4-LineCollection_1"/>
+   <g id="M25-F4-patch_21">
+    <path d="M 232.570045 207.7208 
+L 236.476037 207.7208 
+L 240.38203 207.7208 
+L 240.38203 51.481088 
+L 236.476037 51.481088 
+L 232.570045 51.481088 
+L 232.570045 207.7208 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M25-F4-axes_8">
+   <g id="M25-F4-patch_22">
+    <path d="M 494.983638 207.7208 
+L 502.795624 207.7208 
+L 502.795624 51.481088 
+L 494.983638 51.481088 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAsAAADZCAYAAAD2WsoCAAABT0lEQVR4nN2VyY3DUAxDucj9dxxNC+aBgDw5Ew9c9B0Sz+Llb0C+1WIAvRcTCZkJmROQ4YSsQIzIs0o9S3PBM4vV+b3YyW2wGNAlsvgEYpwIqN7cmNYoiEZxiTz7tDyj1gZaYu/UbPC9mNsKONk/rEoBFbXBFtmRZ/YCokR25JmojYITbSixgVZ1inpGi+xkQWajoEVmIPYHR2Ht6lxsY2vk979J1MMP3oYSsrkXXrdq1TkJqOLna0tkZa97P/i690QbCMiKnhVaZF+Zey/YsKK5NxCz9xXdUkBmo2yLDJTI1u/CgoyujolYv9bVqTU3e9UpsaFaQKElZmJjeqPgvRi9Nvw9z8jIDMiukRWQkZAZkUctMqM2eEHMpA3c8Ax+MaBO2LD/eRv2BxfUjTb0vTaYkGduLKhSwM0C6saCapGndfzb86wo4LTIvHH8gfgPahcwGTpn/uwAAAAASUVORK5CYII=" id="M25-F4-image476a143040" transform="scale(1 -1) translate(0 -156.24)" x="494.64" y="-51.12" width="7.92" height="156.24"/>
+   <g id="M25-F4-matplotlib.axis_15"/>
+   <g id="M25-F4-matplotlib.axis_16">
+    <g id="M25-F4-ytick_7">
+     <g id="M25-F4-line2d_7">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="207.7208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_13">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="212.117362" transform="rotate(-0 509.795624 212.117362)">0</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_8">
+     <g id="M25-F4-line2d_8">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="183.911448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_14">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="188.30801" transform="rotate(-0 509.795624 188.30801)">1</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_9">
+     <g id="M25-F4-line2d_9">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="160.102095" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_15">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="164.498658" transform="rotate(-0 509.795624 164.498658)">2</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_10">
+     <g id="M25-F4-line2d_10">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="136.292743" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_16">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="140.689306" transform="rotate(-0 509.795624 140.689306)">3</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_11">
+     <g id="M25-F4-line2d_11">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="112.483391" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_17">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="116.879953" transform="rotate(-0 509.795624 116.879953)">4</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_12">
+     <g id="M25-F4-line2d_12">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="88.674039" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_18">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="93.070601" transform="rotate(-0 509.795624 93.070601)">5</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_13">
+     <g id="M25-F4-line2d_13">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="64.864686" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_19">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="69.261249" transform="rotate(-0 509.795624 69.261249)">6</text>
+     </g>
+    </g>
+   </g>
+   <g id="M25-F4-LineCollection_2"/>
+   <g id="M25-F4-patch_23">
+    <path d="M 494.983638 207.7208 
+L 498.889631 207.7208 
+L 502.795624 207.7208 
+L 502.795624 51.481088 
+L 498.889631 51.481088 
+L 494.983638 51.481088 
+L 494.983638 207.7208 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M25-F4-axes_9">
+   <g id="M25-F4-patch_24">
+    <path d="M 762.156451 207.7208 
+L 769.968437 207.7208 
+L 769.968437 51.481088 
+L 762.156451 51.481088 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAoAAADZCAYAAAAZmKE8AAABY0lEQVR4nO2V0W0cQQxDSc2WlRpStJsyYGekdBA8AzTkA3LfBLmP1O751++3Efg9LhOdHrsUdizoeM7ZijZ1rHg9FacuTG3co8PCk9/auB7T6IKOhworDWN+uE47nlegFhQ+FMbxd8ba6vGcvZfLSn9SCj+jYLTx1oLRTtdzTtqx4ssYw5TiE4oKDaOdjj7sr1DfMaHXoqvmBWAGCgs7igmt2TuKYcJDhY5HV7zHwveoNWpjGMPocoejjSdU/ih6C8Z4GeV77B9P7biwdNMwE4cZuEzN3Yo2d5w16sHLNBNqD0bxaFNHccemwrv1jMr32HjCTlN3mlr/qf/xe3TTW2tx6xuH6bV7VEPHiVNPnro7DdO0nkkXLt7jxKk7HK08zJ8bXmYwTMdhOn24w6OHCjvs2HRCzdozzh71YMe7WM+8APWE67mfix+A2arnfuxNePGZDRPed1r4Zzp66PV8wZEJ/wIWgytOh4OQwAAAAABJRU5ErkJggg==" id="M25-F4-image7e8bb12859" transform="scale(1 -1) translate(0 -156.24)" x="762.48" y="-51.12" width="7.2" height="156.24"/>
+   <g id="M25-F4-matplotlib.axis_17"/>
+   <g id="M25-F4-matplotlib.axis_18">
+    <g id="M25-F4-ytick_14">
+     <g id="M25-F4-line2d_14">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="170.748154" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_20">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="175.144717" transform="rotate(-0 776.968437 175.144717)">-2</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_15">
+     <g id="M25-F4-line2d_15">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="129.600944" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_21">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="133.997506" transform="rotate(-0 776.968437 133.997506)">0</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_16">
+     <g id="M25-F4-line2d_16">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="88.453734" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_22">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="92.850296" transform="rotate(-0 776.968437 92.850296)">2</text>
+     </g>
+    </g>
+   </g>
+   <g id="M25-F4-LineCollection_3"/>
+   <g id="M25-F4-patch_25">
+    <path d="M 762.156451 207.7208 
+L 766.062444 207.7208 
+L 769.968437 207.7208 
+L 769.968437 51.481088 
+L 766.062444 51.481088 
+L 762.156451 51.481088 
+L 762.156451 207.7208 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M25-F4-axes_10">
+   <g id="M25-F4-patch_26">
+    <path d="M 232.570045 474.1208 
+L 240.38203 474.1208 
+L 240.38203 317.881088 
+L 232.570045 317.881088 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAsAAADZCAYAAAD2WsoCAAABZ0lEQVR4nO2V0W3FUAxCwX5jdYYO3aUqtb2mK1wqITlS840QHJOEb+8fwuXzYvFWixdZCDmX4dzdG2LQca4YuorRKIsGLc4MiTu3DVro6MQow7kdcaUK0hs/U879RBowxC+nIGPvILGBc/eOF5ZIfb7KygwjBq1twIjBFLrulHPFLkirYCF2bjhiGjGYitH3v24kz80VMar0wIIyxGU5415MaMeQdC9uR8xYjIpxLmvPWEGDVkEaMYoTikHr3MgNaTYUpHVB5DjP42gwJi6cVEHFCsq4YOlsiEHPWStoyLrg3IuxoyBiMeg4w3MeR3w2ZEaO81jnnhSNSdHAP40/r+6ktoEl2zixgrNizxjDWTEaytGYSRUcB51SR4HHWTEaE4qBXMGfE7qgrIITKzip8cuLIUc8Iedxzg2tyKwdNGQ5nxUF9UgaCqE73zsmelagO187zn2siepefD6do3ynYshZnel8L/4FxTArTq9Ozh0AAAAASUVORK5CYII=" id="M25-F4-image214243af78" transform="scale(1 -1) translate(0 -156.24)" x="232.56" y="-317.52" width="7.92" height="156.24"/>
+   <g id="M25-F4-matplotlib.axis_19"/>
+   <g id="M25-F4-matplotlib.axis_20">
+    <g id="M25-F4-ytick_17">
+     <g id="M25-F4-line2d_17">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="437.148154" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_23">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="441.544717" transform="rotate(-0 247.38203 441.544717)">-2</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_18">
+     <g id="M25-F4-line2d_18">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="396.000944" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_24">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="400.397506" transform="rotate(-0 247.38203 400.397506)">0</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_19">
+     <g id="M25-F4-line2d_19">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="240.38203" y="354.853734" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_25">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="247.38203" y="359.250296" transform="rotate(-0 247.38203 359.250296)">2</text>
+     </g>
+    </g>
+   </g>
+   <g id="M25-F4-LineCollection_4"/>
+   <g id="M25-F4-patch_27">
+    <path d="M 232.570045 474.1208 
+L 236.476037 474.1208 
+L 240.38203 474.1208 
+L 240.38203 317.881088 
+L 236.476037 317.881088 
+L 232.570045 317.881088 
+L 232.570045 474.1208 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M25-F4-axes_11">
+   <g id="M25-F4-patch_28">
+    <path d="M 494.983638 474.1208 
+L 502.795624 474.1208 
+L 502.795624 317.881088 
+L 494.983638 317.881088 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAsAAADZCAYAAAD2WsoCAAABZ0lEQVR4nO2V0W3FUAxCwX5jdYYO3aUqtb2mK1wqITlS840QHJOEb+8fwuXzYvFWixdZCDmX4dzdG2LQca4YuorRKIsGLc4MiTu3DVro6MQow7kdcaUK0hs/U879RBowxC+nIGPvILGBc/eOF5ZIfb7KygwjBq1twIjBFLrulHPFLkirYCF2bjhiGjGYitH3v24kz80VMar0wIIyxGU5415MaMeQdC9uR8xYjIpxLmvPWEGDVkEaMYoTikHr3MgNaTYUpHVB5DjP42gwJi6cVEHFCsq4YOlsiEHPWStoyLrg3IuxoyBiMeg4w3MeR3w2ZEaO81jnnhSNSdHAP40/r+6ktoEl2zixgrNizxjDWTEaytGYSRUcB51SR4HHWTEaE4qBXMGfE7qgrIITKzip8cuLIUc8Iedxzg2tyKwdNGQ5nxUF9UgaCqE73zsmelagO187zn2siepefD6do3ynYshZnel8L/4FxTArTq9Ozh0AAAAASUVORK5CYII=" id="M25-F4-image97d7c4f6ce" transform="scale(1 -1) translate(0 -156.24)" x="494.64" y="-317.52" width="7.92" height="156.24"/>
+   <g id="M25-F4-matplotlib.axis_21"/>
+   <g id="M25-F4-matplotlib.axis_22">
+    <g id="M25-F4-ytick_20">
+     <g id="M25-F4-line2d_20">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="469.738706" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_26">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="474.135269" transform="rotate(-0 509.795624 474.135269)">-0.2</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_21">
+     <g id="M25-F4-line2d_21">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="432.869825" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_27">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="437.266388" transform="rotate(-0 509.795624 437.266388)">-0.1</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_22">
+     <g id="M25-F4-line2d_22">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="396.000944" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_28">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="400.397506" transform="rotate(-0 509.795624 400.397506)">0.0</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_23">
+     <g id="M25-F4-line2d_23">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="359.132063" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_29">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="363.528625" transform="rotate(-0 509.795624 363.528625)">0.1</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_24">
+     <g id="M25-F4-line2d_24">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="502.795624" y="322.263182" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_30">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="509.795624" y="326.659744" transform="rotate(-0 509.795624 326.659744)">0.2</text>
+     </g>
+    </g>
+   </g>
+   <g id="M25-F4-LineCollection_5"/>
+   <g id="M25-F4-patch_29">
+    <path d="M 494.983638 474.1208 
+L 498.889631 474.1208 
+L 502.795624 474.1208 
+L 502.795624 317.881088 
+L 498.889631 317.881088 
+L 494.983638 317.881088 
+L 494.983638 474.1208 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M25-F4-axes_12">
+   <g id="M25-F4-patch_30">
+    <path d="M 762.156451 474.1208 
+L 769.968437 474.1208 
+L 769.968437 317.881088 
+L 762.156451 317.881088 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAoAAADZCAYAAAAZmKE8AAABTUlEQVR4nN2WyZHDQAwDcdD5Z2xuCnhARWv1RvWwwZFsEp9F8AzIJIcBlAWJlMiUyAmJcEpUGEQ8o8o9SnM1Ix+ox1nQ6a75gIzLRPETBnEmo/4KMe3CERfuMnH2054RdWu0g96pH80syG3LTP7LpbKMYmu2iY5nZF8GZaLjGYl64TizVno02vUo7hFtotPNMC8cbSLDoF9QOOu3xw9Yb52YPZMmhy/YtVKiuVdvoer1OJXRA5+ULROVv4X7grdwz6wREhW/CmgTfbnCvTraile4YZD9r9mWZZgXvm0iUCZa36vNML49TIP6tm+P2itkvx6lR6suI7SDTI+efuHIguhb+/dnRE5kSHSdqJCIlMiYOGoTGVvzKsjUGnczgm+Q0dnR9j+ytl+wGd1Z6/etmRJn7jajsszmMrrbjNrEaV/c7c+oWGbaxPwfwJX1Hxb4MBk5eEfVAAAAAElFTkSuQmCC" id="M25-F4-image8988a014d3" transform="scale(1 -1) translate(0 -156.24)" x="762.48" y="-317.52" width="7.2" height="156.24"/>
+   <g id="M25-F4-matplotlib.axis_23"/>
+   <g id="M25-F4-matplotlib.axis_24">
+    <g id="M25-F4-ytick_25">
+     <g id="M25-F4-line2d_25">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="474.1208" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_31">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="478.517362" transform="rotate(-0 776.968437 478.517362)">0.0</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_26">
+     <g id="M25-F4-line2d_26">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="442.872857" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_32">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="447.26942" transform="rotate(-0 776.968437 447.26942)">0.2</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_27">
+     <g id="M25-F4-line2d_27">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="411.624915" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_33">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="416.021478" transform="rotate(-0 776.968437 416.021478)">0.4</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_28">
+     <g id="M25-F4-line2d_28">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="380.376973" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_34">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="384.773535" transform="rotate(-0 776.968437 384.773535)">0.6</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_29">
+     <g id="M25-F4-line2d_29">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="349.12903" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_35">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="353.525593" transform="rotate(-0 776.968437 353.525593)">0.8</text>
+     </g>
+    </g>
+    <g id="M25-F4-ytick_30">
+     <g id="M25-F4-line2d_30">
+      <g>
+       <use xlink:href="#M25-F4-m3d282da70f" x="769.968437" y="317.881088" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M25-F4-text_36">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="776.968437" y="322.27765" transform="rotate(-0 776.968437 322.27765)">1.0</text>
+     </g>
+    </g>
+   </g>
+   <g id="M25-F4-LineCollection_6"/>
+   <g id="M25-F4-patch_31">
+    <path d="M 762.156451 474.1208 
+L 766.062444 474.1208 
+L 769.968437 474.1208 
+L 769.968437 317.881088 
+L 766.062444 317.881088 
+L 762.156451 317.881088 
+L 762.156451 474.1208 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M25-F4-pd4d3ce4e1e">
+   <rect x="7.2" y="22.281875" width="214.638138" height="214.638138"/>
+  </clipPath>
+  <clipPath id="M25-F4-p300784c373">
+   <rect x="269.613594" y="22.281875" width="214.638138" height="214.638138"/>
+  </clipPath>
+  <clipPath id="M25-F4-p28e721ce61">
+   <rect x="536.786406" y="22.281875" width="214.638138" height="214.638138"/>
+  </clipPath>
+  <clipPath id="M25-F4-p078a8f9d63">
+   <rect x="7.2" y="288.681875" width="214.638138" height="214.638138"/>
+  </clipPath>
+  <clipPath id="M25-F4-p5d535cb8da">
+   <rect x="269.613594" y="288.681875" width="214.638138" height="214.638138"/>
+  </clipPath>
+  <clipPath id="M25-F4-p02019e8e3d">
+   <rect x="536.786406" y="288.681875" width="214.638138" height="214.638138"/>
+  </clipPath>
+ </defs>
+</svg>

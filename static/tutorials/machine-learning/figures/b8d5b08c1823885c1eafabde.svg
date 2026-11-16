@@ -1,0 +1,603 @@
+<svg role="img" aria-label="Left: unique non-parameter backing storage retained for backward after forward, including full input storage retained by a slice; this is not process peak memory. Upper right compares gradients except the DDP row, which compares parameters after SGD. Lower right shows real type conversions. All checks use the same 96 examples and parameter initialization." xmlns:xlink="http://www.w3.org/1999/xlink" width="901.19952pt" height="483.59952pt" viewBox="0 0 901.19952 483.59952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M26-F2-figure_1">
+  <g id="M26-F2-patch_1">
+   <path d="M 0 483.59952 
+L 901.19952 483.59952 
+L 901.19952 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M26-F2-axes_1">
+   <g id="M26-F2-patch_2">
+    <path d="M 49.142656 457.871864 
+L 343.388915 457.871864 
+L 343.388915 23.75175 
+L 49.142656 23.75175 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M26-F2-patch_3">
+    <path d="M 62.517486 457.871864 
+L 162.828711 457.871864 
+L 162.828711 89.973462 
+L 62.517486 89.973462 
+z
+" clip-path="url(#M26-F2-pe9aef200b0)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F2-patch_4">
+    <path d="M 229.70286 457.871864 
+L 330.014085 457.871864 
+L 330.014085 269.479328 
+L 229.70286 269.479328 
+z
+" clip-path="url(#M26-F2-pe9aef200b0)" style="fill: #dd8b38"/>
+   </g>
+   <g id="M26-F2-matplotlib.axis_1">
+    <g id="M26-F2-xtick_1">
+     <g id="M26-F2-line2d_1">
+      <defs>
+       <path id="M26-F2-m4fb48360fd" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M26-F2-m4fb48360fd" x="112.673098" y="457.871864" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_1">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="112.673098" y="473.664989" transform="rotate(-0 112.673098 473.664989)">Normal forward</text>
+     </g>
+    </g>
+    <g id="M26-F2-xtick_2">
+     <g id="M26-F2-line2d_2">
+      <g>
+       <use xlink:href="#M26-F2-m4fb48360fd" x="279.858473" y="457.871864" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_2">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="279.858473" y="473.664989" transform="rotate(-0 279.858473 473.664989)">Checkpointed</text>
+     </g>
+    </g>
+   </g>
+   <g id="M26-F2-matplotlib.axis_2">
+    <g id="M26-F2-ytick_1">
+     <g id="M26-F2-line2d_3">
+      <defs>
+       <path id="M26-F2-m03e0a99b6e" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="49.142656" y="457.871864" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_3">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="42.142656" y="462.268426" transform="rotate(-0 42.142656 462.268426)">0</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_2">
+     <g id="M26-F2-line2d_4">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="49.142656" y="395.543438" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_4">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="42.142656" y="399.940001" transform="rotate(-0 42.142656 399.940001)">50</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_3">
+     <g id="M26-F2-line2d_5">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="49.142656" y="333.215013" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_5">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="42.142656" y="337.611575" transform="rotate(-0 42.142656 337.611575)">100</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_4">
+     <g id="M26-F2-line2d_6">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="49.142656" y="270.886587" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_6">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="42.142656" y="275.283149" transform="rotate(-0 42.142656 275.283149)">150</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_5">
+     <g id="M26-F2-line2d_7">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="49.142656" y="208.558161" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_7">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="42.142656" y="212.954724" transform="rotate(-0 42.142656 212.954724)">200</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_6">
+     <g id="M26-F2-line2d_8">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="49.142656" y="146.229736" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_8">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="42.142656" y="150.626298" transform="rotate(-0 42.142656 150.626298)">250</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_7">
+     <g id="M26-F2-line2d_9">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="49.142656" y="83.90131" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_9">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="42.142656" y="88.297873" transform="rotate(-0 42.142656 88.297873)">300</text>
+     </g>
+    </g>
+    <g id="M26-F2-text_10">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="15.993125" y="240.811807" transform="rotate(-90 15.993125 240.811807)">Retained non-parameter storage / KiB</text>
+    </g>
+   </g>
+   <g id="M26-F2-patch_5">
+    <path d="M 49.142656 457.871864 
+L 49.142656 23.75175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F2-patch_6">
+    <path d="M 49.142656 457.871864 
+L 343.388915 457.871864 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F2-text_11">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="112.673098" y="84.987188" transform="rotate(-0 112.673098 84.987188)">295.1</text>
+   </g>
+   <g id="M26-F2-text_12">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="279.858473" y="264.493054" transform="rotate(-0 279.858473 264.493054)">151.1</text>
+   </g>
+   <g id="M26-F2-text_13">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="196.265786" y="17.75175" transform="rotate(-0 196.265786 17.75175)">Same 96 examples; unique storage addresses</text>
+   </g>
+  </g>
+  <g id="M26-F2-axes_2">
+   <g id="M26-F2-patch_7">
+    <path d="M 496.767071 209.430452 
+L 893.99952 209.430452 
+L 893.99952 23.75175 
+L 496.767071 23.75175 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M26-F2-patch_8">
+    <path d="M -40758.958667 32.191691 
+L 581.254184 32.191691 
+L 581.254184 60.324828 
+L -40758.958667 60.324828 
+z
+" clip-path="url(#M26-F2-p9e9f759e48)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F2-patch_9">
+    <path d="M -40758.958667 67.358112 
+L 839.773928 67.358112 
+L 839.773928 95.491248 
+L -40758.958667 95.491248 
+z
+" clip-path="url(#M26-F2-p9e9f759e48)" style="fill: #dd8b38"/>
+   </g>
+   <g id="M26-F2-patch_10">
+    <path d="M -40758.958667 102.524533 
+L 791.312743 102.524533 
+L 791.312743 130.657669 
+L -40758.958667 130.657669 
+z
+" clip-path="url(#M26-F2-p9e9f759e48)" style="fill: #8a63a2"/>
+   </g>
+   <g id="M26-F2-patch_11">
+    <path d="M -40758.958667 137.690953 
+L 503.223225 137.690953 
+L 503.223225 165.82409 
+L -40758.958667 165.82409 
+z
+" clip-path="url(#M26-F2-p9e9f759e48)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F2-patch_12">
+    <path d="M -40758.958667 172.857374 
+L 581.254184 172.857374 
+L 581.254184 200.990511 
+L -40758.958667 200.990511 
+z
+" clip-path="url(#M26-F2-p9e9f759e48)" style="fill: #266d86"/>
+   </g>
+   <g id="M26-F2-matplotlib.axis_3">
+    <g id="M26-F2-xtick_3">
+     <g id="M26-F2-line2d_10">
+      <g>
+       <use xlink:href="#M26-F2-m4fb48360fd" x="544.902197" y="209.430452" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_14">
+      <!-- $\mathdefault{10^{-9}}$ -->
+      <g transform="translate(533.132197 225.223577)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">9</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M26-F2-xtick_4">
+     <g id="M26-F2-line2d_11">
+      <g>
+       <use xlink:href="#M26-F2-m4fb48360fd" x="628.26014" y="209.430452" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_15">
+      <!-- $\mathdefault{10^{-7}}$ -->
+      <g transform="translate(616.49014 225.223577)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">7</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M26-F2-xtick_5">
+     <g id="M26-F2-line2d_12">
+      <g>
+       <use xlink:href="#M26-F2-m4fb48360fd" x="711.618083" y="209.430452" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_16">
+      <!-- $\mathdefault{10^{-5}}$ -->
+      <g transform="translate(699.848083 225.223577)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">5</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M26-F2-xtick_6">
+     <g id="M26-F2-line2d_13">
+      <g>
+       <use xlink:href="#M26-F2-m4fb48360fd" x="794.976027" y="209.430452" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_17">
+      <!-- $\mathdefault{10^{-3}}$ -->
+      <g transform="translate(783.206027 225.223577)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M26-F2-xtick_7">
+     <g id="M26-F2-line2d_14">
+      <g>
+       <use xlink:href="#M26-F2-m4fb48360fd" x="878.33397" y="209.430452" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_18">
+      <!-- $\mathdefault{10^{-1}}$ -->
+      <g transform="translate(866.56397 225.223577)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">−</tspan>
+        <tspan x="18.716357" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M26-F2-text_19">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="695.383296" y="240.751233" transform="rotate(-0 695.383296 240.751233)">Max absolute difference (zero drawn at 1e-10)</text>
+    </g>
+   </g>
+   <g id="M26-F2-matplotlib.axis_4">
+    <g id="M26-F2-ytick_8">
+     <g id="M26-F2-line2d_15">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="496.767071" y="46.258259" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_20">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="489.767071" y="50.654822" transform="rotate(-0 489.767071 50.654822)">Weighted accumulation</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_9">
+     <g id="M26-F2-line2d_16">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="496.767071" y="81.42468" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_21">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="489.767071" y="85.821243" transform="rotate(-0 489.767071 85.821243)">Unweighted microbatches</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_10">
+     <g id="M26-F2-line2d_17">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="496.767071" y="116.591101" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_22">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="489.767071" y="120.987663" transform="rotate(-0 489.767071 120.987663)">BF16</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_11">
+     <g id="M26-F2-line2d_18">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="496.767071" y="151.757522" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_23">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="489.767071" y="156.154084" transform="rotate(-0 489.767071 156.154084)">Recompute</text>
+     </g>
+    </g>
+    <g id="M26-F2-ytick_12">
+     <g id="M26-F2-line2d_19">
+      <g>
+       <use xlink:href="#M26-F2-m03e0a99b6e" x="496.767071" y="186.923943" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M26-F2-text_24">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" x="489.767071" y="191.320505" transform="rotate(-0 489.767071 191.320505)">Two-process DDP</text>
+     </g>
+    </g>
+   </g>
+   <g id="M26-F2-patch_13">
+    <path d="M 496.767071 209.430452 
+L 496.767071 23.75175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F2-patch_14">
+    <path d="M 496.767071 209.430452 
+L 893.99952 209.430452 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M26-F2-text_25">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="585.293294" y="48.736775" transform="rotate(-0 585.293294 48.736775)">7.5e-09</text>
+   </g>
+   <g id="M26-F2-text_26">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="843.813037" y="83.903196" transform="rotate(-0 843.813037 83.903196)">0.012</text>
+   </g>
+   <g id="M26-F2-text_27">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="795.351853" y="119.069617" transform="rotate(-0 795.351853 119.069617)">0.00082</text>
+   </g>
+   <g id="M26-F2-text_28">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="507.262335" y="154.236037" transform="rotate(-0 507.262335 154.236037)">0</text>
+   </g>
+   <g id="M26-F2-text_29">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" x="585.293294" y="189.402458" transform="rotate(-0 585.293294 189.402458)">7.5e-09</text>
+   </g>
+  </g>
+  <g id="M26-F2-axes_3">
+   <g id="M26-F2-table_1">
+    <g id="M26-F2-patch_15">
+     <path d="M 496.767071 319.483625 
+L 629.177887 319.483625 
+L 629.177887 296.709181 
+L 496.767071 296.709181 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_30">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="562.972479" y="311.1257" transform="rotate(-0 562.972479 311.1257)">FP32</text>
+    </g>
+    <g id="M26-F2-patch_16">
+     <path d="M 629.177887 319.483625 
+L 761.588704 319.483625 
+L 761.588704 296.709181 
+L 629.177887 296.709181 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_31">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="695.383296" y="311.1257" transform="rotate(-0 695.383296 311.1257)">FP16</text>
+    </g>
+    <g id="M26-F2-patch_17">
+     <path d="M 761.588704 319.483625 
+L 893.99952 319.483625 
+L 893.99952 296.709181 
+L 761.588704 296.709181 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_32">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="827.794112" y="311.1257" transform="rotate(-0 827.794112 311.1257)">BF16</text>
+    </g>
+    <g id="M26-F2-patch_18">
+     <path d="M 496.767071 342.258069 
+L 629.177887 342.258069 
+L 629.177887 319.483625 
+L 496.767071 319.483625 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_33">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="562.972479" y="333.900144" transform="rotate(-0 562.972479 333.900144)">1e-08</text>
+    </g>
+    <g id="M26-F2-patch_19">
+     <path d="M 629.177887 342.258069 
+L 761.588704 342.258069 
+L 761.588704 319.483625 
+L 629.177887 319.483625 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_34">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="695.383296" y="333.900144" transform="rotate(-0 695.383296 333.900144)">0</text>
+    </g>
+    <g id="M26-F2-patch_20">
+     <path d="M 761.588704 342.258069 
+L 893.99952 342.258069 
+L 893.99952 319.483625 
+L 761.588704 319.483625 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_35">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="827.794112" y="333.900144" transform="rotate(-0 827.794112 333.900144)">1.001172e-08</text>
+    </g>
+    <g id="M26-F2-patch_21">
+     <path d="M 496.767071 365.032513 
+L 629.177887 365.032513 
+L 629.177887 342.258069 
+L 496.767071 342.258069 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_36">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="562.972479" y="356.674588" transform="rotate(-0 562.972479 356.674588)">1e-05</text>
+    </g>
+    <g id="M26-F2-patch_22">
+     <path d="M 629.177887 365.032513 
+L 761.588704 365.032513 
+L 761.588704 342.258069 
+L 629.177887 342.258069 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_37">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="695.383296" y="356.674588" transform="rotate(-0 695.383296 356.674588)">1.001358e-05</text>
+    </g>
+    <g id="M26-F2-patch_23">
+     <path d="M 761.588704 365.032513 
+L 893.99952 365.032513 
+L 893.99952 342.258069 
+L 761.588704 342.258069 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_38">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="827.794112" y="356.674588" transform="rotate(-0 827.794112 356.674588)">1.001358e-05</text>
+    </g>
+    <g id="M26-F2-patch_24">
+     <path d="M 496.767071 387.806957 
+L 629.177887 387.806957 
+L 629.177887 365.032513 
+L 496.767071 365.032513 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_39">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="562.972479" y="379.449032" transform="rotate(-0 562.972479 379.449032)">0.1</text>
+    </g>
+    <g id="M26-F2-patch_25">
+     <path d="M 629.177887 387.806957 
+L 761.588704 387.806957 
+L 761.588704 365.032513 
+L 629.177887 365.032513 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_40">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="695.383296" y="379.449032" transform="rotate(-0 695.383296 379.449032)">0.09997559</text>
+    </g>
+    <g id="M26-F2-patch_26">
+     <path d="M 761.588704 387.806957 
+L 893.99952 387.806957 
+L 893.99952 365.032513 
+L 761.588704 365.032513 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_41">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="827.794112" y="379.449032" transform="rotate(-0 827.794112 379.449032)">0.1000977</text>
+    </g>
+    <g id="M26-F2-patch_27">
+     <path d="M 496.767071 410.581401 
+L 629.177887 410.581401 
+L 629.177887 387.806957 
+L 496.767071 387.806957 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_42">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="562.972479" y="402.223476" transform="rotate(-0 562.972479 402.223476)">1.001</text>
+    </g>
+    <g id="M26-F2-patch_28">
+     <path d="M 629.177887 410.581401 
+L 761.588704 410.581401 
+L 761.588704 387.806957 
+L 629.177887 387.806957 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_43">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="695.383296" y="402.223476" transform="rotate(-0 695.383296 402.223476)">1.000977</text>
+    </g>
+    <g id="M26-F2-patch_29">
+     <path d="M 761.588704 410.581401 
+L 893.99952 410.581401 
+L 893.99952 387.806957 
+L 761.588704 387.806957 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_44">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="827.794112" y="402.223476" transform="rotate(-0 827.794112 402.223476)">1</text>
+    </g>
+    <g id="M26-F2-patch_30">
+     <path d="M 496.767071 433.355845 
+L 629.177887 433.355845 
+L 629.177887 410.581401 
+L 496.767071 410.581401 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_45">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="562.972479" y="424.99792" transform="rotate(-0 562.972479 424.99792)">1000.1</text>
+    </g>
+    <g id="M26-F2-patch_31">
+     <path d="M 629.177887 433.355845 
+L 761.588704 433.355845 
+L 761.588704 410.581401 
+L 629.177887 410.581401 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_46">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="695.383296" y="424.99792" transform="rotate(-0 695.383296 424.99792)">1000</text>
+    </g>
+    <g id="M26-F2-patch_32">
+     <path d="M 761.588704 433.355845 
+L 893.99952 433.355845 
+L 893.99952 410.581401 
+L 761.588704 410.581401 
+z
+" style="fill: #ffffff; stroke: #000000; stroke-linejoin: miter"/>
+    </g>
+    <g id="M26-F2-text_47">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="827.794112" y="424.99792" transform="rotate(-0 827.794112 424.99792)">1000</text>
+    </g>
+   </g>
+   <g id="M26-F2-text_48">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" x="695.383296" y="266.193162" transform="rotate(-0 695.383296 266.193162)">Actual conversions: range and precision differ</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M26-F2-pe9aef200b0">
+   <rect x="49.142656" y="23.75175" width="294.246259" height="434.120114"/>
+  </clipPath>
+  <clipPath id="M26-F2-p9e9f759e48">
+   <rect x="496.767071" y="23.75175" width="397.232449" height="185.678702"/>
+  </clipPath>
+ </defs>
+</svg>

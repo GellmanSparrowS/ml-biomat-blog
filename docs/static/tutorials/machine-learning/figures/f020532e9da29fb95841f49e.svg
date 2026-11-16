@@ -1,0 +1,898 @@
+<svg role="img" aria-label="Left: standard-model confusion counts on 360 test images. Upper right: validation cross entropy for both training settings. Lower right: test accuracy on original and one-pixel-right-shifted images. Both runs share initial weights and select their own parameters by validation loss." xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="561.6pt" viewBox="0 0 864 561.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M12-F3-figure_1">
+  <g id="M12-F3-patch_1">
+   <path d="M 0 561.6 
+L 864 561.6 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M12-F3-axes_1">
+   <g id="M12-F3-patch_2">
+    <path d="M 30.34399 460.608012 
+L 407.614702 460.608012 
+L 407.614702 83.3373 
+L 30.34399 83.3373 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g clip-path="url(#M12-F3-pc045c44a7c)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAgwAAAIMCAYAAACZhvQPAAAJFUlEQVR4nO3YMWrcUBRAUTkIE0ilKiuZztvILqb2StRkTVqMquBgG0/qVJcwJrL/nFP/4vGFxNW7e3q5XCYA4F0tp/NQN/rl6AEAgI9PMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABpngbz6/frNJpvX4d7TMCVnl/fhrrD7z9+TqPZt3UaiQ0DAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkO6eXi6XPgbAR7KcztNI9m09egSCDQMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAIBgAgOvZMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAAae4jAJ/bcjpPo9m39egRuDE2DABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAEgwAQBIMAEASDABAmvsIcGuW03kayb6tR48An54NAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDAJAEAwCQBAMAkAQDACAYAIDr2TAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABJMAAASTAAAEkwAABp7iNAWU7noS5p39ajRwA+GBsGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACDNfQTe1/LwONyV7ts6jeT59W0ayf3s34j/73mw98hbBAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAACTBAAAkwQAAJMEAAKS7p5fLpY9xpOV0HuoB7Nt69AgA/CMbBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgBAMAAA17NhAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAACSYAAAkmAAAJJgAADSPA1mOZ2n0ezbevQIANw4GwYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIM3Lw+M0kn1bjx6BG/T8+jaN5H72LwH8zVcBAEiCAQBIggEASIIBAEiCAQBIggEASIIBAEiCAQBIggEASIIBAEiCAQBIggEASIIBAEiCAQBIggEASIIBAEiCAQBIggEASIIBAEiCAQBIggEASIIBAEiCAQBIggEASIIBAEiCAQBIggEAEAwAwPVsGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgCQYAIAkGACAJBgAgKn8AYjUOwP6wDE7AAAAAElFTkSuQmCC" id="M12-F3-imagebc079132fe" transform="scale(1 -1) translate(0 -377.28)" x="30.34399" y="-83.328012" width="377.28" height="377.28"/>
+   </g>
+   <g id="M12-F3-matplotlib.axis_1">
+    <g id="M12-F3-xtick_1">
+     <g id="M12-F3-line2d_1">
+      <defs>
+       <path id="M12-F3-mfd4903f4a0" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="49.207526" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_1">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="49.207526" y="475.601762" transform="rotate(-0 49.207526 475.601762)">0</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_2">
+     <g id="M12-F3-line2d_2">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="86.934597" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_2">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="86.934597" y="475.601762" transform="rotate(-0 86.934597 475.601762)">1</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_3">
+     <g id="M12-F3-line2d_3">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="124.661668" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_3">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="124.661668" y="475.601762" transform="rotate(-0 124.661668 475.601762)">2</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_4">
+     <g id="M12-F3-line2d_4">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="162.388739" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_4">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="162.388739" y="475.601762" transform="rotate(-0 162.388739 475.601762)">3</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_5">
+     <g id="M12-F3-line2d_5">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="200.115811" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_5">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="200.115811" y="475.601762" transform="rotate(-0 200.115811 475.601762)">4</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_6">
+     <g id="M12-F3-line2d_6">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="237.842882" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_6">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="237.842882" y="475.601762" transform="rotate(-0 237.842882 475.601762)">5</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_7">
+     <g id="M12-F3-line2d_7">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="275.569953" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_7">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="275.569953" y="475.601762" transform="rotate(-0 275.569953 475.601762)">6</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_8">
+     <g id="M12-F3-line2d_8">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="313.297024" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_8">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="313.297024" y="475.601762" transform="rotate(-0 313.297024 475.601762)">7</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_9">
+     <g id="M12-F3-line2d_9">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="351.024096" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_9">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="351.024096" y="475.601762" transform="rotate(-0 351.024096 475.601762)">8</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_10">
+     <g id="M12-F3-line2d_10">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="388.751167" y="460.608012" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_10">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="388.751167" y="475.601762" transform="rotate(-0 388.751167 475.601762)">9</text>
+     </g>
+    </g>
+    <g id="M12-F3-text_11">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="218.979346" y="490.08145" transform="rotate(-0 218.979346 490.08145)">Predicted class</text>
+    </g>
+   </g>
+   <g id="M12-F3-matplotlib.axis_2">
+    <g id="M12-F3-ytick_1">
+     <g id="M12-F3-line2d_11">
+      <defs>
+       <path id="M12-F3-m66c3ea8592" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="102.200836" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_12">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="106.197711" transform="rotate(-0 23.34399 106.197711)">0</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_2">
+     <g id="M12-F3-line2d_12">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="139.927907" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_13">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="143.924782" transform="rotate(-0 23.34399 143.924782)">1</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_3">
+     <g id="M12-F3-line2d_13">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="177.654978" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_14">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="181.651853" transform="rotate(-0 23.34399 181.651853)">2</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_4">
+     <g id="M12-F3-line2d_14">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="215.382049" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_15">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="219.378924" transform="rotate(-0 23.34399 219.378924)">3</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_5">
+     <g id="M12-F3-line2d_15">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="253.109121" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_16">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="257.105996" transform="rotate(-0 23.34399 257.105996)">4</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_6">
+     <g id="M12-F3-line2d_16">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="290.836192" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_17">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="294.833067" transform="rotate(-0 23.34399 294.833067)">5</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_7">
+     <g id="M12-F3-line2d_17">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="328.563263" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_18">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="332.560138" transform="rotate(-0 23.34399 332.560138)">6</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_8">
+     <g id="M12-F3-line2d_18">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="366.290334" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_19">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="370.287209" transform="rotate(-0 23.34399 370.287209)">7</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_9">
+     <g id="M12-F3-line2d_19">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="404.017406" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_20">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="408.014281" transform="rotate(-0 23.34399 408.014281)">8</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_10">
+     <g id="M12-F3-line2d_20">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="30.34399" y="441.744477" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_21">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="23.34399" y="445.741352" transform="rotate(-0 23.34399 445.741352)">9</text>
+     </g>
+    </g>
+    <g id="M12-F3-text_22">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="10.99399" y="271.972656" transform="rotate(-90 10.99399 271.972656)">True class</text>
+    </g>
+   </g>
+   <g id="M12-F3-patch_3">
+    <path d="M 30.34399 460.608012 
+L 30.34399 83.3373 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M12-F3-patch_4">
+    <path d="M 30.34399 460.608012 
+L 407.614702 460.608012 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M12-F3-text_23">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="49.207526" y="104.954742" transform="rotate(-0 49.207526 104.954742)">35</text>
+   </g>
+   <g id="M12-F3-text_24">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #17323c" x="200.115811" y="104.954742" transform="rotate(-0 200.115811 104.954742)">1</text>
+   </g>
+   <g id="M12-F3-text_25">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="86.934597" y="142.681813" transform="rotate(-0 86.934597 142.681813)">36</text>
+   </g>
+   <g id="M12-F3-text_26">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="124.661668" y="180.408884" transform="rotate(-0 124.661668 180.408884)">36</text>
+   </g>
+   <g id="M12-F3-text_27">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="162.388739" y="218.135956" transform="rotate(-0 162.388739 218.135956)">35</text>
+   </g>
+   <g id="M12-F3-text_28">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #17323c" x="237.842882" y="218.135956" transform="rotate(-0 237.842882 218.135956)">1</text>
+   </g>
+   <g id="M12-F3-text_29">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #17323c" x="388.751167" y="218.135956" transform="rotate(-0 388.751167 218.135956)">1</text>
+   </g>
+   <g id="M12-F3-text_30">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="200.115811" y="255.863027" transform="rotate(-0 200.115811 255.863027)">36</text>
+   </g>
+   <g id="M12-F3-text_31">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="237.842882" y="293.590098" transform="rotate(-0 237.842882 293.590098)">36</text>
+   </g>
+   <g id="M12-F3-text_32">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="275.569953" y="331.317169" transform="rotate(-0 275.569953 331.317169)">36</text>
+   </g>
+   <g id="M12-F3-text_33">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="313.297024" y="369.044241" transform="rotate(-0 313.297024 369.044241)">36</text>
+   </g>
+   <g id="M12-F3-text_34">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #17323c" x="86.934597" y="406.771312" transform="rotate(-0 86.934597 406.771312)">2</text>
+   </g>
+   <g id="M12-F3-text_35">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #17323c" x="313.297024" y="406.771312" transform="rotate(-0 313.297024 406.771312)">1</text>
+   </g>
+   <g id="M12-F3-text_36">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="351.024096" y="406.771312" transform="rotate(-0 351.024096 406.771312)">32</text>
+   </g>
+   <g id="M12-F3-text_37">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #ffffff" x="388.751167" y="444.498383" transform="rotate(-0 388.751167 444.498383)">36</text>
+   </g>
+  </g>
+  <g id="M12-F3-axes_2">
+   <g id="M12-F3-patch_5">
+    <path d="M 426.478238 406.458864 
+L 439.926859 406.458864 
+L 439.926859 137.486448 
+L 426.478238 137.486448 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAABMAAAF2CAYAAACMHqORAAAB3klEQVR4nO2cy40gMRBCmRL5p7uHkczG4BbSlAwvANS4vvahf/79SjAxMELfdwEUfGpjUwJAeG36GKMWGs172Gg+lLST8mVQhs2lM2B8Umg0P8BG8xqGjDqsXUPVNfQW9lLxVtLKJjYZV0SGrKFYbNMHG81rBkbYaF7D1uY17Ki7ZmCEXVyuYcgVUV1Db2EXl5cWl2MM59iU0P3sCzyL704yiinC5skYdbLaFJbaPK2AW9hovjWEtbY2l9rk5ouYdgZgsDeaiij0s7bQZRVTSD9DRGoowubptv1Q2z4ZSSuvTSTsGifkzLD0zMYnhU6n19q2ImzCKaZOp4duKFoqNj4p9JHksX6miLatrTa5eAbAKaaQ1wMlbNtaa/Nk2BQyWpASZsD4pNCJ/ti2jYik1dZnwvFJYXELYmfANYOIUTc2JSTZlFMMNsYnhdr8AGMqAE4x2cTGpoTa/AIbzWsGRtjp9Nfb9mk/u2RghJ1Ob7VtRfwQQAoQG5sSmhpfYKP5UtIqozaljN9vKeLM1Il+C0OiqbU2sbXQx6aEnGhqawtizJlpbaEfp5hsYmNTQm3+eWqMTQnmPGMr4Bq20K8ZGGGT9hrihETz2MTGpoS27S+whX4NO53e6meyie21+R9FxhuoO7jfMgAAAABJRU5ErkJggg==" id="M12-F3-image935b56572c" transform="scale(1 -1) translate(0 -269.28)" x="426.24" y="-137.52" width="13.68" height="269.28"/>
+   <g id="M12-F3-matplotlib.axis_3"/>
+   <g id="M12-F3-matplotlib.axis_4">
+    <g id="M12-F3-ytick_11">
+     <g id="M12-F3-line2d_21">
+      <defs>
+       <path id="M12-F3-mf893e9bac4" d="M 0 0 
+L 3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M12-F3-mf893e9bac4" x="439.926859" y="406.458864" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_38">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="446.926859" y="410.455739" transform="rotate(-0 446.926859 410.455739)">0</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_12">
+     <g id="M12-F3-line2d_22">
+      <g>
+       <use xlink:href="#M12-F3-mf893e9bac4" x="439.926859" y="369.101584" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_39">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="446.926859" y="373.098459" transform="rotate(-0 446.926859 373.098459)">5</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_13">
+     <g id="M12-F3-line2d_23">
+      <g>
+       <use xlink:href="#M12-F3-mf893e9bac4" x="439.926859" y="331.744304" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_40">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="446.926859" y="335.741179" transform="rotate(-0 446.926859 335.741179)">10</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_14">
+     <g id="M12-F3-line2d_24">
+      <g>
+       <use xlink:href="#M12-F3-mf893e9bac4" x="439.926859" y="294.387024" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_41">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="446.926859" y="298.383899" transform="rotate(-0 446.926859 298.383899)">15</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_15">
+     <g id="M12-F3-line2d_25">
+      <g>
+       <use xlink:href="#M12-F3-mf893e9bac4" x="439.926859" y="257.029744" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_42">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="446.926859" y="261.026619" transform="rotate(-0 446.926859 261.026619)">20</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_16">
+     <g id="M12-F3-line2d_26">
+      <g>
+       <use xlink:href="#M12-F3-mf893e9bac4" x="439.926859" y="219.672464" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_43">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="446.926859" y="223.669339" transform="rotate(-0 446.926859 223.669339)">25</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_17">
+     <g id="M12-F3-line2d_27">
+      <g>
+       <use xlink:href="#M12-F3-mf893e9bac4" x="439.926859" y="182.315184" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_44">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="446.926859" y="186.312059" transform="rotate(-0 446.926859 186.312059)">30</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_18">
+     <g id="M12-F3-line2d_28">
+      <g>
+       <use xlink:href="#M12-F3-mf893e9bac4" x="439.926859" y="144.957904" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_45">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="446.926859" y="148.954779" transform="rotate(-0 446.926859 148.954779)">35</text>
+     </g>
+    </g>
+    <g id="M12-F3-text_46">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="470.648734" y="271.972656" transform="rotate(-90 470.648734 271.972656)">Count</text>
+    </g>
+   </g>
+   <g id="M12-F3-LineCollection_1"/>
+   <g id="M12-F3-patch_6">
+    <path d="M 426.478238 406.458864 
+L 433.202549 406.458864 
+L 439.926859 406.458864 
+L 439.926859 137.486448 
+L 433.202549 137.486448 
+L 426.478238 137.486448 
+L 426.478238 406.458864 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="M12-F3-axes_3">
+   <g id="M12-F3-patch_7">
+    <path d="M 518.026385 249.992489 
+L 860.99976 249.992489 
+L 860.99976 3.00024 
+L 518.026385 3.00024 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M12-F3-matplotlib.axis_5">
+    <g id="M12-F3-xtick_11">
+     <g id="M12-F3-line2d_29">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="527.252941" y="249.992489" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_47">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="527.252941" y="264.986239" transform="rotate(-0 527.252941 264.986239)">0</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_12">
+     <g id="M12-F3-line2d_30">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="590.884365" y="249.992489" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_48">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="590.884365" y="264.986239" transform="rotate(-0 590.884365 264.986239)">10</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_13">
+     <g id="M12-F3-line2d_31">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="654.515789" y="249.992489" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_49">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="654.515789" y="264.986239" transform="rotate(-0 654.515789 264.986239)">20</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_14">
+     <g id="M12-F3-line2d_32">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="718.147213" y="249.992489" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_50">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="718.147213" y="264.986239" transform="rotate(-0 718.147213 264.986239)">30</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_15">
+     <g id="M12-F3-line2d_33">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="781.778637" y="249.992489" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_51">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="781.778637" y="264.986239" transform="rotate(-0 781.778637 264.986239)">40</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_16">
+     <g id="M12-F3-line2d_34">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="845.410061" y="249.992489" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_52">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="845.410061" y="264.986239" transform="rotate(-0 845.410061 264.986239)">50</text>
+     </g>
+    </g>
+    <g id="M12-F3-text_53">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="689.513073" y="279.465926" transform="rotate(-0 689.513073 279.465926)">Epoch</text>
+    </g>
+   </g>
+   <g id="M12-F3-matplotlib.axis_6">
+    <g id="M12-F3-ytick_19">
+     <g id="M12-F3-line2d_35">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="245.826401" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_54">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="249.823276" transform="rotate(-0 511.026385 249.823276)">0.0</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_20">
+     <g id="M12-F3-line2d_36">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="191.556334" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_55">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="195.553209" transform="rotate(-0 511.026385 195.553209)">0.5</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_21">
+     <g id="M12-F3-line2d_37">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="137.286267" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_56">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="141.283142" transform="rotate(-0 511.026385 141.283142)">1.0</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_22">
+     <g id="M12-F3-line2d_38">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="83.0162" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_57">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="87.013075" transform="rotate(-0 511.026385 87.013075)">1.5</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_23">
+     <g id="M12-F3-line2d_39">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="28.746133" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_58">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="32.743008" transform="rotate(-0 511.026385 32.743008)">2.0</text>
+     </g>
+    </g>
+    <g id="M12-F3-text_59">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="490.346698" y="126.496364" transform="rotate(-90 490.346698 126.496364)">Validation cross entropy</text>
+    </g>
+   </g>
+   <g id="M12-F3-line2d_40">
+    <path d="M 533.616084 71.748175 
+L 539.979226 172.549478 
+L 546.342369 209.564965 
+L 552.705511 217.402492 
+L 559.068653 224.54483 
+L 565.431796 224.393573 
+L 571.794938 225.960857 
+L 578.158081 227.88307 
+L 584.521223 233.051796 
+L 590.884365 233.88228 
+L 597.247508 232.598205 
+L 603.61065 235.469517 
+L 609.973793 229.820128 
+L 616.336935 232.533229 
+L 622.700077 235.917965 
+L 629.06322 237.418103 
+L 635.426362 236.88936 
+L 641.789505 236.658559 
+L 648.152647 237.582705 
+L 654.515789 234.537495 
+L 660.878932 236.943432 
+L 667.242074 237.398591 
+L 673.605217 236.803306 
+L 679.968359 235.716683 
+L 686.331501 238.435611 
+L 692.694644 237.966511 
+L 699.057786 238.765568 
+L 705.420928 237.359194 
+L 711.784071 237.633364 
+L 718.147213 238.546253 
+L 724.510356 238.014977 
+L 730.873498 238.195004 
+L 737.23664 238.006368 
+L 743.599783 238.365554 
+L 749.962925 238.252865 
+L 756.326068 237.806908 
+L 762.68921 237.951256 
+L 769.052352 238.205147 
+L 775.415495 238.117591 
+L 781.778637 237.721602 
+L 788.14178 237.980019 
+L 794.504922 237.87607 
+L 800.868064 238.031936 
+L 807.231207 237.659067 
+L 813.594349 238.134581 
+L 819.957492 237.099109 
+L 826.320634 237.755784 
+L 832.683776 237.726665 
+L 839.046919 237.641808 
+L 845.410061 237.841554 
+" clip-path="url(#M12-F3-p8e9d0b1457)" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="M12-F3-line2d_41">
+    <path d="M 533.616084 14.22716 
+L 539.979226 85.587643 
+L 546.342369 161.257911 
+L 552.705511 196.052009 
+L 559.068653 181.10582 
+L 565.431796 196.20599 
+L 571.794938 208.35813 
+L 578.158081 217.820583 
+L 584.521223 219.169033 
+L 590.884365 219.738762 
+L 597.247508 218.537112 
+L 603.61065 214.783271 
+L 609.973793 205.617864 
+L 616.336935 218.955769 
+L 622.700077 226.414514 
+L 629.06322 227.004764 
+L 635.426362 225.375715 
+L 641.789505 227.490393 
+L 648.152647 219.615108 
+L 654.515789 226.706179 
+L 660.878932 226.351543 
+L 667.242074 224.692336 
+L 673.605217 221.234916 
+L 679.968359 231.344261 
+L 686.331501 230.096431 
+L 692.694644 231.965842 
+L 699.057786 229.671071 
+L 705.420928 224.791696 
+L 711.784071 228.686009 
+L 718.147213 229.548841 
+L 724.510356 230.094588 
+L 730.873498 228.683172 
+L 737.23664 223.234789 
+L 743.599783 222.684253 
+L 749.962925 228.886551 
+L 756.326068 229.427273 
+L 762.68921 226.226393 
+L 769.052352 229.778261 
+L 775.415495 231.967653 
+L 781.778637 231.793326 
+L 788.14178 228.894879 
+L 794.504922 233.347331 
+L 800.868064 232.011188 
+L 807.231207 230.028208 
+L 813.594349 231.98477 
+L 819.957492 228.967935 
+L 826.320634 232.735894 
+L 832.683776 228.848054 
+L 839.046919 224.094412 
+L 845.410061 226.16852 
+" clip-path="url(#M12-F3-p8e9d0b1457)" style="fill: none; stroke: #d58500; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="M12-F3-patch_8">
+    <path d="M 518.026385 249.992489 
+L 518.026385 3.00024 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M12-F3-patch_9">
+    <path d="M 518.026385 249.992489 
+L 860.99976 249.992489 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M12-F3-legend_1">
+    <g id="M12-F3-patch_10">
+     <path d="M 766.998198 42.017427 
+L 853.99976 42.017427 
+Q 855.99976 42.017427 855.99976 40.017427 
+L 855.99976 10.00024 
+Q 855.99976 8.00024 853.99976 8.00024 
+L 766.998198 8.00024 
+Q 764.998198 8.00024 764.998198 10.00024 
+L 764.998198 40.017427 
+Q 764.998198 42.017427 766.998198 42.017427 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="M12-F3-line2d_42">
+     <path d="M 768.998198 16.49399 
+L 778.998198 16.49399 
+L 788.998198 16.49399 
+" style="fill: none; stroke: #0072b2; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="M12-F3-text_60">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="796.998198" y="19.99399" transform="rotate(-0 796.998198 19.99399)">standard</text>
+    </g>
+    <g id="M12-F3-line2d_43">
+     <path d="M 768.998198 31.973677 
+L 778.998198 31.973677 
+L 788.998198 31.973677 
+" style="fill: none; stroke: #d58500; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="M12-F3-text_61">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="796.998198" y="35.473677" transform="rotate(-0 796.998198 35.473677)">augmented</text>
+    </g>
+   </g>
+  </g>
+  <g id="M12-F3-axes_4">
+   <g id="M12-F3-patch_11">
+    <path d="M 518.026385 540.945073 
+L 860.99976 540.945073 
+L 860.99976 293.952824 
+L 518.026385 293.952824 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M12-F3-patch_12">
+    <path d="M 533.616084 540.945073 
+L 595.974879 540.945073 
+L 595.974879 324.091755 
+L 533.616084 324.091755 
+z
+" clip-path="url(#M12-F3-p21dc403467)" style="fill: #0072b2"/>
+   </g>
+   <g id="M12-F3-patch_13">
+    <path d="M 717.024306 540.945073 
+L 779.383101 540.945073 
+L 779.383101 358.396232 
+L 717.024306 358.396232 
+z
+" clip-path="url(#M12-F3-p21dc403467)" style="fill: #0072b2"/>
+   </g>
+   <g id="M12-F3-patch_14">
+    <path d="M 599.643044 540.945073 
+L 662.001839 540.945073 
+L 662.001839 328.992395 
+L 599.643044 328.992395 
+z
+" clip-path="url(#M12-F3-p21dc403467)" style="fill: #d58500"/>
+   </g>
+   <g id="M12-F3-patch_15">
+    <path d="M 783.051266 540.945073 
+L 845.410061 540.945073 
+L 845.410061 326.542082 
+L 783.051266 326.542082 
+z
+" clip-path="url(#M12-F3-p21dc403467)" style="fill: #d58500"/>
+   </g>
+   <g id="M12-F3-matplotlib.axis_7">
+    <g id="M12-F3-xtick_17">
+     <g id="M12-F3-line2d_44">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="597.808962" y="540.945073" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_62">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="597.808962" y="555.938823" transform="rotate(-0 597.808962 555.938823)">Original</text>
+     </g>
+    </g>
+    <g id="M12-F3-xtick_18">
+     <g id="M12-F3-line2d_45">
+      <g>
+       <use xlink:href="#M12-F3-mfd4903f4a0" x="781.217183" y="540.945073" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_63">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="781.217183" y="556.05601" transform="rotate(-0 781.217183 556.05601)">Right shift: 1 pixel</text>
+     </g>
+    </g>
+   </g>
+   <g id="M12-F3-matplotlib.axis_8">
+    <g id="M12-F3-ytick_24">
+     <g id="M12-F3-line2d_46">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="540.945073" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_64">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="544.941947" transform="rotate(-0 511.026385 544.941947)">0.0</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_25">
+     <g id="M12-F3-line2d_47">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="496.839314" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_65">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="500.836189" transform="rotate(-0 511.026385 500.836189)">0.2</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_26">
+     <g id="M12-F3-line2d_48">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="452.733555" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_66">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="456.73043" transform="rotate(-0 511.026385 456.73043)">0.4</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_27">
+     <g id="M12-F3-line2d_49">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="408.627796" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_67">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="412.624671" transform="rotate(-0 511.026385 412.624671)">0.6</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_28">
+     <g id="M12-F3-line2d_50">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="364.522038" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_68">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="368.518913" transform="rotate(-0 511.026385 368.518913)">0.8</text>
+     </g>
+    </g>
+    <g id="M12-F3-ytick_29">
+     <g id="M12-F3-line2d_51">
+      <g>
+       <use xlink:href="#M12-F3-m66c3ea8592" x="518.026385" y="320.416279" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M12-F3-text_69">
+      <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="511.026385" y="324.413154" transform="rotate(-0 511.026385 324.413154)">1.0</text>
+     </g>
+    </g>
+    <g id="M12-F3-text_70">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="490.346698" y="417.448948" transform="rotate(-90 490.346698 417.448948)">Test accuracy</text>
+    </g>
+   </g>
+   <g id="M12-F3-patch_16">
+    <path d="M 518.026385 540.945073 
+L 518.026385 293.952824 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M12-F3-patch_17">
+    <path d="M 518.026385 540.945073 
+L 860.99976 540.945073 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M12-F3-text_71">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="564.795482" y="320.783823" transform="rotate(-0 564.795482 320.783823)">98.3%</text>
+   </g>
+   <g id="M12-F3-text_72">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="748.203704" y="355.0883" transform="rotate(-0 748.203704 355.0883)">82.8%</text>
+   </g>
+   <g id="M12-F3-text_73">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="630.822441" y="325.684463" transform="rotate(-0 630.822441 325.684463)">96.1%</text>
+   </g>
+   <g id="M12-F3-text_74">
+    <text style="font-size: 9px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="814.230663" y="323.23415" transform="rotate(-0 814.230663 323.23415)">97.2%</text>
+   </g>
+   <g id="M12-F3-legend_2">
+    <g id="M12-F3-patch_18">
+     <path d="M 525.026385 535.945073 
+L 612.027948 535.945073 
+Q 614.027948 535.945073 614.027948 533.945073 
+L 614.027948 503.927885 
+Q 614.027948 501.927885 612.027948 501.927885 
+L 525.026385 501.927885 
+Q 523.026385 501.927885 523.026385 503.927885 
+L 523.026385 533.945073 
+Q 523.026385 535.945073 525.026385 535.945073 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="M12-F3-patch_19">
+     <path d="M 527.026385 513.921635 
+L 547.026385 513.921635 
+L 547.026385 506.921635 
+L 527.026385 506.921635 
+z
+" style="fill: #0072b2"/>
+    </g>
+    <g id="M12-F3-text_75">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="555.026385" y="513.921635" transform="rotate(-0 555.026385 513.921635)">standard</text>
+    </g>
+    <g id="M12-F3-patch_20">
+     <path d="M 527.026385 529.401322 
+L 547.026385 529.401322 
+L 547.026385 522.401322 
+L 527.026385 522.401322 
+z
+" style="fill: #d58500"/>
+    </g>
+    <g id="M12-F3-text_76">
+     <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="555.026385" y="529.401322" transform="rotate(-0 555.026385 529.401322)">augmented</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M12-F3-pc045c44a7c">
+   <rect x="30.34399" y="83.3373" width="377.270712" height="377.270712"/>
+  </clipPath>
+  <clipPath id="M12-F3-p8e9d0b1457">
+   <rect x="518.026385" y="3.00024" width="342.973375" height="246.992249"/>
+  </clipPath>
+  <clipPath id="M12-F3-p21dc403467">
+   <rect x="518.026385" y="293.952824" width="342.973375" height="246.992249"/>
+  </clipPath>
+ </defs>
+</svg>

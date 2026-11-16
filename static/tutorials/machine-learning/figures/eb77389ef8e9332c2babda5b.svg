@@ -1,0 +1,609 @@
+<svg aria-label="左：实际训练与验证交叉熵；中：48 条独立条件组测试样例的计数混淆矩阵；右：相同测试信号参数下改变加噪信噪比的正确率。虚线是三类均衡任务的随机机会水平。" height="274.79952pt" role="img" version="1.1" viewBox="0 0 872.39952 274.79952" width="872.39952pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+</defs>
+<g id="M20-F2-figure_1">
+<g id="M20-F2-patch_1">
+<path d="M 0 274.79952 
+L 872.39952 274.79952 
+L 872.39952 0 
+L 0 0 
+z
+" style="fill: #ffffff"></path>
+</g>
+<g id="M20-F2-axes_1">
+<g id="M20-F2-patch_2">
+<path d="M 42.815625 219.71728 
+L 284.103474 219.71728 
+L 284.103474 7.2 
+L 42.815625 7.2 
+z
+" style="fill: #ffffff"></path>
+</g>
+<g id="M20-F2-matplotlib.axis_1">
+<g id="M20-F2-xtick_1">
+<g id="M20-F2-line2d_1">
+<defs>
+<path d="M 0 0 
+L 0 3.5 
+" id="M20-F2-md0b3d05a76" style="stroke: #000000; stroke-width: 0.8"></path>
+</defs>
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="47.331708" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_1">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 47.331708 234.71103)" x="47.331708" y="234.71103">0</text>
+</g>
+</g>
+<g id="M20-F2-xtick_2">
+<g id="M20-F2-line2d_2">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="79.589442" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_2">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 79.589442 234.71103)" x="79.589442" y="234.71103">5</text>
+</g>
+</g>
+<g id="M20-F2-xtick_3">
+<g id="M20-F2-line2d_3">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="111.847175" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_3">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 111.847175 234.71103)" x="111.847175" y="234.71103">10</text>
+</g>
+</g>
+<g id="M20-F2-xtick_4">
+<g id="M20-F2-line2d_4">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="144.104909" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_4">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 144.104909 234.71103)" x="144.104909" y="234.71103">15</text>
+</g>
+</g>
+<g id="M20-F2-xtick_5">
+<g id="M20-F2-line2d_5">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="176.362643" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_5">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 176.362643 234.71103)" x="176.362643" y="234.71103">20</text>
+</g>
+</g>
+<g id="M20-F2-xtick_6">
+<g id="M20-F2-line2d_6">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="208.620377" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_6">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 208.620377 234.71103)" x="208.620377" y="234.71103">25</text>
+</g>
+</g>
+<g id="M20-F2-xtick_7">
+<g id="M20-F2-line2d_7">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="240.878111" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_7">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 240.878111 234.71103)" x="240.878111" y="234.71103">30</text>
+</g>
+</g>
+<g id="M20-F2-xtick_8">
+<g id="M20-F2-line2d_8">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="273.135845" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_8">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 273.135845 234.71103)" x="273.135845" y="234.71103">35</text>
+</g>
+</g>
+<g id="M20-F2-text_9">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 163.45955 249.190717)" x="163.45955" y="249.190717">轮数</text>
+</g>
+</g>
+<g id="M20-F2-matplotlib.axis_2">
+<g id="M20-F2-ytick_1">
+<g id="M20-F2-line2d_9">
+<defs>
+<path d="M 0 0 
+L -3.5 0 
+" id="M20-F2-m21c3c75830" style="stroke: #000000; stroke-width: 0.8"></path>
+</defs>
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="42.815625" xlink:href="#M20-F2-m21c3c75830" y="211.370586"></use>
+</g>
+</g>
+<g id="M20-F2-text_10">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 35.815625 215.367461)" x="35.815625" y="215.367461">0.0</text>
+</g>
+</g>
+<g id="M20-F2-ytick_2">
+<g id="M20-F2-line2d_10">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="42.815625" xlink:href="#M20-F2-m21c3c75830" y="174.707765"></use>
+</g>
+</g>
+<g id="M20-F2-text_11">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 35.815625 178.70464)" x="35.815625" y="178.70464">0.2</text>
+</g>
+</g>
+<g id="M20-F2-ytick_3">
+<g id="M20-F2-line2d_11">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="42.815625" xlink:href="#M20-F2-m21c3c75830" y="138.044944"></use>
+</g>
+</g>
+<g id="M20-F2-text_12">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 35.815625 142.041819)" x="35.815625" y="142.041819">0.4</text>
+</g>
+</g>
+<g id="M20-F2-ytick_4">
+<g id="M20-F2-line2d_12">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="42.815625" xlink:href="#M20-F2-m21c3c75830" y="101.382122"></use>
+</g>
+</g>
+<g id="M20-F2-text_13">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 35.815625 105.378997)" x="35.815625" y="105.378997">0.6</text>
+</g>
+</g>
+<g id="M20-F2-ytick_5">
+<g id="M20-F2-line2d_13">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="42.815625" xlink:href="#M20-F2-m21c3c75830" y="64.719301"></use>
+</g>
+</g>
+<g id="M20-F2-text_14">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 35.815625 68.716176)" x="35.815625" y="68.716176">0.8</text>
+</g>
+</g>
+<g id="M20-F2-ytick_6">
+<g id="M20-F2-line2d_14">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="42.815625" xlink:href="#M20-F2-m21c3c75830" y="28.05648"></use>
+</g>
+</g>
+<g id="M20-F2-text_15">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 35.815625 32.053355)" x="35.815625" y="32.053355">1.0</text>
+</g>
+</g>
+<g id="M20-F2-text_16">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-90 15.19375 113.45864)" x="15.19375" y="113.45864">交叉熵</text>
+</g>
+</g>
+<g id="M20-F2-line2d_15">
+<path clip-path="url(#M20-F2-pc88d8b28fb)" d="M 53.783255 16.859876 
+L 60.234801 29.413146 
+L 66.686348 46.245743 
+L 73.137895 74.193687 
+L 79.589442 104.971886 
+L 86.040988 132.624849 
+L 92.492535 158.397639 
+L 98.944082 173.062862 
+L 105.395629 184.014759 
+L 111.847175 189.906177 
+L 118.298722 192.856729 
+L 124.750269 196.462788 
+L 131.201816 198.081439 
+L 137.653362 199.130798 
+L 144.104909 201.729748 
+L 150.556456 202.077007 
+L 157.008003 204.274306 
+L 163.45955 205.194428 
+L 169.911096 205.268701 
+L 176.362643 206.385559 
+L 182.81419 206.146292 
+L 189.265737 206.697735 
+L 195.717283 207.690373 
+L 202.16883 207.319318 
+L 208.620377 208.299437 
+L 215.071924 209.173466 
+L 221.52347 209.147154 
+L 227.975017 209.011209 
+L 234.426564 209.570254 
+L 240.878111 209.628659 
+L 247.329658 209.740647 
+L 253.781204 209.83765 
+L 260.232751 209.429302 
+L 266.684298 208.880624 
+L 273.135845 210.057403 
+" style="fill: none; stroke: #176b91; stroke-width: 1.5; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-line2d_16">
+<path clip-path="url(#M20-F2-pc88d8b28fb)" d="M 53.783255 22.686364 
+L 60.234801 36.739263 
+L 66.686348 57.658655 
+L 73.137895 87.370848 
+L 79.589442 120.258306 
+L 86.040988 146.448492 
+L 92.492535 166.169834 
+L 98.944082 177.923582 
+L 105.395629 183.283311 
+L 111.847175 189.216221 
+L 118.298722 192.079847 
+L 124.750269 193.695083 
+L 131.201816 196.252876 
+L 137.653362 197.521661 
+L 144.104909 198.636675 
+L 150.556456 199.883966 
+L 157.008003 200.327219 
+L 163.45955 201.625178 
+L 169.911096 201.82824 
+L 176.362643 202.482661 
+L 182.81419 203.0686 
+L 189.265737 203.703791 
+L 195.717283 203.5356 
+L 202.16883 205.29892 
+L 208.620377 205.352087 
+L 215.071924 204.63943 
+L 221.52347 204.913755 
+L 227.975017 205.948234 
+L 234.426564 205.705676 
+L 240.878111 206.963622 
+L 247.329658 206.218631 
+L 253.781204 205.784519 
+L 260.232751 207.128279 
+L 266.684298 206.484393 
+L 273.135845 207.822856 
+" style="fill: none; stroke: #bc5549; stroke-width: 1.5; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-patch_3">
+<path d="M 42.815625 219.71728 
+L 42.815625 7.2 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-patch_4">
+<path d="M 42.815625 219.71728 
+L 284.103474 219.71728 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-legend_1">
+<g id="M20-F2-patch_5">
+<path d="M 225.103474 46.159375 
+L 277.103474 46.159375 
+Q 279.103474 46.159375 279.103474 44.159375 
+L 279.103474 14.2 
+Q 279.103474 12.2 277.103474 12.2 
+L 225.103474 12.2 
+Q 223.103474 12.2 223.103474 14.2 
+L 223.103474 44.159375 
+Q 223.103474 46.159375 225.103474 46.159375 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"></path>
+</g>
+<g id="M20-F2-line2d_17">
+<path d="M 227.103474 20.69375 
+L 237.103474 20.69375 
+L 247.103474 20.69375 
+" style="fill: none; stroke: #176b91; stroke-width: 1.5; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-text_17">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" transform="rotate(-0 255.103474 24.19375)" x="255.103474" y="24.19375">训练</text>
+</g>
+<g id="M20-F2-line2d_18">
+<path d="M 227.103474 36.173437 
+L 237.103474 36.173437 
+L 247.103474 36.173437 
+" style="fill: none; stroke: #bc5549; stroke-width: 1.5; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-text_18">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" transform="rotate(-0 255.103474 39.673437)" x="255.103474" y="39.673437">验证</text>
+</g>
+</g>
+</g>
+<g id="M20-F2-axes_2">
+<g id="M20-F2-patch_6">
+<path d="M 355.393002 219.71728 
+L 567.910281 219.71728 
+L 567.910281 7.2 
+L 355.393002 7.2 
+z
+" style="fill: #ffffff"></path>
+</g>
+<g clip-path="url(#M20-F2-p874553e924)">
+<image height="213.12" id="M20-F2-imagea0c421e16a" transform="scale(1 -1) translate(0 -213.12)" width="213.12" x="355.393002" xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAASgAAAEoCAYAAADrB2wZAAAED0lEQVR4nO3WoRHCABBFwYRBYNMJhqqgnHSVYiIRiCBgAIPOE7sV/Dnx5sb7Y9sG4GO63Fwj4rD3AIB/BArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIOu49gK/pcnOOgHWZ957Amw8KyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIGs8na/b3iN4WZfZKeCHDwrIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBArIEiggS6CALIECsgQKyBIoIEuggCyBArIECsgSKCBLoIAsgQKyBAoYqp5a4A3jYNsxnwAAAABJRU5ErkJggg==" y="-6.59728"/>
+</g>
+<g id="M20-F2-matplotlib.axis_3">
+<g id="M20-F2-xtick_9">
+<g id="M20-F2-line2d_19">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="390.812548" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_19">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif" transform="translate(373.850244 250.866808) rotate(-25)">恒定音调</text>
+</g>
+</g>
+<g id="M20-F2-xtick_10">
+<g id="M20-F2-line2d_20">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="461.651641" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_20">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif" transform="translate(444.689337 250.866808) rotate(-25)">上升扫频</text>
+</g>
+</g>
+<g id="M20-F2-xtick_11">
+<g id="M20-F2-line2d_21">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="532.490735" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_21">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif" transform="translate(515.52843 250.866808) rotate(-25)">下降扫频</text>
+</g>
+</g>
+<g id="M20-F2-text_22">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 461.651641 265.113582)" x="461.651641" y="265.113582">预测类别</text>
+</g>
+</g>
+<g id="M20-F2-matplotlib.axis_4">
+<g id="M20-F2-ytick_7">
+<g id="M20-F2-line2d_22">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="355.393002" xlink:href="#M20-F2-m21c3c75830" y="42.619547"></use>
+</g>
+</g>
+<g id="M20-F2-text_23">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 348.393002 46.616422)" x="348.393002" y="46.616422">恒定音调</text>
+</g>
+</g>
+<g id="M20-F2-ytick_8">
+<g id="M20-F2-line2d_23">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="355.393002" xlink:href="#M20-F2-m21c3c75830" y="113.45864"></use>
+</g>
+</g>
+<g id="M20-F2-text_24">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 348.393002 117.455515)" x="348.393002" y="117.455515">上升扫频</text>
+</g>
+</g>
+<g id="M20-F2-ytick_9">
+<g id="M20-F2-line2d_24">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="355.393002" xlink:href="#M20-F2-m21c3c75830" y="184.297733"></use>
+</g>
+</g>
+<g id="M20-F2-text_25">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 348.393002 188.294608)" x="348.393002" y="188.294608">下降扫频</text>
+</g>
+</g>
+<g id="M20-F2-text_26">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-90 301.907064 113.45864)" x="301.907064" y="113.45864">实际类别</text>
+</g>
+</g>
+<g id="M20-F2-patch_7">
+<path d="M 355.393002 219.71728 
+L 355.393002 7.2 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-patch_8">
+<path d="M 355.393002 219.71728 
+L 567.910281 219.71728 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-text_27">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #ffffff" transform="rotate(-0 390.812548 45.373453)" x="390.812548" y="45.373453">16</text>
+</g>
+<g id="M20-F2-text_28">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #18384d" transform="rotate(-0 461.651641 45.373453)" x="461.651641" y="45.373453">0</text>
+</g>
+<g id="M20-F2-text_29">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #18384d" transform="rotate(-0 532.490735 45.373453)" x="532.490735" y="45.373453">0</text>
+</g>
+<g id="M20-F2-text_30">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #18384d" transform="rotate(-0 390.812548 116.212546)" x="390.812548" y="116.212546">0</text>
+</g>
+<g id="M20-F2-text_31">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #ffffff" transform="rotate(-0 461.651641 116.212546)" x="461.651641" y="116.212546">16</text>
+</g>
+<g id="M20-F2-text_32">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #18384d" transform="rotate(-0 532.490735 116.212546)" x="532.490735" y="116.212546">0</text>
+</g>
+<g id="M20-F2-text_33">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #18384d" transform="rotate(-0 390.812548 187.051639)" x="390.812548" y="187.051639">0</text>
+</g>
+<g id="M20-F2-text_34">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #18384d" transform="rotate(-0 461.651641 187.051639)" x="461.651641" y="187.051639">0</text>
+</g>
+<g id="M20-F2-text_35">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle; fill: #ffffff" transform="rotate(-0 532.490735 187.051639)" x="532.490735" y="187.051639">16</text>
+</g>
+</g>
+<g id="M20-F2-axes_3">
+<g id="M20-F2-patch_9">
+<path d="M 623.911671 219.71728 
+L 865.19952 219.71728 
+L 865.19952 7.2 
+L 623.911671 7.2 
+z
+" style="fill: #ffffff"></path>
+</g>
+<g id="M20-F2-matplotlib.axis_5">
+<g id="M20-F2-xtick_12">
+<g id="M20-F2-line2d_25">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="854.23189" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_36">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 854.23189 234.71103)" x="854.23189" y="234.71103">20</text>
+</g>
+</g>
+<g id="M20-F2-xtick_13">
+<g id="M20-F2-line2d_26">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="722.620336" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_37">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 722.620336 234.71103)" x="722.620336" y="234.71103">5</text>
+</g>
+</g>
+<g id="M20-F2-xtick_14">
+<g id="M20-F2-line2d_27">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="634.8793" xlink:href="#M20-F2-md0b3d05a76" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_38">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 634.8793 234.71103)" x="634.8793" y="234.71103">-5</text>
+</g>
+</g>
+<g id="M20-F2-text_39">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-0 744.555595 249.190717)" x="744.555595" y="249.190717">输入信噪比 / dB</text>
+</g>
+</g>
+<g id="M20-F2-matplotlib.axis_6">
+<g id="M20-F2-ytick_10">
+<g id="M20-F2-line2d_28">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="623.911671" xlink:href="#M20-F2-m21c3c75830" y="219.71728"></use>
+</g>
+</g>
+<g id="M20-F2-text_40">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 616.911671 223.714155)" x="616.911671" y="223.714155">0.0</text>
+</g>
+</g>
+<g id="M20-F2-ytick_11">
+<g id="M20-F2-line2d_29">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="623.911671" xlink:href="#M20-F2-m21c3c75830" y="179.237798"></use>
+</g>
+</g>
+<g id="M20-F2-text_41">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 616.911671 183.234673)" x="616.911671" y="183.234673">0.2</text>
+</g>
+</g>
+<g id="M20-F2-ytick_12">
+<g id="M20-F2-line2d_30">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="623.911671" xlink:href="#M20-F2-m21c3c75830" y="138.758316"></use>
+</g>
+</g>
+<g id="M20-F2-text_42">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 616.911671 142.755191)" x="616.911671" y="142.755191">0.4</text>
+</g>
+</g>
+<g id="M20-F2-ytick_13">
+<g id="M20-F2-line2d_31">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="623.911671" xlink:href="#M20-F2-m21c3c75830" y="98.278834"></use>
+</g>
+</g>
+<g id="M20-F2-text_43">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 616.911671 102.275709)" x="616.911671" y="102.275709">0.6</text>
+</g>
+</g>
+<g id="M20-F2-ytick_14">
+<g id="M20-F2-line2d_32">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="623.911671" xlink:href="#M20-F2-m21c3c75830" y="57.799352"></use>
+</g>
+</g>
+<g id="M20-F2-text_44">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 616.911671 61.796227)" x="616.911671" y="61.796227">0.8</text>
+</g>
+</g>
+<g id="M20-F2-ytick_15">
+<g id="M20-F2-line2d_33">
+<g>
+<use style="stroke: #000000; stroke-width: 0.8" x="623.911671" xlink:href="#M20-F2-m21c3c75830" y="17.31987"></use>
+</g>
+</g>
+<g id="M20-F2-text_45">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: end" transform="rotate(-0 616.911671 21.316745)" x="616.911671" y="21.316745">1.0</text>
+</g>
+</g>
+<g id="M20-F2-text_46">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: middle" transform="rotate(-90 596.289796 113.45864)" x="596.289796" y="113.45864">正确率</text>
+</g>
+</g>
+<g id="M20-F2-line2d_34">
+<path clip-path="url(#M20-F2-p28358d27e3)" d="M 854.23189 17.31987 
+L 722.620336 17.31987 
+L 634.8793 152.251477 
+" style="fill: none; stroke: #176b91; stroke-width: 1.5; stroke-linecap: square"></path>
+<defs>
+<path d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" id="M20-F2-m20de0d06d5" style="stroke: #176b91"></path>
+</defs>
+<g clip-path="url(#M20-F2-p28358d27e3)">
+<use style="fill: #176b91; stroke: #176b91" x="854.23189" xlink:href="#M20-F2-m20de0d06d5" y="17.31987"></use>
+<use style="fill: #176b91; stroke: #176b91" x="722.620336" xlink:href="#M20-F2-m20de0d06d5" y="17.31987"></use>
+<use style="fill: #176b91; stroke: #176b91" x="634.8793" xlink:href="#M20-F2-m20de0d06d5" y="152.251477"></use>
+</g>
+</g>
+<g id="M20-F2-line2d_35">
+<path clip-path="url(#M20-F2-p28358d27e3)" d="M 623.911671 152.251477 
+L 865.19952 152.251477 
+" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #8e9ba3; stroke-width: 1.5"></path>
+</g>
+<g id="M20-F2-patch_10">
+<path d="M 623.911671 219.71728 
+L 623.911671 7.2 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-patch_11">
+<path d="M 623.911671 219.71728 
+L 865.19952 219.71728 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"></path>
+</g>
+<g id="M20-F2-legend_2">
+<g id="M20-F2-patch_12">
+<path d="M 630.911671 214.71728 
+L 721.871046 214.71728 
+Q 723.871046 214.71728 723.871046 212.71728 
+L 723.871046 198.237592 
+Q 723.871046 196.237592 721.871046 196.237592 
+L 630.911671 196.237592 
+Q 628.911671 196.237592 628.911671 198.237592 
+L 628.911671 212.71728 
+Q 628.911671 214.71728 630.911671 214.71728 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"></path>
+</g>
+<g id="M20-F2-line2d_36">
+<path d="M 632.911671 204.731342 
+L 642.911671 204.731342 
+L 652.911671 204.731342 
+" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #8e9ba3; stroke-width: 1.5"></path>
+</g>
+<g id="M20-F2-text_47">
+<text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', sans-serif; text-anchor: start" transform="rotate(-0 660.911671 208.231342)" x="660.911671" y="208.231342">随机机会 1/3</text>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="M20-F2-pc88d8b28fb">
+<rect height="212.51728" width="241.287849" x="42.815625" y="7.2"></rect>
+</clipPath>
+<clipPath id="M20-F2-p874553e924">
+<rect height="212.51728" width="212.51728" x="355.393002" y="7.2"></rect>
+</clipPath>
+<clipPath id="M20-F2-p28358d27e3">
+<rect height="212.51728" width="241.287849" x="623.911671" y="7.2"></rect>
+</clipPath>
+</defs>
+</svg>

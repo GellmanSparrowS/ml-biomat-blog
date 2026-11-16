@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 from pathlib import Path
 from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR, COMMENTS_ENABLED
-from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support, molecular_dynamics, python_scientific, payment, sponsorship
+from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support, molecular_dynamics, python_scientific, machine_learning, payment, sponsorship
 
 ROOT = Path(__file__).resolve().parent
 SEARCH_METADATA = json.loads((ROOT / 'content/search-metadata.json').read_text(encoding='utf-8'))
@@ -475,7 +475,8 @@ def build():
     new_courses = biomaterials_courses.load()
     md_courses = molecular_dynamics.load()
     python_courses = python_scientific.load()
-    course_items = biomaterials_courses.entries(new_courses) + molecular_dynamics.entries(md_courses) + python_scientific.entries(python_courses)
+    ml_courses = machine_learning.load()
+    course_items = biomaterials_courses.entries(new_courses) + molecular_dynamics.entries(md_courses) + python_scientific.entries(python_courses) + machine_learning.entries(ml_courses)
     catalog_items = catalog.entries(posts, curriculum) + course_items
     check_coverage(posts)
     en = [p for p in posts if p["lang"] == "en"]
@@ -582,6 +583,7 @@ def build():
 
     course_routes += molecular_dynamics.render(md_courses, make_head, make_footer, write_file, versioned_asset, CATEGORIES, SITE["base_url"])
     course_routes += python_scientific.render(python_courses, make_head, make_footer, write_file, versioned_asset, CATEGORIES, SITE["base_url"])
+    course_routes += machine_learning.render(ml_courses, make_head, make_footer, write_file, versioned_asset, CATEGORIES, SITE["base_url"])
 
     payment.render(make_head, make_footer, write_file, versioned_asset, SITE['base_url'], catalog_items)
 

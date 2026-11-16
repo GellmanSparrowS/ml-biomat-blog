@@ -1,0 +1,523 @@
+<svg role="img" aria-label="Two single-factor failure experiments. Left: identical initial weights and full training batch, changing only SGD learning rate; the high-rate run stops at the preset loss threshold. Right: matched 80-epoch Adam runs with aligned or fixed-shuffled training targets, evaluated against correctly aligned validation targets." xmlns:xlink="http://www.w3.org/1999/xlink" width="792pt" height="295.2pt" viewBox="0 0 792 295.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M10-F5-figure_1">
+  <g id="M10-F5-patch_1">
+   <path d="M 0 295.2 
+L 792 295.2 
+L 792 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M10-F5-axes_1">
+   <g id="M10-F5-patch_2">
+    <path d="M 47.967896 258.144448 
+L 394.702273 258.144448 
+L 394.702273 3.00024 
+L 47.967896 3.00024 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M10-F5-matplotlib.axis_1">
+    <g id="M10-F5-xtick_1">
+     <g id="M10-F5-line2d_1">
+      <defs>
+       <path id="M10-F5-m010a260885" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="63.72855" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_1">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="63.72855" y="273.937572" transform="rotate(-0 63.72855 273.937572)">0</text>
+     </g>
+    </g>
+    <g id="M10-F5-xtick_2">
+     <g id="M10-F5-line2d_2">
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="118.075631" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_2">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="118.075631" y="273.937572" transform="rotate(-0 118.075631 273.937572)">5</text>
+     </g>
+    </g>
+    <g id="M10-F5-xtick_3">
+     <g id="M10-F5-line2d_3">
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="172.422712" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_3">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="172.422712" y="273.937572" transform="rotate(-0 172.422712 273.937572)">10</text>
+     </g>
+    </g>
+    <g id="M10-F5-xtick_4">
+     <g id="M10-F5-line2d_4">
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="226.769792" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_4">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="226.769792" y="273.937572" transform="rotate(-0 226.769792 273.937572)">15</text>
+     </g>
+    </g>
+    <g id="M10-F5-xtick_5">
+     <g id="M10-F5-line2d_5">
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="281.116873" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_5">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="281.116873" y="273.937572" transform="rotate(-0 281.116873 273.937572)">20</text>
+     </g>
+    </g>
+    <g id="M10-F5-xtick_6">
+     <g id="M10-F5-line2d_6">
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="335.463954" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_6">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="335.463954" y="273.937572" transform="rotate(-0 335.463954 273.937572)">25</text>
+     </g>
+    </g>
+    <g id="M10-F5-xtick_7">
+     <g id="M10-F5-line2d_7">
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="389.811035" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_7">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="389.811035" y="273.937572" transform="rotate(-0 389.811035 273.937572)">30</text>
+     </g>
+    </g>
+    <g id="M10-F5-text_8">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="221.335084" y="289.465229" transform="rotate(-0 221.335084 289.465229)">Full-batch update</text>
+    </g>
+   </g>
+   <g id="M10-F5-matplotlib.axis_2">
+    <g id="M10-F5-ytick_1">
+     <g id="M10-F5-line2d_8">
+      <defs>
+       <path id="M10-F5-m44bdb223ab" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="47.967896" y="222.543077" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_9">
+      <!-- $\mathdefault{10^{1}}$ -->
+      <g transform="translate(23.147896 226.93964)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_2">
+     <g id="M10-F5-line2d_9">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="47.967896" y="186.766873" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_10">
+      <!-- $\mathdefault{10^{3}}$ -->
+      <g transform="translate(23.147896 191.163436)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_3">
+     <g id="M10-F5-line2d_10">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="47.967896" y="150.990669" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_11">
+      <!-- $\mathdefault{10^{5}}$ -->
+      <g transform="translate(23.147896 155.387232)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">5</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_4">
+     <g id="M10-F5-line2d_11">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="47.967896" y="115.214465" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_12">
+      <!-- $\mathdefault{10^{7}}$ -->
+      <g transform="translate(23.147896 119.611027)">
+       <text>
+        <tspan x="0" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.025" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-4.18125" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">7</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_5">
+     <g id="M10-F5-line2d_12">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="47.967896" y="79.438261" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_13">
+      <!-- $\mathdefault{10^{9}}$ -->
+      <g transform="translate(23.147896 83.834823)">
+       <text>
+        <tspan x="0" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.926562" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.082812" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">9</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_6">
+     <g id="M10-F5-line2d_13">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="47.967896" y="43.662057" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_14">
+      <!-- $\mathdefault{10^{11}}$ -->
+      <g transform="translate(18.527896 48.058619)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="17.520752" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_7">
+     <g id="M10-F5-line2d_14">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="47.967896" y="7.885852" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_15">
+      <!-- $\mathdefault{10^{13}}$ -->
+      <g transform="translate(18.527896 12.282415)">
+       <text>
+        <tspan x="0" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="6.450684" y="-0.89375" style="font-size: 11px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">0</tspan>
+        <tspan x="13.005273" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">1</tspan>
+        <tspan x="17.520752" y="-5.05" style="font-size: 7.7px; font-family: 'Microsoft YaHei', Arial, 'Microsoft YaHei', sans-serif">3</tspan>
+       </text>
+      </g>
+     </g>
+    </g>
+    <g id="M10-F5-text_16">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="11.729771" y="130.572344" transform="rotate(-90 11.729771 130.572344)">Training MSE</text>
+    </g>
+   </g>
+   <g id="M10-F5-line2d_15">
+    <path d="M 63.72855 245.128339 
+L 74.597966 245.366035 
+L 85.467382 245.508102 
+L 96.336798 245.599797 
+L 107.206214 245.664557 
+L 118.075631 245.714647 
+L 128.945047 245.756602 
+L 139.814463 245.793979 
+L 150.683879 245.828759 
+L 161.553295 245.86208 
+L 172.422712 245.894607 
+L 183.292128 245.926744 
+L 194.161544 245.958742 
+L 205.03096 245.990762 
+L 215.900376 246.02291 
+L 226.769792 246.055258 
+L 237.639209 246.08786 
+L 248.508625 246.120754 
+L 259.378041 246.153972 
+L 270.247457 246.187541 
+L 281.116873 246.221482 
+L 291.98629 246.255819 
+L 302.855706 246.290569 
+L 313.725122 246.325753 
+L 324.594538 246.361388 
+L 335.463954 246.397494 
+L 346.333371 246.434088 
+L 357.202787 246.471189 
+L 368.072203 246.508815 
+L 378.941619 246.546984 
+" clip-path="url(#M10-F5-p16b1c0b841)" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="M10-F5-m9a57f64002" d="M 0 1.5 
+C 0.397805 1.5 0.77937 1.341951 1.06066 1.06066 
+C 1.341951 0.77937 1.5 0.397805 1.5 0 
+C 1.5 -0.397805 1.341951 -0.77937 1.06066 -1.06066 
+C 0.77937 -1.341951 0.397805 -1.5 0 -1.5 
+C -0.397805 -1.5 -0.77937 -1.341951 -1.06066 -1.06066 
+C -1.341951 -0.77937 -1.5 -0.397805 -1.5 0 
+C -1.5 0.397805 -1.341951 0.77937 -1.06066 1.06066 
+C -0.77937 1.341951 -0.397805 1.5 0 1.5 
+z
+" style="stroke: #1f77b4"/>
+    </defs>
+    <g clip-path="url(#M10-F5-p16b1c0b841)">
+     <use xlink:href="#M10-F5-m9a57f64002" x="63.72855" y="245.128339" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="74.597966" y="245.366035" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="85.467382" y="245.508102" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="96.336798" y="245.599797" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="107.206214" y="245.664557" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="118.075631" y="245.714647" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="128.945047" y="245.756602" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="139.814463" y="245.793979" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="150.683879" y="245.828759" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="161.553295" y="245.86208" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="172.422712" y="245.894607" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="183.292128" y="245.926744" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="194.161544" y="245.958742" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="205.03096" y="245.990762" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="215.900376" y="246.02291" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="226.769792" y="246.055258" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="237.639209" y="246.08786" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="248.508625" y="246.120754" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="259.378041" y="246.153972" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="270.247457" y="246.187541" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="281.116873" y="246.221482" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="291.98629" y="246.255819" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="302.855706" y="246.290569" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="313.725122" y="246.325753" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="324.594538" y="246.361388" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="335.463954" y="246.397494" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="346.333371" y="246.434088" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="357.202787" y="246.471189" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="368.072203" y="246.508815" style="fill: #1f77b4; stroke: #1f77b4"/>
+     <use xlink:href="#M10-F5-m9a57f64002" x="378.941619" y="246.546984" style="fill: #1f77b4; stroke: #1f77b4"/>
+    </g>
+   </g>
+   <g id="M10-F5-line2d_16">
+    <path d="M 63.72855 245.128339 
+L 74.597966 234.574286 
+L 85.467382 199.349647 
+L 96.336798 147.534616 
+L 107.206214 126.583044 
+L 118.075631 72.056746 
+L 128.945047 14.597704 
+" clip-path="url(#M10-F5-p16b1c0b841)" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+    <defs>
+     <path id="M10-F5-m5e6594fb3b" d="M 0 1.5 
+C 0.397805 1.5 0.77937 1.341951 1.06066 1.06066 
+C 1.341951 0.77937 1.5 0.397805 1.5 0 
+C 1.5 -0.397805 1.341951 -0.77937 1.06066 -1.06066 
+C 0.77937 -1.341951 0.397805 -1.5 0 -1.5 
+C -0.397805 -1.5 -0.77937 -1.341951 -1.06066 -1.06066 
+C -1.341951 -0.77937 -1.5 -0.397805 -1.5 0 
+C -1.5 0.397805 -1.341951 0.77937 -1.06066 1.06066 
+C -0.77937 1.341951 -0.397805 1.5 0 1.5 
+z
+" style="stroke: #ff7f0e"/>
+    </defs>
+    <g clip-path="url(#M10-F5-p16b1c0b841)">
+     <use xlink:href="#M10-F5-m5e6594fb3b" x="63.72855" y="245.128339" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M10-F5-m5e6594fb3b" x="74.597966" y="234.574286" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M10-F5-m5e6594fb3b" x="85.467382" y="199.349647" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M10-F5-m5e6594fb3b" x="96.336798" y="147.534616" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M10-F5-m5e6594fb3b" x="107.206214" y="126.583044" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M10-F5-m5e6594fb3b" x="118.075631" y="72.056746" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     <use xlink:href="#M10-F5-m5e6594fb3b" x="128.945047" y="14.597704" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+    </g>
+   </g>
+   <g id="M10-F5-patch_3">
+    <path d="M 47.967896 258.144448 
+L 47.967896 3.00024 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M10-F5-patch_4">
+    <path d="M 47.967896 258.144448 
+L 394.702273 258.144448 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M10-F5-legend_1">
+    <g id="M10-F5-patch_5">
+     <path d="M 306.023366 45.855553 
+L 387.002273 45.855553 
+Q 389.202273 45.855553 389.202273 43.655553 
+L 389.202273 10.70024 
+Q 389.202273 8.50024 387.002273 8.50024 
+L 306.023366 8.50024 
+Q 303.823366 8.50024 303.823366 10.70024 
+L 303.823366 43.655553 
+Q 303.823366 45.855553 306.023366 45.855553 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="M10-F5-line2d_17">
+     <path d="M 308.223366 17.843365 
+L 319.223366 17.843365 
+L 330.223366 17.843365 
+" style="fill: none; stroke: #1f77b4; stroke-width: 1.5; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#M10-F5-m9a57f64002" x="319.223366" y="17.843365" style="fill: #1f77b4; stroke: #1f77b4"/>
+     </g>
+    </g>
+    <g id="M10-F5-text_17">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="339.023366" y="21.693365" transform="rotate(-0 339.023366 21.693365)">rate 0.03</text>
+    </g>
+    <g id="M10-F5-line2d_18">
+     <path d="M 308.223366 34.871021 
+L 319.223366 34.871021 
+L 330.223366 34.871021 
+" style="fill: none; stroke: #ff7f0e; stroke-width: 1.5; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#M10-F5-m5e6594fb3b" x="319.223366" y="34.871021" style="fill: #ff7f0e; stroke: #ff7f0e"/>
+     </g>
+    </g>
+    <g id="M10-F5-text_18">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="339.023366" y="38.721021" transform="rotate(-0 339.023366 38.721021)">rate 1.0</text>
+    </g>
+   </g>
+  </g>
+  <g id="M10-F5-axes_2">
+   <g id="M10-F5-patch_6">
+    <path d="M 442.265384 258.144448 
+L 788.99976 258.144448 
+L 788.99976 3.00024 
+L 442.265384 3.00024 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="M10-F5-patch_7">
+    <path d="M 458.026037 258.144448 
+L 569.875836 258.144448 
+L 569.875836 232.053217 
+L 458.026037 232.053217 
+z
+" clip-path="url(#M10-F5-p2dbe31a53a)" style="fill: #0072b2"/>
+   </g>
+   <g id="M10-F5-patch_8">
+    <path d="M 661.389308 258.144448 
+L 773.239107 258.144448 
+L 773.239107 15.149964 
+L 661.389308 15.149964 
+z
+" clip-path="url(#M10-F5-p2dbe31a53a)" style="fill: #d58500"/>
+   </g>
+   <g id="M10-F5-matplotlib.axis_3">
+    <g id="M10-F5-xtick_8">
+     <g id="M10-F5-line2d_19">
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="513.950937" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_19">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="513.950937" y="273.937572" transform="rotate(-0 513.950937 273.937572)">Aligned targets</text>
+     </g>
+    </g>
+    <g id="M10-F5-xtick_9">
+     <g id="M10-F5-line2d_20">
+      <g>
+       <use xlink:href="#M10-F5-m010a260885" x="717.314207" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_20">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="717.314207" y="274.066479" transform="rotate(-0 717.314207 274.066479)">Shuffled targets</text>
+     </g>
+    </g>
+   </g>
+   <g id="M10-F5-matplotlib.axis_4">
+    <g id="M10-F5-ytick_8">
+     <g id="M10-F5-line2d_21">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="442.265384" y="258.144448" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_21">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="435.265384" y="262.54101" transform="rotate(-0 435.265384 262.54101)">0.0</text>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_9">
+     <g id="M10-F5-line2d_22">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="442.265384" y="205.735891" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_22">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="435.265384" y="210.132454" transform="rotate(-0 435.265384 210.132454)">0.1</text>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_10">
+     <g id="M10-F5-line2d_23">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="442.265384" y="153.327335" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_23">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="435.265384" y="157.723897" transform="rotate(-0 435.265384 157.723897)">0.2</text>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_11">
+     <g id="M10-F5-line2d_24">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="442.265384" y="100.918778" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_24">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="435.265384" y="105.315341" transform="rotate(-0 435.265384 105.315341)">0.3</text>
+     </g>
+    </g>
+    <g id="M10-F5-ytick_12">
+     <g id="M10-F5-line2d_25">
+      <g>
+       <use xlink:href="#M10-F5-m44bdb223ab" x="442.265384" y="48.510222" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="M10-F5-text_25">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="435.265384" y="52.906784" transform="rotate(-0 435.265384 52.906784)">0.4</text>
+     </g>
+    </g>
+    <g id="M10-F5-text_26">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="412.981321" y="130.572344" transform="rotate(-90 412.981321 130.572344)">Best validation MSE</text>
+    </g>
+   </g>
+   <g id="M10-F5-patch_9">
+    <path d="M 442.265384 258.144448 
+L 442.265384 3.00024 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M10-F5-patch_10">
+    <path d="M 442.265384 258.144448 
+L 788.99976 258.144448 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="M10-F5-text_27">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="513.950937" y="229.318686" transform="rotate(-0 513.950937 229.318686)">0.0498</text>
+   </g>
+   <g id="M10-F5-text_28">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="717.314207" y="12.415433" transform="rotate(-0 717.314207 12.415433)">0.4637</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="M10-F5-p16b1c0b841">
+   <rect x="47.967896" y="3.00024" width="346.734376" height="255.144207"/>
+  </clipPath>
+  <clipPath id="M10-F5-p2dbe31a53a">
+   <rect x="442.265384" y="3.00024" width="346.734376" height="255.144207"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,157 @@
+<svg role="img" aria-label="单样本的计算图。蓝色箭头沿输入到损失方向传值，橙色箭头表示反向传播顺序；数值来自本章明确指定的标量例子。" xmlns:xlink="http://www.w3.org/1999/xlink" width="667.26pt" height="249.831845pt" viewBox="0 0 667.26 249.831845" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="M09-F1-figure_1">
+  <g id="M09-F1-patch_1">
+   <path d="M 0 249.831845 
+L 667.26 249.831845 
+L 667.26 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="M09-F1-axes_1">
+   <g id="M09-F1-text_1">
+    <g id="M09-F1-patch_2">
+     <path d="M 50.776222 118.184842 
+L 82.325597 118.184842 
+Q 90.775597 118.184842 90.775597 109.734842 
+L 90.775597 96.111248 
+Q 90.775597 87.661248 82.325597 87.661248 
+L 50.776222 87.661248 
+Q 42.326222 87.661248 42.326222 96.111248 
+L 42.326222 109.734842 
+Q 42.326222 118.184842 50.776222 118.184842 
+z
+" style="fill: #edf5f8"/>
+    </g>
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="66.550909" y="106.503123" transform="rotate(-0 66.550909 106.503123)">x = 2</text>
+   </g>
+   <g id="M09-F1-text_2">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="66.550909" y="187.449142" transform="rotate(-0 66.550909 187.449142)">输入</text>
+   </g>
+   <g id="M09-F1-text_3">
+    <g id="M09-F1-patch_3">
+     <path d="M 169.946594 126.035826 
+L 236.169406 126.035826 
+Q 244.619406 126.035826 244.619406 117.585826 
+L 244.619406 88.260264 
+Q 244.619406 79.810264 236.169406 79.810264 
+L 169.946594 79.810264 
+Q 161.496594 79.810264 161.496594 88.260264 
+L 161.496594 117.585826 
+Q 161.496594 126.035826 169.946594 126.035826 
+z
+" style="fill: #edf5f8"/>
+    </g>
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif" transform="translate(169.946594 98.652139)">z = wx + b</text>
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif" transform="translate(175.689953 114.354107)">= 0.5000</text>
+   </g>
+   <g id="M09-F1-text_4">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="203.058" y="187.449142" transform="rotate(-0 203.058 187.449142)">加权求和</text>
+   </g>
+   <g id="M09-F1-text_5">
+    <g id="M09-F1-patch_4">
+     <path d="M 329.072798 126.035826 
+L 397.538111 126.035826 
+Q 405.988111 126.035826 405.988111 117.585826 
+L 405.988111 88.260264 
+Q 405.988111 79.810264 397.538111 79.810264 
+L 329.072798 79.810264 
+Q 320.622798 79.810264 320.622798 88.260264 
+L 320.622798 117.585826 
+Q 320.622798 126.035826 329.072798 126.035826 
+z
+" style="fill: #edf5f8"/>
+    </g>
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif" transform="translate(329.072798 98.652139)">h = tanh(z)</text>
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif" transform="translate(335.937408 114.354107)">= 0.4621</text>
+   </g>
+   <g id="M09-F1-text_6">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="363.305455" y="187.449142" transform="rotate(-0 363.305455 187.449142)">非线性变换</text>
+   </g>
+   <g id="M09-F1-text_7">
+    <g id="M09-F1-patch_5">
+     <path d="M 495.861229 126.073404 
+L 586.855135 126.073404 
+Q 595.305135 126.073404 595.305135 117.623404 
+L 595.305135 88.147529 
+Q 595.305135 79.697529 586.855135 79.697529 
+L 495.861229 79.697529 
+Q 487.411229 79.697529 487.411229 88.147529 
+L 487.411229 117.623404 
+Q 487.411229 126.073404 495.861229 126.073404 
+z
+" style="fill: #edf5f8"/>
+    </g>
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif" transform="translate(495.861229 98.614561)">L = (h − y)² / 2</text>
+    <text style="font-size: 13px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif" transform="translate(513.990135 114.391686)">= 0.1447</text>
+   </g>
+   <g id="M09-F1-text_8">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="541.358182" y="187.626173" transform="rotate(-0 541.358182 187.626173)">比较目标 y = 1</text>
+   </g>
+   <g id="M09-F1-patch_6">
+    <path d="M 107.131332 102.923045 
+Q 127.386517 102.923045 145.405634 102.923045 
+" style="fill: none; stroke: #0072b2; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 141.005634 100.723045 
+L 145.405634 102.923045 
+L 141.005634 105.123045 
+" style="fill: none; stroke: #0072b2; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="M09-F1-patch_7">
+    <path d="M 147.639849 36.949445 
+Q 127.384665 36.949445 109.365548 36.949445 
+" style="fill: none; stroke: #d58500; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 113.765548 39.149445 
+L 109.365548 36.949445 
+L 113.765548 34.749445 
+" style="fill: none; stroke: #d58500; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="M09-F1-patch_8">
+    <path d="M 264.409611 102.923045 
+Q 283.180421 102.923045 299.715164 102.923045 
+" style="fill: none; stroke: #0072b2; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 295.315164 100.723045 
+L 299.715164 102.923045 
+L 295.315164 105.123045 
+" style="fill: none; stroke: #0072b2; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="M09-F1-patch_9">
+    <path d="M 301.953843 36.949445 
+Q 283.183033 36.949445 266.648291 36.949445 
+" style="fill: none; stroke: #d58500; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 271.048291 39.149445 
+L 266.648291 36.949445 
+L 271.048291 34.749445 
+" style="fill: none; stroke: #d58500; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="M09-F1-patch_10">
+    <path d="M 424.654892 102.923045 
+Q 449.364001 102.923045 471.837041 102.923045 
+" style="fill: none; stroke: #0072b2; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 467.437041 100.723045 
+L 471.837041 102.923045 
+L 467.437041 105.123045 
+" style="fill: none; stroke: #0072b2; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="M09-F1-patch_11">
+    <path d="M 474.073653 36.949445 
+Q 449.364545 36.949445 426.891505 36.949445 
+" style="fill: none; stroke: #d58500; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 431.291505 39.149445 
+L 426.891505 36.949445 
+L 431.291505 34.749445 
+" style="fill: none; stroke: #d58500; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="M09-F1-text_9">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #d58500" x="327.694909" y="15.993125" transform="rotate(-0 327.694909 15.993125)">反向：把每一步的变化率乘起来</text>
+   </g>
+   <g id="M09-F1-text_10">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="327.694909" y="230.989445" transform="rotate(-0 327.694909 230.989445)">w = 0.3，b = −0.1；梯度 dL/dw = -0.846033</text>
+   </g>
+  </g>
+ </g>
+</svg>
