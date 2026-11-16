@@ -112,3 +112,9 @@
 - 新模拟课程源为 D:/DW/molecular-dynamics-courses/courses，已按同一物理建模与模拟分类接入 35 篇双语教程。使用 content_tools/molecular_dynamics.py 渲染，源正文、公式、图和交互完整保留；不公开源项目的 private/authoring。
 - PayPal 赞赏区只增加简洁入口，付款回跳页面才显示确认与下载。必须验证 PayPal 的实际完成状态、正确商品、币种与金额，不能用回跳参数或点击按钮当作已付款。
 - 百度本次按用户要求暂停在当日提交限额；不要重复提交或自行创建定时任务。
+
+## Python 科学计算教程（2026-11-16）
+
+- 新课程来自 D:/DW/python-scientific-courses/public，共37课（P01–P30、S01–S07），中英文分74页；通过 content_tools/python_scientific.py 融入 python-tutorials 分类，使用 /tutorials/python-scientific/p01/ 与 /en/ 等配对地址。
+- 配套37份ZIP、完整正文、公式、实验脚本与许可一并保留；不发布源项目的 authoring、private 或环境。科学SVG独立加载时，内部栅格图仍需内嵌，避免浏览器阻止加载图层；原图经共享图片清单校验。
+- 用户确认本轮先发布课程，PayPal后续接通。新课程 PAYPAL_ENABLED=False；二维码与免费代码包正常显示。更新线上付款服务的课程名单并验证后，再开启新课程PayPal入口。已有课程付款设置不变。

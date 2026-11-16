@@ -1,0 +1,675 @@
+<svg role="img" aria-label="Original method diagram: five quadratic samples give a 2 mV center under a moving mean and 0 mV under a quadratic local fit. The coefficients show how local fitting becomes repeated weighting in the Savitzky–Golay method." xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="403.2pt" viewBox="0 0 864 403.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="P20-F2-figure_1">
+  <g id="P20-F2-patch_1">
+   <path d="M 0 403.2 
+L 864 403.2 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="P20-F2-axes_1">
+   <g id="P20-F2-patch_2">
+    <path d="M 43.207115 364.44226 
+L 424.35 364.44226 
+L 424.35 42.481751 
+L 43.207115 42.481751 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="P20-F2-matplotlib.axis_1">
+    <g id="P20-F2-xtick_1">
+     <g id="P20-F2-line2d_1">
+      <defs>
+       <path id="P20-F2-m940cc69388" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="60.531792" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_1">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="60.531792" y="380.99351" transform="rotate(-0 60.531792 380.99351)">−2.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_2">
+     <g id="P20-F2-line2d_2">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="103.843483" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_2">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="103.843483" y="380.99351" transform="rotate(-0 103.843483 380.99351)">−1.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_3">
+     <g id="P20-F2-line2d_3">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="147.155175" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_3">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="147.155175" y="380.99351" transform="rotate(-0 147.155175 380.99351)">−1.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_4">
+     <g id="P20-F2-line2d_4">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="190.466866" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_4">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="190.466866" y="380.99351" transform="rotate(-0 190.466866 380.99351)">−0.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_5">
+     <g id="P20-F2-line2d_5">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="233.778557" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_5">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="233.778557" y="380.99351" transform="rotate(-0 233.778557 380.99351)">0.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_6">
+     <g id="P20-F2-line2d_6">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="277.090249" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_6">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="277.090249" y="380.99351" transform="rotate(-0 277.090249 380.99351)">0.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_7">
+     <g id="P20-F2-line2d_7">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="320.40194" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_7">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="320.40194" y="380.99351" transform="rotate(-0 320.40194 380.99351)">1.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_8">
+     <g id="P20-F2-line2d_8">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="363.713632" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_8">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="363.713632" y="380.99351" transform="rotate(-0 363.713632 380.99351)">1.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_9">
+     <g id="P20-F2-line2d_9">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="407.025323" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_9">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="407.025323" y="380.99351" transform="rotate(-0 407.025323 380.99351)">2.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-text_10">
+     <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="233.778557" y="397.45101" transform="rotate(-0 233.778557 397.45101)">Relative sample offset k</text>
+    </g>
+   </g>
+   <g id="P20-F2-matplotlib.axis_2">
+    <g id="P20-F2-ytick_1">
+     <g id="P20-F2-line2d_10">
+      <defs>
+       <path id="P20-F2-m9c14ee7d97" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="349.807691" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_11">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="354.583316" transform="rotate(-0 36.207115 354.583316)">0.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_2">
+     <g id="P20-F2-line2d_11">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="313.22127" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_12">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="317.996895" transform="rotate(-0 36.207115 317.996895)">0.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_3">
+     <g id="P20-F2-line2d_12">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="276.634849" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_13">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="281.410474" transform="rotate(-0 36.207115 281.410474)">1.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_4">
+     <g id="P20-F2-line2d_13">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="240.048427" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_14">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="244.824052" transform="rotate(-0 36.207115 244.824052)">1.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_5">
+     <g id="P20-F2-line2d_14">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="203.462006" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_15">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="208.237631" transform="rotate(-0 36.207115 208.237631)">2.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_6">
+     <g id="P20-F2-line2d_15">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="166.875584" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_16">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="171.651209" transform="rotate(-0 36.207115 171.651209)">2.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_7">
+     <g id="P20-F2-line2d_16">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="130.289163" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_17">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="135.064788" transform="rotate(-0 36.207115 135.064788)">3.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_8">
+     <g id="P20-F2-line2d_17">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="93.702741" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_18">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="98.478366" transform="rotate(-0 36.207115 98.478366)">3.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_9">
+     <g id="P20-F2-line2d_18">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="43.207115" y="57.11632" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_19">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="36.207115" y="61.891945" transform="rotate(-0 36.207115 61.891945)">4.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-text_20">
+     <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="12.55149" y="203.462006" transform="rotate(-90 12.55149 203.462006)">Teaching value / mV</text>
+    </g>
+   </g>
+   <g id="P20-F2-line2d_19">
+    <path d="M 60.531792 57.11632 
+L 67.496486 80.17627 
+L 74.46118 102.290171 
+L 81.425874 123.458022 
+L 86.649394 138.713066 
+L 91.872915 153.435957 
+L 97.096436 167.626696 
+L 102.319956 181.285281 
+L 107.543477 194.411714 
+L 112.766997 207.005995 
+L 117.990518 219.068122 
+L 123.214039 230.598097 
+L 128.437559 241.59592 
+L 133.66108 252.061589 
+L 138.8846 261.995106 
+L 144.108121 271.39647 
+L 149.331641 280.265682 
+L 154.555162 288.602741 
+L 159.778683 296.407647 
+L 165.002203 303.6804 
+L 170.225724 310.421001 
+L 173.708071 314.619095 
+L 177.190418 318.580676 
+L 180.672765 322.305745 
+L 184.155112 325.794301 
+L 187.637459 329.046345 
+L 191.119806 332.061877 
+L 194.602153 334.840897 
+L 198.0845 337.383404 
+L 201.566847 339.689399 
+L 205.049194 341.758882 
+L 208.531541 343.591852 
+L 212.013888 345.18831 
+L 215.496235 346.548256 
+L 218.978583 347.67169 
+L 222.46093 348.558611 
+L 225.943277 349.20902 
+L 229.425624 349.622916 
+L 232.907971 349.8003 
+L 236.390318 349.741172 
+L 239.872665 349.445532 
+L 243.355012 348.913379 
+L 246.837359 348.144714 
+L 250.319706 347.139537 
+L 253.802053 345.897847 
+L 257.2844 344.419645 
+L 260.766747 342.704931 
+L 264.249094 340.753705 
+L 267.731441 338.565966 
+L 271.213788 336.141715 
+L 274.696135 333.480951 
+L 278.178482 330.583675 
+L 281.660829 327.449887 
+L 285.143177 324.079587 
+L 288.625524 320.472774 
+L 292.107871 316.629449 
+L 295.590218 312.549612 
+L 299.072565 308.233262 
+L 304.296085 301.315277 
+L 309.519606 293.86514 
+L 314.743126 285.882849 
+L 319.966647 277.368406 
+L 325.190168 268.32181 
+L 330.413688 258.743062 
+L 335.637209 248.632161 
+L 340.860729 237.989107 
+L 346.08425 226.8139 
+L 351.307771 215.106541 
+L 356.531291 202.867029 
+L 361.754812 190.095365 
+L 366.978332 176.791547 
+L 372.201853 162.955577 
+L 377.425373 148.587455 
+L 382.648894 133.687179 
+L 387.872415 118.254751 
+L 393.095935 102.290171 
+L 400.060629 80.17627 
+L 407.025323 57.11632 
+L 407.025323 57.11632 
+" clip-path="url(#P20-F2-pa764e42238)" style="fill: none; stroke: #28658c; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="P20-F2-line2d_20">
+    <path d="M 43.207115 203.462006 
+L 424.35 203.462006 
+" clip-path="url(#P20-F2-pa764e42238)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #b64a35; stroke-width: 1.5"/>
+   </g>
+   <g id="P20-F2-patch_3">
+    <path d="M 43.207115 364.44226 
+L 43.207115 42.481751 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="P20-F2-patch_4">
+    <path d="M 43.207115 364.44226 
+L 424.35 364.44226 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="P20-F2-text_21">
+    <text style="font-size: 14.4px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="233.778557" y="36.481751" transform="rotate(-0 233.778557 36.481751)">Preserve local curvature</text>
+   </g>
+   <g id="P20-F2-PathCollection_1">
+    <defs>
+     <path id="P20-F2-m6ea06d92c0" d="M 0 3 
+C 0.795609 3 1.55874 2.683901 2.12132 2.12132 
+C 2.683901 1.55874 3 0.795609 3 0 
+C 3 -0.795609 2.683901 -1.55874 2.12132 -2.12132 
+C 1.55874 -2.683901 0.795609 -3 0 -3 
+C -0.795609 -3 -1.55874 -2.683901 -2.12132 -2.12132 
+C -2.683901 -1.55874 -3 -0.795609 -3 0 
+C -3 0.795609 -2.683901 1.55874 -2.12132 2.12132 
+C -1.55874 2.683901 -0.795609 3 0 3 
+z
+" style="stroke: #20313e"/>
+    </defs>
+    <g clip-path="url(#P20-F2-pa764e42238)">
+     <use xlink:href="#P20-F2-m6ea06d92c0" x="60.531792" y="57.11632" style="fill: #20313e; stroke: #20313e"/>
+     <use xlink:href="#P20-F2-m6ea06d92c0" x="147.155175" y="276.634849" style="fill: #20313e; stroke: #20313e"/>
+     <use xlink:href="#P20-F2-m6ea06d92c0" x="233.778557" y="349.807691" style="fill: #20313e; stroke: #20313e"/>
+     <use xlink:href="#P20-F2-m6ea06d92c0" x="320.40194" y="276.634849" style="fill: #20313e; stroke: #20313e"/>
+     <use xlink:href="#P20-F2-m6ea06d92c0" x="407.025323" y="57.11632" style="fill: #20313e; stroke: #20313e"/>
+    </g>
+   </g>
+   <g id="P20-F2-PathCollection_2">
+    <defs>
+     <path id="P20-F2-mb3eb544eca" d="M 0 4.472136 
+C 1.186024 4.472136 2.323632 4.000923 3.162278 3.162278 
+C 4.000923 2.323632 4.472136 1.186024 4.472136 0 
+C 4.472136 -1.186024 4.000923 -2.323632 3.162278 -3.162278 
+C 2.323632 -4.000923 1.186024 -4.472136 0 -4.472136 
+C -1.186024 -4.472136 -2.323632 -4.000923 -3.162278 -3.162278 
+C -4.000923 -2.323632 -4.472136 -1.186024 -4.472136 0 
+C -4.472136 1.186024 -4.000923 2.323632 -3.162278 3.162278 
+C -2.323632 4.000923 -1.186024 4.472136 0 4.472136 
+z
+" style="stroke: #28658c"/>
+    </defs>
+    <g clip-path="url(#P20-F2-pa764e42238)">
+     <use xlink:href="#P20-F2-mb3eb544eca" x="233.778557" y="349.807691" style="fill: #ffffff; stroke: #28658c"/>
+    </g>
+   </g>
+   <g id="P20-F2-legend_1">
+    <g id="P20-F2-line2d_21">
+     <path d="M 155.553792 54.595189 
+L 164.553792 54.595189 
+L 173.553792 54.595189 
+" style="fill: none; stroke: #28658c; stroke-width: 2; stroke-linecap: square"/>
+    </g>
+    <g id="P20-F2-text_22">
+     <text style="font-size: 9px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="180.753792" y="57.745189" transform="rotate(-0 180.753792 57.745189)">Local quadratic</text>
+    </g>
+    <g id="P20-F2-PathCollection_3">
+     <g>
+      <use xlink:href="#P20-F2-m6ea06d92c0" x="164.553792" y="69.107689" style="fill: #20313e; stroke: #20313e"/>
+     </g>
+    </g>
+    <g id="P20-F2-text_23">
+     <text style="font-size: 9px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="180.753792" y="71.470189" transform="rotate(-0 180.753792 71.470189)">Five sampled values</text>
+    </g>
+    <g id="P20-F2-line2d_22">
+     <path d="M 155.553792 82.045189 
+L 164.553792 82.045189 
+L 173.553792 82.045189 
+" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #b64a35; stroke-width: 1.5"/>
+    </g>
+    <g id="P20-F2-text_24">
+     <text style="font-size: 9px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="180.753792" y="85.195189" transform="rotate(-0 180.753792 85.195189)">Moving-mean center output = 2</text>
+    </g>
+    <g id="P20-F2-PathCollection_4">
+     <g>
+      <use xlink:href="#P20-F2-mb3eb544eca" x="164.553792" y="96.864251" style="fill: #ffffff; stroke: #28658c"/>
+     </g>
+    </g>
+    <g id="P20-F2-text_25">
+     <text style="font-size: 9px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="180.753792" y="99.226751" transform="rotate(-0 180.753792 99.226751)">Quadratic-fit center output = 0</text>
+    </g>
+   </g>
+  </g>
+  <g id="P20-F2-axes_2">
+   <g id="P20-F2-patch_5">
+    <path d="M 479.856875 364.44226 
+L 860.99976 364.44226 
+L 860.99976 42.481751 
+L 479.856875 42.481751 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="P20-F2-patch_6">
+    <path d="M 497.181552 305.903986 
+L 518.45747 305.903986 
+L 518.45747 203.462006 
+L 497.181552 203.462006 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #b64a35"/>
+   </g>
+   <g id="P20-F2-patch_7">
+    <path d="M 573.166975 305.903986 
+L 594.442894 305.903986 
+L 594.442894 203.462006 
+L 573.166975 203.462006 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #b64a35"/>
+   </g>
+   <g id="P20-F2-patch_8">
+    <path d="M 649.152399 305.903986 
+L 670.428317 305.903986 
+L 670.428317 203.462006 
+L 649.152399 203.462006 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #b64a35"/>
+   </g>
+   <g id="P20-F2-patch_9">
+    <path d="M 725.137823 305.903986 
+L 746.413741 305.903986 
+L 746.413741 203.462006 
+L 725.137823 203.462006 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #b64a35"/>
+   </g>
+   <g id="P20-F2-patch_10">
+    <path d="M 801.123246 305.903986 
+L 822.399165 305.903986 
+L 822.399165 203.462006 
+L 801.123246 203.462006 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #b64a35"/>
+   </g>
+   <g id="P20-F2-patch_11">
+    <path d="M 518.45747 305.903986 
+L 539.733389 305.903986 
+L 539.733389 349.807691 
+L 518.45747 349.807691 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #28658c"/>
+   </g>
+   <g id="P20-F2-patch_12">
+    <path d="M 594.442894 305.903986 
+L 615.718812 305.903986 
+L 615.718812 130.289163 
+L 594.442894 130.289163 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #28658c"/>
+   </g>
+   <g id="P20-F2-patch_13">
+    <path d="M 670.428317 305.903986 
+L 691.704236 305.903986 
+L 691.704236 57.11632 
+L 670.428317 57.11632 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #28658c"/>
+   </g>
+   <g id="P20-F2-patch_14">
+    <path d="M 746.413741 305.903986 
+L 767.68966 305.903986 
+L 767.68966 130.289163 
+L 746.413741 130.289163 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #28658c"/>
+   </g>
+   <g id="P20-F2-patch_15">
+    <path d="M 822.399165 305.903986 
+L 843.675083 305.903986 
+L 843.675083 349.807691 
+L 822.399165 349.807691 
+z
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: #28658c"/>
+   </g>
+   <g id="P20-F2-matplotlib.axis_3">
+    <g id="P20-F2-xtick_10">
+     <g id="P20-F2-line2d_23">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="518.45747" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_26">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="518.45747" y="380.99351" transform="rotate(-0 518.45747 380.99351)">−2</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_11">
+     <g id="P20-F2-line2d_24">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="594.442894" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_27">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="594.442894" y="380.99351" transform="rotate(-0 594.442894 380.99351)">−1</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_12">
+     <g id="P20-F2-line2d_25">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="670.428317" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_28">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="670.428317" y="380.99351" transform="rotate(-0 670.428317 380.99351)">0</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_13">
+     <g id="P20-F2-line2d_26">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="746.413741" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_29">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="746.413741" y="380.99351" transform="rotate(-0 746.413741 380.99351)">1</text>
+     </g>
+    </g>
+    <g id="P20-F2-xtick_14">
+     <g id="P20-F2-line2d_27">
+      <g>
+       <use xlink:href="#P20-F2-m940cc69388" x="822.399165" y="364.44226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_30">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="822.399165" y="380.99351" transform="rotate(-0 822.399165 380.99351)">2</text>
+     </g>
+    </g>
+    <g id="P20-F2-text_31">
+     <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="670.428317" y="397.45101" transform="rotate(-0 670.428317 397.45101)">Relative sample offset k</text>
+    </g>
+   </g>
+   <g id="P20-F2-matplotlib.axis_4">
+    <g id="P20-F2-ytick_10">
+     <g id="P20-F2-line2d_28">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="479.856875" y="357.124976" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_32">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="472.856875" y="361.900601" transform="rotate(-0 472.856875 361.900601)">−0.1</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_11">
+     <g id="P20-F2-line2d_29">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="479.856875" y="305.903986" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_33">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="472.856875" y="310.679611" transform="rotate(-0 472.856875 310.679611)">0.0</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_12">
+     <g id="P20-F2-line2d_30">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="479.856875" y="254.682996" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_34">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="472.856875" y="259.458621" transform="rotate(-0 472.856875 259.458621)">0.1</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_13">
+     <g id="P20-F2-line2d_31">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="479.856875" y="203.462006" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_35">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="472.856875" y="208.237631" transform="rotate(-0 472.856875 208.237631)">0.2</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_14">
+     <g id="P20-F2-line2d_32">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="479.856875" y="152.241016" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_36">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="472.856875" y="157.016641" transform="rotate(-0 472.856875 157.016641)">0.3</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_15">
+     <g id="P20-F2-line2d_33">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="479.856875" y="101.020026" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_37">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="472.856875" y="105.795651" transform="rotate(-0 472.856875 105.795651)">0.4</text>
+     </g>
+    </g>
+    <g id="P20-F2-ytick_16">
+     <g id="P20-F2-line2d_34">
+      <g>
+       <use xlink:href="#P20-F2-m9c14ee7d97" x="479.856875" y="49.799036" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="P20-F2-text_38">
+      <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="472.856875" y="54.574661" transform="rotate(-0 472.856875 54.574661)">0.5</text>
+     </g>
+    </g>
+    <g id="P20-F2-text_39">
+     <text style="font-size: 12px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="442.54125" y="203.462006" transform="rotate(-90 442.54125 203.462006)">Weight, dimensionless</text>
+    </g>
+   </g>
+   <g id="P20-F2-line2d_35">
+    <path d="M 479.856875 305.903986 
+L 860.99976 305.903986 
+" clip-path="url(#P20-F2-p8aca1b54fe)" style="fill: none; stroke: #20313e; stroke-linecap: square"/>
+   </g>
+   <g id="P20-F2-patch_16">
+    <path d="M 479.856875 364.44226 
+L 479.856875 42.481751 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="P20-F2-patch_17">
+    <path d="M 479.856875 364.44226 
+L 860.99976 364.44226 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="P20-F2-text_40">
+    <text style="font-size: 14.4px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="670.428317" y="36.481751" transform="rotate(-0 670.428317 36.481751)">Fixed weights implement local least squares</text>
+   </g>
+   <g id="P20-F2-legend_2">
+    <g id="P20-F2-patch_18">
+     <path d="M 753.179447 59.441126 
+L 773.179447 59.441126 
+L 773.179447 52.441126 
+L 753.179447 52.441126 
+z
+" style="fill: #b64a35"/>
+    </g>
+    <g id="P20-F2-text_41">
+     <text style="font-size: 10px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="781.179447" y="59.441126" transform="rotate(-0 781.179447 59.441126)">Moving mean</text>
+    </g>
+    <g id="P20-F2-patch_19">
+     <path d="M 753.179447 74.900501 
+L 773.179447 74.900501 
+L 773.179447 67.900501 
+L 753.179447 67.900501 
+z
+" style="fill: #28658c"/>
+    </g>
+    <g id="P20-F2-text_42">
+     <text style="font-size: 10px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="781.179447" y="74.900501" transform="rotate(-0 781.179447 74.900501)">Savitzky–Golay</text>
+    </g>
+   </g>
+  </g>
+  <g id="P20-F2-text_43">
+   <text style="font-size: 15px; font-family: 'Noto Sans SC', 'Microsoft YaHei', 'SimHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="432" y="15.269771" transform="rotate(-0 432 15.269771)">Savitzky and Golay (1964): local fitting as repeated weighting</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="P20-F2-pa764e42238">
+   <rect x="43.207115" y="42.481751" width="381.142885" height="321.960509"/>
+  </clipPath>
+  <clipPath id="P20-F2-p8aca1b54fe">
+   <rect x="479.856875" y="42.481751" width="381.142885" height="321.960509"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,3633 @@
+{
+  "title": {
+    "zh": "Python与科研常用库",
+    "en": "Python for Scientific Work"
+  },
+  "lessons": [
+    {
+      "id": "P01",
+      "title": {
+        "zh": "让一段程序回答一个具体问题",
+        "en": "A First Program That Answers a Question"
+      },
+      "standfirst": {
+        "zh": "从三次称量开始，看清变量、执行顺序和两个比例的区别。",
+        "en": "Start with three weighings to understand variables, execution order, and two different ratios."
+      },
+      "category": "python-tutorials",
+      "group": "Python基础",
+      "keywords": [
+        "Python",
+        "变量",
+        "赋值",
+        "质量",
+        "units",
+        "variables"
+      ],
+      "sections": [
+        {
+          "id": "P01-question",
+          "title": {
+            "zh": "一块吸水后的凝胶，究竟吸进了多少水？",
+            "en": "How much water has a swollen gel actually retained?"
+          }
+        },
+        {
+          "id": "P01-program",
+          "title": {
+            "zh": "程序是可以重新执行的计算过程",
+            "en": "A program is a calculation that can be executed again"
+          }
+        },
+        {
+          "id": "P01-names",
+          "title": {
+            "zh": "给数值起名字，才能看清它们怎样变化",
+            "en": "Names reveal what the numbers mean and when they change"
+          }
+        },
+        {
+          "id": "P01-mass-balance",
+          "title": {
+            "zh": "先守住质量账，再决定怎样报告比例",
+            "en": "Balance the mass account before choosing a ratio"
+          }
+        },
+        {
+          "id": "P01-history",
+          "title": {
+            "zh": "从读得懂的表达式，到能连接工具的语言",
+            "en": "A readable language that could reach other tools"
+          }
+        },
+        {
+          "id": "P01-output",
+          "title": {
+            "zh": "读懂输出，也学会检查一个看似正确的数",
+            "en": "Read the output and check what a plausible number means"
+          }
+        },
+        {
+          "id": "P01-complete",
+          "title": {
+            "zh": "运行完整例子：计算、画图与保存结果",
+            "en": "Run the complete example: calculate, plot, and save"
+          }
+        },
+        {
+          "id": "P01-lab-section",
+          "title": {
+            "zh": "亲手改变读数，观察整个计算怎样响应",
+            "en": "Change a reading and follow the complete response"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": null,
+        "next": "P02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "P02",
+      "title": {
+        "zh": "数字、单位与计算机里的近似",
+        "en": "Numbers, Units, and Numerical Approximation"
+      },
+      "standfirst": {
+        "zh": "从一条薄膜的应力计算，分清单位换算、测量变化与浮点舍入。",
+        "en": "Use a thin-film stress calculation to distinguish units, input sensitivity, and floating-point rounding."
+      },
+      "category": "python-tutorials",
+      "group": "Python基础",
+      "keywords": [
+        "units",
+        "float",
+        "Decimal",
+        "Fraction",
+        "math",
+        "单位",
+        "精度"
+      ],
+      "sections": [
+        {
+          "id": "P02-question-section",
+          "title": {
+            "zh": "为什么同一个样品，会被算出相差一百万倍的结果？",
+            "en": "How can one specimen acquire results a million times apart?"
+          }
+        },
+        {
+          "id": "P02-units-section",
+          "title": {
+            "zh": "把单位带进计算，面积换算就不会少乘一次",
+            "en": "Carry the units through the area calculation"
+          }
+        },
+        {
+          "id": "P02-history-section",
+          "title": {
+            "zh": "共同的米，来自怎样的测量历史？",
+            "en": "How did measurements acquire a shared metre?"
+          }
+        },
+        {
+          "id": "P02-representation-section",
+          "title": {
+            "zh": "计算机里的数，是有限刻度上的位置",
+            "en": "Stored numbers occupy a finite set of positions"
+          }
+        },
+        {
+          "id": "P02-exact-section",
+          "title": {
+            "zh": "什么时候需要整数、十进制数或分数？",
+            "en": "Choose integers, decimals, or fractions for the quantity"
+          }
+        },
+        {
+          "id": "P02-comparison-section",
+          "title": {
+            "zh": "“足够接近”必须带有尺度",
+            "en": "“Close enough” requires a scale"
+          }
+        },
+        {
+          "id": "P02-example-section",
+          "title": {
+            "zh": "完整运行：把三种误差放到各自的位置",
+            "en": "Run the example and separate three different error mechanisms"
+          }
+        },
+        {
+          "id": "P02-lab-section",
+          "title": {
+            "zh": "改变厚度与单位，让几何、曲线和检查同步变化",
+            "en": "Link geometry, units, sensitivity, and the comparison rule"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P01",
+        "next": "P03"
+      },
+      "prerequisites": [
+        "P01"
+      ]
+    },
+    {
+      "id": "P03",
+      "title": {
+        "zh": "用列表和字典组织一组实验",
+        "en": "Organizing Experiments with Lists and Dictionaries"
+      },
+      "standfirst": {
+        "zh": "让样品身份、条件和数值一起移动，理解排序、缺失与复制。",
+        "en": "Keep specimen identities, conditions, and values together through sorting, missing data, and copying."
+      },
+      "category": "python-tutorials",
+      "group": "Python基础",
+      "keywords": [
+        "list",
+        "dict",
+        "None",
+        "records",
+        "列表",
+        "字典",
+        "缺失值"
+      ],
+      "sections": [
+        {
+          "id": "P03-question-section",
+          "title": {
+            "zh": "样品多起来以后，怎样让每个数字都找得到主人？",
+            "en": "When specimens multiply, how does each value keep its identity?"
+          }
+        },
+        {
+          "id": "P03-list-section",
+          "title": {
+            "zh": "列表把一串值放在有顺序的位置上",
+            "en": "A list gives values ordered positions"
+          }
+        },
+        {
+          "id": "P03-dict-section",
+          "title": {
+            "zh": "字典让字段名称与值一起移动",
+            "en": "A dictionary keeps a field name attached to its value"
+          }
+        },
+        {
+          "id": "P03-records-section",
+          "title": {
+            "zh": "一条记录作为一个整体，排序才不会拆散实验",
+            "en": "Move whole records so sorting preserves the experiment"
+          }
+        },
+        {
+          "id": "P03-missing-section",
+          "title": {
+            "zh": "没有称量，与称得零克，进入计算的方式不同",
+            "en": "An absent weighing and a zero reading have different meanings"
+          }
+        },
+        {
+          "id": "P03-summary-section",
+          "title": {
+            "zh": "汇总时保留样品点与有效计数",
+            "en": "Keep individual specimens and valid counts beside a summary"
+          }
+        },
+        {
+          "id": "P03-code-section",
+          "title": {
+            "zh": "完整代码：从原始记录到可检查的结果",
+            "en": "Complete code: from original records to inspectable results"
+          }
+        },
+        {
+          "id": "P03-lab-section",
+          "title": {
+            "zh": "重排记录、修改一条称量，再追踪它的去向",
+            "en": "Reorder a record, edit a weighing, and follow its identity"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P02",
+        "next": "P04"
+      },
+      "prerequisites": [
+        "P01",
+        "P02"
+      ]
+    },
+    {
+      "id": "P04",
+      "title": {
+        "zh": "把重复操作写成可靠的函数",
+        "en": "Turning Repeated Work into Functions"
+      },
+      "standfirst": {
+        "zh": "从一条质量记录追踪到整批结果，看清参数、分支、循环与返回值。",
+        "en": "Trace one mass record through parameters, branches, loops, and returned results."
+      },
+      "category": "python-tutorials",
+      "group": "Python基础",
+      "keywords": [
+        "function",
+        "for",
+        "return",
+        "None",
+        "exception",
+        "函数",
+        "循环"
+      ],
+      "sections": [
+        {
+          "id": "P04-question-section",
+          "title": {
+            "zh": "让同一套计算走过每个样品",
+            "en": "Apply one calculation to every specimen"
+          }
+        },
+        {
+          "id": "P04-function-section",
+          "title": {
+            "zh": "定义、调用与返回值，分别发生了什么？",
+            "en": "Definition, call, and return are different events"
+          }
+        },
+        {
+          "id": "P04-history-section",
+          "title": {
+            "zh": "子程序曾经解决的，是科学计算中的重复劳动",
+            "en": "Reusable routines addressed repeated scientific work"
+          }
+        },
+        {
+          "id": "P04-conditions-section",
+          "title": {
+            "zh": "把计算成立的条件写在入口处",
+            "en": "Check the calculation's conditions at its entrance"
+          }
+        },
+        {
+          "id": "P04-loop-section",
+          "title": {
+            "zh": "循环一次，只处理当前的一条记录",
+            "en": "One iteration handles one current record"
+          }
+        },
+        {
+          "id": "P04-verification-section",
+          "title": {
+            "zh": "一个函数，既要检查答案，也要检查关系",
+            "en": "Check answers and relationships"
+          }
+        },
+        {
+          "id": "P04-code-section",
+          "title": {
+            "zh": "从单样品函数接到完整分析",
+            "en": "Connect the functions into a complete analysis"
+          }
+        },
+        {
+          "id": "P04-lab-section",
+          "title": {
+            "zh": "自己走一遍：下一条记录会改变什么？",
+            "en": "Predict what the next record changes"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P03",
+        "next": "P05"
+      },
+      "prerequisites": [
+        "P01",
+        "P02",
+        "P03"
+      ]
+    },
+    {
+      "id": "P05",
+      "title": {
+        "zh": "从一个文件到一批实验记录",
+        "en": "From One File to a Batch of Records"
+      },
+      "standfirst": {
+        "zh": "读取CSV和JSON清单，把不同时间单位的冷却记录接成可比较的数据。",
+        "en": "Read CSV files and a JSON manifest to make cooling records with different time units comparable."
+      },
+      "category": "python-tutorials",
+      "group": "Python基础",
+      "keywords": [
+        "pathlib",
+        "csv",
+        "json",
+        "metadata",
+        "units",
+        "批处理",
+        "单位",
+        "文件"
+      ],
+      "sections": [
+        {
+          "id": "P05-question-section",
+          "title": {
+            "zh": "让程序接过仪器留下的记录",
+            "en": "Let a program take over the recorded observations"
+          }
+        },
+        {
+          "id": "P05-path-section",
+          "title": {
+            "zh": "文件在哪里，取决于路径从哪里出发",
+            "en": "A path has a starting point"
+          }
+        },
+        {
+          "id": "P05-csv-section",
+          "title": {
+            "zh": "CSV中的数字，最初只是文字",
+            "en": "Numbers in a CSV begin as text"
+          }
+        },
+        {
+          "id": "P05-metadata-section",
+          "title": {
+            "zh": "数字能交换，含义也要一起交换",
+            "en": "Meaning must travel with numbers"
+          }
+        },
+        {
+          "id": "P05-batch-section",
+          "title": {
+            "zh": "从读一个文件，走到有顺序的一批文件",
+            "en": "Process a defined collection of files"
+          }
+        },
+        {
+          "id": "P05-rate-section",
+          "title": {
+            "zh": "把结果放到同一时间尺度上读",
+            "en": "Read all results on a common time scale"
+          }
+        },
+        {
+          "id": "P05-code-section",
+          "title": {
+            "zh": "完整程序：读取、转换、合并，再保存",
+            "en": "Read, convert, combine, and save"
+          }
+        },
+        {
+          "id": "P05-lab-section",
+          "title": {
+            "zh": "交互检查：一分钟究竟被放在横轴哪里？",
+            "en": "Where does one minute land on the axis?"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P04",
+        "next": "P06"
+      },
+      "prerequisites": [
+        "P03",
+        "P04"
+      ]
+    },
+    {
+      "id": "P06",
+      "title": {
+        "zh": "让程序在自己的电脑上稳定运行",
+        "en": "Running and Understanding Your Python Environment"
+      },
+      "standfirst": {
+        "zh": "从解释器、模块和环境到一次有单位的密度计算，学会沿着实际执行路径定位问题。",
+        "en": "Connect interpreters, modules, and environments to a density calculation with explicit units."
+      },
+      "category": "python-tutorials",
+      "group": "Python基础",
+      "keywords": [
+        "Python",
+        "venv",
+        "pip",
+        "modules",
+        "traceback",
+        "density"
+      ],
+      "sections": [
+        {
+          "id": "P06-question-section",
+          "title": {
+            "zh": "同一段程序，怎样在自己的电脑上跑清楚？",
+            "en": "Understand what runs on your own computer"
+          }
+        },
+        {
+          "id": "P06-interpreter-section",
+          "title": {
+            "zh": "先确认是谁在执行代码",
+            "en": "Identify the process executing the code"
+          }
+        },
+        {
+          "id": "P06-environment-section",
+          "title": {
+            "zh": "虚拟环境解决的是依赖如何相处",
+            "en": "Virtual environments organize project dependencies"
+          }
+        },
+        {
+          "id": "P06-module-section",
+          "title": {
+            "zh": "模块让计算规则有一个清楚的家",
+            "en": "A module gives calculation rules a clear location"
+          }
+        },
+        {
+          "id": "P06-density-section",
+          "title": {
+            "zh": "先用尺寸与单位检查一个能够手算的结果",
+            "en": "Begin with a result that can be calculated by hand"
+          }
+        },
+        {
+          "id": "P06-errors-section",
+          "title": {
+            "zh": "沿着异常回到最小的出错输入",
+            "en": "Follow an exception back to its smallest input"
+          }
+        },
+        {
+          "id": "P06-code-section",
+          "title": {
+            "zh": "两份完整代码，以及一次可复查的运行",
+            "en": "Two complete files and an inspectable run"
+          }
+        },
+        {
+          "id": "P06-lab-section",
+          "title": {
+            "zh": "选择运行入口，再检查计算含义",
+            "en": "Select an execution route, then inspect the calculation"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P05",
+        "next": "P07"
+      },
+      "prerequisites": [
+        "P04",
+        "P05"
+      ]
+    },
+    {
+      "id": "P07",
+      "title": {
+        "zh": "把多次实验放进同一个数组",
+        "en": "Putting Repeated Measurements into an Array"
+      },
+      "standfirst": {
+        "zh": "从三个样品、五个时刻出发，看清数组的形状、索引和轴怎样决定计算的含义。",
+        "en": "Start with three specimens observed at five times, and see how shape, indexing, and axes give a calculation its meaning."
+      },
+      "category": "python-tutorials",
+      "group": "NumPy",
+      "keywords": [
+        "NumPy",
+        "array",
+        "shape",
+        "axis",
+        "mean",
+        "standard deviation",
+        "实验重复",
+        "数组"
+      ],
+      "sections": [
+        {
+          "id": "p07-question",
+          "title": {
+            "zh": "三个样品、五个时刻，应该怎样放进计算机",
+            "en": "Three specimens, five times: deciding what the numbers mean"
+          }
+        },
+        {
+          "id": "p07-shape",
+          "title": {
+            "zh": "形状说明有几条索引，类型说明每格存什么",
+            "en": "Shape describes the indices; dtype describes each element"
+          }
+        },
+        {
+          "id": "p07-history",
+          "title": {
+            "zh": "科学家为什么需要一种共同的数组对象",
+            "en": "Why scientific computing developed a common array object"
+          }
+        },
+        {
+          "id": "p07-index",
+          "title": {
+            "zh": "用索引准确找到一个数、一行或一列",
+            "en": "Locate a value, a row, or a column precisely"
+          }
+        },
+        {
+          "id": "p07-reduction",
+          "title": {
+            "zh": "沿哪条轴求平均，决定最后留下什么",
+            "en": "The reduced axis determines what remains"
+          }
+        },
+        {
+          "id": "p07-spread",
+          "title": {
+            "zh": "平均曲线之外，还要保留样品之间的差别",
+            "en": "Preserve specimen differences alongside the mean"
+          }
+        },
+        {
+          "id": "p07-pipeline",
+          "title": {
+            "zh": "把计算、保存和图形连接成一次完整分析",
+            "en": "Connect the calculation, saved data, and figures"
+          }
+        },
+        {
+          "id": "p07-lab",
+          "title": {
+            "zh": "改变一个观测，看它怎样影响整张图",
+            "en": "Change one observation and follow its consequences"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P06",
+        "next": "P08"
+      },
+      "prerequisites": [
+        "P03",
+        "P04",
+        "P06"
+      ]
+    },
+    {
+      "id": "P08",
+      "title": {
+        "zh": "切片与广播：沿正确的方向计算",
+        "en": "Indexing and Broadcasting along the Right Axis"
+      },
+      "standfirst": {
+        "zh": "选中观测、配对基准、校正漂移，并追踪视图与原始数据的联系。",
+        "en": "Select observations, pair baselines, correct offsets, and trace shared array storage."
+      },
+      "category": "python-tutorials",
+      "group": "NumPy",
+      "keywords": [
+        "NumPy",
+        "indexing",
+        "broadcasting",
+        "views",
+        "copies",
+        "calibration"
+      ],
+      "sections": [
+        {
+          "id": "P08-question-section",
+          "title": {
+            "zh": "让每一个数都和正确的参照量配对",
+            "en": "Pair every observation with the right reference"
+          }
+        },
+        {
+          "id": "P08-selection-section",
+          "title": {
+            "zh": "切片选择的是位置，时间仍由坐标给出",
+            "en": "Slices select positions; coordinates supply the time"
+          }
+        },
+        {
+          "id": "P08-mask-section",
+          "title": {
+            "zh": "选择几块试样，与选择若干个观测值",
+            "en": "Selecting specimens differs from selecting individual values"
+          }
+        },
+        {
+          "id": "P08-broadcast-section",
+          "title": {
+            "zh": "一列基准怎样服务于整张表",
+            "en": "How one baseline column serves an entire table"
+          }
+        },
+        {
+          "id": "P08-calibration-section",
+          "title": {
+            "zh": "校正量沿时间走，基准量沿样品走",
+            "en": "Corrections follow time; baselines follow specimens"
+          }
+        },
+        {
+          "id": "P08-memory-section",
+          "title": {
+            "zh": "从数组的历史设计理解视图与副本",
+            "en": "Array design explains views and copies"
+          }
+        },
+        {
+          "id": "P08-code-section",
+          "title": {
+            "zh": "完整程序把配对规则变成可检查的输出",
+            "en": "A complete program makes each pairing inspectable"
+          }
+        },
+        {
+          "id": "P08-lab-section",
+          "title": {
+            "zh": "改变选择、校正与写入方式，追踪同一个格子",
+            "en": "Trace a cell through selection, correction, and editing"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P07",
+        "next": "P09"
+      },
+      "prerequisites": [
+        "P07"
+      ]
+    },
+    {
+      "id": "P09",
+      "title": {
+        "zh": "随机数怎样帮助理解测量",
+        "en": "Random Numbers and Measurement Variability"
+      },
+      "standfirst": {
+        "zh": "重复完整的测量过程，分别观察平均值的波动、固定偏差与共有条件。",
+        "en": "Repeat complete measurement procedures to distinguish random spread, fixed bias, and shared conditions."
+      },
+      "category": "python-tutorials",
+      "group": "NumPy",
+      "keywords": [
+        "NumPy",
+        "Generator",
+        "Monte Carlo",
+        "standard error",
+        "bias",
+        "correlation"
+      ],
+      "sections": [
+        {
+          "id": "P09-question-section",
+          "title": {
+            "zh": "多测几次，究竟改善了什么？",
+            "en": "What does taking more measurements improve?"
+          }
+        },
+        {
+          "id": "P09-model-section",
+          "title": {
+            "zh": "随机变量描述可能的读数，分布描述它们出现的规律",
+            "en": "A random variable describes a possible reading"
+          }
+        },
+        {
+          "id": "P09-generator-section",
+          "title": {
+            "zh": "让随机计算能够重复，也能够改变",
+            "en": "Make a random calculation repeatable and adjustable"
+          }
+        },
+        {
+          "id": "P09-history-section",
+          "title": {
+            "zh": "蒙特卡洛把许多可能的实验变成可计算的对象",
+            "en": "Monte Carlo turns possible experiments into computable objects"
+          }
+        },
+        {
+          "id": "P09-average-section",
+          "title": {
+            "zh": "平均值为什么更稳定，又为什么不会每次都更准",
+            "en": "Why an average is more stable"
+          }
+        },
+        {
+          "id": "P09-shared-section",
+          "title": {
+            "zh": "固定偏差与共有偏移，为什么留在平均值里",
+            "en": "Why fixed bias and shared offsets remain in an average"
+          }
+        },
+        {
+          "id": "P09-code-section",
+          "title": {
+            "zh": "完整模拟与实际输出",
+            "en": "The complete simulation and its actual outputs"
+          }
+        },
+        {
+          "id": "P09-lab-section",
+          "title": {
+            "zh": "把重复次数、随机波动与共同偏移分开调整",
+            "en": "Adjust repetition, independent fluctuation, and shared conditions separately"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P08",
+        "next": "P10"
+      },
+      "prerequisites": [
+        "P08"
+      ]
+    },
+    {
+      "id": "P10",
+      "title": {
+        "zh": "坐标、矩阵与一把可靠的图像尺",
+        "en": "Coordinates, Matrices, and Image Calibration"
+      },
+      "standfirst": {
+        "zh": "用刻度尺建立像素尺度，沿残差理解最小二乘，再让矩阵转动整组坐标。",
+        "en": "Calibrate a pixel scale, understand least squares through residuals, and rotate an entire coordinate array."
+      },
+      "category": "python-tutorials",
+      "group": "NumPy",
+      "keywords": [
+        "NumPy",
+        "matrix",
+        "calibration",
+        "least squares",
+        "rotation",
+        "residuals"
+      ],
+      "sections": [
+        {
+          "id": "P10-image-section",
+          "title": {
+            "zh": "照片中的一百个像素，究竟有多长",
+            "en": "How long is a hundred pixels?"
+          }
+        },
+        {
+          "id": "P10-vector-section",
+          "title": {
+            "zh": "从“向右两步、向上一步”理解向量",
+            "en": "A vector begins with two directions"
+          }
+        },
+        {
+          "id": "P10-matrix-section",
+          "title": {
+            "zh": "矩阵的两列，描述两根方向箭头怎样转动",
+            "en": "Matrix columns show where the basic directions go"
+          }
+        },
+        {
+          "id": "P10-calibration-section",
+          "title": {
+            "zh": "把刻度尺读数变成带单位的直线",
+            "en": "A calibration line carries units"
+          }
+        },
+        {
+          "id": "P10-squares-section",
+          "title": {
+            "zh": "最小二乘从观测问题中长出来",
+            "en": "Least squares grew out of imperfect observations"
+          }
+        },
+        {
+          "id": "P10-solving-section",
+          "title": {
+            "zh": "把六条关系排成矩阵，让NumPy求解",
+            "en": "Arrange the six relationships for NumPy"
+          }
+        },
+        {
+          "id": "P10-run-section",
+          "title": {
+            "zh": "完整计算：标定、旋转和逐点检查",
+            "en": "The complete calibration and rotation"
+          }
+        },
+        {
+          "id": "P10-laboratory-section",
+          "title": {
+            "zh": "亲手调整一条标定记录，观察影响怎样传到几何图",
+            "en": "Follow one altered reading through the calculation"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P09",
+        "next": "P11"
+      },
+      "prerequisites": [
+        "P08"
+      ]
+    },
+    {
+      "id": "P11",
+      "title": {
+        "zh": "读懂一张真实的数据表",
+        "en": "Reading and Cleaning a Real Data Table"
+      },
+      "standfirst": {
+        "zh": "从南极企鹅记录出发，理解行与列、单位、缺失值和保留观测身份的筛选。",
+        "en": "Use Antarctic penguin records to understand rows, columns, units, missing values, and selection that preserves observation identity."
+      },
+      "category": "python-tutorials",
+      "group": "pandas",
+      "keywords": [
+        "pandas",
+        "DataFrame",
+        "Series",
+        "loc",
+        "iloc",
+        "missing data",
+        "Palmer penguins"
+      ],
+      "sections": [
+        {
+          "id": "P11-observation-section",
+          "title": {
+            "zh": "先问每一行是什么，再问怎样算",
+            "en": "Ask what a row represents before calculating"
+          }
+        },
+        {
+          "id": "P11-history-section",
+          "title": {
+            "zh": "野外测量留下的结构，藏在列名里",
+            "en": "Column names preserve a field measurement's structure"
+          }
+        },
+        {
+          "id": "P11-dataframe-section",
+          "title": {
+            "zh": "DataFrame与Series：整张表和一列记录",
+            "en": "A DataFrame is a table; a Series is a labelled column"
+          }
+        },
+        {
+          "id": "P11-types-section",
+          "title": {
+            "zh": "让数字、类别和单位各就各位",
+            "en": "Keep numerical types, categories, and units distinct"
+          }
+        },
+        {
+          "id": "P11-missing-section",
+          "title": {
+            "zh": "一个空格，为什么会改变可回答的问题",
+            "en": "A missing entry changes which questions a row can answer"
+          }
+        },
+        {
+          "id": "P11-select-section",
+          "title": {
+            "zh": "把一个问题拆成三个条件",
+            "en": "Turn one question into three conditions"
+          }
+        },
+        {
+          "id": "P11-code-section",
+          "title": {
+            "zh": "完整例子：从原表到可追踪的筛选结果",
+            "en": "The complete example, from input table to traceable selection"
+          }
+        },
+        {
+          "id": "P11-lab-section",
+          "title": {
+            "zh": "在图、筛选条件和原记录之间往返",
+            "en": "Move between the plot, conditions, and individual records"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P10",
+        "next": "P12"
+      },
+      "prerequisites": [
+        "P05",
+        "P08"
+      ]
+    },
+    {
+      "id": "P12",
+      "title": {
+        "zh": "分组以后，平均值回答什么问题",
+        "en": "What a Grouped Average Actually Answers"
+      },
+      "standfirst": {
+        "zh": "沿着读数、试样和配方三层身份，理解分组、权重、缺失与表格变形。",
+        "en": "Follow readings, specimens, and formulations to understand grouping, weights, missingness, and reshaping."
+      },
+      "category": "python-tutorials",
+      "group": "pandas",
+      "keywords": [
+        "pandas",
+        "groupby",
+        "aggregation",
+        "transform",
+        "pivot",
+        "技术重复",
+        "观测单位",
+        "分组",
+        "权重"
+      ],
+      "sections": [
+        {
+          "id": "P12-question",
+          "title": {
+            "zh": "同一块材料多称几次，平均值为什么变了",
+            "en": "Why does measuring one specimen more often change the average?"
+          }
+        },
+        {
+          "id": "P12-history",
+          "title": {
+            "zh": "把大表拆成小问题，再把结果放回一起",
+            "en": "Break a large table into smaller questions, then combine the answers"
+          }
+        },
+        {
+          "id": "P12-grouping",
+          "title": {
+            "zh": "分组键是身份，聚合列才是需要计算的量",
+            "en": "Grouping keys identify objects; selected columns contain the quantities"
+          }
+        },
+        {
+          "id": "P12-weights-reading",
+          "title": {
+            "zh": "平均数背后，每一份权重都指向一个对象",
+            "en": "Every averaging weight belongs to a particular object"
+          }
+        },
+        {
+          "id": "P12-missing-reading",
+          "title": {
+            "zh": "缺失值让分母改变，也可能让一个试样暂时失去结果",
+            "en": "A missing value changes the denominator and sometimes removes a specimen mean"
+          }
+        },
+        {
+          "id": "P12-transform",
+          "title": {
+            "zh": "摘要放在新表里，组内基准也能回到每一条记录",
+            "en": "Keep a summary table, and return group baselines to the original records"
+          }
+        },
+        {
+          "id": "P12-code",
+          "title": {
+            "zh": "完整程序保留从读数到配方的每一层",
+            "en": "A complete program retaining each level from reading to formulation"
+          }
+        },
+        {
+          "id": "P12-lab-section",
+          "title": {
+            "zh": "改动记录结构，观察谁改变、谁保持不变",
+            "en": "Change the record structure and trace what moves"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P11",
+        "next": "P13"
+      },
+      "prerequisites": [
+        "P11",
+        "P03"
+      ]
+    },
+    {
+      "id": "P13",
+      "title": {
+        "zh": "把多张表准确地拼在一起",
+        "en": "Joining Tables without Losing Their Meaning"
+      },
+      "standfirst": {
+        "zh": "从样品身份追踪到统计权重，理解concat、merge和每一次匹配如何改变结果。",
+        "en": "Trace sample identity and statistical weight through concat, merge, and every individual match."
+      },
+      "category": "python-tutorials",
+      "group": "pandas",
+      "keywords": [
+        "pandas",
+        "merge",
+        "concat",
+        "keys",
+        "cardinality"
+      ],
+      "sections": [
+        {
+          "id": "P13-question",
+          "title": {
+            "zh": "一次测量的完整信息，常常分散在几张表里",
+            "en": "The information for one observation often lives in several tables"
+          }
+        },
+        {
+          "id": "P13-identity",
+          "title": {
+            "zh": "从关系数据思想理解“按键连接”",
+            "en": "Understand a key-based join through the relational idea"
+          }
+        },
+        {
+          "id": "P13-composite",
+          "title": {
+            "zh": "同名样品来自不同批次时，把范围写进键",
+            "en": "Include scope when sample names repeat across batches"
+          }
+        },
+        {
+          "id": "P13-concat",
+          "title": {
+            "zh": "增加观测记录，与补充样品属性，是两种操作",
+            "en": "Adding observations and adding attributes are different operations"
+          }
+        },
+        {
+          "id": "P13-join-rules",
+          "title": {
+            "zh": "决定未匹配对象应该留在哪里",
+            "en": "Decide where unmatched objects should remain"
+          }
+        },
+        {
+          "id": "P13-cardinality",
+          "title": {
+            "zh": "重复键怎样把两条测量变成四条结果",
+            "en": "How a repeated key turns two observations into four output rows"
+          }
+        },
+        {
+          "id": "P13-statistics",
+          "title": {
+            "zh": "行数变化会进入平均值的计算",
+            "en": "Changes in row count enter the mean"
+          }
+        },
+        {
+          "id": "P13-experiment",
+          "title": {
+            "zh": "用交互追踪每条配对线的去向",
+            "en": "Follow every pairing through linked views"
+          }
+        },
+        {
+          "id": "P13-full-example",
+          "title": {
+            "zh": "完整脚本如何保存可检查的结果",
+            "en": "Save results that remain inspectable"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P12",
+        "next": "P14"
+      },
+      "prerequisites": [
+        "P11",
+        "P12"
+      ]
+    },
+    {
+      "id": "P14",
+      "title": {
+        "zh": "沿着时间整理多批数据",
+        "en": "Organizing Time and Multiple Data Batches"
+      },
+      "standfirst": {
+        "zh": "把启动时刻、经过时间、分箱平均和记录覆盖率放在同一条清楚的分析路径中。",
+        "en": "Connect start times, elapsed time, bin averages, and observation coverage in one clear analysis."
+      },
+      "category": "python-tutorials",
+      "group": "pandas",
+      "keywords": [
+        "pandas",
+        "datetime",
+        "resample",
+        "rolling",
+        "time series"
+      ],
+      "sections": [
+        {
+          "id": "P14-question",
+          "title": {
+            "zh": "两批实验都在升温，怎样放在一起比较",
+            "en": "How can two heating experiments be compared in time?"
+          }
+        },
+        {
+          "id": "P14-history",
+          "title": {
+            "zh": "把时间看作数据的身份，而不只是第几行",
+            "en": "Treat time as part of observation identity"
+          }
+        },
+        {
+          "id": "P14-parsing",
+          "title": {
+            "zh": "从写着日期的文本，得到能计算的时间",
+            "en": "Convert date text into time that can be calculated"
+          }
+        },
+        {
+          "id": "P14-alignment",
+          "title": {
+            "zh": "在每个批次内部建立经过时间",
+            "en": "Construct elapsed time inside each batch"
+          }
+        },
+        {
+          "id": "P14-binning",
+          "title": {
+            "zh": "一个5分钟平均值，究竟包含哪几条记录",
+            "en": "Which observations belong to a five-minute average?"
+          }
+        },
+        {
+          "id": "P14-coverage",
+          "title": {
+            "zh": "让空档与平均曲线一起留下来",
+            "en": "Retain gaps alongside the mean curve"
+          }
+        },
+        {
+          "id": "P14-rolling",
+          "title": {
+            "zh": "最近三条记录，不一定等于最近五分钟",
+            "en": "The last three records may span much longer than five minutes"
+          }
+        },
+        {
+          "id": "P14-interaction",
+          "title": {
+            "zh": "移动箱的边界，看平均值怎样跟着改变",
+            "en": "Move bin boundaries and follow the changing summaries"
+          }
+        },
+        {
+          "id": "P14-complete",
+          "title": {
+            "zh": "把完整时间处理过程写成可重复运行的程序",
+            "en": "Make the complete time calculation reproducible"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P13",
+        "next": "P15"
+      },
+      "prerequisites": [
+        "P11",
+        "P12",
+        "P13"
+      ]
+    },
+    {
+      "id": "P15",
+      "title": {
+        "zh": "一张科学图是怎样组成的",
+        "en": "How a Scientific Figure Is Built"
+      },
+      "standfirst": {
+        "zh": "从六条标定记录出发，看清数据、绘图区和屏幕位置怎样对应，学会有目的地修改一张图。",
+        "en": "Start with six calibration records and connect data, plotting objects, and screen positions to make deliberate changes to a figure."
+      },
+      "category": "python-tutorials",
+      "group": "可视化",
+      "keywords": [
+        "Matplotlib",
+        "Figure",
+        "Axes",
+        "Artist",
+        "坐标变换",
+        "科学绘图"
+      ],
+      "sections": [
+        {
+          "id": "P15-question",
+          "title": {
+            "zh": "从六条记录开始，决定这张图要回答什么",
+            "en": "Start with six records and a question for the figure"
+          }
+        },
+        {
+          "id": "P15-history",
+          "title": {
+            "zh": "绘图库为何需要同时照顾探索和出版",
+            "en": "Why plotting must support exploration and publication"
+          }
+        },
+        {
+          "id": "P15-objects",
+          "title": {
+            "zh": "Figure、Axes和Artist各自做什么",
+            "en": "The responsibilities of Figure, Axes, and Artist"
+          }
+        },
+        {
+          "id": "P15-marks",
+          "title": {
+            "zh": "每个视觉标记都应有可以说清的含义",
+            "en": "Give each visual mark an explainable meaning"
+          }
+        },
+        {
+          "id": "P15-coordinates",
+          "title": {
+            "zh": "数据坐标怎样变成图中的位置",
+            "en": "How data coordinates become positions in a plot"
+          }
+        },
+        {
+          "id": "P15-experiment",
+          "title": {
+            "zh": "在两个联动视图中检查自己的判断",
+            "en": "Test your prediction in two linked views"
+          }
+        },
+        {
+          "id": "P15-program",
+          "title": {
+            "zh": "运行完整程序，保留数据和图的对应关系",
+            "en": "Run the complete program and preserve the mapping"
+          }
+        },
+        {
+          "id": "P15-export",
+          "title": {
+            "zh": "把可读的结果保存下来",
+            "en": "Save a result that remains readable"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P14",
+        "next": "P16"
+      },
+      "prerequisites": [
+        "P07",
+        "P08",
+        "P11"
+      ]
+    },
+    {
+      "id": "P16",
+      "title": {
+        "zh": "从清楚的曲线到完整的科学组图",
+        "en": "From Clear Curves to a Scientific Figure"
+      },
+      "standfirst": {
+        "zh": "用相同数据组织总览、线性尺度与对数尺度，让面板之间的比较有准确的数量依据。",
+        "en": "Connect an overview with linear and logarithmic details, preserving quantitative meaning across panels."
+      },
+      "category": "python-tutorials",
+      "group": "可视化",
+      "keywords": [
+        "Matplotlib",
+        "subplot_mosaic",
+        "Normalize",
+        "LogNorm",
+        "科学组图"
+      ],
+      "sections": [
+        {
+          "id": "P16-question",
+          "title": {
+            "zh": "一张组图怎样让读者看清整个过程",
+            "en": "How a composite figure makes a whole process readable"
+          }
+        },
+        {
+          "id": "P16-history",
+          "title": {
+            "zh": "从一列数字到共同坐标，比较方式发生了什么变化",
+            "en": "What changes when numbers acquire common coordinates?"
+          }
+        },
+        {
+          "id": "P16-model",
+          "title": {
+            "zh": "建立一组能够逐项核对的曲线",
+            "en": "Build curves whose values can be checked directly"
+          }
+        },
+        {
+          "id": "P16-composition",
+          "title": {
+            "zh": "总览给范围，细节给读数",
+            "en": "Use an overview for range and details for reading values"
+          }
+        },
+        {
+          "id": "P16-scales",
+          "title": {
+            "zh": "改变坐标或颜色，究竟改变了什么",
+            "en": "What changes when you change coordinates or colors?"
+          }
+        },
+        {
+          "id": "P16-geometry",
+          "title": {
+            "zh": "让几何位置、标记和文字都保留准确含义",
+            "en": "Preserve meaning in geometry, markers, and text"
+          }
+        },
+        {
+          "id": "P16-program",
+          "title": {
+            "zh": "完整程序：从数组到可复用的组图",
+            "en": "A complete program, from arrays to reusable figures"
+          }
+        },
+        {
+          "id": "P16-explore",
+          "title": {
+            "zh": "联动观察：让颜色、曲线和读数指向同一个位置",
+            "en": "Link colors, curves, and numerical readings"
+          }
+        },
+        {
+          "id": "P16-transfer",
+          "title": {
+            "zh": "把这种组织方法带到自己的数据中",
+            "en": "Apply the arrangement to your own data"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P15",
+        "next": "P17"
+      },
+      "prerequisites": [
+        "P08",
+        "P15"
+      ]
+    },
+    {
+      "id": "P17",
+      "title": {
+        "zh": "分布、重复测量与误差线：让每个样品都说话",
+        "en": "Distributions, Repeated Measurements, and Error Bars"
+      },
+      "standfirst": {
+        "zh": "用Seaborn连接样品点、分布与统计区间，读懂标准差、标准误和独立样本数。",
+        "en": "Connect specimen points, distributions, and intervals with Seaborn; distinguish spread, precision, and independent sample size."
+      },
+      "category": "python-tutorials",
+      "group": "可视化",
+      "keywords": [
+        "seaborn",
+        "SD",
+        "SEM",
+        "ECDF",
+        "独立样本"
+      ],
+      "sections": [
+        {
+          "id": "P17-question",
+          "title": {
+            "zh": "平均值相同的两批材料，使用感受也会相同吗",
+            "en": "Can two batches with the same mean feel different?"
+          }
+        },
+        {
+          "id": "P17-history",
+          "title": {
+            "zh": "为什么统计学家坚持先看数据的样子",
+            "en": "Why statisticians insist on seeing the observations"
+          }
+        },
+        {
+          "id": "P17-units",
+          "title": {
+            "zh": "先确定一个点究竟代表什么",
+            "en": "First establish what one point represents"
+          }
+        },
+        {
+          "id": "P17-distribution",
+          "title": {
+            "zh": "从逐个样品走向分布：分箱、累计和排序",
+            "en": "From individual specimens to bins, cumulative counts, and ranks"
+          }
+        },
+        {
+          "id": "P17-errors",
+          "title": {
+            "zh": "标准差、标准误与置信区间在回答不同问题",
+            "en": "Standard deviation, standard error, and confidence intervals"
+          }
+        },
+        {
+          "id": "P17-repeats",
+          "title": {
+            "zh": "把读数当成样品，为什么误差线会变窄",
+            "en": "Why treating readings as specimens narrows the interval"
+          }
+        },
+        {
+          "id": "P17-code",
+          "title": {
+            "zh": "完整程序：让分组、统计量和图形共享同一份表",
+            "en": "A complete program with shared grouping, statistics, and figures"
+          }
+        },
+        {
+          "id": "P17-laboratory",
+          "title": {
+            "zh": "联动实验：改变展示，保留样品身份",
+            "en": "Change the display while retaining specimen identity"
+          }
+        },
+        {
+          "id": "P17-next",
+          "title": {
+            "zh": "让图形选择跟随研究问题",
+            "en": "Let the research question choose the statistical view"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P16",
+        "next": "P18"
+      },
+      "prerequisites": [
+        "P12",
+        "P16"
+      ]
+    },
+    {
+      "id": "P18",
+      "title": {
+        "zh": "让图回应问题：Plotly联动科学数据",
+        "en": "Figures That Respond: Linked Scientific Data with Plotly"
+      },
+      "standfirst": {
+        "zh": "跟随同一条周期加载记录，在时间曲线与应力—应变轨迹间切换，解释相位和耗散。",
+        "en": "Follow one cyclic-loading record through time views and a stress–strain trajectory, connecting phase and dissipation."
+      },
+      "category": "python-tutorials",
+      "group": "可视化",
+      "keywords": [
+        "Plotly",
+        "customdata",
+        "交互",
+        "黏弹性",
+        "离线HTML"
+      ],
+      "sections": [
+        {
+          "id": "P18-question",
+          "title": {
+            "zh": "把同一个时刻，放进三幅互相联系的图",
+            "en": "Follow one instant through three connected figures"
+          }
+        },
+        {
+          "id": "P18-history",
+          "title": {
+            "zh": "交互图的早期目标：换一个角度，仍然认得同一个点",
+            "en": "Early interactive graphics: change the view and retain the point"
+          }
+        },
+        {
+          "id": "P18-motion",
+          "title": {
+            "zh": "先把拉伸过程写成能够计算的量",
+            "en": "Turn the stretching motion into computable quantities"
+          }
+        },
+        {
+          "id": "P18-response",
+          "title": {
+            "zh": "把弹性响应与黏性响应相加",
+            "en": "Add elastic and viscous contributions"
+          }
+        },
+        {
+          "id": "P18-work",
+          "title": {
+            "zh": "环线围住的面积为什么与耗散有关",
+            "en": "Why the loop area is related to dissipation"
+          }
+        },
+        {
+          "id": "P18-objects",
+          "title": {
+            "zh": "Plotly怎样保存一个可追踪的科学图",
+            "en": "How Plotly stores a traceable scientific figure"
+          }
+        },
+        {
+          "id": "P18-code",
+          "title": {
+            "zh": "完整程序：计算、导出与点击联动",
+            "en": "A complete program: calculate, export, and link clicks"
+          }
+        },
+        {
+          "id": "P18-experiment",
+          "title": {
+            "zh": "直接操作：参数变化与记录追踪分开观察",
+            "en": "Separate condition changes from record tracking"
+          }
+        },
+        {
+          "id": "P18-transfer",
+          "title": {
+            "zh": "把交互做成一条可核对的阅读路径",
+            "en": "Make interaction a checkable reading path"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [
+        "assets/plotly.min.js"
+      ],
+      "neighbors": {
+        "prev": "P17",
+        "next": "P19"
+      },
+      "prerequisites": [
+        "P08",
+        "P16"
+      ]
+    },
+    {
+      "id": "P19",
+      "title": {
+        "zh": "从散点到模型：拟合与残差",
+        "en": "From Observations to Models: Fitting and Residuals"
+      },
+      "standfirst": {
+        "zh": "从一段应力松弛曲线出发，理解参数、残差和观测时间怎样共同决定拟合结果。",
+        "en": "Use a stress-relaxation curve to understand how parameters, residuals, and observation time shape a fit."
+      },
+      "category": "python-tutorials",
+      "group": "科学计算",
+      "keywords": [
+        "SciPy",
+        "curve_fit",
+        "least squares",
+        "residual",
+        "identifiability"
+      ],
+      "sections": [
+        {
+          "id": "P19-question",
+          "title": {
+            "zh": "从一块被拉住的软材料开始",
+            "en": "Begin with a soft material held at a fixed stretch"
+          }
+        },
+        {
+          "id": "P19-model",
+          "title": {
+            "zh": "让参数分别回答高度、速度和平台",
+            "en": "Give amplitude, time scale, and plateau separate roles"
+          }
+        },
+        {
+          "id": "P19-objective",
+          "title": {
+            "zh": "用残差把“贴近数据”变成可计算的要求",
+            "en": "Turn closeness to the data into a computable requirement"
+          }
+        },
+        {
+          "id": "P19-computation",
+          "title": {
+            "zh": "把模型交给SciPy，也保留对计算的理解",
+            "en": "Use SciPy while keeping the calculation understandable"
+          }
+        },
+        {
+          "id": "P19-run",
+          "title": {
+            "zh": "运行完整例子，再读曲线留下的偏差",
+            "en": "Run the complete example and inspect what the curve leaves behind"
+          }
+        },
+        {
+          "id": "P19-profile-analysis",
+          "title": {
+            "zh": "为什么延长观测时间有时比增加点数更有用",
+            "en": "Why a longer observation interval can add different information"
+          }
+        },
+        {
+          "id": "P19-lab-reading",
+          "title": {
+            "zh": "同时观察曲线、残差和误差地形",
+            "en": "Read the curve, residuals, and error landscape together"
+          }
+        },
+        {
+          "id": "P19-next",
+          "title": {
+            "zh": "让拟合结果回到实验问题",
+            "en": "Return the fitted numbers to the experimental question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P18",
+        "next": "P20"
+      },
+      "prerequisites": [
+        "P10",
+        "P15"
+      ]
+    },
+    {
+      "id": "P20",
+      "title": {
+        "zh": "平滑之后，峰还在吗：SciPy信号处理",
+        "en": "Is the Peak Still There? Signal Processing with SciPy"
+      },
+      "standfirst": {
+        "zh": "把采样、局部拟合、峰定位和频率响应连起来，检查平滑对信号形状的影响。",
+        "en": "Connect sampling, local fitting, peak detection, and frequency response to inspect how smoothing changes a signal."
+      },
+      "category": "python-tutorials",
+      "group": "科学计算",
+      "keywords": [
+        "SciPy",
+        "Savitzky–Golay",
+        "采样",
+        "滤波",
+        "峰"
+      ],
+      "sections": [
+        {
+          "id": "P20-question",
+          "title": {
+            "zh": "曲线变平滑之后，峰还在原来的位置吗",
+            "en": "After smoothing, is the peak still in the same place?"
+          }
+        },
+        {
+          "id": "P20-sampling",
+          "title": {
+            "zh": "先看采样间隔，再讨论窗口大小",
+            "en": "Read the sampling interval before choosing a window"
+          }
+        },
+        {
+          "id": "P20-model",
+          "title": {
+            "zh": "构造一条每个部分都能解释的教学信号",
+            "en": "Build a signal whose components can be explained"
+          }
+        },
+        {
+          "id": "P20-history",
+          "title": {
+            "zh": "从平均附近数值，到保留局部曲率",
+            "en": "From averaging neighbors to preserving local curvature"
+          }
+        },
+        {
+          "id": "P20-boundary",
+          "title": {
+            "zh": "窗口走到边界时，计算需要什么信息",
+            "en": "What information does a window need at a boundary?"
+          }
+        },
+        {
+          "id": "P20-peaks",
+          "title": {
+            "zh": "平滑之后再定位峰，仍要保留明确的判据",
+            "en": "Locate peaks with explicit criteria after smoothing"
+          }
+        },
+        {
+          "id": "P20-frequency",
+          "title": {
+            "zh": "从频率看窗口：它保留哪些变化速度",
+            "en": "Read a window as a selector of variation rates"
+          }
+        },
+        {
+          "id": "P20-code",
+          "title": {
+            "zh": "完整程序与联动实验：从权重追到最终曲线",
+            "en": "A complete program and a linked experiment"
+          }
+        },
+        {
+          "id": "P20-transfer",
+          "title": {
+            "zh": "把处理参数写成能够复现的分析条件",
+            "en": "Describe processing parameters as reproducible conditions"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P19",
+        "next": "P21"
+      },
+      "prerequisites": [
+        "P08",
+        "P16"
+      ]
+    },
+    {
+      "id": "P21",
+      "title": {
+        "zh": "用积分和微分方程描述变化",
+        "en": "Describing Change with Integrals and Differential Equations"
+      },
+      "standfirst": {
+        "zh": "从三种状态之间的转化，理解变化率、小步推进、守恒和累计面积。",
+        "en": "Use a three-state conversion to understand rates, numerical steps, conservation, and accumulated area."
+      },
+      "category": "python-tutorials",
+      "group": "科学计算",
+      "keywords": [
+        "SciPy",
+        "solve_ivp",
+        "quad",
+        "Euler",
+        "integration"
+      ],
+      "sections": [
+        {
+          "id": "P21-question",
+          "title": {
+            "zh": "一种物质经过中间态，什么时候最适合观察",
+            "en": "When should an intermediate state be observed?"
+          }
+        },
+        {
+          "id": "P21-rates",
+          "title": {
+            "zh": "变化率是每分钟改变多少，方程先记录流向",
+            "en": "Rates describe change per minute; the equations record the flows"
+          }
+        },
+        {
+          "id": "P21-history",
+          "title": {
+            "zh": "从当前斜率向前走：把连续变化变成可计算的小步",
+            "en": "Advance along the current slope, then calculate it again"
+          }
+        },
+        {
+          "id": "P21-solver",
+          "title": {
+            "zh": "让求解器选择小步，自己明确初值和输出时刻",
+            "en": "Let the solver choose its steps; specify the initial state and output times"
+          }
+        },
+        {
+          "id": "P21-checks",
+          "title": {
+            "zh": "总量正确以后，还要看每个分数是否合理",
+            "en": "A correct total is one check; each fraction also has a meaning"
+          }
+        },
+        {
+          "id": "P21-area",
+          "title": {
+            "zh": "曲线下的面积，把数量和持续时间一起累计",
+            "en": "Area accumulates an amount together with its duration"
+          }
+        },
+        {
+          "id": "P21-code",
+          "title": {
+            "zh": "完整程序：把模型、数值算法与核对答案放在一起",
+            "en": "A complete program with a model, an algorithm, and an independent answer"
+          }
+        },
+        {
+          "id": "P21-experiment",
+          "title": {
+            "zh": "联动实验：改变速度和步长，观察三项检查怎样分开",
+            "en": "Change the rate and step size, then compare the checks"
+          }
+        },
+        {
+          "id": "P21-transfer",
+          "title": {
+            "zh": "把变化问题交给计算机前，先把量和条件放稳",
+            "en": "Establish quantities and conditions before choosing solver settings"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P20",
+        "next": "P22"
+      },
+      "prerequisites": [
+        "P04",
+        "P08",
+        "P19"
+      ]
+    },
+    {
+      "id": "P22",
+      "title": {
+        "zh": "从有限样本走向统计判断",
+        "en": "Statistical Reasoning from Finite Samples"
+      },
+      "standfirst": {
+        "zh": "把原始读数、抽样均值和置信区间放在同一组可追踪数据里。",
+        "en": "Connect observations, sampling distributions, and confidence intervals through the same traceable data."
+      },
+      "category": "python-tutorials",
+      "group": "科学计算",
+      "keywords": [
+        "SciPy",
+        "stats",
+        "confidence interval",
+        "Student t",
+        "sampling"
+      ],
+      "sections": [
+        {
+          "id": "P22-question",
+          "title": {
+            "zh": "测完十个试样以后，怎样描述还没有测到的那一批",
+            "en": "What do ten measured specimens tell us about the rest?"
+          }
+        },
+        {
+          "id": "P22-unit",
+          "title": {
+            "zh": "先确定一个样本点究竟代表什么",
+            "en": "Decide what one observation represents"
+          }
+        },
+        {
+          "id": "P22-spread",
+          "title": {
+            "zh": "标准差描述试样，标准误描述均值的波动",
+            "en": "Standard deviation describes specimens; standard error describes a mean"
+          }
+        },
+        {
+          "id": "P22-history",
+          "title": {
+            "zh": "Student的小样本问题：连波动大小也是估出来的",
+            "en": "Student's small-sample problem: the spread is estimated too"
+          }
+        },
+        {
+          "id": "P22-interval",
+          "title": {
+            "zh": "置信区间是一套重复使用的估计规则",
+            "en": "A confidence interval is a rule used across repeated samples"
+          }
+        },
+        {
+          "id": "P22-test",
+          "title": {
+            "zh": "把均值与一个具体参考值比较",
+            "en": "Compare a mean with a specified reference"
+          }
+        },
+        {
+          "id": "P22-code",
+          "title": {
+            "zh": "完整程序：每个区间都能追到它自己的样本",
+            "en": "A complete program that connects every interval to its sample"
+          }
+        },
+        {
+          "id": "P22-experiment",
+          "title": {
+            "zh": "联动查看一个样本、它的均值和它的区间",
+            "en": "Link a sample, its mean, and its confidence interval"
+          }
+        },
+        {
+          "id": "P22-transfer",
+          "title": {
+            "zh": "把统计结果写回研究问题",
+            "en": "Write the statistical result back into the scientific question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P21",
+        "next": "P23"
+      },
+      "prerequisites": [
+        "P09",
+        "P17"
+      ]
+    },
+    {
+      "id": "P23",
+      "title": {
+        "zh": "回归系数、实验批次与模型诊断",
+        "en": "Regression, Experimental Batches, and Model Diagnostics"
+      },
+      "standfirst": {
+        "zh": "在18个可追踪读数中，分开组内趋势、批次高度和单点影响。",
+        "en": "Separate within-batch trends, batch baselines, and single-observation influence in eighteen traceable readings."
+      },
+      "category": "python-tutorials",
+      "group": "科学计算",
+      "keywords": [
+        "statsmodels",
+        "OLS",
+        "batch",
+        "residuals",
+        "influence"
+      ],
+      "sections": [
+        {
+          "id": "P23-question",
+          "title": {
+            "zh": "每个批次都在上升，合在一起怎么反而下降",
+            "en": "Why can two increasing batches produce a decreasing pooled trend?"
+          }
+        },
+        {
+          "id": "P23-history",
+          "title": {
+            "zh": "科学史中的汇总问题，在散点图里也会出现",
+            "en": "The historical aggregation problem also appears in scatterplots"
+          }
+        },
+        {
+          "id": "P23-model-reasoning",
+          "title": {
+            "zh": "为浓度和批次各留一列，让系数有明确单位",
+            "en": "Give concentration and batch separate columns and explicit units"
+          }
+        },
+        {
+          "id": "P23-fit",
+          "title": {
+            "zh": "公式接口把问题变成矩阵，拟合让残差平方和最小",
+            "en": "The formula becomes a matrix; fitting minimizes squared residuals"
+          }
+        },
+        {
+          "id": "P23-centered",
+          "title": {
+            "zh": "减去批次均值，亲眼看见“保持批次相同”的比较",
+            "en": "Subtract batch means to see the within-batch comparison"
+          }
+        },
+        {
+          "id": "P23-diagnostics",
+          "title": {
+            "zh": "残差找结构，影响度找值得追查的读数",
+            "en": "Residuals reveal structure; influence identifies records to investigate"
+          }
+        },
+        {
+          "id": "P23-code",
+          "title": {
+            "zh": "完整程序：读出有名字的系数，而不是搬运整张摘要",
+            "en": "A complete program with named coefficients and traceable diagnostics"
+          }
+        },
+        {
+          "id": "P23-experiment",
+          "title": {
+            "zh": "联动实验：改变批次高度，再追踪一个点的影响",
+            "en": "Move a batch, then trace the effect of one observation"
+          }
+        },
+        {
+          "id": "P23-transfer",
+          "title": {
+            "zh": "一条回归结论，应当说明比较发生在什么条件下",
+            "en": "A regression statement should identify the conditions of comparison"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P22",
+        "next": "P24"
+      },
+      "prerequisites": [
+        "P10",
+        "P13",
+        "P19",
+        "P22"
+      ]
+    },
+    {
+      "id": "P24",
+      "title": {
+        "zh": "让数学推导连接数值计算",
+        "en": "Connecting Symbolic Mathematics to Numerical Computation"
+      },
+      "standfirst": {
+        "zh": "从弹性储能出发，用SymPy推导力与刚度，再看精确公式怎样解释数值误差。",
+        "en": "Derive force and stiffness from elastic energy with SymPy, then use exact algebra to understand numerical error."
+      },
+      "category": "python-tutorials",
+      "group": "科学计算",
+      "keywords": [
+        "SymPy",
+        "symbolic",
+        "derivative",
+        "lambdify",
+        "finite difference"
+      ],
+      "sections": [
+        {
+          "id": "P24-purpose",
+          "title": {
+            "zh": "从拉长一根弹性元件开始",
+            "en": "Begin with an elastic element in your hand"
+          }
+        },
+        {
+          "id": "P24-energy-reasoning",
+          "title": {
+            "zh": "先把能量、位移和单位放在一起",
+            "en": "Put energy, displacement, and units together"
+          }
+        },
+        {
+          "id": "P24-force-reasoning",
+          "title": {
+            "zh": "曲线的斜率为什么就是力",
+            "en": "Why the slope of energy gives force"
+          }
+        },
+        {
+          "id": "P24-symbols-reasoning",
+          "title": {
+            "zh": "让字母保留含义，让分数保留精确值",
+            "en": "Keep the letters meaningful and the fractions exact"
+          }
+        },
+        {
+          "id": "P24-history-reasoning",
+          "title": {
+            "zh": "公式怎样成为计算机可以改写的对象",
+            "en": "How a formula becomes something a computer can transform"
+          }
+        },
+        {
+          "id": "P24-numeric-bridge",
+          "title": {
+            "zh": "从推导结果走到一整条数值曲线",
+            "en": "Turn a derived expression into a numerical curve"
+          }
+        },
+        {
+          "id": "P24-difference-reasoning",
+          "title": {
+            "zh": "为什么差分步长不能一味缩小",
+            "en": "Why the smallest difference step is not always the best"
+          }
+        },
+        {
+          "id": "P24-code-reasoning",
+          "title": {
+            "zh": "完整程序：推导、求解、导出和作图",
+            "en": "A complete program from derivation to figures"
+          }
+        },
+        {
+          "id": "P24-lab-reasoning",
+          "title": {
+            "zh": "联动观察：能量曲线、力和计算误差",
+            "en": "Explore energy, force, and calculation error together"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P23",
+        "next": "P25"
+      },
+      "prerequisites": [
+        "P06",
+        "P09",
+        "P15"
+      ]
+    },
+    {
+      "id": "P25",
+      "title": {
+        "zh": "从公开接口获取可追溯的数据",
+        "en": "Retrieving Traceable Data from Public APIs"
+      },
+      "standfirst": {
+        "zh": "从四个蛋白质数据库条目出发，把网址、嵌套 JSON、科学含义与可重复的数据表连接起来。",
+        "en": "Connect URLs, nested JSON, scientific meaning, and reproducible tables through four Protein Data Bank entries."
+      },
+      "category": "python-tutorials",
+      "group": "科研工作流",
+      "keywords": [
+        "Requests",
+        "HTTP",
+        "JSON",
+        "PDB",
+        "provenance",
+        "missing data"
+      ],
+      "sections": [
+        {
+          "id": "purpose",
+          "title": {
+            "zh": "一张结构表，是怎样从数据库来到电脑里的",
+            "en": "How a structure table travels from a database to your computer"
+          }
+        },
+        {
+          "id": "archive",
+          "title": {
+            "zh": "从共享坐标到可以连接的数据记录",
+            "en": "From shared coordinates to connected scientific records"
+          }
+        },
+        {
+          "id": "http-json",
+          "title": {
+            "zh": "把一次请求拆成能够检查的步骤",
+            "en": "Separate a request into steps you can inspect"
+          }
+        },
+        {
+          "id": "program",
+          "title": {
+            "zh": "完整示例：先保留原始记录，再生成分析表",
+            "en": "A complete example: preserve the response before making the table"
+          }
+        },
+        {
+          "id": "meaning",
+          "title": {
+            "zh": "空值也有科学含义：怎样比较四条记录",
+            "en": "A missing value can carry scientific meaning"
+          }
+        },
+        {
+          "id": "inspect",
+          "title": {
+            "zh": "沿着字段路径，查看同一个数值的三种表示",
+            "en": "Follow one value through its record, field, and plot"
+          }
+        },
+        {
+          "id": "trace",
+          "title": {
+            "zh": "让下一次分析仍然找得到这一次的输入",
+            "en": "Keep the inputs available for the next analysis"
+          }
+        },
+        {
+          "id": "practice",
+          "title": {
+            "zh": "把这个小流程扩展成自己的数据入口",
+            "en": "Develop this workflow into your own data entrance"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P24",
+        "next": "P26"
+      },
+      "prerequisites": [
+        "P03",
+        "P05",
+        "P11"
+      ]
+    },
+    {
+      "id": "P26",
+      "title": {
+        "zh": "把实验结果做成可用的 Excel 报告",
+        "en": "Building a Useful Excel Report from Results"
+      },
+      "standfirst": {
+        "zh": "用带公式、单位、参数与图表的工作簿，把一次图像测量交到下一位读者手中。",
+        "en": "Turn an image measurement into a workbook with formulas, units, parameters, and charts that another reader can use."
+      },
+      "category": "python-tutorials",
+      "group": "科研工作流",
+      "keywords": [
+        "Excel",
+        "XlsxWriter",
+        "openpyxl",
+        "formulas",
+        "calibration",
+        "reports"
+      ],
+      "sections": [
+        {
+          "id": "purpose",
+          "title": {
+            "zh": "一份报告要让下一位读者接得住",
+            "en": "A report should support its next reader's work"
+          }
+        },
+        {
+          "id": "history",
+          "title": {
+            "zh": "电子表格的价值，在于看得见的计算关系",
+            "en": "The useful feature of a spreadsheet is a visible dependency"
+          }
+        },
+        {
+          "id": "structure",
+          "title": {
+            "zh": "先确定每一行是什么，再设计三个工作表",
+            "en": "Define the row before designing the worksheets"
+          }
+        },
+        {
+          "id": "formula",
+          "title": {
+            "zh": "写下公式，同时解释公式怎样依赖输入",
+            "en": "Write formulas that expose their inputs"
+          }
+        },
+        {
+          "id": "program",
+          "title": {
+            "zh": "完整程序：生成带公式和图表的工作簿",
+            "en": "The complete program: formulas, typed values, and a chart"
+          }
+        },
+        {
+          "id": "stored",
+          "title": {
+            "zh": "公式、保存的结果和重新计算，分别发生在哪里",
+            "en": "Distinguish the formula, the saved value, and recalculation"
+          }
+        },
+        {
+          "id": "lab",
+          "title": {
+            "zh": "在一个视图里观察标定、公式和结果",
+            "en": "Inspect calibration, formulas, and results together"
+          }
+        },
+        {
+          "id": "reuse",
+          "title": {
+            "zh": "从一次导出走向稳定的报告模板",
+            "en": "Develop a stable report template"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P25",
+        "next": "P27"
+      },
+      "prerequisites": [
+        "P05",
+        "P11",
+        "S01"
+      ]
+    },
+    {
+      "id": "P27",
+      "title": {
+        "zh": "让分析程序经得起检查与复用",
+        "en": "Making Analysis Programs Testable and Reusable"
+      },
+      "standfirst": {
+        "zh": "用能够手算的几何对象、明确的输入定义和实际执行的测试，让一次面积计算成为可复用的科学工具。",
+        "en": "Use hand-checkable geometry, explicit input definitions, and executed tests to make an area calculation reusable."
+      },
+      "category": "python-tutorials",
+      "group": "科研工作流",
+      "keywords": [
+        "pytest",
+        "unit tests",
+        "geometry",
+        "validation",
+        "floating point",
+        "reproducibility"
+      ],
+      "sections": [
+        {
+          "id": "purpose",
+          "title": {
+            "zh": "下一次改代码时，怎样知道原来的计算仍然成立",
+            "en": "How can the original calculation remain valid after an edit?"
+          }
+        },
+        {
+          "id": "contract",
+          "title": {
+            "zh": "把函数的输入与输出说清楚",
+            "en": "Define the inputs and outputs"
+          }
+        },
+        {
+          "id": "geometry",
+          "title": {
+            "zh": "先准备一个能独立算答案的对象",
+            "en": "Prepare an object with an independent answer"
+          }
+        },
+        {
+          "id": "framework",
+          "title": {
+            "zh": "测试框架怎样把一次检查变成长期保留的能力",
+            "en": "Retain a check as a repeatable object"
+          }
+        },
+        {
+          "id": "invariants",
+          "title": {
+            "zh": "用几何规律补充单个算例",
+            "en": "Add geometric relationships to individual examples"
+          }
+        },
+        {
+          "id": "diagnosis",
+          "title": {
+            "zh": "看清一组测试究竟发现了什么",
+            "en": "Inspect what a collection of tests detects"
+          }
+        },
+        {
+          "id": "run",
+          "title": {
+            "zh": "完整运行：执行检查，生成诊断结果",
+            "en": "Run the checks and generate the diagnostic results"
+          }
+        },
+        {
+          "id": "reuse",
+          "title": {
+            "zh": "让测试随着研究问题一起发展",
+            "en": "Let the tests develop with the research question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P26",
+        "next": "P28"
+      },
+      "prerequisites": [
+        "P04",
+        "P07",
+        "P26"
+      ]
+    },
+    {
+      "id": "P28",
+      "title": {
+        "zh": "找到耗时在哪里，再提高效率",
+        "en": "Finding and Improving Performance Bottlenecks"
+      },
+      "standfirst": {
+        "zh": "用同一个邻近对计数问题，比较真实耗时、数组形状和内存，再判断局部提速能改变多少整体工作。",
+        "en": "Use one neighbor-pair problem to connect measured time, array shapes, memory, and the effect of a local improvement on the whole task."
+      },
+      "category": "python-tutorials",
+      "group": "科研工作流",
+      "keywords": [
+        "timeit",
+        "cProfile",
+        "tracemalloc",
+        "NumPy",
+        "broadcasting",
+        "blocking",
+        "Amdahl"
+      ],
+      "sections": [
+        {
+          "id": "purpose",
+          "title": {
+            "zh": "让一次科学计算更快，需要先看它在做什么",
+            "en": "Understand the work before making it faster"
+          }
+        },
+        {
+          "id": "problem",
+          "title": {
+            "zh": "先固定计数规则，才能比较不同写法",
+            "en": "Fix the counting definition before comparing implementations"
+          }
+        },
+        {
+          "id": "measurement",
+          "title": {
+            "zh": "区分定位耗时与测量速度",
+            "en": "Distinguish locating expensive work from timing implementations"
+          }
+        },
+        {
+          "id": "arrays",
+          "title": {
+            "zh": "广播把循环移到哪里，产生了什么数组",
+            "en": "Follow broadcasting through the array shapes"
+          }
+        },
+        {
+          "id": "memory",
+          "title": {
+            "zh": "分块：在保留计算定义的同时控制工作空间",
+            "en": "Control working space with blocks"
+          }
+        },
+        {
+          "id": "history",
+          "title": {
+            "zh": "Amdahl 的问题：局部快十倍，整体会怎样",
+            "en": "Amdahl's question: what does a local tenfold improvement change?"
+          }
+        },
+        {
+          "id": "program",
+          "title": {
+            "zh": "完整程序：保留计时记录、内存结果与数值检查",
+            "en": "Keep timing records, memory measurements, and numerical checks"
+          }
+        },
+        {
+          "id": "lab",
+          "title": {
+            "zh": "在点对矩阵中看见分块，再选择下一步改进",
+            "en": "See the blocks inside the pair matrix"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P27",
+        "next": "P29"
+      },
+      "prerequisites": [
+        "P07",
+        "P08",
+        "P27"
+      ]
+    },
+    {
+      "id": "P29",
+      "title": {
+        "zh": "从材料实验表格走到可复查的结论",
+        "en": "From Materials Observations to an Inspectable Analysis"
+      },
+      "standfirst": {
+        "zh": "用真实吸附数据连接表格、参数、残差和下一轮测量，比较模型形状与压力覆盖的影响。",
+        "en": "Connect real adsorption observations to parameters, residuals, and further measurements; compare model shape and pressure coverage."
+      },
+      "category": "python-tutorials",
+      "group": "综合项目",
+      "keywords": [
+        "pandas",
+        "SciPy",
+        "adsorption",
+        "nonlinear least squares",
+        "residuals",
+        "uncertainty"
+      ],
+      "sections": [
+        {
+          "id": "question",
+          "title": {
+            "zh": "一张吸附曲线，怎样变成可复查的材料结论",
+            "en": "Turning an adsorption curve into an inspectable materials result"
+          }
+        },
+        {
+          "id": "table",
+          "title": {
+            "zh": "先看清一行数据究竟记录了什么",
+            "en": "Establishing what one row actually records"
+          }
+        },
+        {
+          "id": "models",
+          "title": {
+            "zh": "从表面位点到函数：两种“逐渐饱和”并不相同",
+            "en": "From surface sites to equations: two different routes toward saturation"
+          }
+        },
+        {
+          "id": "estimate",
+          "title": {
+            "zh": "让全部观测共同决定参数",
+            "en": "Letting all observations determine the parameters"
+          }
+        },
+        {
+          "id": "program",
+          "title": {
+            "zh": "运行完整项目，并追踪一个数值的来路",
+            "en": "Running the project and following one number"
+          }
+        },
+        {
+          "id": "uncertainty",
+          "title": {
+            "zh": "好看的曲线之后，还要读残差与参数关系",
+            "en": "Reading residuals and relationships between parameters"
+          }
+        },
+        {
+          "id": "coverage",
+          "title": {
+            "zh": "逐步扩大压力范围，观察容量估计怎样变化",
+            "en": "Expanding the pressure range and watching capacity change"
+          }
+        },
+        {
+          "id": "report",
+          "title": {
+            "zh": "把项目整理成别人能够接着使用的结果",
+            "en": "Preparing a result that another analysis can build on"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P28",
+        "next": "P30"
+      },
+      "prerequisites": [
+        "P11",
+        "P16",
+        "P19",
+        "P22"
+      ]
+    },
+    {
+      "id": "P30",
+      "title": {
+        "zh": "把模拟输出变成可比较的结果",
+        "en": "Turning Simulation Outputs into Comparable Results"
+      },
+      "standfirst": {
+        "zh": "以有解析解的振子为参照，对齐八份轨迹，联动比较位置、能量、精度与计算步数。",
+        "en": "Use an exactly solvable oscillator to align eight trajectories and compare position, energy, accuracy, and update counts."
+      },
+      "category": "python-tutorials",
+      "group": "综合项目",
+      "keywords": [
+        "simulation",
+        "pandas",
+        "NumPy",
+        "Verlet",
+        "convergence",
+        "energy",
+        "time alignment"
+      ],
+      "sections": [
+        {
+          "id": "comparison",
+          "title": {
+            "zh": "两份轨迹，怎样才算在比较同一个过程",
+            "en": "When do two trajectories represent a fair comparison?"
+          }
+        },
+        {
+          "id": "oscillator",
+          "title": {
+            "zh": "从弹簧的方向感理解运动与解析参照",
+            "en": "Understanding motion from the direction of the spring force"
+          }
+        },
+        {
+          "id": "integrators",
+          "title": {
+            "zh": "同样的力，怎样走出两种数值轨迹",
+            "en": "How the same force produces different numerical trajectories"
+          }
+        },
+        {
+          "id": "alignment",
+          "title": {
+            "zh": "比较物理时间，而不是文件里的行号",
+            "en": "Comparing physical time instead of row number"
+          }
+        },
+        {
+          "id": "implementation",
+          "title": {
+            "zh": "完整程序：先产生输出，再从输出计算结果",
+            "en": "The complete program: write outputs, then analyze the outputs"
+          }
+        },
+        {
+          "id": "diagnostics",
+          "title": {
+            "zh": "能量、轨迹误差和工作量各自回答什么",
+            "en": "What energy, trajectory error, and work each tell us"
+          }
+        },
+        {
+          "id": "experiment",
+          "title": {
+            "zh": "同步观察位置、相空间和能量",
+            "en": "Following position, phase space, and energy together"
+          }
+        },
+        {
+          "id": "reuse",
+          "title": {
+            "zh": "把比较方法带到更大的模拟项目",
+            "en": "Carrying the comparison into a larger simulation project"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P29",
+        "next": "S01"
+      },
+      "prerequisites": [
+        "P13",
+        "P16",
+        "P21",
+        "P27"
+      ]
+    },
+    {
+      "id": "S01",
+      "title": {
+        "zh": "从显微图像测量结构",
+        "en": "Measuring Structure in Microscopy Images"
+      },
+      "standfirst": {
+        "zh": "把一幅真实细胞相位图变成有单位、有边界定义、能追问参数影响的面积测量。",
+        "en": "Turn a real cell phase image into an area measurement with physical units, an explicit boundary, and inspectable parameter effects."
+      },
+      "category": "python-tutorials",
+      "group": "科研专题",
+      "keywords": [
+        "scikit-image",
+        "microscopy",
+        "segmentation",
+        "Otsu",
+        "calibration",
+        "regionprops"
+      ],
+      "sections": [
+        {
+          "id": "question",
+          "title": {
+            "zh": "显微镜里的大小，怎样变成可以比较的数字",
+            "en": "How does a microscopic size become a comparable number?"
+          }
+        },
+        {
+          "id": "array",
+          "title": {
+            "zh": "先把图像读成一张有位置的数表",
+            "en": "Read the image as a table of values with positions"
+          }
+        },
+        {
+          "id": "threshold",
+          "title": {
+            "zh": "从人工划线到 Otsu：怎样选择一个灰度界限",
+            "en": "From drawing a boundary to Otsu's threshold"
+          }
+        },
+        {
+          "id": "regions",
+          "title": {
+            "zh": "哪些像素属于同一个对象，孔洞又该怎样处理",
+            "en": "Decide which pixels belong together and how to treat holes"
+          }
+        },
+        {
+          "id": "units",
+          "title": {
+            "zh": "从像素计数走到面积与等效直径",
+            "en": "Convert pixel counts into area and equivalent diameter"
+          }
+        },
+        {
+          "id": "program",
+          "title": {
+            "zh": "完整 Python 程序与能够逐项核对的输出",
+            "en": "The complete Python program and inspectable outputs"
+          }
+        },
+        {
+          "id": "sensitivity",
+          "title": {
+            "zh": "把参数影响画出来，判断一个结果稳不稳定",
+            "en": "Plot parameter effects to assess a measurement"
+          }
+        },
+        {
+          "id": "extend",
+          "title": {
+            "zh": "把单个区域的测量扩展到自己的图像",
+            "en": "Extend one-region measurement to your own images"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P30",
+        "next": "S02"
+      },
+      "prerequisites": [
+        "P11",
+        "P12",
+        "P16"
+      ]
+    },
+    {
+      "id": "S02",
+      "title": {
+        "zh": "把材料连接关系写成图",
+        "en": "Representing Material Connectivity as a Graph"
+      },
+      "standfirst": {
+        "zh": "从节点与边到连接、最短路和电流守恒，比较断开与备用连接怎样改变材料网络。",
+        "en": "Connect nodes and edges to reachability, shortest routes, and current balance; compare edge loss and redundant connections."
+      },
+      "category": "python-tutorials",
+      "group": "科研专题",
+      "keywords": [
+        "NetworkX",
+        "graph",
+        "connectivity",
+        "Laplacian",
+        "conductance",
+        "bridges"
+      ],
+      "sections": [
+        {
+          "id": "why",
+          "title": {
+            "zh": "材料里的连接，为什么值得单独研究",
+            "en": "Why study a material’s connections separately?"
+          }
+        },
+        {
+          "id": "history",
+          "title": {
+            "zh": "从七座桥到图：保留解决问题需要的信息",
+            "en": "From seven bridges to a graph: preserving the relevant information"
+          }
+        },
+        {
+          "id": "representation",
+          "title": {
+            "zh": "用节点表与边表把材料写清楚",
+            "en": "Describing the material with node and edge tables"
+          }
+        },
+        {
+          "id": "paths",
+          "title": {
+            "zh": "先问是否相通，再问哪条路最短",
+            "en": "Ask whether a route exists before asking which is shortest"
+          }
+        },
+        {
+          "id": "current",
+          "title": {
+            "zh": "让电流守恒，把连接图变成可求解的物理模型",
+            "en": "Using current conservation to make a physical graph model"
+          }
+        },
+        {
+          "id": "program",
+          "title": {
+            "zh": "运行完整例子，比较每一种单边移除",
+            "en": "Running the example and comparing every single-edge removal"
+          }
+        },
+        {
+          "id": "changes",
+          "title": {
+            "zh": "同样少一条边，影响为何差这么多",
+            "en": "Why can removing one edge have very different effects?"
+          }
+        },
+        {
+          "id": "applications",
+          "title": {
+            "zh": "从教学图走向显微结构与材料问题",
+            "en": "Moving from a teaching graph to microscopy and materials"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S01",
+        "next": "S03"
+      },
+      "prerequisites": [
+        "P03",
+        "P07",
+        "P10"
+      ]
+    },
+    {
+      "id": "S03",
+      "title": {
+        "zh": "组织有名字的多维实验数据",
+        "en": "Organizing Labeled Multidimensional Data"
+      },
+      "standfirst": {
+        "zh": "用温度场理解坐标对齐、缺失覆盖与HDF5分块，让每个数值保留它的物理位置和单位。",
+        "en": "Use thermal fields to understand coordinate alignment, missing coverage, and HDF5 chunks while preserving location and units."
+      },
+      "category": "python-tutorials",
+      "group": "科研专题",
+      "keywords": [
+        "xarray",
+        "h5py",
+        "HDF5",
+        "dimension scales",
+        "chunking",
+        "missing data",
+        "diffusion"
+      ],
+      "sections": [
+        {
+          "id": "problem",
+          "title": {
+            "zh": "四个轴都有名字，分析才知道沿哪里进行",
+            "en": "Named axes let an analysis know where to operate"
+          }
+        },
+        {
+          "id": "field",
+          "title": {
+            "zh": "先给温度场一个可以解释的变化规律",
+            "en": "Giving the temperature field an interpretable evolution"
+          }
+        },
+        {
+          "id": "labels",
+          "title": {
+            "zh": "维度、坐标、属性分别解决哪一个问题",
+            "en": "What dimensions, coordinates, and attributes each contribute"
+          }
+        },
+        {
+          "id": "alignment",
+          "title": {
+            "zh": "坐标对齐与缺失值，会直接改变科学结论",
+            "en": "Coordinate alignment and missing values change the meaning of results"
+          }
+        },
+        {
+          "id": "storage",
+          "title": {
+            "zh": "把坐标与数值一起存下来，而不依赖记忆",
+            "en": "Saving coordinates together with values"
+          }
+        },
+        {
+          "id": "chunks",
+          "title": {
+            "zh": "存储块怎样影响“我只想看这一小部分”",
+            "en": "How storage chunks affect a request for a small part"
+          }
+        },
+        {
+          "id": "code",
+          "title": {
+            "zh": "完整例子与同步的数据探索",
+            "en": "The full example and synchronized exploration"
+          }
+        },
+        {
+          "id": "practice",
+          "title": {
+            "zh": "把有名字的数据组织方式带进实际研究",
+            "en": "Bringing labeled organization into research data"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S02",
+        "next": "S04"
+      },
+      "prerequisites": [
+        "P07",
+        "P08",
+        "P11"
+      ]
+    },
+    {
+      "id": "S04",
+      "title": {
+        "zh": "从分子字符串到化学结构表",
+        "en": "From Molecular Strings to Chemical Structure Tables"
+      },
+      "standfirst": {
+        "zh": "用 RDKit 追踪原子、核对质量，并区分字符串、构型与化学身份。",
+        "en": "Trace atoms, verify masses, and distinguish text, stereochemistry, and molecular identity with RDKit."
+      },
+      "category": "python-tutorials",
+      "group": "科研专题",
+      "keywords": [
+        "RDKit",
+        "SMILES",
+        "SMARTS",
+        "molecular identity",
+        "stereochemistry"
+      ],
+      "sections": [
+        {
+          "id": "S04-question",
+          "title": {
+            "zh": "一张分子表，先要知道每一行是谁",
+            "en": "A molecular table starts with knowing what each row represents"
+          }
+        },
+        {
+          "id": "S04-graph",
+          "title": {
+            "zh": "读懂 SMILES：括号、环和省略的氢",
+            "en": "Reading SMILES: branches, rings, and omitted hydrogens"
+          }
+        },
+        {
+          "id": "S04-validation",
+          "title": {
+            "zh": "从输入记录到可追踪的结构表",
+            "en": "From an input record to a traceable structure table"
+          }
+        },
+        {
+          "id": "S04-mass",
+          "title": {
+            "zh": "先用能手算的质量，检查自动生成的描述符",
+            "en": "Check automatic descriptors with a mass you can calculate by hand"
+          }
+        },
+        {
+          "id": "S04-identity",
+          "title": {
+            "zh": "相同质量，还要继续看构型、电荷和分组规则",
+            "en": "Equal mass still leaves configuration, charge, and grouping to examine"
+          }
+        },
+        {
+          "id": "S04-code",
+          "title": {
+            "zh": "完整程序：保留记录，再逐层生成结果",
+            "en": "The complete program: retain records and build the results in layers"
+          }
+        },
+        {
+          "id": "S04-experiment",
+          "title": {
+            "zh": "把结构、原子表和去重结果放在一起检查",
+            "en": "Inspect the structure, atom table, and grouping together"
+          }
+        },
+        {
+          "id": "S04-lab",
+          "title": {
+            "zh": "结构身份实验台",
+            "en": "Molecular identity workbench"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S03",
+        "next": "S05"
+      },
+      "prerequisites": [
+        "P03",
+        "P04",
+        "P11",
+        "S02"
+      ]
+    },
+    {
+      "id": "S05",
+      "title": {
+        "zh": "让蛋白质序列与结构相互对应",
+        "en": "Connecting Protein Sequences and Structures"
+      },
+      "standfirst": {
+        "zh": "以真实晶体结构的内部缺口为线索，建立从序列位置到坐标、距离和结构比较的完整对应。",
+        "en": "Use an internal gap in a real crystal structure to connect sequence positions with coordinates, distances, and structural comparisons."
+      },
+      "category": "python-tutorials",
+      "group": "科研专题",
+      "keywords": [
+        "Biopython",
+        "PDB",
+        "mmCIF",
+        "sequence",
+        "residue mapping",
+        "contacts"
+      ],
+      "sections": [
+        {
+          "id": "S05-question",
+          "title": {
+            "zh": "序列里的第 64 个氨基酸，为什么在结构里找不到",
+            "en": "Why sequence position 64 can be absent from a structure"
+          }
+        },
+        {
+          "id": "S05-sequence-reading",
+          "title": {
+            "zh": "字母、残基与 Cα：先确定每个对象是什么",
+            "en": "Letters, residues, and Cα: identify the objects first"
+          }
+        },
+        {
+          "id": "S05-map",
+          "title": {
+            "zh": "连接两张表，用位置标识而不是列表行号",
+            "en": "Join by position identifiers, not by list-row numbers"
+          }
+        },
+        {
+          "id": "S05-distance",
+          "title": {
+            "zh": "把三维位置变成可检查的距离与接触",
+            "en": "Turn three-dimensional positions into distances and contacts"
+          }
+        },
+        {
+          "id": "S05-history",
+          "title": {
+            "zh": "同一条序列的不同拷贝，要先对齐再比较",
+            "en": "Align copies of the same sequence before comparing their positions"
+          }
+        },
+        {
+          "id": "S05-code",
+          "title": {
+            "zh": "完整程序：让序列位置贯穿每一步计算",
+            "en": "The complete program carries sequence positions through every calculation"
+          }
+        },
+        {
+          "id": "S05-labsection",
+          "title": {
+            "zh": "沿着一个残基，同时读序列、结构与接触图",
+            "en": "Follow one residue through sequence, structure, and the contact map"
+          }
+        },
+        {
+          "id": "S05-lab",
+          "title": {
+            "zh": "残基对应与接触实验",
+            "en": "Residue correspondence and contact experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S04",
+        "next": "S06"
+      },
+      "prerequisites": [
+        "P03",
+        "P07",
+        "P08",
+        "P11"
+      ]
+    },
+    {
+      "id": "S06",
+      "title": {
+        "zh": "沿着轨迹分析分子的变化",
+        "en": "Analyzing Molecular Change along a Trajectory"
+      },
+      "standfirst": {
+        "zh": "用泛素的实际模拟轨迹分开整体转动与内部变化，在结构、时间曲线和残基波动之间逐项核对。",
+        "en": "Separate global motion from internal change in an actual ubiquitin trajectory, linking structures, time traces, and residue fluctuations."
+      },
+      "category": "python-tutorials",
+      "group": "科研专题",
+      "keywords": [
+        "MDAnalysis",
+        "trajectory",
+        "RMSD",
+        "RMSF",
+        "radius of gyration",
+        "alignment"
+      ],
+      "sections": [
+        {
+          "id": "S06-purpose-section",
+          "title": {
+            "zh": "分子在动，形状也在变吗",
+            "en": "A molecule moves; does its shape change too?"
+          }
+        },
+        {
+          "id": "S06-reading-section",
+          "title": {
+            "zh": "先把原子身份和时间放进同一个对象",
+            "en": "Connect atom identities to a changing time record"
+          }
+        },
+        {
+          "id": "S06-fitting-section",
+          "title": {
+            "zh": "让同一个分子在同一把尺子下比较",
+            "en": "Compare the molecule in a shared frame of reference"
+          }
+        },
+        {
+          "id": "S06-rmsd-section",
+          "title": {
+            "zh": "一个结构差异数值是怎样算出来的",
+            "en": "Build a structural difference from paired coordinates"
+          }
+        },
+        {
+          "id": "S06-size-section",
+          "title": {
+            "zh": "回转半径：质量离中心有多远",
+            "en": "Radius of gyration: where the mass lies"
+          }
+        },
+        {
+          "id": "S06-fluctuation-section",
+          "title": {
+            "zh": "沿着残基编号找出局部活动",
+            "en": "Locate motion along the residue sequence"
+          }
+        },
+        {
+          "id": "S06-code-section",
+          "title": {
+            "zh": "完整程序：从读取到结果表和组图",
+            "en": "A complete program from trajectory to tables and figures"
+          }
+        },
+        {
+          "id": "S06-explore-section",
+          "title": {
+            "zh": "沿着同一帧，在结构和曲线之间来回查看",
+            "en": "Follow the same frame through structures and curves"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S05",
+        "next": "S07"
+      },
+      "prerequisites": [
+        "P07",
+        "P08",
+        "P10",
+        "S05"
+      ]
+    },
+    {
+      "id": "S07",
+      "title": {
+        "zh": "看清三维数据内部的结构",
+        "en": "Seeing Inside Three-Dimensional Scientific Data"
+      },
+      "standfirst": {
+        "zh": "从空间采样到等值面、内部切片与体积测量，用PyVista把三维形状与可核对的几何量连接起来。",
+        "en": "Connect spatial samples, isosurfaces, internal slices, and measurable geometry with PyVista."
+      },
+      "category": "python-tutorials",
+      "group": "科研专题",
+      "keywords": [
+        "PyVista",
+        "VTK",
+        "3D",
+        "isosurface",
+        "slice",
+        "mesh",
+        "Marching Cubes"
+      ],
+      "sections": [
+        {
+          "id": "S07-purpose",
+          "title": {
+            "zh": "看见外表以后，怎样知道里面是什么",
+            "en": "Once the outside is visible, how do we inspect the inside?"
+          }
+        },
+        {
+          "id": "S07-field-reasoning",
+          "title": {
+            "zh": "先给空间中的每个位置一个数",
+            "en": "Assign a number to every position"
+          }
+        },
+        {
+          "id": "S07-grid-reasoning",
+          "title": {
+            "zh": "数组有几个数，空间就有几个格子吗",
+            "en": "Do array values and spatial cells have the same count?"
+          }
+        },
+        {
+          "id": "S07-history-reasoning",
+          "title": {
+            "zh": "八个角点之间，表面究竟从哪里穿过",
+            "en": "Where does the surface cross between eight samples?"
+          }
+        },
+        {
+          "id": "S07-slicing-reasoning",
+          "title": {
+            "zh": "切开体数据，与切开表面，得到的东西不同",
+            "en": "A slice of the field differs from a slice of its surface"
+          }
+        },
+        {
+          "id": "S07-measurement-reasoning",
+          "title": {
+            "zh": "体积和截面积，要有可以核对的答案",
+            "en": "Give volume and area an answer to check against"
+          }
+        },
+        {
+          "id": "S07-convergence-reasoning",
+          "title": {
+            "zh": "用加密采样判断几何结果是否稳定",
+            "en": "Refine samples and inspect geometric convergence"
+          }
+        },
+        {
+          "id": "S07-code-reasoning",
+          "title": {
+            "zh": "完整程序：保存几何，也保存测量依据",
+            "en": "Save the geometry and the basis of its measurements"
+          }
+        },
+        {
+          "id": "S07-lab-reasoning",
+          "title": {
+            "zh": "把阈值、切片高度和网格间距分开试一遍",
+            "en": "Vary threshold, height, and resolution separately"
+          }
+        },
+        {
+          "id": "S07-lab",
+          "title": {
+            "zh": "实验：同一个体数据，三个相互校对的视图",
+            "en": "Experiment: three linked views of one volume dataset"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [
+        "assets/plotly.min.js"
+      ],
+      "neighbors": {
+        "prev": "S06",
+        "next": null
+      },
+      "prerequisites": [
+        "P07",
+        "P10",
+        "P15"
+      ]
+    }
+  ]
+}

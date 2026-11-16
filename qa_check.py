@@ -675,7 +675,10 @@ def run():
     md_courses = molecular_dynamics.load()
     md_entries = molecular_dynamics.entries(md_courses)
     bm_entries = biomaterials_courses.entries(courses)
-    course_entries = bm_entries + md_entries
+    from content_tools import python_scientific
+    python_courses = python_scientific.load()
+    python_entries = python_scientific.entries(python_courses)
+    course_entries = bm_entries + md_entries + python_entries
     indexed_total = total + tutorial_count + len(course_entries)
     en = sum(1 for x in posts if x[0] == "en")
     zh = total - en

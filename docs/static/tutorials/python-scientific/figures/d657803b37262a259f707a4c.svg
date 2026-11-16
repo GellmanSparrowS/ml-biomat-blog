@@ -1,0 +1,468 @@
+<svg role="img" aria-label="原创缓冲区图解：彩色位置属于同一数据，切片保留原40字节行步长，副本采用独立的24字节行步长。" xmlns:xlink="http://www.w3.org/1999/xlink" width="908.39952pt" height="605.99952pt" viewBox="0 0 908.39952 605.99952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="P08-F3-figure_1">
+  <g id="P08-F3-patch_1">
+   <path d="M 0 605.99952 
+L 908.39952 605.99952 
+L 908.39952 0 
+L 0 0 
+z
+" style="fill: #fbfaf6"/>
+  </g>
+  <g id="P08-F3-axes_1">
+   <g id="P08-F3-text_1">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="7.2" y="28.934946" transform="rotate(-0 7.2 28.934946)">数组思想：一个数值缓冲区，多种访问方式</text>
+   </g>
+   <g id="P08-F3-text_2">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="7.2" y="76.027329" transform="rotate(-0 7.2 76.027329)">NumPy作者2020年回顾的核心结构：数值数据与形状、类型、步长分开组织。</text>
+   </g>
+  </g>
+  <g id="P08-F3-axes_2">
+   <g id="P08-F3-patch_2">
+    <path d="M 46.312479 194.32503 
+L 98.834951 194.32503 
+L 98.834951 139.987665 
+L 46.312479 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #28648a; opacity: 0.08; stroke: #28648a; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_3">
+    <path d="M 102.187449 194.32503 
+L 154.709921 194.32503 
+L 154.709921 139.987665 
+L 102.187449 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #28648a; opacity: 0.25; stroke: #28648a; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_4">
+    <path d="M 158.062419 194.32503 
+L 210.584891 194.32503 
+L 210.584891 139.987665 
+L 158.062419 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #28648a; opacity: 0.25; stroke: #28648a; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_5">
+    <path d="M 213.937389 194.32503 
+L 266.459861 194.32503 
+L 266.459861 139.987665 
+L 213.937389 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #28648a; opacity: 0.25; stroke: #28648a; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_6">
+    <path d="M 269.812359 194.32503 
+L 322.334831 194.32503 
+L 322.334831 139.987665 
+L 269.812359 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #28648a; opacity: 0.08; stroke: #28648a; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_7">
+    <path d="M 325.687329 194.32503 
+L 378.209801 194.32503 
+L 378.209801 139.987665 
+L 325.687329 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #b85336; opacity: 0.08; stroke: #b85336; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_8">
+    <path d="M 381.562299 194.32503 
+L 434.084771 194.32503 
+L 434.084771 139.987665 
+L 381.562299 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #b85336; opacity: 0.25; stroke: #b85336; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_9">
+    <path d="M 437.437269 194.32503 
+L 489.959741 194.32503 
+L 489.959741 139.987665 
+L 437.437269 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #b85336; opacity: 0.25; stroke: #b85336; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_10">
+    <path d="M 493.312239 194.32503 
+L 545.834711 194.32503 
+L 545.834711 139.987665 
+L 493.312239 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #b85336; opacity: 0.25; stroke: #b85336; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_11">
+    <path d="M 549.187209 194.32503 
+L 601.709681 194.32503 
+L 601.709681 139.987665 
+L 549.187209 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #b85336; opacity: 0.08; stroke: #b85336; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_12">
+    <path d="M 605.062179 194.32503 
+L 657.584651 194.32503 
+L 657.584651 139.987665 
+L 605.062179 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #467a62; opacity: 0.08; stroke: #467a62; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_13">
+    <path d="M 660.937149 194.32503 
+L 713.459621 194.32503 
+L 713.459621 139.987665 
+L 660.937149 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #467a62; opacity: 0.25; stroke: #467a62; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_14">
+    <path d="M 716.812119 194.32503 
+L 769.334591 194.32503 
+L 769.334591 139.987665 
+L 716.812119 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #467a62; opacity: 0.25; stroke: #467a62; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_15">
+    <path d="M 772.687089 194.32503 
+L 825.209561 194.32503 
+L 825.209561 139.987665 
+L 772.687089 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #467a62; opacity: 0.25; stroke: #467a62; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-patch_16">
+    <path d="M 828.562059 194.32503 
+L 881.084531 194.32503 
+L 881.084531 139.987665 
+L 828.562059 139.987665 
+z
+" clip-path="url(#P08-F3-p7a12f4985d)" style="fill: #467a62; opacity: 0.08; stroke: #467a62; stroke-linejoin: miter"/>
+   </g>
+   <g id="P08-F3-text_3">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="72.573715" y="170.185644" transform="rotate(-0 72.573715 170.185644)">1.00</text>
+   </g>
+   <g id="P08-F3-text_4">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="72.573715" y="224.512455" transform="rotate(-0 72.573715 224.512455)">0</text>
+   </g>
+   <g id="P08-F3-text_5">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="128.448685" y="170.185644" transform="rotate(-0 128.448685 170.185644)">1.08</text>
+   </g>
+   <g id="P08-F3-text_6">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="128.448685" y="224.512455" transform="rotate(-0 128.448685 224.512455)">8</text>
+   </g>
+   <g id="P08-F3-text_7">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="184.323655" y="170.185644" transform="rotate(-0 184.323655 170.185644)">1.14</text>
+   </g>
+   <g id="P08-F3-text_8">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="184.323655" y="224.512455" transform="rotate(-0 184.323655 224.512455)">16</text>
+   </g>
+   <g id="P08-F3-text_9">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="240.198625" y="170.185644" transform="rotate(-0 240.198625 170.185644)">1.18</text>
+   </g>
+   <g id="P08-F3-text_10">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="240.198625" y="224.512455" transform="rotate(-0 240.198625 224.512455)">24</text>
+   </g>
+   <g id="P08-F3-text_11">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="296.073595" y="170.185644" transform="rotate(-0 296.073595 170.185644)">1.20</text>
+   </g>
+   <g id="P08-F3-text_12">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="296.073595" y="224.512455" transform="rotate(-0 296.073595 224.512455)">32</text>
+   </g>
+   <g id="P08-F3-text_13">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="351.948565" y="170.185644" transform="rotate(-0 351.948565 170.185644)">1.02</text>
+   </g>
+   <g id="P08-F3-text_14">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="351.948565" y="224.512455" transform="rotate(-0 351.948565 224.512455)">40</text>
+   </g>
+   <g id="P08-F3-text_15">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="407.823535" y="170.185644" transform="rotate(-0 407.823535 170.185644)">1.09</text>
+   </g>
+   <g id="P08-F3-text_16">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="407.823535" y="224.512455" transform="rotate(-0 407.823535 224.512455)">48</text>
+   </g>
+   <g id="P08-F3-text_17">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="463.698505" y="170.185644" transform="rotate(-0 463.698505 170.185644)">1.16</text>
+   </g>
+   <g id="P08-F3-text_18">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="463.698505" y="224.512455" transform="rotate(-0 463.698505 224.512455)">56</text>
+   </g>
+   <g id="P08-F3-text_19">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="519.573475" y="170.185644" transform="rotate(-0 519.573475 170.185644)">1.21</text>
+   </g>
+   <g id="P08-F3-text_20">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="519.573475" y="224.512455" transform="rotate(-0 519.573475 224.512455)">64</text>
+   </g>
+   <g id="P08-F3-text_21">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="575.448445" y="170.185644" transform="rotate(-0 575.448445 170.185644)">1.24</text>
+   </g>
+   <g id="P08-F3-text_22">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="575.448445" y="224.512455" transform="rotate(-0 575.448445 224.512455)">72</text>
+   </g>
+   <g id="P08-F3-text_23">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="631.323415" y="170.185644" transform="rotate(-0 631.323415 170.185644)">0.98</text>
+   </g>
+   <g id="P08-F3-text_24">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="631.323415" y="224.512455" transform="rotate(-0 631.323415 224.512455)">80</text>
+   </g>
+   <g id="P08-F3-text_25">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="687.198385" y="170.185644" transform="rotate(-0 687.198385 170.185644)">1.05</text>
+   </g>
+   <g id="P08-F3-text_26">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="687.198385" y="224.512455" transform="rotate(-0 687.198385 224.512455)">88</text>
+   </g>
+   <g id="P08-F3-text_27">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="743.073355" y="170.185644" transform="rotate(-0 743.073355 170.185644)">1.11</text>
+   </g>
+   <g id="P08-F3-text_28">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="743.073355" y="224.512455" transform="rotate(-0 743.073355 224.512455)">96</text>
+   </g>
+   <g id="P08-F3-text_29">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="798.948325" y="170.185644" transform="rotate(-0 798.948325 170.185644)">1.15</text>
+   </g>
+   <g id="P08-F3-text_30">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="798.948325" y="224.512455" transform="rotate(-0 798.948325 224.512455)">104</text>
+   </g>
+   <g id="P08-F3-text_31">
+    <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="854.823295" y="170.185644" transform="rotate(-0 854.823295 170.185644)">1.18</text>
+   </g>
+   <g id="P08-F3-text_32">
+    <text style="font-size: 10px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="854.823295" y="224.512455" transform="rotate(-0 854.823295 224.512455)">112</text>
+   </g>
+   <g id="P08-F3-text_33">
+    <text style="font-size: 14px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="46.312479" y="112.818982" transform="rotate(-0 46.312479 112.818982)">写入前的连续float64缓冲区：3 × 5 × 8 = 120字节</text>
+   </g>
+   <g id="P08-F3-text_34">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="46.312479" y="260.737365" transform="rotate(-0 46.312479 260.737365)">数字下方：相对起点的字节偏移；每个数占8字节</text>
+   </g>
+  </g>
+  <g id="P08-F3-axes_3">
+   <g id="P08-F3-patch_17">
+    <path d="M 22.099992 421.846323 
+L 137.57493 421.846323 
+L 137.57493 381.88915 
+L 22.099992 381.88915 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #b85336; opacity: 0.22"/>
+   </g>
+   <g id="P08-F3-patch_18">
+    <path d="M 148.749924 421.846323 
+L 264.224862 421.846323 
+L 264.224862 381.88915 
+L 148.749924 381.88915 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #28648a; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_19">
+    <path d="M 275.399856 421.846323 
+L 390.874794 421.846323 
+L 390.874794 381.88915 
+L 275.399856 381.88915 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #28648a; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_20">
+    <path d="M 22.099992 470.365748 
+L 137.57493 470.365748 
+L 137.57493 430.408575 
+L 22.099992 430.408575 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #28648a; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_21">
+    <path d="M 148.749924 470.365748 
+L 264.224862 470.365748 
+L 264.224862 430.408575 
+L 148.749924 430.408575 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #28648a; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_22">
+    <path d="M 275.399856 470.365748 
+L 390.874794 470.365748 
+L 390.874794 430.408575 
+L 275.399856 430.408575 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #28648a; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_23">
+    <path d="M 22.099992 518.885173 
+L 137.57493 518.885173 
+L 137.57493 478.928 
+L 22.099992 478.928 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #28648a; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_24">
+    <path d="M 148.749924 518.885173 
+L 264.224862 518.885173 
+L 264.224862 478.928 
+L 148.749924 478.928 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #28648a; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_25">
+    <path d="M 275.399856 518.885173 
+L 390.874794 518.885173 
+L 390.874794 478.928 
+L 275.399856 478.928 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #28648a; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_26">
+    <path d="M 483.999744 421.846323 
+L 599.474682 421.846323 
+L 599.474682 381.88915 
+L 483.999744 381.88915 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_27">
+    <path d="M 610.649676 421.846323 
+L 726.124614 421.846323 
+L 726.124614 381.88915 
+L 610.649676 381.88915 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_28">
+    <path d="M 737.299608 421.846323 
+L 852.774546 421.846323 
+L 852.774546 381.88915 
+L 737.299608 381.88915 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_29">
+    <path d="M 483.999744 470.365748 
+L 599.474682 470.365748 
+L 599.474682 430.408575 
+L 483.999744 430.408575 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_30">
+    <path d="M 610.649676 470.365748 
+L 726.124614 470.365748 
+L 726.124614 430.408575 
+L 610.649676 430.408575 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_31">
+    <path d="M 737.299608 470.365748 
+L 852.774546 470.365748 
+L 852.774546 430.408575 
+L 737.299608 430.408575 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_32">
+    <path d="M 483.999744 518.885173 
+L 599.474682 518.885173 
+L 599.474682 478.928 
+L 483.999744 478.928 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_33">
+    <path d="M 610.649676 518.885173 
+L 726.124614 518.885173 
+L 726.124614 478.928 
+L 610.649676 478.928 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-patch_34">
+    <path d="M 737.299608 518.885173 
+L 852.774546 518.885173 
+L 852.774546 478.928 
+L 737.299608 478.928 
+z
+" clip-path="url(#P08-F3-p559f327a5f)" style="fill: #467a62; opacity: 0.08"/>
+   </g>
+   <g id="P08-F3-text_35">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="10.924998" y="310.537054" transform="rotate(-0 10.924998 310.537054)">视图写入9.0：原表同格一起改变</text>
+   </g>
+   <g id="P08-F3-text_36">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="10.924998" y="344.78606" transform="rotate(-0 10.924998 344.78606)">shape = (3,3); strides = (40,8) bytes</text>
+   </g>
+   <g id="P08-F3-text_37">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #b85336" x="79.837461" y="405.998596" transform="rotate(-0 79.837461 405.998596)">9.00</text>
+   </g>
+   <g id="P08-F3-text_38">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="206.487393" y="405.998596" transform="rotate(-0 206.487393 405.998596)">1.14</text>
+   </g>
+   <g id="P08-F3-text_39">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="333.137325" y="405.998596" transform="rotate(-0 333.137325 405.998596)">1.18</text>
+   </g>
+   <g id="P08-F3-text_40">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="79.837461" y="454.518021" transform="rotate(-0 79.837461 454.518021)">1.09</text>
+   </g>
+   <g id="P08-F3-text_41">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="206.487393" y="454.518021" transform="rotate(-0 206.487393 454.518021)">1.16</text>
+   </g>
+   <g id="P08-F3-text_42">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="333.137325" y="454.518021" transform="rotate(-0 333.137325 454.518021)">1.21</text>
+   </g>
+   <g id="P08-F3-text_43">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="79.837461" y="503.037446" transform="rotate(-0 79.837461 503.037446)">1.05</text>
+   </g>
+   <g id="P08-F3-text_44">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="206.487393" y="503.037446" transform="rotate(-0 206.487393 503.037446)">1.11</text>
+   </g>
+   <g id="P08-F3-text_45">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="333.137325" y="503.037446" transform="rotate(-0 333.137325 503.037446)">1.15</text>
+   </g>
+   <g id="P08-F3-text_46">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="10.924998" y="578.820933" transform="rotate(-0 10.924998 578.820933)">共享存储；从原缓冲区偏移8字节</text>
+   </g>
+   <g id="P08-F3-text_47">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="472.82475" y="310.537054" transform="rotate(-0 472.82475 310.537054)">提前复制的数据：仍然保留1.08</text>
+   </g>
+   <g id="P08-F3-text_48">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="472.82475" y="344.78606" transform="rotate(-0 472.82475 344.78606)">shape = (3,3); strides = (24,8) bytes</text>
+   </g>
+   <g id="P08-F3-text_49">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="541.737213" y="405.998596" transform="rotate(-0 541.737213 405.998596)">1.08</text>
+   </g>
+   <g id="P08-F3-text_50">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="668.387145" y="405.998596" transform="rotate(-0 668.387145 405.998596)">1.14</text>
+   </g>
+   <g id="P08-F3-text_51">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="795.037077" y="405.998596" transform="rotate(-0 795.037077 405.998596)">1.18</text>
+   </g>
+   <g id="P08-F3-text_52">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="541.737213" y="454.518021" transform="rotate(-0 541.737213 454.518021)">1.09</text>
+   </g>
+   <g id="P08-F3-text_53">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="668.387145" y="454.518021" transform="rotate(-0 668.387145 454.518021)">1.16</text>
+   </g>
+   <g id="P08-F3-text_54">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="795.037077" y="454.518021" transform="rotate(-0 795.037077 454.518021)">1.21</text>
+   </g>
+   <g id="P08-F3-text_55">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="541.737213" y="503.037446" transform="rotate(-0 541.737213 503.037446)">1.05</text>
+   </g>
+   <g id="P08-F3-text_56">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="668.387145" y="503.037446" transform="rotate(-0 668.387145 503.037446)">1.11</text>
+   </g>
+   <g id="P08-F3-text_57">
+    <text style="font-size: 15px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle; fill: #172b36" x="795.037077" y="503.037446" transform="rotate(-0 795.037077 503.037446)">1.15</text>
+   </g>
+   <g id="P08-F3-text_58">
+    <text style="font-size: 12px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start; fill: #172b36" x="472.82475" y="578.820933" transform="rotate(-0 472.82475 578.820933)">独立存储：3 × 3 × 8 = 72字节</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="P08-F3-p7a12f4985d">
+   <rect x="7.2" y="85.6503" width="893.99952" height="193.19952"/>
+  </clipPath>
+  <clipPath id="P08-F3-p559f327a5f">
+   <rect x="7.2" y="284.8503" width="893.99952" height="313.94922"/>
+  </clipPath>
+ </defs>
+</svg>
