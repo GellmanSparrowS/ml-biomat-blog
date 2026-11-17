@@ -19,8 +19,8 @@ def route(identifier, lang='zh'):
 
 def load():
     data=json.loads((CONTENT/'manifest.json').read_text(encoding='utf-8-sig'))
-    assert len(data['lessons']) == 51
-    assert len({item['id'] for item in data['lessons']}) == 51
+    assert len(data['lessons']) == 52
+    assert len({item['id'] for item in data['lessons']}) == 52
     return data
 
 
@@ -89,5 +89,5 @@ def render(data, make_head, make_footer, write_file, versioned_asset, categories
             page=page.replace('</body>',scripts+'</body>')
             write_file(address.lstrip('/')+'index.html',page)
             routes.append(address)
-    print('  Experimental methods: 51 bilingual lessons / 102 topic-integrated pages')
+    print('  Experimental methods: 52 bilingual lessons / 104 topic-integrated pages')
     return routes

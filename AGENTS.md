@@ -135,6 +135,6 @@
 
 ## 实验表征教程（2026-11-17）
 
-- 正式来源为 D:/DW/experimental-methods-courses/public，共51课，中英文分102页，按原八组教学顺序接入 wet-lab-data 分类。页面为 /tutorials/experimental-methods/s01/ 与 /en/ 等配对地址；导入入口为 content_tools/import_experimental_methods.py，渲染模块为 content_tools/experimental_methods.py。
-- 保留完整正文、公式、原始科学图、交互实验、51份代码ZIP及许可；不发布源项目 authoring、private。许可索引的章节链接需映射正式网站地址，I02交互用到的正文JSON数据脚本必须保留。
+- 正式来源为 D:/DW/experimental-methods-courses/public，共52课，中英文分104页，按原八组教学顺序接入 wet-lab-data 分类。页面为 /tutorials/experimental-methods/s01/ 与 /en/ 等配对地址；导入入口为 content_tools/import_experimental_methods.py，渲染模块为 content_tools/experimental_methods.py。
+- 保留完整正文、公式、原始科学图、交互实验、52份代码ZIP及许可；不发布源项目 authoring、private。许可索引的章节链接需映射正式网站地址，I02交互用到的正文JSON数据脚本必须保留。
 - 科学SVG外置后保持内嵌栅格图自包含；中文实验识别 zh-CN。沿用网站目录、双语切换、手机排版、图片放大和赞赏二维码。新增教程PayPal继续暂缓，免费代码下载正常开放。

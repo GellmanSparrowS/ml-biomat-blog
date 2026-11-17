@@ -49,6 +49,12 @@ Begin with a spreading water droplet and connect electron energy, surface depth,
 
 Experimental Characterization & Data Analysis
 
+## [ICP emission spectrometry: Turning elemental light into reliable concentrations](https://ml-biomat.com/tutorials/experimental-methods/s08/en/)
+
+Connect material release and composition with argon plasma, spectral separation, calibration and elemental mass accounting.
+
+Experimental Characterization & Data Analysis
+
 ## [DSC: What happens when materials absorb and release heat](https://ml-biomat.com/tutorials/experimental-methods/t01/en/)
 
 Read steps and peaks in heat flow, connecting thermal history and scan rate with molecular structure.

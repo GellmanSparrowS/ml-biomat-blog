@@ -5,7 +5,7 @@ Language: zh-CN
 
 ## 全部主题
 
-256
+257
 
 机器学习
 
@@ -1224,6 +1224,12 @@ Python科学计算
 ## [X射线光电子能谱：读懂材料最外层](https://ml-biomat.com/tutorials/experimental-methods/s07/)
 
 从一滴水的铺展出发，读懂电子能量、表面深度、元素比例和化学环境。
+
+实验表征与数据分析
+
+## [ICP发射光谱：把元素的光变成可靠的含量](https://ml-biomat.com/tutorials/experimental-methods/s08/)
+
+从材料浸出与组成出发，理解氩等离子体、谱线分离、定量校准和元素质量账本。
 
 实验表征与数据分析
 

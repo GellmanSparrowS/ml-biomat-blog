@@ -77,11 +77,12 @@ def media(body):
     return body
 
 catalog=json.loads((SOURCE.parent/'COURSES.json').read_text(encoding='utf8'))
-assert len(catalog['courses']) == 51 and len({course['id'] for course in catalog['courses']}) == 51
+assert len(catalog['courses']) == 52 and len({course['id'] for course in catalog['courses']}) == 52
 lessons=[]
 strand_names={strand['id']:strand['title'] for strand in catalog['strands']}
 # Short search titles leave the full scientific title in the visible h1.
 short_english={
+    'S08':'ICP emission spectrometry: Elemental analysis and calibration',
     'I01':'Optical and fluorescence microscopy: Light paths and images',
     'I02':'Confocal microscopy: Optical sectioning and 3-D images',
     'P05':'Protein adsorption at material–biological interfaces',

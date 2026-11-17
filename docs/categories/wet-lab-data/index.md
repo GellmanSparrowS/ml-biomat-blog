@@ -49,6 +49,12 @@ Language: zh-CN
 
 实验表征与数据分析
 
+## [ICP发射光谱：把元素的光变成可靠的含量](https://ml-biomat.com/tutorials/experimental-methods/s08/)
+
+从材料浸出与组成出发，理解氩等离子体、谱线分离、定量校准和元素质量账本。
+
+实验表征与数据分析
+
 ## [差示扫描量热：材料吸热放热时发生了什么](https://ml-biomat.com/tutorials/experimental-methods/t01/)
 
 读懂热流中的台阶和峰，把热历史、升温速率与分子结构联系起来。

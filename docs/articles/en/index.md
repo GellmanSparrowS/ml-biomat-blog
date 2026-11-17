@@ -5,7 +5,7 @@ Language: en
 
 ## All articles
 
-236
+237
 
 Machine Learning
 
@@ -1110,6 +1110,12 @@ Experimental Characterization & Data Analysis
 ## [XPS: Reading the outermost layers of a material](https://ml-biomat.com/tutorials/experimental-methods/s07/en/)
 
 Begin with a spreading water droplet and connect electron energy, surface depth, elemental composition and chemical environments.
+
+Experimental Characterization & Data Analysis
+
+## [ICP emission spectrometry: Turning elemental light into reliable concentrations](https://ml-biomat.com/tutorials/experimental-methods/s08/en/)
+
+Connect material release and composition with argon plasma, spectral separation, calibration and elemental mass accounting.
 
 Experimental Characterization & Data Analysis
 
