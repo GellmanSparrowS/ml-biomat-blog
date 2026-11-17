@@ -40,7 +40,12 @@ function markdownResponse(response, request, canonical) {
   const headers = new Headers(response.headers);
   headers.set('Content-Type', 'text/markdown; charset=utf-8');
   headers.set('X-Content-Type-Options', 'nosniff');
-  headers.set('X-Robots-Tag', 'noindex');
+  if (new URL(request.url).pathname.endsWith('.md')) {
+    const policy = headers.get('X-Robots-Tag');
+    if (!(policy || '').split(',').some(rule => rule.trim().toLowerCase() === 'noindex')) {
+      headers.set('X-Robots-Tag', policy ? policy + ', noindex' : 'noindex');
+    }
+  }
   if (canonical) headers.set('Link', `<${canonical}>; rel="canonical"; type="text/html"`);
   headers.set('Cache-Control', 'public, max-age=300');
   withVary(headers);

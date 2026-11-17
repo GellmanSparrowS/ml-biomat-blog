@@ -47,7 +47,7 @@ await test('Markdown metadata and origin security headers', async () => {
   const server = origin();
   const response = await handle(request(undefined, {headers: {Accept: 'text/markdown'}}), server.fetch);
   assert.equal(await response.text(), markdown); assert.match(response.headers.get('content-type'), /^text\/markdown/);
-  assert.equal(response.headers.get('etag'), '"markdown"'); assert.equal(response.headers.get('x-robots-tag'), 'noindex');
+  assert.equal(response.headers.get('etag'), '"markdown"'); assert.equal(response.headers.get('x-robots-tag'), null);
   assert.equal(response.headers.get('x-content-type-options'), 'nosniff');
   assert.equal(response.headers.get('strict-transport-security'), 'max-age=31536000');
   assert.equal(response.headers.get('content-security-policy'), "default-src 'self'");
@@ -88,10 +88,18 @@ await test('Unavailable, redirected or HTML derivatives fall back to HTML', asyn
     assert(server.calls.every(call => new URL(call.url).hostname === 'ml-biomat.com'));
   }
 });
+await test('Source indexing directives survive both representations', async () => {
+  const server = origin();
+  const source = async incoming => { const r = await server.fetch(incoming); const headers = new Headers(r.headers); headers.set('X-Robots-Tag', 'nosnippet'); return new Response(r.body, {status:r.status, headers}); };
+  const negotiated = await handle(request(undefined, {headers:{Accept:'text/markdown'}}), source);
+  assert.equal(negotiated.headers.get('x-robots-tag'), 'nosnippet');
+  const explicit = await handle(request('/tutorials/machine-learning/m01/index.md'), source);
+  assert.equal(explicit.headers.get('x-robots-tag'), 'nosnippet, noindex');
+});
 await test('Direct Markdown has correct type and canonical HTML companion', async () => {
   const server = origin();
   const response = await handle(request('/tutorials/machine-learning/m01/index.md'), server.fetch);
-  assert.match(response.headers.get('content-type'), /^text\/markdown/); assert.match(response.headers.get('link'), /m01\/>; rel="canonical"/); assert.equal(server.calls.length, 1);
+  assert.match(response.headers.get('content-type'), /^text\/markdown/); assert.equal(response.headers.get('x-robots-tag'), 'noindex'); assert.match(response.headers.get('link'), /m01\/>; rel="canonical"/); assert.equal(server.calls.length, 1);
 });
 await test('Auth discovery document does not claim to be an HTML page', async () => {
   const response = await handle(request('/auth.md'), origin().fetch);
