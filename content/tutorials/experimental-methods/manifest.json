@@ -1,0 +1,5291 @@
+{
+  "title": {
+    "zh": "实验与表征",
+    "en": "Experiments and Characterization"
+  },
+  "lessons": [
+    {
+      "id": "S01",
+      "title": {
+        "zh": "红外光谱：从分子振动读懂材料",
+        "en": "FTIR: Reading materials through molecular vibrations"
+      },
+      "standfirst": {
+        "zh": "从透明薄膜的分子振动出发，读懂光谱、ATR取样和定量标定；用真实聚合物光谱与完整计算练习，把每个峰放回实验条件中。",
+        "en": "Follow molecular vibrations in a transparent film through spectral reading, ATR sampling and calibration, using measured polymer data and a complete computational example."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "光谱与化学结构",
+        "en": "Spectroscopy and chemical structure"
+      },
+      "search_title": {
+        "zh": "红外光谱：从分子振动读懂材料",
+        "en": "FTIR: Reading materials through molecular vibrations"
+      },
+      "keywords": [
+        "FTIR",
+        "ATR",
+        "红外",
+        "LDPE-in-soil",
+        "基线",
+        "吸光度",
+        "infrared",
+        "baseline",
+        "absorbance"
+      ],
+      "sections": [
+        {
+          "id": "S01-question",
+          "title": {
+            "zh": "1. 两张透明薄膜，为什么会有不同的“指纹”",
+            "en": "1. Two transparent films, two molecular fingerprints"
+          }
+        },
+        {
+          "id": "S01-vibration",
+          "title": {
+            "zh": "2. 从弹簧的节奏，理解分子为什么吸光",
+            "en": "2. Why molecules absorb: restoring forces, masses and charge"
+          }
+        },
+        {
+          "id": "S01-measurement",
+          "title": {
+            "zh": "3. 仪器怎样把一束光变成一条曲线",
+            "en": "3. How an instrument turns light into a curve"
+          }
+        },
+        {
+          "id": "S01-sampling",
+          "title": {
+            "zh": "4. ATR为什么方便，又为什么特别在意接触",
+            "en": "4. ATR: convenient sampling with an important interface"
+          }
+        },
+        {
+          "id": "S01-lab",
+          "title": {
+            "zh": "交互实验：ATR在样品里看得多深",
+            "en": "Interactive experiment: How deep does ATR sample?"
+          }
+        },
+        {
+          "id": "S01-reading",
+          "title": {
+            "zh": "5. 读一份真实聚合物光谱：先看全貌，再看局部",
+            "en": "5. Read a measured polymer spectrum from overview to detail"
+          }
+        },
+        {
+          "id": "S01-quantify",
+          "title": {
+            "zh": "6. 从一个峰到一个数：怎样建立可解释的定量",
+            "en": "6. Turning a band into an interpretable measurement"
+          }
+        },
+        {
+          "id": "S01-code",
+          "title": {
+            "zh": "7. 把读谱、处理和核对放进一个完整程序",
+            "en": "7. A complete program for reading, processing and checking"
+          }
+        },
+        {
+          "id": "S01-decisions",
+          "title": {
+            "zh": "8. 带着光谱回到材料问题",
+            "en": "8. Bring the spectrum back to the material question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": null,
+        "next": "S02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "S02",
+      "title": {
+        "zh": "拉曼光谱：散射光里的分子指纹",
+        "en": "Raman spectroscopy: Molecular fingerprints in scattered light"
+      },
+      "standfirst": {
+        "zh": "从一粒透明颗粒出发，理解光如何交换振动能量，再用完整光谱分析分辨峰、背景与仪器效应。",
+        "en": "Start with a transparent particle, follow the exchange of vibrational energy, and separate bands, background and instrument effects in a complete spectral analysis."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "光谱与化学结构",
+        "en": "Spectroscopy and chemical structure"
+      },
+      "search_title": {
+        "zh": "拉曼光谱：散射光里的分子指纹",
+        "en": "Raman spectroscopy: Molecular fingerprints in scattered light"
+      },
+      "keywords": [
+        "Raman",
+        "拉曼",
+        "光谱",
+        "基线",
+        "峰面积",
+        "信噪比"
+      ],
+      "sections": [
+        {
+          "id": "S02-question",
+          "title": {
+            "zh": "一粒看不见成分的颗粒，怎样告诉我们它是什么",
+            "en": "How a tiny particle can reveal what it contains"
+          }
+        },
+        {
+          "id": "S02-history",
+          "title": {
+            "zh": "从两块滤光片到现代光谱仪：先把稀少的光找出来",
+            "en": "From two filters to a spectrometer: finding the rare light"
+          }
+        },
+        {
+          "id": "S02-energy",
+          "title": {
+            "zh": "光交换了一点能量，横坐标就记下这一点差别",
+            "en": "A small energy exchange becomes the horizontal axis"
+          }
+        },
+        {
+          "id": "S02-acquisition",
+          "title": {
+            "zh": "测量条件怎样进入光谱：功率、时间、焦点与样品",
+            "en": "Power, time, focus and specimen all enter the spectrum"
+          }
+        },
+        {
+          "id": "S02-lab",
+          "title": {
+            "zh": "调节采集条件，观察信噪比与削顶",
+            "en": "Adjust acquisition conditions and observe noise and clipping"
+          }
+        },
+        {
+          "id": "S02-processing",
+          "title": {
+            "zh": "从原始计数到峰面积：每一步都保留可检查的痕迹",
+            "en": "From raw counts to band areas, with each step inspectable"
+          }
+        },
+        {
+          "id": "S02-code",
+          "title": {
+            "zh": "完整计算：同时看拟合结果与处理选择的影响",
+            "en": "A complete calculation that exposes the effect of processing choices"
+          }
+        },
+        {
+          "id": "S02-research",
+          "title": {
+            "zh": "把谱图放回研究问题：一张图需要哪些相互支持的线索",
+            "en": "Returning the spectrum to the research question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S01",
+        "next": "S03"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "S03",
+      "title": {
+        "zh": "紫外—可见吸收：光如何变成浓度",
+        "en": "UV–visible absorption: Turning light into concentration"
+      },
+      "standfirst": {
+        "zh": "从颜色变浅的日常观察理解透过率和吸光度，再把标准曲线、稀释与光学误差连接成一次完整定量。",
+        "en": "Connect changing color to transmission and absorbance, then build a complete quantification through calibration, dilution and optical-error analysis."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "光谱与化学结构",
+        "en": "Spectroscopy and chemical structure"
+      },
+      "search_title": {
+        "zh": "紫外—可见吸收：光如何变成浓度",
+        "en": "UV–visible absorption: Turning light into concentration"
+      },
+      "keywords": [
+        "UV–Vis",
+        "紫外",
+        "可见",
+        "吸光度",
+        "比尔朗伯",
+        "校准",
+        "稀释"
+      ],
+      "sections": [
+        {
+          "id": "S03-color",
+          "title": {
+            "zh": "一杯水变浅了，怎样知道里面还剩多少分子",
+            "en": "A solution becomes paler: how many molecules remain?"
+          }
+        },
+        {
+          "id": "S03-optics",
+          "title": {
+            "zh": "为什么石英和光电检测改变了分析化学",
+            "en": "Why quartz and photoelectric detection changed chemical analysis"
+          }
+        },
+        {
+          "id": "S03-logarithm",
+          "title": {
+            "zh": "为什么取对数：每一层吸收的是剩余光的一部分",
+            "en": "Why use a logarithm? Each layer acts on the light that remains"
+          }
+        },
+        {
+          "id": "S03-standard",
+          "title": {
+            "zh": "从标准液到未知液：一条直线怎样获得实验含义",
+            "en": "From standards to an unknown: giving a straight line experimental meaning"
+          }
+        },
+        {
+          "id": "S03-deviation",
+          "title": {
+            "zh": "吸收很强与样品浑浊，为什么是两类不同问题",
+            "en": "Strong absorption and turbidity create different problems"
+          }
+        },
+        {
+          "id": "S03-lab",
+          "title": {
+            "zh": "浓度继续增加时，吸光度为什么停住了",
+            "en": "Why can absorbance level off while concentration increases?"
+          }
+        },
+        {
+          "id": "S03-code",
+          "title": {
+            "zh": "完整计算：让浓度结果和诊断图一起出现",
+            "en": "A complete calculation with concentration and diagnostic plots together"
+          }
+        },
+        {
+          "id": "S03-decision",
+          "title": {
+            "zh": "在材料与生物实验里，怎样选择下一步测量",
+            "en": "Choosing the next measurement in materials and biology"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S02",
+        "next": "S04"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "S04",
+      "title": {
+        "zh": "荧光光谱：亮度、寿命与分子环境",
+        "en": "Fluorescence spectroscopy: Intensity, lifetime and molecular environment"
+      },
+      "standfirst": {
+        "zh": "同样变暗的样品，可能少了分子，也可能改变了分子的能量去路。把强度、寿命与光路放在一起判断。",
+        "en": "A dimmer sample may contain fewer emitters or different energy-relaxation pathways. Connect intensity, lifetime and optical transmission."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "光谱与化学结构",
+        "en": "Spectroscopy and chemical structure"
+      },
+      "search_title": {
+        "zh": "荧光光谱：亮度、寿命与分子环境",
+        "en": "Fluorescence spectroscopy: Intensity and lifetime"
+      },
+      "keywords": [
+        "fluorescence",
+        "荧光",
+        "寿命",
+        "量子产率",
+        "GFP",
+        "猝灭"
+      ],
+      "sections": [
+        {
+          "id": "S04-question",
+          "title": {
+            "zh": "一管样品更亮了，是分子变多了，还是每个分子更会发光",
+            "en": "When a sample becomes dimmer, what changed?"
+          }
+        },
+        {
+          "id": "S04-history",
+          "title": {
+            "zh": "从荧光的命名到绿色荧光蛋白：发光中心需要怎样的环境",
+            "en": "From Stokes's observation to a protein that protects its own light source"
+          }
+        },
+        {
+          "id": "S04-pathways",
+          "title": {
+            "zh": "吸收之后有几条路：量子产率与寿命为什么相关又不同",
+            "en": "Brightness and lifetime describe different parts of the same competition"
+          }
+        },
+        {
+          "id": "S04-instrument",
+          "title": {
+            "zh": "稳态光谱与时间分辨测量，分别怎样接住光",
+            "en": "Follow the light before interpreting the curve"
+          }
+        },
+        {
+          "id": "S04-quenching",
+          "title": {
+            "zh": "变暗的三种原因：减少、猝灭与遮挡",
+            "en": "Separate fewer emitters from faster energy loss"
+          }
+        },
+        {
+          "id": "S04-lab",
+          "title": {
+            "zh": "把变暗的三种原因分开",
+            "en": "Separate three reasons for becoming dimmer"
+          }
+        },
+        {
+          "id": "S04-code",
+          "title": {
+            "zh": "完整计算：从光子计数拟合寿命，再检查变暗的原因",
+            "en": "A complete example: count photons, fit a decay and inspect the assumptions"
+          }
+        },
+        {
+          "id": "S04-research",
+          "title": {
+            "zh": "让荧光真正参与研究：先决定光信号代表哪个对象",
+            "en": "Choose the object that the fluorescence will represent"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S03",
+        "next": "S05"
+      },
+      "prerequisites": [
+        "S03"
+      ]
+    },
+    {
+      "id": "S05",
+      "title": {
+        "zh": "圆二色谱：蛋白质折叠留下的光学线索",
+        "en": "Circular dichroism: Optical clues to protein folding"
+      },
+      "standfirst": {
+        "zh": "从两种旋向光的微小吸收差，读出蛋白质整体构象的变化，再把浓度、参考光谱与升温条件纳入判断。",
+        "en": "Read ensemble conformational changes from a small polarization-dependent absorption difference, then examine concentration, reference spectra and temperature conditions."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "光谱与化学结构",
+        "en": "Spectroscopy and chemical structure"
+      },
+      "search_title": {
+        "zh": "圆二色谱：蛋白质折叠留下的光学线索",
+        "en": "Circular dichroism: Optical clues to protein folding"
+      },
+      "keywords": [
+        "CD",
+        "圆二色谱",
+        "二级结构",
+        "蛋白质折叠",
+        "椭圆率",
+        "热转变"
+      ],
+      "sections": [
+        {
+          "id": "S05-question",
+          "title": {
+            "zh": "蛋白质还在，折叠是否已经改变？",
+            "en": "The protein is still present. Has its folding changed?"
+          }
+        },
+        {
+          "id": "S05-handedness",
+          "title": {
+            "zh": "两种旋转的光，为何会看到不同的分子？",
+            "en": "Why can opposite rotations of light see a molecule differently?"
+          }
+        },
+        {
+          "id": "S05-scale",
+          "title": {
+            "zh": "毫度、浓度和平均残基：先让曲线站在同一把尺上",
+            "en": "Millidegrees, concentration and residues: place the curves on a common scale"
+          }
+        },
+        {
+          "id": "S05-acquisition",
+          "title": {
+            "zh": "把紫外光送到探测器，比把曲线磨平更重要",
+            "en": "Getting ultraviolet photons to the detector matters more than smoothing a curve"
+          }
+        },
+        {
+          "id": "S05-mixture",
+          "title": {
+            "zh": "结构比例像配色：组合能解释什么，哪里需要更多信息？",
+            "en": "Structural fractions resemble color mixing, with a reference palette that matters"
+          }
+        },
+        {
+          "id": "S05-lab",
+          "title": {
+            "zh": "是结构变了，还是归一化变了？",
+            "en": "Did structure change, or did normalization change?"
+          }
+        },
+        {
+          "id": "S05-temperature",
+          "title": {
+            "zh": "跟着温度观察折叠：中点为什么要有基线？",
+            "en": "Follow folding with temperature: why a midpoint needs baselines"
+          }
+        },
+        {
+          "id": "S05-research",
+          "title": {
+            "zh": "让 CD 与研究问题对齐",
+            "en": "Align the CD experiment with the research decision"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S04",
+        "next": "S06"
+      },
+      "prerequisites": [
+        "S03"
+      ]
+    },
+    {
+      "id": "S06",
+      "title": {
+        "zh": "核磁共振：从核自旋到分子结构",
+        "en": "NMR: From nuclear spins to molecular structure"
+      },
+      "standfirst": {
+        "zh": "以真实乙醇峰表为线索，把自旋、化学位移、耦合、时间信号与积分连接起来，再走向聚合物和蛋白质。",
+        "en": "Use real ethanol peak records to connect spin, chemical shift, coupling, time signals and integration, then extend the reasoning to polymers and proteins."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "光谱与化学结构",
+        "en": "Spectroscopy and chemical structure"
+      },
+      "search_title": {
+        "zh": "核磁共振：从核自旋到分子结构",
+        "en": "NMR: From nuclear spins to molecular structure"
+      },
+      "keywords": [
+        "NMR",
+        "核磁共振",
+        "化学位移",
+        "自旋耦合",
+        "FID",
+        "定量",
+        "BMRB"
+      ],
+      "sections": [
+        {
+          "id": "S06-question",
+          "title": {
+            "zh": "一杯透明溶液里，分子怎样连接？",
+            "en": "How are the molecules connected inside a transparent solution?"
+          }
+        },
+        {
+          "id": "S06-spin",
+          "title": {
+            "zh": "磁场建立差别，射频脉冲让差别变得可测",
+            "en": "The field creates a difference; a radiofrequency pulse makes it observable"
+          }
+        },
+        {
+          "id": "S06-shift",
+          "title": {
+            "zh": "化学位移：为什么横轴用 ppm，而且从右向左增加？",
+            "en": "Chemical shift: why use ppm, and why does the axis increase to the left?"
+          }
+        },
+        {
+          "id": "S06-coupling",
+          "title": {
+            "zh": "一组线不等于一组不同分子",
+            "en": "Several lines can belong to one chemical environment"
+          }
+        },
+        {
+          "id": "S06-time",
+          "title": {
+            "zh": "先听到随时间衰减的合奏，再分开其中的频率",
+            "en": "Record a fading ensemble in time, then separate its frequencies"
+          }
+        },
+        {
+          "id": "S06-lab",
+          "title": {
+            "zh": "让两条邻近谱线分开",
+            "en": "Separate two neighboring resonances"
+          }
+        },
+        {
+          "id": "S06-quantify",
+          "title": {
+            "zh": "积分成为数量之前，要让核有时间恢复",
+            "en": "Before areas become amounts, allow magnetization to recover"
+          }
+        },
+        {
+          "id": "S06-research",
+          "title": {
+            "zh": "从乙醇走向聚合物和蛋白质",
+            "en": "From ethanol to polymers and proteins"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S05",
+        "next": "S07"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "S07",
+      "title": {
+        "zh": "X射线光电子能谱：读懂材料最外层",
+        "en": "XPS: Reading the outermost layers of a material"
+      },
+      "standfirst": {
+        "zh": "从一滴水的铺展出发，读懂电子能量、表面深度、元素比例和化学环境。",
+        "en": "Begin with a spreading water droplet and connect electron energy, surface depth, elemental composition and chemical environments."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "光谱与化学结构",
+        "en": "Spectroscopy and chemical structure"
+      },
+      "search_title": {
+        "zh": "X射线光电子能谱：读懂材料最外层",
+        "en": "XPS: Reading the outermost layers of a material"
+      },
+      "keywords": [
+        "XPS",
+        "ESCA",
+        "表面",
+        "photoemission",
+        "充电",
+        "峰拟合",
+        "深度"
+      ],
+      "sections": [
+        {
+          "id": "S07-question",
+          "title": {
+            "zh": "一滴水为什么突然愿意铺开",
+            "en": "Why does a water droplet suddenly spread?"
+          }
+        },
+        {
+          "id": "S07-energy",
+          "title": {
+            "zh": "把电子带走，要付出多少能量",
+            "en": "Accounting for the energy needed to remove an electron"
+          }
+        },
+        {
+          "id": "S07-depth",
+          "title": {
+            "zh": "为什么照进去很深，读出来却很浅",
+            "en": "Deep illumination, shallow information"
+          }
+        },
+        {
+          "id": "S07-lab",
+          "title": {
+            "zh": "改变观看角度，表面会显得多厚",
+            "en": "Change the viewing angle"
+          }
+        },
+        {
+          "id": "S07-acquire",
+          "title": {
+            "zh": "真正的样品从哪里开始变得复杂",
+            "en": "How a real specimen enters the measurement"
+          }
+        },
+        {
+          "id": "S07-quantify",
+          "title": {
+            "zh": "峰有多大，先问它对什么敏感",
+            "en": "A larger peak can mean a stronger response"
+          }
+        },
+        {
+          "id": "S07-model",
+          "title": {
+            "zh": "分峰是一项化学解释，不是绘画比赛",
+            "en": "Peak fitting is a chemical explanation"
+          }
+        },
+        {
+          "id": "S07-research",
+          "title": {
+            "zh": "把表面化学变成下一步实验",
+            "en": "Turning surface chemistry into the next experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S06",
+        "next": "T01"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "T01",
+      "title": {
+        "zh": "差示扫描量热：材料吸热放热时发生了什么",
+        "en": "DSC: What happens when materials absorb and release heat"
+      },
+      "standfirst": {
+        "zh": "读懂热流中的台阶和峰，把热历史、升温速率与分子结构联系起来。",
+        "en": "Read steps and peaks in heat flow, connecting thermal history and scan rate with molecular structure."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "热分析",
+        "en": "Thermal analysis"
+      },
+      "search_title": {
+        "zh": "差示扫描量热：材料吸热放热时发生了什么",
+        "en": "DSC: What happens when materials absorb and release heat"
+      },
+      "keywords": [
+        "DSC",
+        "热容量",
+        "玻璃化",
+        "冷结晶",
+        "蛋白质展开",
+        "calorimetry"
+      ],
+      "sections": [
+        {
+          "id": "T01-question",
+          "title": {
+            "zh": "塑料为什么会变软，蛋白质为什么会展开？",
+            "en": "Why does a plastic soften, and why does a protein unfold?"
+          }
+        },
+        {
+          "id": "T01-instrument",
+          "title": {
+            "zh": "两只小容器，怎样测到微小的热量差",
+            "en": "How two small containers reveal a heat difference"
+          }
+        },
+        {
+          "id": "T01-transitions",
+          "title": {
+            "zh": "台阶和峰，讲的是不同的分子故事",
+            "en": "Steps and peaks tell different molecular stories"
+          }
+        },
+        {
+          "id": "T01-design",
+          "title": {
+            "zh": "样品的过去，和升温的速度，都进入测量",
+            "en": "The specimen's past and the scan speed both enter the result"
+          }
+        },
+        {
+          "id": "T01-analysis",
+          "title": {
+            "zh": "从毫瓦曲线算到每克热量与结晶比例",
+            "en": "From milliwatts to heat per gram and crystalline fraction"
+          }
+        },
+        {
+          "id": "T01-lab",
+          "title": {
+            "zh": "峰变高，是否意味着每克热量变多？",
+            "en": "Does a taller peak mean more heat per gram?"
+          }
+        },
+        {
+          "id": "T01-protein",
+          "title": {
+            "zh": "蛋白质的吸热峰，怎样与展开比例联系起来",
+            "en": "Connecting a protein endotherm with the unfolded population"
+          }
+        },
+        {
+          "id": "T01-example",
+          "title": {
+            "zh": "把完整计算用于一项材料或配方比较",
+            "en": "Use the complete calculation to design a comparison"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "S07",
+        "next": "T02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "T02",
+      "title": {
+        "zh": "热重分析：质量变化中的组成与稳定性",
+        "en": "TGA: Composition and stability in changing mass"
+      },
+      "standfirst": {
+        "zh": "让每一份失重都有去向：从水分、残炭与灰分，到温度和时间共同决定的稳定性。",
+        "en": "Account for every lost portion, from water, char and ash to stability governed by temperature and time."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "热分析",
+        "en": "Thermal analysis"
+      },
+      "search_title": {
+        "zh": "热重分析：质量变化中的组成与稳定性",
+        "en": "TGA: Composition and stability in changing mass"
+      },
+      "keywords": [
+        "TGA",
+        "DTG",
+        "热解",
+        "残炭",
+        "结晶水",
+        "Arrhenius"
+      ],
+      "sections": [
+        {
+          "id": "T02-question",
+          "title": {
+            "zh": "一块材料变轻以后，离开的究竟是什么",
+            "en": "When a material becomes lighter, what has actually left?"
+          }
+        },
+        {
+          "id": "T02-balance",
+          "title": {
+            "zh": "连续称量的巧思：把天平放进一个可控制的环境",
+            "en": "The thermobalance: continuous weighing in a controlled environment"
+          }
+        },
+        {
+          "id": "T02-traces",
+          "title": {
+            "zh": "从质量轨迹到失重速率：先看台阶，再看峰",
+            "en": "Read the mass steps before interpreting derivative peaks"
+          }
+        },
+        {
+          "id": "T02-composition",
+          "title": {
+            "zh": "残炭会让组成分析拐一个弯",
+            "en": "Char changes the composition calculation"
+          }
+        },
+        {
+          "id": "T02-lab",
+          "title": {
+            "zh": "同一个残余，可能装着哪些物质？",
+            "en": "What substances can occupy the same residue?"
+          }
+        },
+        {
+          "id": "T02-hydrate",
+          "title": {
+            "zh": "用化学式核对台阶：一份结晶水的去向",
+            "en": "A chemical formula predicts the mass steps"
+          }
+        },
+        {
+          "id": "T02-stability",
+          "title": {
+            "zh": "为什么快一点加热，材料看起来会更耐热",
+            "en": "Why faster heating can make a material appear more stable"
+          }
+        },
+        {
+          "id": "T02-example",
+          "title": {
+            "zh": "把一条热重曲线整理成可以追问的结果",
+            "en": "Turn a curve into a result that supports the next experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "T01",
+        "next": "I01"
+      },
+      "prerequisites": [
+        "T01"
+      ]
+    },
+    {
+      "id": "I01",
+      "title": {
+        "zh": "光学与荧光显微镜：从光路到可信图像",
+        "en": "Optical and fluorescence microscopy: From light paths to trustworthy images"
+      },
+      "standfirst": {
+        "zh": "沿着样品、光路与像素理解显微成像，用真实细胞图像检验分辨率、强度与区域计数。",
+        "en": "Follow a specimen through light paths and pixels, then examine resolution, intensity and object measurements in a real cell image."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "显微与结构",
+        "en": "Imaging and structure"
+      },
+      "search_title": {
+        "zh": "光学与荧光显微镜：从光路到可信图像",
+        "en": "Optical and fluorescence microscopy: Light paths and images"
+      },
+      "keywords": [
+        "microscopy",
+        "fluorescence",
+        "光学显微镜",
+        "荧光",
+        "PSF",
+        "NA",
+        "分辨率"
+      ],
+      "sections": [
+        {
+          "id": "I01-question",
+          "title": {
+            "zh": "一张细胞照片，怎样变成一个可以回答的问题",
+            "en": "How does a photograph of cells become a scientific measurement?"
+          }
+        },
+        {
+          "id": "I01-light",
+          "title": {
+            "zh": "从胡克的观察到荧光标记：让透明结构产生对比",
+            "en": "From Hooke's observations to fluorescent labels: creating contrast"
+          }
+        },
+        {
+          "id": "I01-resolution",
+          "title": {
+            "zh": "放大、分辨与采样，为什么是三个不同的旋钮",
+            "en": "Magnification, resolution and sampling are different controls"
+          }
+        },
+        {
+          "id": "I01-specimen",
+          "title": {
+            "zh": "从样品准备开始保护你想观察的结构",
+            "en": "Preserve the structure you want to observe during preparation"
+          }
+        },
+        {
+          "id": "I01-photons",
+          "title": {
+            "zh": "相机记录的是光子形成的信号，亮度比较需要共同尺度",
+            "en": "The camera records a signal from photons, so brightness needs a common scale"
+          }
+        },
+        {
+          "id": "I01-real",
+          "title": {
+            "zh": "用真实图像走一遍：从像素到区域，而不是直接跳到细胞结论",
+            "en": "Follow a real image from pixels to regions before assigning biological meaning"
+          }
+        },
+        {
+          "id": "I01-lab-code",
+          "title": {
+            "zh": "亲手改变孔径和像素尺寸，再运行完整分析",
+            "en": "Change aperture and pixel spacing, then run the complete analysis"
+          }
+        },
+        {
+          "id": "I01-lab",
+          "title": {
+            "zh": "两点源显微实验",
+            "en": "Two-emitter microscopy experiment"
+          }
+        },
+        {
+          "id": "I01-design",
+          "title": {
+            "zh": "把一组照片组织成一次有说服力的测量",
+            "en": "Organize the photographs around a measurement question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "T02",
+        "next": "I02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "I02",
+      "title": {
+        "zh": "共聚焦显微镜：让三维样品一层层显现",
+        "en": "Confocal microscopy: Revealing a specimen one optical section at a time"
+      },
+      "standfirst": {
+        "zh": "从针孔与光学切片理解三维测量，用真实组织堆栈探索深度、投影和体积。",
+        "en": "Understand three-dimensional measurement through pinholes and optical sections, then explore depth, projections and volume in a real tissue stack."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "显微与结构",
+        "en": "Imaging and structure"
+      },
+      "search_title": {
+        "zh": "共聚焦显微镜：让三维样品一层层显现",
+        "en": "Confocal microscopy: Optical sectioning and 3-D images"
+      },
+      "keywords": [
+        "confocal",
+        "共聚焦",
+        "光学切片",
+        "z-stack",
+        "pinhole",
+        "projection",
+        "体素"
+      ],
+      "sections": [
+        {
+          "id": "I02-question",
+          "title": {
+            "zh": "细胞是在材料表面，还是已经走进了里面",
+            "en": "Are cells on the material surface or already inside it?"
+          }
+        },
+        {
+          "id": "I02-pinhole",
+          "title": {
+            "zh": "针孔为什么能挑选深度：从明斯基的双重聚焦说起",
+            "en": "Why can a pinhole select depth? Minsky's double-focusing idea"
+          }
+        },
+        {
+          "id": "I02-stack",
+          "title": {
+            "zh": "从一张图到一个体积：像素、体素与层间距",
+            "en": "From a picture to a volume: pixels, voxels and slice spacing"
+          }
+        },
+        {
+          "id": "I02-acquire",
+          "title": {
+            "zh": "扫描速度、光子数和样品状态怎样一起决定设置",
+            "en": "Scanning time, photon counts and specimen condition determine settings together"
+          }
+        },
+        {
+          "id": "I02-projection",
+          "title": {
+            "zh": "三维数据怎样压成一张图，以及压缩时丢掉了什么",
+            "en": "What happens when a three-dimensional stack is compressed into one image?"
+          }
+        },
+        {
+          "id": "I02-volume",
+          "title": {
+            "zh": "体积不是把二维面积随意乘一个厚度",
+            "en": "Volume comes from calibrated voxels and a defined object"
+          }
+        },
+        {
+          "id": "I02-lab-code",
+          "title": {
+            "zh": "拖动真实切片，再把整个分析重新算一遍",
+            "en": "Move through the real sections and rerun the complete analysis"
+          }
+        },
+        {
+          "id": "I02-lab",
+          "title": {
+            "zh": "逐层浏览真实共聚焦堆栈",
+            "en": "Explore a real confocal stack"
+          }
+        },
+        {
+          "id": "I02-design",
+          "title": {
+            "zh": "围绕三维问题组织采集与呈现",
+            "en": "Build acquisition and presentation around the three-dimensional question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "I01",
+        "next": "I03"
+      },
+      "prerequisites": [
+        "I01"
+      ]
+    },
+    {
+      "id": "I03",
+      "title": {
+        "zh": "扫描电镜与能谱：形貌、电子与元素",
+        "en": "SEM and EDS: Morphology, electrons and elements"
+      },
+      "standfirst": {
+        "zh": "沿着电子束到达样品后产生的不同信号，读懂表面图像、元素谱与它们之间的空间关系。",
+        "en": "Follow the signals generated by an electron beam to interpret surface images, elemental spectra and their spatial relationship."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "显微与结构",
+        "en": "Imaging and structure"
+      },
+      "search_title": {
+        "zh": "扫描电镜与能谱：形貌、电子与元素",
+        "en": "SEM and EDS: Morphology, electrons and elements"
+      },
+      "keywords": [
+        "SEM",
+        "EDS",
+        "电子显微镜",
+        "能谱",
+        "charging",
+        "electron microscopy"
+      ],
+      "sections": [
+        {
+          "id": "I03-question",
+          "title": {
+            "zh": "表面的纹理、颗粒与元素，分别要怎样看",
+            "en": "How can surface texture, particles and elements be examined?"
+          }
+        },
+        {
+          "id": "I03-signals",
+          "title": {
+            "zh": "扫描电子束怎样把表面变成一幅图",
+            "en": "How does a scanned electron beam form an image?"
+          }
+        },
+        {
+          "id": "I03-preparation",
+          "title": {
+            "zh": "制样改变了什么，图像就应该怎样解释",
+            "en": "Preparation defines the material state that the image represents"
+          }
+        },
+        {
+          "id": "I03-image",
+          "title": {
+            "zh": "从真实花粉图像读出结构，再把像素换成长度",
+            "en": "Read a real pollen image, then convert pixels to length"
+          }
+        },
+        {
+          "id": "I03-dose",
+          "title": {
+            "zh": "电子束也是一种处理：剂量与重复扫描",
+            "en": "The beam also treats the specimen: dose and repeated scans"
+          }
+        },
+        {
+          "id": "I03-eds",
+          "title": {
+            "zh": "EDS能谱的峰位、峰面积与背景各自说明什么",
+            "en": "Peak position, area and background each contribute different information"
+          }
+        },
+        {
+          "id": "I03-lab-code",
+          "title": {
+            "zh": "改变峰宽与计数，观察哪些问题能靠多测一会儿解决",
+            "en": "Which problems improve when the counting time increases?"
+          }
+        },
+        {
+          "id": "I03-lab",
+          "title": {
+            "zh": "改变分辨率，两个元素峰会发生什么",
+            "en": "Change resolution: what happens to two peaks?"
+          }
+        },
+        {
+          "id": "I03-design",
+          "title": {
+            "zh": "让形貌与组成围绕同一个材料问题展开",
+            "en": "Connect morphology and composition to one materials question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "I02",
+        "next": "I04"
+      },
+      "prerequisites": [
+        "I01"
+      ]
+    },
+    {
+      "id": "I04",
+      "title": {
+        "zh": "透射电镜：电子穿过薄片以后",
+        "en": "TEM: What electrons reveal after crossing a thin specimen"
+      },
+      "standfirst": {
+        "zh": "从一颗黑点出发，理解薄样品、投影、衍射和颗粒尺寸之间的关系。",
+        "en": "Begin with a dark spot and connect thin specimens, projections, diffraction and particle dimensions."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "显微与结构",
+        "en": "Imaging and structure"
+      },
+      "search_title": {
+        "zh": "透射电镜：电子穿过薄片以后",
+        "en": "TEM: What electrons reveal after crossing a thin specimen"
+      },
+      "keywords": [
+        "TEM",
+        "透射电镜",
+        "cryo-TEM",
+        "diffraction",
+        "投影",
+        "粒径"
+      ],
+      "sections": [
+        {
+          "id": "I04-question",
+          "title": {
+            "zh": "一颗黑点，是颗粒、空腔，还是两件东西的重叠",
+            "en": "Is a dark spot a particle, a cavity, or two overlapping objects?"
+          }
+        },
+        {
+          "id": "I04-electrons",
+          "title": {
+            "zh": "电子为什么能成为一束可以成像的波",
+            "en": "Why electrons can form a magnified image"
+          }
+        },
+        {
+          "id": "I04-preparation",
+          "title": {
+            "zh": "先把样品变得可透过，再决定保留哪一种结构",
+            "en": "Make the specimen transmissive while preserving the structure of interest"
+          }
+        },
+        {
+          "id": "I04-contrast",
+          "title": {
+            "zh": "灰度承载着厚度、散射与取向的信息",
+            "en": "Gray levels carry information about thickness, scattering and orientation"
+          }
+        },
+        {
+          "id": "I04-projection",
+          "title": {
+            "zh": "把样品转一点，二维重叠就可能分开",
+            "en": "A small tilt can separate objects that overlap in projection"
+          }
+        },
+        {
+          "id": "I04-lab",
+          "title": {
+            "zh": "转动两个球，看见隐藏的深度",
+            "en": "Tilt two spheres to expose hidden depth"
+          }
+        },
+        {
+          "id": "I04-diffraction",
+          "title": {
+            "zh": "衍射图不是另一张照片，它记录空间周期",
+            "en": "A diffraction pattern records periodicity rather than object position"
+          }
+        },
+        {
+          "id": "I04-quantify",
+          "title": {
+            "zh": "从颗粒轮廓到一份能够解释的尺寸分布",
+            "en": "Turn particle outlines into an interpretable size distribution"
+          }
+        },
+        {
+          "id": "I04-code",
+          "title": {
+            "zh": "用一套可重复计算把图像、几何和结构联系起来",
+            "en": "Connect images, geometry and structure through reproducible calculations"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "I03",
+        "next": "I05"
+      },
+      "prerequisites": [
+        "I03"
+      ]
+    },
+    {
+      "id": "I05",
+      "title": {
+        "zh": "原子力显微镜：用微小探针触摸表面",
+        "en": "AFM: Touching a surface with a tiny probe"
+      },
+      "standfirst": {
+        "zh": "让针尖形状、表面起伏和微小力各自有清楚的物理含义。",
+        "en": "Give probe shape, surface topography and small forces distinct physical meanings."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "显微与结构",
+        "en": "Imaging and structure"
+      },
+      "search_title": {
+        "zh": "原子力显微镜：用微小探针触摸表面",
+        "en": "AFM: Touching a surface with a tiny probe"
+      },
+      "keywords": [
+        "AFM",
+        "原子力",
+        "roughness",
+        "indentation",
+        "tip convolution",
+        "力曲线"
+      ],
+      "sections": [
+        {
+          "id": "I05-question",
+          "title": {
+            "zh": "看起来一样光滑的表面，细胞为什么可能感到不同",
+            "en": "Why might cells feel a difference between two smooth-looking surfaces?"
+          }
+        },
+        {
+          "id": "I05-history",
+          "title": {
+            "zh": "从读取电流，到读取一根微小弹簧的弯曲",
+            "en": "From measuring current to measuring a tiny spring's bending"
+          }
+        },
+        {
+          "id": "I05-scan",
+          "title": {
+            "zh": "怎样扫描，决定怎样接触样品",
+            "en": "The scanning mode determines how the probe encounters the specimen"
+          }
+        },
+        {
+          "id": "I05-tip",
+          "title": {
+            "zh": "探针有宽度，测得的山也会变宽",
+            "en": "A probe has width, so a measured hill can become wider"
+          }
+        },
+        {
+          "id": "I05-lab",
+          "title": {
+            "zh": "针尖变钝，台阶会变宽多少",
+            "en": "How much does a blunt probe broaden a step?"
+          }
+        },
+        {
+          "id": "I05-roughness",
+          "title": {
+            "zh": "粗糙度是相对于哪一个平面、哪一种尺度的起伏",
+            "en": "Roughness depends on the reference surface and spatial scale"
+          }
+        },
+        {
+          "id": "I05-force",
+          "title": {
+            "zh": "从靠近与离开的一条曲线，读出压入和粘附",
+            "en": "Read indentation and adhesion from an approach-and-retract curve"
+          }
+        },
+        {
+          "id": "I05-compute",
+          "title": {
+            "zh": "让几何、调平和接触模型各自接受检验",
+            "en": "Test geometry, leveling and contact mechanics separately"
+          }
+        },
+        {
+          "id": "I05-case",
+          "title": {
+            "zh": "把一块水凝胶的表面图与力学图连起来",
+            "en": "Connect a hydrogel's surface map with its mechanical map"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "I04",
+        "next": "I06"
+      },
+      "prerequisites": [
+        "I01"
+      ]
+    },
+    {
+      "id": "I06",
+      "title": {
+        "zh": "X射线衍射：从峰的位置到晶体结构",
+        "en": "XRD: From peak positions to crystal structure"
+      },
+      "standfirst": {
+        "zh": "把峰位、峰宽和峰面积分别连到原子周期、有序尺度与散射分配。",
+        "en": "Connect peak position, width and area to atomic periodicity, coherent length and scattering contributions."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "显微与结构",
+        "en": "Imaging and structure"
+      },
+      "search_title": {
+        "zh": "X射线衍射：从峰的位置到晶体结构",
+        "en": "XRD: From peak positions to crystal structure"
+      },
+      "keywords": [
+        "XRD",
+        "X射线衍射",
+        "Bragg",
+        "Scherrer",
+        "crystallinity",
+        "晶体"
+      ],
+      "sections": [
+        {
+          "id": "I06-question",
+          "title": {
+            "zh": "同样含有钙和磷，为什么还要看衍射",
+            "en": "If calcium and phosphorus are present, why measure diffraction?"
+          }
+        },
+        {
+          "id": "I06-history",
+          "title": {
+            "zh": "让波峰一起到达，原子排列就会留下方向信息",
+            "en": "When wave crests arrive together, atomic order becomes directional information"
+          }
+        },
+        {
+          "id": "I06-powder",
+          "title": {
+            "zh": "为什么一堆随机小晶粒能形成一条可读的曲线",
+            "en": "Why many randomly oriented crystallites produce a readable curve"
+          }
+        },
+        {
+          "id": "I06-position",
+          "title": {
+            "zh": "峰位置给出间距，整套峰才逐渐约束结构",
+            "en": "One position gives a spacing; a set of reflections constrains a structure"
+          }
+        },
+        {
+          "id": "I06-width",
+          "title": {
+            "zh": "峰为什么变宽：有限周期、应变和仪器一起参与",
+            "en": "Finite order, strain and the instrument all contribute to peak width"
+          }
+        },
+        {
+          "id": "I06-area",
+          "title": {
+            "zh": "峰面积、宽散射和背景，为什么需要一起解释",
+            "en": "Peak area, broad scattering and background need a joint interpretation"
+          }
+        },
+        {
+          "id": "I06-lab-discussion",
+          "title": {
+            "zh": "把晶格膨胀与尺寸变化分开观察",
+            "en": "Observe lattice expansion and size change separately"
+          }
+        },
+        {
+          "id": "I06-lab",
+          "title": {
+            "zh": "同一个峰，位置与宽度各由什么改变",
+            "en": "One peak: separate position from broadening"
+          }
+        },
+        {
+          "id": "I06-code",
+          "title": {
+            "zh": "从一条曲线走向一套可解释的结构判断",
+            "en": "Build an interpretable structural argument from the whole pattern"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "I05",
+        "next": "I07"
+      },
+      "prerequisites": [
+        "I04"
+      ]
+    },
+    {
+      "id": "I07",
+      "title": {
+        "zh": "小角X射线散射：看见纳米尺度的集合结构",
+        "en": "SAXS: Seeing nanoscale structure in an ensemble"
+      },
+      "standfirst": {
+        "zh": "从一瓶透明蛋白质溶液出发，读懂散射曲线、回转半径与拟合范围。",
+        "en": "Follow a clear protein solution into scattering profiles, radius of gyration and fitting-window decisions."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "显微与结构",
+        "en": "Imaging and structure"
+      },
+      "search_title": {
+        "zh": "小角X射线散射：看见纳米尺度的集合结构",
+        "en": "SAXS: Seeing nanoscale structure in an ensemble"
+      },
+      "keywords": [
+        "SAXS",
+        "小角X射线散射",
+        "Guinier",
+        "Kratky",
+        "lysozyme",
+        "回转半径"
+      ],
+      "sections": [
+        {
+          "id": "I07-question",
+          "title": {
+            "zh": "一瓶透明蛋白质溶液，里面的分子有没有抱成团",
+            "en": "A clear protein solution can still hide a structural change"
+          }
+        },
+        {
+          "id": "I07-history",
+          "title": {
+            "zh": "从金属为什么变硬，到溶液里的纳米结构",
+            "en": "From the hardening of an alloy to structure in a liquid"
+          }
+        },
+        {
+          "id": "I07-sample",
+          "title": {
+            "zh": "先把水和容器量好，蛋白质的信号才会显出来",
+            "en": "Measure the liquid and container before interpreting the protein"
+          }
+        },
+        {
+          "id": "I07-guinier",
+          "title": {
+            "zh": "曲线起点怎样给出一个分子的分布尺度",
+            "en": "How the beginning of a curve gives a measure of molecular extent"
+          }
+        },
+        {
+          "id": "I07-data-discussion",
+          "title": {
+            "zh": "在真实曲线上练习：同一个名字下面，保留完整测量条件",
+            "en": "Read the real curve together with its experimental definition"
+          }
+        },
+        {
+          "id": "I07-shape",
+          "title": {
+            "zh": "尺寸之外：紧凑、柔性、聚集与背景留下不同线索",
+            "en": "Compactness, flexibility, association and background leave different clues"
+          }
+        },
+        {
+          "id": "I07-laboratory",
+          "title": {
+            "zh": "亲手移动拟合窗口，观察结论如何跟着证据变化",
+            "en": "Move the fitting window and watch the evidence change"
+          }
+        },
+        {
+          "id": "I07-lab",
+          "title": {
+            "zh": "真实曲线：移动Guinier拟合窗口",
+            "en": "Measured curve: move the Guinier fitting window"
+          }
+        },
+        {
+          "id": "I07-example",
+          "title": {
+            "zh": "完整计算：把曲线、误差和选择一起保存",
+            "en": "Save the curve, its errors and the decisions that shaped the result"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "I06",
+        "next": "I08"
+      },
+      "prerequisites": [
+        "I06"
+      ]
+    },
+    {
+      "id": "I08",
+      "title": {
+        "zh": "显微CT：把投影还原成三维结构",
+        "en": "Micro-CT: Reconstructing three-dimensional structure from projections"
+      },
+      "standfirst": {
+        "zh": "用多方向投影恢复内部截面，再分清孔隙体积与贯通通路。",
+        "en": "Recover internal sections from angular projections, then distinguish pore volume from spanning pathways."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "显微与结构",
+        "en": "Imaging and structure"
+      },
+      "search_title": {
+        "zh": "显微CT：把投影还原成三维结构",
+        "en": "Micro-CT: Reconstructing three-dimensional structure from projections"
+      },
+      "keywords": [
+        "microCT",
+        "显微CT",
+        "tomography",
+        "porosity",
+        "connectivity",
+        "孔隙率"
+      ],
+      "sections": [
+        {
+          "id": "I08-question",
+          "title": {
+            "zh": "海绵里面的孔，是房间还是相通的走廊",
+            "en": "Are the pores inside a sponge rooms or connected corridors?"
+          }
+        },
+        {
+          "id": "I08-history",
+          "title": {
+            "zh": "把叠在一起的影子分开，曾经比拍得更细更重要",
+            "en": "Separating overlapping structures changed the purpose of an image"
+          }
+        },
+        {
+          "id": "I08-signal",
+          "title": {
+            "zh": "探测器先看到光变弱，随后才得到内部灰度",
+            "en": "The detector measures weakened radiation before we obtain internal gray levels"
+          }
+        },
+        {
+          "id": "I08-reconstruct",
+          "title": {
+            "zh": "从正弦图到截面：方向越少，条纹越容易留下来",
+            "en": "From sinogram to section: sparse directions leave streaks"
+          }
+        },
+        {
+          "id": "I08-resolution",
+          "title": {
+            "zh": "体素有多小，与真正能分清多细，是两件相连的事",
+            "en": "Small voxels and fine resolved detail are related but distinct"
+          }
+        },
+        {
+          "id": "I08-quantify",
+          "title": {
+            "zh": "先定义研究区域，再数孔隙和寻找通路",
+            "en": "Define the region before counting pores and following pathways"
+          }
+        },
+        {
+          "id": "I08-laboratory",
+          "title": {
+            "zh": "移动阈值，看一条窄颈怎样决定整个通路",
+            "en": "Move the threshold and watch a throat control the whole pathway"
+          }
+        },
+        {
+          "id": "I08-lab",
+          "title": {
+            "zh": "三维孔隙：阈值怎样改变贯通",
+            "en": "Three-dimensional pores: threshold and spanning"
+          }
+        },
+        {
+          "id": "I08-example",
+          "title": {
+            "zh": "完整例子：让几何真值、重建与三维统计彼此核对",
+            "en": "Keep geometry, reconstruction and three-dimensional statistics connected"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "I07",
+        "next": "C01"
+      },
+      "prerequisites": [
+        "I01"
+      ]
+    },
+    {
+      "id": "C01",
+      "title": {
+        "zh": "高效液相色谱：让混合物按时间分开",
+        "en": "HPLC: Separating mixtures in time"
+      },
+      "standfirst": {
+        "zh": "把混合物分成可辨认的时间信号，再把峰面积变成有明确实验含义的浓度与质量。",
+        "en": "Separate a mixture into distinguishable time signals, then turn peak area into concentration and mass with a clear experimental meaning."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "分离与分子测量",
+        "en": "Separation and molecular measurements"
+      },
+      "search_title": {
+        "zh": "高效液相色谱：让混合物按时间分开",
+        "en": "HPLC: Separating mixtures in time"
+      },
+      "keywords": [
+        "HPLC",
+        "液相色谱",
+        "分离度",
+        "校准",
+        "回收率",
+        "释放",
+        "chromatography"
+      ],
+      "sections": [
+        {
+          "id": "C01-question",
+          "title": {
+            "zh": "一杯咖啡里，怎样只数咖啡因",
+            "en": "How do we count only the caffeine in coffee?"
+          }
+        },
+        {
+          "id": "C01-column",
+          "title": {
+            "zh": "分子的一点偏好，怎样变成分钟级的差别",
+            "en": "Turning a molecular preference into minutes of separation"
+          }
+        },
+        {
+          "id": "C01-time",
+          "title": {
+            "zh": "峰在哪里，和峰有多宽一样重要",
+            "en": "Peak width matters as much as arrival time"
+          }
+        },
+        {
+          "id": "C01-lab",
+          "title": {
+            "zh": "让峰变窄，还是让峰离远一些",
+            "en": "Narrow the peaks or move them apart"
+          }
+        },
+        {
+          "id": "C01-method",
+          "title": {
+            "zh": "让样品以合适的状态进入柱子",
+            "en": "Introducing the specimen in a suitable state"
+          }
+        },
+        {
+          "id": "C01-calibration",
+          "title": {
+            "zh": "从一个峰，到原样里有多少物质",
+            "en": "From one peak to the amount in the original specimen"
+          }
+        },
+        {
+          "id": "C01-quality",
+          "title": {
+            "zh": "一条漂亮的直线，还需要哪些搭档",
+            "en": "What should accompany a convincing calibration line?"
+          }
+        },
+        {
+          "id": "C01-research",
+          "title": {
+            "zh": "当浓度进入一个材料实验",
+            "en": "When concentration becomes a materials result"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "I08",
+        "next": "C02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "C02",
+      "title": {
+        "zh": "体积排阻色谱：聚合物分子有多大",
+        "en": "SEC/GPC: How large are polymer molecules"
+      },
+      "standfirst": {
+        "zh": "让溶解的链通过多孔空间，读懂尺寸分离、质量加权和一整群分子的分布。",
+        "en": "Follow dissolved chains through porous spaces to understand size separation, mass weighting and molecular distributions."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "分离与分子测量",
+        "en": "Separation and molecular measurements"
+      },
+      "search_title": {
+        "zh": "体积排阻色谱：聚合物分子有多大",
+        "en": "SEC/GPC: How large are polymer molecules"
+      },
+      "keywords": [
+        "SEC",
+        "GPC",
+        "体积排阻",
+        "分子量",
+        "摩尔质量",
+        "分散系数",
+        "polyethylene"
+      ],
+      "sections": [
+        {
+          "id": "C02-question",
+          "title": {
+            "zh": "同样叫聚合物，为什么一瓶很稠，另一瓶很稀",
+            "en": "The same polymer name can hide very different chains"
+          }
+        },
+        {
+          "id": "C02-pores",
+          "title": {
+            "zh": "大分子先出来：多孔小球里的“侧边房间”",
+            "en": "Large molecules emerge first because they visit fewer side rooms"
+          }
+        },
+        {
+          "id": "C02-calibration",
+          "title": {
+            "zh": "从流出位置到摩尔质量，中间要搭一把尺子",
+            "en": "Calibration builds a bridge from elution position to molar mass"
+          }
+        },
+        {
+          "id": "C02-averages",
+          "title": {
+            "zh": "一群长短不同的链，为什么需要两个平均值",
+            "en": "One population, two averages and two different voting rules"
+          }
+        },
+        {
+          "id": "C02-sample",
+          "title": {
+            "zh": "真正进入色谱柱的，是经过制备的一份样品",
+            "en": "The column receives a prepared specimen, not an abstract material"
+          }
+        },
+        {
+          "id": "C02-inference",
+          "title": {
+            "zh": "峰变宽、峰移动，各自怎样影响结论",
+            "en": "Broadening and shifting a peak tell different stories"
+          }
+        },
+        {
+          "id": "C02-lab",
+          "title": {
+            "zh": "同一群链怎样变成不同的表观分布",
+            "en": "How the same chains acquire different apparent distributions"
+          }
+        },
+        {
+          "id": "C02-code",
+          "title": {
+            "zh": "把一条曲线变成能重新检查的完整分析",
+            "en": "A complete analysis keeps the reasoning available for inspection"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "C01",
+        "next": "C03"
+      },
+      "prerequisites": [
+        "C01"
+      ]
+    },
+    {
+      "id": "C03",
+      "title": {
+        "zh": "质谱：用质量与电荷辨认分子",
+        "en": "Mass spectrometry: Identifying molecules through mass and charge"
+      },
+      "standfirst": {
+        "zh": "让离子带路，把质量、电荷、碎片和浓度连接成可以逐步检验的分子证据。",
+        "en": "Use ions to connect mass, charge, fragmentation and concentration in a stepwise molecular investigation."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "分离与分子测量",
+        "en": "Separation and molecular measurements"
+      },
+      "search_title": {
+        "zh": "质谱：用质量与电荷辨认分子",
+        "en": "Mass spectrometry: Identifying molecules through mass and charge"
+      },
+      "keywords": [
+        "mass spectrometry",
+        "MS/MS",
+        "ESI",
+        "质谱",
+        "咖啡因",
+        "内标",
+        "基质效应"
+      ],
+      "sections": [
+        {
+          "id": "C03-question",
+          "title": {
+            "zh": "一杯咖啡里，怎样把“像咖啡因”变成可检验的判断",
+            "en": "Turning “looks like caffeine” into a testable identification"
+          }
+        },
+        {
+          "id": "C03-ions",
+          "title": {
+            "zh": "先让分子完整地进入气相，再谈怎样测量",
+            "en": "Getting an intact molecule into the measurable ion population"
+          }
+        },
+        {
+          "id": "C03-charge",
+          "title": {
+            "zh": "一个分子为什么能出现许多峰",
+            "en": "Why one molecule can make many peaks"
+          }
+        },
+        {
+          "id": "C03-spectrum",
+          "title": {
+            "zh": "峰的位置、峰的宽度和碎片，分别告诉我们什么",
+            "en": "Position, width and fragments provide different information"
+          }
+        },
+        {
+          "id": "C03-lcms",
+          "title": {
+            "zh": "液相质谱是一张随时间展开的地图",
+            "en": "LC-MS is a map unfolding in time"
+          }
+        },
+        {
+          "id": "C03-quant",
+          "title": {
+            "zh": "同样多的分子，为什么信号会变小",
+            "en": "The same amount can generate less signal"
+          }
+        },
+        {
+          "id": "C03-lab",
+          "title": {
+            "zh": "同一浓度，响应为什么变了",
+            "en": "Same concentration, different response"
+          }
+        },
+        {
+          "id": "C03-example",
+          "title": {
+            "zh": "从完整例子走向一份可追问的研究结果",
+            "en": "A complete example preserves the questions behind the result"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "C02",
+        "next": "C04"
+      },
+      "prerequisites": [
+        "C01"
+      ]
+    },
+    {
+      "id": "C04",
+      "title": {
+        "zh": "凝胶电泳：在一块胶里分开生物大分子",
+        "en": "Gel electrophoresis: Separating biomolecules in a gel"
+      },
+      "standfirst": {
+        "zh": "读懂一张胶图中的位置、亮度和分子状态，让每条带都有合适的参照。",
+        "en": "Read position, brightness and molecular state with the right reference for each band."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "分离与分子测量",
+        "en": "Separation and molecular measurements"
+      },
+      "search_title": {
+        "zh": "凝胶电泳：在一块胶里分开生物大分子",
+        "en": "Gel electrophoresis: Separating biomolecules in a gel"
+      },
+      "keywords": [
+        "electrophoresis",
+        "SDS-PAGE",
+        "DNA",
+        "凝胶电泳",
+        "条带定量"
+      ],
+      "sections": [
+        {
+          "id": "C04-question",
+          "title": {
+            "zh": "一条亮带里，藏着几个不同的问题",
+            "en": "Several questions can hide inside one bright band"
+          }
+        },
+        {
+          "id": "C04-history",
+          "title": {
+            "zh": "从液体中移动的界面，到一块能筛分分子的胶",
+            "en": "From a moving liquid boundary to a molecular sieve"
+          }
+        },
+        {
+          "id": "C04-chemistry",
+          "title": {
+            "zh": "先决定保留什么结构，再选择怎样跑胶",
+            "en": "Choose which molecular structures the experiment should preserve"
+          }
+        },
+        {
+          "id": "C04-design",
+          "title": {
+            "zh": "把样品、标记和对照放在同一张图上",
+            "en": "Put samples, references, and controls into the same comparison"
+          }
+        },
+        {
+          "id": "C04-size",
+          "title": {
+            "zh": "先读位置：把迁移距离变成有参照的大小",
+            "en": "Read position first: Establish a size ruler"
+          }
+        },
+        {
+          "id": "C04-quantity",
+          "title": {
+            "zh": "再读亮度：背景、面积和饱和共同决定定量",
+            "en": "Read brightness through background, area, and saturation"
+          }
+        },
+        {
+          "id": "C04-lab",
+          "title": {
+            "zh": "一条带何时会被曝光截平",
+            "en": "When does a band become clipped?"
+          }
+        },
+        {
+          "id": "C04-example",
+          "title": {
+            "zh": "让一张胶图成为下一步实验的依据",
+            "en": "Turn the image into a decision for the next experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "C03",
+        "next": "C05"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "C05",
+      "title": {
+        "zh": "等温滴定量热：用热量测量分子结合",
+        "en": "ITC: Measuring molecular binding through heat"
+      },
+      "standfirst": {
+        "zh": "把逐针热量与分子占据联系起来，读懂亲和力、焓变和实验条件。",
+        "en": "Connect injection heats with molecular occupancy to interpret affinity, enthalpy and experimental conditions."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "分离与分子测量",
+        "en": "Separation and molecular measurements"
+      },
+      "search_title": {
+        "zh": "等温滴定量热：用热量测量分子结合",
+        "en": "ITC: Measuring molecular binding through heat"
+      },
+      "keywords": [
+        "ITC",
+        "binding",
+        "enthalpy",
+        "等温滴定量热",
+        "亲和力",
+        "空白校正"
+      ],
+      "sections": [
+        {
+          "id": "C05-question",
+          "title": {
+            "zh": "两个分子是否愿意待在一起，可以从热量问起",
+            "en": "Ask about molecular binding through a small amount of heat"
+          }
+        },
+        {
+          "id": "C05-instrument",
+          "title": {
+            "zh": "温度几乎不变，为什么仍然能测到热",
+            "en": "Heat can be measured while temperature stays nearly constant"
+          }
+        },
+        {
+          "id": "C05-equilibrium",
+          "title": {
+            "zh": "先数清游离、结合与总量，亲和力才有含义",
+            "en": "Count free, bound, and total molecules before interpreting affinity"
+          }
+        },
+        {
+          "id": "C05-design",
+          "title": {
+            "zh": "把实验做在曲线能够说话的区间",
+            "en": "Choose a concentration range in which the curve contains information"
+          }
+        },
+        {
+          "id": "C05-analysis",
+          "title": {
+            "zh": "从一串热峰，走到可以核查的结合参数",
+            "en": "Connect a sequence of peaks to inspectable binding parameters"
+          }
+        },
+        {
+          "id": "C05-thermodynamics",
+          "title": {
+            "zh": "热量、亲和力与熵，分别回答什么",
+            "en": "Heat, affinity, and entropy describe different aspects of binding"
+          }
+        },
+        {
+          "id": "C05-lab",
+          "title": {
+            "zh": "分别改变亲和力、热量与浓度",
+            "en": "Change affinity, heat and concentration separately"
+          }
+        },
+        {
+          "id": "C05-example",
+          "title": {
+            "zh": "把测量过程保留在完整分析里",
+            "en": "Preserve the measurement inside the complete analysis"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "C04",
+        "next": "C06"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "C06",
+      "title": {
+        "zh": "表面等离子体共振：实时观察结合与解离",
+        "en": "SPR: Watching binding and dissociation in real time"
+      },
+      "standfirst": {
+        "zh": "从光学响应、参照和时间曲线，理解分子结合的亲和力、速度与输运。",
+        "en": "Connect optics, references and time traces to molecular affinity, kinetics and transport."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "分离与分子测量",
+        "en": "Separation and molecular measurements"
+      },
+      "search_title": {
+        "zh": "表面等离子体共振：实时观察结合与解离",
+        "en": "SPR: Watching binding and dissociation in real time"
+      },
+      "keywords": [
+        "SPR",
+        "binding kinetics",
+        "affinity",
+        "传质",
+        "表面等离子体共振",
+        "再结合"
+      ],
+      "sections": [
+        {
+          "id": "C06-question",
+          "title": {
+            "zh": "结合得牢，和留得久，是同一回事吗？",
+            "en": "Does strong binding also mean a long stay?"
+          }
+        },
+        {
+          "id": "C06-optics",
+          "title": {
+            "zh": "从金属薄膜上的光，到分子结合的时间记录",
+            "en": "Turning a change at a metal film into a time record"
+          }
+        },
+        {
+          "id": "C06-kinetics",
+          "title": {
+            "zh": "把上升和下降写成可理解的速率",
+            "en": "Understanding the rates behind the rising and falling curve"
+          }
+        },
+        {
+          "id": "C06-lab",
+          "title": {
+            "zh": "相同亲和力，不同的时间过程",
+            "en": "Same affinity, different time courses"
+          }
+        },
+        {
+          "id": "C06-design",
+          "title": {
+            "zh": "曲线质量从表面和样品开始",
+            "en": "Good curves begin with the surface and the sample"
+          }
+        },
+        {
+          "id": "C06-analysis",
+          "title": {
+            "zh": "从四条原始记录，到一组共享参数",
+            "en": "From four raw records to shared molecular parameters"
+          }
+        },
+        {
+          "id": "C06-transport",
+          "title": {
+            "zh": "表面附近的浓度，为什么可能与注射液不同",
+            "en": "Why the concentration at the surface can differ from the syringe"
+          }
+        },
+        {
+          "id": "C06-example",
+          "title": {
+            "zh": "完整重建一次分析，并把结果用于下一步实验",
+            "en": "Reconstruct the analysis and choose the next experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "C05",
+        "next": "P01"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "P01",
+      "title": {
+        "zh": "动态光散射：从布朗运动测量粒径",
+        "en": "DLS: Measuring particle size through Brownian motion"
+      },
+      "standfirst": {
+        "zh": "从随机运动和闪烁光强，读懂水动力尺寸、少量聚集体与不同平均方式。",
+        "en": "Connect random motion and fluctuating light to hydrodynamic size, rare aggregates and different averages."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "颗粒与界面",
+        "en": "Particles and interfaces"
+      },
+      "search_title": {
+        "zh": "动态光散射：从布朗运动测量粒径",
+        "en": "DLS: Measuring particle size through Brownian motion"
+      },
+      "keywords": [
+        "DLS",
+        "布朗运动",
+        "水动力直径",
+        "相关函数",
+        "z-average",
+        "PDI"
+      ],
+      "sections": [
+        {
+          "id": "P01-question",
+          "title": {
+            "zh": "看不见颗粒，也能知道它在水里有多大",
+            "en": "Measuring particles that cannot be seen individually"
+          }
+        },
+        {
+          "id": "P01-brownian",
+          "title": {
+            "zh": "从花粉附近的微粒，到可以计算的随机运动",
+            "en": "From Brown’s observations to a quantitative random walk"
+          }
+        },
+        {
+          "id": "P01-optics",
+          "title": {
+            "zh": "散射光为什么会闪烁：颗粒移动改变了波的叠加",
+            "en": "Moving particles change the interference of scattered waves"
+          }
+        },
+        {
+          "id": "P01-inference",
+          "title": {
+            "zh": "从衰减时间走到直径，中间有哪些换算",
+            "en": "The steps between a decay time and a diameter"
+          }
+        },
+        {
+          "id": "P01-mixtures",
+          "title": {
+            "zh": "为什么千分之一的大颗粒，会占去很多散射光",
+            "en": "A few larger particles can contribute much of the light"
+          }
+        },
+        {
+          "id": "P01-lab",
+          "title": {
+            "zh": "极少量大颗粒与一个输入框，会怎样改变粒径？",
+            "en": "How do rare large particles and one input field change size?"
+          }
+        },
+        {
+          "id": "P01-sample",
+          "title": {
+            "zh": "样品与液体，也是测量模型的一部分",
+            "en": "The liquid and sample preparation belong to the measurement"
+          }
+        },
+        {
+          "id": "P01-example",
+          "title": {
+            "zh": "保留相关曲线，让粒径结果可以被解释",
+            "en": "Keep the correlation so that the size remains interpretable"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "C06",
+        "next": "P02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "P02",
+      "title": {
+        "zh": "Zeta电位：颗粒周围的电与运动",
+        "en": "Zeta potential: Electricity and motion around particles"
+      },
+      "standfirst": {
+        "zh": "沿着相位、速度和迁移率，认识盐、滑移面与分散液中的界面电性。",
+        "en": "Follow phase, velocity and mobility to understand salt, slipping planes and interfacial electrical behavior."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "颗粒与界面",
+        "en": "Particles and interfaces"
+      },
+      "search_title": {
+        "zh": "Zeta电位：颗粒周围的电与运动",
+        "en": "Zeta potential: Electricity and motion around particles"
+      },
+      "keywords": [
+        "Zeta",
+        "电泳迁移率",
+        "PALS",
+        "电双层",
+        "离子强度",
+        "colloids"
+      ],
+      "sections": [
+        {
+          "id": "P02-question",
+          "title": {
+            "zh": "为什么一瓶分散液，换一种水就开始结团？",
+            "en": "Why can changing the water make a dispersion clump?"
+          }
+        },
+        {
+          "id": "P02-interface",
+          "title": {
+            "zh": "颗粒带着怎样的一圈液体一起走？",
+            "en": "Which part of the surrounding liquid moves with the particle?"
+          }
+        },
+        {
+          "id": "P02-motion",
+          "title": {
+            "zh": "从看见运动，到读懂光的相位",
+            "en": "From visible motion to the phase of scattered light"
+          }
+        },
+        {
+          "id": "P02-conversion",
+          "title": {
+            "zh": "迁移率怎样成为毫伏，模型又怎样进入结果？",
+            "en": "How does mobility become a value in millivolts?"
+          }
+        },
+        {
+          "id": "P02-screening",
+          "title": {
+            "zh": "盐改变的是电作用的空间范围",
+            "en": "Salt changes the spatial range of electrical interactions"
+          }
+        },
+        {
+          "id": "P02-lab",
+          "title": {
+            "zh": "同一表面，为什么读到不同的ζ？",
+            "en": "Why can one surface give different zeta values?"
+          }
+        },
+        {
+          "id": "P02-design",
+          "title": {
+            "zh": "把酸碱度、吸附与分散稳定性连成实验",
+            "en": "Connect pH, adsorption and dispersion stability through experiments"
+          }
+        },
+        {
+          "id": "P02-reference",
+          "title": {
+            "zh": "让真实参考数据和完整计算帮助判断读数",
+            "en": "Use real reference data and complete calculations to interpret a result"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P01",
+        "next": "P03"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "P03",
+      "title": {
+        "zh": "接触角：一滴液体如何认识表面",
+        "en": "Contact angle: How a drop meets a surface"
+      },
+      "standfirst": {
+        "zh": "从水珠的轮廓理解润湿，分清界面平衡、接触线历史与图像误差。",
+        "en": "Read wetting from a droplet contour while separating interfacial equilibrium, contact-line history and image errors."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "颗粒与界面",
+        "en": "Particles and interfaces"
+      },
+      "search_title": {
+        "zh": "接触角：一滴液体如何认识表面",
+        "en": "Contact angle: How a drop meets a surface"
+      },
+      "keywords": [
+        "contact angle",
+        "接触角",
+        "wetting",
+        "润湿",
+        "hysteresis",
+        "Young"
+      ],
+      "sections": [
+        {
+          "id": "P03-question",
+          "title": {
+            "zh": "同一滴水，为什么有时铺开，有时像珠子",
+            "en": "Why does the same drop spread on one surface and bead on another?"
+          }
+        },
+        {
+          "id": "P03-history",
+          "title": {
+            "zh": "Young为什么把问题放在三种界面的交会处",
+            "en": "Young placed the question where three interfaces meet"
+          }
+        },
+        {
+          "id": "P03-setup",
+          "title": {
+            "zh": "先看清接触的位置，再让软件去找轮廓",
+            "en": "Locate the contact before asking software to fit the outline"
+          }
+        },
+        {
+          "id": "P03-geometry",
+          "title": {
+            "zh": "从一顶球冠，读出角度、体积与基线偏差",
+            "en": "A spherical cap connects angle, volume and baseline position"
+          }
+        },
+        {
+          "id": "P03-hysteresis",
+          "title": {
+            "zh": "加液与抽液，让接触线的记忆显现出来",
+            "en": "Adding and removing liquid exposes the contact line's history"
+          }
+        },
+        {
+          "id": "P03-texture",
+          "title": {
+            "zh": "粗糙表面上，水到底接触了多少固体",
+            "en": "On a textured surface, how much solid does the liquid actually touch?"
+          }
+        },
+        {
+          "id": "P03-laboratory",
+          "title": {
+            "zh": "把基线移动一点，看看“材料性质”会不会跟着变",
+            "en": "Move the baseline slightly and watch the reported angle change"
+          }
+        },
+        {
+          "id": "P03-lab",
+          "title": {
+            "zh": "球冠与基线：角度改变来自哪里",
+            "en": "Cap and baseline: what changes the angle?"
+          }
+        },
+        {
+          "id": "P03-example",
+          "title": {
+            "zh": "完整例子：保存轮廓，而不只保存一个角度",
+            "en": "Keep the outline, not only the final angle"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P02",
+        "next": "P04"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "P04",
+      "title": {
+        "zh": "表面张力：液滴、液面与界面能",
+        "en": "Surface tension: Drops, interfaces and interfacial energy"
+      },
+      "standfirst": {
+        "zh": "用薄板的力与悬滴的形状测量界面张力，再看表面年龄和浓度怎样改变读数。",
+        "en": "Measure interfacial tension through plate forces and pendant contours, then separate surface age and concentration effects."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "颗粒与界面",
+        "en": "Particles and interfaces"
+      },
+      "search_title": {
+        "zh": "表面张力：液滴、液面与界面能",
+        "en": "Surface tension: Drops, interfaces and interfacial energy"
+      },
+      "keywords": [
+        "surface tension",
+        "表面张力",
+        "Wilhelmy",
+        "pendant drop",
+        "CMC",
+        "Pockels"
+      ],
+      "sections": [
+        {
+          "id": "P04-purpose",
+          "title": {
+            "zh": "一滴清洁剂，为什么能改变一大片水面",
+            "en": "Why a little detergent changes a large water surface"
+          }
+        },
+        {
+          "id": "P04-history",
+          "title": {
+            "zh": "把水面的“干净程度”变成可以控制的变量",
+            "en": "Making surface cleanliness an experimental variable"
+          }
+        },
+        {
+          "id": "P04-plate",
+          "title": {
+            "zh": "从天平读数中分离毛细力和浮力",
+            "en": "Separating capillary force from buoyancy"
+          }
+        },
+        {
+          "id": "P04-pendant",
+          "title": {
+            "zh": "让液滴轮廓告诉我们界面的力量",
+            "en": "Reading interfacial tension from a drop contour"
+          }
+        },
+        {
+          "id": "P04-age-discussion",
+          "title": {
+            "zh": "同一瓶溶液，也会有不同年龄的表面",
+            "en": "A fresh surface can belong to an old solution"
+          }
+        },
+        {
+          "id": "P04-concentration",
+          "title": {
+            "zh": "浓度曲线的转折，怎样联系到分子聚集",
+            "en": "Connecting a concentration break to molecular aggregation"
+          }
+        },
+        {
+          "id": "P04-laboratory",
+          "title": {
+            "zh": "交互实验：把三个误差来源分开",
+            "en": "Interactive experiment: separate three causes of a changing force"
+          }
+        },
+        {
+          "id": "P04-lab",
+          "title": {
+            "zh": "交互：年龄、浮力与润湿",
+            "en": "Interactive: age, buoyancy and wetting"
+          }
+        },
+        {
+          "id": "P04-code",
+          "title": {
+            "zh": "完整分析：让力、轮廓和浓度结果互相解释",
+            "en": "Complete analysis linking force, shape and concentration"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P03",
+        "next": "P05"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "P05",
+      "title": {
+        "zh": "蛋白质吸附：材料接触生物环境的第一步",
+        "en": "Protein adsorption: A material’s first encounter with a biological environment"
+      },
+      "standfirst": {
+        "zh": "跟随一次进样和冲洗，理解蛋白质到来、离开、带水与呈现功能的不同证据。",
+        "en": "Follow injection and rinsing to distinguish protein arrival, departure, coupled water and functional presentation."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "颗粒与界面",
+        "en": "Particles and interfaces"
+      },
+      "search_title": {
+        "zh": "蛋白质吸附：材料接触生物环境的第一步",
+        "en": "Protein adsorption at material–biological interfaces"
+      },
+      "keywords": [
+        "protein adsorption",
+        "蛋白质吸附",
+        "QCM-D",
+        "SPR",
+        "Langmuir",
+        "kinetics"
+      ],
+      "sections": [
+        {
+          "id": "P05-first",
+          "title": {
+            "zh": "细胞遇到的表面，往往已经穿上了蛋白质外衣",
+            "en": "The surface a cell meets may already wear a protein layer"
+          }
+        },
+        {
+          "id": "P05-history",
+          "title": {
+            "zh": "从有限吸附位置，到会改变表面的生物分子",
+            "en": "From finite adsorption sites to molecules that change a surface"
+          }
+        },
+        {
+          "id": "P05-measure",
+          "title": {
+            "zh": "光学信号和石英频率分别看见什么",
+            "en": "What optical and acoustic instruments actually detect"
+          }
+        },
+        {
+          "id": "P05-protocol",
+          "title": {
+            "zh": "把一次进样做成可以解释的时间曲线",
+            "en": "Turning an injection into an interpretable time record"
+          }
+        },
+        {
+          "id": "P05-model",
+          "title": {
+            "zh": "从空位与占位，推导一条最简单的吸附曲线",
+            "en": "Deriving a simple curve from empty and occupied positions"
+          }
+        },
+        {
+          "id": "P05-real",
+          "title": {
+            "zh": "真实薄层的厚度，怎样与水和模型联系起来",
+            "en": "Reading a real thin layer in terms of water and modelling"
+          }
+        },
+        {
+          "id": "P05-lab-discussion",
+          "title": {
+            "zh": "交互实验：同样的亲和程度，可以有不同速度",
+            "en": "Interactive experiment: equal affinity with different rates"
+          }
+        },
+        {
+          "id": "P05-lab",
+          "title": {
+            "zh": "交互：吸附与冲洗",
+            "en": "Interactive: adsorption and rinsing"
+          }
+        },
+        {
+          "id": "P05-code",
+          "title": {
+            "zh": "完整分析：保留原始通道，再检验模型",
+            "en": "Complete analysis: retain channels and test the model"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P04",
+        "next": "M01"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "M01",
+      "title": {
+        "zh": "拉伸实验：从一条曲线认识材料",
+        "en": "Tensile testing: Reading a material through its stress–strain curve"
+      },
+      "standfirst": {
+        "zh": "从力和标距开始，区分模量、屈服、强度与吸收功，并看清夹具和尺寸怎样进入结果。",
+        "en": "Start from force and gauge length, distinguish modulus, yield, strength and work, and trace geometry and fixture effects into the result."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "力学与流变",
+        "en": "Mechanics and rheology"
+      },
+      "search_title": {
+        "zh": "拉伸实验：从一条曲线认识材料",
+        "en": "Tensile testing: Reading a material through its stress–strain curve"
+      },
+      "keywords": [
+        "tensile",
+        "拉伸",
+        "modulus",
+        "strain",
+        "compliance",
+        "Hooke"
+      ],
+      "sections": [
+        {
+          "id": "M01-question",
+          "title": {
+            "zh": "一根线能承受多大拉力，与它有多难拉长，是两件事",
+            "en": "Carrying a large force and resisting extension are different properties"
+          }
+        },
+        {
+          "id": "M01-history",
+          "title": {
+            "zh": "从Hooke的弹簧，到标距上的两枚小点",
+            "en": "From Hooke's spring to two marks on a specimen"
+          }
+        },
+        {
+          "id": "M01-units",
+          "title": {
+            "zh": "把牛顿和毫米，换成可以比较的应力与应变",
+            "en": "Converting newtons and millimetres into stress and strain"
+          }
+        },
+        {
+          "id": "M01-raw",
+          "title": {
+            "zh": "为什么相同试样能被算出两种模量",
+            "en": "How one specimen can produce two apparent moduli"
+          }
+        },
+        {
+          "id": "M01-properties",
+          "title": {
+            "zh": "在曲线上分别找到刚度、屈服、强度与吸收功",
+            "en": "Reading modulus, yielding, strength and work separately"
+          }
+        },
+        {
+          "id": "M01-conditions",
+          "title": {
+            "zh": "让不同试样之间的比较真正可用",
+            "en": "Making comparisons between specimens useful"
+          }
+        },
+        {
+          "id": "M01-lab-discussion",
+          "title": {
+            "zh": "交互实验：只改测量方法，材料会不会“变软”",
+            "en": "Interactive experiment: can measurement alone make a material look softer?"
+          }
+        },
+        {
+          "id": "M01-lab",
+          "title": {
+            "zh": "交互：材料与测量定义",
+            "en": "Interactive: material and measurement definition"
+          }
+        },
+        {
+          "id": "M01-code",
+          "title": {
+            "zh": "完整处理：从原始通道到可以复算的材料指标",
+            "en": "Complete processing from raw channels to reproducible properties"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "P05",
+        "next": "M02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "M02",
+      "title": {
+        "zh": "压缩实验：柔软材料承重时发生什么",
+        "en": "Compression testing: How soft materials carry load"
+      },
+      "standfirst": {
+        "zh": "从接触和侧向膨胀出发，理解软材料的非线性承载、端面约束与排液时间。",
+        "en": "Start from contact and lateral expansion to understand nonlinear load support, end constraints and drainage time."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "力学与流变",
+        "en": "Mechanics and rheology"
+      },
+      "search_title": {
+        "zh": "压缩实验：柔软材料承重时发生什么",
+        "en": "Compression testing: How soft materials carry load"
+      },
+      "keywords": [
+        "compression",
+        "压缩",
+        "hydrogel",
+        "contact",
+        "poroelasticity",
+        "biphasic"
+      ],
+      "sections": [
+        {
+          "id": "M02-question",
+          "title": {
+            "zh": "一块软材料，为什么有时承重、有时塌下去",
+            "en": "Why a soft material sometimes supports a load and sometimes gives way"
+          }
+        },
+        {
+          "id": "M02-geometry",
+          "title": {
+            "zh": "从压板位移到材料应变，中间隔着一个接触点",
+            "en": "A contact point separates platen travel from specimen compression"
+          }
+        },
+        {
+          "id": "M02-boundaries",
+          "title": {
+            "zh": "侧面能不能鼓出来，决定了压缩的含义",
+            "en": "Whether the sides can expand changes what compression measures"
+          }
+        },
+        {
+          "id": "M02-nonlinear",
+          "title": {
+            "zh": "曲线变陡，可以来自形状变化",
+            "en": "A steepening curve can arise from changing shape"
+          }
+        },
+        {
+          "id": "M02-fluid",
+          "title": {
+            "zh": "压住以后力变小，水去了哪里",
+            "en": "When force falls during a hold, where does the water go?"
+          }
+        },
+        {
+          "id": "M02-experiment",
+          "title": {
+            "zh": "让实验条件和材料问题对得上",
+            "en": "Match the experimental conditions to the material question"
+          }
+        },
+        {
+          "id": "M02-compute",
+          "title": {
+            "zh": "把接触、弹性和排液分别算清楚",
+            "en": "Calculate contact, elasticity and drainage as distinct questions"
+          }
+        },
+        {
+          "id": "M02-lab",
+          "title": {
+            "zh": "交互：排液路径与时间",
+            "en": "Interactive: drainage path and time"
+          }
+        },
+        {
+          "id": "M02-decisions",
+          "title": {
+            "zh": "从一条压缩曲线走向可解释的材料比较",
+            "en": "Turn a compression curve into an interpretable material comparison"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M01",
+        "next": "M03"
+      },
+      "prerequisites": [
+        "M01"
+      ]
+    },
+    {
+      "id": "M03",
+      "title": {
+        "zh": "断裂实验：裂纹为什么向前走",
+        "en": "Fracture testing: Why a crack advances"
+      },
+      "standfirst": {
+        "zh": "从一个小裂口走到能量释放率，读懂起裂、稳定扩展、柔度标定与凝胶撕裂。",
+        "en": "Follow a small cut into energy release, initiation, stable growth, compliance calibration and gel tearing."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "力学与流变",
+        "en": "Mechanics and rheology"
+      },
+      "search_title": {
+        "zh": "断裂实验：裂纹为什么向前走",
+        "en": "Fracture testing: Why a crack advances"
+      },
+      "keywords": [
+        "fracture",
+        "断裂",
+        "Griffith",
+        "DCB",
+        "pure shear",
+        "tearing",
+        "compliance"
+      ],
+      "sections": [
+        {
+          "id": "M03-question",
+          "title": {
+            "zh": "一个小口子，为什么会改变整件材料的命运",
+            "en": "Why a small cut can change the fate of a whole object"
+          }
+        },
+        {
+          "id": "M03-energy",
+          "title": {
+            "zh": "先分清能量的三个分母",
+            "en": "Three different denominators give three different energy quantities"
+          }
+        },
+        {
+          "id": "M03-specimen",
+          "title": {
+            "zh": "把裂纹、载荷和开口放进同一幅图",
+            "en": "Put crack length, force and opening in the same drawing"
+          }
+        },
+        {
+          "id": "M03-compliance",
+          "title": {
+            "zh": "裂纹越长，结构越软：用柔度测能量",
+            "en": "A longer crack makes a softer structure: measuring energy through compliance"
+          }
+        },
+        {
+          "id": "M03-stability",
+          "title": {
+            "zh": "起裂以后，是停住还是继续走",
+            "en": "After initiation, does the crack stop or keep advancing?"
+          }
+        },
+        {
+          "id": "M03-gel",
+          "title": {
+            "zh": "柔软水凝胶怎样测断裂能",
+            "en": "How a soft hydrogel can be tested for fracture energy"
+          }
+        },
+        {
+          "id": "M03-compute",
+          "title": {
+            "zh": "把原始信号、裂纹图像和计算连起来",
+            "en": "Connect original signals, crack images and calculation"
+          }
+        },
+        {
+          "id": "M03-lab",
+          "title": {
+            "zh": "交互：同一起裂点，两种控制方式",
+            "en": "Interactive: one initiation state, two controls"
+          }
+        },
+        {
+          "id": "M03-decisions",
+          "title": {
+            "zh": "让断裂结果回答实际的耐损伤问题",
+            "en": "Use fracture results to answer a damage-tolerance question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M02",
+        "next": "M04"
+      },
+      "prerequisites": [
+        "M01"
+      ]
+    },
+    {
+      "id": "M04",
+      "title": {
+        "zh": "疲劳实验：反复加载怎样留下损伤",
+        "en": "Fatigue testing: How repeated loads accumulate damage"
+      },
+      "standfirst": {
+        "zh": "读懂循环载荷、寿命离散、未失效试样和裂纹增长，把反复使用变成可分析的历史。",
+        "en": "Interpret cyclic loads, life scatter, runouts and crack growth as a measurable history of repeated use."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "力学与流变",
+        "en": "Mechanics and rheology"
+      },
+      "search_title": {
+        "zh": "疲劳实验：反复加载怎样留下损伤",
+        "en": "Fatigue testing: How repeated loads accumulate damage"
+      },
+      "keywords": [
+        "fatigue",
+        "疲劳",
+        "runout",
+        "censoring",
+        "Paris",
+        "Miner",
+        "hydrogel"
+      ],
+      "sections": [
+        {
+          "id": "M04-question",
+          "title": {
+            "zh": "一次没有压坏，为什么反复使用后会坏",
+            "en": "Why repeated use can break something that survived the first load"
+          }
+        },
+        {
+          "id": "M04-wave",
+          "title": {
+            "zh": "一个循环必须说清最大值、最小值和速度",
+            "en": "Define the maximum, minimum and timing of a cycle"
+          }
+        },
+        {
+          "id": "M04-life",
+          "title": {
+            "zh": "寿命曲线上的箭头，也是实验结果",
+            "en": "An arrow on a life curve is an experimental observation"
+          }
+        },
+        {
+          "id": "M04-growth",
+          "title": {
+            "zh": "不等它断开，直接跟踪裂纹每圈走多远",
+            "en": "Track how far a crack moves instead of waiting for separation"
+          }
+        },
+        {
+          "id": "M04-history",
+          "title": {
+            "zh": "不同大小的循环，能否直接相加",
+            "en": "Can cycles of different sizes simply be added?"
+          }
+        },
+        {
+          "id": "M04-real",
+          "title": {
+            "zh": "在真实水凝胶研究中，怎样看待“没有增长”",
+            "en": "Read “no detectable growth” in an actual hydrogel study"
+          }
+        },
+        {
+          "id": "M04-compute",
+          "title": {
+            "zh": "从完整记录计算寿命与裂纹增长",
+            "en": "Calculate life and crack growth from complete records"
+          }
+        },
+        {
+          "id": "M04-lab",
+          "title": {
+            "zh": "交互：初始裂纹与传播循环数",
+            "en": "Interactive: initial crack and propagation cycles"
+          }
+        },
+        {
+          "id": "M04-decisions",
+          "title": {
+            "zh": "把“能循环多久”变成一个完整的研究问题",
+            "en": "Turn durability into a complete research question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M03",
+        "next": "M05"
+      },
+      "prerequisites": [
+        "M03"
+      ]
+    },
+    {
+      "id": "M05",
+      "title": {
+        "zh": "应力松弛：拉住不动后力为什么下降",
+        "en": "Stress relaxation: Why force falls at fixed deformation"
+      },
+      "standfirst": {
+        "zh": "从固定长度下的力下降，读懂分子重排、加载时间、松弛谱与细胞周围的持续阻力。",
+        "en": "Use force decay at fixed deformation to understand rearrangement, loading time, relaxation timescales and persistent resistance around cells."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "力学与流变",
+        "en": "Mechanics and rheology"
+      },
+      "search_title": {
+        "zh": "应力松弛：拉住不动后力为什么下降",
+        "en": "Stress relaxation: Why force falls at fixed deformation"
+      },
+      "keywords": [
+        "stress relaxation",
+        "应力松弛",
+        "Maxwell",
+        "finite ramp",
+        "creep",
+        "粘弹性",
+        "hydrogel"
+      ],
+      "sections": [
+        {
+          "id": "M05-question",
+          "title": {
+            "zh": "长度没有变，为什么手里的拉力在变",
+            "en": "Why can the force change while the length stays fixed?"
+          }
+        },
+        {
+          "id": "M05-history",
+          "title": {
+            "zh": "从气体里的分子运动，到会慢慢回缩的弹簧",
+            "en": "From molecular motion to a spring that gradually recoils"
+          }
+        },
+        {
+          "id": "M05-model",
+          "title": {
+            "zh": "让一条下降曲线说清楚：下降多少，下降多快",
+            "en": "Separate the amount of relaxation from its speed"
+          }
+        },
+        {
+          "id": "M05-ramp-discussion",
+          "title": {
+            "zh": "仪器拉到目标长度之前，材料已经开始变化",
+            "en": "Relaxation begins before the apparatus reaches its target"
+          }
+        },
+        {
+          "id": "M05-measure",
+          "title": {
+            "zh": "让力的变化有明确含义",
+            "en": "Make the changing force interpretable"
+          }
+        },
+        {
+          "id": "M05-analysis",
+          "title": {
+            "zh": "拟合应当回答什么，曲线又能提供多少信息",
+            "en": "What can fitting recover from the available record?"
+          }
+        },
+        {
+          "id": "M05-creep",
+          "title": {
+            "zh": "同一种材料，换一种控制方式会得到另一条时间曲线",
+            "en": "Changing the controlled quantity changes the time response"
+          }
+        },
+        {
+          "id": "M05-research",
+          "title": {
+            "zh": "从一条松弛曲线走向材料与细胞的时间问题",
+            "en": "Connect the curve to a material’s task over time"
+          }
+        },
+        {
+          "id": "M05-lab",
+          "title": {
+            "zh": "交互：在加载期间发生了多少松弛",
+            "en": "Interactive: how much relaxation occurs during loading?"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M04",
+        "next": "M06"
+      },
+      "prerequisites": [
+        "M01"
+      ]
+    },
+    {
+      "id": "M06",
+      "title": {
+        "zh": "蠕变实验：恒定载荷下缓慢发生的变形",
+        "en": "Creep testing: Slow deformation under a constant load"
+      },
+      "standfirst": {
+        "zh": "从软垫的缓慢下陷出发，认识柔量、延迟恢复和黏性流动，用完整的加载—卸载记录检验材料模型。",
+        "en": "Follow a slowly sinking cushion into compliance, delayed recovery and viscous flow, then test a material model against a complete loading–unloading record."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "力学与流变",
+        "en": "Mechanics and rheology"
+      },
+      "search_title": {
+        "zh": "蠕变实验：恒定载荷下缓慢发生的变形",
+        "en": "Creep testing: Slow deformation under a constant load"
+      },
+      "keywords": [
+        "creep",
+        "蠕变",
+        "compliance",
+        "柔量",
+        "Burgers",
+        "recovery",
+        "恢复"
+      ],
+      "sections": [
+        {
+          "id": "M06-question",
+          "title": {
+            "zh": "一块软材料，为什么越压越扁",
+            "en": "Why a soft material keeps changing under the same load"
+          }
+        },
+        {
+          "id": "M06-mechanism",
+          "title": {
+            "zh": "弹簧、阻尼器与材料中的等待时间",
+            "en": "Springs, dashpots and the time a material needs"
+          }
+        },
+        {
+          "id": "M06-measurement",
+          "title": {
+            "zh": "从力和长度出发，得到可以比较的柔量",
+            "en": "From force and length to a comparable compliance"
+          }
+        },
+        {
+          "id": "M06-model",
+          "title": {
+            "zh": "一条曲线中的立即变形、延迟变形和流动",
+            "en": "Separating immediate deformation, delayed deformation and flow"
+          }
+        },
+        {
+          "id": "M06-recovery",
+          "title": {
+            "zh": "卸下载荷，观察材料留下了什么",
+            "en": "Remove the load and follow what remains"
+          }
+        },
+        {
+          "id": "M06-lab",
+          "title": {
+            "zh": "交互实验：改变加载历史，看恢复如何变化",
+            "en": "Interactive experiment: Change the loading history and follow recovery"
+          }
+        },
+        {
+          "id": "M06-data",
+          "title": {
+            "zh": "从原始记录拟合参数，也保留诊断信息",
+            "en": "Fit the record while keeping the diagnostic information"
+          }
+        },
+        {
+          "id": "M06-design",
+          "title": {
+            "zh": "让实验回答真正关心的使用问题",
+            "en": "Design the measurement around the intended use"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M05",
+        "next": "M07"
+      },
+      "prerequisites": [
+        "M01",
+        "M05"
+      ]
+    },
+    {
+      "id": "M07",
+      "title": {
+        "zh": "动态力学分析：用振动读懂黏弹性",
+        "en": "DMA: Reading viscoelasticity through oscillation"
+      },
+      "standfirst": {
+        "zh": "让两条波形解释储能、损耗与相位，从夹具和幅值选择走到频率谱、回线能量及时间—温度叠加。",
+        "en": "Use two waveforms to understand storage, loss and phase, then connect fixtures and amplitude to spectra, loop energy and time–temperature superposition."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "力学与流变",
+        "en": "Mechanics and rheology"
+      },
+      "search_title": {
+        "zh": "动态力学分析：用振动读懂黏弹性",
+        "en": "DMA: Reading viscoelasticity through oscillation"
+      },
+      "keywords": [
+        "DMA",
+        "动态力学",
+        "储能模量",
+        "损耗模量",
+        "phase",
+        "WLF",
+        "viscoelasticity"
+      ],
+      "sections": [
+        {
+          "id": "M07-purpose",
+          "title": {
+            "zh": "同一块橡胶，为什么慢慢按和快速振动时不一样",
+            "en": "Why slow pressing and rapid vibration feel different"
+          }
+        },
+        {
+          "id": "M07-instrument",
+          "title": {
+            "zh": "夹具决定怎样变形，传感器决定看见什么",
+            "en": "Fixtures define the deformation and sensors reveal the response"
+          }
+        },
+        {
+          "id": "M07-phase",
+          "title": {
+            "zh": "从两条正弦波读出储能与损耗",
+            "en": "Read storage and loss from two sine waves"
+          }
+        },
+        {
+          "id": "M07-energy",
+          "title": {
+            "zh": "把时间轴折起来，看见一圈损失的能量",
+            "en": "Fold the time axis into a loop and see the dissipated energy"
+          }
+        },
+        {
+          "id": "M07-frequency",
+          "title": {
+            "zh": "换一种振动节奏，分子运动来不来得及",
+            "en": "Change the pace and ask whether molecular motion can keep up"
+          }
+        },
+        {
+          "id": "M07-lab",
+          "title": {
+            "zh": "交互实验：频率、幅值与材料时钟",
+            "en": "Interactive experiment: Frequency, amplitude and the material clock"
+          }
+        },
+        {
+          "id": "M07-temperature",
+          "title": {
+            "zh": "温度改变分子的时钟，也连接了科学史",
+            "en": "Temperature changes the molecular clock"
+          }
+        },
+        {
+          "id": "M07-analysis",
+          "title": {
+            "zh": "从完整波形计算模量，再判断结果怎样使用",
+            "en": "Calculate moduli from complete waveforms and connect them to use"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M06",
+        "next": "M08"
+      },
+      "prerequisites": [
+        "M01",
+        "M06"
+      ]
+    },
+    {
+      "id": "M08",
+      "title": {
+        "zh": "旋转与振荡流变：从流动到凝胶网络",
+        "en": "Rotational and oscillatory rheology: From flow to gel networks"
+      },
+      "standfirst": {
+        "zh": "把黏度、剪切变稀、壁面滑移和结构恢复分开理解，让流变曲线对应配方、加工与生物材料中的具体问题。",
+        "en": "Separate viscosity, shear thinning, wall slip and structural recovery, and connect rheological curves to formulation, processing and biomaterial questions."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "力学与流变",
+        "en": "Mechanics and rheology"
+      },
+      "search_title": {
+        "zh": "旋转与振荡流变：从流动到凝胶网络",
+        "en": "Rotational and oscillatory rheology: From flow to gel networks"
+      },
+      "keywords": [
+        "rheology",
+        "流变",
+        "shear thinning",
+        "thixotropy",
+        "wall slip",
+        "gel point",
+        "流变仪"
+      ],
+      "sections": [
+        {
+          "id": "M08-purpose",
+          "title": {
+            "zh": "从能不能倒出来，问到怎样流动和恢复",
+            "en": "From whether a material pours to how it flows and recovers"
+          }
+        },
+        {
+          "id": "M08-geometry",
+          "title": {
+            "zh": "先选对几何，再相信软件给出的物理量",
+            "en": "Choose the geometry before interpreting the reported quantities"
+          }
+        },
+        {
+          "id": "M08-flow",
+          "title": {
+            "zh": "一条流动曲线，分清变稀、屈服和时间变化",
+            "en": "Separate shear thinning, yielding and time dependence"
+          }
+        },
+        {
+          "id": "M08-slip-discussion",
+          "title": {
+            "zh": "材料真的变稀了，还是在壁面上滑动",
+            "en": "Is the material thinning, or is it sliding at the wall?"
+          }
+        },
+        {
+          "id": "M08-lab",
+          "title": {
+            "zh": "交互实验：有多少运动进入了流体内部",
+            "en": "Interactive experiment: How much motion enters the fluid bulk?"
+          }
+        },
+        {
+          "id": "M08-oscillation",
+          "title": {
+            "zh": "轻轻来回剪切，观察网络怎样形成",
+            "en": "Gently reverse shear and watch a network form"
+          }
+        },
+        {
+          "id": "M08-recovery",
+          "title": {
+            "zh": "强剪切之后，恢复速度怎样变成可用信息",
+            "en": "Turn recovery after strong shear into useful information"
+          }
+        },
+        {
+          "id": "M08-analysis",
+          "title": {
+            "zh": "让代码保留测量定义，让结论对应实验用途",
+            "en": "Keep measurement definitions in the code and connect conclusions to use"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M07",
+        "next": "E01"
+      },
+      "prerequisites": [
+        "M07"
+      ]
+    },
+    {
+      "id": "E01",
+      "title": {
+        "zh": "溶胀实验：水如何进入高分子网络",
+        "en": "Swelling: How water enters a polymer network"
+      },
+      "standfirst": {
+        "zh": "从干湿质量与分母定义出发，把吸水、尺寸变化、网络连接和生物材料的使用状态联系起来。",
+        "en": "Connect dry and wet masses, reference states, network connectivity and the hydrated conditions in which biomaterials are used."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "材料实验",
+        "en": "Material experiments"
+      },
+      "search_title": {
+        "zh": "溶胀实验：水如何进入高分子网络",
+        "en": "Swelling: How water enters a polymer network"
+      },
+      "keywords": [
+        "溶胀",
+        "swelling",
+        "hydrogel",
+        "mass ratio",
+        "water content",
+        "水凝胶"
+      ],
+      "sections": [
+        {
+          "id": "E01-purpose",
+          "title": {
+            "zh": "一片敷料吸进水以后，改变的不只是重量",
+            "en": "When a dressing absorbs water, more than its weight changes"
+          }
+        },
+        {
+          "id": "E01-network",
+          "title": {
+            "zh": "水想进入，网络又把链拉回来",
+            "en": "Water enters while the network pulls back"
+          }
+        },
+        {
+          "id": "E01-ratios",
+          "title": {
+            "zh": "从天平读数走到含水量和体积",
+            "en": "From balance readings to water content and volume"
+          }
+        },
+        {
+          "id": "E01-protocol",
+          "title": {
+            "zh": "把浸泡和称重设计成一条完整证据链",
+            "en": "Make immersion and weighing a connected measurement"
+          }
+        },
+        {
+          "id": "E01-time",
+          "title": {
+            "zh": "快慢、平衡和厚度，分别告诉我们什么",
+            "en": "Rate, equilibrium and thickness tell different stories"
+          }
+        },
+        {
+          "id": "E01-evidence",
+          "title": {
+            "zh": "让误差显形，再看真实材料",
+            "en": "Expose measurement bias, then examine published data"
+          }
+        },
+        {
+          "id": "E01-lab",
+          "title": {
+            "zh": "改变称量偏差，观察同一块凝胶",
+            "en": "Change weighing bias for the same gel"
+          }
+        },
+        {
+          "id": "E01-analysis",
+          "title": {
+            "zh": "把一组质量数据整理成可以继续研究的结果",
+            "en": "Turn a mass record into a result that supports the next experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "M08",
+        "next": "E02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "E02",
+      "title": {
+        "zh": "凝胶分数：真正连成网络的有多少",
+        "en": "Gel fraction: How much material belongs to the network"
+      },
+      "standfirst": {
+        "zh": "从连接、提取和质量守恒读懂凝胶分数，辨别填料、未提尽组分与网络结构各自的作用。",
+        "en": "Use connectivity, extraction and mass conservation to separate network fraction from filler, trapped soluble material and mechanical behavior."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "材料实验",
+        "en": "Material experiments"
+      },
+      "search_title": {
+        "zh": "凝胶分数：真正连成网络的有多少",
+        "en": "Gel fraction: How much material belongs to the network"
+      },
+      "keywords": [
+        "gel fraction",
+        "凝胶分数",
+        "extraction",
+        "sol fraction",
+        "network",
+        "交联"
+      ],
+      "sections": [
+        {
+          "id": "E02-purpose",
+          "title": {
+            "zh": "看起来成了胶，里面的链都连上了吗",
+            "en": "It looks like a gel, but how many chains joined the network?"
+          }
+        },
+        {
+          "id": "E02-connectivity",
+          "title": {
+            "zh": "从一根线到一张网：连通为何会突然出现",
+            "en": "From a strand to a network: why connectivity can emerge suddenly"
+          }
+        },
+        {
+          "id": "E02-mass",
+          "title": {
+            "zh": "先算干物质，再决定分母里放什么",
+            "en": "Account for dry material before choosing the denominator"
+          }
+        },
+        {
+          "id": "E02-extraction",
+          "title": {
+            "zh": "提取条件决定哪些物质能够离开",
+            "en": "Extraction conditions determine what can leave"
+          }
+        },
+        {
+          "id": "E02-endpoint",
+          "title": {
+            "zh": "洗一次和洗六次，测到的为什么不同",
+            "en": "Why one wash and six washes can give different results"
+          }
+        },
+        {
+          "id": "E02-lab",
+          "title": {
+            "zh": "提取效率与填料，各自改变了什么",
+            "en": "Separate extraction efficiency from filler content"
+          }
+        },
+        {
+          "id": "E02-interpretation",
+          "title": {
+            "zh": "同样的凝胶分数，为什么可以有不同的刚度",
+            "en": "The same gel fraction can accompany different stiffness"
+          }
+        },
+        {
+          "id": "E02-analysis",
+          "title": {
+            "zh": "让质量核算帮助你改进下一批材料",
+            "en": "Use mass accounting to improve the next material batch"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "E01",
+        "next": "E03"
+      },
+      "prerequisites": [
+        "E01"
+      ]
+    },
+    {
+      "id": "E03",
+      "title": {
+        "zh": "降解实验：材料如何随时间改变",
+        "en": "Degradation: How materials change with time"
+      },
+      "standfirst": {
+        "zh": "沿着分子断链、质量流失与碳的去向，理解材料的结构变化和功能寿命。",
+        "en": "Follow molecular scission, mass loss and carbon destinations to understand structural change and functional lifetime."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "材料实验",
+        "en": "Material experiments"
+      },
+      "search_title": {
+        "zh": "降解实验：材料如何随时间改变",
+        "en": "Degradation: How materials change with time"
+      },
+      "keywords": [
+        "degradation",
+        "erosion",
+        "mineralization",
+        "降解",
+        "水解",
+        "carbon balance"
+      ],
+      "sections": [
+        {
+          "id": "E03-purpose",
+          "title": {
+            "zh": "材料什么时候失去作用，又什么时候真正离开",
+            "en": "When does a material lose its function, and when does it leave?"
+          }
+        },
+        {
+          "id": "E03-mechanism",
+          "title": {
+            "zh": "水、酶和扩散，怎样共同决定材料的变化",
+            "en": "Water, enzymes and diffusion work together"
+          }
+        },
+        {
+          "id": "E03-measurement",
+          "title": {
+            "zh": "质量、链长和功能：三个互相补充的读数",
+            "en": "Mass, chain length and function provide complementary readings"
+          }
+        },
+        {
+          "id": "E03-design",
+          "title": {
+            "zh": "让时间点、对照和环境组成一个实验",
+            "en": "Make time points, controls and environment one experiment"
+          }
+        },
+        {
+          "id": "E03-model",
+          "title": {
+            "zh": "把链剪短，为什么天平还没有明显变化",
+            "en": "Shorter chains can appear before substantial mass loss"
+          }
+        },
+        {
+          "id": "E03-lab",
+          "title": {
+            "zh": "断链与溶解分别控制了什么",
+            "en": "Separate chain scission from dissolution"
+          }
+        },
+        {
+          "id": "E03-evidence",
+          "title": {
+            "zh": "真实图像与碳去向，把“降解”说得更具体",
+            "en": "Images and carbon destinations make degradation more specific"
+          }
+        },
+        {
+          "id": "E03-analysis",
+          "title": {
+            "zh": "从一条下降曲线走向材料的使用窗口",
+            "en": "From a falling curve to a useful material lifetime"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "E02",
+        "next": "E04"
+      },
+      "prerequisites": [
+        "E01",
+        "E02"
+      ]
+    },
+    {
+      "id": "E04",
+      "title": {
+        "zh": "释放实验：药物与蛋白质怎样离开载体",
+        "en": "Release experiments: How drugs and proteins leave their carriers"
+      },
+      "standfirst": {
+        "zh": "从分子路程、标准曲线和取样账本出发，重建累计释放，分辨材料、介质与装置的作用。",
+        "en": "Reconstruct cumulative release from molecular routes, calibration and sampling balances, separating material, medium and apparatus effects."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "材料实验",
+        "en": "Material experiments"
+      },
+      "search_title": {
+        "zh": "释放实验：药物与蛋白质怎样离开载体",
+        "en": "Release experiments: How drugs and proteins leave their carriers"
+      },
+      "keywords": [
+        "release",
+        "释放",
+        "drug delivery",
+        "sampling correction",
+        "Higuchi",
+        "dialysis"
+      ],
+      "sections": [
+        {
+          "id": "E04-question",
+          "title": {
+            "zh": "同样装进去一份分子，为什么出来的时间不同",
+            "en": "The same molecular cargo can follow different timetables"
+          }
+        },
+        {
+          "id": "E04-mechanism",
+          "title": {
+            "zh": "一条释放曲线里，藏着哪几段路程",
+            "en": "Which parts of the journey shape the curve?"
+          }
+        },
+        {
+          "id": "E04-design",
+          "title": {
+            "zh": "让外液和检测方法配合研究问题",
+            "en": "Match the receiving medium and assay to the question"
+          }
+        },
+        {
+          "id": "E04-accounting",
+          "title": {
+            "zh": "已经取走的那一份，也属于累计释放",
+            "en": "Previously collected samples remain part of cumulative release"
+          }
+        },
+        {
+          "id": "E04-lab",
+          "title": {
+            "zh": "取样多一点，累计释放会变少吗",
+            "en": "Does a larger sample reduce cumulative release?"
+          }
+        },
+        {
+          "id": "E04-reading",
+          "title": {
+            "zh": "读懂曲线的速度、平台和残差",
+            "en": "Read the rate, plateau and residuals together"
+          }
+        },
+        {
+          "id": "E04-evidence",
+          "title": {
+            "zh": "把材料变化与真正的释放证据放在一起",
+            "en": "Connect material change to independent release evidence"
+          }
+        },
+        {
+          "id": "E04-analysis",
+          "title": {
+            "zh": "从原始吸光度重建一条释放轨迹",
+            "en": "Reconstruct a release trajectory from raw absorbance"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "E03",
+        "next": "E05"
+      },
+      "prerequisites": [
+        "E01",
+        "E03",
+        "S03"
+      ]
+    },
+    {
+      "id": "E05",
+      "title": {
+        "zh": "扩散与渗透：分子怎样穿过材料",
+        "en": "Diffusion and permeation: How molecules cross a material"
+      },
+      "standfirst": {
+        "zh": "把分子进入、内部运动与整体穿过分开测量，用浓度分布、时间滞后和荧光恢复读懂传输。",
+        "en": "Separate entry, internal mobility and complete passage using concentration profiles, time lag and fluorescence recovery."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "材料实验",
+        "en": "Material experiments"
+      },
+      "search_title": {
+        "zh": "扩散与渗透：分子怎样穿过材料",
+        "en": "Diffusion and permeation: How molecules cross a material"
+      },
+      "keywords": [
+        "diffusion",
+        "permeation",
+        "FRAP",
+        "扩散",
+        "渗透",
+        "partition",
+        "time lag"
+      ],
+      "sections": [
+        {
+          "id": "E05-question",
+          "title": {
+            "zh": "材料里面能走动，为什么还不一定穿得过去",
+            "en": "Moving inside a material and crossing it are different questions"
+          }
+        },
+        {
+          "id": "E05-random",
+          "title": {
+            "zh": "许多无规则的小步，怎样形成有方向的净流动",
+            "en": "Random steps can produce directional net transport"
+          }
+        },
+        {
+          "id": "E05-partition-discussion",
+          "title": {
+            "zh": "进入多少与走得多快，共同决定通透性",
+            "en": "Entry and mobility jointly determine passage"
+          }
+        },
+        {
+          "id": "E05-experiment",
+          "title": {
+            "zh": "把两间小室变成可以解释的实验",
+            "en": "Turn two compartments into an interpretable measurement"
+          }
+        },
+        {
+          "id": "E05-lag",
+          "title": {
+            "zh": "从后期斜率和时间滞后拆出两个信息",
+            "en": "Extract separate information from slope and time lag"
+          }
+        },
+        {
+          "id": "E05-lab",
+          "title": {
+            "zh": "厚度、扩散与分配，各自留下什么特征",
+            "en": "Separate signatures of thickness, diffusion and partitioning"
+          }
+        },
+        {
+          "id": "E05-frap",
+          "title": {
+            "zh": "不等分子穿过整块材料，也能观察局部运动",
+            "en": "Observe local movement without waiting for complete passage"
+          }
+        },
+        {
+          "id": "E05-analysis",
+          "title": {
+            "zh": "用完整计算连接空间图像和接收量曲线",
+            "en": "Connect spatial profiles to the receiver curve with complete calculations"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "E04",
+        "next": "L01"
+      },
+      "prerequisites": [
+        "E04"
+      ]
+    },
+    {
+      "id": "L01",
+      "title": {
+        "zh": "细胞培养与计数：建立可比较的实验起点",
+        "en": "Cell culture and counting: Establishing comparable starting conditions"
+      },
+      "standfirst": {
+        "zh": "从计数室的一小格，连接细胞培养历史、取样精度与每孔接种数。",
+        "en": "Connect a counting-chamber square to culture history, sampling precision and the number seeded in each well."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "细胞培养与计数：建立可比较的实验起点",
+        "en": "Cell culture and counting: Establishing comparable starting conditions"
+      },
+      "keywords": [
+        "cell culture",
+        "hemocytometer",
+        "counting",
+        "细胞培养",
+        "计数",
+        "seeding"
+      ],
+      "sections": [
+        {
+          "id": "L01-start",
+          "title": {
+            "zh": "比较材料之前，先让细胞站在相近的起点",
+            "en": "Before comparing materials, establish comparable starting populations"
+          }
+        },
+        {
+          "id": "L01-history",
+          "title": {
+            "zh": "细胞有培养历史，传一次代不等于分裂一次",
+            "en": "Culture has a history: one passage does not mean one doubling"
+          }
+        },
+        {
+          "id": "L01-environment",
+          "title": {
+            "zh": "让环境变化和处理效应分得开",
+            "en": "Separate environmental changes from the intended treatment"
+          }
+        },
+        {
+          "id": "L01-volume",
+          "title": {
+            "zh": "计数板的关键是一小格里有多少体积",
+            "en": "A counting chamber works because its observed volume is known"
+          }
+        },
+        {
+          "id": "L01-quality",
+          "title": {
+            "zh": "数得更多、稀释重数，分别解决什么问题",
+            "en": "Counting more and checking dilutions solve different problems"
+          }
+        },
+        {
+          "id": "L01-lab",
+          "title": {
+            "zh": "多看一些面积，会怎样改变计数结果？",
+            "en": "What changes when more area is counted?"
+          }
+        },
+        {
+          "id": "L01-seeding",
+          "title": {
+            "zh": "从每毫升多少个，走到每孔真正放进去多少个",
+            "en": "Convert a concentration into what each well actually receives"
+          }
+        },
+        {
+          "id": "L01-analysis",
+          "title": {
+            "zh": "让数量、状态与后续实验自然衔接",
+            "en": "Connect abundance, condition, and the next experiment"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "E05",
+        "next": "L02"
+      },
+      "prerequisites": []
+    },
+    {
+      "id": "L02",
+      "title": {
+        "zh": "CCK-8与MTT：颜色变化告诉了我们什么",
+        "en": "CCK-8 and MTT: What a color change tells us"
+      },
+      "standfirst": {
+        "zh": "一孔颜色背后有细胞数量、代谢和材料背景。沿着显色反应、孔板对照与剂量曲线，学会计算并解释一个有明确含义的百分数。",
+        "en": "Cell number, metabolism and material background all contribute to a well’s color. Follow reaction chemistry, plate controls and dose curves to calculate a percentage with a defined meaning."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "CCK-8与MTT：颜色变化告诉了我们什么",
+        "en": "CCK-8 and MTT: What a color change tells us"
+      },
+      "keywords": [
+        "CCK-8",
+        "MTT",
+        "WST-8",
+        "细胞活性",
+        "酶标仪",
+        "剂量",
+        "匹配空白",
+        "viability",
+        "plate reader",
+        "dose response",
+        "tetrazolium"
+      ],
+      "sections": [
+        {
+          "id": "L02-question",
+          "title": {
+            "zh": "1. 一孔颜色变浅，细胞究竟发生了什么",
+            "en": "1. A well becomes paler: what happened to the cells?"
+          }
+        },
+        {
+          "id": "L02-chemistry",
+          "title": {
+            "zh": "2. 从MTT到WST-8：把细胞过程接到一块微孔板上",
+            "en": "2. From MTT to WST-8: connecting a cell process to a microplate"
+          }
+        },
+        {
+          "id": "L02-reader",
+          "title": {
+            "zh": "3. 酶标仪读取的是光，生物学解释从光以后开始",
+            "en": "3. The reader measures light; biology is interpreted afterwards"
+          }
+        },
+        {
+          "id": "L02-controls",
+          "title": {
+            "zh": "4. 为材料实验安排真正匹配的空白",
+            "en": "4. Design blanks that match the material experiment"
+          }
+        },
+        {
+          "id": "L02-meaning",
+          "title": {
+            "zh": "5. 细胞数量、代谢和重复，怎样分别解释",
+            "en": "5. Separate cell number, metabolic response and replication"
+          }
+        },
+        {
+          "id": "L02-dose",
+          "title": {
+            "zh": "6. 剂量—响应曲线上的两个“50%”",
+            "en": "6. Two different “50%” positions on a dose–response curve"
+          }
+        },
+        {
+          "id": "L02-code",
+          "title": {
+            "zh": "7. 从孔板原始读数到可复查的图",
+            "en": "7. From raw well readings to reproducible figures"
+          }
+        },
+        {
+          "id": "L02-lab",
+          "title": {
+            "zh": "交互实验：相同颜色，可以来自多少种细胞状态",
+            "en": "Interactive experiment: How many cell states can give the same color?"
+          }
+        },
+        {
+          "id": "L02-next",
+          "title": {
+            "zh": "8. 把一个百分数写成清楚的实验结论",
+            "en": "8. Write a percentage as a clear experimental result"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L01",
+        "next": "L03"
+      },
+      "prerequisites": [
+        "L01",
+        "S03"
+      ]
+    },
+    {
+      "id": "L03",
+      "title": {
+        "zh": "活死染色：把细胞状态变成可读图像",
+        "en": "Live/dead staining: Turning cell state into readable images"
+      },
+      "standfirst": {
+        "zh": "从染料进出细胞的机制，走向背景、串色、对象分类与三维材料里的空间判断。",
+        "en": "Follow probe entry and retention through background, spillover, object classification and spatial interpretation in materials."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "活死染色：把细胞状态变成可读图像",
+        "en": "Live/dead staining: Turning cell state into readable images"
+      },
+      "keywords": [
+        "live dead",
+        "calcein",
+        "EthD-1",
+        "viability",
+        "活死染色",
+        "荧光"
+      ],
+      "sections": [
+        {
+          "id": "L03-question",
+          "title": {
+            "zh": "一张绿色的细胞照片，究竟回答了什么问题",
+            "en": "What does a green image of cells actually tell us?"
+          }
+        },
+        {
+          "id": "L03-mechanism",
+          "title": {
+            "zh": "让细胞自己完成一段发光反应",
+            "en": "Let the cell perform part of the fluorescence reaction"
+          }
+        },
+        {
+          "id": "L03-controls",
+          "title": {
+            "zh": "先准备几幅能解释颜色的对照图",
+            "en": "Prepare images that explain where the colors come from"
+          }
+        },
+        {
+          "id": "L03-image",
+          "title": {
+            "zh": "相机保存的是数字，颜色只是读图方式",
+            "en": "The detector records numbers; color is a display choice"
+          }
+        },
+        {
+          "id": "L03-count",
+          "title": {
+            "zh": "从图像走向百分比，最重要的是分母",
+            "en": "The denominator turns an image into a defined percentage"
+          }
+        },
+        {
+          "id": "L03-lab",
+          "title": {
+            "zh": "细胞没有改变，双阳为什么突然变多？",
+            "en": "Why do double positives increase when the cells stay unchanged?"
+          }
+        },
+        {
+          "id": "L03-depth",
+          "title": {
+            "zh": "看见深处、保留数量，才能读懂材料上的状态",
+            "en": "Preserve depth and abundance when interpreting a material"
+          }
+        },
+        {
+          "id": "L03-analysis",
+          "title": {
+            "zh": "让每一个分类都能回到原图",
+            "en": "Make every classification traceable to the original image"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L02",
+        "next": "L04"
+      },
+      "prerequisites": [
+        "L01"
+      ]
+    },
+    {
+      "id": "L04",
+      "title": {
+        "zh": "EdU实验：追踪正在复制的DNA",
+        "en": "EdU assays: Tracking DNA synthesis"
+      },
+      "standfirst": {
+        "zh": "用一个有起止时间的分子标签，分清新 DNA 合成、阳性比例和细胞群体增长。",
+        "en": "Use a timed molecular label to distinguish DNA synthesis, positive fraction and population growth."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "EdU实验：追踪正在复制的DNA",
+        "en": "EdU assays: Tracking DNA synthesis"
+      },
+      "keywords": [
+        "EdU",
+        "DNA synthesis",
+        "pulse chase",
+        "cell cycle",
+        "DNA合成",
+        "细胞周期"
+      ],
+      "sections": [
+        {
+          "id": "L04-question",
+          "title": {
+            "zh": "细胞变多之前，先看谁正在复制遗传信息",
+            "en": "Before cells become more numerous, ask who is copying genetic information"
+          }
+        },
+        {
+          "id": "L04-history",
+          "title": {
+            "zh": "一个很小的化学标签，连接了细胞生物学与点击反应",
+            "en": "A small chemical handle connects cell biology to click chemistry"
+          }
+        },
+        {
+          "id": "L04-cycle",
+          "title": {
+            "zh": "理解细胞周期，才知道一个阳性核代表哪段经历",
+            "en": "A positive nucleus records a history within the cell cycle"
+          }
+        },
+        {
+          "id": "L04-design",
+          "title": {
+            "zh": "脉冲、浓度和对照，应围绕同一个问题安排",
+            "en": "Choose pulse, concentration, and controls around one question"
+          }
+        },
+        {
+          "id": "L04-image",
+          "title": {
+            "zh": "先找到全部细胞核，再问哪些核带有新合成标记",
+            "en": "Find all nuclei before asking which ones contain new-DNA label"
+          }
+        },
+        {
+          "id": "L04-pulse-discussion",
+          "title": {
+            "zh": "改变时间窗口，再看一张真正的实验图",
+            "en": "Change the time window, then read a measured example"
+          }
+        },
+        {
+          "id": "L04-lab",
+          "title": {
+            "zh": "只把脉冲延长，阳性比例会怎样变化？",
+            "en": "What happens if only the pulse becomes longer?"
+          }
+        },
+        {
+          "id": "L04-analysis",
+          "title": {
+            "zh": "从逐核记录，回到材料改变了哪一段过程",
+            "en": "Trace each nucleus back to the process changed by the material"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L03",
+        "next": "L05"
+      },
+      "prerequisites": [
+        "L01",
+        "L03"
+      ]
+    },
+    {
+      "id": "L05",
+      "title": {
+        "zh": "免疫荧光：让目标蛋白在细胞中显现",
+        "en": "Immunofluorescence: Locating target proteins in cells"
+      },
+      "standfirst": {
+        "zh": "从抗体识别到核胞质比，读懂真实细胞图像，并亲手检验背景、曝光与区域选择。",
+        "en": "Follow antibody recognition to nuclear localization, and investigate background, exposure and region selection."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "免疫荧光：让目标蛋白在细胞中显现",
+        "en": "Immunofluorescence: Locating target proteins in cells"
+      },
+      "keywords": [
+        "immunofluorescence",
+        "免疫荧光",
+        "antibody",
+        "核胞质比",
+        "VIM"
+      ],
+      "sections": [
+        {
+          "id": "L05-question",
+          "title": {
+            "zh": "一枚细胞变亮之前，先问蛋白去了哪里",
+            "en": "Before asking whether a cell is brighter, ask where its protein went"
+          }
+        },
+        {
+          "id": "L05-recognition",
+          "title": {
+            "zh": "抗体怎样把分子身份变成可见位置",
+            "en": "How recognition becomes a visible address"
+          }
+        },
+        {
+          "id": "L05-preparation",
+          "title": {
+            "zh": "保存现场，也给探针留出通路",
+            "en": "Preserve the scene and provide a route to the target"
+          }
+        },
+        {
+          "id": "L05-controls",
+          "title": {
+            "zh": "让对照回答具体的问题",
+            "en": "Give each control a question to answer"
+          }
+        },
+        {
+          "id": "L05-measure",
+          "title": {
+            "zh": "从亮度到位置：先扣背景，再确定分母",
+            "en": "From brightness to localization: correct the background and define the denominator"
+          }
+        },
+        {
+          "id": "L05-optics",
+          "title": {
+            "zh": "漂亮图像与可比较图像需要哪些共同条件",
+            "en": "What comparable images require from the microscope"
+          }
+        },
+        {
+          "id": "L05-lab",
+          "title": {
+            "zh": "同一个蛋白分布，为何测出不同的比值？",
+            "en": "Why can one protein distribution produce different ratios?"
+          }
+        },
+        {
+          "id": "L05-example",
+          "title": {
+            "zh": "运行完整例子，再把设计带回自己的样品",
+            "en": "Run the complete example and carry its logic back to a specimen"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L04",
+        "next": "L06"
+      },
+      "prerequisites": [
+        "L01",
+        "L03"
+      ]
+    },
+    {
+      "id": "L06",
+      "title": {
+        "zh": "ELISA：把分子识别转化成浓度",
+        "en": "ELISA: Turning molecular recognition into concentration"
+      },
+      "standfirst": {
+        "zh": "看懂显色、弯曲的标准曲线、稀释与加标，建立从一孔读数到研究结论的完整计算链。",
+        "en": "Connect recognition, nonlinear calibration, dilution and recovery to a complete concentration measurement."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "ELISA：把分子识别转化成浓度",
+        "en": "ELISA: Turning molecular recognition into concentration"
+      },
+      "keywords": [
+        "ELISA",
+        "4PL",
+        "校准",
+        "加标回收",
+        "matrix effect"
+      ],
+      "sections": [
+        {
+          "id": "L06-question",
+          "title": {
+            "zh": "一滴培养液，怎样告诉我们细胞发出了多少信号",
+            "en": "What can a drop of culture medium tell us about cellular communication?"
+          }
+        },
+        {
+          "id": "L06-mechanism",
+          "title": {
+            "zh": "识别、洗涤与显色，各自承担哪一段工作",
+            "en": "Recognition, washing, and color development perform different jobs"
+          }
+        },
+        {
+          "id": "L06-plate",
+          "title": {
+            "zh": "在加样之前，把样品、标准与质控放到同一张地图上",
+            "en": "Put standards, samples, and controls on one map before pipetting"
+          }
+        },
+        {
+          "id": "L06-calibration",
+          "title": {
+            "zh": "标准曲线为什么弯曲，怎样沿着它找回浓度",
+            "en": "Why the curve bends and how to follow it back to concentration"
+          }
+        },
+        {
+          "id": "L06-matrix",
+          "title": {
+            "zh": "稀释与加标，让样品自己检验这把尺",
+            "en": "Use dilution and added target to test the sample's response"
+          }
+        },
+        {
+          "id": "L06-lab",
+          "title": {
+            "zh": "同一份样品，稀释后为何得到不同的浓度？",
+            "en": "Why does dilution change the inferred concentration of one sample?"
+          }
+        },
+        {
+          "id": "L06-quality",
+          "title": {
+            "zh": "误差条、批次变化与真正可比较的结果",
+            "en": "Precision, reagent lots, and measurements that can be compared"
+          }
+        },
+        {
+          "id": "L06-example",
+          "title": {
+            "zh": "把完整计算链跑一遍，再解释生物学差异",
+            "en": "Run the calculation chain, then interpret the biology"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L05",
+        "next": "L07"
+      },
+      "prerequisites": [
+        "L01",
+        "L05"
+      ]
+    },
+    {
+      "id": "L07",
+      "title": {
+        "zh": "Western blot：条带的身份、强度与比较",
+        "en": "Western blotting: Band identity, intensity and comparison"
+      },
+      "standfirst": {
+        "zh": "沿着分离、转移、识别和成像，理解一条蛋白条带怎样成为有明确分母的测量。",
+        "en": "Follow separation, transfer, recognition and imaging to a protein measurement with a defined denominator."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "Western blot：条带的身份、强度与比较",
+        "en": "Western blotting: Band identity, intensity and comparison"
+      },
+      "keywords": [
+        "Western blot",
+        "免疫印迹",
+        "归一化",
+        "dynamic range"
+      ],
+      "sections": [
+        {
+          "id": "L07-question",
+          "title": {
+            "zh": "一条深色条带，究竟告诉了我们什么",
+            "en": "What does a dark protein band actually tell us?"
+          }
+        },
+        {
+          "id": "L07-transfer",
+          "title": {
+            "zh": "把分离的位置保存下来，让抗体能够接近目标",
+            "en": "Preserve the separated pattern and make it accessible to antibodies"
+          }
+        },
+        {
+          "id": "L07-sample",
+          "title": {
+            "zh": "从细胞到泳道：让加进去的样品有明确含义",
+            "en": "Give the material entering a lane a clear definition"
+          }
+        },
+        {
+          "id": "L07-position",
+          "title": {
+            "zh": "读条带位置，也读整条泳道的上下文",
+            "en": "Read the band position together with the rest of its lane"
+          }
+        },
+        {
+          "id": "L07-integrate",
+          "title": {
+            "zh": "从像素加法到归一化倍数",
+            "en": "From pixel addition to a normalized fold change"
+          }
+        },
+        {
+          "id": "L07-range",
+          "title": {
+            "zh": "条带越深，为什么反而越难比较",
+            "en": "Why the darkest band can be harder to compare"
+          }
+        },
+        {
+          "id": "L07-lab",
+          "title": {
+            "zh": "交互实验：多曝光会不会改变倍数",
+            "en": "Interactive experiment: Does exposure change the fold change?"
+          }
+        },
+        {
+          "id": "L07-example",
+          "title": {
+            "zh": "把完整膜图、逐泳道数值与研究问题放在一起",
+            "en": "Connect the complete image, lane values, and biological question"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L06",
+        "next": "L08"
+      },
+      "prerequisites": [
+        "C04",
+        "L05"
+      ]
+    },
+    {
+      "id": "L08",
+      "title": {
+        "zh": "qPCR：从扩增曲线理解基因表达",
+        "en": "qPCR: Understanding gene expression through amplification curves"
+      },
+      "standfirst": {
+        "zh": "把每轮复制、荧光交点、效率、参照与低拷贝取样接成一条清楚的数量链。",
+        "en": "Connect copying, fluorescence crossings, efficiency, references and low-copy sampling."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "qPCR：从扩增曲线理解基因表达",
+        "en": "qPCR: Understanding gene expression through amplification curves"
+      },
+      "keywords": [
+        "qPCR",
+        "RT-qPCR",
+        "MIQE",
+        "扩增效率",
+        "reference gene"
+      ],
+      "sections": [
+        {
+          "id": "L08-question",
+          "title": {
+            "zh": "细胞的回答，为什么藏在一条变亮的曲线里",
+            "en": "Why a cell's answer appears as a rising fluorescence curve"
+          }
+        },
+        {
+          "id": "L08-copy",
+          "title": {
+            "zh": "从复制一段DNA，到连续看见复制过程",
+            "en": "From copying DNA to watching the copies accumulate"
+          }
+        },
+        {
+          "id": "L08-sample",
+          "title": {
+            "zh": "一小孔里的目标，来自怎样的一份样品",
+            "en": "What specimen does the small reaction volume represent?"
+          }
+        },
+        {
+          "id": "L08-curves",
+          "title": {
+            "zh": "先读原始曲线，再把循环数换成起始量",
+            "en": "Read the curve before converting cycles into quantity"
+          }
+        },
+        {
+          "id": "L08-normalization",
+          "title": {
+            "zh": "为什么要减两次，又为什么不能总用2作底数",
+            "en": "Why subtract twice, and why is the base not always two?"
+          }
+        },
+        {
+          "id": "L08-lab",
+          "title": {
+            "zh": "交互实验：同样的起始差异，不同的增长速度",
+            "en": "Interactive experiment: Same input difference, different growth rates"
+          }
+        },
+        {
+          "id": "L08-products",
+          "title": {
+            "zh": "亮起来的是什么，没亮的孔又装了什么",
+            "en": "What became fluorescent, and what entered an unlit well?"
+          }
+        },
+        {
+          "id": "L08-example",
+          "title": {
+            "zh": "完整例子：让每个倍数都能回到那条曲线",
+            "en": "A complete example that keeps every fold linked to its curve"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L07",
+        "next": "L09"
+      },
+      "prerequisites": [
+        "L01",
+        "L07"
+      ]
+    },
+    {
+      "id": "L09",
+      "title": {
+        "zh": "流式细胞术：逐个细胞读出多维信息",
+        "en": "Flow cytometry: Reading multiple signals from individual cells"
+      },
+      "standfirst": {
+        "zh": "从光脉冲、串色和门控出发，把群体分布、比例与绝对数量连接起来。",
+        "en": "Connect optical pulses, spillover and gates to population distributions, fractions and absolute counts."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "流式细胞术：逐个细胞读出多维信息",
+        "en": "Flow cytometry: Reading multiple signals from individual cells"
+      },
+      "keywords": [
+        "flow cytometry",
+        "FCS",
+        "compensation",
+        "gating",
+        "流式细胞术",
+        "FMO"
+      ],
+      "sections": [
+        {
+          "id": "L09-question",
+          "title": {
+            "zh": "平均值相同，两瓶细胞可以很不一样",
+            "en": "The same average can hide very different cell populations"
+          }
+        },
+        {
+          "id": "L09-stream",
+          "title": {
+            "zh": "一颗细胞经过光束，留下怎样的脉冲",
+            "en": "A cell crossing a light beam leaves a pulse"
+          }
+        },
+        {
+          "id": "L09-compensation",
+          "title": {
+            "zh": "两种颜色进入同一个通道，怎样把贡献分开",
+            "en": "When two colors enter one detector, separate their contributions"
+          }
+        },
+        {
+          "id": "L09-gates",
+          "title": {
+            "zh": "沿着一条有分母的路线，找到目标群体",
+            "en": "Follow a selection path with an explicit denominator"
+          }
+        },
+        {
+          "id": "L09-controls",
+          "title": {
+            "zh": "阳性边界怎样获得实验依据",
+            "en": "Give the positivity boundary an experimental basis"
+          }
+        },
+        {
+          "id": "L09-lab",
+          "title": {
+            "zh": "交互实验：串色、门阈值与显示尺度",
+            "en": "Interactive experiment: Spillover, threshold and display scale"
+          }
+        },
+        {
+          "id": "L09-counts",
+          "title": {
+            "zh": "比例之外，还要知道采到了多少",
+            "en": "A percentage needs both a denominator and a sampling scale"
+          }
+        },
+        {
+          "id": "L09-distributions",
+          "title": {
+            "zh": "从真实分布中，看见群体内部的变化",
+            "en": "Read measured distributions as populations with internal variation"
+          }
+        },
+        {
+          "id": "L09-example",
+          "title": {
+            "zh": "让每个结果都能回到事件表",
+            "en": "Keep every result connected to its event table"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L08",
+        "next": "L10"
+      },
+      "prerequisites": [
+        "L01",
+        "L03"
+      ]
+    },
+    {
+      "id": "L10",
+      "title": {
+        "zh": "划痕与Transwell：细胞怎样移动并穿过屏障",
+        "en": "Scratch and Transwell assays: How cells move and cross barriers"
+      },
+      "standfirst": {
+        "zh": "把闭合面积、细胞轨迹、梯度与跨膜数量连起来，读懂迁移、铺展和增殖各自留下的证据。",
+        "en": "Connect gap area, cell trajectories, gradients and membrane counts to distinguish movement, spreading and division."
+      },
+      "category": "wet-lab-data",
+      "group": {
+        "zh": "细胞与分子实验",
+        "en": "Cellular and molecular assays"
+      },
+      "search_title": {
+        "zh": "划痕与Transwell：细胞怎样移动并穿过屏障",
+        "en": "Scratch and Transwell assays: How cells move and cross barriers"
+      },
+      "keywords": [
+        "scratch assay",
+        "Transwell",
+        "趋化",
+        "cell tracking",
+        "migration"
+      ],
+      "sections": [
+        {
+          "id": "L10-question",
+          "title": {
+            "zh": "一条空隙变窄，细胞究竟做了什么",
+            "en": "When a gap narrows, what have the cells actually done?"
+          }
+        },
+        {
+          "id": "L10-history",
+          "title": {
+            "zh": "把移动放进一个可比较的装置",
+            "en": "Putting movement into a comparable geometry"
+          }
+        },
+        {
+          "id": "L10-area",
+          "title": {
+            "zh": "从像素面积到闭合速度，分母先讲清楚",
+            "en": "From pixels to closure, with the denominator made visible"
+          }
+        },
+        {
+          "id": "L10-processes",
+          "title": {
+            "zh": "同样闭合60%，可能经历不同的细胞过程",
+            "en": "The same sixty-percent closure can contain different processes"
+          }
+        },
+        {
+          "id": "L10-lab",
+          "title": {
+            "zh": "交互实验：同样闭合，不同细胞移动",
+            "en": "Interactive experiment: Same closure, different movement"
+          }
+        },
+        {
+          "id": "L10-transwell",
+          "title": {
+            "zh": "穿过多孔膜：信号、孔道和计数位置",
+            "en": "Crossing a membrane: cues, pores and counting locations"
+          }
+        },
+        {
+          "id": "L10-tracks",
+          "title": {
+            "zh": "走得快、走得直与朝同一方向，是三件事",
+            "en": "Fast, straight and commonly directed are different properties"
+          }
+        },
+        {
+          "id": "L10-images",
+          "title": {
+            "zh": "让图像保留足够的生物学信息",
+            "en": "Preserving enough biological information in the image"
+          }
+        },
+        {
+          "id": "L10-example",
+          "title": {
+            "zh": "完整例子：面积、轨迹与跨膜计数一起读",
+            "en": "A complete example connecting areas, tracks and membrane counts"
+          }
+        },
+        {
+          "id": "references",
+          "title": {
+            "zh": "参考与延伸阅读",
+            "en": "References and further reading"
+          }
+        }
+      ],
+      "scripts": [],
+      "neighbors": {
+        "prev": "L09",
+        "next": null
+      },
+      "prerequisites": [
+        "L01",
+        "L04",
+        "I01"
+      ]
+    }
+  ]
+}

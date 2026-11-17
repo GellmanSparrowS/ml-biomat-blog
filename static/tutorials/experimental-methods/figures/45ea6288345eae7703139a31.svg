@@ -1,0 +1,923 @@
+<svg role="img" aria-label="四类计数、阈值敏感性、构造深度衰减与整体强度的不同来源。A、B 使用同一分母 120；C 的系数是教学参数；D 区分细胞数与单细胞亮度。" xmlns:xlink="http://www.w3.org/1999/xlink" width="811.539062pt" height="531.164875pt" viewBox="0 0 811.539062 531.164875" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="L03-F3-figure_1">
+  <g id="L03-F3-patch_1">
+   <path d="M 0 531.164875 
+L 811.539062 531.164875 
+L 811.539062 0 
+L 0 0 
+z
+" style="fill: #faf9f5"/>
+  </g>
+  <g id="L03-F3-axes_1">
+   <g id="L03-F3-patch_2">
+    <path d="M 49.079063 225.704875 
+L 393.489063 225.704875 
+L 393.489063 23.75175 
+L 49.079063 23.75175 
+z
+" style="fill: #faf9f5"/>
+   </g>
+   <g id="L03-F3-patch_3">
+    <path d="M 64.734063 225.704875 
+L 130.649852 225.704875 
+L 130.649852 33.368565 
+L 64.734063 33.368565 
+z
+" clip-path="url(#L03-F3-pa5055f2492)" style="fill: #3c8a6a"/>
+   </g>
+   <g id="L03-F3-patch_4">
+    <path d="M 147.128799 225.704875 
+L 213.044589 225.704875 
+L 213.044589 170.751644 
+L 147.128799 170.751644 
+z
+" clip-path="url(#L03-F3-pa5055f2492)" style="fill: #cd803f"/>
+   </g>
+   <g id="L03-F3-patch_5">
+    <path d="M 229.523536 225.704875 
+L 295.439326 225.704875 
+L 295.439326 211.966567 
+L 229.523536 211.966567 
+z
+" clip-path="url(#L03-F3-pa5055f2492)" style="fill: #8160a1"/>
+   </g>
+   <g id="L03-F3-patch_6">
+    <path d="M 311.918273 225.704875 
+L 377.834063 225.704875 
+L 377.834063 211.966567 
+L 311.918273 211.966567 
+z
+" clip-path="url(#L03-F3-pa5055f2492)" style="fill: #7c8990"/>
+   </g>
+   <g id="L03-F3-matplotlib.axis_1">
+    <g id="L03-F3-xtick_1">
+     <g id="L03-F3-line2d_1">
+      <defs>
+       <path id="L03-F3-m23569fbb10" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="97.691957" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_1">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="97.691957" y="241.498" transform="rotate(-0 97.691957 241.498)">绿单阳</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_2">
+     <g id="L03-F3-line2d_2">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="180.086694" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_2">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="180.086694" y="241.498" transform="rotate(-0 180.086694 241.498)">红单阳</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_3">
+     <g id="L03-F3-line2d_3">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="262.481431" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_3">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="262.481431" y="241.498" transform="rotate(-0 262.481431 241.498)">双阳</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_4">
+     <g id="L03-F3-line2d_4">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="344.876168" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_4">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="344.876168" y="241.498" transform="rotate(-0 344.876168 241.498)">双阴</text>
+     </g>
+    </g>
+   </g>
+   <g id="L03-F3-matplotlib.axis_2">
+    <g id="L03-F3-ytick_1">
+     <g id="L03-F3-line2d_5">
+      <defs>
+       <path id="L03-F3-md61f631132" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_5">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="230.101437" transform="rotate(-0 42.079063 230.101437)">0</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_2">
+     <g id="L03-F3-line2d_6">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="202.807695" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_6">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="207.204258" transform="rotate(-0 42.079063 207.204258)">10</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_3">
+     <g id="L03-F3-line2d_7">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="179.910516" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_7">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="184.307078" transform="rotate(-0 42.079063 184.307078)">20</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_4">
+     <g id="L03-F3-line2d_8">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="157.013336" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_8">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="161.409898" transform="rotate(-0 42.079063 161.409898)">30</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_5">
+     <g id="L03-F3-line2d_9">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="134.116156" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_9">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="138.512719" transform="rotate(-0 42.079063 138.512719)">40</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_6">
+     <g id="L03-F3-line2d_10">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="111.218976" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_10">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="115.615539" transform="rotate(-0 42.079063 115.615539)">50</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_7">
+     <g id="L03-F3-line2d_11">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="88.321797" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_11">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="92.718359" transform="rotate(-0 42.079063 92.718359)">60</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_8">
+     <g id="L03-F3-line2d_12">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="65.424617" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_12">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="69.82118" transform="rotate(-0 42.079063 69.82118)">70</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_9">
+     <g id="L03-F3-line2d_13">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="42.527437" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_13">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="46.924" transform="rotate(-0 42.079063 46.924)">80</text>
+     </g>
+    </g>
+    <g id="L03-F3-text_14">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="22.443594" y="124.728312" transform="rotate(-90 22.443594 124.728312)">对象数</text>
+    </g>
+   </g>
+   <g id="L03-F3-patch_7">
+    <path d="M 49.079063 225.704875 
+L 49.079063 23.75175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-patch_8">
+    <path d="M 49.079063 225.704875 
+L 393.489063 225.704875 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-text_15">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="221.284063" y="17.75175" transform="rotate(-0 221.284063 17.75175)">A  保留四类与共同分母 120</text>
+   </g>
+  </g>
+  <g id="L03-F3-axes_2">
+   <g id="L03-F3-patch_9">
+    <path d="M 459.929062 225.704875 
+L 804.339062 225.704875 
+L 804.339062 23.75175 
+L 459.929062 23.75175 
+z
+" style="fill: #faf9f5"/>
+   </g>
+   <g id="L03-F3-matplotlib.axis_3">
+    <g id="L03-F3-xtick_5">
+     <g id="L03-F3-line2d_14">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="475.584062" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_16">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="475.584062" y="241.498" transform="rotate(-0 475.584062 241.498)">20</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_6">
+     <g id="L03-F3-line2d_15">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="541.499852" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_17">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="541.499852" y="241.498" transform="rotate(-0 541.499852 241.498)">40</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_7">
+     <g id="L03-F3-line2d_16">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="607.415641" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_18">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="607.415641" y="241.498" transform="rotate(-0 607.415641 241.498)">60</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_8">
+     <g id="L03-F3-line2d_17">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="673.331431" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_19">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="673.331431" y="241.498" transform="rotate(-0 673.331431 241.498)">80</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_9">
+     <g id="L03-F3-line2d_18">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="739.24722" y="225.704875" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_20">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="739.24722" y="241.498" transform="rotate(-0 739.24722 241.498)">100</text>
+     </g>
+    </g>
+    <g id="L03-F3-text_21">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="632.134063" y="257.025656" transform="rotate(-0 632.134063 257.025656)">绿色阈值 / a.u.</text>
+    </g>
+   </g>
+   <g id="L03-F3-matplotlib.axis_4">
+    <g id="L03-F3-ytick_10">
+     <g id="L03-F3-line2d_19">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="216.525187" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_22">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="220.92175" transform="rotate(-0 452.929062 220.92175)">0</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_11">
+     <g id="L03-F3-line2d_20">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="190.297509" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_23">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="194.694071" transform="rotate(-0 452.929062 194.694071)">10</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_12">
+     <g id="L03-F3-line2d_21">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="164.06983" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_24">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="168.466393" transform="rotate(-0 452.929062 168.466393)">20</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_13">
+     <g id="L03-F3-line2d_22">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="137.842152" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_25">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="142.238714" transform="rotate(-0 452.929062 142.238714)">30</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_14">
+     <g id="L03-F3-line2d_23">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="111.614473" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_26">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="116.011036" transform="rotate(-0 452.929062 116.011036)">40</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_15">
+     <g id="L03-F3-line2d_24">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="85.386795" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_27">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="89.783357" transform="rotate(-0 452.929062 89.783357)">50</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_16">
+     <g id="L03-F3-line2d_25">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="59.159116" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_28">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="63.555679" transform="rotate(-0 452.929062 63.555679)">60</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_17">
+     <g id="L03-F3-line2d_26">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="32.931437" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_29">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="37.328" transform="rotate(-0 452.929062 37.328)">70</text>
+     </g>
+    </g>
+    <g id="L03-F3-text_30">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="433.293594" y="124.728312" transform="rotate(-90 433.293594 124.728312)">绿单阳占全部对象 / %</text>
+    </g>
+   </g>
+   <g id="L03-F3-line2d_27">
+    <path d="M 475.584062 32.931437 
+L 478.879852 32.931437 
+L 482.175641 32.931437 
+L 485.471431 32.931437 
+L 488.76722 32.931437 
+L 492.06301 32.931437 
+L 495.358799 32.931437 
+L 498.654589 32.931437 
+L 501.950378 32.931437 
+L 505.246168 32.931437 
+L 508.541957 32.931437 
+L 511.837747 32.931437 
+L 515.133536 32.931437 
+L 518.429326 32.931437 
+L 521.725115 32.931437 
+L 525.020905 32.931437 
+L 528.316694 32.931437 
+L 531.612484 32.931437 
+L 534.908273 32.931437 
+L 538.204062 32.931437 
+L 541.499852 32.931437 
+L 544.795641 32.931437 
+L 548.091431 32.931437 
+L 551.38722 32.931437 
+L 554.68301 32.931437 
+L 557.978799 32.931437 
+L 561.274589 32.931437 
+L 564.570378 32.931437 
+L 567.866168 32.931437 
+L 571.161957 32.931437 
+L 574.457747 32.931437 
+L 577.753536 32.931437 
+L 581.049326 32.931437 
+L 584.345115 32.931437 
+L 587.640905 32.931437 
+L 590.936694 32.931437 
+L 594.232484 32.931437 
+L 597.528273 32.931437 
+L 600.824062 32.931437 
+L 604.119852 32.931437 
+L 607.415641 32.931437 
+L 610.711431 32.931437 
+L 614.00722 32.931437 
+L 617.30301 32.931437 
+L 620.598799 32.931437 
+L 623.894589 32.931437 
+L 627.190378 32.931437 
+L 630.486168 32.931437 
+L 633.781957 32.931437 
+L 637.077747 32.931437 
+L 640.373536 32.931437 
+L 643.669326 32.931437 
+L 646.965115 32.931437 
+L 650.260905 32.931437 
+L 653.556694 32.931437 
+L 656.852484 32.931437 
+L 660.148273 32.931437 
+L 663.444062 32.931437 
+L 666.739852 32.931437 
+L 670.035641 32.931437 
+L 673.331431 32.931437 
+L 676.62722 32.931437 
+L 679.92301 32.931437 
+L 683.218799 32.931437 
+L 686.514589 35.117077 
+L 689.810378 35.117077 
+L 693.106168 35.117077 
+L 696.401957 35.117077 
+L 699.697747 37.302717 
+L 702.993536 50.416557 
+L 706.289326 54.787836 
+L 709.585115 65.716036 
+L 712.880905 74.458595 
+L 716.176694 100.686274 
+L 719.472484 124.728312 
+L 722.768273 146.584711 
+L 726.064062 161.88419 
+L 729.359852 179.36931 
+L 732.655641 201.225708 
+L 735.951431 214.339548 
+L 739.24722 214.339548 
+L 742.54301 214.339548 
+L 745.838799 216.525187 
+L 749.134589 216.525187 
+L 752.430378 216.525187 
+L 755.726168 216.525187 
+L 759.021957 216.525187 
+L 762.317747 216.525187 
+L 765.613536 216.525187 
+L 768.909326 216.525187 
+L 772.205115 216.525187 
+L 775.500905 216.525187 
+L 778.796694 216.525187 
+L 782.092484 216.525187 
+L 785.388273 216.525187 
+L 788.684062 216.525187 
+" clip-path="url(#L03-F3-p8ccf84b899)" style="fill: none; stroke: #186e83; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-line2d_28">
+    <path d="M 541.499852 225.704875 
+L 541.499852 23.75175 
+" clip-path="url(#L03-F3-p8ccf84b899)" style="fill: none; stroke-dasharray: 5.55,2.4; stroke-dashoffset: 0; stroke: #cd803f; stroke-width: 1.5"/>
+   </g>
+   <g id="L03-F3-patch_10">
+    <path d="M 459.929062 225.704875 
+L 459.929062 23.75175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-patch_11">
+    <path d="M 459.929062 225.704875 
+L 804.339062 225.704875 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-text_31">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="632.134063" y="17.75175" transform="rotate(-0 632.134063 17.75175)">B  阈值敏感性保留分母</text>
+   </g>
+  </g>
+  <g id="L03-F3-axes_3">
+   <g id="L03-F3-patch_12">
+    <path d="M 49.079063 489.87175 
+L 393.489063 489.87175 
+L 393.489063 287.918625 
+L 49.079063 287.918625 
+z
+" style="fill: #faf9f5"/>
+   </g>
+   <g id="L03-F3-matplotlib.axis_5">
+    <g id="L03-F3-xtick_10">
+     <g id="L03-F3-line2d_29">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="64.734063" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_32">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="64.734063" y="505.664875" transform="rotate(-0 64.734063 505.664875)">0</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_11">
+     <g id="L03-F3-line2d_30">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="103.871563" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_33">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="103.871563" y="505.664875" transform="rotate(-0 103.871563 505.664875)">50</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_12">
+     <g id="L03-F3-line2d_31">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="143.009063" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_34">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="143.009063" y="505.664875" transform="rotate(-0 143.009063 505.664875)">100</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_13">
+     <g id="L03-F3-line2d_32">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="182.146563" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_35">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="182.146563" y="505.664875" transform="rotate(-0 182.146563 505.664875)">150</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_14">
+     <g id="L03-F3-line2d_33">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="221.284063" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_36">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="221.284063" y="505.664875" transform="rotate(-0 221.284063 505.664875)">200</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_15">
+     <g id="L03-F3-line2d_34">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="260.421562" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_37">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="260.421562" y="505.664875" transform="rotate(-0 260.421562 505.664875)">250</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_16">
+     <g id="L03-F3-line2d_35">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="299.559063" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_38">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="299.559063" y="505.664875" transform="rotate(-0 299.559063 505.664875)">300</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_17">
+     <g id="L03-F3-line2d_36">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="338.696563" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_39">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="338.696563" y="505.664875" transform="rotate(-0 338.696563 505.664875)">350</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_18">
+     <g id="L03-F3-line2d_37">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="377.834063" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_40">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="377.834063" y="505.664875" transform="rotate(-0 377.834063 505.664875)">400</text>
+     </g>
+    </g>
+    <g id="L03-F3-text_41">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="221.284063" y="521.230344" transform="rotate(-0 221.284063 521.230344)">深度 / μm</text>
+    </g>
+   </g>
+   <g id="L03-F3-matplotlib.axis_6">
+    <g id="L03-F3-ytick_18">
+     <g id="L03-F3-line2d_38">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="458.626851" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_42">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="463.023413" transform="rotate(-0 42.079063 463.023413)">20</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_19">
+     <g id="L03-F3-line2d_39">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="418.244716" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_43">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="422.641279" transform="rotate(-0 42.079063 422.641279)">40</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_20">
+     <g id="L03-F3-line2d_40">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="377.862582" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_44">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="382.259144" transform="rotate(-0 42.079063 382.259144)">60</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_21">
+     <g id="L03-F3-line2d_41">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="337.480447" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_45">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="341.87701" transform="rotate(-0 42.079063 341.87701)">80</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_22">
+     <g id="L03-F3-line2d_42">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="49.079063" y="297.098312" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_46">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="42.079063" y="301.494875" transform="rotate(-0 42.079063 301.494875)">100</text>
+     </g>
+    </g>
+    <g id="L03-F3-text_47">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="15.993125" y="388.895187" transform="rotate(-90 15.993125 388.895187)">保留强度 / %</text>
+    </g>
+   </g>
+   <g id="L03-F3-line2d_43">
+    <path d="M 64.734063 297.098312 
+L 70.996063 306.561101 
+L 77.258063 315.580405 
+L 83.520063 324.177008 
+L 89.782063 332.37072 
+L 96.044063 340.180425 
+L 102.306063 347.624118 
+L 108.568063 354.718953 
+L 114.830063 361.481281 
+L 121.092063 367.926683 
+L 127.354063 374.070014 
+L 133.616062 379.925431 
+L 139.878062 385.506426 
+L 146.140062 390.825861 
+L 152.402062 395.895995 
+L 158.664062 400.72851 
+L 166.491563 406.451919 
+L 174.319063 411.842023 
+L 182.146563 416.918232 
+L 189.974063 421.698825 
+L 197.801562 426.201018 
+L 205.629063 430.441024 
+L 213.456563 434.434112 
+L 221.284063 438.194659 
+L 229.111562 441.73621 
+L 238.504563 445.714899 
+L 247.897562 449.417191 
+L 257.290563 452.862289 
+L 266.683562 456.068058 
+L 276.076563 459.051126 
+L 285.469562 461.826963 
+L 296.428063 464.822672 
+L 307.386563 467.57702 
+L 318.345063 470.109454 
+L 330.869062 472.754801 
+L 343.393062 475.158004 
+L 355.917062 477.341227 
+L 370.006563 479.559407 
+L 377.834063 480.692062 
+L 377.834063 480.692062 
+" clip-path="url(#L03-F3-p7eb24d6c72)" style="fill: none; stroke: #186e83; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-line2d_44">
+    <path d="M 64.734063 297.098312 
+L 74.127063 304.237815 
+L 83.520063 311.124866 
+L 92.913063 317.768393 
+L 103.871563 325.222859 
+L 114.830063 332.37072 
+L 125.788563 339.224589 
+L 136.747063 345.796556 
+L 147.705563 352.098217 
+L 158.664062 358.140689 
+L 169.622563 363.934633 
+L 180.581063 369.490271 
+L 191.539563 374.817404 
+L 204.063562 380.637793 
+L 216.587562 386.185402 
+L 229.111562 391.473017 
+L 241.635562 396.51282 
+L 254.159562 401.316427 
+L 266.683562 405.894907 
+L 279.207562 410.258812 
+L 293.297063 414.924221 
+L 307.386563 419.34438 
+L 321.476063 423.532181 
+L 335.565562 427.499837 
+L 351.220563 431.664206 
+L 366.875563 435.586061 
+L 377.834063 438.194659 
+L 377.834063 438.194659 
+" clip-path="url(#L03-F3-p7eb24d6c72)" style="fill: none; stroke: #cd803f; stroke-width: 1.5; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-patch_13">
+    <path d="M 49.079063 489.87175 
+L 49.079063 287.918625 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-patch_14">
+    <path d="M 49.079063 489.87175 
+L 393.489062 489.87175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-text_48">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="221.284063" y="281.918625" transform="rotate(-0 221.284063 281.918625)">C  构造的深度衰减</text>
+   </g>
+   <g id="L03-F3-legend_1">
+    <g id="L03-F3-patch_15">
+     <path d="M 290.084063 319.123625 
+L 387.889063 319.123625 
+Q 389.489063 319.123625 389.489063 317.523625 
+L 389.489063 293.518625 
+Q 389.489063 291.918625 387.889063 291.918625 
+L 290.084063 291.918625 
+Q 288.484063 291.918625 288.484063 293.518625 
+L 288.484063 317.523625 
+Q 288.484063 319.123625 290.084063 319.123625 
+z
+" style="fill: #faf9f5; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="L03-F3-line2d_45">
+     <path d="M 291.684063 298.732375 
+L 299.684063 298.732375 
+L 307.684063 298.732375 
+" style="fill: none; stroke: #186e83; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="L03-F3-text_49">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="314.084063" y="301.532375" transform="rotate(-0 314.084063 301.532375)">绿色 μ=0.006 μm⁻¹</text>
+    </g>
+    <g id="L03-F3-line2d_46">
+     <path d="M 291.684063 311.134875 
+L 299.684063 311.134875 
+L 307.684063 311.134875 
+" style="fill: none; stroke: #cd803f; stroke-width: 1.5; stroke-linecap: square"/>
+    </g>
+    <g id="L03-F3-text_50">
+     <text style="font-size: 8px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: start" x="314.084063" y="313.934875" transform="rotate(-0 314.084063 313.934875)">红色 μ=0.003 μm⁻¹</text>
+    </g>
+   </g>
+  </g>
+  <g id="L03-F3-axes_4">
+   <g id="L03-F3-patch_16">
+    <path d="M 459.929062 489.87175 
+L 804.339062 489.87175 
+L 804.339062 287.918625 
+L 459.929062 287.918625 
+z
+" style="fill: #faf9f5"/>
+   </g>
+   <g id="L03-F3-patch_17">
+    <path d="M 475.584062 489.87175 
+L 565.041205 489.87175 
+L 565.041205 297.53544 
+L 475.584062 297.53544 
+z
+" clip-path="url(#L03-F3-pd85058c912)" style="fill: #186e83"/>
+   </g>
+   <g id="L03-F3-patch_18">
+    <path d="M 587.405491 489.87175 
+L 676.862634 489.87175 
+L 676.862634 393.703595 
+L 587.405491 393.703595 
+z
+" clip-path="url(#L03-F3-pd85058c912)" style="fill: #cd803f"/>
+   </g>
+   <g id="L03-F3-patch_19">
+    <path d="M 699.22692 489.87175 
+L 788.684062 489.87175 
+L 788.684062 393.703595 
+L 699.22692 393.703595 
+z
+" clip-path="url(#L03-F3-pd85058c912)" style="fill: #8160a1"/>
+   </g>
+   <g id="L03-F3-matplotlib.axis_7">
+    <g id="L03-F3-xtick_19">
+     <g id="L03-F3-line2d_47">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="520.312634" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_51">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="520.312634" y="505.664875" transform="rotate(-0 520.312634 505.664875)">100 个 × 100</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_20">
+     <g id="L03-F3-line2d_48">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="632.134062" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_52">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="632.134062" y="505.664875" transform="rotate(-0 632.134062 505.664875)">100 个 × 50</text>
+     </g>
+    </g>
+    <g id="L03-F3-xtick_21">
+     <g id="L03-F3-line2d_49">
+      <g>
+       <use xlink:href="#L03-F3-m23569fbb10" x="743.955491" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_53">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="743.955491" y="505.664875" transform="rotate(-0 743.955491 505.664875)">50 个 × 100</text>
+     </g>
+    </g>
+   </g>
+   <g id="L03-F3-matplotlib.axis_8">
+    <g id="L03-F3-ytick_23">
+     <g id="L03-F3-line2d_50">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="489.87175" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_54">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="494.268312" transform="rotate(-0 452.929062 494.268312)">0</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_24">
+     <g id="L03-F3-line2d_51">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="451.404488" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_55">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="455.801051" transform="rotate(-0 452.929062 455.801051)">2000</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_25">
+     <g id="L03-F3-line2d_52">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="412.937226" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_56">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="417.333789" transform="rotate(-0 452.929062 417.333789)">4000</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_26">
+     <g id="L03-F3-line2d_53">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="374.469964" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_57">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="378.866527" transform="rotate(-0 452.929062 378.866527)">6000</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_27">
+     <g id="L03-F3-line2d_54">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="336.002702" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_58">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="340.399265" transform="rotate(-0 452.929062 340.399265)">8000</text>
+     </g>
+    </g>
+    <g id="L03-F3-ytick_28">
+     <g id="L03-F3-line2d_55">
+      <g>
+       <use xlink:href="#L03-F3-md61f631132" x="459.929062" y="297.53544" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="L03-F3-text_59">
+      <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: end" x="452.929062" y="301.932003" transform="rotate(-0 452.929062 301.932003)">10000</text>
+     </g>
+    </g>
+    <g id="L03-F3-text_60">
+     <text style="font-size: 11px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="413.942187" y="388.895187" transform="rotate(-90 413.942187 388.895187)">总荧光 / a.u.</text>
+    </g>
+   </g>
+   <g id="L03-F3-patch_20">
+    <path d="M 459.929062 489.87175 
+L 459.929062 287.918625 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-patch_21">
+    <path d="M 459.929062 489.87175 
+L 804.339062 489.87175 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="L03-F3-text_61">
+    <text style="font-size: 13.2px; font-family: 'Microsoft YaHei', 'DejaVu Sans', Arial, 'Microsoft YaHei', sans-serif; text-anchor: middle" x="632.134063" y="281.918625" transform="rotate(-0 632.134063 281.918625)">D  一样的总强度有不同原因</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="L03-F3-pa5055f2492">
+   <rect x="49.079063" y="23.75175" width="344.41" height="201.953125"/>
+  </clipPath>
+  <clipPath id="L03-F3-p8ccf84b899">
+   <rect x="459.929062" y="23.75175" width="344.41" height="201.953125"/>
+  </clipPath>
+  <clipPath id="L03-F3-p7eb24d6c72">
+   <rect x="49.079063" y="287.918625" width="344.41" height="201.953125"/>
+  </clipPath>
+  <clipPath id="L03-F3-pd85058c912">
+   <rect x="459.929062" y="287.918625" width="344.41" height="201.953125"/>
+  </clipPath>
+ </defs>
+</svg>

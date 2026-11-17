@@ -131,3 +131,10 @@
 - `static/js/agent-tools.js` 提供 WebMCP 只读搜索、主题列表和公开正文读取；按浏览器支持情况启用。不添加假的浏览器 API，不引入写操作、付款操作或外部任意 URL 请求。
 - `edge/markdown/worker.mjs` 是独立的内容格式协商服务，须在 Cloudflare 实际部署并验证后，才能宣称同一 URL 支持 `Accept: text/markdown`。静态文件发布本身不等于已接通协商。默认 HTML、状态码、既有付款服务和缓存隔离必须验证。
 - 本站公开阅读无需注册。不要为扫描得分发布不存在的 OAuth、A2A 或 MCP 服务。Cloudflare 登录仍由用户通过 GitHub 完成，密钥不写入仓库。
+
+
+## 实验表征教程（2026-11-17）
+
+- 正式来源为 D:/DW/experimental-methods-courses/public，共51课，中英文分102页，按原八组教学顺序接入 wet-lab-data 分类。页面为 /tutorials/experimental-methods/s01/ 与 /en/ 等配对地址；导入入口为 content_tools/import_experimental_methods.py，渲染模块为 content_tools/experimental_methods.py。
+- 保留完整正文、公式、原始科学图、交互实验、51份代码ZIP及许可；不发布源项目 authoring、private。许可索引的章节链接需映射正式网站地址，I02交互用到的正文JSON数据脚本必须保留。
+- 科学SVG外置后保持内嵌栅格图自包含；中文实验识别 zh-CN。沿用网站目录、双语切换、手机排版、图片放大和赞赏二维码。新增教程PayPal继续暂缓，免费代码下载正常开放。

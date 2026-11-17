@@ -687,7 +687,10 @@ def run():
     from content_tools import machine_learning
     ml_courses = machine_learning.load()
     ml_entries = machine_learning.entries(ml_courses)
-    course_entries = bm_entries + md_entries + python_entries + ml_entries
+    from content_tools import experimental_methods
+    experimental_courses = experimental_methods.load()
+    experimental_entries = experimental_methods.entries(experimental_courses)
+    course_entries = bm_entries + md_entries + python_entries + ml_entries + experimental_entries
     indexed_total = total + tutorial_count + len(course_entries)
     en = sum(1 for x in posts if x[0] == "en")
     zh = total - en
