@@ -1,4 +1,4 @@
-# 杨云浩Yunhao Yang
+# 杨云浩 Yunhao Yang
 
 Source: https://ml-biomat.com/about/
 Language: zh-CN

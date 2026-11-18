@@ -292,6 +292,39 @@ class Markdown:
         return text + '\n'
 
 
+def profile_summary(source: str) -> str:
+    """Read the displayed biography from a profile page or its body fragment."""
+    doc = Document(source)
+    reader = Markdown('')
+    summaries = []
+
+    def visit(node: Node) -> None:
+        if reader.skipped(node):
+            return
+        if node.tag == 'p' and 'pr-summary' in node.classes:
+            summaries.append(_compact(reader.render(node)))
+            return
+        for child in node.children:
+            if isinstance(child, Node):
+                visit(child)
+
+    visit(doc.root)
+    if len(summaries) != 1 or not summaries[0]:
+        raise ValueError('Expected one visible, non-empty p.pr-summary in the author profile.')
+    return summaries[0]
+
+
+def _heading_title(heading: Node) -> str:
+    parts = []
+    for child in heading.children:
+        if isinstance(child, str):
+            parts.append(child)
+        elif 'topic-total' not in child.classes:
+            text = child.text()
+            parts.append(' ' + text + ' ' if child.attrs.get('lang') else text)
+    return _compact(''.join(parts))
+
+
 def convert(source: str, source_url: str) -> dict | None:
     """Convert one canonical page; return None for redirects/non-content pages."""
     doc = Document(source)
@@ -305,7 +338,7 @@ def convert(source: str, source_url: str) -> dict | None:
     if not main:
         return None
     heading = next((n for n in main.walk() if n.tag == 'h1'), None)
-    title = _compact(''.join(c.text() if isinstance(c, Node) else c for c in heading.children if not isinstance(c, Node) or 'topic-total' not in c.classes)) if heading else next((_compact(n.text()).removesuffix(' — ML-Biomat') for n in nodes if n.tag == 'title'), 'ML-Biomat')
+    title = _heading_title(heading) if heading else next((_compact(n.text()).removesuffix(' — ML-Biomat') for n in nodes if n.tag == 'title'), 'ML-Biomat')
     language = next((n.attrs.get('lang') or 'zh-CN' for n in nodes if n.tag == 'html'), 'zh-CN')
     converter = Markdown(source_url, heading, main)
     body = converter.finish(converter.render(main)).strip()
@@ -338,6 +371,7 @@ def generate(build_root: Path, base_url: str, search_data: list) -> dict:
         if item_route:
             search[item_route] = item
     pages, texts = [], {}
+    profiles = {}
     html_bytes = 0
     for route in routes:
         path = (root / unquote(route.lstrip('/')) / 'index.html').resolve()
@@ -347,6 +381,8 @@ def generate(build_root: Path, base_url: str, search_data: list) -> dict:
         result = convert(source, base_url + route)
         if not result:
             continue
+        if route in ('/about/', '/about/en/'):
+            profiles[route] = profile_summary(source)
         target = path.with_suffix('.md')
         target.write_text(result['text'], encoding='utf-8', newline='\n')
         for asset, raw in result['assets'].items():
@@ -361,13 +397,19 @@ def generate(build_root: Path, base_url: str, search_data: list) -> dict:
         html_bytes += len(source.encode('utf-8'))
     (root / 'agent-index.json').write_text(json.dumps({'version': 1, 'pages': pages}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
     catalog = ['# ML-Biomat', '', '> Bilingual research tutorials, scientific computing and biomaterials resources.', '',
-               'Public reading requires no account or credentials. Follow the license and attribution notices in each resource.', '',
-               '## Reading and search', '',
+               'Public reading requires no account or credentials. Follow the license and attribution notices in each resource.', '']
+    if profiles:
+        catalog.extend(['## 作者 / Author', ''])
+        for route, label in [('/about/', '中文个人主页'), ('/about/en/', 'English research profile')]:
+            if route in profiles:
+                catalog.extend([profiles[route], '', f'[{label}]({base_url}{route})', ''])
+        catalog.extend(['[复旦大学课题组档案 / Fudan University profile](https://swdfz.fudan.edu.cn/fd/36/c54394a785718/page.htm)', ''])
+    catalog.extend(['## Reading and search', '',
                f'- [Page and Markdown index]({base_url}/agent-index.json)',
                f'- [Search index]({base_url}/search.json)',
                f'- [Complete text]({base_url}/llms-full.txt)',
                f'- [Public access]({base_url}/auth.md)', '',
-               'Each page below has a Markdown sibling named `index.md`. HTML remains the browser representation.', '']
+               'Each page below has a Markdown sibling named `index.md`. HTML remains the browser representation.', ''])
     core = [entry for entry in pages if entry['url'] not in search]
     articles = [entry for entry in pages if entry['url'] in search]
     for heading, entries in [('Site pages and catalogs', core), ('Articles and tutorials', articles)]:

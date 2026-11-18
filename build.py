@@ -8,6 +8,7 @@ from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR, COMMENTS_ENABLED
 from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support, molecular_dynamics, python_scientific, machine_learning, experimental_methods, payment, sponsorship, agent_content
 
 ROOT = Path(__file__).resolve().parent
+PERSON_ID = SITE["base_url"] + "/about/#person"
 SEARCH_METADATA = json.loads((ROOT / 'content/search-metadata.json').read_text(encoding='utf-8'))
 INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
 os.chdir(str(ROOT))
@@ -174,7 +175,8 @@ def article_ld(post):
         "datePublished": post["date"], "dateModified": post.get("modified",post["date"]),
         "wordCount": post.get("word_count", 0),
         "inLanguage": "en" if post["lang"] == "en" else "zh-CN",
-        "author": {"@type": "Person", "name": SITE["author"], "url": "https://github.com/GellmanSparrowS"},
+        "author": {"@type": "Person", "@id": PERSON_ID, "name": SITE["author"],
+                   "url": SITE["base_url"] + ("/about/en/" if post["lang"] == "en" else "/about/")},
         "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": SITE["base_url"]},
         "url": url,
     }
@@ -198,19 +200,39 @@ def site_ld():
         "@context": "https://schema.org", "@type": "WebSite",
         "name": "ML-Biomat", "url": SITE["base_url"],
         "description": SITE["description_en"],
+        "creator": {"@type": "Person", "@id": PERSON_ID, "name": SITE["author"], "url": SITE["base_url"] + "/about/"},
     })
 
 
-def person_ld():
-    return ld_json({
-        "@context": "https://schema.org", "@type": "Person",
-        "name": "Yunhao Yang", "alternateName": "杨云浩",
-        "jobTitle": "PhD Student", "affiliation": {"@type": "Organization", "name": "Fudan University"},
-        "url": SITE["base_url"] + "/about/",
+def person_ld(language, route, biography):
+    english = language == "en"
+    profile_url = SITE["base_url"] + ("/about/en/" if english else "/about/")
+    person = {
+        "@type": "Person", "@id": PERSON_ID,
+        "name": "Yunhao Yang" if english else "杨云浩",
+        "alternateName": "杨云浩" if english else "Yunhao Yang",
+        "description": biography,
+        "jobTitle": "Ph.D. student" if english else "博士研究生",
+        "affiliation": {
+            "@type": "Organization",
+            "name": "Department of Macromolecular Science" if english else "高分子科学系",
+            "parentOrganization": {
+                "@type": "CollegeOrUniversity",
+                "name": "Fudan University" if english else "复旦大学",
+            },
+        },
+        "url": profile_url,
         "sameAs": [
+            "https://swdfz.fudan.edu.cn/fd/36/c54394a785718/page.htm",
+            "https://orcid.org/0009-0005-1314-1325",
             "https://github.com/GellmanSparrowS",
-            "https://www.researchgate.net/profile/Yunhao-Yang-7"
-        ]
+            "https://www.researchgate.net/profile/Yunhao-Yang-7",
+        ],
+    }
+    return ld_json({
+        "@context": "https://schema.org", "@type": "ProfilePage",
+        "url": SITE["base_url"] + "/" + route, "inLanguage": language,
+        "mainEntity": person,
     })
 
 
@@ -574,6 +596,7 @@ def build():
         write_file(route.lstrip('/')+'index.html',document)
 
     # Separate Chinese and English personal profiles.
+    biographies = {}
     profile_alternates = (
         f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/about/">'
         f'<link rel="alternate" hreflang="en" href="{SITE["base_url"]}/about/en/">'
@@ -584,11 +607,12 @@ def build():
         ("about-en-body.html", "about/en/", "en", "Yunhao Yang — Research Profile", "Yunhao Yang, PhD student at Fudan University. Rational design of biomaterial systems and structures across scales. Research, publications, awards, and photographs."),
     ]:
         about_body = (Path("content") / source).read_text(encoding="utf-8")
+        biographies[language] = agent_content.profile_summary(about_body)
         about_body = about_body.replace("<!-- PROFILE_RESEARCH_ALBUMS -->", render_profile_albums("research", language))
         about_body = about_body.replace("<!-- PROFILE_EVENT_ALBUMS -->", render_profile_albums("events", language))
         about_body += f'<script src="{versioned_asset("/static/js/profile-gallery.js")}" defer></script>'
         profile_head = make_head(title=title, desc=description, url=SITE["base_url"] + "/" + route,
-                                 lang=language, ld=person_ld(), wide=True, alternates=profile_alternates,
+                                 lang=language, ld=person_ld(language, route, biographies[language]), wide=True, alternates=profile_alternates,
                                  en_href="/about/en/", zh_href="/about/", navigation_language=language,
                                  en_active=' class="active"' if language == "en" else "",
                                  zh_active=' class="active"' if language == "zh-CN" else "")
@@ -742,7 +766,7 @@ if (legacyTag) {
     ]:
         cv_body = (Path("content") / source).read_text(encoding="utf-8")
         cv_page = make_head(title=title, desc=description, url=SITE["base_url"] + "/" + route,
-                            lang=language, ld=person_ld(), alternates=cv_alternates,
+                            lang=language, ld=person_ld(language, route, biographies[language]), alternates=cv_alternates,
                             en_href="/cv/en/", zh_href="/cv/", navigation_language=language,
                             en_active=' class="active"' if language == "en" else "",
                             zh_active=' class="active"' if language == "zh-CN" else "")
