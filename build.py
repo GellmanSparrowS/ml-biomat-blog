@@ -671,6 +671,7 @@ def build():
 
     # Historical URLs keep their exact current destinations, outside the sitemap.
     legacy_routes = {
+        '/posts/feature-engineering-materials-ml-zh/': ('/posts/feature-engineering-materials-zh/', '材料数据的特征工程'),
         '/categories/research-notes/': ('/categories/', '研究教程'),
         '/posts/multiscale-modeling-fiber-biomaterials-zh/': (
             '/posts/multiscale-modeling-biomaterials-intro-zh/', '生物材料多尺度模拟'),

@@ -60,6 +60,10 @@ export async function handle(request, fetchOrigin = fetch) {
     url.pathname = '/tags/' + legacyTag[1].toLowerCase() + (legacyTag[2] || '') + '/';
     return Response.redirect(url.href, 301);
   }
+  if (safeRead && /^\/posts\/feature-engineering-materials-ml-zh\/?$/.test(url.pathname)) {
+    url.pathname = '/posts/feature-engineering-materials-zh/';
+    return Response.redirect(url.href, 301);
+  }
   const path = markdownPath(url.pathname);
   if (safeRead && path && prefersMarkdown(request.headers.get('Accept'))) {
     const alternate = new URL(request.url);

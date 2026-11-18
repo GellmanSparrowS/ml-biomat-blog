@@ -776,6 +776,7 @@ def run():
                  for p in (DOCS / "posts").glob("*/index.html"))
     legacy_errors = []
     for old, target in {
+        '/posts/feature-engineering-materials-ml-zh/': '/posts/feature-engineering-materials-zh/',
         '/categories/research-notes/': '/categories/',
         '/posts/multiscale-modeling-fiber-biomaterials-zh/': '/posts/multiscale-modeling-biomaterials-intro-zh/',
     }.items():

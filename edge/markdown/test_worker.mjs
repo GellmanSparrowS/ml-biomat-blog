@@ -59,6 +59,16 @@ await test('Canonical paths, unrelated names, external hosts and POST bypass the
     assert.equal(server.calls[0], incoming);
   }
 });
+await test('The historical Chinese feature engineering article redirects without capturing its translations', async () => {
+  for (const slash of ['', '/']) {
+    const response = await handle(request('/posts/feature-engineering-materials-ml-zh' + slash + '?ref=old'), origin().fetch);
+    assert.equal(response.status, 301);
+    assert.equal(response.headers.get('location'), base + '/posts/feature-engineering-materials-zh/?ref=old');
+  }
+  for (const path of ['/posts/feature-engineering-materials-zh/', '/posts/feature-engineering-materials-ml/', '/posts/feature-engineering-materials-ml-zh/en/']) {
+    assert.equal((await handle(request(path), origin().fetch)).status, 200);
+  }
+});
 await test('Explicit Markdown, parameters, upper case and q=0', () => {
   assert.equal(prefersMarkdown('text/markdown'), true);
   assert.equal(prefersMarkdown('TEXT/MARKDOWN; charset=utf-8; q=0.8,text/html;q=0.5'), true);
