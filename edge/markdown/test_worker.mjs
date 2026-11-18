@@ -31,6 +31,34 @@ await test('HTML remains default, including wildcard browser requests', async ()
     assert.equal(await response.text(), html); assert.equal(server.calls.length, 1); assert.match(response.headers.get('vary'), /Accept/);
   }
 });
+await test('Historical tag pages redirect directly to their matching language', async () => {
+  for (const name of ['Mamba', 'Python']) {
+    for (const language of ['', '/en']) {
+      for (const slash of ['', '/']) {
+        for (const method of ['GET', 'HEAD']) {
+          const server = origin();
+          const result = await handle(request('/tags/' + name + language + slash + '?source=a%2Fb', {method}), server.fetch);
+          assert.equal(result.status, 301);
+          assert.equal(result.headers.get('location'), base + '/tags/' + name.toLowerCase() + language + '/?source=a%2Fb');
+          assert.equal(server.calls.length, 0);
+        }
+      }
+    }
+  }
+});
+await test('Canonical paths, unrelated names, external hosts and POST bypass the tag redirects', async () => {
+  for (const incoming of [
+    request('/tags/mamba/'), request('/tags/python/en/'), request('/tags/MambaProject/'),
+    request('/tags/Python/extra/'), request('/tags/PYTHON/'), request('/posts/Mamba/'),
+    request('/tags/Python/', {method:'POST'}), new Request('https://example.invalid/tags/Mamba/'),
+  ]) {
+    const server = origin();
+    const result = await handle(incoming, server.fetch);
+    assert.equal(result.status, 200, incoming.url);
+    assert.equal(server.calls.length, 1);
+    assert.equal(server.calls[0], incoming);
+  }
+});
 await test('Explicit Markdown, parameters, upper case and q=0', () => {
   assert.equal(prefersMarkdown('text/markdown'), true);
   assert.equal(prefersMarkdown('TEXT/MARKDOWN; charset=utf-8; q=0.8,text/html;q=0.5'), true);

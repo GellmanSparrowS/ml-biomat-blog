@@ -6,6 +6,7 @@
 <title>主动学习：用高斯过程选择下一次实验 — ML-Biomat</title>
 <meta name="description" content="在凝胶溶胀虚拟实验中比较随机、空间覆盖与不确定性选样，用高斯过程和校准区间安排下一轮测量。">
 <meta name="author" content="Yunhao Yang">
+<link rel="icon" href="/favicon.ico?v=cf53fcdc583c">
 <link rel="canonical" href="https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/">
 <link rel="api-catalog" href="/.well-known/api-catalog">
 <link rel="describedby" type="text/plain" href="/llms.txt">
@@ -13,14 +14,14 @@
 <meta name="baidu-site-verification" content="codeva-PBR3uMEnYw" />
 <meta name="google-adsense-account" content="ca-pub-7464969092761889">
 
-<link rel="stylesheet" href="/static/css/style.css?v=c1c0ae8a2779">
+<link rel="stylesheet" href="/static/css/style.css?v=51161271b495">
 <meta property="og:title" content="主动学习：用高斯过程选择下一次实验">
 <meta property="og:description" content="在凝胶溶胀虚拟实验中比较随机、空间覆盖与不确定性选样，用高斯过程和校准区间安排下一轮测量。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/">
 <meta property="og:site_name" content="ML-Biomat">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LearningResource", "name": "主动学习：用高斯过程选择下一次实验", "description": "在凝胶溶胀虚拟实验中比较随机、空间覆盖与不确定性选样，用高斯过程和校准区间安排下一轮测量。", "url": "https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/", "inLanguage": "zh-CN", "learningResourceType": "Tutorial", "author": {"@type": "Person", "name": "Yunhao Yang"}}</script>
-<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-19.css?v=1272b7a1cf05"><link rel="stylesheet" href="/static/css/tutorials.css?v=0f51b9024729"><link rel="stylesheet" href="/static/css/article-support.css?v=9eaac45e6b4c"><link rel="stylesheet" href="/static/css/sponsor.css?v=667c8b7528cf"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=9bbeaf65ce63"><link rel="alternate" type="text/markdown" href="https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/index.md">
+<link rel="stylesheet" href="/static/tutorials/polymer-ai/lesson-19.css?v=1272b7a1cf05"><link rel="stylesheet" href="/static/css/tutorials.css?v=bce62ace293c"><link rel="stylesheet" href="/static/css/article-support.css?v=9eaac45e6b4c"><link rel="stylesheet" href="/static/css/sponsor.css?v=667c8b7528cf"><link rel="stylesheet" href="/static/css/site-layout.css?v=f56c7a8bb927"><link rel="stylesheet" href="/static/css/site-refinement.css?v=9bbeaf65ce63"><link rel="alternate" type="text/markdown" href="https://ml-biomat.com/tutorials/polymer-ai/19-selecting-the-next-experiment/index.md">
 <script src="/static/js/agent-tools.js?v=e927b488acbe" defer></script>
 </head>
 <body class="site-layout">
@@ -374,7 +375,7 @@ Full campaigns, calibration scores and six figures: active_outputs/
 <div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>
 <button id="back-to-top" aria-label="返回顶部" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>
 <script src="/static/js/main.js?v=510b43212be6" defer></script>
-<script src="/static/js/paypal-support.js?v=d8e5c16b0db8" defer></script><script src="/static/js/sponsor.js?v=9771dbb7c101" defer></script><script src="/static/js/site-catalog.js?v=b4cb9d038737" defer></script><script>
+<script src="/static/js/paypal-support.js?v=d8e5c16b0db8" defer></script><script src="/static/js/sponsor.js?v=9771dbb7c101" defer></script><script>
 (function(){
 (()=>{'use strict';
 const $=id=>document.getElementById(id),svg=$('selection-plot');

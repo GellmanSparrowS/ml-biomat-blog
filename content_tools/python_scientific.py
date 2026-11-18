@@ -82,9 +82,7 @@ def render(data, make_head, make_footer, write_file, versioned_asset, categories
             body='<div class="biomat-course python-course" data-course="'+item['id']+'" data-lang="'+lang+'">'+crumb+'<div class="bc-layout">'+toc+'<div class="bc-main">'+intro+article+related+'</div></div></div>'
             dependencies=''.join('<script src="'+versioned_asset('/static/tutorials/python-scientific/'+dependency)+'" defer></script>' for dependency in item.get('scripts',[]))
             scripts=dependencies+'<script src="'+versioned_asset('/static/tutorials/python-scientific/'+item['id'].lower()+'.js')+'" defer></script><script src="'+versioned_asset('/static/js/biomaterials-courses.js')+'" defer></script><script src="'+versioned_asset('/static/js/python-scientific.js')+'" defer></script>'
-            footer=make_footer(lang, article_support=True)
-            if not PAYPAL_ENABLED:
-                footer=re.sub(r'<a\b[^>]*class="support-paypal"[^>]*>.*?</a>', '', footer, flags=re.S)
+            footer=make_footer(lang, article_support=True, paypal=PAYPAL_ENABLED)
             page=head+body+footer
             page=page.replace('</body>',scripts+'</body>')
             write_file(address.lstrip('/')+'index.html',page)

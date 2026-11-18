@@ -1007,3 +1007,10 @@ main.container>.catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(
   .hero h1,.profile-page h1,.catalog-header h1,.article-header h1,.tool-page h1,.cv-page>.section-title,.content>h1{font-size:22px}
   main>h1[style]{font-size:22px!important}
 }
+
+/* Keep the four shared navigation destinations on one mobile row. */
+@media(max-width:600px){
+ .nav-links{gap:4px;justify-content:center;flex-wrap:nowrap}
+ .nav-links a[data-short-label]{font-size:0;padding:6px 10px;white-space:nowrap}
+ .nav-links a[data-short-label]::before{content:attr(data-short-label);font-size:12px;line-height:1.5}
+}

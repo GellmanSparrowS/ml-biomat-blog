@@ -21,6 +21,6 @@ def render(items, categories, site, make_head, make_footer, write_file, site_ld,
         body=site_layouts.collection(items,categories,en=en,full=True)
         alts=f'<link rel="alternate" hreflang="zh-CN" href="{site["base_url"]}/articles/"><link rel="alternate" hreflang="en" href="{site["base_url"]}/articles/en/">'
         page=make_head(title=label,desc=description,url=site['base_url']+collection,lang='en' if en else 'zh-CN',wide=True,
-                       en_href='/articles/en/',zh_href='/articles/',alternates=alts)+body+make_footer(lang)
+                       en_href='/articles/en/',zh_href='/articles/',alternates=alts)+body+make_footer(lang, catalog_controls=True)
         write_file(collection.lstrip('/')+'index.html',page);routes.append(collection)
     return routes

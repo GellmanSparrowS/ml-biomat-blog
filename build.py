@@ -282,12 +282,13 @@ HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}" data-theme="dark">\n<head>\n<me
 FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 
-def versioned_asset(url):
-    digest = hashlib.sha256((ROOT / url.lstrip("/")).read_bytes()).hexdigest()[:12]
+def versioned_asset(url, source=None):
+    digest = hashlib.sha256((ROOT / (source or url.lstrip("/"))).read_bytes()).hexdigest()[:12]
     return f"{url}?v={digest}"
 
 
 # Changed assets get a fresh URL for returning visitors; unchanged builds stay stable.
+HEAD_TOP = HEAD_TOP.replace('<link rel="canonical"', '<link rel="icon" href="' + versioned_asset('/favicon.ico', 'content/favicon.ico') + '">\n<link rel="canonical"')
 HEAD_TOP = HEAD_TOP.replace("/static/css/style.css", versioned_asset("/static/css/style.css"))
 FOOT = FOOT.replace("/static/js/main.js", versioned_asset("/static/js/main.js"))
 
@@ -327,9 +328,10 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
         adsense="", title_suffix=title_suffix, alternates=alternates,
         mathjax=(MATHJAX_SCRIPT if needs_math else ""))
     head = head.replace('<meta charset="utf-8">','<meta charset="utf-8">'+chrome.THEME_INIT+'<script src="'+versioned_asset('/static/js/site-motion.js')+'" defer></script>')
-    head = head.replace("</head>", f'<link rel="stylesheet" href="{versioned_asset("/static/css/tutorials.css")}"></head>')
     route = urllib.parse.urlsplit(url).path or '/'
     styles=[]
+    if route.startswith('/tutorials/polymer-ai/'):
+        styles.append('/static/css/tutorials.css')
     if route.startswith(('/posts/', '/tutorials/')): styles.append('/static/css/article-support.css')
     if route in ('/', '/en/', '/zh/') or route.startswith(('/posts/', '/tutorials/')): styles.append('/static/css/sponsor.css')
     if route.startswith('/fibernet/'):
@@ -348,12 +350,19 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
     return head + chrome.header(language, route, en_href, zh_href, bool(wide))
 
 
-def make_footer(language='zh-CN', article_support=False):
-    footer=(support.render(language, versioned_asset)+sponsorship.render(language, 'tutorial') if article_support else '')+FOOT.format(year=datetime.now().year)
+def make_footer(language='zh-CN', article_support=False, *, catalog_controls=False, paypal=True):
+    footer=(support.render(language, versioned_asset, paypal=paypal)+sponsorship.render(language, 'tutorial') if article_support else '')+FOOT.format(year=datetime.now().year)
     footer=re.sub(r'<div class="footer-links">.*?</div>',chrome.footer_links(language),footer,flags=re.S)
     footer=footer.replace('id="back-to-top"', 'id="back-to-top" aria-label="'+('Back to top' if language=='en' else '返回顶部')+'"')
-    if article_support: footer=footer.replace('</body>','<script src="'+versioned_asset('/static/js/paypal-support.js')+'" defer></script><script src="'+versioned_asset('/static/js/sponsor.js')+'" defer></script></body>')
-    return footer.replace('</body>', '<script src="'+versioned_asset('/static/js/site-catalog.js')+'" defer></script></body>')
+    scripts = []
+    if article_support:
+        if paypal:
+            scripts.append('/static/js/paypal-support.js')
+        scripts.append('/static/js/sponsor.js')
+    if catalog_controls:
+        scripts.append('/static/js/site-catalog.js')
+    tags = ''.join(f'<script src="{versioned_asset(path)}" defer></script>' for path in scripts)
+    return footer.replace('</body>', tags + '</body>')
 
 
 def render_profile_albums(section, language="zh-CN"):
@@ -677,7 +686,12 @@ def build():
 
     # 404: case-only aliases cannot coexist as directories on Windows.
     # This repairs old visitor links; unknown paths still return a real 404.
-    case_alias = '<script>if(location.pathname==="/tags/Mamba/"||location.pathname==="/tags/Mamba"){location.replace("/tags/mamba/"+location.search+location.hash)}</script>'
+    case_alias = r"""<script>
+const legacyTag = /^\/tags\/(Mamba|Python)(\/en)?\/?$/.exec(location.pathname);
+if (legacyTag) {
+  location.replace('/tags/' + legacyTag[1].toLowerCase() + (legacyTag[2] || '') + '/' + location.search + location.hash);
+}
+</script>"""
     not_found = make_head(title="页面未找到", desc="页面未找到", url=f'{SITE["base_url"]}/404.html')
     not_found = not_found.replace('<head>', '<head>' + case_alias, 1)
     not_found += '<h1 style="font-size:3rem;margin-top:3rem">404</h1><p>页面未找到。<a href="/">返回首页</a></p>' + make_footer()
@@ -748,6 +762,8 @@ def build():
     auth_src = Path("content") / "auth.md"
     if auth_src.exists():
         shutil.copy2(auth_src, Path(BUILD_DIR) / "auth.md")
+
+    shutil.copyfile(ROOT / "content/favicon.ico", Path(BUILD_DIR) / "favicon.ico")
 
     # --- CNAME for custom domain ---
     (Path(BUILD_DIR) / ".nojekyll").write_text("", encoding="utf-8")

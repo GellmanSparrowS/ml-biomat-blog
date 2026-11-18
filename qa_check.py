@@ -862,8 +862,10 @@ def run():
         delivery_count += image_delivery_page(shared, relative, image_mapping, image_sources, image_previews, image_errors)
         startup_errors.extend(startup_asset_errors(shared, relative))
         assets = {urlsplit(node.attrs.get('href', node.attrs.get('src', ''))).path for node in shared.find('link') + shared.find('script')}
-        if not {'/static/css/site-layout.css', '/static/css/site-refinement.css', '/static/js/site-catalog.js'} <= assets:
+        if not {'/static/css/site-layout.css', '/static/css/site-refinement.css'} <= assets:
             chrome_errors.append(relative+': shared layout assets missing')
+        if ('/static/js/site-catalog.js' in assets) != bool(shared.find(attr='data-explore-mode')):
+            chrome_errors.append(relative+': catalog controls and script disagree')
         if len(shared.find('body', cls='site-layout')) != 1:
             chrome_errors.append(relative+': shared layout body class missing')
     checks.append(check('Shared navigation and dark-first shell',not chrome_errors,'; '.join(chrome_errors[:15]) if chrome_errors else 'All generated pages retain both language controls, matching navigation, and dark initialization'))

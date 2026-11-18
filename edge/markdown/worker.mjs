@@ -55,6 +55,11 @@ function markdownResponse(response, request, canonical) {
 export async function handle(request, fetchOrigin = fetch) {
   const url = new URL(request.url);
   const safeRead = ['GET', 'HEAD'].includes(request.method) && url.hostname === HOST && !request.headers.has('Authorization') && !request.headers.has('Range');
+  const legacyTag = safeRead && /^\/tags\/(Mamba|Python)(\/en)?\/?$/.exec(url.pathname);
+  if (legacyTag) {
+    url.pathname = '/tags/' + legacyTag[1].toLowerCase() + (legacyTag[2] || '') + '/';
+    return Response.redirect(url.href, 301);
+  }
   const path = markdownPath(url.pathname);
   if (safeRead && path && prefersMarkdown(request.headers.get('Accept'))) {
     const alternate = new URL(request.url);

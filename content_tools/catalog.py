@@ -51,5 +51,5 @@ def render(items, categories, make_head, make_footer, write_file, base_url):
             alts=f'<link rel="alternate" hreflang="en" href="{base_url+en}"><link rel="alternate" hreflang="zh-CN" href="{base_url+zh}">'
             head=make_head(title=title,desc=desc,url=base_url+route,lang='en' if lang=='en' else 'zh-CN',wide=True,
                            en_href=en,zh_href=zh,navigation_language=lang,alternates=alts)
-            write_file(route.lstrip('/')+'index.html',head+body+make_footer(lang));routes.append(route)
+            write_file(route.lstrip('/')+'index.html',head+body+make_footer(lang, catalog_controls=True));routes.append(route)
     return routes
