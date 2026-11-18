@@ -133,7 +133,7 @@
 }
 @media(max-width:760px){
  .profile-redesign{padding:18px 0 0;font-size:14px;line-height:1.8}
- .profile-redesign .pr-hero{display:grid;grid-template-columns:minmax(0,1fr) 78px;gap:0 14px;padding:20px 17px 19px;border-radius:12px}
+ .profile-redesign .pr-hero{display:grid;grid-template-columns:minmax(0,1fr) clamp(65px,20vw,132px);gap:0 14px;padding:20px 17px 19px;border-radius:12px}
  .profile-redesign .pr-hero-copy{display:contents}
 .profile-redesign .pr-identity{grid-column:1;grid-row:1;align-self:center;min-width:0}
  .profile-redesign .pr-identity{grid-column:1;grid-row:1;align-self:center}
@@ -199,14 +199,12 @@
  .profile-redesign .pr-academic-links>a{padding:5px 0}
  .profile-redesign .pr-viewer{width:calc(100vw - 16px);max-height:calc(100dvh - 24px);padding:12px}
  .profile-redesign .pr-viewer header h2{font-size:14px}
- .profile-redesign .pr-viewer-stage{height:60dvh}
- .profile-redesign .pr-viewer-stage img{max-height:60dvh}
  .profile-redesign .pr-viewer-controls{gap:7px;font-size:12px}
  .profile-redesign .pr-viewer-controls button{padding:6px 9px}
  .profile-redesign #pr-viewer-caption{font-size:12px}
 }
 @media(max-width:360px){
- .profile-redesign .pr-hero{grid-template-columns:minmax(0,1fr) 65px;gap:0 11px;padding:17px 14px}
+ .profile-redesign .pr-hero{gap:0 11px;padding:17px 14px}
  .profile-redesign h1{font-size:22px}
  .profile-redesign .pr-statement{font-size:18px}
  .profile-redesign .pr-affiliation{font-size:11.5px}
@@ -218,5 +216,9 @@
  .profile-redesign .pr-paper-figure{padding:5px}
  .profile-redesign .pr-paper-figure .pr-image-link{inset:5px}
  .profile-redesign .pr-index{gap:0 16px}
+}
+@media (max-width:760px), (max-height:500px) and (orientation:landscape){
+ .profile-redesign .pr-viewer-stage{height:auto;display:flex;justify-content:center;align-items:center}
+ .profile-redesign .pr-viewer-stage img{width:auto;height:auto;max-width:100%;max-height:calc(100dvh - 9rem)}
 }
 @media(prefers-reduced-motion:reduce){html:not([data-motion="full"]) .profile-redesign *{scroll-behavior:auto!important;transition:none!important}}

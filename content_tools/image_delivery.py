@@ -47,16 +47,17 @@ def rewrite_html(content,route=''):
         if not item or not valid_source(item['full'],item['source_sha256']):return tag
         full=item['full'];is_profile='/images/profile/' in full
         is_portrait=full.endswith('/photo-sq.jpg')
-        limit=640 if is_portrait or is_profile and not homepage else 960 if is_profile else 1280
+        limit=640 if is_portrait else 1280
         variants=[v for v in item['variants'] if v['width']<=limit]
         # The fallback is intentionally a clear medium preview, never a blurry placeholder.
         if variants:
-            selected=variants[-1]
+            fallback_limit=640 if is_profile and not homepage else 960 if is_profile else 1280
+            selected=next((v for v in reversed(variants) if v['width']<=fallback_limit),variants[0])
             tag=set_attr(tag,'src',selected['src'])
             tag=set_attr(tag,'srcset',', '.join(v['src']+' '+str(v['width'])+'w' for v in variants))
-            if is_portrait:sizes='(max-width:760px) 96px, 200px'
+            if is_portrait:sizes='(max-width:760px) clamp(65px, 20vw, 132px), 168px'
             elif homepage and is_profile and '/paper-' not in full:
-                sizes='(max-width:360px) 90px, (max-width:760px) 116px, (min-width:1160px) 333px, calc((100vw - 162px) / 3)'
+                sizes='(max-width:760px) calc(38vw - 26px), (min-width:1160px) 333px, calc((100vw - 162px) / 3)'
             elif is_profile:sizes='(max-width:760px) calc(100vw - 34px), '+('520px' if homepage else '360px')
             else:sizes='(max-width:760px) calc(100vw - 34px), (max-width:1100px) calc(100vw - 90px), 960px'
             tag=set_attr(tag,'sizes',sizes)
