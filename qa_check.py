@@ -839,6 +839,8 @@ def run():
     # Site-wide UI contract, including untranslated articles.
     chrome_errors=[]
     image_mapping, image_sources, image_previews, image_errors = image_delivery_inventory()
+    bundle = DOCS / 'static/css/tutorial-base.css'
+    bundle_valid = bundle.is_file() and bundle.read_bytes() == build.TUTORIAL_CSS
     delivery_count = 0; startup_errors = []
     from content_tools import chrome
     for page_path in DOCS.rglob('*.html'):
@@ -863,7 +865,9 @@ def run():
         delivery_count += image_delivery_page(shared, relative, image_mapping, image_sources, image_previews, image_errors)
         startup_errors.extend(startup_asset_errors(shared, relative))
         assets = {urlsplit(node.attrs.get('href', node.attrs.get('src', ''))).path for node in shared.find('link') + shared.find('script')}
-        if not {'/static/css/site-layout.css', '/static/css/site-refinement.css'} <= assets:
+        shared_layout = (bundle_valid and build.TUTORIAL_CSS_URL in {node.attrs.get('href') for node in shared.find('link')}
+                         if relative.startswith('tutorials/') else {'/static/css/site-layout.css', '/static/css/site-refinement.css'} <= assets)
+        if not shared_layout:
             chrome_errors.append(relative+': shared layout assets missing')
         if ('/static/js/site-catalog.js' in assets) != bool(shared.find(attr='data-explore-mode')):
             chrome_errors.append(relative+': catalog controls and script disagree')

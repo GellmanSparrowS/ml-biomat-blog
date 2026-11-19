@@ -111,6 +111,10 @@
 .profile-redesign .pr-viewer [data-pr-close]{font-size:23px;border:0;padding:0 8px;line-height:1}
 .profile-redesign .pr-viewer-stage{height:min(67dvh,780px);overflow:auto;background:color-mix(in srgb,var(--c-bg) 85%,transparent);display:grid;place-items:center}
 .profile-redesign .pr-viewer-stage img{display:block;width:100%;height:100%;max-width:100%;max-height:min(67dvh,780px);object-fit:contain;opacity:1;transform:none}
+.profile-redesign .pr-viewer-stage{overflow:hidden;touch-action:none;user-select:none}
+.profile-redesign .pr-viewer-stage.is-zoomed{cursor:grab}
+.profile-redesign .pr-viewer-stage.is-zoomed:active{cursor:grabbing}
+.profile-redesign .pr-viewer-stage img{transform-origin:center;transition:none}
 .profile-redesign .pr-viewer-error{font-size:13px;padding:12px}
 .profile-redesign #pr-viewer-caption{font-size:12.5px;color:var(--pr-muted);margin:10px 0;text-align:start}
 .profile-redesign .pr-viewer-controls{display:flex;align-items:center;justify-content:center;gap:12px;font-size:13px}

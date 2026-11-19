@@ -80,8 +80,15 @@ def render(data, make_head, make_footer, write_file, versioned_asset, categories
                     neighbors.append('<a rel="'+key+'" href="'+route(other['id'],lang)+'">'+escape(other['title'][lang])+'</a>')
             related=('<nav class="bc-related" aria-label="'+('Related tutorials' if en else '相关教程')+'">'+''.join(neighbors)+'</nav>') if neighbors else ''
             body='<div class="biomat-course python-course" data-course="'+item['id']+'" data-lang="'+lang+'">'+crumb+'<div class="bc-layout">'+toc+'<div class="bc-main">'+intro+article+related+'</div></div></div>'
-            dependencies=''.join('<script src="'+versioned_asset('/static/tutorials/python-scientific/'+dependency)+'" defer></script>' for dependency in item.get('scripts',[]))
-            scripts=dependencies+'<script src="'+versioned_asset('/static/tutorials/python-scientific/'+item['id'].lower()+'.js')+'" defer></script><script src="'+versioned_asset('/static/js/biomaterials-courses.js')+'" defer></script><script src="'+versioned_asset('/static/js/python-scientific.js')+'" defer></script>'
+            lab_script = versioned_asset('/static/tutorials/python-scientific/'+item['id'].lower()+'.js')
+            if item.get('scripts') == ['assets/plotly.min.js']:
+                library = versioned_asset('/static/tutorials/python-scientific/assets/plotly.min.js')
+                scripts = (f'<script src="{versioned_asset("/static/js/course-plot-loader.js")}" defer '
+                           f'data-lab="{item["id"]}-lab" data-library="{library}" data-script="{lab_script}"></script>')
+            else:
+                scripts = ''.join('<script src="'+versioned_asset('/static/tutorials/python-scientific/'+dep)+'" defer></script>' for dep in item.get('scripts', []))
+                scripts += f'<script src="{lab_script}" defer></script>'
+            scripts += '<script src="'+versioned_asset('/static/js/biomaterials-courses.js')+'" defer></script><script src="'+versioned_asset('/static/js/python-scientific.js')+'" defer></script>'
             footer=make_footer(lang, article_support=True, paypal=PAYPAL_ENABLED)
             page=head+body+footer
             page=page.replace('</body>',scripts+'</body>')

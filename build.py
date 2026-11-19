@@ -309,6 +309,12 @@ def versioned_asset(url, source=None):
     return f"{url}?v={digest}"
 
 
+# These four sheets are adjacent in the cascade on tutorial pages.
+TUTORIAL_STYLES = ('article-support', 'sponsor', 'site-layout', 'site-refinement')
+TUTORIAL_CSS = b'\n'.join((ROOT / 'static/css' / (name + '.css')).read_bytes().replace(b'\r\n', b'\n') for name in TUTORIAL_STYLES)
+TUTORIAL_CSS_URL = '/static/css/tutorial-base.css?v=' + hashlib.sha256(TUTORIAL_CSS).hexdigest()[:12]
+
+
 # Changed assets get a fresh URL for returning visitors; unchanged builds stay stable.
 HEAD_TOP = HEAD_TOP.replace('<link rel="canonical"', '<link rel="icon" href="' + versioned_asset('/favicon.ico', 'content/favicon.ico') + '">\n<link rel="canonical"')
 HEAD_TOP = HEAD_TOP.replace("/static/css/style.css", versioned_asset("/static/css/style.css"))
@@ -366,7 +372,13 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
         styles.append('/static/css/mobile-hero.css')
     is_catalog = route.startswith(('/categories/', '/articles/'))
     if is_catalog: styles.append('/static/css/catalog-refinement.css')
-    head=head.replace('</head>', ''.join('<link rel="stylesheet" href="'+versioned_asset(path)+'">' for path in styles)+'</head>')
+    if route.startswith('/tutorials/'):
+        shared = ['/static/css/' + name + '.css' for name in TUTORIAL_STYLES]
+        assert styles[-len(shared):] == shared
+        style_urls = [versioned_asset(path) for path in styles[:-len(shared)]] + [TUTORIAL_CSS_URL]
+    else:
+        style_urls = [versioned_asset(path) for path in styles]
+    head=head.replace('</head>', ''.join('<link rel="stylesheet" href="'+path+'">' for path in style_urls)+'</head>')
     body_class='site-layout'+(' reading-page' if route.startswith('/posts/') else '')+(' catalog-refined' if is_catalog else '')
     head=head.replace('<body>','<body class="'+body_class+'">')
     return head + chrome.header(language, route, en_href, zh_href, bool(wide))
@@ -751,6 +763,7 @@ if (legacyTag) {
     search_data.extend(dict(item, type="tutorial") for item in course_items)
     write_file("search.json", json_mod.dumps(search_data, ensure_ascii=False))
     shutil.copytree("static", static_out)
+    (static_out / "css/tutorial-base.css").write_bytes(TUTORIAL_CSS)
     # Google verification
     gv = Path(BUILD_DIR) / "google4f70fafcd20d5909.html"
     gv.write_text("google-site-verification: google4f70fafcd20d5909.html", encoding="utf-8")
