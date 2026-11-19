@@ -9,7 +9,7 @@
 
 ## 内容
 
-- 中文个人主页为 content/about-body.html（/about/），英文个人主页为 content/about-en-body.html（/about/en/）；简历为 content/cv-body.html 与 content/cv-en-body.html；文章为 content/posts/。
+- 中文个人主页为 content/about-body.html（/YunhaoYang/），英文个人主页为 content/about-en-body.html（/YunhaoYang/en/）；简历为 content/cv-body.html 与 content/cv-en-body.html；文章为 content/posts/。
 - 个人介绍围绕研究方向、本人承担的工作、代表项目与成果组织。用准确自然的状态表达获奖、提名、申报；不把团队全部业绩归为个人。
 - 先读取已确认材料。论文以期刊正式记录核对作者、年份、DOI；个人资料优先本人最新修改稿。
 - 新增人物经历、成果数字或联系方式应有明确来源，不从间接线索补写。

@@ -79,7 +79,7 @@ def publish(message):
     if live != head:
         raise RuntimeError("Remote verification differed from the pushed commit; inspect before retrying.")
     print("Published commit:", head)
-    print("Next: verify GitHub Pages deployment and https://ml-biomat.com/about/.")
+    print("Next: verify GitHub Pages deployment and https://ml-biomat.com/YunhaoYang/.")
 
 
 def main():

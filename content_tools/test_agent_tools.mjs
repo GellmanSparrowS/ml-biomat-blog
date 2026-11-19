@@ -20,7 +20,7 @@ function setup({legacy = false, supported = true, language = 'zh-CN', failRegist
   };
   const manifest = {version: 1, pages: [
     {url: '/tutorials/machine-learning/m22/', markdown: '/tutorials/machine-learning/m22/index.md', title: '图神经网络', lang: 'zh'},
-    {url: '/about/', markdown: '/about/index.md', title: '个人主页', lang: 'zh'},
+    {url: '/YunhaoYang/', markdown: '/YunhaoYang/index.md', title: '个人主页', lang: 'zh'},
     {url: '/fibernet/', markdown: 'https://external.invalid/data.md'},
     {url: '/payment/', markdown: '/payment/index.md'},
     {url: '/cv/', markdown: '/not-public.md'}
@@ -65,7 +65,7 @@ for (const input of [{limit: 31}, {limit: '2'}, {language: 'fr'}, {category: '__
 const first = await app.run('read_page', {url: '/tutorials/machine-learning/m22/', max_characters: 1000});
 const second = await app.run('read_page', {url: first.url, offset: first.next_offset, max_characters: 100000});
 check(first.text + second.text === pageText && second.next_offset === null && first.total_characters === pageText.length, 'Markdown pagination preserves exact complete text, code and formula');
-for (const url of ['https://external.invalid/about/', 'https://user:pass@ml-biomat.com/about/', '/about/?token=secret', '/payment/', '/cv/', '/fibernet/', '/unknown/', 'javascript:alert(1)', '/about/index.html']) {
+for (const url of ['https://external.invalid/YunhaoYang/', 'https://user:pass@ml-biomat.com/YunhaoYang/', '/YunhaoYang/?token=secret', '/payment/', '/cv/', '/fibernet/', '/unknown/', 'javascript:alert(1)', '/YunhaoYang/index.html']) {
   const before = app.calls.length;
   check((await app.run('read_page', {url})).isError, 'Rejects unsafe or unlisted URL ' + url);
   check(app.calls.length === before, 'Rejecting URL triggers no content fetch');
@@ -80,7 +80,7 @@ check(app.registered.size === 3 && app.registrations.length === 6, 'Back-forward
 const legacy = setup({legacy: true, language: 'en'});
 check(legacy.registered.size === 3 && (await legacy.run('list_tutorial_topics', {})).language === 'en', 'Legacy navigator implementation and English page default');
 const invalid = setup({html: true});
-check((await invalid.run('read_page', {url: '/about/'})).isError, 'HTML error pages never returned as Markdown');
+check((await invalid.run('read_page', {url: '/YunhaoYang/'})).isError, 'HTML error pages never returned as Markdown');
 const denied = setup({failRegistration: true});
 await new Promise(resolve => setTimeout(resolve, 10));
 check(denied.registered.size === 0 && denied.calls.length === 0, 'Rejected registrations are handled without network requests');

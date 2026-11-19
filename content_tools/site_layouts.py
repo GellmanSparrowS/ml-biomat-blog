@@ -20,7 +20,7 @@ def paper_card(profile,key,venue,title,summary):
 
 def home_activities(en=False):
     lang='en' if en else 'zh-CN'
-    profile='/about/en/' if en else '/about/'
+    profile='/YunhaoYang/en/' if en else '/YunhaoYang/'
     source=(Path(__file__).resolve().parents[1]/'content'/('about-en-body.html' if en else 'about-body.html')).read_text(encoding='utf8')
     section=re.search(r'<section\b[^>]*\bid="activities"[^>]*>.*?</section>',source,re.S)
     dialog=re.search(r'<dialog\b[^>]*class="pr-viewer"[^>]*>.*?</dialog>',source,re.S)
@@ -31,7 +31,7 @@ def home_activities(en=False):
     return '<section class="profile-redesign home-activity-section" lang="'+lang+'">'+content+dialog[0]+'</section>'
 
 def homepage(items,categories,en=False):
-    lang='en' if en else 'zh';profile='/about/en/' if en else '/about/';cats=catalog.category_url(lang=lang)
+    lang='en' if en else 'zh';profile='/YunhaoYang/en/' if en else '/YunhaoYang/';cats=catalog.category_url(lang=lang)
     identity='Yunhao Yang · Fudan University' if en else '杨云浩 · 复旦大学'
     heading='Rational design of biomaterial systems and structures across scales' if en else '跨尺度生物材料体系与结构的理性设计'
     body=f'<section class="home-intro"><div class="home-intro-copy"><p class="home-identity">{identity}</p><h1>{heading}</h1><div class="home-links"><a href="{profile}">{"Research profile" if en else "个人主页"} ↗</a><a href="{cats}">{"Research tutorials" if en else "研究教程"} →</a><a href="/fibernet/{"en/" if en else ""}">FiberNet →</a></div></div><div class="home-scene"><canvas class="fn-scene-canvas" aria-hidden="true"></canvas></div></section>'

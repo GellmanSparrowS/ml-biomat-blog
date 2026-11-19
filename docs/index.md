@@ -5,17 +5,17 @@ Language: zh-CN
 
 杨云浩 · 复旦大学
 
-[个人主页 ↗](https://ml-biomat.com/about/)[研究教程 →](https://ml-biomat.com/categories/)[FiberNet →](https://ml-biomat.com/fibernet/)
+[个人主页 ↗](https://ml-biomat.com/YunhaoYang/)[研究教程 →](https://ml-biomat.com/categories/)[FiberNet →](https://ml-biomat.com/fibernet/)
 
 ## 代表研究
 
-[论文与成果 ↗](https://ml-biomat.com/about/#publications)
+[论文与成果 ↗](https://ml-biomat.com/YunhaoYang/#publications)
 
 ![Nature Communications · 2026](https://ml-biomat.com/static/images/profile/paper-nc-2026.webp?v=66b26c4b5ab5)
 
 Nature Communications · 2026
 
-### [可制造纤维网络的智能设计](https://ml-biomat.com/about/#paper-nc)
+### [可制造纤维网络的智能设计](https://ml-biomat.com/YunhaoYang/#paper-nc)
 
 将连续纤维路径、拓扑生成与力学分析结合，让结构设计与实际制造相衔接。
 
@@ -23,7 +23,7 @@ Nature Communications · 2026
 
 Advanced Science · 2025
 
-### [轻量高强三维无序纤维网络](https://ml-biomat.com/about/#paper-as)
+### [轻量高强三维无序纤维网络](https://ml-biomat.com/YunhaoYang/#paper-as)
 
 通过深度强化学习优化仿生三维无序纤维网络，研究结构组织与轻量高强性能之间的关系。
 
@@ -43,7 +43,7 @@ Advanced Science · 2025
 
 从独立环境、工具包安装到 JupyterLab 内核与 VS Code 解释器，逐步建立可复用的科研计算环境。结合版本冲突、安装路径与环境导出示例，说明常见故障该从哪里排查。
 
-## [学术活动与交流](https://ml-biomat.com/about/#activities)
+## [学术活动与交流](https://ml-biomat.com/YunhaoYang/#activities)
 
 2026.10
 

@@ -5,7 +5,7 @@ Language: zh-CN
 
 ![杨云浩](https://ml-biomat.com/static/images/photo-sq.jpg?v=9c05e09e065d)
 
-[个人主页与研究展示](https://ml-biomat.com/about/) · [English CV](https://ml-biomat.com/cv/en/)
+[个人主页与研究展示](https://ml-biomat.com/YunhaoYang/) · [English CV](https://ml-biomat.com/cv/en/)
 
 ## 研究方向
 

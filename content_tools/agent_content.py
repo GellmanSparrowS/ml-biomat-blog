@@ -381,7 +381,7 @@ def generate(build_root: Path, base_url: str, search_data: list) -> dict:
         result = convert(source, base_url + route)
         if not result:
             continue
-        if route in ('/about/', '/about/en/'):
+        if route in ('/YunhaoYang/', '/YunhaoYang/en/'):
             profiles[route] = profile_summary(source)
         target = path.with_suffix('.md')
         target.write_text(result['text'], encoding='utf-8', newline='\n')
@@ -400,7 +400,7 @@ def generate(build_root: Path, base_url: str, search_data: list) -> dict:
                'Public reading requires no account or credentials. Follow the license and attribution notices in each resource.', '']
     if profiles:
         catalog.extend(['## 作者 / Author', ''])
-        for route, label in [('/about/', '中文个人主页'), ('/about/en/', 'English research profile')]:
+        for route, label in [('/YunhaoYang/', '中文个人主页'), ('/YunhaoYang/en/', 'English research profile')]:
             if route in profiles:
                 catalog.extend([profiles[route], '', f'[{label}]({base_url}{route})', ''])
         catalog.extend(['[复旦大学课题组档案 / Fudan University profile](https://swdfz.fudan.edu.cn/fd/36/c54394a785718/page.htm)', ''])

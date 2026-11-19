@@ -8,7 +8,7 @@ from config import SITE, CATEGORIES, BUILD_DIR, CONTENT_DIR, COMMENTS_ENABLED
 from content_tools import tutorials, catalog, chrome, home, utility_pages, tag_pages, biomaterials_courses, image_delivery, support, molecular_dynamics, python_scientific, machine_learning, experimental_methods, payment, sponsorship, agent_content
 
 ROOT = Path(__file__).resolve().parent
-PERSON_ID = SITE["base_url"] + "/about/#person"
+PERSON_ID = SITE["base_url"] + "/YunhaoYang/#person"
 SEARCH_METADATA = json.loads((ROOT / 'content/search-metadata.json').read_text(encoding='utf-8'))
 INDEXNOW_KEY = "cbd023642a994753b6b98784c0489ce7"
 os.chdir(str(ROOT))
@@ -176,7 +176,7 @@ def article_ld(post):
         "wordCount": post.get("word_count", 0),
         "inLanguage": "en" if post["lang"] == "en" else "zh-CN",
         "author": {"@type": "Person", "@id": PERSON_ID, "name": SITE["author"],
-                   "url": SITE["base_url"] + ("/about/en/" if post["lang"] == "en" else "/about/")},
+                   "url": SITE["base_url"] + ("/YunhaoYang/en/" if post["lang"] == "en" else "/YunhaoYang/")},
         "publisher": {"@type": "Organization", "name": "ML-Biomat", "url": SITE["base_url"]},
         "url": url,
     }
@@ -200,13 +200,13 @@ def site_ld():
         "@context": "https://schema.org", "@type": "WebSite",
         "name": "ML-Biomat", "url": SITE["base_url"],
         "description": SITE["description_en"],
-        "creator": {"@type": "Person", "@id": PERSON_ID, "name": SITE["author"], "url": SITE["base_url"] + "/about/"},
+        "creator": {"@type": "Person", "@id": PERSON_ID, "name": SITE["author"], "url": SITE["base_url"] + "/YunhaoYang/"},
     })
 
 
 def person_ld(language, route, biography):
     english = language == "en"
-    profile_url = SITE["base_url"] + ("/about/en/" if english else "/about/")
+    profile_url = SITE["base_url"] + ("/YunhaoYang/en/" if english else "/YunhaoYang/")
     person = {
         "@type": "Person", "@id": PERSON_ID,
         "name": "Yunhao Yang" if english else "杨云浩",
@@ -301,7 +301,7 @@ HEAD_TOP = '<!DOCTYPE html>\n<html lang="{lang}" data-theme="dark">\n<head>\n<me
 
 # Shared headers are rendered by content_tools.chrome.
 
-FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/about/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
+FOOT = '</main>\n<footer class="site-footer"><div class="footer-inner">\n<span>\u00a9 {year} ML-Biomat \u00b7 by Yunhao Yang</span>\n<div class="footer-links">\n<a href="/YunhaoYang/">Profile / 个人简介</a><a href="/fibernet/">Library / 库</a><a href="/categories/">Categories / 分类</a><a href="/rss.xml">RSS</a><a href="/tools/stress-strain/">Tools / 工具</a><a href="/sitemap.xml">Sitemap</a><a href="/privacy/">Privacy</a>\n</div>\n</div></footer>\n<div id="progress-bar" style="position:fixed;top:0;left:0;height:3px;background:var(--c-primary);z-index:9999;width:0;transition:width .1s"></div>\n<button id="back-to-top" style="position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:var(--c-primary);color:#fff;border:none;cursor:pointer;display:none;font-size:1.2rem;z-index:999;box-shadow:var(--shadow-md)">↑</button>\n<script src="/static/js/main.js" defer></script>\n</body>\n</html>'
 
 
 def versioned_asset(url, source=None):
@@ -359,7 +359,7 @@ def make_head(title, desc, url, lang="zh-CN", og_type="website", ld="",
     if route.startswith('/fibernet/'):
         styles.append('/static/css/fibernet.css')
     styles.append('/static/css/site-layout.css')
-    if route in ('/','/en/','/zh/') or route.startswith('/about/'):
+    if route in ('/','/en/','/zh/') or route.startswith('/YunhaoYang/'):
         styles.append('/static/css/profile-layout.css')
     styles.append('/static/css/site-refinement.css')
     if route in ('/', '/en/', '/zh/', '/fibernet/', '/fibernet/en/'):
@@ -598,13 +598,13 @@ def build():
     # Separate Chinese and English personal profiles.
     biographies = {}
     profile_alternates = (
-        f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/about/">'
-        f'<link rel="alternate" hreflang="en" href="{SITE["base_url"]}/about/en/">'
-        f'<link rel="alternate" hreflang="x-default" href="{SITE["base_url"]}/about/">'
+        f'<link rel="alternate" hreflang="zh-CN" href="{SITE["base_url"]}/YunhaoYang/">'
+        f'<link rel="alternate" hreflang="en" href="{SITE["base_url"]}/YunhaoYang/en/">'
+        f'<link rel="alternate" hreflang="x-default" href="{SITE["base_url"]}/YunhaoYang/">'
     )
     for source, route, language, title, description in [
-        ("about-body.html", "about/", "zh-CN", "杨云浩 Yunhao Yang — 个人主页", "杨云浩，复旦大学博士研究生。跨尺度生物材料体系与结构的理性设计。研究成果、荣誉奖项与学术活动。"),
-        ("about-en-body.html", "about/en/", "en", "Yunhao Yang — Research Profile", "Yunhao Yang, PhD student at Fudan University. Rational design of biomaterial systems and structures across scales. Research, publications, awards, and photographs."),
+        ("about-body.html", "YunhaoYang/", "zh-CN", "杨云浩 Yunhao Yang — 个人主页", "杨云浩，复旦大学博士研究生。跨尺度生物材料体系与结构的理性设计。研究成果、荣誉奖项与学术活动。"),
+        ("about-en-body.html", "YunhaoYang/en/", "en", "Yunhao Yang — Research Profile", "Yunhao Yang, PhD student at Fudan University. Rational design of biomaterial systems and structures across scales. Research, publications, awards, and photographs."),
     ]:
         about_body = (Path("content") / source).read_text(encoding="utf-8")
         biographies[language] = agent_content.profile_summary(about_body)
@@ -613,10 +613,20 @@ def build():
         about_body += f'<script src="{versioned_asset("/static/js/profile-gallery.js")}" defer></script>'
         profile_head = make_head(title=title, desc=description, url=SITE["base_url"] + "/" + route,
                                  lang=language, ld=person_ld(language, route, biographies[language]), wide=True, alternates=profile_alternates,
-                                 en_href="/about/en/", zh_href="/about/", navigation_language=language,
+                                 en_href="/YunhaoYang/en/", zh_href="/YunhaoYang/", navigation_language=language,
                                  en_active=' class="active"' if language == "en" else "",
                                  zh_active=' class="active"' if language == "zh-CN" else "")
         write_file(route + "index.html", profile_head + about_body + make_footer(language))
+        # GitHub Pages fallback also works when the edge redirect is unavailable.
+        target = "/" + route
+        legacy = route.replace("YunhaoYang/", "about/", 1)
+        alias = (f'<!doctype html><html lang="{language}"><head><meta charset="utf-8">'
+                 f'<title>{title}</title><link rel="canonical" href="{SITE["base_url"]}{target}">'
+                 f'<script>location.replace("{target}" + location.search + location.hash)</script>'
+                 f'<meta http-equiv="refresh" content="0;url={target}"></head>'
+                 f'<body><a href="{target}">{title}</a></body></html>')
+        write_file(legacy + "index.html", alias)
+        write_file(legacy + "index.md", f"# {title}\n\n[{title}]({SITE['base_url']}{target}index.md)\n")
 
     utility_routes = utility_pages.render(make_head, make_footer, write_file, SITE['base_url'], versioned_asset)
 
@@ -667,8 +677,8 @@ def build():
         f'  <url><loc>{SITE["base_url"]}/zh/</loc><priority>0.9</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/fibernet/</loc><priority>0.7</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/tools/stress-strain/</loc><priority>0.6</priority></url>',
-        f'  <url><loc>{SITE["base_url"]}/about/</loc><priority>0.6</priority></url>',
-        f'  <url><loc>{SITE["base_url"]}/about/en/</loc><priority>0.6</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/YunhaoYang/</loc><priority>0.6</priority></url>',
+        f'  <url><loc>{SITE["base_url"]}/YunhaoYang/en/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/cv/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/cv/en/</loc><priority>0.6</priority></url>',
         f'  <url><loc>{SITE["base_url"]}/privacy/</loc><priority>0.3</priority></url>',

@@ -5,7 +5,7 @@ Language: en
 
 ![Yunhao Yang](https://ml-biomat.com/static/images/photo-sq.jpg?v=9c05e09e065d)
 
-[Research profile](https://ml-biomat.com/about/en/) · [中文简历](https://ml-biomat.com/cv/)
+[Research profile](https://ml-biomat.com/YunhaoYang/en/) · [中文简历](https://ml-biomat.com/cv/)
 
 ## Research Interests
 

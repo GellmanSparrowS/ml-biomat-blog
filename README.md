@@ -1,13 +1,13 @@
 # ML-Biomat · 杨云浩的研究与开源项目
 
-个人介绍、跨尺度生物材料体系与结构研究、机器学习与多尺度模拟教程。网站：<https://ml-biomat.com/>；个人主页：<https://ml-biomat.com/about/>。
+个人介绍、跨尺度生物材料体系与结构研究、机器学习与多尺度模拟教程。网站：<https://ml-biomat.com/>；个人主页：<https://ml-biomat.com/YunhaoYang/>。
 
 ## 修改入口
 
 | 内容 | 源文件 |
 | --- | --- |
-| 中文个人主页 `/about/` | `content/about-body.html` |
-| English profile `/about/en/` | `content/about-en-body.html` |
+| 中文个人主页 `/YunhaoYang/` | `content/about-body.html` |
+| English profile `/YunhaoYang/en/` | `content/about-en-body.html` |
 | 中文简历 `/cv/` | `content/cv-body.html` |
 | English CV `/cv/en/` | `content/cv-en-body.html` |
 | 相册素材与来源 | `content/profile-albums.json`、`static/images/profile/` |

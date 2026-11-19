@@ -66,7 +66,7 @@ def rewrite_html(content,route=''):
         if 'width' not in attrs:tag=set_attr(tag,'width',item['width'])
         if 'height' not in attrs:tag=set_attr(tag,'height',item['height'])
         tag=set_attr(tag,'decoding','async')
-        if is_portrait and '/about' in '/'+route:tag=set_attr(tag,'loading','eager')
+        if is_portrait and '/YunhaoYang/' in '/'+route:tag=set_attr(tag,'loading','eager')
         else:tag=set_attr(tag,'loading','lazy')
         return tag
     content=TOKENS.sub(image,content)

@@ -1,6 +1,6 @@
 // Serve prebuilt public Markdown without changing the browser's HTML representation.
 const HOST = 'ml-biomat.com';
-const PUBLIC_ROOTS = new Set(['', 'en', 'zh', 'about', 'cv', 'fibernet', 'categories', 'articles', 'posts', 'tutorials', 'tags', 'privacy', 'tools']);
+const PUBLIC_ROOTS = new Set(['', 'en', 'zh', 'YunhaoYang', 'cv', 'fibernet', 'categories', 'articles', 'posts', 'tutorials', 'tags', 'privacy', 'tools']);
 
 export function prefersMarkdown(accept) {
   let markdown = 0;
@@ -55,6 +55,11 @@ function markdownResponse(response, request, canonical) {
 export async function handle(request, fetchOrigin = fetch) {
   const url = new URL(request.url);
   const safeRead = ['GET', 'HEAD'].includes(request.method) && url.hostname === HOST && !request.headers.has('Authorization') && !request.headers.has('Range');
+  const legacyProfile = safeRead && /^\/about(\/en)?(?:\/(index\.md|index\.html)?)?$/.exec(url.pathname);
+  if (legacyProfile) {
+    url.pathname = '/YunhaoYang' + (legacyProfile[1] || '') + '/' + (legacyProfile[2] === 'index.md' ? 'index.md' : '');
+    return Response.redirect(url.href, 301);
+  }
   const legacyTag = safeRead && /^\/tags\/(Mamba|Python)(\/en)?\/?$/.exec(url.pathname);
   if (legacyTag) {
     url.pathname = '/tags/' + legacyTag[1].toLowerCase() + (legacyTag[2] || '') + '/';

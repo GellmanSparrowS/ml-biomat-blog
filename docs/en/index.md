@@ -5,17 +5,17 @@ Language: en
 
 Yunhao Yang · Fudan University
 
-[Research profile ↗](https://ml-biomat.com/about/en/)[Research tutorials →](https://ml-biomat.com/categories/en/)[FiberNet →](https://ml-biomat.com/fibernet/en/)
+[Research profile ↗](https://ml-biomat.com/YunhaoYang/en/)[Research tutorials →](https://ml-biomat.com/categories/en/)[FiberNet →](https://ml-biomat.com/fibernet/en/)
 
 ## Selected research
 
-[Publications ↗](https://ml-biomat.com/about/en/#publications)
+[Publications ↗](https://ml-biomat.com/YunhaoYang/en/#publications)
 
 ![Nature Communications · 2026](https://ml-biomat.com/static/images/profile/paper-nc-2026.webp?v=66b26c4b5ab5)
 
 Nature Communications · 2026
 
-### [Manufacturability-informed design of fibrous networks](https://ml-biomat.com/about/en/#paper-nc)
+### [Manufacturability-informed design of fibrous networks](https://ml-biomat.com/YunhaoYang/en/#paper-nc)
 
 Connecting continuous fiber paths, topology generation and mechanics to guide the design of printable network materials.
 
@@ -23,7 +23,7 @@ Connecting continuous fiber paths, topology generation and mechanics to guide th
 
 Advanced Science · 2025
 
-### [Lightweight three-dimensional fibrous networks](https://ml-biomat.com/about/en/#paper-as)
+### [Lightweight three-dimensional fibrous networks](https://ml-biomat.com/YunhaoYang/en/#paper-as)
 
 Deep reinforcement learning for the design of biomimetic three-dimensional fibrous networks.
 
@@ -43,7 +43,7 @@ Build a small-data regression workflow for fiber mechanics, from specimen featur
 
 Set up isolated Python environments, install the scientific stack, and connect the right interpreter to JupyterLab and VS Code. Learn how to diagnose package conflicts and reproduce a working setup.
 
-## [Academic activities & outreach](https://ml-biomat.com/about/en/#activities)
+## [Academic activities & outreach](https://ml-biomat.com/YunhaoYang/en/#activities)
 
 October 2026
 

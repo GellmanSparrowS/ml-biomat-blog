@@ -8,13 +8,13 @@ NAV = [('home','首页','Home'),('library','工具库','Library'),('categories',
 def paths(language):
     en=language=='en'
     return {'home':'/en/' if en else '/', 'library':'/fibernet/en/' if en else '/fibernet/',
-            'categories':'/categories/en/' if en else '/categories/', 'profile':'/about/en/' if en else '/about/'}
+            'categories':'/categories/en/' if en else '/categories/', 'profile':'/YunhaoYang/en/' if en else '/YunhaoYang/'}
 
 
 def section(route):
     route=route.strip('/')
     if route in ('','en','zh'):return 'home'
-    if route.startswith(('about','cv')):return 'profile'
+    if route.startswith(('YunhaoYang','cv')):return 'profile'
     if route.startswith(('fibernet','tools/')):return 'library'
     if route.startswith(('categories','posts/','articles','tags','tutorials')):return 'categories'
     return None

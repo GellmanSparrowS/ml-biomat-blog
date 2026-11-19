@@ -246,7 +246,7 @@ def homepage_errors(items, categories):
             if not item or len(heading) != 1 or heading[0].text().strip() != item['title']:
                 errors.append(route + ': tutorial pick title or language mismatch')
         direct = dom.find(cls='home-links')
-        expected = {'/about/en/', '/categories/en/', '/fibernet/en/'} if lang == 'en' else {'/about/', '/categories/', '/fibernet/'}
+        expected = {'/YunhaoYang/en/', '/categories/en/', '/fibernet/en/'} if lang == 'en' else {'/YunhaoYang/', '/categories/', '/fibernet/'}
         if len(direct) != 1 or {a.attrs.get('href') for a in direct[0].find('a')} != expected:
             errors.append(route + ': primary home links lose locale')
     for route in ['/articles/', '/articles/en/']:
@@ -502,13 +502,13 @@ def gallery_errors():
     errors = []
     albums = json.loads((ROOT / 'content/profile-albums.json').read_text(encoding='utf-8'))
     events = {album['id']: album for album in albums if album.get('section') == 'events'}
-    for route, lang in [('/', 'zh'), ('/zh/', 'zh'), ('/en/', 'en'), ('/about/', 'zh'), ('/about/en/', 'en')]:
+    for route, lang in [('/', 'zh'), ('/zh/', 'zh'), ('/en/', 'en'), ('/YunhaoYang/', 'zh'), ('/YunhaoYang/en/', 'en')]:
         dom = generated_dom(route, errors)
         if dom is None:
             continue
         activities = dom.find('article', cls='pr-activity')
         ordered = sorted(events.values(), key=lambda a: a.get('event_date', a['date'].replace('.', '-')), reverse=True)
-        selected = ordered if route.startswith('/about/') else ordered[:3]
+        selected = ordered if route.startswith('/YunhaoYang/') else ordered[:3]
         if [a.attrs.get('id') for a in activities] != ['activity-' + a['id'] for a in selected]:
             errors.append(route + ': activity order or latest/full inventory differs')
         if any(a.find('p', cls='pr-prose') for a in activities):
@@ -544,7 +544,7 @@ def gallery_errors():
                     errors.append(route + ': gallery thumbnail/caption missing')
                 elif urlsplit(thumbs[0].attrs.get('data-full-src', '')).path != urlsplit(image.attrs.get('href', '')).path:
                     errors.append(route + ': gallery thumbnail and click target refer to different originals')
-        if route.startswith('/about/'):
+        if route.startswith('/YunhaoYang/'):
             for anchor in ['research', 'publications', 'projects', 'honors', 'activities']:
                 if len(dom.find(attr='id', value=anchor)) != 1:
                     errors.append(route + ': profile section missing or duplicated: ' + anchor)
@@ -698,7 +698,7 @@ def run():
 
     req = ["CNAME", ".nojekyll", "ads.txt", "robots.txt", "sitemap.xml", "rss.xml",
            "search.json", "404.html", "index.html", "llms.txt", "llms-full.txt",
-           "about/index.html", "about/en/index.html", "cv/index.html", "cv/en/index.html", "tutorials/index.html", "tutorials/polymer-ai/index.html"]
+           "YunhaoYang/index.html", "YunhaoYang/en/index.html", "cv/index.html", "cv/en/index.html", "tutorials/index.html", "tutorials/polymer-ai/index.html"]
     missing = [f for f in req if not (DOCS / f).exists()]
     checks.append(check("Required files", not missing,
                         "missing=" + ",".join(missing) if missing else "all present"))

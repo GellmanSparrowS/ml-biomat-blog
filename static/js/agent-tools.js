@@ -40,7 +40,7 @@
     return url;
   }
   function readablePath(path) {
-    return /^\/(?:en\/)?$/.test(path) || /^\/(?:about|cv|fibernet)(?:\/en)?\/$/.test(path) || /^\/(?:posts|tutorials|categories|articles)\//.test(path);
+    return /^\/(?:en\/)?$/.test(path) || /^\/(?:YunhaoYang|cv|fibernet)(?:\/en)?\/$/.test(path) || /^\/(?:posts|tutorials|categories|articles)\//.test(path);
   }
   function result(value) {
     return {content: [{type: 'text', text: typeof value === 'string' ? value : JSON.stringify(value)}]};
