@@ -3,6 +3,20 @@
 Source: https://ml-biomat.com/categories/en/
 Language: en
 
+## Featured tutorials
+
+### [Energy loss under cyclic loading](https://ml-biomat.com/tutorials/python-scientific/p18/en/)
+
+Vary viscosity and loading frequency, then compare the time trace with the stress–strain loop to read the energy lost per cycle.
+
+### [Peak interference in ICP spectroscopy](https://ml-biomat.com/tutorials/experimental-methods/s08/en/)
+
+Adjust peak spacing, width and intensity to see when two lines merge and how interference shifts the measured concentration.
+
+### [Evaluating bike demand forecasts](https://ml-biomat.com/tutorials/machine-learning/m01/en/)
+
+Compare fleet sizes against the same demand record. Change the cost of a shortage and see which choice gives the lowest total loss.
+
 ## All topics
 
 237

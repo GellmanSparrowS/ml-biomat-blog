@@ -256,6 +256,9 @@ def write_file(path, content):
     p = Path(BUILD_DIR) / path
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(content, encoding="utf-8")
+    if str(path).startswith('tags/') and p.name == 'index.html' and '<meta name="robots" content="noindex,follow">' in content:
+        # A formerly indexable archive may still have a generated Markdown sibling.
+        p.with_suffix('.md').unlink(missing_ok=True)
 
 
 def cat_name(cat_slug, lang="en"):

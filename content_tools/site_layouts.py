@@ -56,6 +56,27 @@ def homepage(items,categories,en=False):
     return body
 
 
+def featured_lessons(en):
+    lessons = [
+        ('python-scientific/p18', '周期加载中的能量耗散', 'Energy loss under cyclic loading',
+         '改变黏度和加载频率，对照时间曲线与应力–应变环，读出每个周期耗散的能量。',
+         'Vary viscosity and loading frequency, then compare the time trace with the stress–strain loop to read the energy lost per cycle.'),
+        ('experimental-methods/s08', 'ICP 光谱中的邻峰干扰', 'Peak interference in ICP spectroscopy',
+         '调节峰间距、峰宽和邻峰强度，观察两条谱线何时难以分辨，以及测得的元素含量如何偏移。',
+         'Adjust peak spacing, width and intensity to see when two lines merge and how interference shifts the measured concentration.'),
+        ('machine-learning/m01', '怎样评价单车需求预测', 'Evaluating bike demand forecasts',
+         '用同一组需求记录比较配车方案。改变缺车的代价，看看哪种方案的总损失最低。',
+         'Compare fleet sizes against the same demand record. Change the cost of a shortage and see which choice gives the lowest total loss.'),
+    ]
+    label = 'Featured tutorials' if en else '精选教程'
+    cards = []
+    for slug, zh_title, en_title, zh_desc, en_desc in lessons:
+        url = '/tutorials/' + slug + ('/en/' if en else '/')
+        title, desc = (en_title, en_desc) if en else (zh_title, zh_desc)
+        cards.append(f'<a href="{url}"><h3>{e(title)}</h3><p>{e(desc)}</p></a>')
+    return f'<section class="featured-lessons" aria-labelledby="featured-title"><h2 id="featured-title">{label}</h2><div>{"".join(cards)}</div></section>'
+
+
 def collection(items,categories,en=False,topic=None,full=False):
     lang='en' if en else 'zh';topics=active_topics(items,categories,lang)
     selected=[i for i in items if i['lang']==lang and (topic is None or i['category']==topic)]
@@ -65,6 +86,8 @@ def collection(items,categories,en=False,topic=None,full=False):
     all_label=('All articles' if en else '全部教程') if full else ('All topics' if en else '全部主题')
     total=(f'<span class="topic-total">{len(selected)} '+('articles' if en else '篇')+'</span>') if topic else ''
     body=f'<header class="explore-header"><h1>{e(title)}{total}</h1>'+(f'<p>{e(description)}</p>' if description else '')+'</header>'
+    if mode == 'directory':
+        body += featured_lessons(en)
     active=f' data-active-topic="{topic}"' if topic else ''
     body+=f'<div class="explore-layout" data-explore-mode="{mode}"{active}><aside class="topic-sidebar"><nav class="topic-filters" aria-label="{"Topics" if en else "主题分类"}">'
     if topic:body+=f'<a href="{catalog.category_url(lang=lang)}">{all_label}</a>'

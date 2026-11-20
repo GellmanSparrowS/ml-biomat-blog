@@ -93,6 +93,8 @@ def tag_integrity_errors(posts):
                 errors.append(relative + ': missing exact-case path')
                 continue
             page = files[relative].read_text(encoding='utf-8')
+            if ('<meta name="robots" content="noindex,follow">' in page) != (len(members) == 1):
+                errors.append(relative + ': indexing policy does not match article count')
             actual = re.findall(r'<a[^>]+href="/posts/([^"/]+)/"', page)
             if set(actual) != members or len(actual) != len(members):
                 errors.append(relative + ': tag union incomplete or duplicated')
@@ -738,7 +740,11 @@ def run():
         if not title or len(html.unescape(title[1]))>70: search_errors.append(route+': long or missing title')
         minimum=120 if en else (35 if route.startswith('/tutorials/') else 60)
         if not desc or len(html.unescape(desc[1]))<minimum: search_errors.append(route+': short or missing description')
-        if not canonical or unquote(urlsplit(canonical[1]).path) not in sitemap_routes: search_errors.append(route+': canonical missing from sitemap')
+        single_tag = '<meta name="robots" content="noindex,follow">' in page and route.startswith('/tags/')
+        if single_tag:
+            if route in sitemap_routes: search_errors.append(route+': noindex tag in sitemap')
+        elif not canonical or unquote(urlsplit(canonical[1]).path) not in sitemap_routes:
+            search_errors.append(route+': canonical missing from sitemap')
         count=page.count('class="article-support"')
         article=route.startswith('/posts/') or (route.startswith('/tutorials/') and not 'http-equiv="refresh"' in page)
         if article:

@@ -3,6 +3,20 @@
 Source: https://ml-biomat.com/categories/
 Language: zh-CN
 
+## 精选教程
+
+### [周期加载中的能量耗散](https://ml-biomat.com/tutorials/python-scientific/p18/)
+
+改变黏度和加载频率，对照时间曲线与应力–应变环，读出每个周期耗散的能量。
+
+### [ICP 光谱中的邻峰干扰](https://ml-biomat.com/tutorials/experimental-methods/s08/)
+
+调节峰间距、峰宽和邻峰强度，观察两条谱线何时难以分辨，以及测得的元素含量如何偏移。
+
+### [怎样评价单车需求预测](https://ml-biomat.com/tutorials/machine-learning/m01/)
+
+用同一组需求记录比较配车方案。改变缺车的代价，看看哪种方案的总损失最低。
+
 ## 全部主题
 
 257

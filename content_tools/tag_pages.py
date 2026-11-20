@@ -55,6 +55,9 @@ def render(posts,make_head,make_footer,write_file,base_url,find_pair):
                 lead = find_pair(lead, by_lang) or lead
             topic_description = (f'Tutorials tagged {tag}. ' if en else f'{tag} 相关教程。') + lead['description']
             page=make_head(title=tag+' — '+label,desc=topic_description,url=base_url+base+suffix,lang='en' if en else 'zh-CN',en_href=base+'en/',zh_href=base)+body+make_footer(lang)
+            if len(items) == 1:
+                page = page.replace('</head>', '<meta name="robots" content="noindex,follow"></head>', 1)
+            else:
+                routes.append(base+suffix)
             write_file('tags/'+slug+'/'+suffix+'index.html',page)
-            routes.append(base+suffix)
     return routes
