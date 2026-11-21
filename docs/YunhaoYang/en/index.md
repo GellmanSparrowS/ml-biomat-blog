@@ -127,7 +127,7 @@ Tensile simulation and deep reinforcement learning are combined for biomimetic t
 
 November 2026
 
-[![Certificate presentation](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+[![Certificate presentation](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp?v=f29ccbe8772a)](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
 
 ### [Ruiqing Education Fund Awards Ceremony at Fudan University](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
 
