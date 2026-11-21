@@ -45,6 +45,12 @@ Set up isolated Python environments, install the scientific stack, and connect t
 
 ## [Academic activities & outreach](https://ml-biomat.com/YunhaoYang/en/#activities)
 
+November 2026
+
+[![Certificate presentation](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+
+### [Ruiqing Education Fund Awards Ceremony at Fudan University](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+
 October 2026
 
 [![October 2026 · Conference poster](https://ml-biomat.com/static/images/profile/fudan-frontier-2026-poster.png?v=c14aba784bfb)](https://ml-biomat.com/static/images/profile/fudan-frontier-2026-poster.png)
@@ -56,9 +62,3 @@ September 2026
 [![September 2026 · Project presentation](https://ml-biomat.com/static/images/profile/goai-presentation.webp?v=3554165f5edc)](https://ml-biomat.com/static/images/profile/goai-presentation.webp)
 
 ### [Inaugural World AI Open Source Competition](https://ml-biomat.com/static/images/profile/goai-presentation.webp)
-
-June 2026
-
-[![June 2026 · Studio group photograph](https://ml-biomat.com/static/images/profile/cctv-group.webp?v=949e89ec3d04)](https://ml-biomat.com/static/images/profile/cctv-group.webp)
-
-### [CCTV-1 · China in Intangible Cultural Heritage](https://ml-biomat.com/static/images/profile/cctv-group.webp)

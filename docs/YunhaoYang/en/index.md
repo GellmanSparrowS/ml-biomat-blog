@@ -125,6 +125,12 @@ Tensile simulation and deep reinforcement learning are combined for biomimetic t
 
 ## Academic activities & outreach
 
+November 2026
+
+[![Certificate presentation](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+
+### [Ruiqing Education Fund Awards Ceremony at Fudan University](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+
 October 2026
 
 [![October 2026 · Conference poster](https://ml-biomat.com/static/images/profile/fudan-frontier-2026-poster.png?v=c14aba784bfb)](https://ml-biomat.com/static/images/profile/fudan-frontier-2026-poster.png)

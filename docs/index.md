@@ -45,6 +45,12 @@ Advanced Science · 2025
 
 ## [学术活动与交流](https://ml-biomat.com/YunhaoYang/#activities)
 
+2026.11
+
+[![颁发证书](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+
+### [复旦大学“瑞清”教育基金颁奖典礼](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+
 2026.10
 
 [![2026.10｜大会墙报](https://ml-biomat.com/static/images/profile/fudan-frontier-2026-poster.png?v=c14aba784bfb)](https://ml-biomat.com/static/images/profile/fudan-frontier-2026-poster.png)
@@ -56,9 +62,3 @@ Advanced Science · 2025
 [![2026.09｜项目报告](https://ml-biomat.com/static/images/profile/goai-presentation.webp?v=3554165f5edc)](https://ml-biomat.com/static/images/profile/goai-presentation.webp)
 
 ### [首届世界人工智能开源大赛](https://ml-biomat.com/static/images/profile/goai-presentation.webp)
-
-2026.06
-
-[![2026.06｜演播室合影](https://ml-biomat.com/static/images/profile/cctv-group.webp?v=949e89ec3d04)](https://ml-biomat.com/static/images/profile/cctv-group.webp)
-
-### [CCTV-1《非遗里的中国》](https://ml-biomat.com/static/images/profile/cctv-group.webp)
