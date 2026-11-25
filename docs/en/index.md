@@ -47,9 +47,9 @@ Set up isolated Python environments, install the scientific stack, and connect t
 
 November 2026
 
-[![Certificate presentation](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp?v=f29ccbe8772a)](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+[![Full view of the ceremony backdrop](https://ml-biomat.com/static/images/profile/ruiqing-2026-backdrop.webp?v=d7bebdd9b157)](https://ml-biomat.com/static/images/profile/ruiqing-2026-backdrop.webp)
 
-### [Ruiqing Education Fund Awards Ceremony at Fudan University](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+### [Ruiqing Education Fund Awards Ceremony at Fudan University](https://ml-biomat.com/static/images/profile/ruiqing-2026-backdrop.webp)
 
 October 2026
 

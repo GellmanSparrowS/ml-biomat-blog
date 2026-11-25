@@ -127,9 +127,9 @@ Advanced Science · 2025
 
 2026.11
 
-[![颁发证书](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp?v=f29ccbe8772a)](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+[![典礼背景板全景](https://ml-biomat.com/static/images/profile/ruiqing-2026-backdrop.webp?v=d7bebdd9b157)](https://ml-biomat.com/static/images/profile/ruiqing-2026-backdrop.webp)
 
-### [复旦大学“瑞清”教育基金颁奖典礼](https://ml-biomat.com/static/images/profile/ruiqing-2026-presentation.webp)
+### [复旦大学“瑞清”教育基金颁奖典礼](https://ml-biomat.com/static/images/profile/ruiqing-2026-backdrop.webp)
 
 2026.10
 
