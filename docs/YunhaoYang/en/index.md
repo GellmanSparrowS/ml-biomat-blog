@@ -33,13 +33,13 @@ Continuous fiber paths and manufacturing constraints are incorporated into topol
 
 npj Flexible Electronics · 2026
 
-### Structural optimization of silk fibroin ionic conductors
+### [Structural optimization of silk fibroin ionic conductors](https://doi.org/10.1038/s41528-026-00656-z)
 
 [![npj Flexible Electronics (2026)](https://ml-biomat.com/static/images/profile/paper-npj-2026.webp?v=4db8aef8707d)](https://ml-biomat.com/static/images/profile/paper-npj-2026.webp)
 
 Zigzag silk fibroin ionic conductors connect geometric parameterization, performance prediction, and reinforcement learning with structural optimization for spatially resolved wearable motion detection.
 
-Machine Learning–Driven Structural Optimization of Zigzag Silk Fibroin Ionic Conductors for Spatially Resolved Wearable Motion Detection
+[Machine Learning–Driven Structural Optimization of Zigzag Silk Fibroin Ionic Conductors for Spatially Resolved Wearable Motion Detection](https://doi.org/10.1038/s41528-026-00656-z)
 
 **Yang Y.**, Sun S., Xu C. et al.
 
@@ -69,17 +69,22 @@ Tensile simulation and deep reinforcement learning are combined for biomimetic t
 
 ### Further publications
 
-1. Advanced Functional Materials · 2026
+1. Nano Today · 2026
+
+   #### Geometry-aware and flow-guided conformal nanofiber deposition on complex three-dimensional surfaces
+
+   Zhang X.^{#}, **Yang Y.**^{#}, Cao L., Ren J., Li Z., Ling S.
+2. Advanced Functional Materials · 2026
 
    #### [Processing-history-programmed silk fibers integrating mechanical robustness, ionic conduction, and optical waveguiding for intelligent wearables](https://doi.org/10.1002/adfm.76164)
 
    Ma C.^{#}, Ma X.^{#}, **Yang Y.**^{#} et al.
-2. ACS Nano · 2026
+3. ACS Nano · 2026
 
-   #### Early pathway selection precedes conformational locking in protein self-assembly
+   #### [Early pathway selection precedes conformational locking in protein self-assembly](https://doi.org/10.1021/acsnano.6c13997)
 
-   Peng R.^{#}, Zhou L.^{#}, Bai R., **Yang Y.** et al.
-3. AI for Science · 2025
+   Peng R.^{#}, Zhou L.^{#}, Bai R., **Yang Y.** et al. · 20(44), 30061–30073
+4. AI for Science · 2025
 
    #### [Artificial intelligence for fibrous network design and mechanics](https://iopscience.iop.org/article/10.1088/3050-287X/adfaf7)
 

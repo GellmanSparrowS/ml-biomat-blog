@@ -33,13 +33,13 @@ Nature Communications · 2026
 
 npj Flexible Electronics · 2026
 
-### 丝素蛋白离子导体的结构优化
+### [丝素蛋白离子导体的结构优化](https://doi.org/10.1038/s41528-026-00656-z)
 
 [![npj Flexible Electronics（2026）](https://ml-biomat.com/static/images/profile/paper-npj-2026.webp?v=4db8aef8707d)](https://ml-biomat.com/static/images/profile/paper-npj-2026.webp)
 
 以 Zigzag 丝素蛋白离子导体为研究对象，将几何参数化、性能预测与强化学习用于结构优化，面向可穿戴运动检测研究材料结构与感知功能的联系。
 
-Machine Learning–Driven Structural Optimization of Zigzag Silk Fibroin Ionic Conductors for Spatially Resolved Wearable Motion Detection
+[Machine Learning–Driven Structural Optimization of Zigzag Silk Fibroin Ionic Conductors for Spatially Resolved Wearable Motion Detection](https://doi.org/10.1038/s41528-026-00656-z)
 
 **Yang Y.**, Sun S., Xu C. et al.
 
@@ -69,17 +69,22 @@ Advanced Science · 2025
 
 ### 其他近期论文
 
-1. Advanced Functional Materials · 2026
+1. Nano Today · 2026
+
+   #### Geometry-aware and flow-guided conformal nanofiber deposition on complex three-dimensional surfaces
+
+   Zhang X.^{#}, **Yang Y.**^{#}, Cao L., Ren J., Li Z., Ling S.
+2. Advanced Functional Materials · 2026
 
    #### [Processing-history-programmed silk fibers integrating mechanical robustness, ionic conduction, and optical waveguiding for intelligent wearables](https://doi.org/10.1002/adfm.76164)
 
    Ma C.^{#}, Ma X.^{#}, **Yang Y.**^{#} et al.
-2. ACS Nano · 2026
+3. ACS Nano · 2026
 
-   #### Early pathway selection precedes conformational locking in protein self-assembly
+   #### [Early pathway selection precedes conformational locking in protein self-assembly](https://doi.org/10.1021/acsnano.6c13997)
 
-   Peng R.^{#}, Zhou L.^{#}, Bai R., **Yang Y.** et al.
-3. AI for Science · 2025
+   Peng R.^{#}, Zhou L.^{#}, Bai R., **Yang Y.** et al. · 20(44), 30061–30073
+4. AI for Science · 2025
 
    #### [Artificial intelligence for fibrous network design and mechanics](https://iopscience.iop.org/article/10.1088/3050-287X/adfaf7)
 
