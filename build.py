@@ -251,7 +251,7 @@ def write_file(path, content):
                 if canonical[1] == expected:
                     markdown_url = canonical[1] + 'index.md'
                     discovery = '<link rel="alternate" type="text/markdown" href="' + markdown_url + '">\n'
-                    tools_script = '<script src="'+versioned_asset('/static/js/agent-tools.js')+'" defer></script>\n'
+                    tools_script = '<meta name="webmcp-script" content="'+versioned_asset('/static/js/agent-tools.js')+'">\n'
                     content = content.replace('</head>', discovery+tools_script+'</head>')
     p = Path(BUILD_DIR) / path
     p.parent.mkdir(parents=True, exist_ok=True)

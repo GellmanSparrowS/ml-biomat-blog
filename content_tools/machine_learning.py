@@ -4,6 +4,7 @@ from html import escape, unescape
 import json
 import re
 from pathlib import Path
+from content_tools.course_scripts import lab_loader
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / 'content/tutorials/machine-learning'
@@ -80,8 +81,8 @@ def render(data, make_head, make_footer, write_file, versioned_asset, categories
                     neighbors.append('<a rel="'+key+'" href="'+route(other['id'],lang)+'">'+escape(other['title'][lang])+'</a>')
             related=('<nav class="bc-related" aria-label="'+('Related tutorials' if en else '相关教程')+'">'+''.join(neighbors)+'</nav>') if neighbors else ''
             body='<div class="biomat-course python-course ml-course" data-course="'+item['id']+'" data-lang="'+lang+'">'+crumb+'<div class="bc-layout">'+toc+'<div class="bc-main">'+intro+article+related+'</div></div></div>'
-            dependencies=''.join('<script src="'+versioned_asset('/static/tutorials/machine-learning/'+dependency)+'" defer></script>' for dependency in item.get('scripts',[]))
-            scripts=dependencies+'<script src="'+versioned_asset('/static/tutorials/machine-learning/'+item['id'].lower()+'.js')+'" defer></script><script src="'+versioned_asset('/static/js/biomaterials-courses.js')+'" defer></script><script src="'+versioned_asset('/static/js/python-scientific.js')+'" defer></script>'
+            scripts = lab_loader(item, 'machine-learning', versioned_asset)
+            scripts += '<script src="'+versioned_asset('/static/js/biomaterials-courses.js')+'" defer></script><script src="'+versioned_asset('/static/js/python-scientific.js')+'" defer></script>'
             footer=make_footer(lang, article_support=True, paypal=PAYPAL_ENABLED)
             page=head+body+footer
             page=page.replace('</body>',scripts+'</body>')

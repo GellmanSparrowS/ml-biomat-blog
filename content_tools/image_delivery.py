@@ -1,6 +1,6 @@
 """Deliver bounded raster previews while keeping original images for inspection.
 
-Only img start tags change. SVG, formulas, links, lesson text, scripts and styles
+Responsive previews preserve source links. SVG, formulas, lesson text, scripts and styles
 retain their original bytes. Preview generation is a separate Pillow task; the
 regular site build uses only the standard library and the committed manifest.
 """
@@ -68,6 +68,12 @@ def rewrite_html(content,route=''):
         tag=set_attr(tag,'decoding','async')
         if is_portrait and '/YunhaoYang/' in '/'+route:tag=set_attr(tag,'loading','eager')
         else:tag=set_attr(tag,'loading','lazy')
+        if is_profile and '/paper-' in full and (homepage or 'YunhaoYang/' in route):
+            # Reserve the intrinsic ratio before the image approaches the viewport.
+            placeholder = (f"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'"
+                           f"%20width='{item['width']}'%20height='{item['height']}'/%3E")
+            return (f'<picture style="display:contents"><source media="(scripting: enabled)" '
+                    f'srcset="{placeholder}" data-onview>{tag}</picture>')
         return tag
     content=TOKENS.sub(image,content)
     # Hidden gallery alternatives need no network request before they are opened.

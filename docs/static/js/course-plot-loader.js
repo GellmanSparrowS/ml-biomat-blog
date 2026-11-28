@@ -1,8 +1,7 @@
 (() => {
   'use strict';
   const config = document.currentScript.dataset;
-  const lab = document.getElementById(config.lab);
-  if (!lab) return;
+  const lab = document.getElementById(config.lab) || document.querySelector('.science-lab');
   let pending = false;
   function load(src) {
     return new Promise((resolve, reject) => {
@@ -17,21 +16,23 @@
     if (pending) return;
     pending = true;
     try {
-      if (!window.Plotly) await load(config.library);
+      for (const src of (config.libraries || config.library || '').split(/\s+/).filter(Boolean)) {
+        if (!src.includes('/plotly.min.js') || !window.Plotly) await load(src);
+      }
       await load(config.script);
-      lab.removeEventListener('pointerdown', activate);
-      lab.removeEventListener('focusin', activate);
+      lab?.removeEventListener('pointerdown', activate);
+      lab?.removeEventListener('focusin', activate);
     } catch {
       pending = false;
     }
   }
-  lab.addEventListener('focusin', activate);
-  lab.addEventListener('pointerdown', activate);
-  if ('IntersectionObserver' in window) {
+  lab?.addEventListener('focusin', activate);
+  lab?.addEventListener('pointerdown', activate);
+  if (lab && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
       if (!entries.some(entry => entry.isIntersecting)) return;
       observer.disconnect(); activate();
-    }, {rootMargin:'1000px'});
+    }, {rootMargin:'320px 0px'});
     observer.observe(lab);
   } else activate();
 })();

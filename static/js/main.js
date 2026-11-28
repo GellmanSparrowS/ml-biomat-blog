@@ -717,3 +717,31 @@ document.addEventListener('DOMContentLoaded',function(){
     toggle.addEventListener('click',function(){queueMicrotask(label);});
     label();
 });
+
+// Start below-fold figures near the reader. Without scripting, picture uses the original image.
+(() => {
+    const sources = document.querySelectorAll('picture > source[data-onview]');
+    if (!sources.length) return;
+    if (!('IntersectionObserver' in window)) {
+        sources.forEach(source => source.remove());
+        return;
+    }
+    const observer = new IntersectionObserver(entries => {
+        for (const {target, isIntersecting} of entries) {
+            if (!isIntersecting) continue;
+            observer.unobserve(target);
+            target.parentElement.querySelector('source[data-onview]')?.remove();
+        }
+    }, {rootMargin: '120px 0px'});
+    sources.forEach(source => observer.observe(source.parentElement.querySelector('img')));
+})();
+
+(() => {
+    const metadata = document.querySelector('meta[name="webmcp-script"]');
+    const context = document.modelContext || navigator.modelContext;
+    if (metadata && typeof context?.registerTool === 'function') {
+        const script = document.createElement('script');
+        script.src = metadata.content;
+        document.head.append(script);
+    }
+})();
