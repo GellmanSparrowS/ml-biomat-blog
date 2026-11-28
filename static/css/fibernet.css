@@ -70,3 +70,9 @@
 
 @media(min-width:641px) and (max-width:850px){.fibernet-page .fn-hero{gap:.8rem}.fibernet-page .fn-scene{height:300px}.fibernet-page .fn-actions{gap:.5rem}.fibernet-page .fn-actions a{padding:.35rem .65rem}}
 @media print{.fibernet-page .fn-scene{display:none}.fibernet-page .fn-hero{display:block}}
+
+.fibernet-page .fn-demos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+.fibernet-page .fn-demos figure{margin:0}
+.fibernet-page .fn-demos figure:first-child{grid-column:1/-1}
+.fibernet-page .fn-demos video{display:block;width:100%;height:auto;border-radius:8px;background:#151b21}
+@media(max-width:640px){.fibernet-page .fn-demos{grid-template-columns:minmax(0,1fr)}}

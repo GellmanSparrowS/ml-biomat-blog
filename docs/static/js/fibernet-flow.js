@@ -129,3 +129,44 @@
     canvas.dataset.ready='true';resize();palette();
   });
 })();
+
+(() => {
+  const videos = document.querySelectorAll('.fn-demos video');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+
+  for (const video of videos) {
+    let visible = false;
+    let userPaused = false;
+    let automaticPause = false;
+
+    function pause() {
+      if (video.paused) return;
+      automaticPause = true;
+      video.pause();
+    }
+
+    function update() {
+      if (!visible || document.hidden) {
+        pause();
+      } else if (!reduced.matches && !userPaused) {
+        video.play().catch(() => {}); // Native controls remain available.
+      }
+    }
+
+    video.addEventListener('pause', () => {
+      if (!automaticPause) userPaused = true;
+      automaticPause = false;
+    });
+    video.addEventListener('play', () => { userPaused = false; });
+    new IntersectionObserver(([entry]) => {
+      visible = entry.intersectionRatio >= 0.25;
+      update();
+    }, {threshold: [0, 0.25]}).observe(video);
+    document.addEventListener('visibilitychange', update);
+    reduced.addEventListener('change', () => {
+      if (reduced.matches) pause();
+      else update();
+    });
+  }
+})();
