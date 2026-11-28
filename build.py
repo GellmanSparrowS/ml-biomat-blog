@@ -212,7 +212,7 @@ def person_ld(language, route, biography):
         "name": "Yunhao Yang" if english else "杨云浩",
         "alternateName": "杨云浩" if english else "Yunhao Yang",
         "description": biography,
-        "jobTitle": "Ph.D. student" if english else "博士研究生",
+        "jobTitle": "Ph.D. student" if english else "在读博士",
         "affiliation": {
             "@type": "Organization",
             "name": "Department of Macromolecular Science" if english else "高分子科学系",
@@ -618,7 +618,7 @@ def build():
         f'<link rel="alternate" hreflang="x-default" href="{SITE["base_url"]}/YunhaoYang/">'
     )
     for source, route, language, title, description in [
-        ("about-body.html", "YunhaoYang/", "zh-CN", "杨云浩 Yunhao Yang — 个人主页", "杨云浩，复旦大学博士研究生。跨尺度生物材料体系与结构的理性设计。研究成果、荣誉奖项与学术活动。"),
+        ("about-body.html", "YunhaoYang/", "zh-CN", "杨云浩 Yunhao Yang — 个人主页", "杨云浩，复旦大学在读博士。跨尺度生物材料体系与结构的理性设计。研究成果、荣誉奖项与学术活动。"),
         ("about-en-body.html", "YunhaoYang/en/", "en", "Yunhao Yang — Research Profile", "Yunhao Yang, PhD student at Fudan University. Rational design of biomaterial systems and structures across scales. Research, publications, awards, and photographs."),
     ]:
         about_body = (Path("content") / source).read_text(encoding="utf-8")

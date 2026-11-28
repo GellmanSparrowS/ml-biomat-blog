@@ -3,7 +3,7 @@
 Source: https://ml-biomat.com/fibernet/en/
 Language: en
 
-4.40.0 · Python 3.9+ · MIT
+4.41.0 · Python 3.9+ · MIT
 
 Fiber-network generation, analysis, and mechanical modeling
 
@@ -38,28 +38,42 @@ From an orientation field to a 3D fiber bundle
 
 ![From leaf veins to a graph neural network](https://ml-biomat.com/static/images/fibernet/homepage/leaf-venation-gnn.webp)
 
-From leaf veins to a graph neural network · Original photograph [Brocken Inaglory](https://commons.wikimedia.org/wiki/File:Vein_skeleton_of_a_leaf.JPG) · cropped, recolored and skeletonized · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+From leaf veins to a graph neural network
 
 ![Flow through a 3D fiber network](https://ml-biomat.com/static/images/fibernet/homepage/porous-fiber-flow.webp)
 
 Flow through a 3D fiber network
 
-[Animation sources and methods](https://github.com/GellmanSparrowS/fibernet/blob/d50dcd08606917c9b693573bcfb8bd6dc81aebd0/docs/MEDIA_GALLERY.md)
+![Current reroutes as compressed fibers touch](https://ml-biomat.com/static/images/fibernet/homepage/woven-contact-current.webp)
+
+Current reroutes as compressed fibers touch
+
+![Learning where to brace a bridge](https://ml-biomat.com/static/images/fibernet/homepage/reinforcement-bridge.webp)
+
+Learning where to brace a bridge
+
+![Helical load paths under twist](https://ml-biomat.com/static/images/fibernet/homepage/helical-recruitment.webp)
+
+Helical load paths under twist
+
+![Cooling of a fiber network after switch-off](https://ml-biomat.com/static/images/fibernet/homepage/electrothermal-switch.webp)
+
+Cooling of a fiber network after switch-off
 
 ## Install FiberNet
 
 Run this command in a terminal. The base installation includes NumPy, SciPy, NetworkX, and Matplotlib, and is sufficient for the honeycomb example below.
 
 ```bash
-python -m pip install "fibernet==4.40.0"
+python -m pip install "fibernet==4.41.0"
 ```
 
 Optional dependencies
 
 ```bash
-python -m pip install "fibernet[ml]==4.40.0"  # Machine learning
-python -m pip install "fibernet[viz]==4.40.0"  # 3D display
-python -m pip install "fibernet[manufacturing]==4.40.0"  # Geometry and solid export
+python -m pip install "fibernet[ml]==4.41.0"  # Machine learning
+python -m pip install "fibernet[viz]==4.41.0"  # 3D display
+python -m pip install "fibernet[manufacturing]==4.41.0"  # Geometry and solid export
 ```
 
 The 3D viewer uses PyVista. For the Taichi backend, install the `accel` extra.
@@ -89,6 +103,8 @@ graph.save_json("network.json")
 result.save("fem_result.json")
 ```
 
+Expected result: 18 nodes, 22 edges, and a maximum displacement of 0.20 mm. The script prints the displacement in meters.
+
 ## More workflows
 
 ### Structural analysis and learning
@@ -105,7 +121,7 @@ Build continuous paths on a plane or curved surface with custom cells, then expo
 
 ## Documentation and tutorials
 
-[PyPI 4.40.0](https://pypi.org/project/fibernet/4.40.0/)[4.40.0 release notes](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/RELEASE_4_40_0.md)[Quick start](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/quickstart.rst)[Beam-FEM model and units](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/METHODS_BEAM_FEM_CONTRACT.md)[Examples](https://github.com/GellmanSparrowS/fibernet/tree/main/examples)[Complete notebook tutorial](https://github.com/GellmanSparrowS/fibernet/blob/main/tutorials/complete_tutorial_v4.ipynb)
+[PyPI 4.41.0](https://pypi.org/project/fibernet/4.41.0/)[4.41.0 release notes](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/RELEASE_4_41_0.md)[Quick start](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/quickstart.rst)[Beam-FEM model and units](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/METHODS_BEAM_FEM_CONTRACT.md)[Examples](https://github.com/GellmanSparrowS/fibernet/tree/main/examples)[Complete notebook tutorial](https://github.com/GellmanSparrowS/fibernet/blob/main/tutorials/complete_tutorial_v4.ipynb)
 
 Structure and simulation gallery (6 figures)
 
@@ -132,3 +148,5 @@ Classification example: confusion matrix, ROC, feature importance, and learning 
 ![CEM search example: per-iteration objective values and the best value found so far.](https://ml-biomat.com/static/images/fibernet/11_rl_reward_dark.webp?v=6f458966f86e)
 
 CEM search example: per-iteration objective values and the best value found so far. [Source figure](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/images/11_rl_reward_dark.png)
+
+[Media credits](https://ml-biomat.com/static/images/fibernet/homepage/credits.html)

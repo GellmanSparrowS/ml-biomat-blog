@@ -1,7 +1,7 @@
 <article class="fibernet-article" lang="en"><div class="fibernet-page">
 <header class="fn-hero">
 <div class="fn-hero-copy">
-<div class="fn-release">4.40.0 · Python 3.9+ · MIT</div><h1>FiberNet</h1>
+<div class="fn-release">4.41.0 · Python 3.9+ · MIT</div><h1>FiberNet</h1>
 <p class="fn-lead">Fiber-network generation, analysis, and mechanical modeling</p><p class="fn-intro">Connect network generation, structural analysis, and mechanical modeling in Python. Use FiberScope to inspect, configure, and export networks on the desktop.</p>
 <nav class="fn-actions" aria-label="Project links"><a href="#fibernet-install">Install and try</a><a href="https://github.com/GellmanSparrowS/fibernet" target="_blank" rel="noopener">GitHub source</a><a href="https://github.com/GellmanSparrowS/fibernet/releases/tag/v4.2.0" target="_blank" rel="noopener">FiberScope desktop</a></nav>
 <p class="fn-language"><a href="/fibernet/" lang="zh-CN" hreflang="zh-CN">中文版本</a></p>
@@ -39,7 +39,7 @@
 <source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/leaf-venation-gnn-still.webp">
 <img src="/static/images/fibernet/homepage/leaf-venation-gnn.webp" alt="From leaf veins to a graph neural network" width="1280" height="720" loading="lazy" decoding="async">
 </picture>
-<figcaption>From leaf veins to a graph neural network · Original photograph <a href="https://commons.wikimedia.org/wiki/File:Vein_skeleton_of_a_leaf.JPG">Brocken Inaglory</a> · cropped, recolored and skeletonized · <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></figcaption>
+<figcaption>From leaf veins to a graph neural network</figcaption>
 </figure>
 <figure class="fn-figure">
 <picture>
@@ -48,13 +48,40 @@
 </picture>
 <figcaption>Flow through a 3D fiber network</figcaption>
 </figure>
+<figure class="fn-figure">
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/woven-contact-current-still.webp">
+<img src="/static/images/fibernet/homepage/woven-contact-current.webp" alt="Current reroutes as compressed fibers touch" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
+<figcaption>Current reroutes as compressed fibers touch</figcaption>
+</figure>
+<figure class="fn-figure">
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/reinforcement-bridge-still.webp">
+<img src="/static/images/fibernet/homepage/reinforcement-bridge.webp" alt="Learning where to brace a bridge" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
+<figcaption>Learning where to brace a bridge</figcaption>
+</figure>
+<figure class="fn-figure">
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/helical-recruitment-still.webp">
+<img src="/static/images/fibernet/homepage/helical-recruitment.webp" alt="Helical load paths under twist" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
+<figcaption>Helical load paths under twist</figcaption>
+</figure>
+<figure class="fn-figure">
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/electrothermal-switch-still.webp">
+<img src="/static/images/fibernet/homepage/electrothermal-switch.webp" alt="Cooling of a fiber network after switch-off" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
+<figcaption>Cooling of a fiber network after switch-off</figcaption>
+</figure>
 </div>
-<p class="fn-note"><a href="https://github.com/GellmanSparrowS/fibernet/blob/d50dcd08606917c9b693573bcfb8bd6dc81aebd0/docs/MEDIA_GALLERY.md">Animation sources and methods</a></p>
 </section>
-<section class="fn-section" id="fibernet-install"><h2>Install FiberNet</h2><p>Run this command in a terminal. The base installation includes NumPy, SciPy, NetworkX, and Matplotlib, and is sufficient for the honeycomb example below.</p><pre><code class="language-bash">python -m pip install &quot;fibernet==4.40.0&quot;</code></pre>
-<details class="fn-archive"><summary>Optional dependencies</summary><pre><code class="language-bash">python -m pip install &quot;fibernet[ml]==4.40.0&quot;  # Machine learning
-python -m pip install &quot;fibernet[viz]==4.40.0&quot;  # 3D display
-python -m pip install &quot;fibernet[manufacturing]==4.40.0&quot;  # Geometry and solid export</code></pre><p class="fn-note">The 3D viewer uses PyVista. For the Taichi backend, install the <code>accel</code> extra.</p></details></section>
+<section class="fn-section" id="fibernet-install"><h2>Install FiberNet</h2><p>Run this command in a terminal. The base installation includes NumPy, SciPy, NetworkX, and Matplotlib, and is sufficient for the honeycomb example below.</p><pre><code class="language-bash">python -m pip install &quot;fibernet==4.41.0&quot;</code></pre>
+<details class="fn-archive"><summary>Optional dependencies</summary><pre><code class="language-bash">python -m pip install &quot;fibernet[ml]==4.41.0&quot;  # Machine learning
+python -m pip install &quot;fibernet[viz]==4.41.0&quot;  # 3D display
+python -m pip install &quot;fibernet[manufacturing]==4.41.0&quot;  # Geometry and solid export</code></pre><p class="fn-note">The 3D viewer uses PyVista. For the Taichi backend, install the <code>accel</code> extra.</p></details></section>
 <section class="fn-section"><h2>Example: stretching a honeycomb network</h2>
 <p>This Python script displays a 2D honeycomb network, computes its maximum displacement in meters, and saves the network and simulation result as separate JSON files.</p>
 <pre><code class="language-python">import fibernet as fn
@@ -74,9 +101,10 @@ result = fn.simulate(
 print(result.max_displacement)
 
 graph.save_json(&quot;network.json&quot;)
-result.save(&quot;fem_result.json&quot;)</code></pre></section>
+result.save(&quot;fem_result.json&quot;)</code></pre>
+<p class="fn-note">Expected result: 18 nodes, 22 edges, and a maximum displacement of 0.20 mm. The script prints the displacement in meters.</p></section>
 <section class="fn-section"><h2>More workflows</h2><div class="fn-two-column"><div class="fn-panel"><h3>Structural analysis and learning</h3><p>Extract features from planar snapshots or use edge-strain histories to study when fibers begin carrying load. The examples also cover physical labels, regression, and target-curve search.</p><div class="fn-source-list"><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/examples/snapshot_features_workflow.py" target="_blank" rel="noopener">Snapshot example</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/examples/physical_learning_workflow.py" target="_blank" rel="noopener">Physical-learning example</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/examples/curve_inverse_workflow.py" target="_blank" rel="noopener">Target-curve search</a></div></div><div class="fn-panel"><h3>Geometric routes and export</h3><p>Build continuous paths on a plane or curved surface with custom cells, then export the paths or solid geometry.</p><div class="fn-source-list"><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/examples/manufacturing_workflow.py" target="_blank" rel="noopener">Route-generation example</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/examples/solid_export_workflow.py" target="_blank" rel="noopener">Solid-export example</a></div></div></div></section>
-<section class="fn-section"><h2>Documentation and tutorials</h2><div class="fn-source-list"><a href="https://pypi.org/project/fibernet/4.40.0/" target="_blank" rel="noopener">PyPI 4.40.0</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/docs/RELEASE_4_40_0.md" target="_blank" rel="noopener">4.40.0 release notes</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/docs/quickstart.rst" target="_blank" rel="noopener">Quick start</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/docs/METHODS_BEAM_FEM_CONTRACT.md" target="_blank" rel="noopener">Beam-FEM model and units</a><a href="https://github.com/GellmanSparrowS/fibernet/tree/main/examples" target="_blank" rel="noopener">Examples</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/tutorials/complete_tutorial_v4.ipynb" target="_blank" rel="noopener">Complete notebook tutorial</a></div></section>
+<section class="fn-section"><h2>Documentation and tutorials</h2><div class="fn-source-list"><a href="https://pypi.org/project/fibernet/4.41.0/" target="_blank" rel="noopener">PyPI 4.41.0</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/docs/RELEASE_4_41_0.md" target="_blank" rel="noopener">4.41.0 release notes</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/docs/quickstart.rst" target="_blank" rel="noopener">Quick start</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/docs/METHODS_BEAM_FEM_CONTRACT.md" target="_blank" rel="noopener">Beam-FEM model and units</a><a href="https://github.com/GellmanSparrowS/fibernet/tree/main/examples" target="_blank" rel="noopener">Examples</a><a href="https://github.com/GellmanSparrowS/fibernet/blob/main/tutorials/complete_tutorial_v4.ipynb" target="_blank" rel="noopener">Complete notebook tutorial</a></div></section>
 <details class="fn-archive fn-gallery"><summary>Structure and simulation gallery (6 figures)</summary>
 <div class="fn-gallery-grid">
 <figure class="fn-figure"><img src="/static/images/fibernet/01_2d_gallery.webp" width="1600" height="1237" alt="Twelve 2D structures from the v3 gallery." loading="lazy" decoding="async"><figcaption>Twelve 2D structures from the v3 gallery. <a href="https://github.com/GellmanSparrowS/fibernet/blob/main/docs/images/01_2d_gallery.png" target="_blank" rel="noopener">Source figure</a></figcaption></figure>
@@ -87,5 +115,6 @@ result.save(&quot;fem_result.json&quot;)</code></pre></section>
 <figure class="fn-figure"><img src="/static/images/fibernet/11_rl_reward_dark.webp" width="1600" height="623" alt="CEM search example: per-iteration objective values and the best value found so far." loading="lazy" decoding="async"><figcaption>CEM search example: per-iteration objective values and the best value found so far. <a href="https://github.com/GellmanSparrowS/fibernet/blob/main/docs/images/11_rl_reward_dark.png" target="_blank" rel="noopener">Source figure</a></figcaption></figure>
 </div>
 </details>
+<p class="fn-note"><a href="/static/images/fibernet/homepage/credits.html">Media credits</a></p>
 </div></article>
 <script src="/static/js/fibernet-flow.js" defer></script>

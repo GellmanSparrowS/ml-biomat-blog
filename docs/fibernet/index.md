@@ -3,7 +3,7 @@
 Source: https://ml-biomat.com/fibernet/
 Language: zh-CN
 
-4.40.0 · Python 3.9+ · MIT
+4.41.0 · Python 3.9+ · MIT
 
 纤维网络结构生成、分析与力学建模
 
@@ -38,28 +38,42 @@ FiberScope 3.1.0 支持几何配置、结构查看、轨迹回放与导出。Win
 
 ![从叶脉到图神经网络](https://ml-biomat.com/static/images/fibernet/homepage/leaf-venation-gnn.webp)
 
-从叶脉到图神经网络 · 原照片 [Brocken Inaglory](https://commons.wikimedia.org/wiki/File:Vein_skeleton_of_a_leaf.JPG) · 裁切、着色与骨架提取 · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+从叶脉到图神经网络
 
 ![三维纤维网络中的流动](https://ml-biomat.com/static/images/fibernet/homepage/porous-fiber-flow.webp)
 
 三维纤维网络中的流动
 
-[动图来源与制作说明](https://github.com/GellmanSparrowS/fibernet/blob/d50dcd08606917c9b693573bcfb8bd6dc81aebd0/docs/MEDIA_GALLERY.md)
+![压缩接触改变电流路径](https://ml-biomat.com/static/images/fibernet/homepage/woven-contact-current.webp)
+
+压缩接触改变电流路径
+
+![用强化学习选择桥梁支撑位置](https://ml-biomat.com/static/images/fibernet/homepage/reinforcement-bridge.webp)
+
+用强化学习选择桥梁支撑位置
+
+![扭转中依次承载的螺旋路径](https://ml-biomat.com/static/images/fibernet/homepage/helical-recruitment.webp)
+
+扭转中依次承载的螺旋路径
+
+![断电后纤维网络的冷却](https://ml-biomat.com/static/images/fibernet/homepage/electrothermal-switch.webp)
+
+断电后纤维网络的冷却
 
 ## 安装 FiberNet
 
 在终端运行以下命令。基础安装包含 NumPy、SciPy、NetworkX 和 Matplotlib，可直接运行下面的蜂窝网络示例。
 
 ```bash
-python -m pip install "fibernet==4.40.0"
+python -m pip install "fibernet==4.41.0"
 ```
 
 可选依赖
 
 ```bash
-python -m pip install "fibernet[ml]==4.40.0"  # 机器学习
-python -m pip install "fibernet[viz]==4.40.0"  # 三维显示
-python -m pip install "fibernet[manufacturing]==4.40.0"  # 几何与实体导出
+python -m pip install "fibernet[ml]==4.41.0"  # 机器学习
+python -m pip install "fibernet[viz]==4.41.0"  # 三维显示
+python -m pip install "fibernet[manufacturing]==4.41.0"  # 几何与实体导出
 ```
 
 三维显示使用 PyVista。使用 Taichi 后端时，安装 `accel` 扩展。
@@ -89,6 +103,8 @@ graph.save_json("network.json")
 result.save("fem_result.json")
 ```
 
+运行结果：18 个节点、22 条边，最大位移为 0.20 mm（终端输出单位为米）。
+
 ## 更多工作流
 
 ### 结构分析与学习
@@ -105,7 +121,7 @@ result.save("fem_result.json")
 
 ## 文档与教程
 
-[PyPI 4.40.0](https://pypi.org/project/fibernet/4.40.0/)[4.40.0 发行说明](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/RELEASE_4_40_0.md)[快速开始](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/quickstart.rst)[梁 FEM 模型与单位](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/METHODS_BEAM_FEM_CONTRACT.md)[示例目录](https://github.com/GellmanSparrowS/fibernet/tree/main/examples)[完整 Notebook 教程](https://github.com/GellmanSparrowS/fibernet/blob/main/tutorials/complete_tutorial_v4.ipynb)
+[PyPI 4.41.0](https://pypi.org/project/fibernet/4.41.0/)[4.41.0 发行说明](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/RELEASE_4_41_0.md)[快速开始](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/quickstart.rst)[梁 FEM 模型与单位](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/METHODS_BEAM_FEM_CONTRACT.md)[示例目录](https://github.com/GellmanSparrowS/fibernet/tree/main/examples)[完整 Notebook 教程](https://github.com/GellmanSparrowS/fibernet/blob/main/tutorials/complete_tutorial_v4.ipynb)
 
 结构与计算图集（6 张）
 
@@ -132,3 +148,5 @@ Voronoi 网络计算示例 · 目标伸长比 1.5。 [源图](https://github.com
 ![CEM 搜索示例：每轮目标值与当前最优值。](https://ml-biomat.com/static/images/fibernet/11_rl_reward_dark.webp?v=6f458966f86e)
 
 CEM 搜索示例：每轮目标值与当前最优值。 [源图](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/images/11_rl_reward_dark.png)
+
+[素材许可](https://ml-biomat.com/static/images/fibernet/homepage/credits.html)
