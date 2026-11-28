@@ -11,7 +11,7 @@ Language: zh-CN
 
 杨云浩，复旦大学高分子科学系博士研究生，曾任复旦大学张江研究院工程师，杭州云结科技有限公司创始人。主要研究方向为物理人工智能与多尺度模拟，致力于跨尺度生物材料体系与结构的理性设计。已在 Nature Communications 等期刊发表论文十余篇；获首届世界人工智能开源大赛 · AI for Research 亚军、中国发明协会发明创业奖成果奖二等奖（第三完成人）及瑞清冠名奖学金等荣誉。
 
-[代表论文](https://ml-biomat.com/YunhaoYang/#publications)[完整学术简历](https://ml-biomat.com/cv/)
+[代表论文](https://ml-biomat.com/YunhaoYang/#publications)[完整学术简历](https://ml-biomat.com/cv/)[联系方式](mailto:26110440045@m.fudan.edu.cn)
 
 ![杨云浩](https://ml-biomat.com/static/images/photo-sq.jpg?v=9c05e09e065d)
 

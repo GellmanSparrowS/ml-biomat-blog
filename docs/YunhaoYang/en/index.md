@@ -11,7 +11,7 @@ Biomacromolecules Group / Advisor: Prof. Shengjie Ling
 
 Yunhao Yang is a Ph.D. student in the Department of Macromolecular Science at Fudan University and founder of Hangzhou Yunjie Technology Co., Ltd. He previously worked as an engineer at Fudan University’s Zhangjiang Institute. His research combines physics-informed artificial intelligence and multiscale simulation for the rational design of biomaterial systems and structures across scales. He has published more than ten papers in journals including Nature Communications. His honors include a runner-up finish in the AI for Research Track of the Inaugural World AI Open Source Competition, Second Prize in the Achievement Category of the China Invention Association's Invention and Entrepreneurship Award (third contributor), and the Ruiqing Scholarship.
 
-[Selected papers](https://ml-biomat.com/YunhaoYang/en/#publications)[Full academic CV](https://ml-biomat.com/cv/en/)
+[Selected papers](https://ml-biomat.com/YunhaoYang/en/#publications)[Full academic CV](https://ml-biomat.com/cv/en/)[Contact](mailto:26110440045@m.fudan.edu.cn)
 
 ![Portrait of Yunhao Yang](https://ml-biomat.com/static/images/photo-sq.jpg?v=9c05e09e065d)
 
