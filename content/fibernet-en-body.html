@@ -15,23 +15,42 @@
 <section class="fn-section" id="fibernet-demos"><h2>Fiber network in motion</h2><div class="fn-demos">
 <figure class="fn-figure">
 <picture>
-<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/route-shape.webp">
-<img src="/static/images/fibernet/route-shape-animated.webp" alt="Structural deformation" width="1280" height="720" loading="lazy" decoding="async">
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/network-morph-still.webp">
+<img src="/static/images/fibernet/homepage/network-morph.webp" alt="Structural deformation" width="1280" height="720" loading="lazy" decoding="async">
 </picture>
-<figcaption id="caption-route-shape">Structural deformation</figcaption></figure>
+<figcaption>Structural deformation</figcaption>
+</figure>
 <figure class="fn-figure">
 <picture>
-<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/tensile-fracture.webp">
-<img src="/static/images/fibernet/tensile-fracture-animated.webp" alt="Fracture" width="1280" height="720" loading="lazy" decoding="async">
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/woven-fracture-still.webp">
+<img src="/static/images/fibernet/homepage/woven-fracture.webp" alt="Tensile fracture of a woven network" width="1280" height="720" loading="lazy" decoding="async">
 </picture>
-<figcaption id="caption-tensile-fracture">Fracture</figcaption></figure>
+<figcaption>Tensile fracture of a woven network</figcaption>
+</figure>
 <figure class="fn-figure">
 <picture>
-<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/network-orientation.webp">
-<img src="/static/images/fibernet/network-orientation-animated.webp" alt="Fiber bundle structure" width="1280" height="720" loading="lazy" decoding="async">
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/orientation-to-bundle-still.webp">
+<img src="/static/images/fibernet/homepage/orientation-to-bundle.webp" alt="From an orientation field to a 3D fiber bundle" width="1280" height="720" loading="lazy" decoding="async">
 </picture>
-<figcaption id="caption-network-orientation">Fiber bundle structure</figcaption></figure>
-</div></section>
+<figcaption>From an orientation field to a 3D fiber bundle</figcaption>
+</figure>
+<figure class="fn-figure">
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/leaf-venation-gnn-still.webp">
+<img src="/static/images/fibernet/homepage/leaf-venation-gnn.webp" alt="From leaf veins to a graph neural network" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
+<figcaption>From leaf veins to a graph neural network · Original photograph <a href="https://commons.wikimedia.org/wiki/File:Vein_skeleton_of_a_leaf.JPG">Brocken Inaglory</a> · cropped, recolored and skeletonized · <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></figcaption>
+</figure>
+<figure class="fn-figure">
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/homepage/porous-fiber-flow-still.webp">
+<img src="/static/images/fibernet/homepage/porous-fiber-flow.webp" alt="Flow through a 3D fiber network" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
+<figcaption>Flow through a 3D fiber network</figcaption>
+</figure>
+</div>
+<p class="fn-note"><a href="https://github.com/GellmanSparrowS/fibernet/blob/d50dcd08606917c9b693573bcfb8bd6dc81aebd0/docs/MEDIA_GALLERY.md">Animation sources and methods</a></p>
+</section>
 <section class="fn-section" id="fibernet-install"><h2>Install FiberNet</h2><p>Run this command in a terminal. The base installation includes NumPy, SciPy, NetworkX, and Matplotlib, and is sufficient for the honeycomb example below.</p><pre><code class="language-bash">python -m pip install &quot;fibernet==4.40.0&quot;</code></pre>
 <details class="fn-archive"><summary>Optional dependencies</summary><pre><code class="language-bash">python -m pip install &quot;fibernet[ml]==4.40.0&quot;  # Machine learning
 python -m pip install &quot;fibernet[viz]==4.40.0&quot;  # 3D display

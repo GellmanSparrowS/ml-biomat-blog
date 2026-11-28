@@ -24,17 +24,27 @@ FiberScope 3.1.0 supports geometry configuration, structural inspection, traject
 
 ## Fiber network in motion
 
-![Structural deformation](https://ml-biomat.com/static/images/fibernet/route-shape-animated.webp)
+![Structural deformation](https://ml-biomat.com/static/images/fibernet/homepage/network-morph.webp)
 
 Structural deformation
 
-![Fracture](https://ml-biomat.com/static/images/fibernet/tensile-fracture-animated.webp)
+![Tensile fracture of a woven network](https://ml-biomat.com/static/images/fibernet/homepage/woven-fracture.webp)
 
-Fracture
+Tensile fracture of a woven network
 
-![Fiber bundle structure](https://ml-biomat.com/static/images/fibernet/network-orientation-animated.webp)
+![From an orientation field to a 3D fiber bundle](https://ml-biomat.com/static/images/fibernet/homepage/orientation-to-bundle.webp)
 
-Fiber bundle structure
+From an orientation field to a 3D fiber bundle
+
+![From leaf veins to a graph neural network](https://ml-biomat.com/static/images/fibernet/homepage/leaf-venation-gnn.webp)
+
+From leaf veins to a graph neural network · Original photograph [Brocken Inaglory](https://commons.wikimedia.org/wiki/File:Vein_skeleton_of_a_leaf.JPG) · cropped, recolored and skeletonized · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+
+![Flow through a 3D fiber network](https://ml-biomat.com/static/images/fibernet/homepage/porous-fiber-flow.webp)
+
+Flow through a 3D fiber network
+
+[Animation sources and methods](https://github.com/GellmanSparrowS/fibernet/blob/d50dcd08606917c9b693573bcfb8bd6dc81aebd0/docs/MEDIA_GALLERY.md)
 
 ## Install FiberNet
 

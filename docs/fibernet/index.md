@@ -24,17 +24,27 @@ FiberScope 3.1.0 支持几何配置、结构查看、轨迹回放与导出。Win
 
 ## 纤维网络动态演示
 
-![结构变形](https://ml-biomat.com/static/images/fibernet/route-shape-animated.webp)
+![结构变形](https://ml-biomat.com/static/images/fibernet/homepage/network-morph.webp)
 
 结构变形
 
-![断裂](https://ml-biomat.com/static/images/fibernet/tensile-fracture-animated.webp)
+![编织网络的拉伸断裂](https://ml-biomat.com/static/images/fibernet/homepage/woven-fracture.webp)
 
-断裂
+编织网络的拉伸断裂
 
-![纤维束结构](https://ml-biomat.com/static/images/fibernet/network-orientation-animated.webp)
+![从取向场到三维纤维束](https://ml-biomat.com/static/images/fibernet/homepage/orientation-to-bundle.webp)
 
-纤维束结构
+从取向场到三维纤维束
+
+![从叶脉到图神经网络](https://ml-biomat.com/static/images/fibernet/homepage/leaf-venation-gnn.webp)
+
+从叶脉到图神经网络 · 原照片 [Brocken Inaglory](https://commons.wikimedia.org/wiki/File:Vein_skeleton_of_a_leaf.JPG) · 裁切、着色与骨架提取 · [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+
+![三维纤维网络中的流动](https://ml-biomat.com/static/images/fibernet/homepage/porous-fiber-flow.webp)
+
+三维纤维网络中的流动
+
+[动图来源与制作说明](https://github.com/GellmanSparrowS/fibernet/blob/d50dcd08606917c9b693573bcfb8bd6dc81aebd0/docs/MEDIA_GALLERY.md)
 
 ## 安装 FiberNet
 
