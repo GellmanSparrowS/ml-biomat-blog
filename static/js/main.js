@@ -554,7 +554,7 @@ document.addEventListener('DOMContentLoaded', function(){
 // Local, keyboard-accessible figure viewer: fit, original size, and scrollable zoom.
 document.addEventListener('DOMContentLoaded', function(){
     var figures = Array.from(document.querySelectorAll('.content img, .tutorial-reader img, .fibernet-page img, img[data-full-src]')).filter(function(image){
-        if(image.closest('[data-pr-image], [hidden], .pr-viewer, dialog'))return false;
+        if(image.closest('[data-pr-image], [hidden], .pr-viewer, dialog, .fn-demos'))return false;
         var link=image.closest('a[href]');
         return !link||/\.(?:png|jpe?g|webp|avif|svg)(?:[?#]|$)/i.test(link.href);
     });

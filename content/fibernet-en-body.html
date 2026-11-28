@@ -14,13 +14,22 @@
 </section>
 <section class="fn-section" id="fibernet-demos"><h2>Fiber network in motion</h2><div class="fn-demos">
 <figure class="fn-figure">
-<video controls muted loop playsinline preload="none" width="1280" height="720" poster="/static/images/fibernet/route-shape.webp" aria-labelledby="caption-route-shape" src="/static/images/fibernet/route-shape.mp4"></video>
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/route-shape.webp">
+<img src="/static/images/fibernet/route-shape-animated.webp" alt="Structural deformation" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
 <figcaption id="caption-route-shape">Structural deformation</figcaption></figure>
 <figure class="fn-figure">
-<video controls muted loop playsinline preload="none" width="1280" height="720" poster="/static/images/fibernet/tensile-fracture.webp" aria-labelledby="caption-tensile-fracture" src="/static/images/fibernet/tensile-fracture.mp4"></video>
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/tensile-fracture.webp">
+<img src="/static/images/fibernet/tensile-fracture-animated.webp" alt="Fracture" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
 <figcaption id="caption-tensile-fracture">Fracture</figcaption></figure>
 <figure class="fn-figure">
-<video controls muted loop playsinline preload="none" width="1280" height="720" poster="/static/images/fibernet/network-orientation.webp" aria-labelledby="caption-network-orientation" src="/static/images/fibernet/network-orientation.mp4"></video>
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/network-orientation.webp">
+<img src="/static/images/fibernet/network-orientation-animated.webp" alt="Fiber bundle structure" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
 <figcaption id="caption-network-orientation">Fiber bundle structure</figcaption></figure>
 </div></section>
 <section class="fn-section" id="fibernet-install"><h2>Install FiberNet</h2><p>Run this command in a terminal. The base installation includes NumPy, SciPy, NetworkX, and Matplotlib, and is sufficient for the honeycomb example below.</p><pre><code class="language-bash">python -m pip install &quot;fibernet==4.40.0&quot;</code></pre>

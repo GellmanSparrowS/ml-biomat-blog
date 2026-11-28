@@ -14,13 +14,22 @@
 </section>
 <section class="fn-section" id="fibernet-demos"><h2>纤维网络动态演示</h2><div class="fn-demos">
 <figure class="fn-figure">
-<video controls muted loop playsinline preload="none" width="1280" height="720" poster="/static/images/fibernet/route-shape.webp" aria-labelledby="caption-route-shape" src="/static/images/fibernet/route-shape.mp4"></video>
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/route-shape.webp">
+<img src="/static/images/fibernet/route-shape-animated.webp" alt="结构变形" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
 <figcaption id="caption-route-shape">结构变形</figcaption></figure>
 <figure class="fn-figure">
-<video controls muted loop playsinline preload="none" width="1280" height="720" poster="/static/images/fibernet/tensile-fracture.webp" aria-labelledby="caption-tensile-fracture" src="/static/images/fibernet/tensile-fracture.mp4"></video>
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/tensile-fracture.webp">
+<img src="/static/images/fibernet/tensile-fracture-animated.webp" alt="断裂" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
 <figcaption id="caption-tensile-fracture">断裂</figcaption></figure>
 <figure class="fn-figure">
-<video controls muted loop playsinline preload="none" width="1280" height="720" poster="/static/images/fibernet/network-orientation.webp" aria-labelledby="caption-network-orientation" src="/static/images/fibernet/network-orientation.mp4"></video>
+<picture>
+<source media="(prefers-reduced-motion: reduce)" srcset="/static/images/fibernet/network-orientation.webp">
+<img src="/static/images/fibernet/network-orientation-animated.webp" alt="纤维束结构" width="1280" height="720" loading="lazy" decoding="async">
+</picture>
 <figcaption id="caption-network-orientation">纤维束结构</figcaption></figure>
 </div></section>
 <section class="fn-section" id="fibernet-install"><h2>安装 FiberNet</h2><p>在终端运行以下命令。基础安装包含 NumPy、SciPy、NetworkX 和 Matplotlib，可直接运行下面的蜂窝网络示例。</p><pre><code class="language-bash">python -m pip install &quot;fibernet==4.40.0&quot;</code></pre>

@@ -24,9 +24,15 @@ FiberScope 3.1.0 支持几何配置、结构查看、轨迹回放与导出。Win
 
 ## 纤维网络动态演示
 
+![结构变形](https://ml-biomat.com/static/images/fibernet/route-shape-animated.webp)
+
 结构变形
 
+![断裂](https://ml-biomat.com/static/images/fibernet/tensile-fracture-animated.webp)
+
 断裂
+
+![纤维束结构](https://ml-biomat.com/static/images/fibernet/network-orientation-animated.webp)
 
 纤维束结构
 

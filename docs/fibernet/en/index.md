@@ -24,9 +24,15 @@ FiberScope 3.1.0 supports geometry configuration, structural inspection, traject
 
 ## Fiber network in motion
 
+![Structural deformation](https://ml-biomat.com/static/images/fibernet/route-shape-animated.webp)
+
 Structural deformation
 
+![Fracture](https://ml-biomat.com/static/images/fibernet/tensile-fracture-animated.webp)
+
 Fracture
+
+![Fiber bundle structure](https://ml-biomat.com/static/images/fibernet/network-orientation-animated.webp)
 
 Fiber bundle structure
 
