@@ -626,6 +626,7 @@ def build():
         about_body = about_body.replace("<!-- PROFILE_RESEARCH_ALBUMS -->", render_profile_albums("research", language))
         about_body = about_body.replace("<!-- PROFILE_EVENT_ALBUMS -->", render_profile_albums("events", language))
         about_body += f'<script src="{versioned_asset("/static/js/profile-gallery.js")}" defer></script>'
+        about_body += f'<script src="{versioned_asset("/static/js/profile-contact.js")}" defer></script>'
         profile_head = make_head(title=title, desc=description, url=SITE["base_url"] + "/" + route,
                                  lang=language, ld=person_ld(language, route, biographies[language]), wide=True, alternates=profile_alternates,
                                  en_href="/YunhaoYang/en/", zh_href="/YunhaoYang/", navigation_language=language,
