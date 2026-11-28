@@ -24,15 +24,15 @@ FiberScope 3.1.0 supports geometry configuration, structural inspection, traject
 
 ## Fiber network in motion
 
-Network fracture under tension
+Structural deformation
 
-Following the same edge sequence as the network changes shape
+Fracture
 
-Fiber orientation in a three-dimensional network
+Fiber bundle structure
 
-## Install 4.40.0
+## Install FiberNet
 
-The core installation includes NumPy, SciPy, NetworkX, and Matplotlib. Add machine-learning, 3D visualization, or geometry-export dependencies for the workflow you choose.
+Run this command in a terminal. The base installation includes NumPy, SciPy, NetworkX, and Matplotlib, and is sufficient for the honeycomb example below.
 
 ```bash
 python -m pip install "fibernet==4.40.0"
@@ -46,29 +46,23 @@ python -m pip install "fibernet[viz]==4.40.0"  # 3D display
 python -m pip install "fibernet[manufacturing]==4.40.0"  # Geometry and solid export
 ```
 
-ml supplies machine-learning tools; viz supplies PyVista for 3D display; manufacturing supplies solid-geometry and export tools. The Taichi backend has a separate accel extra.
+The 3D viewer uses PyVista. For the Taichi backend, install the `accel` extra.
 
-## Generate and inspect a structure
+## Example: stretching a honeycomb network
+
+This Python script displays a 2D honeycomb network, computes its maximum displacement in meters, and saves the network and simulation result as separate JSON files.
 
 ```python
 import fibernet as fn
 
-# Coordinates and radius: meters
+# Build a 2D honeycomb network (lengths in meters)
 graph = fn.pattern_2d(
     unit="honeycomb", box=(0.01, 0.01), grid=(2, 2),
     radius=0.00005, seed=23,
 )
 fn.show(graph)
-```
 
-The example uses SI units: coordinates and radii are in meters, and the elastic modulus is in Pa.
-
-## Run a small-deformation model and save
-
-Use graph from the preceding example for a linear beam-frame FEM solve, then save the structure and results.
-
-```python
-# Elastic modulus: Pa; stretch_ratio is the target stretch ratio
+# Solve for 1% extension with linear beams (elastic modulus in Pa)
 result = fn.simulate(
     graph, backend="fem", mode="stretch", stretch_ratio=1.01,
     nonlinear=False, E=1e9, nu=0.3,
@@ -79,31 +73,29 @@ graph.save_json("network.json")
 result.save("fem_result.json")
 ```
 
-stretch_ratio denotes the target stretch ratio: 1.01 means 1% extension. nonlinear=False selects a linear solve, and max_displacement is in meters.
+## More workflows
 
-## Continue the workflow
+### Structural analysis and learning
 
-## Structural analysis and learning
-
-SnapshotFeatureExtractor analyzes planar snapshots; analyze_tensile_recruitment processes supplied edge-strain trajectories. Physical-label generation, regression, and target-curve search each have dedicated examples.
+Extract features from planar snapshots or use edge-strain histories to study when fibers begin carrying load. The examples also cover physical labels, regression, and target-curve search.
 
 [Snapshot example](https://github.com/GellmanSparrowS/fibernet/blob/main/examples/snapshot_features_workflow.py)[Physical-learning example](https://github.com/GellmanSparrowS/fibernet/blob/main/examples/physical_learning_workflow.py)[Target-curve search](https://github.com/GellmanSparrowS/fibernet/blob/main/examples/curve_inverse_workflow.py)
 
-## Geometric routes and export
+### Geometric routes and export
 
-The manufacturing geometry interfaces construct continuous routes on planar or curved surfaces and support custom cells. Solid and route exports use the corresponding optional dependencies, with coordinate units and route order managed alongside the inputs.
+Build continuous paths on a plane or curved surface with custom cells, then export the paths or solid geometry.
 
 [Route-generation example](https://github.com/GellmanSparrowS/fibernet/blob/main/examples/manufacturing_workflow.py)[Solid-export example](https://github.com/GellmanSparrowS/fibernet/blob/main/examples/solid_export_workflow.py)
 
-## Structure and computation examples
+## Documentation and tutorials
 
-2D structure gallery
+[PyPI 4.40.0](https://pypi.org/project/fibernet/4.40.0/)[4.40.0 release notes](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/RELEASE_4_40_0.md)[Quick start](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/quickstart.rst)[Beam-FEM model and units](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/METHODS_BEAM_FEM_CONTRACT.md)[Examples](https://github.com/GellmanSparrowS/fibernet/tree/main/examples)[Complete notebook tutorial](https://github.com/GellmanSparrowS/fibernet/blob/main/tutorials/complete_tutorial_v4.ipynb)
+
+Structure and simulation gallery (6 figures)
 
 ![Twelve 2D structures from the v3 gallery.](https://ml-biomat.com/static/images/fibernet/01_2d_gallery.webp?v=fce8466dc2ec)
 
 Twelve 2D structures from the v3 gallery. [Source figure](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/images/01_2d_gallery.png)
-
-Mechanical-model figures
 
 ![Eight saved honeycomb frames, colored by edge stretch ratio.](https://ml-biomat.com/static/images/fibernet/05_trajectory_dark.webp?v=49bfe332bfbb)
 
@@ -117,8 +109,6 @@ Beam-frame FEM example, colored by sigma_total: absolute axial stress plus bendi
 
 Voronoi-network example at a target stretch ratio of 1.5. [Source figure](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/images/voronoi_1.5x_auto.png)
 
-Learning and search figures
-
 ![Classification example: confusion matrix, ROC, feature importance, and learning curve.](https://ml-biomat.com/static/images/fibernet/09_ml_analysis_dark.webp?v=1d577a2906f4)
 
 Classification example: confusion matrix, ROC, feature importance, and learning curve. [Source figure](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/images/09_ml_analysis_dark.png)
@@ -126,7 +116,3 @@ Classification example: confusion matrix, ROC, feature importance, and learning 
 ![CEM search example: per-iteration objective values and the best value found so far.](https://ml-biomat.com/static/images/fibernet/11_rl_reward_dark.webp?v=6f458966f86e)
 
 CEM search example: per-iteration objective values and the best value found so far. [Source figure](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/images/11_rl_reward_dark.png)
-
-## Documentation and examples
-
-[PyPI 4.40.0](https://pypi.org/project/fibernet/4.40.0/)[4.40.0 release notes](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/RELEASE_4_40_0.md)[Quick start](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/quickstart.rst)[Beam-FEM model and units](https://github.com/GellmanSparrowS/fibernet/blob/main/docs/METHODS_BEAM_FEM_CONTRACT.md)[Examples](https://github.com/GellmanSparrowS/fibernet/tree/main/examples)[Complete notebook tutorial](https://github.com/GellmanSparrowS/fibernet/blob/main/tutorials/complete_tutorial_v4.ipynb)
